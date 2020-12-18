@@ -1,0 +1,8 @@
+Make settlement choices for peace tournaments as such:
+    -random
+    -one per side
+    -if can't have for a side then none for that side
+    -if cant have for both sides, then none at all
+
+investigate other tournament logic
+pull all TallTales code into separate abstraction layer
