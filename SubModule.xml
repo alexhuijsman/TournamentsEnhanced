@@ -1,0 +1,27 @@
+<Module>
+    <Name value="Tournaments Enhanced" />
+    <Id value="TournamentsEnhanced" />
+    <Version value="e1.5.4" />
+    <SingleplayerModule value="true" />
+    <MultiplayerModule value="false" />
+    <Official value="false" />
+    <DependedModules>
+        <DependedModule Id="Native" />
+        <DependedModule Id="SandBoxCore" />
+        <DependedModule Id="Sandbox" />
+        <DependedModule Id="CustomBattle" />
+        <DependedModule Id="StoryMode" />
+    </DependedModules>
+    <SubModules>
+        <SubModule>
+            <Name value="TournamentsEnhanced" />
+            <DLLName value="TournamentsEnhanced.dll" />
+            <SubModuleClassType value="TournamentsEnhanced.Main" />
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+    </SubModules>
+    <Xmls />
+</Module>
