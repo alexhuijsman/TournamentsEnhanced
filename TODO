@@ -15,12 +15,12 @@ S Explain that can use MCM or ModLib
 
 BUILD
 -------------
-S Output to correct folder structure and include SubModule.xml
 
 
 CREATE
 ----------
 SM add mod options input to change language
+S if language is default option, select language from C# API
 M externalize text resources for multilanguage support
 
 SPIKE full item tooltips in prize selection screen?
