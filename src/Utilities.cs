@@ -74,7 +74,7 @@ namespace TournamentsEnhanced
     }
 
     //create tournament after various events
-    public static void CreateTournament(Settlement settlement, TournamentTypes type)
+    public static void CreateTournament(Settlement settlement, TournamentType type)
     {
       TournamentGame tournament = new FightTournamentGame(settlement.Town);
       Campaign.Current.TournamentManager.AddTournament(tournament);
@@ -94,7 +94,7 @@ namespace TournamentsEnhanced
         }
         else
         {
-          CreateTournament(settlement, TournamentTypes.Vanilla);
+          CreateTournament(settlement, TournamentType.Vanilla);
         }
       }
     }

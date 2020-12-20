@@ -1,19 +1,45 @@
-Make settlement choices for peace tournaments as such:
+LEARN
+-----
+S investigate other tournament logic
+
+INVESTIGATE
+---
+L companions joining in fights have incorrect or missing icon
+S do tournaments still expire and/or resolve on their own?
+
+REFACTOR
+--------
+SM pull all TallTales code into separate abstraction layer
+S add "best experience" version that requires harmony and mcm
+
+DESCRIBE
+--------
+S Explain that can use MCM or ModLib
+
+BUILD
+-------------
+S Output to correct folder structure and include SubModule.xml
+
+
+CREATE
+----------
+SM add mod options input to change language
+M externalize text resources for multilanguage support
+
+SPIKE full item tooltips in prize selection screen?
+
+SM Make settlement choice for tournaments as such:
     -random
     -one per side
     -if can't have for a side then none for that side
     -if cant have for both sides, then none at all
     -do tournaments every go away?
         -if not, allow peace tournament in city that already has one
-investigate other tournament logic
-pull all TallTales code into separate abstraction layer
-full item tooltips in prize selection screen?
-companions joining in fights have wrong icon?
-add version that requires harmony and modlib
-add notification that tournament is happening, and why, to the town description and menu items if possible
-Add tiny flag icon to towns with tournament
-expire old tournaments?
-investigate option to resolve post question (compatibility check or add mod option)
-post a questionaire (why did download mod, what like about it, what don't like about it, what new features or ideas do you have, any other comments?)
-global and local leaderboards (NOT online leaderboards)
-Plan roadmap
+
+SM add notification that tournament is happening, and why, to the town description and menu items if possible
+
+
+SM Add tiny flag icon to towns with tournament (see SettlementIcons mod)
+
+
+M tournament champion "leaderboards" for towns, nations, and empire (or "world") (NOT online leaderboards)

@@ -21,7 +21,7 @@ namespace TournamentsEnhanced
       }
       catch (Exception ex)
       {
-        MessageBox.Show($"Error Initialising TournamentsEnhanced:\n\n{ex}");
+        MessageBox.Show($"Error Initialising Tournaments Enhanced:\n\n{ex}");
       }
     }
 
