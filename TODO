@@ -1,11 +1,8 @@
-LEARN
------
-S investigate other tournament logic
-
 INVESTIGATE
 ---
 L companions joining in fights have incorrect or missing icon
 S do tournaments still expire and/or resolve on their own?
+S investigate other tournament logic
 
 REFACTOR
 --------

@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,9 +33,11 @@
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>lib\0Harmony.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ModLib.Definitions">
       <HintPath>lib\ModLib.Definitions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
@@ -93,6 +95,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)\..\.." />
+  </Target>
   <ItemGroup>
     <Compile Include="src/patches/AddParticipantsPatch.cs" />
     <Compile Include="src/TournamentKB.cs" />
