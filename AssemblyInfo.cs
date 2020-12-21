@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly : AssemblyTitle("TournamentsEnhanced")]
+[assembly : AssemblyTitle("Tournaments Enhanced")]
 [assembly : AssemblyDescription("")]
 [assembly : AssemblyConfiguration("")]
 [assembly : AssemblyCompany("")]
@@ -10,5 +10,5 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyTrademark("")]
 [assembly : ComVisible(false)]
 [assembly : Guid("cda89b54-0795-4e72-9bbe-49220be96d17")]
-[assembly : AssemblyFileVersion("1.5.4.0")]
-[assembly : AssemblyVersion("1.5.4.0")]
+[assembly : AssemblyFileVersion("1.5.4.1")]
+[assembly : AssemblyVersion("1.5.4.1")]

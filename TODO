@@ -21,6 +21,7 @@ S Explain that can use MCM or ModLib
 BUILD
 -------------
 S Clean up output folder of bannerlord folder to clear pdb
+S Parameterize SubModule.xml to get version number dynamically
 
 CREATE
 ----------
