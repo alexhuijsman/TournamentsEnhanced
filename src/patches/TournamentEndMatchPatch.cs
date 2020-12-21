@@ -12,7 +12,7 @@ namespace TournamentsEnhanced
     {
       if (TournamentsEnhancedSettings.Instance.VeryHardTournaments)
       {
-        CampaignOptions.CombatAIDifficulty = Utilities.difficulty;
+        CampaignOptions.CombatAIDifficulty = BannerlordUtils.difficulty;
       }
     }
   }

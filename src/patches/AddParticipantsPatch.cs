@@ -45,7 +45,7 @@ namespace TournamentsEnhanced
             participant.Character.IsHero &&
             participant.Character.IsPlayerCharacter)
           {
-            Utilities.LogAnnouncer("player could not join full team");
+            NotificationUtils.DisplayMessage("player could not join full team");
           }
         }
       }

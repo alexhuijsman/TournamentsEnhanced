@@ -29,7 +29,7 @@ namespace TournamentsEnhanced
           return enumerator.Current.tournamentType;
         }
       }
-      return TournamentType.Vanilla;
+      return TournamentType.Initial;
     }
 
     public static TournamentKB GetTournamentKB(Settlement settlement)
@@ -57,7 +57,7 @@ namespace TournamentsEnhanced
 
   public enum TournamentType
   {
-    Vanilla,
+    Initial,
     Wedding,
     Birth,
     Prosperity,

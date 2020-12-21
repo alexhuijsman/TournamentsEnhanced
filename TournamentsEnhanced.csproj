@@ -14,7 +14,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugOutputToBannerlord|x64' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -118,7 +118,10 @@
     <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)\..\.." />
   </Target>
   <ItemGroup>
-    <Compile Include="src/extensions/Extensions.cs" />
+    <Compile Include="src/extensions/HeroExtensions.cs" />
+    <Compile Include="src/extensions/IListExtensions.cs" />
+    <Compile Include="src/extensions/ItemExtensions.cs" />
+    <Compile Include="src/extensions/SettlementExtensions.cs" />
     <Compile Include="src/patches/AddParticipantsPatch.cs" />
     <Compile Include="src/patches/DisableTournamentSpawnPatch.cs" />
     <Compile Include="src/patches/TournamentStartMatchPatch.cs" />
@@ -131,8 +134,11 @@
     <Compile Include="src/BehaviorBase.cs" />
     <Compile Include="src/Main.cs" />
     <Compile Include="src/TournamentKB.cs" />
-    <Compile Include="src/util/Utilities.cs" />
-    <Compile Include="src/util/ThreadSafeRandom.cs" />
+    <Compile Include="src/util/BannerlordUtils.cs" />
+    <Compile Include="src/util/HeroUtils.cs" />
+    <Compile Include="src/util/ItemUtils.cs" />
+    <Compile Include="src/util/NotificationUtils.cs" />
+    <Compile Include="src/util/TournamentdUtils.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

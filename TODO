@@ -11,17 +11,25 @@ S investigate other tournament logic
 REFACTOR
 --------
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
-SM pull all TallTales code into separate abstraction layer
 S add "best experience" version that requires harmony and mcm
 
 DESCRIBE
 --------
 S Explain that can use MCM or ModLib
 
+FIX
+---
+Don't hide Select Prize button after selecting a prize
+Enable determinism in random number generator (does bannerlord provide a random number api?)
+
 BUILD
 -------------
 S Clean up output folder of bannerlord folder to clear pdb
 S Parameterize SubModule.xml to get version number dynamically
+
+TEST
+----
+Write unit tests for existing methods
 
 CREATE
 ----------

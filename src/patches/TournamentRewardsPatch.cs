@@ -15,7 +15,7 @@ namespace TournamentsEnhanced
 
       while (enumerator.MoveNext())
       {
-        if (Utilities.IsTierable(enumerator.Current) && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
+        if (enumerator.Current.IsTierable() && enumerator.Current.Tier.Equals(Hero.MainHero.GetTournamentRewardTier()))
         {
           tier.Add(enumerator.Current);
         }
