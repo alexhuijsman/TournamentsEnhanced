@@ -18,6 +18,8 @@ namespace TournamentsEnhanced
     private const int MAX_TOURNAMENTS = 2;
     private static bool LimitPrizeSelect = false;
 
+    private Random _random = new Random();
+
     public static bool PrizeSelectCondition(MenuCallbackArgs args)
     {
       if (LimitPrizeSelect)
@@ -202,7 +204,9 @@ namespace TournamentsEnhanced
 
     private void OnProsperityTournament()
     {
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+
+      foreach (var settlement in settlements)
       {
         if (Utilities.SettlementProsperityCheck(settlement) && !settlement.Town.HasTournament && MBRandom.RandomFloat < 0.08f)
         {
@@ -224,34 +228,46 @@ namespace TournamentsEnhanced
       }
     }
 
+    private IList<Settlement> GetShuffledSettlements()
+    {
+      var settlements = Settlement.All.ToList();
+      settlements.Shuffle();
+
+      return settlements;
+    }
+
     private void OnMakePeace(IFaction side1Faction, IFaction side2Faction)
     {
       int maxTournaments = 0;
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+      var side1LeaderName = side1Faction.Leader.Name;
+      var side2LeaderName = side2Faction.Leader.Name;
+      foreach (var settlement in settlements)
       {
+        if (!settlement.IsTown || settlement.Town.HasTournament)
+        {
+          continue;
+        }
+        if (settlement.OwnerClan.Leader.Name.Equals(side1LeaderName) || settlement.OwnerClan.Leader.Name.Equals(side2LeaderName))
+        {
+          Utilities.CreateTournament(settlement, TournamentType.Peace);
+          if (TournamentsEnhancedSettings.Instance.PeaceNotification)
+          {
+            Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
+          }
+          maxTournaments++;
+        }
+        else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(side1LeaderName) || settlement.OwnerClan.Leader.Name.Equals(side2LeaderName))
+        {
+          if (TournamentsEnhancedSettings.Instance.PeaceNotification)
+          {
+            Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
+          }
+          maxTournaments++;
+        }
         if (maxTournaments >= MAX_TOURNAMENTS)
         {
           break;
-        }
-        if (settlement.IsTown)
-        {
-          if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(side1Faction.Leader.Name) || settlement.OwnerClan.Leader.Name.Equals(side2Faction.Leader.Name))
-          {
-            Utilities.CreateTournament(settlement, TournamentType.Peace);
-            if (TournamentsEnhancedSettings.Instance.PeaceNotification)
-            {
-              Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
-            }
-            maxTournaments++;
-          }
-          else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(side1Faction.Leader.Name) || settlement.OwnerClan.Leader.Name.Equals(side2Faction.Leader.Name))
-          {
-            if (TournamentsEnhancedSettings.Instance.PeaceNotification)
-            {
-              Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
-            }
-            maxTournaments++;
-          }
         }
       }
     }
@@ -259,7 +275,8 @@ namespace TournamentsEnhanced
     private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
     {
       int maxTournaments = 0;
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+      foreach (var settlement in settlements)
       {
         if (maxTournaments >= MAX_TOURNAMENTS)
         {
@@ -287,7 +304,8 @@ namespace TournamentsEnhanced
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
     {
       int maxTournaments = 0;
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+      foreach (var settlement in settlements)
       {
         if (maxTournaments >= MAX_TOURNAMENTS)
         {

@@ -12,7 +12,6 @@ namespace TournamentsEnhanced
   {
     static void Postfix(ref List<CharacterObject> __result, Settlement settlement, int maxParticipantCount, bool includePlayer = true, bool includeHeroes = true)
     {
-      //If it is a lord tournament
       if (includePlayer && TournamentKB.GetTournamentType(settlement) == TournamentType.Lord)
       {
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;

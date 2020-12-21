@@ -2,21 +2,36 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "debug build",
+            "label": "build (DEBUG)",
             "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe",
             "args": [
-                "/property:GenerateFullPaths=true",
                 "/t:build",
+                "/p:GenerateFullPaths=true",
+                "/p:Configuration=Debug",
+                "/p:Platform=x64",
                 "${workspaceFolder}/TournamentsEnhanced.csproj"
             ],
             "problemMatcher": "$msCompile",
         },
         {
-            "label": "release build",
+            "label": "build (DEBUG) (INSTALL TO BANNERLORD)",
             "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe",
             "args": [
-                "/property:GenerateFullPaths=true",
                 "/t:build",
+                "/p:GenerateFullPaths=true",
+                "/p:Platform=x64",
+                "/p:Configuration=DebugOutputToBannerlord",
+                "${workspaceFolder}/TournamentsEnhanced.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "label": "build (RELEASE)",
+            "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe",
+            "args": [
+                "/t:build",
+                "/p:GenerateFullPaths=true",
+                "/p:Platform=x64",
                 "/p:Configuration=Release",
                 "${workspaceFolder}/TournamentsEnhanced.csproj"
             ],
@@ -27,17 +42,20 @@
             }
         },
         {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
+            "label": "build (RELEASE) (INSTALL TO BANNERLORD)",
+            "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe",
             "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/TournamentsEnhanced.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/t:clean;build",
+                "/p:GenerateFullPaths=true",
+                "/p:Platform=x64",
+                "/p:Configuration=ReleaseOutputToBannerlord",
+                "${workspaceFolder}/TournamentsEnhanced.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

@@ -1,11 +1,16 @@
+WELCOME
+-------
+Hello! This is my todo list for Tournaments Enhanced.
+
 INVESTIGATE
----
-L companions joining in fights have incorrect or missing icon
-S do tournaments still expire and/or resolve on their own?
+-----------
+L companions joining in fights have incorrect or missing icon. May be bug in Bannerlord?
+S How many days until a tournament goes away on its own?
 S investigate other tournament logic
 
 REFACTOR
 --------
+S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 SM pull all TallTales code into separate abstraction layer
 S add "best experience" version that requires harmony and mcm
 
@@ -15,15 +20,17 @@ S Explain that can use MCM or ModLib
 
 BUILD
 -------------
-
+S Clean up output folder of bannerlord folder to clear pdb
 
 CREATE
 ----------
+XL Grand Tournaments, happening every x months, announced to player before it happens 1 month, 2 weeks, 1 week, and when tournament begins
+  -What should defining characteristics be? Need high renown to compete? Pay to enter? Noble-worthy prizes? Much larger monetary and social gains?
 SM add mod options input to change language
-S if language is default option, select language from C# API
+S if language is default option, select language from Bannerlord
 M externalize text resources for multilanguage support
 
-SPIKE full item tooltips in prize selection screen?
+SPIKE full item tooltips in prize selection screen? (try ImprovedTooltips mod for examples)
 
 SM Make settlement choice for tournaments as such:
     -random

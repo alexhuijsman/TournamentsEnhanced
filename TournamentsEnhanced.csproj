@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{94F1D275-34A0-4B15-B492-F2D7A9196E72}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>TournamentsEnhanced</AssemblyName>
@@ -11,7 +11,7 @@
     <FileAlignment>512</FileAlignment>
     <RootNamespace>TournamentsEnhanced</RootNamespace>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -21,11 +21,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugOutputToBannerlord|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseOutputToBannerlord|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -99,8 +118,8 @@
     <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)\..\.." />
   </Target>
   <ItemGroup>
+    <Compile Include="src/extensions/Extensions.cs" />
     <Compile Include="src/patches/AddParticipantsPatch.cs" />
-    <Compile Include="src/TournamentKB.cs" />
     <Compile Include="src/patches/DisableTournamentSpawnPatch.cs" />
     <Compile Include="src/patches/TournamentStartMatchPatch.cs" />
     <Compile Include="src/patches/TournamentEndMatchPatch.cs" />
@@ -108,10 +127,12 @@
     <Compile Include="src/patches/TournamentXpOnHitPatch.cs" />
     <Compile Include="src/patches/TournamentRenownPatch.cs" />
     <Compile Include="src/patches/TournamentRewardsPatch.cs" />
-    <Compile Include="src/Utilities.cs" />
     <Compile Include="src/Settings.cs" />
     <Compile Include="src/BehaviorBase.cs" />
     <Compile Include="src/Main.cs" />
+    <Compile Include="src/TournamentKB.cs" />
+    <Compile Include="src/util/Utilities.cs" />
+    <Compile Include="src/util/ThreadSafeRandom.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
