@@ -6,7 +6,7 @@ namespace TournamentsEnhanced
 {
     static class SettlementExtensions
     {
-    private const int RELATIONSHIP_MODIFIER = 3;
+        private const int RELATIONSHIP_MODIFIER = 3;
 
         public static bool IsEligibleForProsperityTournament(this Settlement settlement)
         {
@@ -18,31 +18,33 @@ namespace TournamentsEnhanced
 
         public static bool IsLedBy(this Settlement settlement, Hero leader)
         {
-            return settlement.OwnerClan.Leader.Equals(leader);
+            return settlement.MapFaction.Leader.Equals(leader);
         }
 
         public static Hero Leader(this Settlement settlement)
         {
-            return settlement.OwnerClan.Leader;
+            return settlement.MapFaction.Leader;
         }
 
         public static void ApplyTournamentHostingEffects(this Settlement settlement)
         {
-            settlement.Prosperity += TournamentsEnhancedSettings.Instance.ProsperityIncrease;
-            settlement.Town.Loyalty += TournamentsEnhancedSettings.Instance.LoyaltyIncrease;
-            settlement.Town.Security += TournamentsEnhancedSettings.Instance.SecurityIncrease;
-            settlement.Town.FoodStocks -= TournamentsEnhancedSettings.Instance.FoodStocksDecrease;
+            settlement.Prosperity += Settings.Instance.ProsperityIncrease;
+            settlement.Town.Loyalty += Settings.Instance.LoyaltyIncrease;
+            settlement.Town.Security += Settings.Instance.SecurityIncrease;
+            settlement.Town.FoodStocks -= Settings.Instance.FoodStocksDecrease;
+            settlement.OwnerClan.Leader.ChangeHeroGold(-Settings.Instance.TournamentCost);
+            settlement.ApplyTournamentHostingNobleRelationsGain();
 
-            if (settlement.OwnerClan.Leader.IsHumanPlayerCharacter && TournamentsEnhancedSettings.Instance.SettlementStatNotification)
+            if (settlement.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
             {
                 NotificationUtils.DisplayMessage(settlement.Town.Name + "'s prosperity, loyalty and security have increased and food stocks have decreased");
             }
         }
 
-        public static void ApplyTournamentHostingNobleRelationsGain(this Settlement settlement)
+        private static void ApplyTournamentHostingNobleRelationsGain(this Settlement settlement)
         {
             var notables = settlement.Notables;
-            foreach(var notable in notables)
+            foreach (var notable in notables)
             {
                 if (!notable.Name.Equals(settlement.OwnerClan.Leader.Name))
                 {

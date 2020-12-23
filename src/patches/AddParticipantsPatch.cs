@@ -27,7 +27,7 @@ namespace TournamentsEnhanced
             TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam = tournamentTeam3;
             teamselected = true;
           }
-          if (TournamentsEnhancedSettings.Instance.BringCompanions &&
+          if (Settings.Instance.BringCompanions &&
             TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam != null &&
             TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor == tournamentTeam3.TeamColor &&
             tournamentTeam3.IsParticipantRequired() &&
@@ -38,7 +38,7 @@ namespace TournamentsEnhanced
             tournamentTeam3.AddParticipant(participant);
             return false;
           }
-          else if (TournamentsEnhancedSettings.Instance.BringCompanions &&
+          else if (Settings.Instance.BringCompanions &&
             TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam != null &&
             TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor == tournamentTeam3.TeamColor &&
             !tournamentTeam3.IsParticipantRequired() &&

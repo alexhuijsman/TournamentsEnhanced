@@ -36,7 +36,7 @@ namespace TournamentsEnhanced
       }
       else if (includePlayer)
       {
-        int numAddedHeroes = MBRandom.RandomInt(4, TournamentsEnhancedSettings.Instance.UpperBoundHeroesAdded);
+        int numAddedHeroes = MBRandom.RandomInt(4, Settings.Instance.UpperBoundHeroesAdded);
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i <= numAddedHeroes; i++)
         {
@@ -57,7 +57,7 @@ namespace TournamentsEnhanced
         }
       }
       //If the player wants to bring companions with him
-      if (includePlayer && TournamentsEnhancedSettings.Instance.BringCompanions)
+      if (includePlayer && Settings.Instance.BringCompanions)
       {
         IEnumerable<Hero> companions = Hero.MainHero.CompanionsInParty;
         List<Hero> companionList = companions.ToList();

@@ -20,11 +20,11 @@ namespace TournamentsEnhanced
       }
       else if (missionType == CombatXpModel.MissionTypeEnum.PracticeFight)
       {
-        num3 = TournamentsEnhancedSettings.Instance.ArenaHitXP;
+        num3 = Settings.Instance.ArenaHitXP;
       }
       else if (missionType == CombatXpModel.MissionTypeEnum.Tournament)
       {
-        num3 = TournamentsEnhancedSettings.Instance.TournamentHitXP;
+        num3 = Settings.Instance.TournamentHitXP;
       }
       else if (missionType == CombatXpModel.MissionTypeEnum.SimulationBattle)
       {

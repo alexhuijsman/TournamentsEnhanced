@@ -141,6 +141,7 @@
     <Compile Include="src/util/InformationManagerUtils.cs" />
     <Compile Include="src/util/ItemUtils.cs" />
     <Compile Include="src/util/NotificationUtils.cs" />
+    <Compile Include="src/util/SettlementUtils.cs" />
     <Compile Include="src/util/TournamentUtils.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>

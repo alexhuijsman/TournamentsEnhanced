@@ -10,7 +10,7 @@ namespace TournamentsEnhanced
 
     static void Postfix()
     {
-      if (TournamentsEnhancedSettings.Instance.VeryHardTournaments)
+      if (Settings.Instance.VeryHardTournaments)
       {
         CampaignModel.difficultyBeforeTournament = CampaignOptions.CombatAIDifficulty;
         CampaignOptions.CombatAIDifficulty = CampaignOptions.Difficulty.Realistic;
