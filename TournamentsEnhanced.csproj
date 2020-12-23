@@ -137,6 +137,7 @@
     <Compile Include="src/TournamentKB.cs" />
     <Compile Include="src/util/BannerlordUtils.cs" />
     <Compile Include="src/util/HeroUtils.cs" />
+    <Compile Include="src/util/InformationManagerUtils.cs" />
     <Compile Include="src/util/ItemUtils.cs" />
     <Compile Include="src/util/NotificationUtils.cs" />
     <Compile Include="src/util/TournamentUtils.cs" />

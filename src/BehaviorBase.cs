@@ -17,7 +17,7 @@ namespace TournamentsEnhanced
 
     private const int MAX_TOURNAMENTS = 2;
 
-    public static bool PrizeSelectMenuOptionCondition(MenuCallbackArgs args)
+    public static bool PrizeSelectCondition(MenuCallbackArgs args)
     {
       bool shouldBeDisabled;
       TextObject disabledText;
@@ -30,19 +30,8 @@ namespace TournamentsEnhanced
     public static void PrizeSelectConsequence(MenuCallbackArgs args)
     {
       var prizeList = ItemUtils.GetRandomlySelectedPrizeList();
-      InformationManagerUtils.ShowMultiSelectionScreenFromItemList(prizeList);
-    }
-
-    private static List<InquiryElement> CreateInquiryElementsFromItems(IList<ItemObject> itemList)
-    {
-      var inquiryElements = new List<InquiryElement>();
-
-      foreach (var item in itemList)
-      {
-        inquiryElements.Add(CreateInquiryElementFromItem(item));
-      }
-
-      return inquiryElements;
+      InformationManagerUtils.ShowSelectionScreenForItems(prizeList, OnSelectPrize, OnDeSelectPrize);
+      GameMenu.SwitchToMenu("town_arena");
     }
 
     public override void RegisterEvents()
@@ -97,7 +86,7 @@ namespace TournamentsEnhanced
     private static bool game_menu_town_arena_host_tournament_condition(MenuCallbackArgs args)
     {
       args.optionLeaveType = GameMenuOption.LeaveType.Continue;
-      return !Settlement.CurrentSettlement.Town.HasTournament && Settlement.CurrentSettlement.IsTown && Settlement.CurrentSettlement.OwnerClan.Leader.IsHumanPlayerCharacter && weeksSinceHost >= 1;
+      return !Settlement.CurrentSettlement.Town.HasTournament && Settlement.CurrentSettlement.IsTown && Settlement.CurrentSettlement.OwnerClan.Leader.IsHumanPlayerCharacter && WeeksSinceHostedTournament >= 1;
     }
 
     private static void game_menu_town_arena_host_tournament_consequence(MenuCallbackArgs args)
@@ -110,7 +99,7 @@ namespace TournamentsEnhanced
         NotificationUtils.DisplayBannerMessage("You've spent " + TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + " gold on hosting Tournament at " + settlement.Town.Name);
         BannerlordUtils.HostedSettlementStatChange(settlement);
         BannerlordUtils.LocalRelationStatChange(settlement);
-        weeksSinceHost = 0;
+        WeeksSinceHostedTournament = 0;
         GameMenu.ActivateGameMenu("town_arena");
         return;
       }
@@ -125,7 +114,7 @@ namespace TournamentsEnhanced
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectMenuOptionCondition),
+        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectCondition),
         new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence), false, 1, true);
     }
 
@@ -142,14 +131,12 @@ namespace TournamentsEnhanced
     private void WeeklyTick()
     {
       OnLordTournament();
-      weeksSinceHost++;
+      WeeksSinceHostedTournament++;
       InvitePlayer();
     }
 
     private void DailyTick()
     {
-
-      LimitPrizeSelect = false;
       OnProsperityTournament();
     }
 
@@ -235,7 +222,7 @@ namespace TournamentsEnhanced
           continue;
         }
 
-        BannerlordUtils.CreatePeaceTournament(settlement, TournamentType.Peace);
+        TournamentUtils.CreateTournament(settlement, TournamentType.Peace);
 
         if (TournamentsEnhancedSettings.Instance.PeaceNotification)
         {

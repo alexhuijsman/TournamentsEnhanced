@@ -20,8 +20,9 @@ SM Recommend list of mods, and share load order
 
 FIX
 ---
-Don't hide Select Prize button after selecting a prize
-Enable determinism in random number generator (does bannerlord provide a random number api?)
+S Don't hide Select Prize button after selecting a prize
+S Enable determinism in random number generator (does bannerlord provide a random number api?)
+S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value
 
 BUILD
 -------------

@@ -1,21 +1,36 @@
+using System;
+using System.Collections.Generic;
+using TaleWorlds.CampaignSystem.GameMenus;
+using TaleWorlds.Core;
+using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
+
 namespace TournamentsEnhanced
 {
     public static class InformationManagerUtils
     {
-        public static void ShowMultiSelectionScreenForItems(List<ItemObject> items)
+        public static void ShowSelectionScreenForItems(
+            List<ItemObject> items,
+            Action<List<InquiryElement>> affirmativeAction, 
+            Action<List<InquiryElement>> negativeAction
+            )
         {
-            var inquiryElements = CreateInquiryElementsFromItems(prizeList);
+            var inquiryElements = CreateInquiryElementsFromItems(items);
 
             if (inquiryElements.Count > 0)
             {
                 TextObject textObject = new TextObject("Pick a prize from the list below", null);
-                InformationManager.ShowMultiSelectionInquiry(new MultiSelectionInquiryData(new TextObject("Prize Selection",
-                        null).ToString(), textObject.ToString(), inquiryElements, true, 1,
-                    new TextObject("OK", null).ToString(), new TextObject("Cancel", null).ToString(),
-                    new Action<List<InquiryElement>>(BehaviorBase.OnSelectPrize),
-                    new Action<List<InquiryElement>>(BehaviorBase.OnDeSelectPrize),
-                    ""), true);
-                GameMenu.SwitchToMenu("town_arena");
+                InformationManager.ShowMultiSelectionInquiry(
+                    new MultiSelectionInquiryData(
+                        new TextObject("Prize Selection", null).ToString(), 
+                        textObject.ToString(), 
+                        inquiryElements, 
+                        true, 
+                        1,
+                        new TextObject("OK", null).ToString(), new TextObject("Cancel", null).ToString(),
+                        affirmativeAction,
+                        negativeAction), 
+                    true);
             }
             else
             {
@@ -23,7 +38,19 @@ namespace TournamentsEnhanced
             }
         }
 
-        private static InquiryElement CreateInquiryElementFromItem(ItemObject item)
+
+    private static List<InquiryElement> CreateInquiryElementsFromItems(IList<ItemObject> itemList)
+    {
+      var inquiryElements = new List<InquiryElement>();
+
+      foreach (var item in itemList)
+      {
+        inquiryElements.Add(CreateInquiryElementFromItem(item));
+      }
+
+      return inquiryElements;
+    }
+            private static InquiryElement CreateInquiryElementFromItem(ItemObject item)
         {
             var itemModifier =
                 string.IsNullOrWhiteSpace(item.StringId) ? null : MBObjectManager.Instance.GetObject<ItemModifier>(item.StringId);
