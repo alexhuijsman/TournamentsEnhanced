@@ -123,6 +123,7 @@
     <Compile Include="src/extensions/IListExtensions.cs" />
     <Compile Include="src/extensions/ItemExtensions.cs" />
     <Compile Include="src/extensions/SettlementExtensions.cs" />
+    <Compile Include="src/models/CampaignModel.cs" />
     <Compile Include="src/patches/AddParticipantsPatch.cs" />
     <Compile Include="src/patches/DisableTournamentSpawnPatch.cs" />
     <Compile Include="src/patches/TournamentStartMatchPatch.cs" />

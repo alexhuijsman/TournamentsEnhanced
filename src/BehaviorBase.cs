@@ -97,8 +97,8 @@ namespace TournamentsEnhanced
         settlement.OwnerClan.Leader.ChangeHeroGold(-TournamentsEnhancedSettings.Instance.TournamentCost);
         TournamentUtils.CreateTournament(settlement, TournamentType.Hosted);
         NotificationUtils.DisplayBannerMessage("You've spent " + TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + " gold on hosting Tournament at " + settlement.Town.Name);
-        BannerlordUtils.HostedSettlementStatChange(settlement);
-        BannerlordUtils.LocalRelationStatChange(settlement);
+        settlement.ApplyTournamentHostingEffects();
+        settlement.ApplyTournamentHostingNobleRelationsGain();
         WeeksSinceHostedTournament = 0;
         GameMenu.ActivateGameMenu("town_arena");
         return;
@@ -183,7 +183,7 @@ namespace TournamentsEnhanced
             }
           }
           settlement.OwnerClan.Leader.ChangeHeroGold(-TournamentsEnhancedSettings.Instance.TournamentCost);
-          BannerlordUtils.LocalRelationStatChange(settlement);
+          settlement.ApplyTournamentHostingNobleRelationsGain();
         }
       }
     }
@@ -249,7 +249,7 @@ namespace TournamentsEnhanced
           {
             TournamentUtils.CreateTournament(settlement, TournamentType.Wedding);
             NotificationUtils.DisplayBannerMessage("To celebrate the wedding of " + firstHero.Name + " and " + secondHero.Name + ", local nobles have called a tournament at " + settlement.Town.Name);
-            BannerlordUtils.WeddingSettlementStatChange(settlement);
+            settlement.ApplyTournamentHostingEffects();
             maxTournaments++;
           }
           else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(firstHero.Name) || settlement.OwnerClan.Leader.Name.Equals(secondHero.Name))
