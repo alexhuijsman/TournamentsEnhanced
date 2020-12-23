@@ -17,7 +17,6 @@ namespace TournamentsEnhanced
       {
         var harmony = new Harmony(ModuleName);
         harmony.PatchAll();
-        harmony.PatchAll();
       }
       catch (Exception ex)
       {
