@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TaleWorlds.Core;
 using static TaleWorlds.Core.ItemObject;
@@ -6,22 +7,31 @@ namespace TournamentsEnhanced
 {
     public class ItemUtils
     {
-        public static ItemObject RandomObject()
-        {
-            List<ItemObject> prizeItems = new List<ItemObject>();
-            ItemTiers heroItemTier = HeroUtils.GetMainHeroTournamentRewardTier();
+        public static IList<ItemObject> AllItems => new List<ItemObject>(AllItemsReadOnly);
+        public static IList<ItemObject> AllItemsShuffled => AllItems.Shuffle();
+        public static IReadOnlyList<ItemObject> AllItemsReadOnly => ItemObject.All;
 
-            foreach (var item in ItemObject.All)
+        public static List<ItemObject> GetRandomlySelectedPrizeList()
+        {
+            var allItems = ItemUtils.AllItemsShuffled;
+            var selectedItems = new List<ItemObject>();
+
+            foreach (var item in allItems)
             {
-                if (!item.IsTierable() || item.Tier != heroItemTier)
+                if (!item.IsWorthyTournamentPrizeForMainHero())
                 {
                     continue;
                 }
 
-                prizeItems.Add(item);
+                selectedItems.Add(item);
             }
 
-            return prizeItems.IsEmpty() ? ItemObject.All.GetRandomElement() : prizeItems.GetRandomElement();
+            if (selectedItems.Count == 0)
+            {
+                selectedItems.Add(AllItemsReadOnly.GetRandomElement());
+            }
+
+            return selectedItems;
         }
     }
 }

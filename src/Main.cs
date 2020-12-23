@@ -49,7 +49,7 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        BehaviorBase.weeksSinceHost = 1;
+        BehaviorBase.WeeksSinceHostedTournament = 1;
         TournamentUtils.CreateInitialTournaments();
       }
     }

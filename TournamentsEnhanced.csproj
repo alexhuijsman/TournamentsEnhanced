@@ -119,6 +119,7 @@
   </Target>
   <ItemGroup>
     <Compile Include="src/extensions/HeroExtensions.cs" />
+    <Compile Include="src/constants/ItemConstants.cs" />
     <Compile Include="src/extensions/IListExtensions.cs" />
     <Compile Include="src/extensions/ItemExtensions.cs" />
     <Compile Include="src/extensions/SettlementExtensions.cs" />
@@ -138,7 +139,7 @@
     <Compile Include="src/util/HeroUtils.cs" />
     <Compile Include="src/util/ItemUtils.cs" />
     <Compile Include="src/util/NotificationUtils.cs" />
-    <Compile Include="src/util/TournamentdUtils.cs" />
+    <Compile Include="src/util/TournamentUtils.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

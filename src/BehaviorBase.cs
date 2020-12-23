@@ -13,19 +13,12 @@ namespace TournamentsEnhanced
 {
   class BehaviorBase : EncounterGameMenuBehavior
   {
-    public static int weeksSinceHost = 1;
+    public static int WeeksSinceHostedTournament { get; set; }
 
     private const int MAX_TOURNAMENTS = 2;
-    private static bool LimitPrizeSelect = false;
 
-    private Random _random = new Random();
-
-    public static bool PrizeSelectCondition(MenuCallbackArgs args)
+    public static bool PrizeSelectMenuOptionCondition(MenuCallbackArgs args)
     {
-      if (LimitPrizeSelect)
-      {
-        return false;
-      }
       bool shouldBeDisabled;
       TextObject disabledText;
       bool canPlayerDo = Campaign.Current.Models.SettlementAccessModel.CanMainHeroDoSettlementAction(Settlement.CurrentSettlement,
@@ -36,40 +29,20 @@ namespace TournamentsEnhanced
 
     public static void PrizeSelectConsequence(MenuCallbackArgs args)
     {
-      LimitPrizeSelect = true;
-      List<InquiryElement> list = new List<InquiryElement>();
-      TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town);
+      var prizeList = ItemUtils.GetRandomlySelectedPrizeList();
+      InformationManagerUtils.ShowMultiSelectionScreenFromItemList(prizeList);
+    }
 
-      for (int i = 0; i < 5; i++)
+    private static List<InquiryElement> CreateInquiryElementsFromItems(IList<ItemObject> itemList)
+    {
+      var inquiryElements = new List<InquiryElement>();
+
+      foreach (var item in itemList)
       {
-        ItemModifier itemModifier = null;
-        ItemObject prize = BannerlordUtils.GetTournamentPrize();
-        if (!string.IsNullOrWhiteSpace(prize.StringId))
-        {
-          itemModifier = MBObjectManager.Instance.GetObject<ItemModifier>(prize.StringId);
-        }
-        EquipmentElement equipmentElement = new EquipmentElement(prize, itemModifier);
-        ImageIdentifier imageIdentifier = new ImageIdentifier(equipmentElement.Item.StringId, ImageIdentifierType.Item,
-          equipmentElement.GetModifiedItemName().ToString());
-        list.Add(new InquiryElement(equipmentElement.Item.StringId, equipmentElement.GetModifiedItemName().ToString(),
-          imageIdentifier, true, equipmentElement.ToString()));
+        inquiryElements.Add(CreateInquiryElementFromItem(item));
       }
 
-      if (list.Count > 0)
-      {
-        TextObject textObject = new TextObject("Pick a prize from the list below", null);
-        InformationManager.ShowMultiSelectionInquiry(new MultiSelectionInquiryData(new TextObject("Prize Selection",
-            null).ToString(), textObject.ToString(), list, true, 1,
-          new TextObject("OK", null).ToString(), new TextObject("Cancel", null).ToString(),
-          new Action<List<InquiryElement>>(BehaviorBase.OnSelectPrize),
-          new Action<List<InquiryElement>>(BehaviorBase.OnDeSelectPrize),
-          ""), true);
-        GameMenu.SwitchToMenu("town_arena");
-      }
-      else
-      {
-        BannerlordUtils.DisplayMessage("Error creating prize list");
-      }
+      return inquiryElements;
     }
 
     public override void RegisterEvents()
@@ -112,9 +85,9 @@ namespace TournamentsEnhanced
           {
             if (!settlement.Town.HasTournament)
             {
-              BannerlordUtils.CreateTournament(settlement, TournamentType.Invitation);
+              TournamentUtils.CreateTournament(settlement, TournamentType.Invitation);
             }
-            BannerlordUtils.DisplayBannerMessage("A local lord is looking for tournament contestants at " + settlement.Town.Name);
+            NotificationUtils.DisplayBannerMessage("A local lord is looking for tournament contestants at " + settlement.Town.Name);
             break;
           }
         }
@@ -147,18 +120,18 @@ namespace TournamentsEnhanced
     {
       //add option to the menu
       campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
-        TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + "{GOLD_ICON})", new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
+        TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + "{GOLD_ICON})",
+        new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence),
-        false, 1, true);
+        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectMenuOptionCondition),
+        new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence), false, 1, true);
     }
 
     private void OnTournamentWin(CharacterObject character, Town town)
     {
-      ValueTuple<SkillObject, int> tuple = BannerlordUtils.TournamentSkillXpGain(character.HeroObject);
+      ValueTuple<SkillObject, int> tuple = TournamentUtils.TournamentSkillXpGain(character.HeroObject);
       if (character.IsHero)
       {
         character.HeroObject.AddSkillXp(tuple.Item1, tuple.Item2);
@@ -190,10 +163,10 @@ namespace TournamentsEnhanced
           {
             if (settlement.IsTown && !settlement.Town.HasTournament)
             {
-              BannerlordUtils.CreateTournament(settlement, TournamentType.Lord);
+              TournamentUtils.CreateTournament(settlement, TournamentType.Lord);
               if (Hero.MainHero.Clan.Kingdom != null && Hero.MainHero.Clan.Kingdom.Name.Equals(kingdom.Name))
               {
-                BannerlordUtils.DisplayBannerMessage(kingdom.Leader.Name + " invites you to a Highborn tournament at " + settlement.Name);
+                NotificationUtils.DisplayBannerMessage(kingdom.Leader.Name + " invites you to a Highborn tournament at " + settlement.Name);
               }
               break;
             }
@@ -213,13 +186,13 @@ namespace TournamentsEnhanced
           TournamentUtils.CreateTournament(settlement, TournamentType.Prosperity);
           if (settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
           {
-            BannerlordUtils.DisplayBannerMessage("Local nobles at " + settlement.Town.Name + " have called a tournament, using " + TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + " gold from clan coffers.");
+            NotificationUtils.DisplayBannerMessage("Local nobles at " + settlement.Town.Name + " have called a tournament, using " + TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + " gold from clan coffers.");
           }
           else
           {
             if (TournamentsEnhancedSettings.Instance.ProsperityNotification)
             {
-              BannerlordUtils.DisplayMessage("Local nobles at " + settlement.Town.Name + " have called a tournament due to high prosperity");
+              NotificationUtils.DisplayMessage("Local nobles at " + settlement.Town.Name + " have called a tournament due to high prosperity");
             }
           }
           settlement.OwnerClan.Leader.ChangeHeroGold(-TournamentsEnhancedSettings.Instance.TournamentCost);
@@ -266,7 +239,7 @@ namespace TournamentsEnhanced
 
         if (TournamentsEnhancedSettings.Instance.PeaceNotification)
         {
-          BannerlordUtils.DisplayMessage("To celebrate the peace of " + factionA.Name + " and " + factionB.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
+          NotificationUtils.DisplayMessage("To celebrate the peace of " + factionA.Name + " and " + factionB.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
         }
 
         numberOfNewTournaments++;
@@ -287,14 +260,14 @@ namespace TournamentsEnhanced
         {
           if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(firstHero.Name) || settlement.OwnerClan.Leader.Name.Equals(secondHero.Name))
           {
-            BannerlordUtils.CreateTournament(settlement, TournamentType.Wedding);
-            BannerlordUtils.DisplayBannerMessage("To celebrate the wedding of " + firstHero.Name + " and " + secondHero.Name + ", local nobles have called a tournament at " + settlement.Town.Name);
+            TournamentUtils.CreateTournament(settlement, TournamentType.Wedding);
+            NotificationUtils.DisplayBannerMessage("To celebrate the wedding of " + firstHero.Name + " and " + secondHero.Name + ", local nobles have called a tournament at " + settlement.Town.Name);
             BannerlordUtils.WeddingSettlementStatChange(settlement);
             maxTournaments++;
           }
           else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(firstHero.Name) || settlement.OwnerClan.Leader.Name.Equals(secondHero.Name))
           {
-            BannerlordUtils.DisplayBannerMessage("To celebrate the wedding of " + firstHero.Name + " and " + secondHero.Name + ", local nobles have called a tournament at " + settlement.Town.Name);
+            NotificationUtils.DisplayBannerMessage("To celebrate the wedding of " + firstHero.Name + " and " + secondHero.Name + ", local nobles have called a tournament at " + settlement.Town.Name);
             BannerlordUtils.WeddingSettlementStatChange(settlement);
             maxTournaments++;
           }
@@ -316,14 +289,14 @@ namespace TournamentsEnhanced
         {
           if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(mother.Name) || mother.Spouse != null && settlement.OwnerClan.Leader.Name.Equals(mother.Spouse.Name))
           {
-            BannerlordUtils.CreateTournament(settlement, TournamentType.Birth);
-            BannerlordUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + " and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
+            TournamentUtils.CreateTournament(settlement, TournamentType.Birth);
+            NotificationUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + " and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
             BannerlordUtils.WeddingSettlementStatChange(settlement);
             maxTournaments++;
           }
           else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(mother.Name) || mother.Spouse != null && settlement.OwnerClan.Leader.Name.Equals(mother.Spouse.Name))
           {
-            BannerlordUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + " and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
+            NotificationUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + " and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
             BannerlordUtils.WeddingSettlementStatChange(settlement);
             maxTournaments++;
           }
