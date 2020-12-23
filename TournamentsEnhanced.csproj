@@ -114,6 +114,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+    <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)\..\.." />
+  </Target>
   <ItemGroup>
     <Compile Include="src/patches/AddParticipantsPatch.cs" />
     <Compile Include="src/TournamentKB.cs" />

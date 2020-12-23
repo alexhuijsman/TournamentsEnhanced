@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
@@ -10,9 +11,13 @@ namespace TournamentsEnhanced
 {
   public class Main : MBSubModuleBase
   {
+    public static string ModuleName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title;
+    private static string ModuleVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
     {
+      InformationManager.DisplayMessage(new InformationMessage($"Loaded {ModuleName} v{ModuleVersion}", Color.FromUint(4282569842U)));
+
       try
       {
         var harmony = new Harmony(ModuleName);
@@ -20,14 +25,8 @@ namespace TournamentsEnhanced
       }
       catch (Exception ex)
       {
-        MessageBox.Show($"Error Initialising TournamentsEnhanced:\n\n{ex}");
+        MessageBox.Show($"Error Initialising Tournaments Enhanced:\n\n{ex}");
       }
-    }
-
-    protected override void OnSubModuleLoad()
-    {
-
-      InformationManager.DisplayMessage(new InformationMessage("Loaded " + ModuleName, Color.FromUint(4282569842U)));
     }
 
     protected override void OnGameStart(Game game, IGameStarter gameStarter)
@@ -48,7 +47,5 @@ namespace TournamentsEnhanced
         Utilities.CreateInitialTournaments();
       }
     }
-
-    public static string ModuleName = "Tournaments Enhanced";
   }
 }
