@@ -8,24 +8,137 @@ namespace TournamentsEnhanced
 {
   public static class TournamentUtils
   {
-    public static TournamentCreationResult TryCreateTournamentForFaction(IFaction faction)
+    public static TournamentCreationResult CreatePeaceTournamentInTownBelongingToFaction(IFaction faction)
     {
-      var settlement = FindTournamentHostTownForFaction(faction);
+      var result = SettlementUtils.FindNewOrExistingTournamentHostTownForFaction(faction);
 
-      if (settlement != null)
+      if (result.Succeeded)
+      {
+        return CreatePeaceTournamentFromFindSettlementResult(result);
+      }
+      else
+      {
+        return TournamentCreationResult.Failure;
+      }
+    }
+    private static TournamentCreationResult CreatePeaceTournamentFromFindSettlementResult(SettlementUtils.FindSettlementResult result)
+    {
+      var settlement = result.Settlement;
+
+      if (!result.HadExistingTournament)
       {
         TournamentUtils.CreateTournament(settlement, TournamentType.Peace);
-        settlement.ApplyTournamentHostingEffects();
       }
 
-      return new TournamentCreationResult(settlement);
+      return TournamentCreationResult.Success(settlement.Town);
     }
 
-    public static void CreateTournament(Settlement settlement, TournamentType type)
+    public static TournamentCreationResult CreateLordTournamentInSettlements(IList<Settlement> settlements)
+    {
+      var result = SettlementUtils.FindNewTournamentHostTownFromSettlements(settlements);
+
+      if (result.Succeeded)
+      {
+        return CreateLordTournamentFromFindSettlementResult(result);
+      }
+      else
+      {
+        return TournamentCreationResult.Failure;
+      }
+    }
+
+    private static TournamentCreationResult CreateLordTournamentFromFindSettlementResult(SettlementUtils.FindSettlementResult result)
+    {
+      var settlement = result.Settlement;
+      var kingdom = settlement.OwnerClan.Kingdom;
+
+      if (!result.HadExistingTournament)
+      {
+        TournamentUtils.CreateTournament(settlement, TournamentType.Lord);
+      }
+
+      if (Hero.MainHero.Clan.Kingdom != null && Hero.MainHero.Clan.Kingdom.Name.Equals(kingdom.Name))
+      {
+        NotificationUtils.DisplayBannerMessage($"{kingdom.Leader.Name} invites you to a Highborn tournament at {settlement.Name}");
+      }
+
+      return TournamentCreationResult.Success(settlement.Town);
+    }
+
+    public static TournamentCreationResult CreateProsperityTournamentInSettlements(IList<Settlement> settlements)
+    {
+      var result = SettlementUtils.FindNewTournamentHostTownFromSettlements(settlements);
+
+      if (result.Succeeded)
+      {
+        return CreateProsperityTournamentFromFindSettlementResult(result);
+      }
+      else
+      {
+        return TournamentCreationResult.Failure;
+      }
+    }
+
+    private static TournamentCreationResult CreateProsperityTournamentFromFindSettlementResult(SettlementUtils.FindSettlementResult result)
+    {
+      var settlement = result.Settlement;
+      var kingdom = settlement.OwnerClan.Kingdom;
+
+      if (!result.HadExistingTournament)
+      {
+        TournamentUtils.CreateTournament(settlement, TournamentType.Prosperity);
+      }
+      return TournamentCreationResult.Success(settlement.Town);
+    }
+
+    public static TournamentCreationResult CreateInvitationTournamentFromSettlements(IList<Settlement> settlements)
+    {
+      var result = SettlementUtils.FindNewOrExistingTournamentHostTownFromSettlements(settlements);
+
+      if (!result.Succeeded)
+      {
+        return CreateInvitationTournamentFromFindSettlementResult(result);
+      }
+      else
+      {
+        return TournamentCreationResult.Failure;
+      }
+    }
+
+    private static TournamentCreationResult CreateInvitationTournamentFromFindSettlementResult(SettlementUtils.FindSettlementResult result)
+    {
+      var settlement = result.Settlement;
+
+      if (!result.HadExistingTournament)
+      {
+        TournamentUtils.CreateTournament(settlement, TournamentType.Invitation);
+      }
+
+      return TournamentCreationResult.Success(settlement.Town);
+    }
+
+    public static TournamentCreationResult CreateHostedTournamentAtSettlement(Settlement settlement)
+    {
+      TournamentUtils.CreateTournament(settlement, TournamentType.Hosted);
+
+      Hero.MainHero.ChangeHeroGold(-Settings.Instance.TournamentCost);
+      NotificationUtils.DisplayBannerMessage($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Town.Name}");
+
+      return TournamentCreationResult.Success(settlement.Town);
+    }
+
+    private static void CreateTournament(Settlement settlement, TournamentType type)
     {
       TournamentGame tournament = new FightTournamentGame(settlement.Town);
       Campaign.Current.TournamentManager.AddTournament(tournament);
       TournamentKB tournamentKB = new TournamentKB(settlement, type);
+
+      settlement.ApplyTournamentCreationEffects();
+
+      if (type == TournamentType.Hosted)
+      {
+        settlement.ApplyHostedTournamentRelationsGain();
+      }
     }
 
     public static void CreateInitialTournaments()
@@ -53,33 +166,23 @@ namespace TournamentsEnhanced
       int item2 = Settings.Instance.TournamentSkillXp;
       return new ValueTuple<SkillObject, int>(item, item2);
     }
-    private static Settlement FindTournamentHostTownForFaction(IFaction faction)
-    {
-      var settlements = new List<Settlement>(faction.Settlements).Shuffle();
-
-      foreach (var settlement in settlements)
-      {
-        if (!settlement.IsTown || settlement.Town.HasTournament)
-        {
-          continue;
-        }
-
-        return settlement;
-      }
-
-      return null;
-    }
 
     public class TournamentCreationResult
     {
+      public readonly static TournamentCreationResult Failure = new TournamentCreationResult();
+      public static TournamentCreationResult Success(Town town)
+      {
+        return new TournamentCreationResult(town);
+      }
+
       public bool Succeeded => Town != null;
       public Town Town { get; private set; }
 
-      public TournamentCreationResult(Settlement settlement = null)
+      private TournamentCreationResult(Town town)
       {
-        Town = settlement?.Town;
+        Town = town;
       }
+      private TournamentCreationResult() { }
     }
-
   }
 }

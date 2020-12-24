@@ -18,22 +18,26 @@ namespace TournamentsEnhanced
 
         public static bool IsLedBy(this Settlement settlement, Hero leader)
         {
-            return settlement.MapFaction.Leader.Equals(leader);
+            return settlement.OwnerClan.Leader.Equals(leader) || settlement.MapFaction.Leader.Equals(leader);
         }
 
-        public static Hero Leader(this Settlement settlement)
+        public static Hero ClanLeader(this Settlement settlement)
+        {
+            return settlement.OwnerClan.Leader;
+        }
+
+        public static Hero FactionLeader(this Settlement settlement)
         {
             return settlement.MapFaction.Leader;
         }
 
-        public static void ApplyTournamentHostingEffects(this Settlement settlement)
+        public static void ApplyTournamentCreationEffects(this Settlement settlement)
         {
             settlement.Prosperity += Settings.Instance.ProsperityIncrease;
             settlement.Town.Loyalty += Settings.Instance.LoyaltyIncrease;
             settlement.Town.Security += Settings.Instance.SecurityIncrease;
             settlement.Town.FoodStocks -= Settings.Instance.FoodStocksDecrease;
             settlement.OwnerClan.Leader.ChangeHeroGold(-Settings.Instance.TournamentCost);
-            settlement.ApplyTournamentHostingNobleRelationsGain();
 
             if (settlement.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
             {
@@ -41,7 +45,7 @@ namespace TournamentsEnhanced
             }
         }
 
-        private static void ApplyTournamentHostingNobleRelationsGain(this Settlement settlement)
+        public static void ApplyHostedTournamentRelationsGain(this Settlement settlement)
         {
             var notables = settlement.Notables;
             foreach (var notable in notables)
