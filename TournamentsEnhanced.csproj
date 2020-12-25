@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>TournamentsEnhanced</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <ApplicationVersion>1.5.4.1</ApplicationVersion>
+    <ApplicationVersion>1.5.5.0</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>TournamentsEnhanced</RootNamespace>
   </PropertyGroup>
@@ -127,7 +127,8 @@
     <Compile Include="src/patches/TournamentXpOnHitPatch.cs" />
     <Compile Include="src/patches/TournamentRenownPatch.cs" />
     <Compile Include="src/patches/TournamentRewardsPatch.cs" />
-    <Compile Include="src/Utilities.cs" />
+    <Compile Include="src/util/Utilities.cs" />
+    <Compile Include="src/util/ThreadSafeRandom.cs" />
     <Compile Include="src/Settings.cs" />
     <Compile Include="src/BehaviorBase.cs" />
     <Compile Include="src/Main.cs" />

@@ -1,7 +1,7 @@
 <Module>
     <Name value="Tournaments Enhanced" />
     <Id value="TournamentsEnhanced" />
-    <Version value="v1.5.4.1" />
+    <Version value="v1.5.5.0" />
     <SingleplayerModule value="true" />
     <MultiplayerModule value="false" />
     <Official value="false" />
