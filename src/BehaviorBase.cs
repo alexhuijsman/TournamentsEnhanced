@@ -13,28 +13,12 @@ namespace TournamentsEnhanced
 {
   class BehaviorBase : EncounterGameMenuBehavior
   {
-    public override void RegisterEvents()
-    {
-      CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
-      CampaignEvents.OnGivenBirthEvent.AddNonSerializedListener(this, new Action<Hero, List<Hero>, int>(this.OnGivenBirth));
-      CampaignEvents.WeeklyTickEvent.AddNonSerializedListener(this, new Action(this.WeeklyTick));
-      CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
-      CampaignEvents.MakePeace.AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
-      CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.DailyTick));
-      CampaignEvents.TournamentWon.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
-    }
-    private void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
-    {
-      //add option to the menu
-      campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
-        TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + "{GOLD_ICON})", new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
-        new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
+    public static int weeksSinceHost = 1;
 
-      campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence),
-        false, 1, true);
-    }
+    private const int MAX_TOURNAMENTS = 2;
+    private static bool LimitPrizeSelect = false;
+
+    private Random _random = new Random();
 
     public static bool PrizeSelectCondition(MenuCallbackArgs args)
     {
@@ -88,6 +72,17 @@ namespace TournamentsEnhanced
       }
     }
 
+    public override void RegisterEvents()
+    {
+      CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
+      CampaignEvents.OnGivenBirthEvent.AddNonSerializedListener(this, new Action<Hero, List<Hero>, int>(this.OnGivenBirth));
+      CampaignEvents.WeeklyTickEvent.AddNonSerializedListener(this, new Action(this.WeeklyTick));
+      CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
+      CampaignEvents.MakePeace.AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
+      CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.DailyTick));
+      CampaignEvents.TournamentWon.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
+    }
+
     private static void OnSelectPrize(List<InquiryElement> prizes)
     {
       if (prizes.Count > 0)
@@ -105,6 +100,27 @@ namespace TournamentsEnhanced
 
     }
 
+    private static void InvitePlayer()
+    {
+      if (Hero.MainHero.Clan.Renown <= 800.00f && MBRandom.RandomFloat < 0.8f)
+      {
+        IEnumerable<Settlement> settlementList = Settlement.FindSettlementsAroundPosition(Hero.MainHero.GetPosition().AsVec2, 60.00f);
+        for (int i = 0; i < settlementList.Count(); i++)
+        {
+          Settlement settlement = settlementList.GetRandomElement();
+          if (settlement.IsTown)
+          {
+            if (!settlement.Town.HasTournament)
+            {
+              Utilities.CreateTournament(settlement, TournamentType.Invitation);
+            }
+            Utilities.BannerAnnouncer("A local lord is looking for tournament contestants at " + settlement.Town.Name);
+            break;
+          }
+        }
+      }
+    }
+
     private static bool game_menu_town_arena_host_tournament_condition(MenuCallbackArgs args)
     {
       args.optionLeaveType = GameMenuOption.LeaveType.Continue;
@@ -117,7 +133,7 @@ namespace TournamentsEnhanced
       if (settlement.IsTown)
       {
         settlement.OwnerClan.Leader.ChangeHeroGold(-TournamentsEnhancedSettings.Instance.TournamentCost);
-        Utilities.CreateTournament(settlement, TournamentTypes.Hosted);
+        Utilities.CreateTournament(settlement, TournamentType.Hosted);
         Utilities.BannerAnnouncer("You've spent " + TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + " gold on hosting Tournament at " + settlement.Town.Name);
         Utilities.HostedSettlementStatChange(settlement);
         Utilities.LocalRelationStatChange(settlement);
@@ -125,6 +141,19 @@ namespace TournamentsEnhanced
         GameMenu.ActivateGameMenu("town_arena");
         return;
       }
+    }
+
+    private void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
+    {
+      //add option to the menu
+      campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
+        TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + "{GOLD_ICON})", new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
+        new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
+
+      campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
+        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectCondition),
+        new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence),
+        false, 1, true);
     }
 
     private void OnTournamentWin(CharacterObject character, Town town)
@@ -161,7 +190,7 @@ namespace TournamentsEnhanced
           {
             if (settlement.IsTown && !settlement.Town.HasTournament)
             {
-              Utilities.CreateTournament(settlement, TournamentTypes.Lord);
+              Utilities.CreateTournament(settlement, TournamentType.Lord);
               if (Hero.MainHero.Clan.Kingdom != null && Hero.MainHero.Clan.Kingdom.Name.Equals(kingdom.Name))
               {
                 Utilities.BannerAnnouncer(kingdom.Leader.Name + " invites you to a Highborn tournament at " + settlement.Name);
@@ -175,11 +204,13 @@ namespace TournamentsEnhanced
 
     private void OnProsperityTournament()
     {
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+
+      foreach (var settlement in settlements)
       {
         if (Utilities.SettlementProsperityCheck(settlement) && !settlement.Town.HasTournament && MBRandom.RandomFloat < 0.08f)
         {
-          Utilities.CreateTournament(settlement, TournamentTypes.Prosperity);
+          Utilities.CreateTournament(settlement, TournamentType.Prosperity);
           if (settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
           {
             Utilities.BannerAnnouncer("Local nobles at " + settlement.Town.Name + " have called a tournament, using " + TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + " gold from clan coffers.");
@@ -197,34 +228,46 @@ namespace TournamentsEnhanced
       }
     }
 
+    private IList<Settlement> GetShuffledSettlements()
+    {
+      var settlements = Settlement.All.ToList();
+      settlements.Shuffle();
+
+      return settlements;
+    }
+
     private void OnMakePeace(IFaction side1Faction, IFaction side2Faction)
     {
       int maxTournaments = 0;
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+      var side1LeaderName = side1Faction.Leader.Name;
+      var side2LeaderName = side2Faction.Leader.Name;
+      foreach (var settlement in settlements)
       {
+        if (!settlement.IsTown || settlement.Town.HasTournament)
+        {
+          continue;
+        }
+        if (settlement.OwnerClan.Leader.Name.Equals(side1LeaderName) || settlement.OwnerClan.Leader.Name.Equals(side2LeaderName))
+        {
+          Utilities.CreateTournament(settlement, TournamentType.Peace);
+          if (TournamentsEnhancedSettings.Instance.PeaceNotification)
+          {
+            Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
+          }
+          maxTournaments++;
+        }
+        else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(side1LeaderName) || settlement.OwnerClan.Leader.Name.Equals(side2LeaderName))
+        {
+          if (TournamentsEnhancedSettings.Instance.PeaceNotification)
+          {
+            Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
+          }
+          maxTournaments++;
+        }
         if (maxTournaments >= MAX_TOURNAMENTS)
         {
           break;
-        }
-        if (settlement.IsTown)
-        {
-          if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(side1Faction.Leader.Name) || settlement.OwnerClan.Leader.Name.Equals(side2Faction.Leader.Name))
-          {
-            Utilities.CreateTournament(settlement, TournamentTypes.Peace);
-            if (TournamentsEnhancedSettings.Instance.PeaceNotification)
-            {
-              Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
-            }
-            maxTournaments++;
-          }
-          else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(side1Faction.Leader.Name) || settlement.OwnerClan.Leader.Name.Equals(side2Faction.Leader.Name))
-          {
-            if (TournamentsEnhancedSettings.Instance.PeaceNotification)
-            {
-              Utilities.LogAnnouncer("To celebrate the peace of " + side1Faction.Name + " and " + side2Faction.Name + ", faction leaders have called a tournament at " + settlement.Town.Name);
-            }
-            maxTournaments++;
-          }
         }
       }
     }
@@ -232,7 +275,8 @@ namespace TournamentsEnhanced
     private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
     {
       int maxTournaments = 0;
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+      foreach (var settlement in settlements)
       {
         if (maxTournaments >= MAX_TOURNAMENTS)
         {
@@ -242,7 +286,7 @@ namespace TournamentsEnhanced
         {
           if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(firstHero.Name) || settlement.OwnerClan.Leader.Name.Equals(secondHero.Name))
           {
-            Utilities.CreateTournament(settlement, TournamentTypes.Wedding);
+            Utilities.CreateTournament(settlement, TournamentType.Wedding);
             Utilities.BannerAnnouncer("To celebrate the wedding of " + firstHero.Name + " and " + secondHero.Name + ", local nobles have called a tournament at " + settlement.Town.Name);
             Utilities.WeddingSettlementStatChange(settlement);
             maxTournaments++;
@@ -260,7 +304,8 @@ namespace TournamentsEnhanced
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
     {
       int maxTournaments = 0;
-      foreach (var settlement in Settlement.All)
+      var settlements = GetShuffledSettlements();
+      foreach (var settlement in settlements)
       {
         if (maxTournaments >= MAX_TOURNAMENTS)
         {
@@ -270,7 +315,7 @@ namespace TournamentsEnhanced
         {
           if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(mother.Name) || mother.Spouse != null && settlement.OwnerClan.Leader.Name.Equals(mother.Spouse.Name))
           {
-            Utilities.CreateTournament(settlement, TournamentTypes.Birth);
+            Utilities.CreateTournament(settlement, TournamentType.Birth);
             Utilities.BannerAnnouncer("To celebrate the birth of " + mother.Name + " and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
             Utilities.WeddingSettlementStatChange(settlement);
             maxTournaments++;
@@ -284,30 +329,5 @@ namespace TournamentsEnhanced
         }
       }
     }
-
-    private static void InvitePlayer()
-    {
-      if (Hero.MainHero.Clan.Renown <= 800.00f && MBRandom.RandomFloat < 0.8f)
-      {
-        IEnumerable<Settlement> settlementList = Settlement.FindSettlementsAroundPosition(Hero.MainHero.GetPosition().AsVec2, 60.00f);
-        for (int i = 0; i < settlementList.Count(); i++)
-        {
-          Settlement settlement = settlementList.GetRandomElement();
-          if (settlement.IsTown)
-          {
-            if (!settlement.Town.HasTournament)
-            {
-              Utilities.CreateTournament(settlement, TournamentTypes.Invitation);
-            }
-            Utilities.BannerAnnouncer("A local lord is looking for tournament contestants at " + settlement.Town.Name);
-            break;
-          }
-        }
-      }
-    }
-
-    public static int weeksSinceHost = 1;
-    private const int MAX_TOURNAMENTS = 2;
-    private static bool LimitPrizeSelect = false;
   }
 }

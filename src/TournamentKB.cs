@@ -4,20 +4,22 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
 namespace TournamentsEnhanced
 {
-  class TournamentKB
+  public class TournamentKB
   {
+    private static List<TournamentKB> TournamentList = new List<TournamentKB>();
 
-    public TournamentKB(Settlement settlement, TournamentTypes tournamentTypes)
+    private Settlement settlement { get; set; }
+    private TournamentType tournamentType { get; set; }
+    public TournamentTeam playerTeam { get; set; }
+
+    public TournamentKB(Settlement settlement, TournamentType tournamentTypes)
     {
-      //this.tournament = Campaign.Current.TournamentManager.GetTournamentGame(settlement.Town);
       this.tournamentType = tournamentTypes;
       this.settlement = settlement;
-      //this.numberofTeams = 4;
       TournamentList.Add(this);
     }
 
-    //Return type outside of class
-    public static TournamentTypes GetTournamentType(Settlement settlement)
+    public static TournamentType GetTournamentType(Settlement settlement)
     {
       List<TournamentKB>.Enumerator enumerator = TournamentList.GetEnumerator();
       while (enumerator.MoveNext())
@@ -27,10 +29,9 @@ namespace TournamentsEnhanced
           return enumerator.Current.tournamentType;
         }
       }
-      return TournamentTypes.Vanilla;
+      return TournamentType.Vanilla;
     }
 
-    //Find instance to be removed
     public static TournamentKB GetTournamentKB(Settlement settlement)
     {
       List<TournamentKB>.Enumerator enumerator = TournamentList.GetEnumerator();
@@ -44,7 +45,6 @@ namespace TournamentsEnhanced
       return null;
     }
 
-    //Remove instance once tournament is over
     public static void Remove(Settlement settlement)
     {
       if (GetTournamentKB(settlement) != null)
@@ -53,16 +53,9 @@ namespace TournamentsEnhanced
       }
 
     }
-
-    //private TournamentGame tournament { get; set; }
-    private Settlement settlement { get; set; }
-    private TournamentTypes tournamentType { get; set; }
-    public TournamentTeam playerTeam { get; set; }
-
-    private static List<TournamentKB> TournamentList = new List<TournamentKB>();
   }
 
-  public enum TournamentTypes
+  public enum TournamentType
   {
     Vanilla,
     Wedding,
