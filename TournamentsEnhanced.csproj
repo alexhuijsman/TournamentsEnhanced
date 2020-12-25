@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>TournamentsEnhanced</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <ApplicationVersion>1.5.5.0</ApplicationVersion>
+    <ApplicationVersion>1.5.6.0</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>TournamentsEnhanced</RootNamespace>
   </PropertyGroup>
@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="ModLib.Definitions">
       <HintPath>lib\ModLib.Definitions.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
@@ -127,7 +127,8 @@
     <Compile Include="src/patches/TournamentXpOnHitPatch.cs" />
     <Compile Include="src/patches/TournamentRenownPatch.cs" />
     <Compile Include="src/patches/TournamentRewardsPatch.cs" />
-    <Compile Include="src/Utilities.cs" />
+    <Compile Include="src/util/Utilities.cs" />
+    <Compile Include="src/util/ThreadSafeRandom.cs" />
     <Compile Include="src/Settings.cs" />
     <Compile Include="src/BehaviorBase.cs" />
     <Compile Include="src/Main.cs" />
