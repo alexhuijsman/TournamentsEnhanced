@@ -15,8 +15,6 @@ namespace TournamentsEnhanced
   {
     public static int WeeksSinceHostedTournament { get; set; }
 
-    private const int MAX_TOURNAMENTS = 2;
-
     public static bool PrizeSelectCondition(MenuCallbackArgs args)
     {
       bool shouldBeDisabled;
@@ -140,7 +138,7 @@ namespace TournamentsEnhanced
 
     private void OnProsperityTournament()
     {
-      var settlements = SettlementUtils.AllSettlementsShuffled;
+      var settlements = MBSettlementFacade.AllSettlementsShuffled;
 
       TournamentUtils.CreateProsperityTournamentInSettlements(settlements);
       foreach (var settlement in settlements)

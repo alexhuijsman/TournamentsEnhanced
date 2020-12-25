@@ -18,16 +18,19 @@ namespace TournamentsEnhanced
 
         private static bool IsOfAnyMatchingType(this ItemObject item, params ItemTypeEnum[] matchingItemTypes)
         {
-            var itemType = item.ItemType;
+            var actualItemType = item.ItemType;
+            var foundMatch = false;
+
             foreach (var matchingItemType in matchingItemTypes)
             {
-                if (itemType == matchingItemType)
+                if (actualItemType == matchingItemType)
                 {
-                    return true;
+                    foundMatch = true;
+                    break;
                 }
             }
 
-            return false;
+            return foundMatch;
         }
     }
 }

@@ -10,7 +10,6 @@ S investigate other tournament logic
 
 REFACTOR
 --------
-S Rewrite TournamentKB
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 S add "best experience" version that requires harmony and mcm
 
@@ -21,6 +20,7 @@ SM Recommend list of mods, and share load order
 
 FIX
 ---
+Can use mod options to save player difficulty before changing it for tournaments?
 S Don't hide Select Prize button after selecting a prize
 S Enable determinism in random number generator (does bannerlord provide a random number api?)
 S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value
