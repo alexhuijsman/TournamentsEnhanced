@@ -7,14 +7,14 @@
     <OutputType>Library</OutputType>
     <AssemblyName>TournamentsEnhanced</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <ApplicationVersion>1.5.4.0</ApplicationVersion>
+    <ApplicationVersion>1.5.4.1</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>TournamentsEnhanced</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugOutputToBannerlord|x64' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -52,11 +52,11 @@
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>lib\0Harmony.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ModLib.Definitions">
       <HintPath>lib\ModLib.Definitions.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
@@ -114,12 +114,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
     <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)\..\.." />
   </Target>
   <ItemGroup>
-    <Compile Include="src/extensions/Extensions.cs" />
     <Compile Include="src/patches/AddParticipantsPatch.cs" />
+    <Compile Include="src/TournamentKB.cs" />
     <Compile Include="src/patches/DisableTournamentSpawnPatch.cs" />
     <Compile Include="src/patches/TournamentStartMatchPatch.cs" />
     <Compile Include="src/patches/TournamentEndMatchPatch.cs" />
@@ -127,12 +127,10 @@
     <Compile Include="src/patches/TournamentXpOnHitPatch.cs" />
     <Compile Include="src/patches/TournamentRenownPatch.cs" />
     <Compile Include="src/patches/TournamentRewardsPatch.cs" />
+    <Compile Include="src/Utilities.cs" />
     <Compile Include="src/Settings.cs" />
     <Compile Include="src/BehaviorBase.cs" />
     <Compile Include="src/Main.cs" />
-    <Compile Include="src/TournamentKB.cs" />
-    <Compile Include="src/util/Utilities.cs" />
-    <Compile Include="src/util/ThreadSafeRandom.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
