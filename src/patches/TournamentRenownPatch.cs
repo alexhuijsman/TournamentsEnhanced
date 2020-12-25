@@ -8,7 +8,7 @@ namespace TournamentsEnhanced
   {
     static void Postfix(ref int __result)
     {
-      __result = TournamentsEnhancedSettings.Instance.RenownReward;
+      __result = Settings.Instance.RenownReward;
     }
   }
 }

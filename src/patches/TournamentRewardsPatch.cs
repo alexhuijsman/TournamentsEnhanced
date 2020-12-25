@@ -10,19 +10,8 @@ namespace TournamentsEnhanced
   {
     static void Postfix(TournamentGame __instance, ref ItemObject __result)
     {
-      List<ItemObject>.Enumerator enumerator = ItemObject.All.GetEnumerator();
-      List<ItemObject> tier = new List<ItemObject>();
-
-      while (enumerator.MoveNext())
       {
-        if (Utilities.IsTierable(enumerator.Current) && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
-        {
-          tier.Add(enumerator.Current);
-        }
-      }
-      if (!tier.IsEmpty())
-      {
-        __result = tier.GetRandomElement();
+        __result = ItemUtils.GetRandomlySelectedPrizeList().GetRandomElement();
         return;
       }
 

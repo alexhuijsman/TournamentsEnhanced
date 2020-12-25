@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls.Primitives;
+﻿using System.Collections.Generic;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
-using TaleWorlds.MountAndBlade;
 
 namespace TournamentsEnhanced
 {
@@ -17,41 +13,60 @@ namespace TournamentsEnhanced
     static bool Prefix(ref List<TournamentParticipant> ____participants, TournamentParticipant participant, bool firstTime, TournamentMatch __instance)
     {
       ____participants.Add(participant);
-      if (firstTime && TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement) != null)
+
+      var town = Hero.MainHero.CurrentSettlement?.Town;
+
+      if (town == null || !TournamentTracker.HasTournamentInTown(town))
       {
-        bool teamselected = false;
-        foreach (TournamentTeam tournamentTeam3 in __instance.Teams)
+        return false;
+      }
+
+      var tournamentRecord = TournamentTracker.GetByTown(town);
+      TournamentTeam playerTeam = tournamentRecord.playerTeam;
+
+      if (playerTeam == null)
+      {
+        playerTeam = GetEmptyTeamFromTeams(__instance.Teams);
+        tournamentRecord.playerTeam = playerTeam;
+      }
+
+      if (firstTime && Settings.Instance.BringCompanions && playerTeam.IsParticipantRequired())
+      {
+
+      }
+
+      {
+        AssignCompanionsToTeam(playerTeam);
+
+        foreach (var team in __instance.Teams)
         {
-          if (tournamentTeam3.Participants.IsEmpty() && !teamselected)
-          {
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam = tournamentTeam3;
-            teamselected = true;
-          }
-          if (TournamentsEnhancedSettings.Instance.BringCompanions &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam != null &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor == tournamentTeam3.TeamColor &&
-            tournamentTeam3.IsParticipantRequired() &&
+          if (Settings.Instance.BringCompanions &&
+            playerTeam != null &&
+            playerTeam.TeamColor == team.TeamColor &&
+            team.IsParticipantRequired() &&
             participant.Character.IsHero &&
             (participant.Character.IsPlayerCharacter || participant.Character.HeroObject.IsPlayerCompanion ||
               (participant.Character.HeroObject.Spouse != null && participant.Character.HeroObject.Spouse.Name.Equals(Hero.MainHero.Name))))
           {
-            tournamentTeam3.AddParticipant(participant);
+            team.AddParticipant(participant);
             return false;
           }
-          else if (TournamentsEnhancedSettings.Instance.BringCompanions &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam != null &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor == tournamentTeam3.TeamColor &&
-            !tournamentTeam3.IsParticipantRequired() &&
+          else if (Settings.Instance.BringCompanions &&
+            tournamentRecord.playerTeam != null &&
+            tournamentRecord.playerTeam.TeamColor == team.TeamColor &&
+            !team.IsParticipantRequired() &&
             participant.Character.IsHero &&
             participant.Character.IsPlayerCharacter)
           {
-            Utilities.LogAnnouncer("player could not join full team");
+            NotificationUtils.DisplayMessage("player could not join full team");
           }
         }
+
       }
+
       foreach (TournamentTeam tournamentTeam in __instance.Teams)
       {
-        if (firstTime && TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement) != null && tournamentTeam.TeamColor == TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor)
+        if (firstTime && tournamentRecord != null && tournamentTeam.TeamColor == tournamentRecord.playerTeam.TeamColor)
         {
           continue;
         }
@@ -69,8 +84,46 @@ namespace TournamentsEnhanced
           break;
         }
       }
+
+      TournamentTracker.UpdateRecord(tournamentRecord);
       return false;
     }
 
+    private static void AssignParticipantToTeam(TournamentParticipant participant, TournamentTeam team)
+    {
+      {
+        if (Settings.Instance.BringCompanions &&
+          tournamentRecord.playerTeam != null &&
+          tournamentRecord.playerTeam.TeamColor == team.TeamColor &&
+          team.IsParticipantRequired() &&
+          participant.Character.IsHero &&
+          (participant.Character.IsPlayerCharacter || participant.Character.HeroObject.IsPlayerCompanion ||
+            (participant.Character.HeroObject.Spouse != null && participant.Character.HeroObject.Spouse.Name.Equals(Hero.MainHero.Name))))
+        {
+          team.AddParticipant(participant);
+          return false;
+        }
+        else if (Settings.Instance.BringCompanions &&
+          tournamentRecord.playerTeam != null &&
+          tournamentRecord.playerTeam.TeamColor == team.TeamColor &&
+          !team.IsParticipantRequired() &&
+          participant.Character.IsHero &&
+          participant.Character.IsPlayerCharacter)
+        {
+          NotificationUtils.DisplayMessage("player could not join full team");
+        }
+      }
+    }
+
+    private static TournamentTeam GetEmptyTeamFromTeams(IEnumerable<TournamentTeam> teams)
+    {
+      foreach (var team in teams)
+        if (team.Participants.IsEmpty())
+        {
+          return team;
+        }
+
+      return null;
+    }
   }
 }

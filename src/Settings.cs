@@ -4,7 +4,7 @@ using ModLib.Definitions.Attributes;
 
 namespace TournamentsEnhanced
 {
-  public class TournamentsEnhancedSettings : SettingsBase
+  public class Settings : SettingsBase
   {
     public const string InstanceID = "TournamentsEnhancedSettings";
     public override string ModName => Main.ModuleName;
@@ -13,11 +13,11 @@ namespace TournamentsEnhanced
     [XmlElement]
     public override string ID { get; set; } = InstanceID;
 
-    public static TournamentsEnhancedSettings Instance
+    public static Settings Instance
     {
       get
       {
-        return (TournamentsEnhancedSettings)SettingsDatabase.GetSettings<TournamentsEnhancedSettings>();
+        return (Settings)SettingsDatabase.GetSettings<Settings>();
       }
     }
 
