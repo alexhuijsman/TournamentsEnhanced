@@ -2,6 +2,10 @@ WELCOME
 -------
 Hello! This is my todo list for Tournaments Enhanced.
 
+FIX
+---
+Fix Peace tournaments
+
 INVESTIGATE
 -----------
 L companions joining in fights have incorrect or missing icon. May be bug in Bannerlord?
@@ -36,6 +40,7 @@ Write unit tests for existing methods with NUnit, Moq, and Shouldly
 
 CREATE
 ----------
+SPIKE is jousting feasible?
 XL Grand Tournaments, happening every x months, announced to player before it happens 1 month, 2 weeks, 1 week, and when tournament begins
   -What should defining characteristics be? Need high renown to compete? Pay to enter? Noble-worthy prizes? Much larger monetary and social gains?
 SM add mod options input to change language
