@@ -40,7 +40,7 @@ namespace TournamentsEnhanced
       CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
       CampaignEvents.MakePeace.AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
       CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.DailyTick));
-      CampaignEvents.TournamentWon.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
+      CampaignEvents.TournamentFinished.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
     }
 
     private static void OnSelectPrize(List<InquiryElement> prizes)
