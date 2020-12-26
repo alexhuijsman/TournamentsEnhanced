@@ -2,7 +2,7 @@
 <Module>
     <Name value="Tournaments Enhanced" />
     <Id value="TournamentsEnhanced" />
-    <Version value="v1.5.6.1" />
+    <Version value="v1.5.6.x" />
     <SingleplayerModule value="true" />
     <MultiplayerModule value="false" />
     <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/1449" />
