@@ -4,7 +4,7 @@ using TaleWorlds.Library;
 
 namespace TournamentsEnhanced
 {
-    static class SettlementExtensions
+    static class MBTownExtensions
     {
         private const int RELATIONSHIP_MODIFIER = 3;
 

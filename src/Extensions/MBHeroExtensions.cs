@@ -3,7 +3,7 @@ using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced
 {
-    public static class HeroExtensions
+    public static class MBHeroExtensions
     {
         public static ItemTiers GetTournamentRewardTier(this Hero hero)
         {

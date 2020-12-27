@@ -4,7 +4,7 @@ using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced
 {
-    public static class ItemExtensions
+    public static class MBItemExtensions
     {
         public static bool IsWorthyTournamentPrizeForMainHero(this ItemObject item)
         {
