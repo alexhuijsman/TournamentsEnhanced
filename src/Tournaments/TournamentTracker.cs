@@ -13,12 +13,22 @@ namespace TournamentsEnhanced
             Tournaments.Add(town, record);
         }
 
-        public static bool HasTournamentInTown(Town town)
+        public static bool TownHasModdedTournament(Town town)
         {
             return Tournaments.ContainsKey(town);
         }
 
-        public static TournamentRecord GetByTown(Town town)
+        public static TournamentRecord GetRecordForCurrentTown()
+        {
+            return GetRecordByTown(MainHero.CurrentTown);
+        }
+
+        public static void UpdateRecordForCurrentTown(TournamentRecord record)
+        {
+            Tournaments[MainHero.CurrentTown] = record;
+        }
+
+        private static TournamentRecord GetRecordByTown(Town town)
         {
             return Tournaments[town];
         }

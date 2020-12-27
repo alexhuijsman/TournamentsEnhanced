@@ -30,12 +30,6 @@ namespace TournamentsEnhanced
                 TournamentTracker.AddByTownAndRecord(town, new TournamentRecord() { type = TournamentType.Peace });
 
                 town.ApplyTournamentCreationEffects();
-
-                if (type == TournamentType.Hosted)
-                {
-                    town.ApplyHostedTournamentRelationsGain();
-                }
-
             }
 
             return TournamentCreationResult.Success(town, townHasExistingTournament);

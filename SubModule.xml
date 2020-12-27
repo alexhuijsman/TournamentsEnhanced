@@ -8,13 +8,12 @@
     <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/1449" />
     <Official value="false" />
     <DependedModules>
-        <DependedModule Id="Bannerlord.Harmony" Order="LoadBeforeThis" DependentVersion="v2.0.4.2" />
         <DependedModule Id="Native" Order="LoadBeforeThis" DependentVersion="e1.5.6.252176" />
         <DependedModule Id="SandBoxCore" Order="LoadBeforeThis" DependentVersion="e1.5.6.252176" />
         <DependedModule Id="Sandbox" Order="LoadBeforeThis" DependentVersion="e1.5.6.252176" />
         <DependedModule Id="CustomBattle" Order="LoadBeforeThis" DependentVersion="e1.5.6.252176" />
         <DependedModule Id="StoryMode" Order="LoadBeforeThis" DependentVersion="e1.5.6.252176" />
-        <!-- <DependedModule Id="Bannerlord.MBOptionScreen.ModLib" DependentVersion="v4.1.*" /> -->
+        <!-- <DependedModule Id="Bannerlord.MBOptionScreen.ModLib" Order="LoadBeforeThis" DependentVersion="v4.1.*" /> -->
     </DependedModules>
     <SubModules>
         <SubModule>

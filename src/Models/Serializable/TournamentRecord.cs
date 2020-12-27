@@ -1,3 +1,5 @@
+using System;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
 namespace TournamentsEnhanced
@@ -6,5 +8,6 @@ namespace TournamentsEnhanced
     {
         public TournamentType type;
         public uint playerTeamColor;
+        public bool HasPlayerTeam;
     }
 }

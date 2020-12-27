@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
@@ -12,118 +13,78 @@ namespace TournamentsEnhanced
 
     static bool Prefix(ref List<TournamentParticipant> ____participants, TournamentParticipant participant, bool firstTime, TournamentMatch __instance)
     {
+      if (!__instance.IsPlayerParticipating())
+      {
+        return true;
+      }
+
+      var teams = __instance.Teams;
+      var playerTeam = GetPlayerTeam(teams);
+      var nonPlayerTeams = teams.AllExcept(playerTeam);
+
       ____participants.Add(participant);
 
-      var town = Hero.MainHero.CurrentSettlement?.Town;
+      if (playerTeam.IsParticipantRequired() &&
+        (participant.IsPlayer || participant.IsPlayerCompanion() || participant.IsMarriedToPlayer() || participant.IsPlayerTroop()))
+      {
+        playerTeam.AddParticipant(participant);
+        return false;
+      }
 
-      if (town == null || !TournamentTracker.HasTournamentInTown(town))
+      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams)) || participant.TryPlaceInAnyTeam(teams))
       {
         return false;
       }
 
-      var tournamentRecord = TournamentTracker.GetByTown(town);
-      TournamentTeam playerTeam = tournamentRecord.playerTeam;
+      return false;
+    }
 
-      if (playerTeam == null)
+    private static TournamentTeam GetPlayerTeam(IEnumerable<TournamentTeam> teams)
+    {
+      var tournamentRecord = TournamentTracker.GetRecordForCurrentTown();
+
+      TournamentTeam playerTeam;
+      if (tournamentRecord.HasPlayerTeam)
       {
-        playerTeam = GetEmptyTeamFromTeams(__instance.Teams);
-        tournamentRecord.playerTeam = playerTeam;
+        playerTeam = GetTeamByColor(teams, tournamentRecord.playerTeamColor);
+      }
+      else
+      {
+        playerTeam = GetEmptyTeam(teams);
+        tournamentRecord.playerTeamColor = playerTeam.TeamColor;
+        tournamentRecord.HasPlayerTeam = true;
+        TournamentTracker.UpdateRecordForCurrentTown(tournamentRecord);
       }
 
-      if (firstTime && Settings.Instance.BringCompanions && playerTeam.IsParticipantRequired())
+      return playerTeam;
+    }
+
+    private static TournamentTeam GetTeamByColor(IEnumerable<TournamentTeam> teams, uint playerTeamColor)
+    {
+      TournamentTeam matchingTeam = null;
+      foreach (var team in teams)
       {
-
-      }
-
-      {
-        AssignCompanionsToTeam(playerTeam);
-
-        foreach (var team in __instance.Teams)
+        if (team.TeamColor == playerTeamColor)
         {
-          if (Settings.Instance.BringCompanions &&
-            playerTeam != null &&
-            playerTeam.TeamColor == team.TeamColor &&
-            team.IsParticipantRequired() &&
-            participant.Character.IsHero &&
-            (participant.Character.IsPlayerCharacter || participant.Character.HeroObject.IsPlayerCompanion ||
-              (participant.Character.HeroObject.Spouse != null && participant.Character.HeroObject.Spouse.Name.Equals(Hero.MainHero.Name))))
-          {
-            team.AddParticipant(participant);
-            return false;
-          }
-          else if (Settings.Instance.BringCompanions &&
-            tournamentRecord.playerTeam != null &&
-            tournamentRecord.playerTeam.TeamColor == team.TeamColor &&
-            !team.IsParticipantRequired() &&
-            participant.Character.IsHero &&
-            participant.Character.IsPlayerCharacter)
-          {
-            NotificationUtils.DisplayMessage("player could not join full team");
-          }
-        }
-
-      }
-
-      foreach (TournamentTeam tournamentTeam in __instance.Teams)
-      {
-        if (firstTime && tournamentRecord != null && tournamentTeam.TeamColor == tournamentRecord.playerTeam.TeamColor)
-        {
-          continue;
-        }
-        if (tournamentTeam.IsParticipantRequired() && ((participant.Team != null && participant.Team.TeamColor == tournamentTeam.TeamColor) || firstTime))
-        {
-          tournamentTeam.AddParticipant(participant);
-          return false;
-        }
-      }
-      foreach (TournamentTeam tournamentTeam2 in __instance.Teams)
-      {
-        if (tournamentTeam2.IsParticipantRequired())
-        {
-          tournamentTeam2.AddParticipant(participant);
+          matchingTeam = team;
           break;
         }
       }
 
-      TournamentTracker.UpdateRecord(tournamentRecord);
-      return false;
+      return matchingTeam;
     }
 
-    private static void AssignParticipantToTeam(TournamentParticipant participant, TournamentTeam team)
+    private static TournamentTeam GetEmptyTeam(IEnumerable<TournamentTeam> teams)
     {
-      {
-        if (Settings.Instance.BringCompanions &&
-          tournamentRecord.playerTeam != null &&
-          tournamentRecord.playerTeam.TeamColor == team.TeamColor &&
-          team.IsParticipantRequired() &&
-          participant.Character.IsHero &&
-          (participant.Character.IsPlayerCharacter || participant.Character.HeroObject.IsPlayerCompanion ||
-            (participant.Character.HeroObject.Spouse != null && participant.Character.HeroObject.Spouse.Name.Equals(Hero.MainHero.Name))))
-        {
-          team.AddParticipant(participant);
-          return false;
-        }
-        else if (Settings.Instance.BringCompanions &&
-          tournamentRecord.playerTeam != null &&
-          tournamentRecord.playerTeam.TeamColor == team.TeamColor &&
-          !team.IsParticipantRequired() &&
-          participant.Character.IsHero &&
-          participant.Character.IsPlayerCharacter)
-        {
-          NotificationUtils.DisplayMessage("player could not join full team");
-        }
-      }
-    }
-
-    private static TournamentTeam GetEmptyTeamFromTeams(IEnumerable<TournamentTeam> teams)
-    {
+      TournamentTeam emptyTeam = null;
       foreach (var team in teams)
         if (team.Participants.IsEmpty())
         {
-          return team;
+          emptyTeam = team;
+          break;
         }
 
-      return null;
+      return emptyTeam;
     }
   }
 }
