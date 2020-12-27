@@ -6,7 +6,7 @@ namespace TournamentsEnhanced
     {
         public static class HostedTournamentEffects
         {
-            public static readonly int NobleNobleRelationshipModifier = 3;
+            public static readonly int NobleRelationshipModifier = 3;
         }
 
     }

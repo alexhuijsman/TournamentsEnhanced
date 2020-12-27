@@ -147,8 +147,6 @@
     <Compile Include="src\Results\TournamentCreationResult.cs" />
     <Compile Include="src\Results\TownResultBase.cs" />
     <Compile Include="src\Settings.cs" />
-    <Compile Include="src\Tournaments\TournamentManager.cs" />
-    <Compile Include="src\Tournaments\TournamentTracker.cs" />
     <Compile Include="src\Utils\HeroUtils.cs" />
     <Compile Include="src\Utils\InformationManagerUtils.cs" />
     <Compile Include="src\Utils\ItemUtils.cs" />
@@ -158,6 +156,7 @@
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="src\Wrappers\MainHero.cs" />
+    <Compile Include="src\Trackers\TournamentTracker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

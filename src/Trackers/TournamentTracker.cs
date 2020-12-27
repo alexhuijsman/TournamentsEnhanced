@@ -8,7 +8,7 @@ namespace TournamentsEnhanced
     {
         private static Dictionary<Town, TournamentRecord> Tournaments = new Dictionary<Town, TournamentRecord>();
 
-        public static void AddByTownAndRecord(Town town, TournamentRecord record)
+        public static void AddNewRecordForTown(TournamentRecord record, Town town)
         {
             Tournaments.Add(town, record);
         }
