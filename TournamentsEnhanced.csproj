@@ -119,14 +119,22 @@
   </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="src\patches\AddParticipantsPatch.cs" />
+    <Compile Include="src\BehaviorBase.cs" />
     <Compile Include="src\Constants\ItemConstants.cs" />
-    <Compile Include="src\Extensions\HeroExtensions.cs" />
+    <Compile Include="src\Enums\ResultStatus.cs" />
+    <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\IListExtensions.cs" />
-    <Compile Include="src\Extensions\ItemExtensions.cs" />
-    <Compile Include="src\Extensions\SettlementExtensions.cs" />
+    <Compile Include="src\Extensions\MBHeroExtensions.cs" />
+    <Compile Include="src\Extensions\MBItemObjectExtensions.cs" />
+    <Compile Include="src\Extensions\MBSettlementExtensions.cs" />
+    <Compile Include="src\Extensions\MBTownExtensions.cs" />
+    <Compile Include="src\Facades\MBSettlementFacade.cs" />
+    <Compile Include="src\Facades\MBTournamentFacade.cs" />
+    <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
     <Compile Include="src\Models\FindTownOptions.cs" />
+    <Compile Include="src\Models\TournamentRecord.cs" />
+    <Compile Include="src\patches\AddParticipantsPatch.cs" />
     <Compile Include="src\Patches\DisableTournamentSpawnPatch.cs" />
     <Compile Include="src\Patches\TournamentEndMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentParticipantPatch.cs" />
@@ -134,24 +142,17 @@
     <Compile Include="src\Patches\TournamentRewardsPatch.cs" />
     <Compile Include="src\Patches\TournamentStartMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentXpOnHitPatch.cs" />
-    <Compile Include="src\Results\TownResultBase.cs" />
-    <Compile Include="src\Results\TournamentCreationResult.cs" />
-    <Compile Include="src\Results\ResultStatus.cs" />
-    <Compile Include="src\Results\ResultBase.cs" />
     <Compile Include="src\Results\FindTownResult.cs" />
-    <Compile Include="src\Tournaments\TournamentRecord.cs" />
-    <Compile Include="src\Tournaments\TournamentManager.cs" />
-    <Compile Include="src\Tournaments\MBTournamentFacade.cs" />
-    <Compile Include="src\Settlements\MBSettlementFacade.cs" />
-    <Compile Include="src\Tournaments\TournamentTracker.cs" />
-    <Compile Include="src\Tournaments\TournamentType.cs" />
+    <Compile Include="src\Results\ResultBase.cs" />
+    <Compile Include="src\Results\TournamentCreationResult.cs" />
+    <Compile Include="src\Results\TownResultBase.cs" />
     <Compile Include="src\Settings.cs" />
-    <Compile Include="src\BehaviorBase.cs" />
-    <Compile Include="src\Utils\ItemUtils.cs" />
-    <Compile Include="src\Utils\InformationManagerUtils.cs" />
+    <Compile Include="src\Tournaments\TournamentManager.cs" />
+    <Compile Include="src\Tournaments\TournamentTracker.cs" />
     <Compile Include="src\Utils\HeroUtils.cs" />
+    <Compile Include="src\Utils\InformationManagerUtils.cs" />
+    <Compile Include="src\Utils\ItemUtils.cs" />
     <Compile Include="src\Utils\NotificationUtils.cs" />
-    <Compile Include="src\Main.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

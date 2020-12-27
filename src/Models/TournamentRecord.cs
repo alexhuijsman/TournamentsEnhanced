@@ -6,6 +6,5 @@ namespace TournamentsEnhanced
     {
         public TournamentType type;
         public uint playerTeamColor;
-
     }
 }

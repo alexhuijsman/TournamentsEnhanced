@@ -43,10 +43,9 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        BehaviorBase.weeksSinceHost = 1;
-        Utilities.CreateInitialTournaments();
+        BehaviorBase.WeeksSinceHostedTournament = 1;
+        MBTournamentFacade.CreateInitialTournaments();
       }
     }
   }
 }
-

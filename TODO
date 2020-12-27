@@ -16,6 +16,7 @@ REFACTOR
 --------
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 S add "best experience" version that requires harmony and mcm
+refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
 
 DESCRIBE
 --------

@@ -8,6 +8,11 @@ namespace TournamentsEnhanced
     {
         private static Dictionary<Town, TournamentRecord> Tournaments = new Dictionary<Town, TournamentRecord>();
 
+        public static void AddByTownAndRecord(Town town, TournamentRecord record)
+        {
+            Tournaments.Add(town, record);
+        }
+
         public static bool HasTournamentInTown(Town town)
         {
             return Tournaments.ContainsKey(town);

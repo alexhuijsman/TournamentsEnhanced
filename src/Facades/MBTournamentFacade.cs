@@ -27,7 +27,7 @@ namespace TournamentsEnhanced
             }
             else
             {
-                TournamentKB tournamentKB = new TournamentKB(town, type);
+                TournamentTracker.AddByTownAndRecord(town, new TournamentRecord() { type = TournamentType.Peace });
 
                 town.ApplyTournamentCreationEffects();
 
