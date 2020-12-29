@@ -41,7 +41,7 @@ namespace TournamentsEnhanced
 
     private static TournamentTeam GetPlayerTeam(IEnumerable<TournamentTeam> teams)
     {
-      var tournamentRecord = TournamentTracker.GetRecordForCurrentTown();
+      var tournamentRecord = TournamentRecords.GetRecordForCurrentTown();
 
       TournamentTeam playerTeam;
       if (tournamentRecord.HasPlayerTeam)
@@ -53,7 +53,7 @@ namespace TournamentsEnhanced
         playerTeam = GetEmptyTeam(teams);
         tournamentRecord.playerTeamColor = playerTeam.TeamColor;
         tournamentRecord.HasPlayerTeam = true;
-        TournamentTracker.UpdateRecordForCurrentTown(tournamentRecord);
+        TournamentRecords.UpdateRecordForCurrentTown(tournamentRecord);
       }
 
       return playerTeam;

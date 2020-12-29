@@ -157,6 +157,11 @@
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="src\Wrappers\MainHero.cs" />
     <Compile Include="src\Trackers\TournamentTracker.cs" />
+    <Compile Include="src\Options\CreateTournamentOptions.cs" />
+    <Compile Include="src\Enums\PatronType.cs" />
+    <Compile Include="src\Constants\ModuleConstants.cs" />
+    <Compile Include="src\Collections\ModTournaments.cs" />
+    <Compile Include="src\Collections\TournamentRecords.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

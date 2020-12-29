@@ -1,5 +1,5 @@
-﻿using System;
-using HarmonyLib;
+﻿using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
@@ -14,6 +14,8 @@ namespace TournamentsEnhanced
       {
         CampaignOptions.CombatAIDifficulty = CampaignModel.difficultyBeforeTournament;
       }
+
+      TournamentRecords.DeleteForCurrentTown();
     }
   }
 }

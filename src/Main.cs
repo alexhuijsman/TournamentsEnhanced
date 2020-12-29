@@ -1,7 +1,9 @@
+using System.IO;
 using System;
 using System.Reflection;
 using System.Windows;
 using HarmonyLib;
+using ModLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,16 +13,25 @@ namespace TournamentsEnhanced
 {
   public class Main : MBSubModuleBase
   {
-    public static string ModuleName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title;
-    private static string ModuleVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+    protected override void OnSubModuleLoad()
+    {
+      try
+      {
+        FileDatabase.Initialise(ModuleConstants.Name);
+      }
+      catch (Exception ex)
+      {
+        throw new UnauthorizedAccessException($"Exception while calling ModLib.FileDataBase.Initialise(\"${ModuleConstants.Name}\"", ex);
+      }
+    }
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
     {
-      InformationManager.DisplayMessage(new InformationMessage($"Loaded {ModuleName} v{ModuleVersion}", Color.FromUint(4282569842U)));
+      InformationManager.DisplayMessage(new InformationMessage($"Loaded {ModuleConstants.Name} v{ModuleConstants.Version}", Color.FromUint(4282569842U)));
 
       try
       {
-        var harmony = new Harmony(ModuleName);
+        var harmony = new Harmony(ModuleConstants.Name);
         harmony.PatchAll();
       }
       catch (Exception ex)

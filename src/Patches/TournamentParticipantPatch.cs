@@ -12,7 +12,12 @@ namespace TournamentsEnhanced
   {
     static void Postfix(ref List<CharacterObject> __result, Settlement settlement, int maxParticipantCount, bool includePlayer = true, bool includeHeroes = true)
     {
-      if (includePlayer && TournamentKB.GetTournamentType(settlement) == TournamentType.Lord)
+      if (!includePlayer)
+      {
+        return;
+      }
+
+      if (TournamentRecords.GetRecordForCurrentTown().type == TournamentType.Lord)
       {
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i < 15; i++)
@@ -61,7 +66,9 @@ namespace TournamentsEnhanced
       {
         IEnumerable<Hero> companions = Hero.MainHero.CompanionsInParty;
         List<Hero> companionList = companions.ToList();
-        if (Hero.MainHero.Spouse != null && Hero.MainHero.Spouse.CurrentSettlement.Name.Equals(settlement.Name))
+        if (
+            Hero.MainHero.Spouse != null &&
+            Hero.MainHero.Spouse.CurrentSettlement.Name.Equals(settlement.Name))
         {
           companionList.Add(Hero.MainHero.Spouse);
         }
