@@ -1,5 +1,5 @@
-using System.IO;
 using System;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using HarmonyLib;
@@ -55,7 +55,7 @@ namespace TournamentsEnhanced
       if (game.GameType is Campaign)
       {
         BehaviorBase.WeeksSinceHostedTournament = 1;
-        MBTournamentFacade.CreateInitialTournaments();
+        TournamentBuilder.CreateInitialTournaments();
       }
     }
   }

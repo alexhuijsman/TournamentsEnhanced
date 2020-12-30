@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Helpers;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
@@ -110,7 +112,7 @@ namespace TournamentsEnhanced
 
     private void WeeklyTick()
     {
-      OnLordTournament();
+      TryCreateLordTournament();
       WeeksSinceHostedTournament++;
       InvitePlayer();
     }
@@ -120,7 +122,7 @@ namespace TournamentsEnhanced
       OnProsperityTournament();
     }
 
-    private void OnLordTournament()
+    private void TryCreateLordTournament()
     {
       foreach (var kingdom in Kingdom.All)
       {
@@ -129,16 +131,15 @@ namespace TournamentsEnhanced
           continue;
         }
 
-        var settlements = kingdom.RulingClan.Settlements.ToList().Shuffle();
+        TournamentBuilder.CreateLordTournamentInKingdom(kingdom);
 
-        TournamentUtils.CreateLordTournamentInSettlements(settlements);
         break;
       }
     }
 
     private void OnProsperityTournament()
     {
-      var settlements = MBSettlementFacade.AllSettlementsShuffled;
+      var settlements = MBSettlement.AllSettlementsShuffled;
 
       TournamentUtils.CreateProsperityTournamentInSettlements(settlements);
       foreach (var settlement in settlements)

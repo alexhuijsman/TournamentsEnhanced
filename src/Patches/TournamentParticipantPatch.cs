@@ -17,7 +17,7 @@ namespace TournamentsEnhanced
         return;
       }
 
-      if (TournamentRecords.GetRecordForCurrentTown().type == TournamentType.Lord)
+      if (TournamentRecords.GetForCurrentTown().type == TournamentType.Lord)
       {
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i < 15; i++)

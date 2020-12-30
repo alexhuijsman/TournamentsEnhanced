@@ -1,17 +1,14 @@
 using System.Collections.Generic;
-using TaleWorlds.Core;
+
+using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
-    static class IListExtenIEnumerableExtensionssions
+  static class IEnumerableExtensions
+  {
+    public static List<T> ToList<T>(this IEnumerable<T> enumerable)
     {
-        public static List<T> AllExcept<T>(this IEnumerable<T> enumerable, T objectToExclude)
-        {
-            var result = new List<T>(enumerable);
-            result.Remove(objectToExclude);
-
-            return result;
-
-        }
+      return new List<T>(enumerable);
     }
+  }
 }

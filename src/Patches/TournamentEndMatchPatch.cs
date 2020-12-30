@@ -8,14 +8,14 @@ namespace TournamentsEnhanced
   [HarmonyPatch(typeof(TournamentMatch), "End")]
   class TournamentEndMatchPatch
   {
-    static void Postfix()
+    static void Postfix(TournamentMatch __instance)
     {
-      if (Settings.Instance.VeryHardTournaments)
+      if (Settings.Instance.VeryHardTournaments && __instance.IsPlayerParticipating())
       {
         CampaignOptions.CombatAIDifficulty = CampaignModel.difficultyBeforeTournament;
       }
 
-      TournamentRecords.DeleteForCurrentTown();
+      TournamentRecords.RemoveByTown(__instance.GetTown());
     }
   }
 }

@@ -2,13 +2,17 @@ using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
-  public struct PrepareTournamentOptions
+  public struct CreateTournamentOptions
   {
-    public TournamentType type;
-    public bool shouldApplyProsperityBonus;
-    public bool shouldApplySecurityBonus;
-    public bool shouldApplyFoodStocksPenalty;
-    public PatronType patron;
-    public bool shouldApplySettlementStatNotification;
+    public readonly Town town;
+    public readonly TournamentType type;
+    public readonly Payor payor;
+
+    public CreateTournamentOptions(FindHostTownResult result, TournamentType type, Payor payor)
+    {
+      this.town = result.Town;
+      this.type = type;
+      this.payor = payor;
+    }
   }
 }

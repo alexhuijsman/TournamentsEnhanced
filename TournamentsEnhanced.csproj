@@ -131,7 +131,6 @@
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
     <Compile Include="src\Facades\MBSettlementFacade.cs" />
-    <Compile Include="src\Facades\MBTournamentFacade.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\TournamentRecord.cs" />
     <Compile Include="src\patches\AddParticipantsPatch.cs" />
@@ -142,9 +141,7 @@
     <Compile Include="src\Patches\TournamentRewardsPatch.cs" />
     <Compile Include="src\Patches\TournamentStartMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentXpOnHitPatch.cs" />
-    <Compile Include="src\Results\FindTownResult.cs" />
     <Compile Include="src\Results\ResultBase.cs" />
-    <Compile Include="src\Results\TournamentCreationResult.cs" />
     <Compile Include="src\Results\TownResultBase.cs" />
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\Utils\HeroUtils.cs" />
@@ -152,16 +149,27 @@
     <Compile Include="src\Utils\ItemUtils.cs" />
     <Compile Include="src\Utils\NotificationUtils.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
-    <Compile Include="src\Options\FindTownOptions.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="src\Wrappers\MainHero.cs" />
     <Compile Include="src\Trackers\TournamentTracker.cs" />
-    <Compile Include="src\Options\CreateTournamentOptions.cs" />
-    <Compile Include="src\Enums\PatronType.cs" />
     <Compile Include="src\Constants\ModuleConstants.cs" />
     <Compile Include="src\Collections\ModTournaments.cs" />
     <Compile Include="src\Collections\TournamentRecords.cs" />
+    <Compile Include="src\Extensions\MBTournamentMatchExtensions.cs" />
+    <Compile Include="src\Models\Payor.cs" />
+    <Compile Include="src\Options\FindHostTownOptions.cs" />
+    <Compile Include="src\Options\CreateTournamentOptions.cs" />
+    <Compile Include="src\Results\CreateTournamentResult.cs" />
+    <Compile Include="src\Results\FindHostTownResult.cs" />
+    <Compile Include="src\Finders\TownFinder.cs" />
+    <Compile Include="src\Finders\HostTownFinder.cs" />
+    <Compile Include="src\Builders\TournamentBuilder.cs" />
+    <Compile Include="src\Comparators\TournamentTypeComparator.cs" />
+    <Compile Include="src\Comparers\TournamentTypeComparator.cs" />
+    <Compile Include="src\Facades\MBSettlement.cs" />
+    <Compile Include="src\Facades\MBTown.cs" />
+    <Compile Include="src\Extensions\IReadOnlyListExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

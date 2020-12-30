@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using HarmonyLib;
-using TaleWorlds.CampaignSystem;
+
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
@@ -41,7 +41,7 @@ namespace TournamentsEnhanced
 
     private static TournamentTeam GetPlayerTeam(IEnumerable<TournamentTeam> teams)
     {
-      var tournamentRecord = TournamentRecords.GetRecordForCurrentTown();
+      var tournamentRecord = TournamentRecords.GetForCurrentTown();
 
       TournamentTeam playerTeam;
       if (tournamentRecord.HasPlayerTeam)
@@ -53,7 +53,7 @@ namespace TournamentsEnhanced
         playerTeam = GetEmptyTeam(teams);
         tournamentRecord.playerTeamColor = playerTeam.TeamColor;
         tournamentRecord.HasPlayerTeam = true;
-        TournamentRecords.UpdateRecordForCurrentTown(tournamentRecord);
+        TournamentRecords.AddOrUpdateForCurrentTown(tournamentRecord);
       }
 
       return playerTeam;
