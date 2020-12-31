@@ -24,6 +24,8 @@ namespace TournamentsEnhanced.Wrappers
     public Hero ClanLeader => UnwrappedObject.OwnerClan.Leader;
     public Hero FactionLeader => UnwrappedObject.MapFaction.Leader;
 
+    public MBSettlement() : base() { }
+    public MBSettlement(Settlement obj) : base(obj) { }
     private static List<MBSettlement> WrapSettlements()
     {
       var settlements = Settlement.All;

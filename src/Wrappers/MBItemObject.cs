@@ -8,9 +8,10 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBItemObject : CachedWrapper<MBItemObject, ItemObject>
   {
-
     public static IReadOnlyList<MBItemObject> All => WrapAll();
     public static List<MBItemObject> AllShuffled => All.ToList().Shuffle();
+
+    public MBItemObject() : base() { }
     public MBItemObject(ItemObject obj) : base(obj) { }
 
     private static List<MBItemObject> WrapAll()
