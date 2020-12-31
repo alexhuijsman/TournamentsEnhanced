@@ -1,9 +1,10 @@
 using System;
-using System.IO;
-using System.Reflection;
 using System.Windows;
+
 using HarmonyLib;
+
 using ModLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -44,9 +45,10 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        CampaignGameStarter campaignStarter = (CampaignGameStarter)gameStarter;
+        var campaignStarter = (CampaignGameStarter)gameStarter;
 
-        campaignStarter.AddBehavior(new BehaviorBase());
+        campaignStarter.AddBehavior(new EncounterGameMenuModBehavior());
+        campaignStarter.AddBehavior(new SaveCampaignModBehavior());
       }
     }
 
@@ -54,7 +56,7 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        BehaviorBase.WeeksSinceHostedTournament = 1;
+        EncounterGameMenuModBehavior.WeeksSinceHostedTournament = 1;
         TournamentBuilder.CreateInitialTournaments();
       }
     }

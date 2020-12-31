@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using HarmonyLib;
+﻿using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
@@ -11,7 +11,7 @@ namespace TournamentsEnhanced
     static void Postfix(TournamentGame __instance, ref ItemObject __result)
     {
       {
-        __result = ItemUtils.GetRandomlySelectedPrizeList().GetRandomElement();
+        __result = MBItemObject.GetAvailableTournamentPrizes().GetRandomElement();
         return;
       }
 

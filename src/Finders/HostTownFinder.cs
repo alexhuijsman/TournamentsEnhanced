@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
@@ -7,6 +6,12 @@ namespace TournamentsEnhanced
 {
   public static class HostTownFinder
   {
+
+
+    public static Town FindByName(string name)
+    {
+      return MBTown.AllTowns.Find((town) => town.Name.Equals(name));
+    }
 
     public static FindHostTownResult FindForFaction(IFaction faction, FindHostTownOptions options)
     {

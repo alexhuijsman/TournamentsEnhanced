@@ -126,11 +126,8 @@
     <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\IListExtensions.cs" />
     <Compile Include="src\Extensions\MBHeroExtensions.cs" />
-    <Compile Include="src\Extensions\MBItemObjectExtensions.cs" />
-    <Compile Include="src\Extensions\MBSettlementExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
-    <Compile Include="src\Facades\MBSettlementFacade.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\TournamentRecord.cs" />
     <Compile Include="src\patches\AddParticipantsPatch.cs" />
@@ -146,7 +143,6 @@
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\Utils\HeroUtils.cs" />
     <Compile Include="src\Utils\InformationManagerUtils.cs" />
-    <Compile Include="src\Utils\ItemUtils.cs" />
     <Compile Include="src\Utils\NotificationUtils.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
@@ -166,10 +162,27 @@
     <Compile Include="src\Finders\HostTownFinder.cs" />
     <Compile Include="src\Builders\TournamentBuilder.cs" />
     <Compile Include="src\Comparators\TournamentTypeComparator.cs" />
-    <Compile Include="src\Comparers\TournamentTypeComparator.cs" />
-    <Compile Include="src\Facades\MBSettlement.cs" />
-    <Compile Include="src\Facades\MBTown.cs" />
     <Compile Include="src\Extensions\IReadOnlyListExtensions.cs" />
+    <Compile Include="src\Comparers\TournamentTypeComparer.cs" />
+    <Compile Include="src\Comparers\TownComparer.cs" />
+    <Compile Include="src\Comparers\HostTownComparer.cs" />
+    <Compile Include="src\Enums\PayorType.cs" />
+    <Compile Include="src\Behaviors\EncounterGameMenuModBehavior.cs" />
+    <Compile Include="src\Behaviors\SaveCampaignModBehavior.cs" />
+    <Compile Include="src\Models\Serializable\SaveModel.cs" />
+    <Compile Include="src\Models\Serializable\HeroLookupModel.cs" />
+    <Compile Include="src\Wrappers\MBTown.cs" />
+    <Compile Include="src\Wrappers\MBSettlement.cs" />
+    <Compile Include="src\Wrappers\Wrapper.cs" />
+    <Compile Include="src\Wrappers\CachedWrapper.cs" />
+    <Compile Include="src\Wrappers\MBCampaign.cs" />
+    <Compile Include="src\Wrappers\MBGameModels.cs" />
+    <Compile Include="src\Wrappers\MBSettlementAccessModel.cs" />
+    <Compile Include="src\Wrappers\MBTextObject.cs" />
+    <Compile Include="src\Wrappers\MBGameMenuOption.cs" />
+    <Compile Include="src\Utils\MBItemObject.cs" />
+    <Compile Include="src\Wrappers\MBItemObject.cs" />
+    <Compile Include="src\Collections\CachedWrappers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

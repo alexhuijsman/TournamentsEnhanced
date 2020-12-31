@@ -6,7 +6,21 @@ namespace TournamentsEnhanced
 {
   public static class TournamentRecords
   {
-    private static Dictionary<Town, TournamentRecord> Tournaments = new Dictionary<Town, TournamentRecord>();
+
+
+    public static List<TournamentRecord> All => Records.Values.ToList();
+    public static List<TournamentRecord> LoadAll { set => LoadAllFromList(value); }
+
+    private static void LoadAllFromList(List<TournamentRecord> records)
+    {
+      Records.Clear();
+      foreach (var record in records)
+      {
+        Records.Add(record);
+      }
+    }
+
+    private static Dictionary<Town, TournamentRecord> Records = new Dictionary<Town, TournamentRecord>();
 
     public static void AddOrUpdateForCurrentTown(TournamentRecord record)
     {
@@ -15,22 +29,27 @@ namespace TournamentsEnhanced
 
     public static void AddOrUpdateForTown(TournamentRecord record, Town town)
     {
-      Tournaments[town] = record;
+      Records[town] = record;
     }
 
     public static TournamentRecord GetForCurrentTown()
     {
-      return GetRecordByTown(MainHero.CurrentTown);
+      return GetForTown(MainHero.CurrentTown);
     }
 
-    private static TournamentRecord GetRecordByTown(Town town)
+    public static TournamentType GetTournamentTypeForTown(Town town)
     {
-      return Tournaments[town];
+      return Records[town].type;
+    }
+
+    public static TournamentRecord GetForTown(Town town)
+    {
+      return Records[town];
     }
 
     public static void RemoveByTown(Town town)
     {
-      Tournaments.Remove(town);
+      Records.Remove(town);
     }
   }
 }

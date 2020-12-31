@@ -1,18 +1,15 @@
-using System.Collections;
+using System.Collections.Generic;
+
+using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
   public struct FindHostTownOptions
   {
-    private static readonly bool UseExisting = true;
-    private static readonly bool RejectExisting = false;
+    public readonly IComparer<Town> TownComparer;
 
-    public readonly bool CanUseExistingTournamentAsLastResort;
-    public readonly IComparer TownComparer;
-
-    private FindHostTownOptions(bool canUseExistingTournamentAsLastResort, IComparer townComparer = null)
+    public FindHostTownOptions(IComparer<Town> townComparer = null)
     {
-      CanUseExistingTournamentAsLastResort = canUseExistingTournamentAsLastResort;
       TownComparer = townComparer;
     }
   }

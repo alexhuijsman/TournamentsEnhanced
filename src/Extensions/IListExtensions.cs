@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using TaleWorlds.Core;
@@ -19,6 +20,19 @@ namespace TournamentsEnhanced
       }
 
       return list;
+    }
+
+    public static List<W> UnwrapAll<W, U>(List<W> wrappedObjects)
+    where W : Wrapper<U>
+    {
+      var converter = new Converter<W, U>(UnwrapConverter);
+      return wrappedObjects.ConvertAll<U>(converter);
+    }
+
+    private static U UnwrapConverter<W, U>(W wrapper)
+    where W : Wrapper<U>
+    {
+      return wrapper.Unwrap();
     }
   }
 }

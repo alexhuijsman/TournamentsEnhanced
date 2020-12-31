@@ -1,10 +1,10 @@
 namespace TournamentsEnhanced
 {
-  public enum TournamentType
+  public enum PayorType
   {
     None,
-    Initial,
-    Wedding,
+    Town,
+    ClanLeader,
     Birth,
     Prosperity,
     Peace,

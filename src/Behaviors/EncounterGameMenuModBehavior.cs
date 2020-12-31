@@ -11,26 +11,27 @@ using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
+using static TaleWorlds.CampaignSystem.GameMenus.GameMenuOption;
+
 namespace TournamentsEnhanced
 {
-  class BehaviorBase : EncounterGameMenuBehavior
+  class EncounterGameMenuModBehavior : EncounterGameMenuBehavior
   {
     public static int WeeksSinceHostedTournament { get; set; }
 
     public static bool PrizeSelectCondition(MenuCallbackArgs args)
     {
       bool shouldBeDisabled;
-      TextObject disabledText;
-      bool canPlayerDo = Campaign.Current.Models.SettlementAccessModel.CanMainHeroDoSettlementAction(Settlement.CurrentSettlement,
-        SettlementAccessModel.SettlementAction.JoinTournament, out shouldBeDisabled, out disabledText);
-      args.optionLeaveType = GameMenuOption.LeaveType.Manage;
+      MBTextObject disabledText;
+      bool canPlayerDo = MBCampaign.CanMainHeroJoinTournamentAtCurrentSettlement(out shouldBeDisabled, out disabledText);
+      args.optionLeaveType = LeaveType.Manage;
       return MenuHelper.SetOptionProperties(args, canPlayerDo, shouldBeDisabled, disabledText);
     }
 
     public static void PrizeSelectConsequence(MenuCallbackArgs args)
     {
-      var prizeList = ItemUtils.GetRandomlySelectedPrizeList();
-      InformationManagerUtils.ShowSelectionScreenForItems(prizeList, OnSelectPrize, OnDeSelectPrize);
+      var prizeList = MBItemObject.GetAvailableTournamentPrizes();
+      InformationManagerUtils.ShowSelectionScreenForItems(prizeList.UnwrapAll(), OnSelectPrize, OnDeSelectPrize);
       GameMenu.SwitchToMenu("town_arena");
     }
 
@@ -49,7 +50,7 @@ namespace TournamentsEnhanced
     {
       if (prizes.Count > 0)
       {
-        TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town);
+        TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(MBSettlement.CurrentTown);
         ItemObject prize = MBObjectManager.Instance.GetObject<ItemObject>(prizes.First().Identifier.ToString());
         typeof(TournamentGame).GetProperty("Prize").SetValue(tournamentGame, prize);
         GameMenu.SwitchToMenu("town_arena");
@@ -96,8 +97,8 @@ namespace TournamentsEnhanced
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence), false, 1, true);
+        new GameMenuOption.OnConditionDelegate(EncounterGameMenuModBehavior.PrizeSelectCondition),
+        new GameMenuOption.OnConsequenceDelegate(EncounterGameMenuModBehavior.PrizeSelectConsequence), false, 1, true);
     }
 
     private void OnTournamentWin(CharacterObject character, Town town)
