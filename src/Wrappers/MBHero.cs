@@ -4,7 +4,7 @@ using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBHero : CachedWrapper<MBHero, Hero>
+  public class MBHero : CachedWrapperBase<MBHero, Hero>
   {
     public static MBHero MainHero => Hero.MainHero;
 

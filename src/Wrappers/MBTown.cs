@@ -4,7 +4,7 @@ using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBTown : CachedWrapper<MBTown, Town>
+  public class MBTown : CachedWrapperBase<MBTown, Town>
   {
     public static List<Town> AllTownsWithoutTournaments => Town.AllTowns.ToList().FindAll((town) => !town.HasTournament);
     public static List<Town> AllTownsWithTournaments => Town.AllTowns.ToList().FindAll((town) => town.HasTournament);

@@ -7,7 +7,7 @@ using TaleWorlds.Localization;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBClan : CachedWrapper<MBClan, Clan>
+  public class MBClan : CachedWrapperBase<MBClan, Clan>
   {
     public float Renown => UnwrappedObject.Renown;
 

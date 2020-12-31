@@ -3,7 +3,7 @@ using TaleWorlds.Localization;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBCampaign : CachedWrapper<MBCampaign, Campaign>
+  public class MBCampaign : CachedWrapperBase<MBCampaign, Campaign>
   {
     public MBCampaign() { }
     public MBCampaign(Campaign obj) : base(obj) { }

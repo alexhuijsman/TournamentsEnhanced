@@ -6,7 +6,7 @@ using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBItemObject : CachedWrapper<MBItemObject, ItemObject>
+  public class MBItemObject : CachedWrapperBase<MBItemObject, ItemObject>
   {
     public static IReadOnlyList<MBItemObject> All => WrapAll();
     public static List<MBItemObject> AllShuffled => All.ToList().Shuffle();

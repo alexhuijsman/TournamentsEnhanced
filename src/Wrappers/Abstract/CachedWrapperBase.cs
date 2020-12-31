@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 
-namespace TournamentsEnhanced.Wrappers
+namespace TournamentsEnhanced.Wrappers.Abstract
 {
-  public class CachedWrapper<W, T> : Wrapper<T>
-  where W : Wrapper<T>, new()
+  public abstract class CachedWrapperBase<W, T> : WrapperBase<T>
+  where W : WrapperBase<T>, new()
   {
     private static readonly IDictionary<T, W> Cache = new Dictionary<T, W>();
 
-    public CachedWrapper() : base() { }
-    public CachedWrapper(T obj) : base(obj) { }
+    public CachedWrapperBase() : base() { }
+    public CachedWrapperBase(T obj) : base(obj) { }
 
     public static W GetWrapperFor(T obj)
     {

@@ -169,7 +169,6 @@
     <Compile Include="src\Models\Serializable\HeroLookupModel.cs" />
     <Compile Include="src\Wrappers\MBTown.cs" />
     <Compile Include="src\Wrappers\MBSettlement.cs" />
-    <Compile Include="src\Wrappers\Wrapper.cs" />
     <Compile Include="src\Wrappers\CachedWrapper.cs" />
     <Compile Include="src\Wrappers\MBCampaign.cs" />
     <Compile Include="src\Wrappers\MBGameModels.cs" />
@@ -188,6 +187,11 @@
     <Compile Include="src\Wrappers\MBHero.cs" />
     <Compile Include="src\Wrappers\MBBanner.cs" />
     <Compile Include="src\Wrappers\MBMobileParty.cs" />
+    <Compile Include="src\Wrappers\MBTournamentParticipant.cs" />
+    <Compile Include="src\Wrappers\MBTournamentTeam.cs" />
+    <Compile Include="src\Extensions\Extensions.cs" />
+    <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.cs" />
+    <Compile Include="src\Wrappers\Abstract\WrapperBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

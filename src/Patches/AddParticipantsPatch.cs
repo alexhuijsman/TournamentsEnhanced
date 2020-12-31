@@ -5,6 +5,8 @@ using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
+using TournamentsEnhanced.Wrappers;
+
 namespace TournamentsEnhanced
 {
   [HarmonyPatch(typeof(TournamentMatch), "AddParticipant")]
@@ -18,9 +20,10 @@ namespace TournamentsEnhanced
         return true;
       }
 
-      var teams = __instance.Teams;
-      var playerTeam = GetPlayerTeam(teams);
-      var nonPlayerTeams = teams.AllExcept(playerTeam);
+      var teams = __instance.Teams.WrapAll<MBTournamentTeam, TournamentTeam>();
+      var playerTeam = GetPlayerTeamFrom(teams);
+      var nonPlayerTeams = new List<MBTournamentTeam>(teams).Remove(playerTeam);
+      var wrappedParticipant = participant.Wrap();
 
       ____participants.Add(participant);
 
@@ -39,11 +42,11 @@ namespace TournamentsEnhanced
       return false;
     }
 
-    private static TournamentTeam GetPlayerTeam(IEnumerable<TournamentTeam> teams)
+    private static MBTournamentTeam GetPlayerTeamFrom(IEnumerable<MBTournamentTeam> teams)
     {
       var tournamentRecord = TournamentRecords.GetForCurrentTown();
 
-      TournamentTeam playerTeam;
+      MBTournamentTeam playerTeam;
       if (tournamentRecord.HasPlayerTeam)
       {
         playerTeam = GetTeamByColor(teams, tournamentRecord.playerTeamColor);
@@ -59,9 +62,9 @@ namespace TournamentsEnhanced
       return playerTeam;
     }
 
-    private static TournamentTeam GetTeamByColor(IEnumerable<TournamentTeam> teams, uint playerTeamColor)
+    private static MBTournamentTeam GetTeamByColor(IEnumerable<TournamentTeam> teams, uint playerTeamColor)
     {
-      TournamentTeam matchingTeam = null;
+      MBTournamentTeam matchingTeam = null;
       foreach (var team in teams)
       {
         if (team.TeamColor == playerTeamColor)
@@ -74,9 +77,9 @@ namespace TournamentsEnhanced
       return matchingTeam;
     }
 
-    private static TournamentTeam GetEmptyTeam(IEnumerable<TournamentTeam> teams)
+    private static MBTournamentTeam GetEmptyTeam(IEnumerable<MBTournamentTeam> teams)
     {
-      TournamentTeam emptyTeam = null;
+      MBTournamentTeam emptyTeam = null;
       foreach (var team in teams)
         if (team.Participants.IsEmpty())
         {

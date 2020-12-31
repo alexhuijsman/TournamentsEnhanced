@@ -25,20 +25,20 @@ namespace TournamentsEnhanced
     }
 
     public static List<T> UnwrapAll<W, T>(this List<W> wrappedObjects)
-    where W : CachedWrapper<W, T>, new()
+    where W : CachedWrapperBase<W, T>, new()
     {
       var converter = new Converter<W, T>(UnwrapConverter<W, T>);
       return wrappedObjects.ConvertAll<T>(converter);
     }
 
     public static List<W> WrapAll<T, W>(this List<T> objects)
-    where W : CachedWrapper<W, T>, new()
+    where W : CachedWrapperBase<W, T>, new()
     {
       var converter = new Converter<T, W>(WrapConverter<T, W>);
       return objects.ConvertAll<W>(converter);
     }
 
-    private static W WrapConverter<T, W>(this T obj) where W : CachedWrapper<W, T>, new() => CachedWrapper<W, T>.GetWrapperFor(obj);
-    private static T UnwrapConverter<W, T>(this W wrapper) where W : CachedWrapper<W, T>, new() => wrapper.Unwrap();
+    private static W WrapConverter<T, W>(this T obj) where W : CachedWrapperBase<W, T>, new() => CachedWrapperBase<W, T>.GetWrapperFor(obj);
+    private static T UnwrapConverter<W, T>(this W wrapper) where W : CachedWrapperBase<W, T>, new() => wrapper.Unwrap();
   }
 }

@@ -1,0 +1,10 @@
+using TournamentsEnhanced.Wrappers.Abstract;
+
+namespace TournamentsEnhanced.Wrappers
+{
+  public class MB[TypeToWrap] : CachedWrapperBase<MB[TypeToWrap], [TypeToWrap]>
+  {
+    public static implicit operator  [TypeToWrap](MB[TypeToWrap] wrapper) => wrapper.Unwrap();
+  public static implicit operator MB[TypeToWrap]([TypeToWrap] obj) => MB[TypeToWrap].GetWrapperFor(obj);
+}
+}

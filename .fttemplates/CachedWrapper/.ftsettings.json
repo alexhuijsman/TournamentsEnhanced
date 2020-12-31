@@ -1,0 +1,6 @@
+{
+  "name": "Cached Wrapper",
+  "customVariables": ["TypeToWrap", "FileExt=>cs"],
+  "omitParentDirectory": true,
+  "omitFTName": true
+}

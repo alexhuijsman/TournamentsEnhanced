@@ -5,7 +5,7 @@ using TaleWorlds.Library;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBKingdom : CachedWrapper<MBKingdom, Kingdom>
+  public class MBKingdom : CachedWrapperBase<MBKingdom, Kingdom>
   {
     public MBTextObject Name => UnwrappedObject.Name;
 

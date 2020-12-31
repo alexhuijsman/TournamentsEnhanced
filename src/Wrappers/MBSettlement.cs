@@ -5,7 +5,7 @@ using TaleWorlds.Library;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBSettlement : CachedWrapper<MBSettlement, Settlement>
+  public class MBSettlement : CachedWrapperBase<MBSettlement, Settlement>
   {
     public static IReadOnlyList<MBSettlement> All => _allSettlements ?? (_allSettlements = WrapSettlements());
     public static List<MBSettlement> AllShuffled => All.ToList().Shuffle();
