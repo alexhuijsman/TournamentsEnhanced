@@ -17,7 +17,7 @@ namespace TournamentsEnhanced
       return wrappedObjects.ToList().UnwrapAll<W, T>();
     }
 
-    public static List<W> WrapAll<T, W>(this IEnumerable<T> objects)
+    public static List<W> WrapAll<W, T>(this IEnumerable<T> objects)
     where W : CachedWrapper<W, T>, new()
     {
       return objects.ToList().WrapAll<T, W>();

@@ -2,14 +2,16 @@ using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
 
+using TournamentsEnhanced.Wrappers;
+
 namespace TournamentsEnhanced
 {
   public class FindHostTownOptions
   {
-    public readonly IComparer<Town> Comparer;
-    public readonly IList<Settlement> Settlements;
+    public readonly IComparer<MBTown> Comparer;
+    public readonly IEnumerable<MBSettlement> Settlements;
 
-    public FindHostTownOptions(IList<Settlement> settlements, IComparer<Town> comparer = null)
+    public FindHostTownOptions(IEnumerable<MBSettlement> settlements, IComparer<MBTown> comparer = null)
     {
       Settlements = settlements;
       Comparer = comparer ?? new HostTownComparer();

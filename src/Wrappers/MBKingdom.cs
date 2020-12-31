@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace TournamentsEnhanced.Wrappers
 {
@@ -39,17 +39,17 @@ namespace TournamentsEnhanced.Wrappers
 
     public MBBanner Banner => UnwrappedObject.Banner;
 
-    public IEnumerable<MBSettlement> Settlements => UnwrappedObject.Settlements.WrapAll<Settlement, MBSettlement>();
+    public IEnumerable<MBSettlement> Settlements => UnwrappedObject.Settlements.WrapAll<MBSettlement, Settlement>();
 
-    public IEnumerable<MBTown> Fiefs => UnwrappedObject.Fiefs;
+    public IEnumerable<MBTown> Fiefs => UnwrappedObject.Fiefs.WrapAll<MBTown, Town>();
 
-    public IEnumerable<MBHero> Lords => UnwrappedObject.Lords;
+    public IEnumerable<MBHero> Lords => UnwrappedObject.Lords.WrapAll<MBHero, Hero>();
 
-    public IEnumerable<MBHero> Heroes => UnwrappedObject.Heroes;
+    public IEnumerable<MBHero> Heroes => UnwrappedObject.Heroes.WrapAll<MBHero, Hero>();
 
-    public IEnumerable<MBMobileParty> AllParties => UnwrappedObject.AllParties;
+    public IEnumerable<MBMobileParty> AllParties => UnwrappedObject.AllParties.WrapAll<MBMobileParty, MobileParty>();
 
-    public IEnumerable<MBMobileParty> WarParties => UnwrappedObject.WarParties;
+    public IEnumerable<MBMobileParty> WarParties => UnwrappedObject.WarParties.WrapAll<MBMobileParty, MobileParty>();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 

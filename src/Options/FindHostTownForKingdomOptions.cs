@@ -10,7 +10,7 @@ namespace TournamentsEnhanced
   {
     public readonly MBKingdom Kingdom;
 
-    public FindHostTownForKingdomOptions(MBKingdom kingdom, IComparer<Town> comparer = null) : base(kingdom.Settlements.ToList(), comparer)
+    public FindHostTownForKingdomOptions(MBKingdom kingdom, IComparer<MBTown> comparer = null) : base(kingdom.Settlements, comparer)
     {
       Kingdom = kingdom;
     }

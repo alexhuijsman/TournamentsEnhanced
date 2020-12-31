@@ -8,6 +8,11 @@ namespace TournamentsEnhanced.Wrappers
   {
     public static MBHero MainHero => Hero.MainHero;
 
+    public static ItemTiers GetMainHeroTournamentRewardTier()
+    {
+      return MainHero.GetTournamentRewardTier();
+    }
+
     public MBClan Clan => UnwrappedObject.Clan;
     public MBTown CurrentTown => UnwrappedObject.CurrentSettlement?.Town;
     public ItemTiers GetTournamentRewardTier()

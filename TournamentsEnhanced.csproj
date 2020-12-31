@@ -139,7 +139,6 @@
     <Compile Include="src\Results\ResultBase.cs" />
     <Compile Include="src\Results\TownResultBase.cs" />
     <Compile Include="src\Settings.cs" />
-    <Compile Include="src\Utils\HeroUtils.cs" />
     <Compile Include="src\Utils\InformationManagerUtils.cs" />
     <Compile Include="src\Utils\NotificationUtils.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
@@ -188,6 +187,7 @@
     <Compile Include="src\Wrappers\MBCharacterObject.cs" />
     <Compile Include="src\Wrappers\MBHero.cs" />
     <Compile Include="src\Wrappers\MBBanner.cs" />
+    <Compile Include="src\Wrappers\MBMobileParty.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

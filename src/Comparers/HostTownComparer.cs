@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-using TaleWorlds.CampaignSystem;
+using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced
 {
-  public class HostTownComparer : IComparer<Town>
+  public class HostTownComparer : IComparer<MBTown>
   {
-    public int Compare(Town x, Town y)
+    public int Compare(MBTown x, MBTown y)
     {
       var xRecord = TournamentRecords.GetForTown(x);
       var yRecord = TournamentRecords.GetForTown(y);

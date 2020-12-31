@@ -15,15 +15,13 @@ namespace TournamentsEnhanced
 
     public static FindHostTownResult Find(FindHostTownOptions options)
     {
-      FindHostTownResult result;
-
       return FindInSettlements(options);
     }
 
     public static FindHostTownResult FindInSettlements(FindHostTownOptions options)
     {
-      var settlements = options.Faction.Settlements.ToList().Shuffle();
-      var sortedSettlements = settlements.Sort(
+      var settlements = options.Settlements.ToList().Shuffle();
+      var sortedSettlements = settlements.Sort(new HostTownComparer());
 
       )
       Town townWithExistingTournament = null;

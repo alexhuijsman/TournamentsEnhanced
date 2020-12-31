@@ -42,7 +42,7 @@ namespace TournamentsEnhanced.Wrappers
 
     public bool IsWorthyTournamentPrizeForMainHero()
     {
-      return IsTierable() && UnwrappedObject.Tier == HeroUtils.GetMainHeroTournamentRewardTier();
+      return IsTierable() && UnwrappedObject.Tier == MBHero.GetMainHeroTournamentRewardTier();
     }
 
     public bool IsTierable()
