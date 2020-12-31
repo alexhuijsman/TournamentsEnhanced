@@ -43,5 +43,8 @@ namespace TournamentsEnhanced.Wrappers
     {
       return ClanLeader.Equals(leader) || FactionLeader.Equals(leader);
     }
+
+    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.Unwrap();
+    public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
   }
 }

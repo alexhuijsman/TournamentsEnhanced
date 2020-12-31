@@ -4,13 +4,15 @@ using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
-  public struct FindHostTownOptions
+  public class FindHostTownOptions
   {
-    public readonly IComparer<Town> TownComparer;
+    public readonly IComparer<Town> Comparer;
+    public readonly IList<Settlement> Settlements;
 
-    public FindHostTownOptions(IComparer<Town> townComparer = null)
+    public FindHostTownOptions(IList<Settlement> settlements, IComparer<Town> comparer = null)
     {
-      TownComparer = townComparer;
+      Settlements = settlements;
+      Comparer = comparer ?? new HostTownComparer();
     }
   }
 }

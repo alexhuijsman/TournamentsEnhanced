@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class Wrapper<T>
+  public abstract class Wrapper<T>
   {
     internal T UnwrappedObject { get; set; }
 

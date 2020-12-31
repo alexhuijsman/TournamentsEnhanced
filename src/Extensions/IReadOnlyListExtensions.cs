@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 
+using TournamentsEnhanced.Wrappers;
+
 namespace TournamentsEnhanced
 {
   public static class IReadOnlyListExtensions

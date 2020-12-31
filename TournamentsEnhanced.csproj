@@ -124,8 +124,6 @@
     <Compile Include="src\Constants\TournamentConstants.cs" />
     <Compile Include="src\Enums\ResultStatus.cs" />
     <Compile Include="src\Enums\TournamentType.cs" />
-    <Compile Include="src\Extensions\IListExtensions.cs" />
-    <Compile Include="src\Extensions\MBHeroExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
     <Compile Include="src\Main.cs" />
@@ -147,7 +145,6 @@
     <Compile Include="src\Models\CampaignModel.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
-    <Compile Include="src\Wrappers\MainHero.cs" />
     <Compile Include="src\Trackers\TournamentTracker.cs" />
     <Compile Include="src\Constants\ModuleConstants.cs" />
     <Compile Include="src\Collections\ModTournaments.cs" />
@@ -183,6 +180,14 @@
     <Compile Include="src\Utils\MBItemObject.cs" />
     <Compile Include="src\Wrappers\MBItemObject.cs" />
     <Compile Include="src\Collections\CachedWrappers.cs" />
+    <Compile Include="src\Wrappers\MBKingdom.cs" />
+    <Compile Include="src\Wrappers\MBClan.cs" />
+    <Compile Include="src\Options\FindHostTownForKingdomOptions.cs" />
+    <Compile Include="src\Extensions\ListExtensions.cs" />
+    <Compile Include="src\Wrappers\MBCultureObject.cs" />
+    <Compile Include="src\Wrappers\MBCharacterObject.cs" />
+    <Compile Include="src\Wrappers\MBHero.cs" />
+    <Compile Include="src\Wrappers\MBBanner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

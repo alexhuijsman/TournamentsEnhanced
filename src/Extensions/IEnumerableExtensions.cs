@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using TaleWorlds.CampaignSystem;
+using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced
 {
@@ -10,5 +10,20 @@ namespace TournamentsEnhanced
     {
       return new List<T>(enumerable);
     }
+
+    public static List<T> UnwrapAll<W, T>(this IEnumerable<W> wrappedObjects)
+        where W : CachedWrapper<W, T>, new()
+    {
+      return wrappedObjects.ToList().UnwrapAll<W, T>();
+    }
+
+    public static List<W> WrapAll<T, W>(this IEnumerable<T> objects)
+    where W : CachedWrapper<W, T>, new()
+    {
+      return objects.ToList().WrapAll<T, W>();
+    }
+
+    private static W WrapConverter<T, W>(this T obj) where W : CachedWrapper<W, T>, new() => CachedWrapper<W, T>.GetWrapperFor(obj);
+    private static T UnwrapConverter<W, T>(this W wrapper) where W : CachedWrapper<W, T>, new() => wrapper.Unwrap();
   }
 }

@@ -1,6 +1,6 @@
-using System.Collections.Generic;
-
 using TaleWorlds.CampaignSystem;
+
+using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced
 {
@@ -13,15 +13,19 @@ namespace TournamentsEnhanced
       return MBTown.AllTowns.Find((town) => town.Name.Equals(name));
     }
 
-    public static FindHostTownResult FindForFaction(IFaction faction, FindHostTownOptions options)
+    public static FindHostTownResult Find(FindHostTownOptions options)
     {
-      var settlements = faction.Settlements.ToList().Shuffle();
+      FindHostTownResult result;
 
-      return FindInSettlements(settlements, options);
+      return FindInSettlements(options);
     }
 
-    public static FindHostTownResult FindInSettlements(IList<Settlement> settlements, FindHostTownOptions options)
+    public static FindHostTownResult FindInSettlements(FindHostTownOptions options)
     {
+      var settlements = options.Faction.Settlements.ToList().Shuffle();
+      var sortedSettlements = settlements.Sort(
+
+      )
       Town townWithExistingTournament = null;
       Town hostTown = null;
 

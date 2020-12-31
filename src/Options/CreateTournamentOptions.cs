@@ -2,7 +2,7 @@ using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
-  public struct CreateTournamentOptions
+  public class CreateTournamentOptions
   {
     public readonly Town town;
     public readonly TournamentType type;

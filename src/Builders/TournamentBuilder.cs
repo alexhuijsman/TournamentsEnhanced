@@ -11,10 +11,8 @@ namespace TournamentsEnhanced
   {
     public static CreateTournamentResult TryMakePeaceTournamentForFaction(IFaction faction)
     {
-      var findHostTownResult =
-        HostTownFinder.FindForFaction(faction,
-                                      FindHostTownOptions.UseExistingTournamentAsLastResort
-                                      );
+      var findHostTownOptions = new FindHostTownOptions();
+      var findHostTownResult = HostTownFinder.FindForFaction(faction, findHostTownOptions);
       var payor = new Payor(findHostTownResult.Town.FactionLeader());
       var createTournamentOptions = new CreateTournamentOptions(findHostTownResult, TournamentType.Peace, payor);
 
