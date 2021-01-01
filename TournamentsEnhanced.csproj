@@ -202,6 +202,8 @@
     <Compile Include="src\Wrappers\MBWeaponComponentData.cs" />
     <Compile Include="src\Wrappers\MBWeaponDesign.cs" />
     <Compile Include="src\Wrappers\MBWorkshop.cs" />
+    <Compile Include="src\Wrappers\MBStanceLink.cs" />
+    <Compile Include="src\Wrappers\MBStatExplainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

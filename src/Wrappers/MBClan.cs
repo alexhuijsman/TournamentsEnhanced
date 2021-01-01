@@ -1,31 +1,77 @@
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
 using TaleWorlds.Library;
-using TaleWorlds.Localization;
 
 using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers
 {
-  public class MBClan : CachedWrapperBase<MBClan, Clan>
+
+  public interface IMBFaction
+  {
+    MBHeroList Lords { get; }
+    MBMobilePartyList WarParties { get; }
+    bool IsBanditFaction { get; }
+    bool IsMinorFaction { get; }
+    bool IsKingdomFaction { get; }
+    bool IsRebelClan { get; }
+    bool IsClan { get; }
+    bool IsOutlaw { get; }
+    bool IsMapFaction { get; }
+    IFaction MapFaction { get; }
+    float TotalStrength { get; }
+    Vec2 FactionMidPoint { get; }
+    MBStanceLinkList Stances { get; }
+    int TributeWallet { get; set; }
+    float MainHeroCrimeRating { get; set; }
+    float DailyCrimeRatingChange { get; }
+    float Aggressiveness { get; }
+    bool IsEliminated { get; }
+    MBMobilePartyList AllParties { get; }
+    MBHeroList Heroes { get; }
+    CampaignTime NotAttackableByPlayerUntilTime { get; set; }
+    MBTownList Fiefs { get; }
+    MBTextObject Name { get; }
+    string StringId { get; }
+    MBTextObject InformalName { get; }
+    string EncyclopediaLink { get; }
+    MBTextObject EncyclopediaLinkWithName { get; }
+    MBTextObject EncyclopediaText { get; }
+    MBCultureObject Culture { get; }
+    MBStatExplainer DailyCrimeRatingChangeExplained { get; }
+    Vec2 InitialPosition { get; }
+    uint Color { get; }
+    uint Color2 { get; }
+    uint AlternativeColor { get; }
+    uint AlternativeColor2 { get; }
+    MBCharacterObject BasicTroop { get; }
+    MBHero Leader { get; }
+    MBBanner Banner { get; }
+    MBSettlementList Settlements { get; }
+    uint LabelColor { get; }
+
+    MBStanceLink GetStanceWith(IFaction other);
+    bool IsAtWarWith(IFaction other);
+  }
+
+  public class MBClan : CachedWrapperBase<MBClan, Clan>, IMBFaction
   {
     public float Renown => UnwrappedObject.Renown;
 
-    public TextObject Name => UnwrappedObject.Name;
+    public MBTextObject Name => UnwrappedObject.Name;
 
     public string StringId => UnwrappedObject.StringId;
 
-    public TextObject InformalName => UnwrappedObject.InformalName;
+    public MBTextObject InformalName => UnwrappedObject.InformalName;
 
     public string EncyclopediaLink => UnwrappedObject.EncyclopediaLink;
 
-    public TextObject EncyclopediaLinkWithName => UnwrappedObject.EncyclopediaLinkWithName;
+    public MBTextObject EncyclopediaLinkWithName => UnwrappedObject.EncyclopediaLinkWithName;
 
-    public TextObject EncyclopediaText => UnwrappedObject.EncyclopediaText;
+    public MBTextObject EncyclopediaText => UnwrappedObject.EncyclopediaText;
 
-    public CultureObject Culture => UnwrappedObject.Culture;
+    public MBCultureObject Culture => UnwrappedObject.Culture;
 
     public Vec2 InitialPosition => UnwrappedObject.InitialPosition;
 
@@ -39,23 +85,23 @@ namespace TournamentsEnhanced.Wrappers
 
     public uint AlternativeColor2 => UnwrappedObject.AlternativeColor2;
 
-    public CharacterObject BasicTroop => UnwrappedObject.BasicTroop;
+    public MBCharacterObject BasicTroop => UnwrappedObject.BasicTroop;
 
-    public Hero Leader => UnwrappedObject.Leader;
+    public MBHero Leader => UnwrappedObject.Leader;
 
-    public Banner Banner => UnwrappedObject.Banner;
+    public MBBanner Banner => UnwrappedObject.Banner;
 
-    public IEnumerable<Settlement> Settlements => UnwrappedObject.Settlements;
+    public MBSettlementList Settlements => UnwrappedObject.Settlements.ToList();
 
-    public IEnumerable<Town> Fiefs => UnwrappedObject.Fiefs;
+    public MBTownList Fiefs => UnwrappedObject.Fiefs.ToList();
 
-    public IEnumerable<Hero> Lords => UnwrappedObject.Lords;
+    public MBHeroList Lords => UnwrappedObject.Lords.ToList();
 
-    public IEnumerable<Hero> Heroes => UnwrappedObject.Heroes;
+    public MBHeroList Heroes => UnwrappedObject.Heroes.ToList();
 
-    public IEnumerable<MobileParty> AllParties => UnwrappedObject.AllParties;
+    public MBMobilePartyList AllParties => UnwrappedObject.AllParties.ToList();
 
-    public IEnumerable<MobileParty> WarParties => UnwrappedObject.WarParties;
+    public MBMobilePartyList WarParties => UnwrappedObject.WarParties.ToList();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
@@ -77,7 +123,7 @@ namespace TournamentsEnhanced.Wrappers
 
     public Vec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
-    public IEnumerable<StanceLink> Stances => UnwrappedObject.Stances;
+    public MBStanceLinkList Stances => UnwrappedObject.Stances.ToList();
 
     public int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
 
@@ -89,11 +135,12 @@ namespace TournamentsEnhanced.Wrappers
 
     public bool IsEliminated => UnwrappedObject.IsEliminated;
 
-    public StatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
+    public MBStatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
-    public StanceLink GetStanceWith(IFaction other) => UnwrappedObject.GetStanceWith(other);
+
+    public MBStanceLink GetStanceWith(IFaction other) => UnwrappedObject.GetStanceWith(other);
 
     public bool IsAtWarWith(IFaction other) => UnwrappedObject.IsAtWarWith(other);
 
