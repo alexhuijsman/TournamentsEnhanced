@@ -140,7 +140,6 @@
     <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\Extensions.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
-    <Compile Include="src\Extensions\IReadOnlyListExtensions.cs" />
     <Compile Include="src\Extensions\ListExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentMatchExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
@@ -170,7 +169,6 @@
     <Compile Include="src\Results\TownResultBase.cs" />
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\Trackers\TournamentTracker.cs" />
-    <Compile Include="src\Utils\InformationManagerUtils.cs" />
     <Compile Include="src\Utils\MBItemObject.cs" />
     <Compile Include="src\Utils\NotificationUtils.cs" />
     <Compile Include="src\Utils\Reflection.cs" />
@@ -203,6 +201,18 @@
     <Compile Include="src\Wrappers\MBTournamentGame.cs" />
     <Compile Include="src\Wrappers\MBTournamentModel.cs" />
     <Compile Include="src\Wrappers\MBSkillObject.cs" />
+    <Compile Include="src\Wrappers\MBInformationManager.cs" />
+    <Compile Include="src\Wrappers\MBInquiryElement.cs" />
+    <Compile Include="src\Wrappers\MBItemComponent.cs" />
+    <Compile Include="src\Wrappers\MBArmorComponent.cs" />
+    <Compile Include="src\Wrappers\MBWeaponComponentData.cs" />
+    <Compile Include="src\Wrappers\MBMBObjectManager.cs" />
+    <Compile Include="src\Wrappers\MBWeaponDesign.cs" />
+    <Compile Include="src\Wrappers\MBWeaponComponent.cs" />
+    <Compile Include="src\Wrappers\MBTradeItemComponent.cs" />
+    <Compile Include="src\Wrappers\MBSaddleComponent.cs" />
+    <Compile Include="src\Wrappers\MBHorseComponent.cs" />
+    <Compile Include="src\Wrappers\MBBasicCultureObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

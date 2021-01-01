@@ -32,7 +32,7 @@ namespace TournamentsEnhanced
     public static void PrizeSelectConsequence(MenuCallbackArgs args)
     {
       var prizeList = MBItemObject.GetAvailableTournamentPrizes();
-      InformationManagerUtils.ShowSelectionScreenForItems(prizeList, OnSelectPrize, OnDeSelectPrize);
+      MBInformationManager.ShowSelectionScreenForItems(prizeList, OnSelectPrize, OnDeSelectPrize);
       GameMenu.SwitchToMenu("town_arena");
     }
 
