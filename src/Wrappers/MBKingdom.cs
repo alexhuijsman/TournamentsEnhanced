@@ -41,17 +41,17 @@ namespace TournamentsEnhanced.Wrappers
 
     public MBBanner Banner => UnwrappedObject.Banner;
 
-    public IEnumerable<MBSettlement> Settlements => UnwrappedObject.Settlements.Wrap<MBSettlement, Settlement>();
+    public MBSettlementList Settlements => UnwrappedObject.Settlements.ToList();
 
-    public IEnumerable<MBTown> Fiefs => UnwrappedObject.Fiefs.Wrap<MBTown, Town>();
+    public MBTownList Fiefs => UnwrappedObject.Fiefs.ToList();
 
-    public IEnumerable<MBHero> Lords => UnwrappedObject.Lords.Wrap<MBHero, Hero>();
+    public MBHeroList Lords => UnwrappedObject.Lords.ToList();
 
-    public IEnumerable<MBHero> Heroes => UnwrappedObject.Heroes.Wrap<MBHero, Hero>();
+    public MBHeroList Heroes => UnwrappedObject.Heroes.ToList();
 
-    public IEnumerable<MBMobileParty> AllParties => UnwrappedObject.AllParties.Wrap<MBMobileParty, MobileParty>();
+    public MBMobilePartyList AllParties => UnwrappedObject.AllParties.ToList();
 
-    public IEnumerable<MBMobileParty> WarParties => UnwrappedObject.WarParties.Wrap<MBMobileParty, MobileParty>();
+    public MBMobilePartyList WarParties => UnwrappedObject.WarParties.ToList();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 

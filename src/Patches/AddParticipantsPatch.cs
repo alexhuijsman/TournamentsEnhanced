@@ -20,10 +20,10 @@ namespace TournamentsEnhanced
         return true;
       }
 
-      var teams = __instance.Teams.Wrap<MBTournamentTeam, TournamentTeam>();
+      MBTournamentTeamList teams = __instance.Teams.ToList();
       var playerTeam = GetPlayerTeamFrom(teams);
       var nonPlayerTeams = new MBTournamentTeamList().Remove(playerTeam);
-      var wrappedParticipant = participant.Wrap<MBTournamentParticipant, TournamentParticipant>();
+      MBTournamentParticipant wrappedParticipant = participant;
 
       ____participants.Add(participant);
 
@@ -34,7 +34,8 @@ namespace TournamentsEnhanced
         return false;
       }
       // TODO: ADD LIST<MBTYPE> TO IENUMERABLE<TYPE>, and ensure no manual calls to Wrap and Unwrap left
-      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams)) || participant.TryPlaceInAnyTeam(teams))
+
+      if ((firstTime && participant.TryPlaceInNewOrSameTeam((List<TournamentTeam>)teams)) || participant.TryPlaceInAnyTeam((List<TournamentTeam>)teams))
       {
         return false;
       }

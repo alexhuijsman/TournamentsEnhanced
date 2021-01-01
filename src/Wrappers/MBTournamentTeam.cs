@@ -13,7 +13,7 @@ namespace TournamentsEnhanced.Wrappers
     uint TeamColor { get; }
     MBBanner TeamBanner { get; }
     bool IsPlayerTeam { get; }
-    IEnumerable<MBTournamentParticipant> Participants { get; }
+    MBTournamentParticipantList Participants { get; }
     int Score { get; }
 
     void AddParticipant(MBTournamentParticipant participant);
@@ -30,7 +30,7 @@ namespace TournamentsEnhanced.Wrappers
 
     public bool IsPlayerTeam => UnwrappedObject.IsPlayerTeam;
 
-    public IEnumerable<MBTournamentParticipant> Participants => UnwrappedObject.Participants.Wrap<MBTournamentParticipant, TournamentParticipant>();
+    public MBTournamentParticipantList Participants => UnwrappedObject.Participants.ToList();
 
     public int Score => UnwrappedObject.Score;
 
@@ -43,6 +43,7 @@ namespace TournamentsEnhanced.Wrappers
 
   public class MBTournamentTeamList : List<MBTournamentTeam>
   {
+    public List<MBTournamentTeam> ToList() => (List<MBTournamentTeam>)this;
     public static implicit operator List<TournamentTeam>(MBTournamentTeamList wrapperList) => wrapperList.Unwrap<MBTournamentTeam, TournamentTeam>();
     public static implicit operator MBTournamentTeamList(List<TournamentTeam> objectList) => (MBTournamentTeamList)objectList.Wrap<MBTournamentTeam, TournamentTeam>();
   }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Wrappers.Abstract;
@@ -38,5 +40,11 @@ namespace TournamentsEnhanced.Wrappers
 
     public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBHero(Hero obj) => MBHero.GetWrapperFor(obj);
+  }
+
+  public class MBHeroList : List<MBHero>
+  {
+    public static implicit operator List<Hero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, Hero>();
+    public static implicit operator MBHeroList(List<Hero> objectList) => (MBHeroList)objectList.Wrap<MBHero, Hero>();
   }
 }

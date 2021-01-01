@@ -48,4 +48,10 @@ namespace TournamentsEnhanced.Wrappers
     public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
   }
+
+  public class MBSettlementList : List<MBSettlement>
+  {
+    public static implicit operator List<Settlement>(MBSettlementList wrapperList) => wrapperList.Unwrap<MBSettlement, Settlement>();
+    public static implicit operator MBSettlementList(List<Settlement> objectList) => (MBSettlementList)objectList.Wrap<MBSettlement, Settlement>();
+  }
 }

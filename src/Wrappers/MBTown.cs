@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers
   public interface IMBTown
   {
     int DaysAtUnrest { get; }
-    List<MBBuilding> Buildings { get; }
+    MBBuildingList Buildings { get; }
     int BoostBuildingProcess { get; }
     bool InRebelliousState { get; }
     IFaction MapFaction { get; }
@@ -50,15 +50,15 @@ namespace TournamentsEnhanced.Wrappers
   }
   public class MBTown : CachedWrapperBase<MBTown, Town>, IMBTown
   {
-    public static List<MBTown> AllFiefs { get; }
-    public static List<MBTown> AllCastles { get; }
-    public static List<MBTown> AllTownsWithoutTournaments => AllTowns.WrapAll<MBTown, Town>();
-    public static List<MBTown> AllTownsWithTournaments => AllTowns.ToList().FindAll((town) => town.HasTournament);
-    public static List<MBTown> AllTowns => Town.AllTowns.ToList().Wrap();
+    public static MBTownList AllFiefs { get; }
+    public static MBTownList AllCastles { get; }
+    public static MBTownList AllTownsWithoutTournaments => AllTowns;
+    public static MBTownList AllTownsWithTournaments => (MBTownList)AllTowns.ToList().FindAll((town) => town.HasTournament);
+    public static MBTownList AllTowns => Town.AllTowns.ToList();
 
     public int DaysAtUnrest => UnwrappedObject.DaysAtUnrest;
 
-    public List<MBBuilding> Buildings => UnwrappedObject.Buildings.ToList().Wrap<MBBuilding>();
+    public MBBuildingList Buildings => UnwrappedObject.Buildings.ToList();
 
     public int BoostBuildingProcess => UnwrappedObject.BoostBuildingProcess;
 
