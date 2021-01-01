@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
+
+using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers
 {
@@ -44,7 +45,7 @@ namespace TournamentsEnhanced.Wrappers
       return ClanLeader.Equals(leader) || FactionLeader.Equals(leader);
     }
 
-    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.Unwrap();
+    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
   }
 }

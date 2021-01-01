@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using TaleWorlds.Core;
 
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced
 {
@@ -24,21 +24,18 @@ namespace TournamentsEnhanced
       return list;
     }
 
-    public static List<T> UnwrapAll<W, T>(this List<W> wrappedObjects)
+    public static List<T> Unwrap<W, T>(this List<W> wrappedObjects)
     where W : CachedWrapperBase<W, T>, new()
     {
-      var converter = new Converter<W, T>(UnwrapConverter<W, T>);
+      var converter = new Converter<W, T>(CachedWrapperBase.Unwrap<W, T>);
       return wrappedObjects.ConvertAll<T>(converter);
     }
 
-    public static List<W> WrapAll<T, W>(this List<T> objects)
+    public static List<W> Wrap<W, T>(this List<T> objects)
     where W : CachedWrapperBase<W, T>, new()
     {
-      var converter = new Converter<T, W>(WrapConverter<T, W>);
+      var converter = new Converter<T, W>(CachedWrapperBase.Wrap<T, W>);
       return objects.ConvertAll<W>(converter);
     }
-
-    private static W WrapConverter<T, W>(this T obj) where W : CachedWrapperBase<W, T>, new() => CachedWrapperBase<W, T>.GetWrapperFor(obj);
-    private static T UnwrapConverter<W, T>(this W wrapper) where W : CachedWrapperBase<W, T>, new() => wrapper.Unwrap();
   }
 }

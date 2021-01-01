@@ -2,6 +2,8 @@ using System.Collections.Generic;
 
 using TaleWorlds.Core;
 
+using TournamentsEnhanced.Wrappers.Abstract;
+
 using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers

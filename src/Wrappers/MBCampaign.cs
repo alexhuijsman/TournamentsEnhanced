@@ -1,6 +1,8 @@
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
 
+using TournamentsEnhanced.Wrappers.Abstract;
+
 namespace TournamentsEnhanced.Wrappers
 {
   public class MBCampaign : CachedWrapperBase<MBCampaign, Campaign>
@@ -26,5 +28,7 @@ namespace TournamentsEnhanced.Wrappers
     public static MBCampaign Current => MBCampaign.GetWrapperFor(Campaign.Current);
     private MBGameModels Models => MBGameModels.GetWrapperFor(UnwrappedObject.Models);
 
+    public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator MBCampaign(Campaign obj) => MBCampaign.GetWrapperFor(obj);
   }
 }

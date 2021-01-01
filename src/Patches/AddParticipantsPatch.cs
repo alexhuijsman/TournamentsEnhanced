@@ -20,7 +20,7 @@ namespace TournamentsEnhanced
         return true;
       }
 
-      var teams = __instance.Teams.WrapAll<MBTournamentTeam, TournamentTeam>();
+      var teams = __instance.Teams.Wrap<MBTournamentTeam, TournamentTeam>();
       var playerTeam = GetPlayerTeamFrom(teams);
       var nonPlayerTeams = new List<MBTournamentTeam>(teams).Remove(playerTeam);
       var wrappedParticipant = participant.Wrap();

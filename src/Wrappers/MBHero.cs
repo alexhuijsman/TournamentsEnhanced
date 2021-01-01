@@ -1,5 +1,7 @@
 using TaleWorlds.CampaignSystem;
 
+using TournamentsEnhanced.Wrappers.Abstract;
+
 using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers
@@ -34,7 +36,7 @@ namespace TournamentsEnhanced.Wrappers
       return itemTier;
     }
 
-    public static implicit operator Hero(MBHero wrapper) => wrapper.Unwrap();
+    public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBHero(Hero obj) => MBHero.GetWrapperFor(obj);
   }
 }

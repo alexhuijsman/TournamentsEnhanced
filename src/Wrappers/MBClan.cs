@@ -5,6 +5,8 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
+using TournamentsEnhanced.Wrappers.Abstract;
+
 namespace TournamentsEnhanced.Wrappers
 {
   public class MBClan : CachedWrapperBase<MBClan, Clan>
@@ -95,7 +97,7 @@ namespace TournamentsEnhanced.Wrappers
 
     public bool IsAtWarWith(IFaction other) => UnwrappedObject.IsAtWarWith(other);
 
-    public static implicit operator Clan(MBClan wrapper) => wrapper.Unwrap();
+    public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBClan(Clan obj) => MBClan.GetWrapperFor(obj);
   }
 }

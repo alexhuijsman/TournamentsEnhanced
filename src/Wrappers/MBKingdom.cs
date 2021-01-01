@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 
+using TournamentsEnhanced.Wrappers.Abstract;
+
 namespace TournamentsEnhanced.Wrappers
 {
   public class MBKingdom : CachedWrapperBase<MBKingdom, Kingdom>
@@ -39,17 +41,17 @@ namespace TournamentsEnhanced.Wrappers
 
     public MBBanner Banner => UnwrappedObject.Banner;
 
-    public IEnumerable<MBSettlement> Settlements => UnwrappedObject.Settlements.WrapAll<MBSettlement, Settlement>();
+    public IEnumerable<MBSettlement> Settlements => UnwrappedObject.Settlements.Wrap<MBSettlement, Settlement>();
 
-    public IEnumerable<MBTown> Fiefs => UnwrappedObject.Fiefs.WrapAll<MBTown, Town>();
+    public IEnumerable<MBTown> Fiefs => UnwrappedObject.Fiefs.Wrap<MBTown, Town>();
 
-    public IEnumerable<MBHero> Lords => UnwrappedObject.Lords.WrapAll<MBHero, Hero>();
+    public IEnumerable<MBHero> Lords => UnwrappedObject.Lords.Wrap<MBHero, Hero>();
 
-    public IEnumerable<MBHero> Heroes => UnwrappedObject.Heroes.WrapAll<MBHero, Hero>();
+    public IEnumerable<MBHero> Heroes => UnwrappedObject.Heroes.Wrap<MBHero, Hero>();
 
-    public IEnumerable<MBMobileParty> AllParties => UnwrappedObject.AllParties.WrapAll<MBMobileParty, MobileParty>();
+    public IEnumerable<MBMobileParty> AllParties => UnwrappedObject.AllParties.Wrap<MBMobileParty, MobileParty>();
 
-    public IEnumerable<MBMobileParty> WarParties => UnwrappedObject.WarParties.WrapAll<MBMobileParty, MobileParty>();
+    public IEnumerable<MBMobileParty> WarParties => UnwrappedObject.WarParties.Wrap<MBMobileParty, MobileParty>();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
@@ -91,7 +93,7 @@ namespace TournamentsEnhanced.Wrappers
 
     public bool IsAtWarWith(IFaction other) => UnwrappedObject.IsAtWarWith(other);
 
-    public static implicit operator Kingdom(MBKingdom wrapper) => wrapper.Unwrap();
+    public static implicit operator Kingdom(MBKingdom wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBKingdom(Kingdom obj) => MBKingdom.GetWrapperFor(obj);
   }
 }

@@ -192,6 +192,13 @@
     <Compile Include="src\Extensions\Extensions.cs" />
     <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.cs" />
     <Compile Include="src\Wrappers\Abstract\WrapperBase.cs" />
+    <Compile Include="src\Collections\WrapperTypeLookup.cs" />
+    <Compile Include="src\Utils\Reflection.cs" />
+    <Compile Include="src\Wrappers\MBBuilding.cs" />
+    <Compile Include="src\Wrappers\MBEquipmentElement.cs" />
+    <Compile Include="src\Wrappers\MBItemCategory.cs" />
+    <Compile Include="src\Wrappers\MBWorkshop.cs" />
+    <Compile Include="src\Wrappers\MBTownMarketData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
