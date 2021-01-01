@@ -22,7 +22,7 @@ namespace TournamentsEnhanced
 
       var teams = __instance.Teams.Wrap<MBTournamentTeam, TournamentTeam>();
       var playerTeam = GetPlayerTeamFrom(teams);
-      var nonPlayerTeams = new List<MBTournamentTeam>(teams).Remove(playerTeam);
+      var nonPlayerTeams = new MBTournamentTeamList().Remove(playerTeam);
       var wrappedParticipant = participant.Wrap<MBTournamentParticipant, TournamentParticipant>();
 
       ____participants.Add(participant);
@@ -42,7 +42,7 @@ namespace TournamentsEnhanced
       return false;
     }
 
-    private static MBTournamentTeam GetPlayerTeamFrom(IEnumerable<MBTournamentTeam> teams)
+    private static MBTournamentTeam GetPlayerTeamFrom(MBTournamentTeamList teams)
     {
       var tournamentRecord = TournamentRecords.GetForCurrentTown();
 
@@ -62,7 +62,7 @@ namespace TournamentsEnhanced
       return playerTeam;
     }
 
-    private static MBTournamentTeam GetTeamByColor(IEnumerable<TournamentTeam> teams, uint playerTeamColor)
+    private static MBTournamentTeam GetTeamByColor(MBTournamentTeamList teams, uint playerTeamColor)
     {
       MBTournamentTeam matchingTeam = null;
       foreach (var team in teams)
@@ -77,7 +77,7 @@ namespace TournamentsEnhanced
       return matchingTeam;
     }
 
-    private static MBTournamentTeam GetEmptyTeam(IEnumerable<MBTournamentTeam> teams)
+    private static MBTournamentTeam GetEmptyTeam(MBTournamentTeamList teams)
     {
       MBTournamentTeam emptyTeam = null;
       foreach (var team in teams)
