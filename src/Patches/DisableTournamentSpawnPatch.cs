@@ -13,9 +13,10 @@ namespace TournamentsEnhanced
   {
     static bool Prefix(Town town)
     {
+      MBTown wrappedTown = town;
       var tournamentManager = MBCampaign.Current.TournamentManager;
-      TournamentGame tournamentGame = tournamentManager.GetTournamentGame(town);
-      if (tournamentGame != null && MBRandom.RandomFloat < Campaign.Current.Models.TournamentModel.GetTournamentEndChance(tournamentGame))
+      MBTournamentGame tournamentGame = tournamentManager.GetTournamentGame(wrappedTown);
+      if (tournamentGame != null && MBRandom.RandomFloat < MBCampaign.Current.Models.TournamentModel.GetTournamentEndChance(tournamentGame))
       {
         tournamentManager.ResolveTournament(tournamentGame, tournamentGame.Town);
       }

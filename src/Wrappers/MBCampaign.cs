@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Localization;
 
 using TournamentsEnhanced.Wrappers.Abstract;
+
+using static TaleWorlds.CampaignSystem.SettlementAccessModel;
 
 namespace TournamentsEnhanced.Wrappers
 {
@@ -13,22 +14,18 @@ namespace TournamentsEnhanced.Wrappers
     public MBCampaign(Campaign obj) : base(obj) { }
     public static bool CanMainHeroJoinTournamentAtCurrentSettlement(out bool shouldBeDisabled, out MBTextObject disabledText)
     {
-      TextObject unwrappedDisabledText;
-      var result = Current.Models.SettlementAccessModel
-                    .CanMainHeroDoSettlementAction(
-                                                   MBSettlement.CurrentSettlement.UnwrappedObject,
-                                                   SettlementAccessModel.SettlementAction.JoinTournament,
-                                                   out shouldBeDisabled,
-                                                   out unwrappedDisabledText
-      );
-
-      disabledText = unwrappedDisabledText;
-
-      return result;
+      return Current.Models.SettlementAccessModel
+                      .CanMainHeroDoSettlementAction(
+                                                     MBSettlement.CurrentSettlement.UnwrappedObject,
+                                                     SettlementAction.JoinTournament,
+                                                     out shouldBeDisabled,
+                                                     out disabledText
+                                                    );
     }
 
     public static MBCampaign Current => Campaign.Current;
-    private MBGameModels Models => UnwrappedObject.Models;
+    public ITournamentManager TournamentManager => UnwrappedObject.TournamentManager;
+    public MBGameModels Models => UnwrappedObject.Models;
 
     public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBCampaign(Campaign obj) => MBCampaign.GetWrapperFor(obj);

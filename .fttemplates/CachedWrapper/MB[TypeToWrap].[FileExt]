@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers

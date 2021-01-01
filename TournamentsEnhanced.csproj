@@ -200,6 +200,9 @@
     <Compile Include="src\Wrappers\MBTownMarketData.cs" />
     <Compile Include="src\Wrappers\MBWorkshop.cs" />
     <Compile Include="src\patches\AddParticipantsPatch.cs" />
+    <Compile Include="src\Wrappers\MBTournamentGame.cs" />
+    <Compile Include="src\Wrappers\MBTournamentModel.cs" />
+    <Compile Include="src\Wrappers\MBSkillObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
