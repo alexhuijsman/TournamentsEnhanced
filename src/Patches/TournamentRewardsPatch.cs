@@ -3,6 +3,8 @@
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
+using TournamentsEnhanced.Wrappers;
+
 namespace TournamentsEnhanced
 {
   [HarmonyPatch(typeof(TournamentGame), "GetTournamentPrize")]

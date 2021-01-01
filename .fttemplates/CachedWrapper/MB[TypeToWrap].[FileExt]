@@ -5,6 +5,12 @@ namespace TournamentsEnhanced.Wrappers
   public class MB[TypeToWrap] : CachedWrapperBase<MB[TypeToWrap], [TypeToWrap]>
   {
     public static implicit operator  [TypeToWrap](MB[TypeToWrap] wrapper) => wrapper.UnwrappedObject;
-  public static implicit operator MB[TypeToWrap]([TypeToWrap] obj) => MB[TypeToWrap].GetWrapperFor(obj);
-}
+    public static implicit operator MB[TypeToWrap]([TypeToWrap] obj) => MB[TypeToWrap].GetWrapperFor(obj);
+  }
+
+  public class MB[TypeToWrap]List : List<MB[TypeToWrap]>
+  {
+    public static implicit operator List<[TypeToWrap]>(MB[TypeToWrap]List wrapperList) => wrapperList.Unwrap<MB[TypeToWrap], [TypeToWrap]>();
+    public static implicit operator MB[TypeToWrap]List(List<[TypeToWrap]> objectList) => (MB[TypeToWrap]List)objectList.Wrap<MB[TypeToWrap], [TypeToWrap]>();
+  }
 }

@@ -33,8 +33,8 @@ namespace TournamentsEnhanced
         playerTeam.AddParticipant(participant);
         return false;
       }
-      // TODO: ADd implicit conversions from List<Type> to List<MBType> and back, and ensure no manual calls to Wrap and Unwrap left
-      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams.Unwrap<MBTournamentTeam, TournamentTeam>())) || participant.TryPlaceInAnyTeam(teams))
+      // TODO: ADD LIST<MBTYPE> TO IENUMERABLE<TYPE>, and ensure no manual calls to Wrap and Unwrap left
+      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams)) || participant.TryPlaceInAnyTeam(teams))
       {
         return false;
       }
