@@ -23,7 +23,7 @@ namespace TournamentsEnhanced
       var teams = __instance.Teams.Wrap<MBTournamentTeam, TournamentTeam>();
       var playerTeam = GetPlayerTeamFrom(teams);
       var nonPlayerTeams = new List<MBTournamentTeam>(teams).Remove(playerTeam);
-      var wrappedParticipant = participant.Wrap();
+      var wrappedParticipant = participant.Wrap<MBTournamentParticipant, TournamentParticipant>();
 
       ____participants.Add(participant);
 
@@ -33,8 +33,8 @@ namespace TournamentsEnhanced
         playerTeam.AddParticipant(participant);
         return false;
       }
-
-      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams)) || participant.TryPlaceInAnyTeam(teams))
+      // TODO: ADd implicit conversions from List<Type> to List<MBType> and back, and ensure no manual calls to Wrap and Unwrap left
+      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams.Unwrap<MBTournamentTeam, TournamentTeam>())) || participant.TryPlaceInAnyTeam(teams))
       {
         return false;
       }
