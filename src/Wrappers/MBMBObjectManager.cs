@@ -19,10 +19,10 @@ namespace TournamentsEnhanced.Wrappers
     private T GetObject<T>(string id)
     where T : MBObjectBase
     {
-      return UnwrappedObject.GetObject<T>(id);
+      return UnwrapedObject.GetObject<T>(id);
     }
 
-    public static implicit operator MBObjectManager(MBMBObjectManager wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator MBObjectManager(MBMBObjectManager wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBMBObjectManager(MBObjectManager obj) => MBMBObjectManager.GetWrapperFor(obj);
   }
 

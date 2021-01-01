@@ -10,6 +10,9 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
+using TournamentsEnhanced.Builders;
+using TournamentsEnhanced.Models;
+
 namespace TournamentsEnhanced
 {
   public class Main : MBSubModuleBase
@@ -47,8 +50,9 @@ namespace TournamentsEnhanced
       {
         var campaignStarter = (CampaignGameStarter)gameStarter;
 
-        campaignStarter.AddBehavior(new EncounterGameMenuModBehavior());
-        campaignStarter.AddBehavior(new SaveCampaignModBehavior());
+        campaignStarter.AddBehavior(new TownMenuBehavior());
+        campaignStarter.AddBehavior(new SyncDataBehavior());
+        campaignStarter.AddBehavior(new TournamentSpawnBehavior());
       }
     }
 
@@ -56,7 +60,8 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        EncounterGameMenuModBehavior.WeeksSinceHostedTournament = 1;
+        ModState.WeeksSinceHostedTournament = 1;
+
         TournamentBuilder.CreateInitialTournaments();
       }
     }

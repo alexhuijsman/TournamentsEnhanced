@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
     {
       var wrapper = new W()
       {
-        UnwrappedObject = obj
+        UnwrapedObject = obj
       };
 
       return wrapper;
@@ -40,7 +40,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
     public static TT Unwrap<WW, TT>(WW wrapper)
       where WW : WrapperBase<TT>, new()
     {
-      return wrapper.UnwrappedObject;
+      return wrapper.UnwrapedObject;
     }
   }
 }

@@ -8,10 +8,10 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBGameModels : CachedWrapperBase<MBGameModels, GameModels>
   {
-    public MBSettlementAccessModel SettlementAccessModel => UnwrappedObject.SettlementAccessModel;
-    public MBTournamentModel TournamentModel => UnwrappedObject.TournamentModel;
+    public MBSettlementAccessModel SettlementAccessModel => UnwrapedObject.SettlementAccessModel;
+    public MBTournamentModel TournamentModel => UnwrapedObject.TournamentModel;
 
-    public static implicit operator GameModels(MBGameModels wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator GameModels(MBGameModels wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBGameModels(GameModels obj) => MBGameModels.GetWrapperFor(obj);
   }
 

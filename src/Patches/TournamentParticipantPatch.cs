@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+
 using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+
+using TournamentsEnhanced.Models;
 
 namespace TournamentsEnhanced
 {
@@ -17,7 +19,7 @@ namespace TournamentsEnhanced
         return;
       }
 
-      if (TournamentRecords.GetForCurrentTown().type == TournamentType.Lord)
+      if (ModState.TournamentRecords.ForCurrentTown().type == TournamentType.Lord)
       {
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i < 15; i++)

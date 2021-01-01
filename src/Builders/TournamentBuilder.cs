@@ -1,11 +1,13 @@
 using System;
-using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
-namespace TournamentsEnhanced
+using TournamentsEnhanced.Models.Serializable;
+using TournamentsEnhanced.Wrappers;
+
+namespace TournamentsEnhanced.Builders
 {
   public static class TournamentBuilder
   {
@@ -29,22 +31,7 @@ namespace TournamentsEnhanced
       return CreateTournament(new CreateTournamentOptions(findHostTownResult, TournamentType.Peace, payor));
     }
 
-
-    public static CreateTournamentResult CreateProsperityTournamentInSettlements(IList<Settlement> settlements)
-    {
-      var result = HostTownFinder.FindHostTownFromSettlements(settlements);
-
-      if (result.Status)
-      {
-        return CreateProsperityTournamentFromFindSettlementResult(result);
-      }
-      else
-      {
-        return CreateTournamentResult.Failure;
-      }
-    }
-
-    public static CreateTournamentResult CreateInvitationTournamentFromSettlements(IList<Settlement> settlements)
+    public static CreateTournamentResult CreateInvitationTournamentFromSettlements(MBSettlementList settlements)
     {
       var result = HostTownFinder.FindHostTownFromSettlements(settlements);
 
@@ -183,6 +170,20 @@ namespace TournamentsEnhanced
       SkillObject item = (randomFloat < 0.2f) ? DefaultSkills.OneHanded : ((randomFloat < 0.4f) ? DefaultSkills.TwoHanded : ((randomFloat < 0.6f) ? DefaultSkills.Polearm : ((randomFloat < 0.8f) ? DefaultSkills.Riding : DefaultSkills.Athletics)));
       int item2 = Settings.Instance.TournamentSkillXp;
       return new ValueTuple<SkillObject, int>(item, item2);
+    }
+
+    private class CreateTournamentOptions
+    {
+      public readonly Town town;
+      public readonly TournamentType type;
+      public readonly Payor payor;
+
+      public CreateTournamentOptions(FindHostTownResult result, TournamentType type, Payor payor)
+      {
+        this.town = result.Town;
+        this.type = type;
+        this.payor = payor;
+      }
     }
   }
 }

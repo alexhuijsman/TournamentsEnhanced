@@ -1,6 +1,6 @@
 using System;
 
-using TournamentsEnhanced.Collections;
+using TournamentsEnhanced.Wrappers;
 using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced

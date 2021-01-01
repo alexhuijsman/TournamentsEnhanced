@@ -4,6 +4,7 @@ Hello! This is my todo list for Tournaments Enhanced.
 
 FIX
 ---
+S money spent on tournament costs should go to the town
 S Don't hide Select Prize button after selecting a prize
 S Enable determinism in random number generator (does bannerlord provide a random number api?)
 S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value

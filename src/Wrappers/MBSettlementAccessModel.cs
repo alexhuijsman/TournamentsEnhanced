@@ -18,7 +18,7 @@ namespace TournamentsEnhanced.Wrappers
                                               out MBTextObject wrappedDisabledText)
     {
       TextObject disabledText;
-      var result = UnwrappedObject.CanMainHeroDoSettlementAction(settlement,
+      var result = UnwrapedObject.CanMainHeroDoSettlementAction(settlement,
                                                                  settlementAction,
                                                                  out shouldBeDisabled,
                                                                  out disabledText
@@ -28,7 +28,7 @@ namespace TournamentsEnhanced.Wrappers
 
       return result;
     }
-    public static implicit operator SettlementAccessModel(MBSettlementAccessModel wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator SettlementAccessModel(MBSettlementAccessModel wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBSettlementAccessModel(SettlementAccessModel obj) => MBSettlementAccessModel.GetWrapperFor(obj);
   }
 

@@ -8,35 +8,22 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBSettlement : CachedWrapperBase<MBSettlement, Settlement>
   {
-    public static IReadOnlyList<MBSettlement> All => _allSettlements ?? (_allSettlements = WrapSettlements());
-    public static List<MBSettlement> AllShuffled => All.ToList().Shuffle();
+    public static MBSettlementList All => Settlement.All.ToList();
     public static MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
     public static MBTown CurrentTown => CurrentSettlement.Town;
 
-    public MBTown Town => UnwrappedObject.Town;
-    public bool IsEligibleForProsperityTournament => UnwrappedObject.IsTown &&
-                                                     !UnwrappedObject.Town.HasTournament &&
-                                                      UnwrappedObject.Prosperity >= 5000.00f &&
-                                                      UnwrappedObject.OwnerClan.Leader.Gold >= 10000;
+    public MBTown Town => UnwrapedObject.Town;
+    public bool IsTown => UnwrapedObject.IsTown;
 
-    private static List<MBSettlement> _allSettlements;
+    private static MBSettlementList _allSettlements;
 
-    public Hero ClanLeader => UnwrappedObject.OwnerClan.Leader;
-    public Hero FactionLeader => UnwrappedObject.MapFaction.Leader;
+    public Hero ClanLeader => UnwrapedObject.OwnerClan.Leader;
+    public Hero FactionLeader => UnwrapedObject.MapFaction.Leader;
 
-    public MBSettlement() : base() { }
-    public MBSettlement(Settlement obj) : base(obj) { }
-    private static List<MBSettlement> WrapSettlements()
+    public float Prosperity
     {
-      var settlements = Settlement.All;
-      var wrappedSettlements = new List<MBSettlement>(settlements.Count);
-
-      foreach (var settlement in settlements)
-      {
-        wrappedSettlements.Add(new MBSettlement(settlement));
-      }
-
-      return wrappedSettlements;
+      get => UnwrapedObject.Prosperity;
+      set => UnwrapedObject.Prosperity = value;
     }
 
     public bool IsLedBy(Hero leader)
@@ -44,7 +31,7 @@ namespace TournamentsEnhanced.Wrappers
       return ClanLeader.Equals(leader) || FactionLeader.Equals(leader);
     }
 
-    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
   }
 

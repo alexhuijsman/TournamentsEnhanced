@@ -6,18 +6,6 @@ namespace TournamentsEnhanced
 {
   public static class HostTownFinder
   {
-
-
-    public static Town FindByName(string name)
-    {
-      return MBTown.AllTowns.Find((town) => town.Name.Equals(name));
-    }
-
-    public static FindHostTownResult Find(FindHostTownOptions options)
-    {
-      return FindInSettlements(options);
-    }
-
     public static FindHostTownResult FindInSettlements(FindHostTownOptions options)
     {
       var settlements = options.Settlements.ToList().Shuffle();

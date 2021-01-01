@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBBanner : CachedWrapperBase<MBBanner, Banner>
   {
-    public static implicit operator Banner(MBBanner wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator Banner(MBBanner wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBBanner(Banner obj) => MBBanner.GetWrapperFor(obj);
   }
   public class MBBannerList : List<MBBanner>

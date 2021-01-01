@@ -8,7 +8,9 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBInquiryElement : CachedWrapperBase<MBInquiryElement, InquiryElement>
   {
-    public static implicit operator InquiryElement(MBInquiryElement wrapper) => wrapper.UnwrappedObject;
+
+    public object Identifier => UnwrapedObject.Identifier;
+    public static implicit operator InquiryElement(MBInquiryElement wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBInquiryElement(InquiryElement obj) => MBInquiryElement.GetWrapperFor(obj);
   }
 

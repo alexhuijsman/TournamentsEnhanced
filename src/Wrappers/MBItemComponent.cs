@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBItemComponent : CachedWrapperBase<MBItemComponent, ItemComponent>
   {
-    public static implicit operator ItemComponent(MBItemComponent wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator ItemComponent(MBItemComponent wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBItemComponent(ItemComponent obj) => MBItemComponent.GetWrapperFor(obj);
   }
 

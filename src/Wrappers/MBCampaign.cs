@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Wrappers
     {
       return Current.Models.SettlementAccessModel
                       .CanMainHeroDoSettlementAction(
-                                                     MBSettlement.CurrentSettlement.UnwrappedObject,
+                                                     MBSettlement.CurrentSettlement.UnwrapedObject,
                                                      SettlementAction.JoinTournament,
                                                      out shouldBeDisabled,
                                                      out disabledText
@@ -24,10 +24,10 @@ namespace TournamentsEnhanced.Wrappers
     }
 
     public static MBCampaign Current => Campaign.Current;
-    public ITournamentManager TournamentManager => UnwrappedObject.TournamentManager;
-    public MBGameModels Models => UnwrappedObject.Models;
+    public ITournamentManager TournamentManager => UnwrapedObject.TournamentManager;
+    public MBGameModels Models => UnwrapedObject.Models;
 
-    public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBCampaign(Campaign obj) => MBCampaign.GetWrapperFor(obj);
   }
 

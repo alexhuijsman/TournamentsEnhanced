@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBItemCategory : CachedWrapperBase<MBItemCategory, ItemCategory>
   {
-    public static implicit operator ItemCategory(MBItemCategory wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator ItemCategory(MBItemCategory wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBItemCategory(ItemCategory obj) => MBItemCategory.GetWrapperFor(obj);
   }
 

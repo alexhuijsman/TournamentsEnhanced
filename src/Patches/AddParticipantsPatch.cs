@@ -5,6 +5,7 @@ using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced
@@ -47,7 +48,7 @@ namespace TournamentsEnhanced
 
     private static MBTournamentTeam GetPlayerTeamFrom(MBTournamentTeamList teams)
     {
-      var tournamentRecord = TournamentRecords.GetForCurrentTown();
+      var tournamentRecord = ModState.TournamentRecords.ForCurrentTown();
 
       MBTournamentTeam playerTeam;
       if (tournamentRecord.HasPlayerTeam)
@@ -59,7 +60,7 @@ namespace TournamentsEnhanced
         playerTeam = GetEmptyTeam(teams);
         tournamentRecord.playerTeamColor = playerTeam.TeamColor;
         tournamentRecord.HasPlayerTeam = true;
-        TournamentRecords.AddOrUpdateForCurrentTown(tournamentRecord);
+        ModState.TournamentRecords.AddOrUpdate(tournamentRecord);
       }
 
       return playerTeam;

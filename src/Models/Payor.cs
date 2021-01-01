@@ -1,6 +1,6 @@
 using TaleWorlds.CampaignSystem;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Models.Serializable
 {
   public struct Payor
   {

@@ -1,9 +1,9 @@
 using TaleWorlds.CampaignSystem;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Models
 {
-    public static class CampaignModel
-    {
-        public static CampaignOptions.Difficulty difficultyBeforeTournament;
-    }
+  public static class CampaignModel
+  {
+    public static CampaignOptions.Difficulty difficultyBeforeTournament;
+  }
 }

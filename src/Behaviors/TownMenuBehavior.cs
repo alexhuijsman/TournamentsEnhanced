@@ -16,9 +16,9 @@ using static TaleWorlds.CampaignSystem.GameMenus.GameMenuOption;
 
 namespace TournamentsEnhanced
 {
-  class EncounterGameMenuModBehavior : EncounterGameMenuBehavior
+  class TownMenuBehavior : EncounterGameMenuBehavior
   {
-    public static int WeeksSinceHostedTournament { get; set; }
+    //TODO remove tournament spawn behavior
 
     public static bool PrizeSelectCondition(MenuCallbackArgs args)
     {
@@ -32,7 +32,7 @@ namespace TournamentsEnhanced
     public static void PrizeSelectConsequence(MenuCallbackArgs args)
     {
       var prizeList = MBItemObject.GetAvailableTournamentPrizes();
-      MBInformationManager.ShowSelectionScreenForItems(prizeList, OnSelectPrize, OnDeSelectPrize);
+      MBInformationManager.ShowPrizeSelectionMenu(prizeList, OnSelectPrize, OnDeSelectPrize);
       GameMenu.SwitchToMenu("town_arena");
     }
 
@@ -47,7 +47,7 @@ namespace TournamentsEnhanced
       CampaignEvents.TournamentFinished.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
     }
 
-    private static void OnSelectPrize(List<InquiryElement> prizes)
+    private static void OnSelectPrize(MBInquiryElementList prizes)
     {
       if (prizes.Count > 0)
       {
@@ -59,57 +59,49 @@ namespace TournamentsEnhanced
 
     }
 
-    private static void OnDeSelectPrize(List<InquiryElement> prizeSelections)
+    private static void OnDeSelectPrize(MBInquiryElementList prizeSelections)
     {
 
     }
 
-    private static void InvitePlayer()
-    {
-      if (Hero.MainHero.Clan.Renown > 800.00f || MBRandom.RandomFloat >= 0.8f)
-      {
-        return;
-      }
 
-      var settlements = Settlement.FindSettlementsAroundPosition(Hero.MainHero.GetPosition().AsVec2, 60.00f).ToList().Shuffle();
-
-      TournamentUtils.CreateInvitationTournamentFromSettlements(settlements);
-    }
 
     private static bool game_menu_town_arena_host_tournament_condition(MenuCallbackArgs args)
     {
       args.optionLeaveType = GameMenuOption.LeaveType.Continue;
-      return !Settlement.CurrentSettlement.Town.HasTournament && Settlement.CurrentSettlement.IsTown && Settlement.CurrentSettlement.OwnerClan.Leader.IsHumanPlayerCharacter && WeeksSinceHostedTournament >= 1;
+      return !Settlement.CurrentSettlement.Town.HasTournament &&
+              Settlement.CurrentSettlement.IsTown &&
+              Settlement.CurrentSettlement.OwnerClan.Leader.IsHumanPlayerCharacter &&
+              SerializableState.Instance.weeksSinceHosted >= 1;
     }
 
     private static void game_menu_town_arena_host_tournament_consequence(MenuCallbackArgs args)
     {
-      TournamentUtils.CreateHostedTournamentAtSettlement(Settlement.CurrentSettlement);
-      WeeksSinceHostedTournament = 0;
+      TournamentBuilder.CreateHostedTournamentAtSettlement(Settlement.CurrentSettlement);
+      SerializableState.WeeksSinceHostedTournament = 0;
       GameMenu.ActivateGameMenu("town_arena");
     }
 
     private void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
     {
-      //add option to the menu
       campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
         Settings.Instance.TournamentCost.ToString() + "{GOLD_ICON})",
         new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(EncounterGameMenuModBehavior.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(EncounterGameMenuModBehavior.PrizeSelectConsequence), false, 1, true);
+        new GameMenuOption.OnConditionDelegate(TownMenuBehavior.PrizeSelectCondition),
+        new GameMenuOption.OnConsequenceDelegate(TownMenuBehavior.PrizeSelectConsequence), false, 1, true);
     }
 
     private void OnTournamentWin(CharacterObject character, Town town)
     {
-      ValueTuple<SkillObject, int> tuple = TournamentUtils.TournamentSkillXpGain(character.HeroObject);
+      ValueTuple<SkillObject, int> tuple = TournamentBuilder.TournamentSkillXpGain(character.HeroObject);
       if (character.IsHero)
       {
         character.HeroObject.AddSkillXp(tuple.Item1, tuple.Item2);
       }
-      TournamentKB.Remove(town.Settlement);
+      TournamentRecords.RemoveByTown(town);
     }
 
     private void WeeklyTick()
@@ -121,7 +113,7 @@ namespace TournamentsEnhanced
 
     private void DailyTick()
     {
-      OnProsperityTournament();
+      TryCreateProsperityTournament();
     }
 
     private void TryCreateLordTournament()
@@ -133,22 +125,23 @@ namespace TournamentsEnhanced
           continue;
         }
 
-        TournamentBuilder.CreateLordTournamentInKingdom(kingdom);
+        TournamentBuilder.TryMakeLordTournamentForFaction(kingdom);
 
         break;
       }
     }
 
-    private void OnProsperityTournament()
+    private void TryCreateProsperityTournament()
     {
-      var settlements = MBSettlement.AllSettlementsShuffled;
+      var settlements = MBSettlement.All;
+      settlements.Shuffle();
 
-      TournamentUtils.CreateProsperityTournamentInSettlements(settlements);
+      TournamentBuilder.CreateProsperityTournamentInSettlements(settlements);
       foreach (var settlement in settlements)
       {
         if (settlement.IsEligibleForProsperityTournament() && MBRandom.RandomFloat < 0.08f)
         {
-          TournamentUtils.CreateTournament(settlement, TournamentType.Prosperity);
+          TournamentBuilder.CreateTournament(settlement, TournamentType.Prosperity);
           if (settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
           {
             NotificationUtils.DisplayBannerMessage("Local nobles at " + settlement.Town.Name + " have called a tournament, using " + Settings.Instance.TournamentCost.ToString() + " gold from clan coffers.");
@@ -166,8 +159,8 @@ namespace TournamentsEnhanced
 
     private void OnMakePeace(IFaction factionA, IFaction factionB)
     {
-      var resultsA = TournamentUtils.Create(factionA);
-      var resultsB = TournamentUtils.TryCreateTournamentForFaction(factionB);
+      var resultsA = TournamentBuilder.Create(factionA);
+      var resultsB = TournamentBuilder.TryCreateTournamentForFaction(factionB);
 
       if (!Settings.Instance.PeaceNotification || (!resultsA.Succeeded && !resultsB.Succeeded))
       {
@@ -205,8 +198,8 @@ namespace TournamentsEnhanced
 
     private void OnInterFactionMarriage(Hero firstHero, Hero secondHero, bool showNotification)
     {
-      var resultsA = TournamentUtils.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, firstHero.MapFaction);
-      var resultsB = TournamentUtils.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, secondHero.MapFaction);
+      var resultsA = TournamentBuilder.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, firstHero.MapFaction);
+      var resultsB = TournamentBuilder.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, secondHero.MapFaction);
 
       if (!resultsA.Succeeded && !resultsB.Succeeded)
       {
@@ -228,7 +221,7 @@ namespace TournamentsEnhanced
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
     {
-      var resultsA = TournamentUtils.TryCreateTournamentTypeInTownLedByAny(TournamentType.Birth, mother, mother.Spouse);
+      var resultsA = TournamentBuilder.TryCreateTournamentTypeInTownLedByAny(TournamentType.Birth, mother, mother.Spouse);
 
       foreach (var settlement in settlements)
       {
@@ -240,7 +233,7 @@ namespace TournamentsEnhanced
         {
           if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(mother.Name) || mother.Spouse != null && settlement.OwnerClan.Leader.Name.Equals(mother.Spouse.Name))
           {
-            TournamentUtils.CreateTournament(settlement, TournamentType.Birth);
+            TournamentBuilder.CreateTournament(settlement, TournamentType.Birth);
             NotificationUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + "and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
             BannerlordUtils.WeddingSettlementStatChange(settlement);
             maxTournaments++;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TournamentsEnhanced.Utils;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace TournamentsEnhanced.Collections
+namespace TournamentsEnhanced.Wrappers
 {
   public class WrapperTypeDictionary : Dictionary<Type, Type> { public WrapperTypeDictionary(int count) : base(count) { } }
   public class WrapperInstanceDictionary : Dictionary<Type, IWrapperBase> { public WrapperInstanceDictionary(int count) : base(count) { } }

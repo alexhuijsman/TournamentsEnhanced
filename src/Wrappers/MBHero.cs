@@ -17,8 +17,8 @@ namespace TournamentsEnhanced.Wrappers
       return MainHero.GetTournamentRewardTier();
     }
 
-    public MBClan Clan => UnwrappedObject.Clan;
-    public MBTown CurrentTown => UnwrappedObject.CurrentSettlement?.Town;
+    public MBClan Clan => UnwrapedObject.Clan;
+    public MBTown CurrentTown => UnwrapedObject.CurrentSettlement?.Town;
     public ItemTiers GetTournamentRewardTier()
     {
       ItemTiers itemTier;
@@ -38,7 +38,7 @@ namespace TournamentsEnhanced.Wrappers
       return itemTier;
     }
 
-    public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBHero(Hero obj) => MBHero.GetWrapperFor(obj);
   }
 

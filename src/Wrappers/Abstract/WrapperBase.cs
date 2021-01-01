@@ -15,12 +15,12 @@ namespace TournamentsEnhanced.Wrappers.Abstract
 
   public abstract class WrapperBase<T> : WrapperBase
   {
-    internal T UnwrappedObject { get; set; }
+    internal T UnwrapedObject { get; set; }
 
     public override Type UnwrappedType => typeof(T);
 
     public WrapperBase() { }
-    public WrapperBase(T obj) => UnwrappedObject = obj;
+    public WrapperBase(T obj) => UnwrapedObject = obj;
   }
 
   public abstract class AbstractWrapperImpl : WrapperBase<object> { }

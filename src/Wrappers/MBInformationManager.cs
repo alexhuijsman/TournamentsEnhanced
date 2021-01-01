@@ -4,38 +4,39 @@ using System.Collections.Generic;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
-using TournamentsEnhanced.Wrappers.Abstract;
-
 namespace TournamentsEnhanced.Wrappers
 {
   public static class MBInformationManager
   {
-    public static void ShowSelectionScreenForItems(
-                                                  MBItemObjectList items,
-                                                  Action<List<InquiryElement>> affirmativeAction,
-                                                  Action<List<InquiryElement>> negativeAction
-                                                 )
+    public static void ShowPrizeSelectionMenu(MBItemObjectList items,
+                                                   Action<MBInquiryElementList> affirmativeAction,
+                                                   Action<MBInquiryElementList> negativeAction)
     {
-      var inquiryElements = CreateInquiryElementsFromItems(items);
+      var inquiryElements = CreateElementListFromItems(items);
+      MBInquiryElementList selectedElements;
+      bool isAffirmative;
 
       if (inquiryElements.Count > 0)
       {
-        TextObject textObject = new TextObject("Pick a prize from the list below", null);
-        InformationManager
-          .ShowMultiSelectionInquiry(
-                                     new MultiSelectionInquiryData
-                                     (
-                                        new TextObject("Prize Selection", null).ToString(),
-                                        textObject.ToString(),
-                                        inquiryElements,
-                                        true,
-                                        1,
-                                        new TextObject("OK", null).ToString(),
-                                        new TextObject("Cancel", null).ToString(),
-                                        affirmativeAction,
-                                        negativeAction
-                                     ),
-                                     true);
+        var inquiryData =
+          new MBMultiSelectionInquiryData(
+            "Prize Selection",
+            "Pick a prize from the list below",
+            inquiryElements,
+            true,
+            1,
+            "OK",
+            "Cancel",
+            (List<InquiryElement> list) => OnAffirmativeAction(
+              list,
+              out isAffirmative,
+              out selectedElements),
+            (List<InquiryElement> list) => OnNegativeAction(
+              list,
+              out isAffirmative,
+              out selectedElements));
+
+        InformationManager.ShowMultiSelectionInquiry(inquiryData, true);
       }
       else
       {
@@ -43,8 +44,20 @@ namespace TournamentsEnhanced.Wrappers
       }
     }
 
+    private static void OnAffirmativeAction(List<InquiryElement> list, out bool affirmativeResult, out MBInquiryElementList selectedInquiryElements)
+    {
+      affirmativeResult = true;
+      selectedInquiryElements = list;
+    }
 
-    private static MBInquiryElementList CreateInquiryElementsFromItems(MBItemObjectList itemList)
+    private static void OnNegativeAction(List<InquiryElement> list, out bool affirmativeResult, out MBInquiryElementList selectedInquiryElements)
+    {
+      affirmativeResult = false;
+      selectedInquiryElements = list;
+    }
+
+
+    private static MBInquiryElementList CreateElementListFromItems(MBItemObjectList itemList)
     {
       var inquiryElements = new List<InquiryElement>();
 

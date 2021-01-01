@@ -54,6 +54,10 @@
       <HintPath>lib\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Text.Json">
+      <HintPath>lib\System.Text.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ModLib.Definitions">
       <HintPath>lib\ModLib.Definitions.dll</HintPath>
       <Private>True</Private>
@@ -119,13 +123,12 @@
   </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="src\Behaviors\EncounterGameMenuModBehavior.cs" />
-    <Compile Include="src\Behaviors\SaveCampaignModBehavior.cs" />
+    <Compile Include="src\Behaviors\SyncDataBehavior.cs" />
+    <Compile Include="src\Behaviors\TournamentSpawnBehavior.cs" />
+    <Compile Include="src\Behaviors\TownMenuBehavior.cs" />
     <Compile Include="src\Builders\TournamentBuilder.cs" />
-    <Compile Include="src\Collections\TournamentRecords.cs" />
-    <Compile Include="src\Collections\WrapperLookup.cs" />
+    <Compile Include="src\Builders\TournamentRecordBuilder.cs" />
     <Compile Include="src\Comparers\HostTownComparer.cs" />
-    <Compile Include="src\Comparers\TournamentTypeComparer.cs" />
     <Compile Include="src\Constants\ItemConstants.cs" />
     <Compile Include="src\Constants\ModuleConstants.cs" />
     <Compile Include="src\Constants\TournamentConstants.cs" />
@@ -139,15 +142,12 @@
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
     <Compile Include="src\Finders\HostTownFinder.cs" />
+    <Compile Include="src\Finders\Options\FindHostTownForKingdomOptions.cs" />
+    <Compile Include="src\Finders\Options\FindHostTownOptions.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
     <Compile Include="src\Models\Payor.cs" />
-    <Compile Include="src\Models\Serializable\HeroLookupModel.cs" />
-    <Compile Include="src\Models\Serializable\SaveModel.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
-    <Compile Include="src\Options\CreateTournamentOptions.cs" />
-    <Compile Include="src\Options\FindHostTownForKingdomOptions.cs" />
-    <Compile Include="src\Options\FindHostTownOptions.cs" />
     <Compile Include="src\patches\AddParticipantsPatch.cs" />
     <Compile Include="src\Patches\DisableTournamentSpawnPatch.cs" />
     <Compile Include="src\Patches\TournamentEndMatchPatch.cs" />
@@ -186,10 +186,13 @@
     <Compile Include="src\Wrappers\MBKingdom.cs" />
     <Compile Include="src\Wrappers\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\MBMobileParty.cs" />
+    <Compile Include="src\Wrappers\MBMultiSelectionInquiryData.cs" />
     <Compile Include="src\Wrappers\MBSaddleComponent.cs" />
     <Compile Include="src\Wrappers\MBSettlement.cs" />
     <Compile Include="src\Wrappers\MBSettlementAccessModel.cs" />
     <Compile Include="src\Wrappers\MBSkillObject.cs" />
+    <Compile Include="src\Wrappers\MBStanceLink.cs" />
+    <Compile Include="src\Wrappers\MBStatExplainer.cs" />
     <Compile Include="src\Wrappers\MBTextObject.cs" />
     <Compile Include="src\Wrappers\MBTournamentGame.cs" />
     <Compile Include="src\Wrappers\MBTournamentModel.cs" />
@@ -202,8 +205,10 @@
     <Compile Include="src\Wrappers\MBWeaponComponentData.cs" />
     <Compile Include="src\Wrappers\MBWeaponDesign.cs" />
     <Compile Include="src\Wrappers\MBWorkshop.cs" />
-    <Compile Include="src\Wrappers\MBStanceLink.cs" />
-    <Compile Include="src\Wrappers\MBStatExplainer.cs" />
+    <Compile Include="src\Wrappers\WrapperLookup.cs" />
+    <Compile Include="src\Models\ModState.cs" />
+    <Compile Include="src\Models\Serializable\SerializableModState.cs" />
+    <Compile Include="src\Models\Serializable\TournamentRecordList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

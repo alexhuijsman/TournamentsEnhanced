@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBSaddleComponent : CachedWrapperBase<MBSaddleComponent, SaddleComponent>
   {
-    public static implicit operator SaddleComponent(MBSaddleComponent wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator SaddleComponent(MBSaddleComponent wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBSaddleComponent(SaddleComponent obj) => MBSaddleComponent.GetWrapperFor(obj);
   }
 

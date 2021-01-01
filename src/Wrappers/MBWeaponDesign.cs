@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBWeaponDesign : CachedWrapperBase<MBWeaponDesign, WeaponDesign>
   {
-    public static implicit operator WeaponDesign(MBWeaponDesign wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator WeaponDesign(MBWeaponDesign wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBWeaponDesign(WeaponDesign obj) => MBWeaponDesign.GetWrapperFor(obj);
   }
 

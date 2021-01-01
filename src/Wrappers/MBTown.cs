@@ -56,23 +56,23 @@ namespace TournamentsEnhanced.Wrappers
     public static MBTownList AllTownsWithTournaments => (MBTownList)AllTowns.ToList().FindAll((town) => town.HasTournament);
     public static MBTownList AllTowns => Town.AllTowns.ToList();
 
-    public int DaysAtUnrest => UnwrappedObject.DaysAtUnrest;
+    public int DaysAtUnrest => UnwrapedObject.DaysAtUnrest;
 
-    public MBBuildingList Buildings => UnwrappedObject.Buildings.ToList();
+    public MBBuildingList Buildings => UnwrapedObject.Buildings.ToList();
 
-    public int BoostBuildingProcess => UnwrappedObject.BoostBuildingProcess;
+    public int BoostBuildingProcess => UnwrapedObject.BoostBuildingProcess;
 
-    public bool InRebelliousState => UnwrappedObject.InRebelliousState;
+    public bool InRebelliousState => UnwrapedObject.InRebelliousState;
 
-    public IFaction MapFaction => UnwrappedObject.MapFaction;
+    public IFaction MapFaction => UnwrapedObject.MapFaction;
 
-    public float MilitiaChange => UnwrappedObject.MilitiaChange;
+    public float MilitiaChange => UnwrapedObject.MilitiaChange;
 
-    public float Construction => UnwrappedObject.Construction;
+    public float Construction => UnwrapedObject.Construction;
 
-    public MBClan OwnerClan { get => UnwrappedObject.OwnerClan; set => UnwrappedObject.OwnerClan = value; }
-    public float Security { get => UnwrappedObject.Security; set => UnwrappedObject.Security = value; }
-    public float Loyalty { get => UnwrappedObject.Loyalty; set => UnwrappedObject.Loyalty = value; }
+    public MBClan OwnerClan { get => UnwrapedObject.OwnerClan; set => UnwrapedObject.OwnerClan = value; }
+    public float Security { get => UnwrapedObject.Security; set => UnwrapedObject.Security = value; }
+    public float Loyalty { get => UnwrapedObject.Loyalty; set => UnwrapedObject.Loyalty = value; }
 
     public MBWorkshop[] Workshops => throw new System.NotImplementedException();
 
@@ -82,9 +82,9 @@ namespace TournamentsEnhanced.Wrappers
 
     public MBBuilding CurrentDefaultBuilding => throw new System.NotImplementedException();
 
-    public int TradeTaxAccumulated { get => UnwrappedObject.TradeTaxAccumulated; set => UnwrappedObject.TradeTaxAccumulated = value; }
-    public MBHero Governor { get => UnwrappedObject.Governor; set => UnwrappedObject.Governor = value; }
-    public MBClan LastCapturedBy { get => UnwrappedObject.LastCapturedBy; set => UnwrappedObject.LastCapturedBy = value; }
+    public int TradeTaxAccumulated { get => UnwrapedObject.TradeTaxAccumulated; set => UnwrapedObject.TradeTaxAccumulated = value; }
+    public MBHero Governor { get => UnwrapedObject.Governor; set => UnwrapedObject.Governor = value; }
+    public MBClan LastCapturedBy { get => UnwrapedObject.LastCapturedBy; set => UnwrapedObject.LastCapturedBy = value; }
 
     public IReadOnlyList<Village> Villages => throw new System.NotImplementedException();
 
@@ -106,21 +106,28 @@ namespace TournamentsEnhanced.Wrappers
 
     public MBCultureObject Culture => throw new System.NotImplementedException();
 
-    public bool AfterSneakFight { get => UnwrappedObject.AfterSneakFight; set => UnwrappedObject.AfterSneakFight = value; }
+    public bool AfterSneakFight { get => UnwrapedObject.AfterSneakFight; set => UnwrapedObject.AfterSneakFight = value; }
+    public int Gold => UnwrapedObject.Gold;
 
-    public int FoodStocksUpperLimit() => UnwrappedObject.FoodStocksUpperLimit();
+    public Settlement Settlement => UnwrapedObject.Settlement;
 
-    public float GetItemCategoryPriceIndex(MBItemCategory itemCategory, bool isSellingToTown = false) => UnwrappedObject.GetItemCategoryPriceIndex(itemCategory, isSellingToTown);
+    public static MBTown Find(string hostSettlementId) => Settlement.Find(hostSettlementId).Town;
 
-    public int GetItemPrice(MBEquipmentElement itemRosterElement, MBMobileParty tradingParty = null, bool isSelling = false) => UnwrappedObject.GetItemPrice(itemRosterElement, tradingParty, isSelling);
+    public void ChangeGold(int amount) => UnwrapedObject.ChangeGold(amount);
 
-    public int GetItemPrice(MBItemObject item, MBMobileParty tradingParty = null, bool isSelling = false) => UnwrappedObject.GetItemPrice(item, tradingParty, isSelling);
+    public int FoodStocksUpperLimit() => UnwrapedObject.FoodStocksUpperLimit();
 
-    public ProsperityLevel GetProsperityLevel() => UnwrappedObject.GetProsperityLevel();
+    public float GetItemCategoryPriceIndex(MBItemCategory itemCategory, bool isSellingToTown = false) => UnwrapedObject.GetItemCategoryPriceIndex(itemCategory, isSellingToTown);
 
-    public int GetWallLevel() => UnwrappedObject.GetWallLevel();
+    public int GetItemPrice(MBEquipmentElement itemRosterElement, MBMobileParty tradingParty = null, bool isSelling = false) => UnwrapedObject.GetItemPrice(itemRosterElement, tradingParty, isSelling);
 
-    public static implicit operator Town(MBTown wrapper) => wrapper.UnwrappedObject;
+    public int GetItemPrice(MBItemObject item, MBMobileParty tradingParty = null, bool isSelling = false) => UnwrapedObject.GetItemPrice(item, tradingParty, isSelling);
+
+    public ProsperityLevel GetProsperityLevel() => UnwrapedObject.GetProsperityLevel();
+
+    public int GetWallLevel() => UnwrapedObject.GetWallLevel();
+
+    public static implicit operator Town(MBTown wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBTown(Town obj) => MBTown.GetWrapperFor(obj);
   }
 

@@ -73,118 +73,118 @@ namespace TournamentsEnhanced.Wrappers
     public static MBItemObjectList AllTradeGoods => ItemObject.AllTradeGoods.ToList();
     public static MBItemObjectList All => ItemObject.All.ToList();
 
-    public string StringId => UnwrappedObject.StringId;
-    public MBWeaponComponent WeaponComponent => UnwrappedObject.WeaponComponent;
+    public string StringId => UnwrapedObject.StringId;
+    public MBWeaponComponent WeaponComponent => UnwrapedObject.WeaponComponent;
 
-    public MBWeaponComponentData PrimaryWeapon => UnwrappedObject.PrimaryWeapon;
+    public MBWeaponComponentData PrimaryWeapon => UnwrapedObject.PrimaryWeapon;
 
-    public MBWeaponDesign WeaponDesign => UnwrappedObject.WeaponDesign;
+    public MBWeaponDesign WeaponDesign => UnwrapedObject.WeaponDesign;
 
-    public bool IsCraftedWeapon => UnwrappedObject.IsCraftedWeapon;
+    public bool IsCraftedWeapon => UnwrapedObject.IsCraftedWeapon;
 
-    public int LodAtlasIndex => UnwrappedObject.LodAtlasIndex;
+    public int LodAtlasIndex => UnwrapedObject.LodAtlasIndex;
 
-    public bool IsCraftedByPlayer => UnwrappedObject.IsCraftedByPlayer;
+    public bool IsCraftedByPlayer => UnwrapedObject.IsCraftedByPlayer;
 
-    public float ScaleFactor => UnwrappedObject.ScaleFactor;
+    public float ScaleFactor => UnwrapedObject.ScaleFactor;
 
-    public bool MultiplayerItem => UnwrappedObject.MultiplayerItem;
+    public bool MultiplayerItem => UnwrapedObject.MultiplayerItem;
 
-    public MBBasicCultureObject Culture => UnwrappedObject.Culture;
+    public MBBasicCultureObject Culture => UnwrapedObject.Culture;
 
-    public MBHorseComponent HorseComponent => UnwrappedObject.HorseComponent;
+    public MBHorseComponent HorseComponent => UnwrapedObject.HorseComponent;
 
-    public bool IsUniqueItem => UnwrappedObject.IsUniqueItem;
+    public bool IsUniqueItem => UnwrapedObject.IsUniqueItem;
 
-    public bool IsFood => UnwrappedObject.IsFood;
+    public bool IsFood => UnwrapedObject.IsFood;
 
-    public string ArmBandMeshName => UnwrappedObject.ArmBandMeshName;
+    public string ArmBandMeshName => UnwrapedObject.ArmBandMeshName;
 
-    public bool NotMerchandise => UnwrappedObject.NotMerchandise;
+    public bool NotMerchandise => UnwrapedObject.NotMerchandise;
 
-    public bool HasHorseComponent => UnwrappedObject.HasHorseComponent;
+    public bool HasHorseComponent => UnwrapedObject.HasHorseComponent;
 
-    public bool HasSaddleComponent => UnwrappedObject.HasSaddleComponent;
+    public bool HasSaddleComponent => UnwrapedObject.HasSaddleComponent;
 
-    public bool HasArmorComponent => UnwrappedObject.HasArmorComponent;
+    public bool HasArmorComponent => UnwrapedObject.HasArmorComponent;
 
-    public MBSaddleComponent SaddleComponent => UnwrappedObject.SaddleComponent;
+    public MBSaddleComponent SaddleComponent => UnwrapedObject.SaddleComponent;
 
-    public bool UsingFacegenScaling => UnwrappedObject.UsingFacegenScaling;
+    public bool UsingFacegenScaling => UnwrapedObject.UsingFacegenScaling;
 
-    public MBTradeItemComponent FoodComponent => UnwrappedObject.FoodComponent;
+    public MBTradeItemComponent FoodComponent => UnwrapedObject.FoodComponent;
 
-    public bool HasFoodComponent => UnwrappedObject.HasFoodComponent;
+    public bool HasFoodComponent => UnwrapedObject.HasFoodComponent;
 
-    public float Tierf => UnwrappedObject.Tierf;
+    public float Tierf => UnwrapedObject.Tierf;
 
-    public ItemTiers Tier => UnwrappedObject.Tier;
+    public ItemTiers Tier => UnwrapedObject.Tier;
 
-    public MBItemObject PrerequisiteItem => UnwrappedObject.PrerequisiteItem;
+    public MBItemObject PrerequisiteItem => UnwrapedObject.PrerequisiteItem;
 
-    public MBWeaponComponentDataList Weapons => UnwrappedObject.Weapons.ToList();
+    public MBWeaponComponentDataList Weapons => UnwrapedObject.Weapons.ToList();
 
-    public ItemTypeEnum ItemType => UnwrappedObject.ItemType;
+    public ItemTypeEnum ItemType => UnwrapedObject.ItemType;
 
-    public bool IsMountable => UnwrappedObject.IsMountable;
+    public bool IsMountable => UnwrapedObject.IsMountable;
 
-    public bool IsTradeGood => UnwrappedObject.IsTradeGood;
+    public bool IsTradeGood => UnwrapedObject.IsTradeGood;
 
-    public bool IsAnimal => UnwrappedObject.IsAnimal;
+    public bool IsAnimal => UnwrapedObject.IsAnimal;
 
-    public MBSkillObject RelevantSkill => UnwrappedObject.RelevantSkill;
+    public MBSkillObject RelevantSkill => UnwrapedObject.RelevantSkill;
 
-    public MBArmorComponent ArmorComponent => UnwrappedObject.ArmorComponent;
+    public MBArmorComponent ArmorComponent => UnwrapedObject.ArmorComponent;
 
-    public bool IsCivilian => UnwrappedObject.IsCivilian;
+    public bool IsCivilian => UnwrapedObject.IsCivilian;
 
-    public bool IsUsingTableau => UnwrappedObject.IsUsingTableau;
+    public bool IsUsingTableau => UnwrapedObject.IsUsingTableau;
 
-    public bool IsUsingTeamColor => UnwrappedObject.IsUsingTeamColor;
+    public bool IsUsingTeamColor => UnwrapedObject.IsUsingTeamColor;
 
-    public MBItemComponent ItemComponent => UnwrappedObject.ItemComponent;
+    public MBItemComponent ItemComponent => UnwrapedObject.ItemComponent;
 
-    public string MultiMeshName => UnwrappedObject.MultiMeshName;
+    public string MultiMeshName => UnwrapedObject.MultiMeshName;
 
-    public string HolsterMeshName => UnwrappedObject.HolsterMeshName;
+    public string HolsterMeshName => UnwrapedObject.HolsterMeshName;
 
-    public string HolsterWithWeaponMeshName => UnwrappedObject.HolsterWithWeaponMeshName;
+    public string HolsterWithWeaponMeshName => UnwrapedObject.HolsterWithWeaponMeshName;
 
-    public bool DoesNotHideChest => UnwrappedObject.DoesNotHideChest;
+    public bool DoesNotHideChest => UnwrapedObject.DoesNotHideChest;
 
-    public Vec3 HolsterPositionShift => UnwrappedObject.HolsterPositionShift;
+    public Vec3 HolsterPositionShift => UnwrapedObject.HolsterPositionShift;
 
-    public bool HasLowerHolsterPriority => UnwrappedObject.HasLowerHolsterPriority;
+    public bool HasLowerHolsterPriority => UnwrapedObject.HasLowerHolsterPriority;
 
-    public string FlyingMeshName => UnwrappedObject.FlyingMeshName;
+    public string FlyingMeshName => UnwrapedObject.FlyingMeshName;
 
-    public string BodyName => UnwrappedObject.BodyName;
+    public string BodyName => UnwrapedObject.BodyName;
 
-    public string HolsterBodyName => UnwrappedObject.HolsterBodyName;
+    public string HolsterBodyName => UnwrapedObject.HolsterBodyName;
 
-    public string CollisionBodyName => UnwrappedObject.CollisionBodyName;
+    public string CollisionBodyName => UnwrapedObject.CollisionBodyName;
 
-    public string[] ItemHolsters => UnwrappedObject.ItemHolsters;
+    public string[] ItemHolsters => UnwrapedObject.ItemHolsters;
 
-    public string PrefabName => UnwrappedObject.PrefabName;
+    public string PrefabName => UnwrapedObject.PrefabName;
 
-    public MBTextObject Name => UnwrappedObject.Name;
+    public MBTextObject Name => UnwrapedObject.Name;
 
-    public ItemFlags ItemFlags => UnwrappedObject.ItemFlags;
+    public ItemFlags ItemFlags => UnwrapedObject.ItemFlags;
 
-    public MBItemCategory ItemCategory => UnwrappedObject.ItemCategory;
+    public MBItemCategory ItemCategory => UnwrapedObject.ItemCategory;
 
-    public int Value => UnwrappedObject.Value;
+    public int Value => UnwrapedObject.Value;
 
-    public float Effectiveness => UnwrappedObject.Effectiveness;
+    public float Effectiveness => UnwrapedObject.Effectiveness;
 
-    public float Weight => UnwrappedObject.Weight;
+    public float Weight => UnwrapedObject.Weight;
 
-    public int Difficulty => UnwrappedObject.Difficulty;
+    public int Difficulty => UnwrapedObject.Difficulty;
 
-    public float Appearance => UnwrappedObject.Appearance;
+    public float Appearance => UnwrapedObject.Appearance;
 
-    public bool RecalculateBody => UnwrappedObject.RecalculateBody;
+    public bool RecalculateBody => UnwrapedObject.RecalculateBody;
 
     public static MBItemObjectList GetAvailableTournamentPrizes()
     {
@@ -201,7 +201,7 @@ namespace TournamentsEnhanced.Wrappers
 
     public bool IsWorthyTournamentPrizeForMainHero()
     {
-      return IsTierable() && UnwrappedObject.Tier == MBHero.GetMainHeroTournamentRewardTier();
+      return IsTierable() && UnwrapedObject.Tier == MBHero.GetMainHeroTournamentRewardTier();
     }
 
     public bool IsTierable()
@@ -211,7 +211,7 @@ namespace TournamentsEnhanced.Wrappers
 
     private bool IsOfAnyMatchingType(params ItemTypeEnum[] matchingItemTypes)
     {
-      var actualItemType = UnwrappedObject.ItemType;
+      var actualItemType = UnwrapedObject.ItemType;
       var foundMatch = false;
 
       foreach (var matchingItemType in matchingItemTypes)
@@ -226,10 +226,10 @@ namespace TournamentsEnhanced.Wrappers
       return foundMatch;
     }
 
-    public override int GetHashCode() => UnwrappedObject.GetHashCode();
-    public override string ToString() => UnwrappedObject.ToString();
+    public override int GetHashCode() => UnwrapedObject.GetHashCode();
+    public override string ToString() => UnwrapedObject.ToString();
 
-    public static implicit operator ItemObject(MBItemObject wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator ItemObject(MBItemObject wrapper) => wrapper.UnwrapedObject;
     public static implicit operator MBItemObject(ItemObject obj) => MBItemObject.GetWrapperFor(obj);
   }
 

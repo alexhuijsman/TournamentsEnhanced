@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced
@@ -8,8 +9,9 @@ namespace TournamentsEnhanced
   {
     public int Compare(MBTown x, MBTown y)
     {
-      var xRecord = TournamentRecords.GetForTown(x);
-      var yRecord = TournamentRecords.GetForTown(y);
+      //TODO Compare payor
+      var xRecord = ModState.TournamentRecords[x];
+      var yRecord = ModState.TournamentRecords[y];
       var xType = xRecord.type;
       var yType = yRecord.type;
 

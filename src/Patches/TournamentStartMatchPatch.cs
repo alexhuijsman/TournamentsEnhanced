@@ -1,6 +1,9 @@
 ﻿using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
+
+using TournamentsEnhanced.Models;
 
 namespace TournamentsEnhanced
 {

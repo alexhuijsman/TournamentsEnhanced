@@ -3,6 +3,8 @@
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
+using TournamentsEnhanced.Models;
+
 namespace TournamentsEnhanced
 {
   [HarmonyPatch(typeof(TournamentMatch), "End")]
@@ -15,7 +17,7 @@ namespace TournamentsEnhanced
         CampaignOptions.CombatAIDifficulty = CampaignModel.difficultyBeforeTournament;
       }
 
-      TournamentRecords.RemoveByTown(__instance.GetTown());
+      ModState.TournamentRecords.Remove(__instance.GetTown());
     }
   }
 }
