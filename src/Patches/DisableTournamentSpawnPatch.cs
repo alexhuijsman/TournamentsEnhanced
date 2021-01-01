@@ -1,7 +1,10 @@
 ﻿using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
+
+using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced
 {
@@ -10,7 +13,7 @@ namespace TournamentsEnhanced
   {
     static bool Prefix(Town town)
     {
-      ITournamentManager tournamentManager = Campaign.Current.TournamentManager;
+      var tournamentManager = MBCampaign.Current.TournamentManager;
       TournamentGame tournamentGame = tournamentManager.GetTournamentGame(town);
       if (tournamentGame != null && MBRandom.RandomFloat < Campaign.Current.Models.TournamentModel.GetTournamentEndChance(tournamentGame))
       {

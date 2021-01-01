@@ -72,6 +72,11 @@ namespace TournamentsEnhanced.Wrappers
 
     public static implicit operator ItemObject(MBItemObject wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBItemObject(ItemObject obj) => MBItemObject.GetWrapperFor(obj);
+  }
 
+  public class MBItemObjectList : List<MBItemObject>
+  {
+    public static implicit operator List<ItemObject>(MBItemObjectList wrapperList) => wrapperList.Unwrap<MBItemObject, ItemObject>();
+    public static implicit operator MBItemObjectList(List<ItemObject> objectList) => (MBItemObjectList)objectList.Wrap<MBItemObject, ItemObject>();
   }
 }

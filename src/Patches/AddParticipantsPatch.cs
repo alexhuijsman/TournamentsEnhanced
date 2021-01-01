@@ -22,7 +22,9 @@ namespace TournamentsEnhanced
 
       MBTournamentTeamList teams = __instance.Teams.ToList();
       var playerTeam = GetPlayerTeamFrom(teams);
-      var nonPlayerTeams = new MBTournamentTeamList().Remove(playerTeam);
+      var nonPlayerTeams = teams.ToList();
+      nonPlayerTeams.Remove(playerTeam);
+
       MBTournamentParticipant wrappedParticipant = participant;
 
       ____participants.Add(participant);
@@ -31,9 +33,9 @@ namespace TournamentsEnhanced
         (participant.IsPlayer || participant.IsPlayerCompanion() || participant.IsMarriedToPlayer() || participant.IsPlayerTroop()))
       {
         playerTeam.AddParticipant(participant);
+
         return false;
       }
-      // TODO: ADD LIST<MBTYPE> TO IENUMERABLE<TYPE>, and ensure no manual calls to Wrap and Unwrap left
 
       if ((firstTime && participant.TryPlaceInNewOrSameTeam((List<TournamentTeam>)teams)) || participant.TryPlaceInAnyTeam((List<TournamentTeam>)teams))
       {
@@ -81,10 +83,12 @@ namespace TournamentsEnhanced
     private static MBTournamentTeam GetEmptyTeam(MBTournamentTeamList teams)
     {
       MBTournamentTeam emptyTeam = null;
+
       foreach (var team in teams)
         if (team.Participants.IsEmpty())
         {
           emptyTeam = team;
+
           break;
         }
 

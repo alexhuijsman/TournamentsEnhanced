@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
 
@@ -20,15 +22,21 @@ namespace TournamentsEnhanced.Wrappers
                                                    out unwrappedDisabledText
       );
 
-      disabledText = MBTextObject.GetWrapperFor(unwrappedDisabledText);
+      disabledText = unwrappedDisabledText;
 
       return result;
     }
 
-    public static MBCampaign Current => MBCampaign.GetWrapperFor(Campaign.Current);
-    private MBGameModels Models => MBGameModels.GetWrapperFor(UnwrappedObject.Models);
+    public static MBCampaign Current => Campaign.Current;
+    private MBGameModels Models => UnwrappedObject.Models;
 
     public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBCampaign(Campaign obj) => MBCampaign.GetWrapperFor(obj);
+  }
+
+  public class MBCampaignList : List<MBCampaign>
+  {
+    public static implicit operator List<Campaign>(MBCampaignList wrapperList) => wrapperList.Unwrap<MBCampaign, Campaign>();
+    public static implicit operator MBCampaignList(List<Campaign> objectList) => (MBCampaignList)objectList.Wrap<MBCampaign, Campaign>();
   }
 }

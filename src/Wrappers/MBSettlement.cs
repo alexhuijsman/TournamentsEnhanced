@@ -10,11 +10,10 @@ namespace TournamentsEnhanced.Wrappers
   {
     public static IReadOnlyList<MBSettlement> All => _allSettlements ?? (_allSettlements = WrapSettlements());
     public static List<MBSettlement> AllShuffled => All.ToList().Shuffle();
-    public static MBSettlement CurrentSettlement => MBSettlement.GetWrapperFor(Settlement.CurrentSettlement);
+    public static MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
     public static MBTown CurrentTown => CurrentSettlement.Town;
 
-    private MBTown _town;
-    public MBTown Town => _town ?? (_town = MBTown.GetWrapperFor(UnwrappedObject.Town));
+    public MBTown Town => UnwrappedObject.Town;
     public bool IsEligibleForProsperityTournament => UnwrappedObject.IsTown &&
                                                      !UnwrappedObject.Town.HasTournament &&
                                                       UnwrappedObject.Prosperity >= 5000.00f &&

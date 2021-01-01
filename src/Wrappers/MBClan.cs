@@ -100,4 +100,10 @@ namespace TournamentsEnhanced.Wrappers
     public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBClan(Clan obj) => MBClan.GetWrapperFor(obj);
   }
+
+  public class MBClanList : List<MBClan>
+  {
+    public static implicit operator List<Clan>(MBClanList wrapperList) => wrapperList.Unwrap<MBClan, Clan>();
+    public static implicit operator MBClanList(List<Clan> objectList) => (MBClanList)objectList.Wrap<MBClan, Clan>();
+  }
 }

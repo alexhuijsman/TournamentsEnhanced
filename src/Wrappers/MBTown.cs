@@ -122,9 +122,6 @@ namespace TournamentsEnhanced.Wrappers
 
     public static implicit operator Town(MBTown wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTown(Town obj) => MBTown.GetWrapperFor(obj);
-
-
-
   }
 
   public class MBTownList : List<MBTown>

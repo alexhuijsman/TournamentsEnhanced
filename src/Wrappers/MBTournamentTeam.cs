@@ -43,7 +43,6 @@ namespace TournamentsEnhanced.Wrappers
 
   public class MBTournamentTeamList : List<MBTournamentTeam>
   {
-    public List<MBTournamentTeam> ToList() => (List<MBTournamentTeam>)this;
     public static implicit operator List<TournamentTeam>(MBTournamentTeamList wrapperList) => wrapperList.Unwrap<MBTournamentTeam, TournamentTeam>();
     public static implicit operator MBTournamentTeamList(List<TournamentTeam> objectList) => (MBTournamentTeamList)objectList.Wrap<MBTournamentTeam, TournamentTeam>();
   }
