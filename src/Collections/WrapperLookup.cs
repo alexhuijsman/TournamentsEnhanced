@@ -9,12 +9,12 @@ namespace TournamentsEnhanced.Collections
   public class WrapperTypeDictionary : Dictionary<Type, Type> { public WrapperTypeDictionary(int count) : base(count) { } }
   public class WrapperInstanceDictionary : Dictionary<Type, IWrapperBase> { public WrapperInstanceDictionary(int count) : base(count) { } }
 
-  public static partial class WrapperTypeLookup
+  public static partial class WrapperLookup
   {
     private static WrapperTypeDictionary WrappedTypeDictionary { get; }
     private static WrapperInstanceDictionary WrapperInstanceDictionary { get; }
 
-    static WrapperTypeLookup()
+    static WrapperLookup()
     {
       WrappedTypeDictionary = BuildWrappedTypeDictionary();
     }
@@ -38,8 +38,14 @@ namespace TournamentsEnhanced.Collections
     public static Type GetWrapperTypeFor<T>(T obj)
     {
       var type = obj.GetType();
-      var instance = WrapperInstanceDictionary[type] ?? Reflection.InstantiateByTypeAndArgs(type, null);
-      WrappedTypeDictionary[type];
+
+      return WrappedTypeDictionary[type];
+    }
+
+    public static W GetWrapperFor<T, W>(T obj)
+      where W : WrapperBase<T>, new()
+    {
+      return CachedWrapperBase<W, T>.GetWrapperFor(obj);
     }
   }
 }

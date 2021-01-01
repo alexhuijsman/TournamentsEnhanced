@@ -1,23 +1,21 @@
 using System;
 
 using TournamentsEnhanced.Collections;
-using TournamentsEnhanced.Utils;
+using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced
 {
   public static class Extensions
   {
     public static W Wrap<W, T>(this T obj)
+      where W : CachedWrapperBase<W, T>, new()
     {
-      var wrapperType = obj.GetWrapperType();
-      var wrapper = (W)Reflection.InstantiateByTypeAndArgs(wrapperType);
-
-      return wrapper;
+      return CachedWrapperBase<W, T>.GetWrapperFor(obj);
     }
 
     public static Type GetWrapperType<T>(this T obj)
     {
-      return WrapperTypeLookup.GetWrapperTypeFor(obj);
+      return WrapperLookup.GetWrapperTypeFor(obj);
     }
   }
 }

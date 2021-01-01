@@ -2,26 +2,6 @@ using System.Collections.Generic;
 
 namespace TournamentsEnhanced.Wrappers.Abstract
 {
-
-  public interface ICachedWrapperBase : IWrapperBase
-  {
-
-  }
-
-  public abstract class CachedWrapperBase : WrapperBase, ICachedWrapperBase
-  {
-    public static W Wrap<T, W>(T obj)
-      where W : CachedWrapperBase<W, T>, new()
-    {
-      return CachedWrapperBase<W, T>.GetWrapperFor(obj);
-    }
-    public static T Unwrap<W, T>(W wrapper)
-      where W : CachedWrapperBase<W, T>, new()
-    {
-      return wrapper.UnwrappedObject;
-    }
-  }
-
   public abstract class CachedWrapperBase<W, T> : WrapperBase<T>
   where W : WrapperBase<T>, new()
   {
@@ -50,6 +30,17 @@ namespace TournamentsEnhanced.Wrappers.Abstract
       };
 
       return wrapper;
+    }
+
+    public static WW Wrap<WW, TT>(TT obj)
+      where WW : WrapperBase<TT>, new()
+    {
+      return CachedWrapperBase<WW, TT>.GetWrapperFor(obj);
+    }
+    public static TT Unwrap<WW, TT>(WW wrapper)
+      where WW : WrapperBase<TT>, new()
+    {
+      return wrapper.UnwrappedObject;
     }
   }
 }

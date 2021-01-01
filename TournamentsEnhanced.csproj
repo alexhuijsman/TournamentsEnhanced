@@ -199,6 +199,7 @@
     <Compile Include="src\Wrappers\MBItemCategory.cs" />
     <Compile Include="src\Wrappers\MBWorkshop.cs" />
     <Compile Include="src\Wrappers\MBTownMarketData.cs" />
+    <Compile Include="src\Collections\WrapperLookup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

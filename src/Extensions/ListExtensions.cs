@@ -27,14 +27,16 @@ namespace TournamentsEnhanced
     public static List<T> Unwrap<W, T>(this List<W> wrappedObjects)
     where W : CachedWrapperBase<W, T>, new()
     {
-      var converter = new Converter<W, T>(CachedWrapperBase.Unwrap<W, T>);
+      var converter = new Converter<W, T>(CachedWrapperBase<W, T>.Unwrap<W, T>);
+
       return wrappedObjects.ConvertAll<T>(converter);
     }
 
     public static List<W> Wrap<W, T>(this List<T> objects)
     where W : CachedWrapperBase<W, T>, new()
     {
-      var converter = new Converter<T, W>(CachedWrapperBase.Wrap<T, W>);
+      var converter = new Converter<T, W>(CachedWrapperBase<W, T>.Wrap<W, T>);
+
       return objects.ConvertAll<W>(converter);
     }
   }
