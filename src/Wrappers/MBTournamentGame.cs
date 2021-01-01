@@ -8,6 +8,8 @@ namespace TournamentsEnhanced.Wrappers
 {
   public class MBTournamentGame : CachedWrapperBase<MBTournamentGame, TournamentGame>
   {
+    public MBTown Town => UnwrappedObject.Town;
+
     public static implicit operator TournamentGame(MBTournamentGame wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTournamentGame(TournamentGame obj) => MBTournamentGame.GetWrapperFor(obj);
   }

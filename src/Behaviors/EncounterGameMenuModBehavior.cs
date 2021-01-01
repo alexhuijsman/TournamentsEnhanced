@@ -8,8 +8,9 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
-using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
+
+using TournamentsEnhanced.Wrappers;
 
 using static TaleWorlds.CampaignSystem.GameMenus.GameMenuOption;
 
@@ -31,7 +32,7 @@ namespace TournamentsEnhanced
     public static void PrizeSelectConsequence(MenuCallbackArgs args)
     {
       var prizeList = MBItemObject.GetAvailableTournamentPrizes();
-      InformationManagerUtils.ShowSelectionScreenForItems(prizeList.UnwrapAll(), OnSelectPrize, OnDeSelectPrize);
+      InformationManagerUtils.ShowSelectionScreenForItems(prizeList, OnSelectPrize, OnDeSelectPrize);
       GameMenu.SwitchToMenu("town_arena");
     }
 
