@@ -9,7 +9,7 @@ namespace TournamentsEnhanced
   {
     public int Compare(MBTown x, MBTown y)
     {
-      //TODO Compare payor
+      //TODO Compare payor and different comparers depending on tournament type
       var xRecord = ModState.TournamentRecords[x];
       var yRecord = ModState.TournamentRecords[y];
       var xType = xRecord.type;
