@@ -12,7 +12,7 @@ namespace TournamentsEnhanced
     public FindHostTownOptions(MBSettlementList settlements, IComparer<MBTown> comparer = null)
     {
       Settlements = settlements;
-      Comparer = comparer ?? new HostTownComparer();
+      Comparer = comparer ?? new TownComparer();
     }
   }
 }

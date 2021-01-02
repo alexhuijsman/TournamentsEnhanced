@@ -1,0 +1,6 @@
+{
+  "name": "Town Comparer",
+  "customVariables": ["AttributeToCompare", "FileExt=>cs"],
+  "omitParentDirectory": true,
+  "omitFTName": true
+}

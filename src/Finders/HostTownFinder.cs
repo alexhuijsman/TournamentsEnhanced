@@ -9,7 +9,7 @@ namespace TournamentsEnhanced
     public static FindHostTownResult FindInSettlements(FindHostTownOptions options)
     {
       var settlements = options.Settlements.ToList().Shuffle();
-      var sortedSettlements = settlements.Sort(new HostTownComparer());
+      var sortedSettlements = settlements.Sort(new TownComparer());
 
       )
       Town townWithExistingTournament = null;

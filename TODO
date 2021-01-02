@@ -22,6 +22,7 @@ A payor friendly with another payor may decide not to steal tournament
 
 REFACTOR
 --------
+s Wrap MB enums and make a converter
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 S add "best experience" version that requires harmony and mcm
 refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
