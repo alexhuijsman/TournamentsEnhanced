@@ -127,6 +127,8 @@
   </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="src\Behaviors\Abstract\MBCampaignBehaviorBase.cs" />
+    <Compile Include="src\Behaviors\Abstract\MBEncounterGameMenuBehavior.cs" />
     <Compile Include="src\Behaviors\SyncDataBehavior.cs" />
     <Compile Include="src\Behaviors\TournamentSpawnBehavior.cs" />
     <Compile Include="src\Behaviors\TownMenuBehavior.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="src\Finders\Options\FindHostTownOptions.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
+    <Compile Include="src\Models\ModState\ModState.cs" />
     <Compile Include="src\Models\Payor.cs" />
     <Compile Include="src\Models\Serializable\SerializableModState.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
@@ -201,6 +204,7 @@
     <Compile Include="src\Wrappers\Core\MBEquipmentElement.cs" />
     <Compile Include="src\Wrappers\Core\MBHorseComponent.cs" />
     <Compile Include="src\Wrappers\Core\MBInformationManager.cs" />
+    <Compile Include="src\Wrappers\Core\MBInformationMessage.cs" />
     <Compile Include="src\Wrappers\Core\MBInquiryElement.cs" />
     <Compile Include="src\Wrappers\Core\MBItemCategory.cs" />
     <Compile Include="src\Wrappers\Core\MBItemComponent.cs" />
@@ -215,11 +219,6 @@
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
-    <Compile Include="src\Wrappers\Core\MBInformationMessage.cs" />
-    <Compile Include="src\Models\ModState\ModState.cs" />
-    <Compile Include="src\Wrappers\CampaignSystem\Sandbox\CampaignBehaviors\MBEncounterGameMenuBehavior.cs" />
-    <Compile Include="src\Behaviors\Abstract\MBEncounterGameMenuBehavior.cs" />
-    <Compile Include="src\Behaviors\Abstract\MBCampaignBehaviorBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
