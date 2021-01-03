@@ -4,6 +4,7 @@ using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models.Serializable;
 
 namespace TournamentsEnhanced.Behaviors
 {
@@ -13,14 +14,18 @@ namespace TournamentsEnhanced.Behaviors
 
     public override void SyncData(IDataStore dataStore)
     {
-      JsonSerializer.Serialize(ModState.)
-      JsonConvert.SerializeObject(saveData);
-      string dataToSync = json;
+      string json = null;
 
-      var wasSyncSuccessful = dataStore.SyncData(ModuleConstants.ProductName, ref json);
-      if (dataStore.IsLoading)
+      if (dataStore.IsSaving)
       {
+        json = JsonSerializer.Serialize(ModState.SerializableObject);
+      }
 
+      var wasSuccessful = dataStore.SyncData(ModuleConstants.ProductName, ref json);
+
+      if (dataStore.IsLoading && wasSuccessful)
+      {
+        ModState.SerializableObject = JsonSerializer.Deserialize<SerializableModState>(json);
       }
     }
   }

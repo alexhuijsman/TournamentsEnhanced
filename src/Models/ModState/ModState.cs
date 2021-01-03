@@ -14,6 +14,8 @@ namespace TournamentsEnhanced.Models.ModState
 
     private static SerializableModState _state;
 
+    public static SerializableModState SerializableObject { get => _state; set => _state = value; }
+
     static ModState() => _state = default(SerializableModState);
   }
 }
