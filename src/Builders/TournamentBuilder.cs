@@ -22,7 +22,7 @@ namespace TournamentsEnhanced.Builders
     {
       var findHostTownResult =
         HostTownFinder.FindForFaction(faction,
-                                      FindHostTownOptions.RejectExistingTournaments
+                                      FindHostSettlementOptions.RejectExistingTournaments
                                       );
       var payor = new Payor(findHostTownResult.Town.FactionLeader());
 

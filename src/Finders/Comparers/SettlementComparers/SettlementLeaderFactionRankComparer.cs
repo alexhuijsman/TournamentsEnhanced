@@ -1,9 +1,8 @@
-using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparer
 {
-  public class TownLeaderFactionRankComparer : TownComparerBase
+  public class SettlementLeaderFactionRankComparer : SettlementComparerBase
   {
     public override int Compare(MBTown x, MBTown y)
     {

@@ -147,12 +147,9 @@
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
     <Compile Include="src\Finders\Comparers\HeroComparers\FriendshipWithTownNobilityComparer.cs" />
-    <Compile Include="src\Finders\Comparers\TownComparers\TownComparerBase.cs" />
-    <Compile Include="src\Finders\Comparers\TownComparers\TownLeaderFactionRankComparer.cs" />
-    <Compile Include="src\Finders\Comparers\TownComparers\TownProsperityComparer.cs" />
-    <Compile Include="src\Finders\HostTownFinder.cs" />
-    <Compile Include="src\Finders\Options\FindHostTownForKingdomOptions.cs" />
-    <Compile Include="src\Finders\Options\FindHostTownOptions.cs" />
+    <Compile Include="src\Finders\Comparers\SettlementComparers\SettlementComparerBase.cs" />
+    <Compile Include="src\Finders\Comparers\SettlementComparers\SettlementLeaderFactionRankComparer.cs" />
+    <Compile Include="src\Finders\Comparers\SettlementComparers\SettlementProsperityComparer.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
     <Compile Include="src\Models\ModState\ModState.cs" />
@@ -160,7 +157,7 @@
     <Compile Include="src\Models\Serializable\SerializableModState.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecordList.cs" />
-    <Compile Include="src\patches\AddParticipantsPatch.cs" />
+    <Compile Include="src\Patches\AddParticipantsPatch.cs" />
     <Compile Include="src\Patches\DisableTournamentSpawnPatch.cs" />
     <Compile Include="src\Patches\TournamentEndMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentParticipantPatch.cs" />
@@ -209,6 +206,7 @@
     <Compile Include="src\Wrappers\Core\MBItemCategory.cs" />
     <Compile Include="src\Wrappers\Core\MBItemComponent.cs" />
     <Compile Include="src\Wrappers\Core\MBItemObject.cs" />
+    <Compile Include="src\Wrappers\Core\MBMBRandom.cs" />
     <Compile Include="src\Wrappers\Core\MBMultiSelectionInquiryData.cs" />
     <Compile Include="src\Wrappers\Core\MBSaddleComponent.cs" />
     <Compile Include="src\Wrappers\Core\MBSkillObject.cs" />
@@ -219,8 +217,8 @@
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
-    <Compile Include="src\Wrappers\Core\MBMBRandom.cs" />
-    <Compile Include="src\Patches\AddParticipantsPatch.cs" />
+    <Compile Include="src\Finders\SettlementFinder.cs" />
+    <Compile Include="src\Finders\Options\FindSettlementOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

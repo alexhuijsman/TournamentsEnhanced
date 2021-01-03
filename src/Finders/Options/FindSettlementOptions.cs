@@ -4,12 +4,12 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
-  public class FindHostTownOptions
+  public class FindHostSettlementOptions
   {
-    public readonly IComparer<MBTown> Comparer;
+    public readonly IComparer<MBSettlement> Comparer;
     public readonly MBSettlementList Settlements;
 
-    public FindHostTownOptions(MBSettlementList settlements, IComparer<MBTown> comparer = null)
+    public FindHostSettlementOptions(MBSettlementList settlements, IComparer<MBSettlement> comparer = null)
     {
       Settlements = settlements;
       Comparer = comparer ?? new TownComparer();

@@ -3,7 +3,7 @@ using TournamentsEnhanced.Wrappers;
 
 namespace TournamentsEnhanced.Finder.Comparer
 {
-  public class TownProsperityComparer : TownComparerBase
+  public class SettlementProsperityComparer : SettlementComparerBase
   {
     public override int Compare(MBTown x, MBTown y)
     {
