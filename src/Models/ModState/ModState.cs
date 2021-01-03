@@ -1,6 +1,6 @@
 using TournamentsEnhanced.Models.Serializable;
 
-namespace TournamentsEnhanced.Models
+namespace TournamentsEnhanced.Models.ModState
 {
   public class ModState
   {

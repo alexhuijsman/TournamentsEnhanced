@@ -22,7 +22,7 @@ namespace TournamentsEnhanced.Wrappers.Core
       Action<List<InquiryElement>> negativeAction,
       string soundEventPath = "")
     {
-      UnwrapedObject = new MultiSelectionInquiryData(
+      UnwrappedObject = new MultiSelectionInquiryData(
         titleText,
         descriptionText,
         inquiryElements,
@@ -35,7 +35,7 @@ namespace TournamentsEnhanced.Wrappers.Core
         soundEventPath);
     }
 
-    public static implicit operator MultiSelectionInquiryData(MBMultiSelectionInquiryData wrapper) => wrapper.UnwrapedObject;
+    public static implicit operator MultiSelectionInquiryData(MBMultiSelectionInquiryData wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBMultiSelectionInquiryData(MultiSelectionInquiryData obj) => MBMultiSelectionInquiryData.GetWrapperFor(obj);
   }
 

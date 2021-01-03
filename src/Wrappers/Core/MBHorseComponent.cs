@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 {
   public class MBHorseComponent : CachedWrapperBase<MBHorseComponent, HorseComponent>
   {
-    public static implicit operator HorseComponent(MBHorseComponent wrapper) => wrapper.UnwrapedObject;
+    public static implicit operator HorseComponent(MBHorseComponent wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBHorseComponent(HorseComponent obj) => MBHorseComponent.GetWrapperFor(obj);
   }
 

@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 {
   public class MBWeaponComponentData : CachedWrapperBase<MBWeaponComponentData, WeaponComponentData>
   {
-    public static implicit operator WeaponComponentData(MBWeaponComponentData wrapper) => wrapper.UnwrapedObject;
+    public static implicit operator WeaponComponentData(MBWeaponComponentData wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBWeaponComponentData(WeaponComponentData obj) => MBWeaponComponentData.GetWrapperFor(obj);
   }
 

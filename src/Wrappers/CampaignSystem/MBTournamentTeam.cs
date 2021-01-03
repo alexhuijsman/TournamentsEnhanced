@@ -23,22 +23,22 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBTournamentTeam : CachedWrapperBase<MBTournamentTeam, TournamentTeam>, ITournamentTeam
   {
-    public int TeamSize => UnwrapedObject.TeamSize;
+    public int TeamSize => UnwrappedObject.TeamSize;
 
-    public uint TeamColor => UnwrapedObject.TeamColor;
+    public uint TeamColor => UnwrappedObject.TeamColor;
 
-    public MBBanner TeamBanner => UnwrapedObject.TeamBanner;
+    public MBBanner TeamBanner => UnwrappedObject.TeamBanner;
 
-    public bool IsPlayerTeam => UnwrapedObject.IsPlayerTeam;
+    public bool IsPlayerTeam => UnwrappedObject.IsPlayerTeam;
 
-    public MBTournamentParticipantList Participants => UnwrapedObject.Participants.ToList();
+    public MBTournamentParticipantList Participants => UnwrappedObject.Participants.ToList();
 
-    public int Score => UnwrapedObject.Score;
+    public int Score => UnwrappedObject.Score;
 
-    public void AddParticipant(MBTournamentParticipant participant) => UnwrapedObject.AddParticipant(participant);
+    public void AddParticipant(MBTournamentParticipant participant) => UnwrappedObject.AddParticipant(participant);
 
-    public bool IsParticipantRequired() => UnwrapedObject.IsParticipantRequired();
-    public static implicit operator TournamentTeam(MBTournamentTeam wrapper) => wrapper.UnwrapedObject;
+    public bool IsParticipantRequired() => UnwrappedObject.IsParticipantRequired();
+    public static implicit operator TournamentTeam(MBTournamentTeam wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTournamentTeam(TournamentTeam obj) => MBTournamentTeam.GetWrapperFor(obj);
   }
 

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
-using TaleWorlds.Core;
+using TournamentsEnhanced.Behaviors.Abstract;
+using TournamentsEnhanced.Builders;
+using TournamentsEnhanced.Models.ModState;
 
-using TournamentsEnhanced.Wrappers;
-
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Behaviors
 {
-  class TournamentSpawnBehavior : EncounterGameMenuBehavior
+  class TournamentSpawnBehavior : MBEncounterGameMenuBehavior
   {
     public override void RegisterEvents()
     {
@@ -28,7 +26,7 @@ namespace TournamentsEnhanced
     private void WeeklyTick()
     {
       TrySpawnLordTournament();
-      SerializableState.WeeksSinceHostedTournament++;
+      ModState.WeeksSinceHostedTournament++;
       InvitePlayer();
     }
 

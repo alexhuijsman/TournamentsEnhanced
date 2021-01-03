@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 
+using TaleWorlds.[PackageName];
+
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace TournamentsEnhanced.Wrappers
+namespace TournamentsEnhanced.Wrappers.[PackageName]
 {
   public class MB[TypeToWrap] : CachedWrapperBase<MB[TypeToWrap], [TypeToWrap]>
   {

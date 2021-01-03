@@ -5,7 +5,7 @@ using HarmonyLib;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
-using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced

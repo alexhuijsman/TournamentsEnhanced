@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 {
   public class MBArmorComponent : CachedWrapperBase<MBArmorComponent, ArmorComponent>
   {
-    public static implicit operator ArmorComponent(MBArmorComponent wrapper) => wrapper.UnwrapedObject;
+    public static implicit operator ArmorComponent(MBArmorComponent wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBArmorComponent(ArmorComponent obj) => MBArmorComponent.GetWrapperFor(obj);
   }
 

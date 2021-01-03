@@ -12,18 +12,18 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
     public static MBTown CurrentTown => CurrentSettlement.Town;
 
-    public MBTown Town => UnwrapedObject.Town;
-    public bool IsTown => UnwrapedObject.IsTown;
+    public MBTown Town => UnwrappedObject.Town;
+    public bool IsTown => UnwrappedObject.IsTown;
 
     private static MBSettlementList _allSettlements;
 
-    public Hero ClanLeader => UnwrapedObject.OwnerClan.Leader;
-    public Hero FactionLeader => UnwrapedObject.MapFaction.Leader;
+    public Hero ClanLeader => UnwrappedObject.OwnerClan.Leader;
+    public Hero FactionLeader => UnwrappedObject.MapFaction.Leader;
 
     public float Prosperity
     {
-      get => UnwrapedObject.Prosperity;
-      set => UnwrapedObject.Prosperity = value;
+      get => UnwrappedObject.Prosperity;
+      set => UnwrappedObject.Prosperity = value;
     }
 
     public bool IsLedBy(Hero leader)
@@ -31,7 +31,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
       return ClanLeader.Equals(leader) || FactionLeader.Equals(leader);
     }
 
-    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrapedObject;
+    public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
   }
 

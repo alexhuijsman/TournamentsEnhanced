@@ -9,6 +9,8 @@ namespace TournamentsEnhanced.Wrappers.Core
 {
   public static class MBInformationManager
   {
+    public static void DisplayMessage(MBInformationMessage message) => InformationManager.DisplayMessage(message);
+
     public static void ShowPrizeSelectionMenu(MBItemObjectList items,
                                                    Action<MBInquiryElementList> affirmativeAction,
                                                    Action<MBInquiryElementList> negativeAction)

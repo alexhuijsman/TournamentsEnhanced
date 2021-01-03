@@ -2,11 +2,12 @@ using System.Text.Json;
 
 using TaleWorlds.CampaignSystem;
 
-using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Behaviors.Abstract;
+using TournamentsEnhanced.Models.ModState;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Behaviors
 {
-  public class SyncDataBehavior : CampaignBehaviorBase
+  public class SyncDataBehavior : MBCampaignBehaviorBase
   {
     public override void RegisterEvents() { }
 

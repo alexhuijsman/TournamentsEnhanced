@@ -10,7 +10,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBGameMenuOption : CachedWrapperBase<MBGameMenuOption, GameMenuOption>
   {
-    public static implicit operator GameMenuOption(MBGameMenuOption wrapper) => wrapper.UnwrapedObject;
+    public static implicit operator GameMenuOption(MBGameMenuOption wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBGameMenuOption(GameMenuOption obj) => MBGameMenuOption.GetWrapperFor(obj);
   }
 

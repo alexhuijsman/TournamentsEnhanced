@@ -149,7 +149,6 @@
     <Compile Include="src\Finders\Options\FindHostTownOptions.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
-    <Compile Include="src\Models\ModState.cs" />
     <Compile Include="src\Models\Payor.cs" />
     <Compile Include="src\Models\Serializable\SerializableModState.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
@@ -212,6 +211,11 @@
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
+    <Compile Include="src\Wrappers\Core\MBInformationMessage.cs" />
+    <Compile Include="src\Models\ModState\ModState.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\Sandbox\CampaignBehaviors\MBEncounterGameMenuBehavior.cs" />
+    <Compile Include="src\Behaviors\Abstract\MBEncounterGameMenuBehavior.cs" />
+    <Compile Include="src\Behaviors\Abstract\MBCampaignBehaviorBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

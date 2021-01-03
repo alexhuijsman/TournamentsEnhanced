@@ -6,19 +6,19 @@ using Helpers;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
 
+using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 using TournamentsEnhanced.Wrappers.Localization;
 
 using static TaleWorlds.CampaignSystem.GameMenus.GameMenuOption;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Behaviors
 {
-  class TownMenuBehavior : EncounterGameMenuBehavior
+  class TownMenuBehavior : MBEncounterGameMenuBehavior
   {
     //TODO remove tournament spawn behavior
 

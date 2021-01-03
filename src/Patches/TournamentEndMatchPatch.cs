@@ -4,6 +4,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
 using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Models.ModState;
 
 namespace TournamentsEnhanced
 {
