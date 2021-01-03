@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.Core;
+
 using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Behaviors
 {
@@ -162,7 +166,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
     {
-      var resultsA = TournamentBuilder.TryCreateTournamentTypeInTownLedByAny(TournamentType.Birth, mother, mother.Spouse);
+      var resultsA = TournamentBuilder.TryMakeBirthTournamentForMother(mother);
 
       foreach (var settlement in settlements)
       {

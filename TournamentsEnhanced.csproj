@@ -219,6 +219,8 @@
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
+    <Compile Include="src\Wrappers\Core\MBMBRandom.cs" />
+    <Compile Include="src\Patches\AddParticipantsPatch.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

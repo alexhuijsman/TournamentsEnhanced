@@ -10,8 +10,9 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
+using TournamentsEnhanced.Behaviors;
 using TournamentsEnhanced.Builders;
-using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Models.ModState;
 
 namespace TournamentsEnhanced
 {
