@@ -6,7 +6,7 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Models;
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced
 {

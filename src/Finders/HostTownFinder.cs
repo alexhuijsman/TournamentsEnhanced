@@ -2,7 +2,7 @@ using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Wrappers;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Finder
 {
   public static class HostTownFinder
   {

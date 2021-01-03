@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 using TournamentsEnhanced.Models.Serializable;
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
 {

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 
-using TaleWorlds.CampaignSystem;
-
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced
 {

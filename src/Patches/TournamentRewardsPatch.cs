@@ -3,7 +3,7 @@
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced
 {

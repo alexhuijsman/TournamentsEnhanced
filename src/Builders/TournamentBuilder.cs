@@ -1,9 +1,7 @@
 using System;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
-
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers;
 

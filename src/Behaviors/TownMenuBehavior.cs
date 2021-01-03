@@ -10,7 +10,9 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
 
-using TournamentsEnhanced.Wrappers;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
+using TournamentsEnhanced.Wrappers.Core;
+using TournamentsEnhanced.Wrappers.Localization;
 
 using static TaleWorlds.CampaignSystem.GameMenus.GameMenuOption;
 

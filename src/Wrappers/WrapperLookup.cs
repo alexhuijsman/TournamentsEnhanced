@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 using TournamentsEnhanced.Utils;
 using TournamentsEnhanced.Wrappers.Abstract;
 
