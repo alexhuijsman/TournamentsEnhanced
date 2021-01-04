@@ -18,7 +18,9 @@ namespace TournamentsEnhanced.Builders
       var payorHero = payor.Hero;
       var failureResult = CreateTournamentResult.Failure();
 
-      if (payorHero.IsDead || payorHero.IsPrisoner || faction.Settlements.IsEmpty || )
+      //TODO payor !payorHero.IsDead && !payorHero.IsPrisoner && canAffordTournamentCost
+      //TODO  faction faction.Settlements.IsEmpty || has no towns
+      if (!ValidatePayorHero(payorHero) || !ValidateFaction(faction))
       {
         return failureResult;
       }
@@ -33,6 +35,16 @@ namespace TournamentsEnhanced.Builders
       var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Settlement, TournamentType.Peace, payor);
 
       return CreateTournament(createTournamentOptions);
+    }
+
+    private static bool ValidatePayorHero(MBHero payorHero)
+    {
+      return HeroFinder.FindPayorHero(new FindHeroOptions() { heroes = [payorHero] }).Succeeded;
+    }
+
+    private static bool ValidateFaction(IMBFaction faction)
+    {
+      return FactionFinder.FindHostFaction(new FindFactionOptions() { factions = [faction] }).Succeeded;
     }
 
     private static FindSettlementResult TryFindSettlementForPeaceTournament(IMBFaction faction)
