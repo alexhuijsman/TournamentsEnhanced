@@ -15,19 +15,22 @@ namespace TournamentsEnhanced.Builders
     public static CreateTournamentResult TryMakePeaceTournamentForFaction(IMBFaction faction)
     {
       var payor = new Payor(faction.Leader);
+      var payorHero = payor.Hero;
+      var failureResult = CreateTournamentResult.Failure();
 
-      if (payor.Hero.IsPrisoner)
-        var findSettlementResult = TryFindSettlementForPeaceTournament(faction);
+      if (payorHero.IsDead || payorHero.IsPrisoner || faction.Settlements.IsEmpty || )
+      {
+        return failureResult;
+      }
+
+      var findSettlementResult = TryFindSettlementForPeaceTournament(faction);
 
       if (findSettlementResult.Failed)
       {
-        return CreateTournamentResult.Failure();
+        return failureResult;
       }
-      else
-      {
-        var createTournamentOptions = new CreateTournamentOptions(findSettlementResult, TournamentType.Peace, faction.Leader);
 
-      }
+      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Settlement, TournamentType.Peace, payor);
 
       return CreateTournament(createTournamentOptions);
     }
@@ -111,8 +114,8 @@ namespace TournamentsEnhanced.Builders
 
     private static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
-      var town = options.town;
-      var type = options.type;
+      var town = options.Settlement;
+      var type = options.Type;
       var townHadExistingTournament = town.HasTournament;
 
       if (!townHadExistingTournament)
@@ -121,7 +124,7 @@ namespace TournamentsEnhanced.Builders
         ApplyHostingEffectsOfTypeToTown(type, town);
       }
 
-      DebitPayor(options.payor);
+      DebitPayor(options.Payor);
 
       return CreateTournamentResult.Success(town, townHadExistingTournament);
     }
@@ -192,20 +195,6 @@ namespace TournamentsEnhanced.Builders
       SkillObject item = (randomFloat < 0.2f) ? DefaultSkills.OneHanded : ((randomFloat < 0.4f) ? DefaultSkills.TwoHanded : ((randomFloat < 0.6f) ? DefaultSkills.Polearm : ((randomFloat < 0.8f) ? DefaultSkills.Riding : DefaultSkills.Athletics)));
       int item2 = Settings.Instance.TournamentSkillXp;
       return new ValueTuple<SkillObject, int>(item, item2);
-    }
-
-    private class CreateTournamentOptions
-    {
-      public readonly Town town;
-      public readonly TournamentType type;
-      public readonly Payor payor;
-
-      public CreateTournamentOptions(FindSettlementResult result, TournamentType type, Payor payor)
-      {
-        this.town = result.Town;
-        this.type = type;
-        this.payor = payor;
-      }
     }
   }
 }

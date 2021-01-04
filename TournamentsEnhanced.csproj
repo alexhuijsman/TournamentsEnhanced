@@ -206,25 +206,12 @@
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
-    <Compile Include="src\Finders\SettlementFinder.cs" />
-    <Compile Include="src\Finders\Options\FindHostSettlementOptions.cs" />
-    <Compile Include="src\Finders\Comparers\Abstract\SettlementComparerBase.cs" />
-    <Compile Include="src\Finders\Comparers\Abstract\ComparerBase.cs" />
-    <Compile Include="src\Finders\Comparers\Abstract\HostSettlementComparerBase.cs" />
-    <Compile Include="src\Finders\Comparers\FactionRankComparer.cs" />
-    <Compile Include="src\Finders\Comparers\ProsperityComparer.cs" />
-    <Compile Include="src\Finders\Comparers\ExistingTournamentComparer.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecordDictionary.cs" />
     <Compile Include="src\Wrappers\Abstract\MBObjectBaseWrapper.cs" />
     <Compile Include="src\Wrappers\Abstract\MBWrapperBase.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBTournamentMatch.cs" />
-    <Compile Include="src\Finders\Comparers\ExistingTournamentRelationComparer.cs" />
     <Compile Include="src\Wrappers\Abstract\MBListBase.cs" />
     <Compile Include="src\Enums\ResultStatus.cs" />
-    <Compile Include="src\Finders\Results\Abstract\ResultBase.cs" />
-    <Compile Include="src\Finders\Results\Abstract\FindSettlementResultBase.cs" />
-    <Compile Include="src\Finders\Results\CreateTournamentResult.cs" />
-    <Compile Include="src\Finders\Results\FindSettlementResult.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBPartyBase.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBHeroDeveloper.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBCommonArea.cs" />
@@ -241,6 +228,20 @@
     <Compile Include="src\Wrappers\CampaignSystem\Interfaces\IMBFaction.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\Interfaces\IMBHero.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\Interfaces\IMBTown.cs" />
+    <Compile Include="src\Builders\Options\CreateTournamentOptions.cs" />
+    <Compile Include="src\Builders\Results\CreateTournamentResult.cs" />
+    <Compile Include="src\Finders\Abstract\ComparerBase.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentRelationComparer.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentComparer.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\FactionRankComparer.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
+    <Compile Include="src\Finders\Abstract\ResultBase.cs" />
+    <Compile Include="src\Finders\Settlement\Results\FindSettlementResult.cs" />
+    <Compile Include="src\Finders\Settlement\Abstract\HostSettlementComparerBase.cs" />
+    <Compile Include="src\Finders\Settlement\Abstract\SettlementComparerBase.cs" />
+    <Compile Include="src\Finders\Settlement\Abstract\FindSettlementResultBase.cs" />
+    <Compile Include="src\Finders\Settlement\Options\FindHostSettlementOptions.cs" />
+    <Compile Include="src\Finders\Settlement\SettlementFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

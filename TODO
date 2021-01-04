@@ -15,6 +15,7 @@ Write unit tests for existing methods with NUnit, Moq, and Shouldly
 
 IMPROVE
 -------
+Make Popup at peace time asking player if they want to host a tournament
 TournamentTypeComparer, use for more than just overrides. E.g. sort by Prosperity for such tournys, Payor's appeal of towns (distance + prosperity + number of lords for lord tourny)  
 Can only override underling's' tournaments.
 Worsten relations with previous payor if new payor steals their tournament
