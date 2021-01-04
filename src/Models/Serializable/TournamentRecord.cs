@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Models.Serializable
 {
   public struct TournamentRecord
   {
-    public TournamentType type;
+    public TournamentType tournamentType;
     public string hostSettlementId;
     public string payorId;
     public PayorType payorType;
@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Models.Serializable
     public bool IsHeroPayor => payorType == PayorType.Hero;
     public bool IsSettlementPayor => payorType == PayorType.Settlement;
 
-    public MBSettlement PayorSettlement => Settlement.Find(payorId);
-    public MBHero PayorHero => MBCharacterObject.Find(payorId).HeroObject;
+    public MBSettlement FindPayorSettlement() => Settlement.Find(payorId);
+    public MBHero FindPayorHero() => MBCharacterObject.Find(payorId).HeroObject;
   }
 }

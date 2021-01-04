@@ -20,7 +20,7 @@ namespace TournamentsEnhanced.Wrappers
 
     private static WrapperTypeDictionary BuildWrappedTypeDictionary()
     {
-      var wrappedTypes = Reflection.GetAllImplementingTypesOfBaseClassFrom<AbstractWrapperImpl>();
+      var wrappedTypes = Reflection.GetAllImplementingTypesOfBaseClassFrom<WrapperBaseImpl>();
       var result = new WrapperTypeDictionary(wrappedTypes.Count);
 
       Type unwrappedType;
@@ -42,7 +42,7 @@ namespace TournamentsEnhanced.Wrappers
     }
 
     public static W GetWrapperFor<T, W>(T obj)
-      where W : WrapperBase<T>, new()
+      where W : WrapperBase<W, T>, new()
     {
       return CachedWrapperBase<W, T>.GetWrapperFor(obj);
     }

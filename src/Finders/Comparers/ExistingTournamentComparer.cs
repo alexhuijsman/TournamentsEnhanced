@@ -6,11 +6,11 @@ namespace TournamentsEnhanced.Finder.Comparers
 {
   public class ExistingTournamentComparer : HostSettlementComparerBase
   {
-    public float MaxRelation { get; private set; }
+    public bool CanOverrideExisting { get; private set; }
 
-    public ExistingTournamentComparer(Payor payor, float maxRelation) : base(payor)
+    public ExistingTournamentComparer(Payor payor, bool canOverrideExisting) : base(payor)
     {
-      MaxRelation = maxRelation;
+      CanOverrideExisting = canOverrideExisting;
     }
 
     public override int Compare(MBSettlement x, MBSettlement y)
@@ -21,46 +21,14 @@ namespace TournamentsEnhanced.Finder.Comparers
       var xRecord = xHasRecord ? ModState.TournamentRecords[x] : default(TournamentRecord);
       var yRecord = yHasRecord ? ModState.TournamentRecords[y] : default(TournamentRecord);
 
-      var xHasPayorHero = xHasRecord && xRecord.IsHeroPayor;
-      var yHasPayorHero = yHasRecord && yRecord.IsHeroPayor;
+      var xMeetsRequirements = !x.IsNull && MeetsRequirements(xRecord);
 
-      var xPayorHero = xHasPayorHero ? xRecord.PayorHero : null;
-      var yPayorHero = yHasPayorHero ? yRecord.PayorHero : null;
+      var yMeetsRequirements = !y.IsNull && MeetsRequirements(yRecord);
 
-      var xRelation = xHasPayorHero ? xPayorHero.GetRelation(Payor.Hero) : 0;
-      var yRelation = yHasPayorHero ? yPayorHero.GetRelation(Payor.Hero) : 0;
-
-      var xMeetsRequirements = !x.IsNull &&
-                                x.Town.HasTournament &&
-                                xRecord.IsHeroPayor &&
-                                xPayorHero != Payor.Hero &&
-                                xRelation < MaxRelation;
-
-      var yMeetsRequirements = !y.IsNull &&
-                                y.Town.HasTournament &&
-                                yRecord.IsHeroPayor &&
-                                yPayorHero != Payor.Hero &&
-                                yRelation < MaxRelation;
-
-      if (!xMeetsRequirements)
-      {
-        return yMeetsRequirements ? XIsLessThanY : XIsEqualToY;
-      }
-
-      if (!yMeetsRequirements)
-      {
-        return XIsGreaterThanY;
-      }
-
-      var xHasWorseRelation = xRelation < yRelation;
-      var xHasBetterRelation = xRelation > yRelation;
-
-      return xHasWorseRelation ? XIsGreaterThanY : xHasBetterRelation ? XIsLessThanY : XIsEqualToY;
+      return xMeetsRequirements ? yMeetsRequirements ? XIsEqualToY : XIsGreaterThanY : XIsLessThanY;
     }
 
-    private object GetPayorHero(TournamentRecord xRecord)
-    {
-      throw new System.NotImplementedException();
-    }
+    private bool MeetsRequirements(TournamentRecord record) =>
+      CanOverrideExisting || record.tournamentType == TournamentType.None;
   }
 }

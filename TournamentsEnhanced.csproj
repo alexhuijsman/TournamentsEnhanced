@@ -213,7 +213,6 @@
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
     <Compile Include="src\Finders\SettlementFinder.cs" />
     <Compile Include="src\Finders\Options\FindHostSettlementOptions.cs" />
-    <Compile Include="src\Results\NullResult.cs" />
     <Compile Include="src\Finders\Comparers\Abstract\SettlementComparerBase.cs" />
     <Compile Include="src\Finders\Comparers\Abstract\ComparerBase.cs" />
     <Compile Include="src\Finders\Comparers\Abstract\HostSettlementComparerBase.cs" />
@@ -224,6 +223,7 @@
     <Compile Include="src\Wrappers\Abstract\MBObjectBaseWrapper.cs" />
     <Compile Include="src\Wrappers\Abstract\MBWrapperBase.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBTournamentMatch.cs" />
+    <Compile Include="src\Finders\Comparers\ExistingTournamentRelationComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

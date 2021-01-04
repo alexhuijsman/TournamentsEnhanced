@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace TournamentsEnhanced.Wrappers.Abstract
 {
-  public abstract class CachedWrapperBase<W, T> : WrapperBase<T>
-  where W : WrapperBase<T>, new()
+  public abstract class CachedWrapperBase<W, T> : WrapperBase<W, T>
+  where W : WrapperBase<W, T>, new()
   {
     private static readonly IDictionary<T, W> Cache = new Dictionary<T, W>();
 
@@ -33,12 +33,12 @@ namespace TournamentsEnhanced.Wrappers.Abstract
     }
 
     public static WW Wrap<WW, TT>(TT obj)
-      where WW : WrapperBase<TT>, new()
+      where WW : WrapperBase<WW, TT>, new()
     {
       return CachedWrapperBase<WW, TT>.GetWrapperFor(obj);
     }
     public static TT Unwrap<WW, TT>(WW wrapper)
-      where WW : WrapperBase<TT>, new()
+      where WW : WrapperBase<WW, TT>, new()
     {
       return wrapper.UnwrappedObject;
     }
