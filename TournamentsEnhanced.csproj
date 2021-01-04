@@ -235,13 +235,18 @@
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\FactionRankComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
-    <Compile Include="src\Finders\Abstract\ResultBase.cs" />
-    <Compile Include="src\Finders\Settlement\Results\FindSettlementResult.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\HostSettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\SettlementComparerBase.cs" />
-    <Compile Include="src\Finders\Settlement\Abstract\FindSettlementResultBase.cs" />
-    <Compile Include="src\Finders\Settlement\Options\FindHostSettlementOptions.cs" />
     <Compile Include="src\Finders\Settlement\SettlementFinder.cs" />
+    <Compile Include="src\Finders\Settlement\FindHostSettlementOptions.cs" />
+    <Compile Include="src\Finders\Hero\HeroFinder.cs" />
+    <Compile Include="src\Finders\Hero\FindHeroResult.cs" />
+    <Compile Include="src\Finders\Hero\FindHeroOptions.cs" />
+    <Compile Include="src\Finders\Abstract\FinderBase.cs" />
+    <Compile Include="src\Finders\Abstract\IFindOptionsBase.cs" />
+    <Compile Include="src\Finders\Abstract\FindResultBase.cs" />
+    <Compile Include="src\Finders\Abstract\ResultBase.cs" />
+    <Compile Include="src\Finders\Settlement\FindSettlementResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,7 +3,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder
 {
-  public class CreateTournamentResult : FindSettlementResultBase
+  public class CreateTournamentResult : Abstract.FindSettlementResult
   {
     public bool HadExistingTournament { get; private set; }
     public static CreateTournamentResult Success(MBSettlement settlement, bool hadExistingTournament) => new CreateTournamentResult(ResultStatus.Success, settlement, hadExistingTournament);

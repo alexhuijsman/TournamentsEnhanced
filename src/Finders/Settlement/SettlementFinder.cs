@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Finder
   {
     public static FindSettlementResult FindHostSettlement(FindHostSettlementOptions options)
     {
-      var validHostSettlements = options.Settlements.ToList();
+      var validHostSettlements = options.Candidates.ToList();
       SortAndFilterByComparers(validHostSettlements, options.Comparers);
 
       return validHostSettlements.IsEmpty ?

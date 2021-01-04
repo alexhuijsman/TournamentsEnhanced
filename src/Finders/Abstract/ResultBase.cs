@@ -1,22 +1,11 @@
-using System.Xml;
 namespace TournamentsEnhanced.Finder.Abstract
 {
-  public interface IResultBase
+  public abstract class ResultBase
   {
-    ResultStatus Status { get; }
-    bool Failed { get; }
-    bool Succeeded { get; }
-  }
-
-  public abstract class ResultBase : IResultBase
-  {
-    public ResultStatus Status { get; private set; }
+    public ResultStatus Status { get; protected set; }
     public bool Failed => Status == ResultStatus.Failure;
     public bool Succeeded => Status == ResultStatus.Success;
 
-    protected ResultBase(ResultStatus status)
-    {
-      Status = status;
-    }
+    public ResultBase() { }
   }
 }
