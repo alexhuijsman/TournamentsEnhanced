@@ -5,7 +5,7 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
 namespace TournamentsEnhanced
 {
-  static class MBTournamentMatchExtensions
+  public static class MBTournamentMatchExtensions
   {
     public static Town GetTown(this TournamentMatch tournamentMatch)
     {

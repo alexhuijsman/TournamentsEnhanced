@@ -102,10 +102,18 @@ namespace TournamentsEnhanced.Behaviors
       }
     }
 
-    private void OnMakePeace(IFaction factionA, IFaction factionB)
+    private void OnMakePeace(IFaction a, IFaction b)
     {
-      var resultsA = TournamentBuilder.Create(factionA);
-      var resultsB = TournamentBuilder.TryCreateTournamentForFaction(factionB);
+      var factionA = a.ToIMBFaction();
+      var factionB = b.ToIMBFaction();
+
+      OnMakePeace(factionA, factionB);
+    }
+
+    private void OnMakePeace(IMBFaction factionA, IMBFaction factionB)
+    {
+      var resultsA = TournamentBuilder.TryMakePeaceTournamentForFaction(factionA);
+      var resultsB = TournamentBuilder.TryMakePeaceTournamentForFaction(factionB);
 
       if (!Settings.Instance.PeaceNotification || (!resultsA.Succeeded && !resultsB.Succeeded))
       {
@@ -115,11 +123,11 @@ namespace TournamentsEnhanced.Behaviors
       string hostTownNames;
       if (resultsA.Succeeded && resultsB.Succeeded)
       {
-        hostTownNames = $"{resultsA.Town.Name} and {resultsB.Town.Name}";
+        hostTownNames = $"{resultsA.Settlement.Name} and {resultsB.Settlement.Name}";
       }
       else
       {
-        hostTownNames = resultsA.Succeeded ? $"{resultsA.Town.Name}" : $"{resultsB.Town.Name}";
+        hostTownNames = resultsA.Succeeded ? $"{resultsA.Settlement.Name}" : $"{resultsB.Settlement.Name}";
       }
 
       NotificationUtils.DisplayMessage(

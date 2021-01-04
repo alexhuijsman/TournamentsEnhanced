@@ -5,15 +5,19 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Comparers;
+using TournamentsEnhanced.Models.Serializable;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
 {
   public static class TournamentBuilder
   {
-    public static CreateTournamentResult TryMakePeaceTournamentForFaction(IFaction faction)
+    public static CreateTournamentResult TryMakePeaceTournamentForFaction(IMBFaction faction)
     {
-      var findSettlementResult = TryFindSettlementForPeaceTournament(faction);
+      var payor = new Payor(faction.Leader);
+
+      if (payor.Hero.IsPrisoner)
+        var findSettlementResult = TryFindSettlementForPeaceTournament(faction);
 
       if (findSettlementResult.Failed)
       {
@@ -21,19 +25,19 @@ namespace TournamentsEnhanced.Builders
       }
       else
       {
-        var createTournamentOptions = new CreateTournamentOptions(findSettlementResult, TournamentType.Peace, payor);
+        var createTournamentOptions = new CreateTournamentOptions(findSettlementResult, TournamentType.Peace, faction.Leader);
 
       }
 
       return CreateTournament(createTournamentOptions);
     }
 
-    private static FindSettlementResultBase TryFindSettlementForPeaceTournament(IFaction faction)
+    private static FindSettlementResult TryFindSettlementForPeaceTournament(IMBFaction faction)
     {
       throw new NotImplementedException();
     }
 
-    public static CreateTournamentResult TryMakeLordTournamentForFaction(IFaction faction)
+    public static CreateTournamentResult TryMakeLordTournamentForFaction(IMBFaction faction)
     {
       var findHostTownResult =
         HostTownFinder.FindForFaction(faction,

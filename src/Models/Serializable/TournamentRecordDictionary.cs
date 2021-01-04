@@ -28,7 +28,7 @@ namespace TournamentsEnhanced.Models.Serializable
 
     public TournamentRecord ForCurrentTown()
     {
-      return this[MBHero.MainHero.CurrentTown.Settlement];
+      return this[MBHero.MainHero.CurrentSettlement.Settlement];
     }
 
     public bool ContainsSettlement(MBSettlement settlement) => ContainsKey(settlement.StringId);

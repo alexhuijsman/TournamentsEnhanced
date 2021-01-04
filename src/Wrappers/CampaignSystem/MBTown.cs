@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBBuildingList Buildings { get; }
     int BoostBuildingProcess { get; }
     bool InRebelliousState { get; }
-    IFaction MapFaction { get; }
+    IMBFaction MapFaction { get; }
     float MilitiaChange { get; }
     float Construction { get; }
     MBClan OwnerClan { get; set; }
@@ -65,7 +65,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool InRebelliousState => UnwrappedObject.InRebelliousState;
 
-    public IFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
 
     public float MilitiaChange => UnwrappedObject.MilitiaChange;
 

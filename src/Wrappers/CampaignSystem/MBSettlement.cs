@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Wrappers.Abstract;
+using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
@@ -13,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static MBTown CurrentTown => CurrentSettlement.Town;
     public MBTown Town => UnwrappedObject.Town;
     public bool IsTown => UnwrappedObject.IsTown;
+    public MBTextObject Name => UnwrappedObject.Name;
 
     private static MBSettlementList _allSettlements;
 

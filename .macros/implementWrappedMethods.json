@@ -1,0 +1,11 @@
+[{
+  "command": "ssmacro.replace",
+  "args": {
+      "info": "Replace Nonary Not-Implemented Methods",
+      "find": "(\\w*?)\\s(\\w*?)\\((\\w*?)\\s(\\w*?)\\)\\s*\\{\\s*throw new NotImplementedException\\(\\);\\s*\\}",
+      "replace": "$1 $2($3 $4) => UnwrappedObject.$2($4);",
+      "all": true,
+      "reg": true,
+      "flag": "gm"
+  }
+}]

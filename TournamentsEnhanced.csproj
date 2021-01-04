@@ -225,6 +225,20 @@
     <Compile Include="src\Finders\Results\Abstract\FindSettlementResultBase.cs" />
     <Compile Include="src\Finders\Results\CreateTournamentResult.cs" />
     <Compile Include="src\Finders\Results\FindSettlementResult.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBPartyBase.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBHeroDeveloper.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBCommonArea.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\IMBFaction.cs" />
+    <Compile Include="src\Extensions\IFactionExtensions.cs" />
+    <Compile Include="src\Wrappers\Core\MBEquipment.cs" />
+    <Compile Include="src\Wrappers\Core\MBBodyProperties.cs" />
+    <Compile Include="src\Wrappers\Core\MBCharacterSkills.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBCharacterTraits.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBPerkObject.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBTraitObject.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\IMBHero.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBCaravanPartyComponent.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBIssueBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

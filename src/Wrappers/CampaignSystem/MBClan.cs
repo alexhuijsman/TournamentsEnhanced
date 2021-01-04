@@ -9,7 +9,7 @@ using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBClan : MBObjectBaseWrapper<MBClan, Clan>
+  public class MBClan : MBObjectBaseWrapper<MBClan, Clan>, IMBFaction
   {
     public float Renown => UnwrappedObject.Renown;
 
@@ -69,7 +69,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsMapFaction => UnwrappedObject.IsMapFaction;
 
-    public IFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
 
     public float TotalStrength => UnwrappedObject.TotalStrength;
 
@@ -92,9 +92,9 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
 
-    public MBStanceLink GetStanceWith(IFaction other) => UnwrappedObject.GetStanceWith(other);
+    public MBStanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith(other);
 
-    public bool IsAtWarWith(IFaction other) => UnwrappedObject.IsAtWarWith(other);
+    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith(other);
 
     public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBClan(Clan obj) => MBClan.GetWrapperFor(obj);

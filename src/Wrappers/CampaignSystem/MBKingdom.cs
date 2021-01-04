@@ -9,7 +9,7 @@ using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBKingdom : MBObjectBaseWrapper<MBKingdom, Kingdom>
+  public class MBKingdom : MBObjectBaseWrapper<MBKingdom, Kingdom>, IMBFaction
   {
     public static MBKingdomList All => Kingdom.All.ToList();
     public MBTextObject Name => UnwrappedObject.Name;
@@ -68,7 +68,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsMapFaction => UnwrappedObject.IsMapFaction;
 
-    public IFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
 
     public float TotalStrength => UnwrappedObject.TotalStrength;
 
@@ -90,9 +90,9 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
-    public StanceLink GetStanceWith(IFaction other) => UnwrappedObject.GetStanceWith(other);
+    public StanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith(other);
 
-    public bool IsAtWarWith(IFaction other) => UnwrappedObject.IsAtWarWith(other);
+    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith(other);
 
     public static implicit operator Kingdom(MBKingdom wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBKingdom(Kingdom obj) => MBKingdom.GetWrapperFor(obj);
