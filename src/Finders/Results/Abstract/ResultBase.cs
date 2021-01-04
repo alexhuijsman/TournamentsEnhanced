@@ -1,5 +1,5 @@
 using System.Xml;
-namespace TournamentsEnhanced.Finder.Results.Abstract
+namespace TournamentsEnhanced.Finder.Abstract
 {
   public interface IResultBase
   {

@@ -224,7 +224,7 @@
     <Compile Include="src\Finders\Results\Abstract\ResultBase.cs" />
     <Compile Include="src\Finders\Results\Abstract\FindSettlementResultBase.cs" />
     <Compile Include="src\Finders\Results\CreateTournamentResult.cs" />
-    <Compile Include="src\Finders\Results\FindHostSettlementResult.cs" />
+    <Compile Include="src\Finders\Results\FindSettlementResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

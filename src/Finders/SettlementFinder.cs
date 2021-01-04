@@ -6,14 +6,14 @@ namespace TournamentsEnhanced.Finder
 {
   public static class SettlementFinder
   {
-    public static FindHostSettlementResult FindHostSettlement(FindHostSettlementOptions options)
+    public static FindSettlementResult FindHostSettlement(FindHostSettlementOptions options)
     {
       var validHostSettlements = options.Settlements.ToList();
       SortAndFilterByComparers(validHostSettlements, options.Comparers);
 
       return validHostSettlements.IsEmpty ?
-        FindHostSettlementResult.Failure() :
-        FindHostSettlementResult.Success(validHostSettlements.First());
+        FindSettlementResult.Failure() :
+        FindSettlementResult.Success(validHostSettlements.First());
     }
 
     private static MBSettlementList SortAndFilterByComparers(MBSettlementList settlements, IComparer<MBSettlement>[] comparers)

@@ -7,8 +7,8 @@ namespace TournamentsEnhanced
 {
   public struct FindHostSettlementOptions
   {
-    public IComparer<MBSettlement>[] Comparers;
-    public MBSettlementList Settlements;
     public Payor Payor;
+    public MBSettlementList Settlements;
+    public IComparer<MBSettlement>[] Comparers;
   }
 }

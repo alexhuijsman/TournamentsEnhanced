@@ -1,9 +1,8 @@
 using TaleWorlds.CampaignSystem;
 
-using TournamentsEnhanced.Finder.Results.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Finder.Abstract
 {
   public interface ISettlementResultBase : IResultBase
   {

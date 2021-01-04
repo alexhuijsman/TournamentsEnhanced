@@ -1,9 +1,11 @@
 using System;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
-using TournamentsEnhanced.Models.Serializable;
-using TournamentsEnhanced.Wrappers;
+
+using TournamentsEnhanced.Finder;
+using TournamentsEnhanced.Finder.Comparers;
 
 namespace TournamentsEnhanced.Builders
 {
@@ -11,13 +13,26 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryMakePeaceTournamentForFaction(IFaction faction)
     {
-      var findHostTownOptions = new FindHostTownOptions();
-      var findHostTownResult = HostTownFinder.FindForFaction(faction, findHostTownOptions);
-      var payor = new Payor(findHostTownResult.Town.FactionLeader());
-      var createTournamentOptions = new CreateTournamentOptions(findHostTownResult, TournamentType.Peace, payor);
+      var findSettlementResult = TryFindSettlementForPeaceTournament(faction);
+
+      if (findSettlementResult.Failed)
+      {
+        return CreateTournamentResult.Failure();
+      }
+      else
+      {
+        var createTournamentOptions = new CreateTournamentOptions(findSettlementResult, TournamentType.Peace, payor);
+
+      }
 
       return CreateTournament(createTournamentOptions);
     }
+
+    private static FindSettlementResultBase TryFindSettlementForPeaceTournament(IFaction faction)
+    {
+      throw new NotImplementedException();
+    }
+
     public static CreateTournamentResult TryMakeLordTournamentForFaction(IFaction faction)
     {
       var findHostTownResult =
@@ -65,7 +80,7 @@ namespace TournamentsEnhanced.Builders
       CreateTournamentOptions options;
       foreach (var town in townsWithExisting)
       {
-        options = new CreateTournamentOptions(FindHostSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions(FindSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
         CreateTournament(options);
       }
 
@@ -77,7 +92,7 @@ namespace TournamentsEnhanced.Builders
           break;
         }
 
-        options = new CreateTournamentOptions(FindHostSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions(FindSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
         CreateTournament(options);
 
         numCreated++;
@@ -176,7 +191,7 @@ namespace TournamentsEnhanced.Builders
       public readonly TournamentType type;
       public readonly Payor payor;
 
-      public CreateTournamentOptions(FindHostSettlementResult result, TournamentType type, Payor payor)
+      public CreateTournamentOptions(FindSettlementResult result, TournamentType type, Payor payor)
       {
         this.town = result.Town;
         this.type = type;
