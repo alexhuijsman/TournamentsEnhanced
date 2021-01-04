@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -9,24 +8,27 @@ namespace TournamentsEnhanced.Finder
   {
     public static FindHostSettlementResult FindHostSettlement(FindHostSettlementOptions options)
     {
-      var sortedSettlements = SortSettlementsByComparers(options.Settlements, options.Comparers);
-      return sortedSettlements.Count == 0 ? FindHostSettlementResult.Failure() : FindHostSettlementResult.Success(sortedSettlements.First());
+      var validHostSettlements = options.Settlements.ToList();
+      SortAndFilterByComparers(validHostSettlements, options.Comparers);
+
+      return validHostSettlements.IsEmpty ?
+        FindHostSettlementResult.Failure() :
+        FindHostSettlementResult.Success(validHostSettlements.First());
     }
 
-    private static MBSettlementList SortSettlementsByComparers(MBSettlementList settlements, IComparer<MBSettlement>[] comparers)
+    private static MBSettlementList SortAndFilterByComparers(MBSettlementList settlements, IComparer<MBSettlement>[] comparers)
     {
-      var sortedSettlements = settlements.ToList();
-      sortedSettlements.Add(MBSettlement.Null);
+      settlements.Add(MBSettlement.Null);
 
       foreach (var comparer in comparers)
       {
-        sortedSettlements.Sort(comparer);
-        RemoveSettlementsRankedLowerThanNull(sortedSettlements);
+        settlements.Sort(comparer);
+        RemoveSettlementsRankedLowerThanNull(settlements);
       }
 
-      sortedSettlements.Remove(MBSettlement.Null);
+      settlements.Remove(MBSettlement.Null);
 
-      return sortedSettlements;
+      return settlements;
     }
 
     private static void RemoveSettlementsRankedLowerThanNull(MBSettlementList settlements)
