@@ -48,6 +48,11 @@ namespace TournamentsEnhanced.Builders
       return CreateTournament(new CreateTournamentOptions(findHostTownResult, TournamentType.Peace, payor));
     }
 
+    public static CreateTournamentResult TryMakeHostTournament()
+    {
+
+    }
+
     public static CreateTournamentResult CreateInvitationTournamentFromSettlements(MBSettlementList settlements)
     {
       var result = HostTownFinder.FindHostTownFromSettlements(settlements);
