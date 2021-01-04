@@ -69,7 +69,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsMapFaction => UnwrappedObject.IsMapFaction;
 
-    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
 
     public float TotalStrength => UnwrappedObject.TotalStrength;
 
@@ -91,10 +91,9 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
+    public MBStanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith((IFaction)other);
 
-    public MBStanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith(other);
-
-    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith(other);
+    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith((IFaction)other);
 
     public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBClan(Clan obj) => MBClan.GetWrapperFor(obj);

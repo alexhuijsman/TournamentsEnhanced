@@ -138,7 +138,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     IMapPoint GetMapPoint();
     bool GetPerkValue(MBPerkObject perk);
     Vec3 GetPosition();
-    int GetRelation(MBHero otherHero);
+    float GetRelation(MBHero otherHero);
     float GetRelationWithPlayer();
     int GetSkillValue(MBSkillObject skill);
     int GetTraitLevel(MBTraitObject trait);

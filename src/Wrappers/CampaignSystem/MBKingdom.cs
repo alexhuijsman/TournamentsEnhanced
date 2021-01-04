@@ -68,13 +68,13 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsMapFaction => UnwrappedObject.IsMapFaction;
 
-    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
 
     public float TotalStrength => UnwrappedObject.TotalStrength;
 
     public Vec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
-    public IEnumerable<StanceLink> Stances => UnwrappedObject.Stances;
+    public MBStanceLinkList Stances => UnwrappedObject.Stances.ToList();
 
     public int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
 
@@ -86,13 +86,13 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsEliminated => UnwrappedObject.IsEliminated;
 
-    public StatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
+    public MBStatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
-    public StanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith(other);
+    public MBStanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith((IFaction)other);
 
-    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith(other);
+    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith((IFaction)other);
 
     public static implicit operator Kingdom(MBKingdom wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBKingdom(Kingdom obj) => MBKingdom.GetWrapperFor(obj);

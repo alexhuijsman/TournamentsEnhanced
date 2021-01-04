@@ -15,7 +15,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
 
 
-  public class MBHero : MBObjectBaseWrapper<MBHero, MBHero>, IMBHero
+  public class MBHero : MBObjectBaseWrapper<MBHero, Hero>, IMBHero
   {
     public static MBHeroList All => MBHero.All.ToList();
     public static MBHero MainHero => MBHero.MainHero;
@@ -28,7 +28,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public float GetRelation(MBHero otherHero) => UnwrappedObject.GetRelation(otherHero);
     public static ItemTiers GetMainHeroTournamentRewardTier() => GetRewardTierForHero(MainHero);
 
-    public MBClan Clan => UnwrappedObject.Clan;
+    public MBClan Clan { get => UnwrappedObject.Clan; set => UnwrappedObject.Clan = value; }
 
     public bool IsPregnant => UnwrappedObject.IsPregnant;
 
@@ -50,7 +50,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public int Level => UnwrappedObject.Level;
 
-    public MBHeroList ExSpouses => UnwrappedObject.ExSpouses;
+    public MBHeroList ExSpouses => UnwrappedObject.ExSpouses.ToList();
 
     public bool AlwaysDie => UnwrappedObject.AlwaysDie;
 
@@ -68,7 +68,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBTextObject FirstName => UnwrappedObject.FirstName;
 
-    public MBCharacterObjectList VolunteerTypes => UnwrappedObject.VolunteerTypes;
+    public MBCharacterObjectList VolunteerTypes => UnwrappedObject.VolunteerTypes.ToList();
 
     public int LastTimeStampForActivity => UnwrappedObject.LastTimeStampForActivity;
 
@@ -106,7 +106,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsWanderer => UnwrappedObject.IsWanderer;
 
-    public MBClan CompanionOf { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public MBClan CompanionOf { get => UnwrappedObject.CompanionOf; set => UnwrappedObject.CompanionOf = value; }
 
     public CampaignTime LastSeenTime => UnwrappedObject.LastSeenTime;
 
@@ -116,9 +116,9 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool AwaitingTrial => UnwrappedObject.AwaitingTrial;
 
-    public MBHeroList CompanionsInParty => UnwrappedObject.CompanionsInParty;
+    public MBHeroList CompanionsInParty => UnwrappedObject.CompanionsInParty.ToList();
 
-    public MBCharacterObject Template { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public MBCharacterObject Template { get => UnwrappedObject.Template; set => UnwrappedObject.Template = value; }
 
     public bool IsDead => UnwrappedObject.IsDead;
 
@@ -148,36 +148,36 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public CampaignTime BirthDay => UnwrappedObject.BirthDay;
 
-    public MBSettlement BornSettlement { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public MBSettlement BornSettlement { get => UnwrappedObject.BornSettlement; set => UnwrappedObject.BornSettlement = value; }
 
     public MBSettlement HomeSettlement => UnwrappedObject.HomeSettlement;
 
-    public int Gold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int Gold { get => UnwrappedObject.Gold; set => UnwrappedObject.Gold = value; }
 
     public Hero.FactionRank Rank => UnwrappedObject.Rank;
 
-    public float ProbabilityOfDeath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public MBHero Father { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public MBHero Mother { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public MBHero Spouse { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public float ProbabilityOfDeath { get => UnwrappedObject.ProbabilityOfDeath; set => UnwrappedObject.ProbabilityOfDeath = value; }
+    public MBHero Father { get => UnwrappedObject.Father; set => UnwrappedObject.Father = value; }
+    public MBHero Mother { get => UnwrappedObject.Mother; set => UnwrappedObject.Mother = value; }
+    public MBHero Spouse { get => UnwrappedObject.Spouse; set => UnwrappedObject.Spouse = value; }
 
     public MBHeroList Children => UnwrappedObject.Children;
 
-    public MBHeroList Siblings => UnwrappedObject.Siblings;
+    public MBHeroList Siblings => UnwrappedObject.Siblings.ToList();
 
     public MBHeroDeveloper HeroDeveloper => UnwrappedObject.HeroDeveloper;
 
-    public MBWorkshopList OwnedWorkshops => UnwrappedObject.OwnedWorkshops;
+    public MBWorkshopList OwnedWorkshops => UnwrappedObject.OwnedWorkshops.ToList();
 
-    public MBCommonAreaList OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas;
+    public MBCommonAreaList OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas.ToList();
 
-    public MBPartyBaseList OwnedParties => UnwrappedObject.OwnedParties;
+    public MBPartyBaseList OwnedParties => UnwrappedObject.OwnedParties.ToList();
 
-    public CampaignTime LastMeetingTimeWithPlayer { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public int HitPoints { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool HasMet { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float Controversy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public CampaignTime DeathDay { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public CampaignTime LastMeetingTimeWithPlayer { get => UnwrappedObject.LastMeetingTimeWithPlayer; set => UnwrappedObject.LastMeetingTimeWithPlayer = value; }
+    public int HitPoints { get => UnwrappedObject.HitPoints; set => UnwrappedObject.HitPoints = value; }
+    public bool HasMet { get => UnwrappedObject.HasMet; set => UnwrappedObject.HasMet = value; }
+    public float Controversy { get => UnwrappedObject.Controversy; set => UnwrappedObject.Controversy = value; }
+    public CampaignTime DeathDay { get => UnwrappedObject.DeathDay; set => UnwrappedObject.DeathDay = value; }
 
     public float Age => UnwrappedObject.Age;
 
@@ -187,11 +187,11 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBBanner ClanBanner => UnwrappedObject.ClanBanner;
 
-    public long LastExaminedLogEntryID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public MBClan SupporterOf { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public MBTown GovernorOf { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public long LastExaminedLogEntryID { get => UnwrappedObject.LastExaminedLogEntryID; set => UnwrappedObject.LastExaminedLogEntryID = value; }
+    public MBClan SupporterOf { get => UnwrappedObject.SupporterOf; set => UnwrappedObject.SupporterOf = value; }
+    public MBTown GovernorOf { get => UnwrappedObject.GovernorOf; set => UnwrappedObject.GovernorOf = value; }
 
-    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
 
     public bool IsFactionLeader => UnwrappedObject.IsFactionLeader;
 
@@ -201,17 +201,17 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBIssueBase Issue => UnwrappedObject.Issue;
 
-    public MBSettlement StayingInSettlementOfNotable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public MBSettlement StayingInSettlementOfNotable { get => UnwrappedObject.StayingInSettlementOfNotable; set => UnwrappedObject.StayingInSettlementOfNotable = value; }
 
     public bool IsHumanPlayerCharacter => UnwrappedObject.IsHumanPlayerCharacter;
 
-    public bool AlwaysUnconscious { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float PassedTimeAtHomeSettlement { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool IsNoble { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool AlwaysUnconscious { get => UnwrappedObject.AlwaysUnconscious; set => UnwrappedObject.AlwaysUnconscious = value; }
+    public float PassedTimeAtHomeSettlement { get => UnwrappedObject.PassedTimeAtHomeSettlement; set => UnwrappedObject.PassedTimeAtHomeSettlement = value; }
+    public bool IsNoble { get => UnwrappedObject.IsNoble; set => UnwrappedObject.IsNoble = value; }
 
     public Hero.CharacterStates HeroState => UnwrappedObject.HeroState;
 
-    public CampaignTime CaptivityStartTime { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public CampaignTime CaptivityStartTime { get => UnwrappedObject.CaptivityStartTime; set => UnwrappedObject.CaptivityStartTime = value; }
 
     public MBEquipment CivilianEquipment => UnwrappedObject.CivilianEquipment;
 
@@ -223,7 +223,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public string EncyclopediaLink => UnwrappedObject.EncyclopediaLink;
 
-    public MBTextObject EncyclopediaText { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public MBTextObject EncyclopediaText { get => UnwrappedObject.EncyclopediaText; set => UnwrappedObject.EncyclopediaText = value; }
 
     public MBCharacterObject CharacterObject => UnwrappedObject.CharacterObject;
 
@@ -231,9 +231,11 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBBodyProperties BodyProperties => UnwrappedObject.BodyProperties;
 
-    public float Build { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float Weight { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool IsMinorFactionHero { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public float Build { get => UnwrappedObject.Build; set => UnwrappedObject.Build = value; }
+    public float Weight { get => UnwrappedObject.Weight; set => UnwrappedObject.Weight = value; }
+    public bool IsMinorFactionHero { get => UnwrappedObject.IsMinorFactionHero; set => UnwrappedObject.IsMinorFactionHero = value; }
+
+    public MBSettlement CurrentSettlement => UnwrappedObject.CurrentSettlement;
 
     private static ItemTiers GetRewardTierForHero(MBHero hero)
     {
@@ -256,140 +258,65 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
       return itemTier;
     }
 
-    public void AddInfluenceWithKingdom(float additionalInfluence)
-    {
-      throw new NotImplementedException();
-    }
+    public void AddInfluenceWithKingdom(float additionalInfluence) => UnwrappedObject.AddInfluenceWithKingdom(additionalInfluence);
 
-    public void AddPower(float value)
-    {
-      throw new NotImplementedException();
-    }
+    public void AddPower(float value) => UnwrappedObject.AddPower(value);
 
-    public void AddSkillXp(MBSkillObject skill, float xpAmount)
-    {
-      throw new NotImplementedException();
-    }
+    public void AddSkillXp(MBSkillObject skill, float xpAmount) => UnwrappedObject.AddSkillXp(skill, xpAmount);
 
-    public void ChangeHeroGold(int changeAmount)
-    {
-      throw new NotImplementedException();
-    }
+    public void ChangeHeroGold(int changeAmount) => UnwrappedObject.ChangeHeroGold(changeAmount);
 
-    public int GetAttributeValue(CharacterAttributesEnum charAttribute)
-    {
-      throw new NotImplementedException();
-    }
+    public int GetAttributeValue(CharacterAttributesEnum charAttribute) => UnwrappedObject.GetAttributeValue(charAttribute);
 
-    public int GetBaseHeroRelation(MBHero otherHero)
-    {
-      throw new NotImplementedException();
-    }
+    public int GetBaseHeroRelation(MBHero otherHero) => UnwrappedObject.GetBaseHeroRelation(otherHero);
 
-    public IEnumerable<string> GetHeroOccupiedEvents()
-    {
-      throw new NotImplementedException();
-    }
+    public IEnumerable<string> GetHeroOccupiedEvents() => UnwrappedObject.GetHeroOccupiedEvents();
 
-    public MBCharacterSkills GetHeroSkills()
-    {
-      throw new NotImplementedException();
-    }
+    public MBCharacterSkills GetHeroSkills() => UnwrappedObject.GetHeroSkills();
 
-    public MBCharacterTraits GetHeroTraits()
-    {
-      throw new NotImplementedException();
-    }
+    public MBCharacterTraits GetHeroTraits() => UnwrappedObject.GetHeroTraits();
 
-    public IMapPoint GetMapPoint()
-    {
-      throw new NotImplementedException();
-    }
+    public IMapPoint GetMapPoint() => UnwrappedObject.GetMapPoint();
 
-    public bool GetPerkValue(MBPerkObject perk)
-    {
-      throw new NotImplementedException();
-    }
+    public bool GetPerkValue(MBPerkObject perk) => UnwrappedObject.GetPerkValue(perk);
 
-    public Vec3 GetPosition()
-    {
-      throw new NotImplementedException();
-    }
+    public Vec3 GetPosition() => UnwrappedObject.GetPosition();
 
 
 
-    public int GetSkillValue(MBSkillObject skill)
-    {
-      throw new NotImplementedException();
-    }
+    public int GetSkillValue(MBSkillObject skill) => UnwrappedObject.GetSkillValue(skill);
 
-    public int GetTraitLevel(MBTraitObject trait)
-    {
-      throw new NotImplementedException();
-    }
+    public int GetTraitLevel(MBTraitObject trait) => UnwrappedObject.GetTraitLevel(trait);
 
-    public float GetUnmodifiedClanLeaderRelationshipWithPlayer()
-    {
-      throw new NotImplementedException();
-    }
+    public float GetUnmodifiedClanLeaderRelationshipWithPlayer() => UnwrappedObject.GetUnmodifiedClanLeaderRelationshipWithPlayer();
 
-    public void Heal(MBPartyBase party, int healAmount, bool addXp = false)
-    {
-      throw new NotImplementedException();
-    }
+    public void Heal(MBPartyBase party, int healAmount, bool addXp = false) => UnwrappedObject.Heal(party, healAmount, addXp);
 
-    public bool IsEnemy(MBHero otherHero)
-    {
-      throw new NotImplementedException();
-    }
+    public bool IsEnemy(MBHero otherHero) => UnwrappedObject.IsEnemy(otherHero);
 
-    public bool IsFriend(MBHero otherHero)
-    {
-      throw new NotImplementedException();
-    }
+    public bool IsFriend(MBHero otherHero) => UnwrappedObject.IsFriend(otherHero);
 
-    public bool IsHealthFull()
-    {
-      throw new NotImplementedException();
-    }
+    public bool IsHealthFull() => UnwrappedObject.IsHealthFull();
 
-    public bool IsNeutral(MBHero otherHero)
-    {
-      throw new NotImplementedException();
-    }
+    public bool IsNeutral(MBHero otherHero) => UnwrappedObject.IsNeutral(otherHero);
 
-    public bool IsOccupiedByAnEvent()
-    {
-      throw new NotImplementedException();
-    }
+    public bool IsOccupiedByAnEvent() => UnwrappedObject.IsOccupiedByAnEvent();
 
-    public void SetCharacterObject(MBCharacterObject characterObject)
-    {
-      throw new NotImplementedException();
-    }
+    public void SetCharacterObject(MBCharacterObject characterObject) => UnwrappedObject.SetCharacterObject(characterObject);
 
-    public void SetPerkValue(MBPerkObject perk, bool value)
-    {
-      throw new NotImplementedException();
-    }
+    public void SetPerkValue(MBPerkObject perk, bool value) => UnwrappedObject.SetPerkValue(perk, value);
 
-    public void SetPersonalRelation(MBHero otherHero, int value)
-    {
-      throw new NotImplementedException();
-    }
+    public void SetPersonalRelation(MBHero otherHero, int value) => UnwrappedObject.SetPersonalRelation(otherHero, value);
 
-    public void SetSkillValue(MBSkillObject skill, int value)
-    {
-      throw new NotImplementedException();
-    }
+    public void SetSkillValue(MBSkillObject skill, int value) => UnwrappedObject.SetSkillValue(skill, value);
 
-    public static implicit operator MBHero(MBHero wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBHero(MBHero obj) => MBHero.GetWrapperFor(obj);
+    public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
+    public static implicit operator MBHero(Hero obj) => MBHero.GetWrapperFor(obj);
   }
 
   public class MBHeroList : MBListBase<MBHero, MBHeroList>
   {
-    public static implicit operator List<MBHero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, MBHero>();
-    public static implicit operator MBHeroList(List<MBHero> objectList) => (MBHeroList)objectList.Wrap<MBHero, MBHero>();
+    public static implicit operator List<Hero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, Hero>();
+    public static implicit operator MBHeroList(List<Hero> objectList) => (MBHeroList)objectList.Wrap<MBHero, Hero>();
   }
 }

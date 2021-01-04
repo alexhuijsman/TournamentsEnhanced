@@ -36,15 +36,15 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     string EncyclopediaLink { get; }
     MBTextObject EncyclopediaLinkWithName { get; }
     MBTextObject EncyclopediaText { get; }
-    CultureObject Culture { get; }
-    StatExplainer DailyCrimeRatingChangeExplained { get; }
+    MBCultureObject Culture { get; }
+    MBStatExplainer DailyCrimeRatingChangeExplained { get; }
     Vec2 InitialPosition { get; }
     uint Color { get; }
     uint Color2 { get; }
     uint AlternativeColor { get; }
     uint AlternativeColor2 { get; }
-    CharacterObject BasicTroop { get; }
-    Hero Leader { get; }
+    MBCharacterObject BasicTroop { get; }
+    MBHero Leader { get; }
     MBBanner Banner { get; }
     MBSettlementList Settlements { get; }
     uint LabelColor { get; }

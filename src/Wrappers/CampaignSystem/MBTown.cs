@@ -9,46 +9,6 @@ using static TaleWorlds.CampaignSystem.SettlementComponent;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-
-  public interface IMBTown
-  {
-    int DaysAtUnrest { get; }
-    MBBuildingList Buildings { get; }
-    int BoostBuildingProcess { get; }
-    bool InRebelliousState { get; }
-    IMBFaction MapFaction { get; }
-    float MilitiaChange { get; }
-    float Construction { get; }
-    MBClan OwnerClan { get; set; }
-    float Security { get; set; }
-    float Loyalty { get; set; }
-    MBWorkshop[] Workshops { get; }
-    MBBuilding CurrentBuilding { get; }
-    bool IsUnderSiege { get; }
-    MBBuilding CurrentDefaultBuilding { get; }
-    int TradeTaxAccumulated { get; set; }
-    MBHero Governor { get; set; }
-    MBClan LastCapturedBy { get; set; }
-    IReadOnlyList<Village> Villages { get; }
-    MBMobileParty MilitiaParty { get; }
-    MBTownMarketData MarketData { get; }
-    float SecurityChange { get; }
-    float LoyaltyChange { get; }
-    bool HasTournament { get; }
-    float FoodChange { get; }
-    int GarrisonChange { get; }
-    float ProsperityChange { get; }
-    MBCultureObject Culture { get; }
-    bool AfterSneakFight { get; set; }
-
-    int FoodStocksUpperLimit();
-    float GetItemCategoryPriceIndex(MBItemCategory itemCategory, bool isSellingToTown = false);
-    int GetItemPrice(MBEquipmentElement itemRosterElement, MBMobileParty tradingParty = null, bool isSelling = false);
-    int GetItemPrice(MBItemObject item, MBMobileParty tradingParty = null, bool isSelling = false);
-    ProsperityLevel GetProsperityLevel();
-    int GetWallLevel();
-
-  }
   public class MBTown : CachedWrapperBase<MBTown, Town>, IMBTown
   {
     public static MBTownList AllFiefs { get; }
@@ -65,7 +25,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool InRebelliousState => UnwrappedObject.InRebelliousState;
 
-    public IMBFaction MapFaction => UnwrappedObject.MapFaction;
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
 
     public float MilitiaChange => UnwrappedObject.MilitiaChange;
 
@@ -75,44 +35,42 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public float Security { get => UnwrappedObject.Security; set => UnwrappedObject.Security = value; }
     public float Loyalty { get => UnwrappedObject.Loyalty; set => UnwrappedObject.Loyalty = value; }
 
-    public MBWorkshop[] Workshops => throw new System.NotImplementedException();
+    public MBWorkshopList Workshops => UnwrappedObject.Workshops.ToList();
 
-    public MBBuilding CurrentBuilding => throw new System.NotImplementedException();
+    public MBBuilding CurrentBuilding => UnwrappedObject.CurrentBuilding;
 
-    public bool IsUnderSiege => throw new System.NotImplementedException();
+    public bool IsUnderSiege => UnwrappedObject.IsUnderSiege;
 
-    public MBBuilding CurrentDefaultBuilding => throw new System.NotImplementedException();
+    public MBBuilding CurrentDefaultBuilding => UnwrappedObject.CurrentDefaultBuilding;
 
     public int TradeTaxAccumulated { get => UnwrappedObject.TradeTaxAccumulated; set => UnwrappedObject.TradeTaxAccumulated = value; }
     public MBHero Governor { get => UnwrappedObject.Governor; set => UnwrappedObject.Governor = value; }
     public MBClan LastCapturedBy { get => UnwrappedObject.LastCapturedBy; set => UnwrappedObject.LastCapturedBy = value; }
 
-    public IReadOnlyList<Village> Villages => throw new System.NotImplementedException();
+    public MBVillageList Villages => UnwrappedObject.Villages.ToList();
 
-    public MBMobileParty MilitiaParty => throw new System.NotImplementedException();
+    public MBMobileParty MilitiaParty => UnwrappedObject.MilitiaParty;
 
-    public MBTownMarketData MarketData => throw new System.NotImplementedException();
+    public MBTownMarketData MarketData => UnwrappedObject.MarketData;
 
-    public float SecurityChange => throw new System.NotImplementedException();
+    public float SecurityChange => UnwrappedObject.SecurityChange;
 
-    public float LoyaltyChange => throw new System.NotImplementedException();
+    public float LoyaltyChange => UnwrappedObject.LoyaltyChange;
 
-    public bool HasTournament => throw new System.NotImplementedException();
+    public bool HasTournament => UnwrappedObject.HasTournament;
 
-    public float FoodChange => throw new System.NotImplementedException();
+    public float FoodChange => UnwrappedObject.FoodChange;
 
-    public int GarrisonChange => throw new System.NotImplementedException();
+    public int GarrisonChange => UnwrappedObject.GarrisonChange;
 
-    public float ProsperityChange => throw new System.NotImplementedException();
+    public float ProsperityChange => UnwrappedObject.ProsperityChange;
 
-    public MBCultureObject Culture => throw new System.NotImplementedException();
+    public MBCultureObject Culture => UnwrappedObject.Culture;
 
     public bool AfterSneakFight { get => UnwrappedObject.AfterSneakFight; set => UnwrappedObject.AfterSneakFight = value; }
     public int Gold => UnwrappedObject.Gold;
 
-    public Settlement Settlement => UnwrappedObject.Settlement;
-
-    public static MBTown Find(string hostSettlementId) => Settlement.Find(hostSettlementId).Town;
+    public MBSettlement Settlement => UnwrappedObject.Settlement;
 
     public void ChangeGold(int amount) => UnwrappedObject.ChangeGold(amount);
 
