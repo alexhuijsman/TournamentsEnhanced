@@ -48,7 +48,7 @@ namespace TournamentsEnhanced
 
     private static MBTournamentTeam GetPlayerTeamFrom(MBTournamentTeamList teams)
     {
-      var tournamentRecord = ModState.TournamentRecords.ForCurrentTown();
+      var tournamentRecord = ModState.TournamentRecords.ForCurrentSettlement();
 
       MBTournamentTeam playerTeam;
       if (tournamentRecord.HasPlayerTeam)
