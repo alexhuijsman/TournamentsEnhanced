@@ -15,7 +15,7 @@ namespace TournamentsEnhanced
     {
       if (Settings.Instance.VeryHardTournaments)
       {
-        CampaignModel.difficultyBeforeTournament = CampaignOptions.CombatAIDifficulty;
+        CampaignModel.NonTournamentDifficulty = CampaignOptions.CombatAIDifficulty;
         CampaignOptions.CombatAIDifficulty = CampaignOptions.Difficulty.Realistic;
       }
     }

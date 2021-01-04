@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public class MBWeaponDesign : CachedWrapperBase<MBWeaponDesign, WeaponDesign>
+  public class MBWeaponDesign : MBWrapperBase<MBWeaponDesign, WeaponDesign>
   {
     public static implicit operator WeaponDesign(MBWeaponDesign wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBWeaponDesign(WeaponDesign obj) => MBWeaponDesign.GetWrapperFor(obj);

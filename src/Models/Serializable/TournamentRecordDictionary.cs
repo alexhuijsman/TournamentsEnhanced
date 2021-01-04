@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using TournamentsEnhanced.Wrappers.CampaignSystem;
@@ -11,7 +12,9 @@ namespace TournamentsEnhanced.Models.Serializable
       return this[MBHero.MainHero.CurrentTown.Settlement.StringId];
     }
 
-    public TournamentRecord this[MBTown town] => this[town.Settlement.StringId];
+    public bool ContainsSettlement(MBSettlement settlement) => ContainsKey(settlement.StringId);
+
+    public TournamentRecord this[MBSettlement settlement] => this[settlement.StringId];
 
     public void AddOrUpdate(TournamentRecord record)
     {
@@ -24,6 +27,12 @@ namespace TournamentsEnhanced.Models.Serializable
         Add(record.hostSettlementId, record);
       }
     }
-    public void Remove(MBTown town) => Remove(town.Settlement.StringId);
+
+    internal void Remove(object hostSettlement)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void Remove(MBSettlement settlement) => Remove(settlement.StringId);
   }
 }

@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBTournamentGame : CachedWrapperBase<MBTournamentGame, TournamentGame>
+  public class MBTournamentGame : MBWrapperBase<MBTournamentGame, TournamentGame>
   {
     public MBTown Town => UnwrappedObject.Town;
 

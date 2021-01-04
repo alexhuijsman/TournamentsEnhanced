@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public class MBTradeItemComponent : CachedWrapperBase<MBTradeItemComponent, TradeItemComponent>
+  public class MBTradeItemComponent : MBObjectBaseWrapper<MBTradeItemComponent, TradeItemComponent>
   {
     public static implicit operator TradeItemComponent(MBTradeItemComponent wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTradeItemComponent(TradeItemComponent obj) => MBTradeItemComponent.GetWrapperFor(obj);

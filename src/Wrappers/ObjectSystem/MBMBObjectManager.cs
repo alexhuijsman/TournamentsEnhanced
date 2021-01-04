@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.ObjectSystem
 {
-  public class MBMBObjectManager : CachedWrapperBase<MBMBObjectManager, MBObjectManager>
+  public class MBMBObjectManager : MBWrapperBase<MBMBObjectManager, MBObjectManager>
   {
     public static MBMBObjectManager Instance => MBObjectManager.Instance;
 

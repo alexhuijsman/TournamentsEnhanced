@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.[PackageName]
 {
-  public class MB[TypeToWrap] : CachedWrapperBase<MB[TypeToWrap], [TypeToWrap]>
+  public class MB[TypeToWrap] : MBWrapperBase<MB[TypeToWrap], [TypeToWrap]>
   {
     public static implicit operator  [TypeToWrap](MB[TypeToWrap] wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MB[TypeToWrap]([TypeToWrap] obj) => MB[TypeToWrap].GetWrapperFor(obj);

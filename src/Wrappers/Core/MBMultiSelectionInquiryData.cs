@@ -7,7 +7,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public class MBMultiSelectionInquiryData : CachedWrapperBase<MBMultiSelectionInquiryData, MultiSelectionInquiryData>
+  public class MBMultiSelectionInquiryData : MBWrapperBase<MBMultiSelectionInquiryData, MultiSelectionInquiryData>
   {
     public MBMultiSelectionInquiryData() { }
     public MBMultiSelectionInquiryData(

@@ -6,12 +6,11 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBSettlement : CachedWrapperBase<MBSettlement, Settlement>
+  public class MBSettlement : MBObjectBaseWrapper<MBSettlement, Settlement>
   {
     public static MBSettlementList All => Settlement.All.ToList();
     public static MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
     public static MBTown CurrentTown => CurrentSettlement.Town;
-
     public MBTown Town => UnwrappedObject.Town;
     public bool IsTown => UnwrappedObject.IsTown;
 

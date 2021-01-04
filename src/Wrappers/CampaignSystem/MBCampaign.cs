@@ -9,10 +9,8 @@ using static TaleWorlds.CampaignSystem.SettlementAccessModel;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBCampaign : CachedWrapperBase<MBCampaign, Campaign>
+  public class MBCampaign : MBWrapperBase<MBCampaign, Campaign>
   {
-    public MBCampaign() { }
-    public MBCampaign(Campaign obj) : base(obj) { }
     public static bool CanMainHeroJoinTournamentAtCurrentSettlement(out bool shouldBeDisabled, out MBTextObject disabledText)
     {
       return Current.Models.SettlementAccessModel

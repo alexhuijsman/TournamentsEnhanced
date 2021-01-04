@@ -19,6 +19,8 @@ namespace TournamentsEnhanced.Wrappers.Abstract
 
     public override Type UnwrappedType => typeof(T);
 
+    public bool IsNull => UnwrappedObject == null;
+
     public WrapperBase() { }
     public WrapperBase(T obj) => UnwrappedObject = obj;
   }

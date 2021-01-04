@@ -7,7 +7,7 @@ using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBTournamentModel : CachedWrapperBase<MBTournamentModel, TournamentModel>
+  public class MBTournamentModel : MBWrapperBase<MBTournamentModel, TournamentModel>
   {
     public int GetRenownReward(MBHero winner, MBTown town) => UnwrappedObject.GetRenownReward(winner, town);
     public int GetNumLeaderboardVictoriesAtGameStart() => UnwrappedObject.GetNumLeaderboardVictoriesAtGameStart();

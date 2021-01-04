@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBGameModels : CachedWrapperBase<MBGameModels, GameModels>
+  public class MBGameModels : MBWrapperBase<MBGameModels, GameModels>
   {
     public MBSettlementAccessModel SettlementAccessModel => UnwrappedObject.SettlementAccessModel;
     public MBTournamentModel TournamentModel => UnwrappedObject.TournamentModel;

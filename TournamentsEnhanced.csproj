@@ -133,7 +133,6 @@
     <Compile Include="src\Behaviors\TournamentSpawnBehavior.cs" />
     <Compile Include="src\Behaviors\TownMenuBehavior.cs" />
     <Compile Include="src\Builders\TournamentBuilder.cs" />
-    <Compile Include="src\Builders\TournamentRecordBuilder.cs" />
     <Compile Include="src\Constants\ItemConstants.cs" />
     <Compile Include="src\Constants\ModuleConstants.cs" />
     <Compile Include="src\Constants\TournamentConstants.cs" />
@@ -146,17 +145,12 @@
     <Compile Include="src\Extensions\MBTournamentMatchExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
-    <Compile Include="src\Finders\Comparers\HeroComparers\FriendshipWithTownNobilityComparer.cs" />
-    <Compile Include="src\Finders\Comparers\SettlementComparers\SettlementComparerBase.cs" />
-    <Compile Include="src\Finders\Comparers\SettlementComparers\SettlementLeaderFactionRankComparer.cs" />
-    <Compile Include="src\Finders\Comparers\SettlementComparers\SettlementProsperityComparer.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
     <Compile Include="src\Models\ModState\ModState.cs" />
     <Compile Include="src\Models\Payor.cs" />
     <Compile Include="src\Models\Serializable\SerializableModState.cs" />
     <Compile Include="src\Models\Serializable\TournamentRecord.cs" />
-    <Compile Include="src\Models\Serializable\TournamentRecordList.cs" />
     <Compile Include="src\Patches\AddParticipantsPatch.cs" />
     <Compile Include="src\Patches\DisableTournamentSpawnPatch.cs" />
     <Compile Include="src\Patches\TournamentEndMatchPatch.cs" />
@@ -218,7 +212,18 @@
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
     <Compile Include="src\Finders\SettlementFinder.cs" />
-    <Compile Include="src\Finders\Options\FindSettlementOptions.cs" />
+    <Compile Include="src\Finders\Options\FindHostSettlementOptions.cs" />
+    <Compile Include="src\Results\NullResult.cs" />
+    <Compile Include="src\Finders\Comparers\Abstract\SettlementComparerBase.cs" />
+    <Compile Include="src\Finders\Comparers\Abstract\ComparerBase.cs" />
+    <Compile Include="src\Finders\Comparers\Abstract\HostSettlementComparerBase.cs" />
+    <Compile Include="src\Finders\Comparers\FactionRankComparer.cs" />
+    <Compile Include="src\Finders\Comparers\ProsperityComparer.cs" />
+    <Compile Include="src\Finders\Comparers\ExistingTournamentComparer.cs" />
+    <Compile Include="src\Models\Serializable\TournamentRecordDictionary.cs" />
+    <Compile Include="src\Wrappers\Abstract\MBObjectBaseWrapper.cs" />
+    <Compile Include="src\Wrappers\Abstract\MBWrapperBase.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBTournamentMatch.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public class MBInformationMessage : CachedWrapperBase<MBInformationMessage, InformationMessage>
+  public class MBInformationMessage : MBWrapperBase<MBInformationMessage, InformationMessage>
   {
     public MBInformationMessage(string message)
     {

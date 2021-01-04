@@ -10,7 +10,7 @@ using static TaleWorlds.CampaignSystem.SettlementAccessModel;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBSettlementAccessModel : CachedWrapperBase<MBSettlementAccessModel, SettlementAccessModel>
+  public class MBSettlementAccessModel : MBWrapperBase<MBSettlementAccessModel, SettlementAccessModel>
   {
 
     public bool CanMainHeroDoSettlementAction(MBSettlement settlement,

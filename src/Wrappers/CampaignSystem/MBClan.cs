@@ -9,13 +9,11 @@ using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBClan : CachedWrapperBase<MBClan, Clan>
+  public class MBClan : MBObjectBaseWrapper<MBClan, Clan>
   {
     public float Renown => UnwrappedObject.Renown;
 
     public MBTextObject Name => UnwrappedObject.Name;
-
-    public string StringId => UnwrappedObject.StringId;
 
     public MBTextObject InformalName => UnwrappedObject.InformalName;
 

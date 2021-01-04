@@ -70,12 +70,11 @@ namespace TournamentsEnhanced.Wrappers.Core
     float Appearance { get; }
     bool RecalculateBody { get; }
   }
-  public class MBItemObject : CachedWrapperBase<MBItemObject, ItemObject>, IMBItemObject
+  public class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
   {
     public static MBItemObjectList AllTradeGoods => ItemObject.AllTradeGoods.ToList();
     public static MBItemObjectList All => ItemObject.All.ToList();
 
-    public string StringId => UnwrappedObject.StringId;
     public MBWeaponComponent WeaponComponent => UnwrappedObject.WeaponComponent;
 
     public MBWeaponComponentData PrimaryWeapon => UnwrappedObject.PrimaryWeapon;

@@ -5,6 +5,7 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced
 {
@@ -13,12 +14,14 @@ namespace TournamentsEnhanced
   {
     static void Postfix(TournamentMatch __instance)
     {
-      if (Settings.Instance.VeryHardTournaments && __instance.IsPlayerParticipating())
+      var tournamentMatch = (MBTournamentMatch)__instance;
+
+      if (Settings.Instance.VeryHardTournaments && tournamentMatch.IsPlayerParticipating())
       {
-        CampaignOptions.CombatAIDifficulty = CampaignModel.difficultyBeforeTournament;
+        CampaignOptions.CombatAIDifficulty = CampaignModel.NonTournamentDifficulty;
       }
 
-      ModState.TournamentRecords.Remove(__instance.GetTown());
+      ModState.TournamentRecords.Remove(tournamentMatch.HostSettlement);
     }
   }
 }

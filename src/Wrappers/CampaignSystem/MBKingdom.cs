@@ -9,12 +9,10 @@ using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBKingdom : CachedWrapperBase<MBKingdom, Kingdom>
+  public class MBKingdom : MBObjectBaseWrapper<MBKingdom, Kingdom>
   {
     public static MBKingdomList All => Kingdom.All.ToList();
     public MBTextObject Name => UnwrappedObject.Name;
-
-    public string StringId => UnwrappedObject.StringId;
 
     public MBTextObject InformalName => UnwrappedObject.InformalName;
 

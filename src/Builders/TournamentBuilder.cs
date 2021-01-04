@@ -133,9 +133,9 @@ namespace TournamentsEnhanced.Builders
       {
         payor.Hero.ChangeHeroGold(-Settings.Instance.TournamentCost);
       }
-      else if (payor.IsTown)
+      else if (payor.IsSettlement)
       {
-        payor.Town.ChangeGold(-Settings.Instance.TournamentCost);
+        payor.Settlement.ChangeGold(-Settings.Instance.TournamentCost);
       }
     }
 

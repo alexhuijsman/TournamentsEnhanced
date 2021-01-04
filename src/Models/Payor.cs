@@ -1,39 +1,31 @@
 using TaleWorlds.CampaignSystem;
 
+using TournamentsEnhanced.Wrappers.CampaignSystem;
+
 namespace TournamentsEnhanced.Models.Serializable
 {
   public struct Payor
   {
-    public bool IsTown => Town != null;
+    public bool IsSettlement => Settlement != null;
     public bool IsHero => Hero != null;
-    public bool IsNoPayor => !IsTown && !IsHero;
+    public bool IsNoPayor => !IsSettlement && !IsHero;
 
-    public Town Town { get; private set; }
-    public Hero Hero { get; private set; }
+    public MBSettlement Settlement { get; private set; }
+    public MBHero Hero { get; private set; }
     public static Payor NoPayor => new Payor((Hero)null);
 
-    public Payor(Town town)
+    public string StringId => IsNoPayor ? null : IsHero ? Hero.StringId : Settlement.StringId;
+
+    public Payor(MBSettlement settlement)
     {
-      Town = town;
+      Settlement = settlement;
       Hero = null;
     }
 
-    public Payor(Hero hero)
+    public Payor(MBHero hero)
     {
-      Town = null;
+      Settlement = null;
       Hero = hero;
-    }
-
-    public void PayForTournament()
-    {
-      if (IsTown)
-      {
-        // charge town
-      }
-      else if (IsHero)
-      {
-        // charge hero
-      }
     }
   }
 }

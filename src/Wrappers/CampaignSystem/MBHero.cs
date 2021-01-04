@@ -8,10 +8,11 @@ using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
-  public class MBHero : CachedWrapperBase<MBHero, Hero>
+  public class MBHero : MBObjectBaseWrapper<MBHero, Hero>
   {
     public static MBHero MainHero => Hero.MainHero;
-
+    public float GetRelationWithPlayer() => UnwrappedObject.GetRelationWithPlayer();
+    public float GetRelation(MBHero otherHero) => UnwrappedObject.GetRelation(otherHero);
     public static ItemTiers GetMainHeroTournamentRewardTier()
     {
       return MainHero.GetTournamentRewardTier();

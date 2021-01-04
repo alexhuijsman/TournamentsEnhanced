@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public class MBInquiryElement : CachedWrapperBase<MBInquiryElement, InquiryElement>
+  public class MBInquiryElement : MBWrapperBase<MBInquiryElement, InquiryElement>
   {
 
     public object Identifier => UnwrappedObject.Identifier;

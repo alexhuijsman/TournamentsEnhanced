@@ -4,6 +4,6 @@ namespace TournamentsEnhanced.Models
 {
   public static class CampaignModel
   {
-    public static CampaignOptions.Difficulty difficultyBeforeTournament;
+    public static CampaignOptions.Difficulty NonTournamentDifficulty;
   }
 }

@@ -1,0 +1,30 @@
+using TournamentsEnhanced.Models.Serializable;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
+
+namespace TournamentsEnhanced.Finder.Comparers
+{
+  public class [AttributeToCompare]Comparer : ComparerBase
+  {
+    public [AttributeToCompare]Comparer(Payor payor) : base(payor)
+    {
+    }
+
+    public override int Compare(MBSettlement x, MBSettlement y)
+    {
+      var xMeetsRequirements = !x.IsNull;
+      var yMeetsRequirements = !y.IsNull;
+
+      if (!xMeetsRequirements)
+      {
+        return yMeetsRequirements ? XIsLessThanY : XIsEqualToY;
+      }
+
+      if (!yMeetsRequirements)
+      {
+        return XIsGreaterThanY;
+      }
+
+      return XIsEqualToY;
+    }
+  }
+}

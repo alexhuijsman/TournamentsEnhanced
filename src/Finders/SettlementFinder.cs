@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Wrappers.CampaignSystem;
@@ -8,18 +6,11 @@ namespace TournamentsEnhanced.Finder
 {
   public static class SettlementFinder
   {
-
-    private static void AddNullTown(this List<MBSettlement> settlements)
+    public static FindHostTownResult FindHostSettlement(FindHostSettlementOptions options)
     {
-      settlements.Add(NullSettlement);
-    }
-    public static FindHostTownResult FindInSettlements(FindHostSettlementOptions options)
-    {
-      var settlements = options.Settlements.ToList().Shuffle();
+      var settlements = options.Settlements.Shuffle();
       var sortedSettlements = settlements.Sort(new TownComparer());
 
-
-      )
       Town townWithExistingTournament = null;
       Town hostTown = null;
 
