@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBHorseComponent(HorseComponent obj) => MBHorseComponent.GetWrapperFor(obj);
   }
 
-  public class MBHorseComponentList : List<MBHorseComponent>
+  public class MBHorseComponentList : MBListBase<MBHorseComponent, MBHorseComponentList>
   {
     public static implicit operator List<HorseComponent>(MBHorseComponentList wrapperList) => wrapperList.Unwrap<MBHorseComponent, HorseComponent>();
     public static implicit operator MBHorseComponentList(List<HorseComponent> objectList) => (MBHorseComponentList)objectList.Wrap<MBHorseComponent, HorseComponent>();

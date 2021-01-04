@@ -224,6 +224,7 @@
     <Compile Include="src\Wrappers\Abstract\MBWrapperBase.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBTournamentMatch.cs" />
     <Compile Include="src\Finders\Comparers\ExistingTournamentRelationComparer.cs" />
+    <Compile Include="src\Wrappers\Abstract\MBListBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

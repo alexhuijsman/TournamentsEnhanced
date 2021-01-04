@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBTradeItemComponent(TradeItemComponent obj) => MBTradeItemComponent.GetWrapperFor(obj);
   }
 
-  public class MBTradeItemComponentList : List<MBTradeItemComponent>
+  public class MBTradeItemComponentList : MBListBase<MBTradeItemComponent, MBTradeItemComponentList>
   {
     public static implicit operator List<TradeItemComponent>(MBTradeItemComponentList wrapperList) => wrapperList.Unwrap<MBTradeItemComponent, TradeItemComponent>();
     public static implicit operator MBTradeItemComponentList(List<TradeItemComponent> objectList) => (MBTradeItemComponentList)objectList.Wrap<MBTradeItemComponent, TradeItemComponent>();

@@ -234,7 +234,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBItemObject(ItemObject obj) => MBItemObject.GetWrapperFor(obj);
   }
 
-  public class MBItemObjectList : List<MBItemObject>
+  public class MBItemObjectList : MBListBase<MBItemObject, MBItemObjectList>
   {
     public static implicit operator List<ItemObject>(MBItemObjectList wrapperList) => wrapperList.Unwrap<MBItemObject, ItemObject>();
     public static implicit operator MBItemObjectList(List<ItemObject> objectList) => (MBItemObjectList)objectList.Wrap<MBItemObject, ItemObject>();

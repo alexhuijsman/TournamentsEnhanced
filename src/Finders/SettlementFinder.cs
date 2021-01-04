@@ -1,4 +1,5 @@
-using TaleWorlds.CampaignSystem;
+using System;
+using System.Collections.Generic;
 
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -8,34 +9,21 @@ namespace TournamentsEnhanced.Finder
   {
     public static FindHostTownResult FindHostSettlement(FindHostSettlementOptions options)
     {
-      var settlements = options.Settlements.Shuffle();
-      var sortedSettlements = settlements.Sort(new TownComparer());
-
-      Town townWithExistingTournament = null;
-      Town hostTown = null;
-
-      foreach (var settlement in settlements)
-      {
-        if (settlement.IsTown && settlement.Town.HasTournament && townWithExistingTournament == null)
-        {
-          townWithExistingTournament = settlement.Town;
-        }
-
-        if (!settlement.IsTown || settlement.Town.HasTournament)
-        {
-          continue;
-        }
-
-        hostTown = settlement.Town;
-        break;
-      }
-
-      if (hostTown == null && townWithExistingTournament != null && options.CanUseExistingTournamentAsLastResort)
-      {
-        hostTown = townWithExistingTournament;
-      }
-
+      var results = SortSettlementsByComparers(options.Settlements.ToList(), options.Comparers);
       return hostTown == null ? FindHostTownResult.Failure() : FindHostTownResult.Success(hostTown);
+    }
+
+    private static MBSettlementList SortSettlementsByComparers(MBSettlementList settlements, IComparer<MBSettlement>[] comparers)
+    {
+      foreach (var comparer in comparers)
+      {
+        SortSettlementsByComparers(comparer);
+      }
+    }
+
+    private static void SortSettlementsByComparers(IComparer<MBSettlement> comparer)
+    {
+      throw new NotImplementedException();
     }
   }
 }

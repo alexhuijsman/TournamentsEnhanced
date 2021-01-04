@@ -43,7 +43,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator MBHero(Hero obj) => MBHero.GetWrapperFor(obj);
   }
 
-  public class MBHeroList : List<MBHero>
+  public class MBHeroList : MBListBase<MBHero, MBHeroList>
   {
     public static implicit operator List<Hero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, Hero>();
     public static implicit operator MBHeroList(List<Hero> objectList) => (MBHeroList)objectList.Wrap<MBHero, Hero>();

@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBArmorComponent(ArmorComponent obj) => MBArmorComponent.GetWrapperFor(obj);
   }
 
-  public class MBArmorComponentList : List<MBArmorComponent>
+  public class MBArmorComponentList : MBListBase<MBArmorComponent, MBArmorComponentList>
   {
     public static implicit operator List<ArmorComponent>(MBArmorComponentList wrapperList) => wrapperList.Unwrap<MBArmorComponent, ArmorComponent>();
     public static implicit operator MBArmorComponentList(List<ArmorComponent> objectList) => (MBArmorComponentList)objectList.Wrap<MBArmorComponent, ArmorComponent>();

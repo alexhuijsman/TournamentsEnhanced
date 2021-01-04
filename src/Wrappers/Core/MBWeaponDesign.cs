@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBWeaponDesign(WeaponDesign obj) => MBWeaponDesign.GetWrapperFor(obj);
   }
 
-  public class MBWeaponDesignList : List<MBWeaponDesign>
+  public class MBWeaponDesignList : MBListBase<MBWeaponDesign, MBWeaponDesignList>
   {
     public static implicit operator List<WeaponDesign>(MBWeaponDesignList wrapperList) => wrapperList.Unwrap<MBWeaponDesign, WeaponDesign>();
     public static implicit operator MBWeaponDesignList(List<WeaponDesign> objectList) => (MBWeaponDesignList)objectList.Wrap<MBWeaponDesign, WeaponDesign>();

@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.Wrappers.ObjectSystem
     public static implicit operator MBMBObjectManager(MBObjectManager obj) => MBMBObjectManager.GetWrapperFor(obj);
   }
 
-  public class MBMBObjectManagerList : List<MBMBObjectManager>
+  public class MBMBObjectManagerList : MBListBase<MBMBObjectManager, MBMBObjectManagerList>
   {
     public static implicit operator List<MBObjectManager>(MBMBObjectManagerList wrapperList) => wrapperList.Unwrap<MBMBObjectManager, MBObjectManager>();
     public static implicit operator MBMBObjectManagerList(List<MBObjectManager> objectList) => (MBMBObjectManagerList)objectList.Wrap<MBMBObjectManager, MBObjectManager>();

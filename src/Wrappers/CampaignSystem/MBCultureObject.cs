@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator MBCultureObject(CultureObject obj) => MBCultureObject.GetWrapperFor(obj);
   }
 
-  public class MBCultureObjectList : List<MBCultureObject>
+  public class MBCultureObjectList : MBListBase<MBCultureObject, MBCultureObjectList>
   {
     public static implicit operator List<CultureObject>(MBCultureObjectList wrapperList) => wrapperList.Unwrap<MBCultureObject, CultureObject>();
     public static implicit operator MBCultureObjectList(List<CultureObject> objectList) => (MBCultureObjectList)objectList.Wrap<MBCultureObject, CultureObject>();

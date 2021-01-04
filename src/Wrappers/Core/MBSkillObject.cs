@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBSkillObject(SkillObject obj) => MBSkillObject.GetWrapperFor(obj);
   }
 
-  public class MBSkillObjectList : List<MBSkillObject>
+  public class MBSkillObjectList : MBListBase<MBSkillObject, MBSkillObjectList>
   {
     public static implicit operator List<SkillObject>(MBSkillObjectList wrapperList) => wrapperList.Unwrap<MBSkillObject, SkillObject>();
     public static implicit operator MBSkillObjectList(List<SkillObject> objectList) => (MBSkillObjectList)objectList.Wrap<MBSkillObject, SkillObject>();

@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public MBSettlement HostSettlement => UnwrappedObject.Winners.First().Character.HeroObject.CurrentSettlement;
   }
 
-  public class MBTournamentMatchList : List<MBTournamentMatch>
+  public class MBTournamentMatchList : MBListBase<MBTournamentMatch, MBTournamentMatchList>
   {
     public static implicit operator List<TournamentMatch>(MBTournamentMatchList wrapperList) => wrapperList.Unwrap<MBTournamentMatch, TournamentMatch>();
     public static implicit operator MBTournamentMatchList(List<TournamentMatch> objectList) => (MBTournamentMatchList)objectList.Wrap<MBTournamentMatch, TournamentMatch>();

@@ -33,7 +33,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator MBSettlementAccessModel(SettlementAccessModel obj) => MBSettlementAccessModel.GetWrapperFor(obj);
   }
 
-  public class MBSettlementAccessModelList : List<MBSettlementAccessModel>
+  public class MBSettlementAccessModelList : MBListBase<MBSettlementAccessModel, MBSettlementAccessModelList>
   {
     public static implicit operator List<SettlementAccessModel>(MBSettlementAccessModelList wrapperList) => wrapperList.Unwrap<MBSettlementAccessModel, SettlementAccessModel>();
     public static implicit operator MBSettlementAccessModelList(List<SettlementAccessModel> objectList) => (MBSettlementAccessModelList)objectList.Wrap<MBSettlementAccessModel, SettlementAccessModel>();

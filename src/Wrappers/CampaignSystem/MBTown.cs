@@ -132,7 +132,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator MBTown(Town obj) => MBTown.GetWrapperFor(obj);
   }
 
-  public class MBTownList : List<MBTown>
+  public class MBTownList : MBListBase<MBTown, MBTownList>
   {
     public static implicit operator List<Town>(MBTownList wrapperList) => wrapperList.Unwrap<MBTown, Town>();
     public static implicit operator MBTownList(List<Town> objectList) => (MBTownList)objectList.Wrap<MBTown, Town>();

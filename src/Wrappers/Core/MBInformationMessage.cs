@@ -18,7 +18,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static implicit operator MBInformationMessage(InformationMessage obj) => MBInformationMessage.GetWrapperFor(obj);
   }
 
-  public class MBInformationMessageList : List<MBInformationMessage>
+  public class MBInformationMessageList : MBListBase<MBInformationMessage, MBInformationMessageList>
   {
     public static implicit operator List<InformationMessage>(MBInformationMessageList wrapperList) => wrapperList.Unwrap<MBInformationMessage, InformationMessage>();
     public static implicit operator MBInformationMessageList(List<InformationMessage> objectList) => (MBInformationMessageList)objectList.Wrap<MBInformationMessage, InformationMessage>();
