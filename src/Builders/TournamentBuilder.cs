@@ -65,7 +65,7 @@ namespace TournamentsEnhanced.Builders
       CreateTournamentOptions options;
       foreach (var town in townsWithExisting)
       {
-        options = new CreateTournamentOptions(FindHostTownResult.Success(town), TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions(FindHostSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
         CreateTournament(options);
       }
 
@@ -77,7 +77,7 @@ namespace TournamentsEnhanced.Builders
           break;
         }
 
-        options = new CreateTournamentOptions(FindHostTownResult.Success(town), TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions(FindHostSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
         CreateTournament(options);
 
         numCreated++;
@@ -176,7 +176,7 @@ namespace TournamentsEnhanced.Builders
       public readonly TournamentType type;
       public readonly Payor payor;
 
-      public CreateTournamentOptions(FindHostTownResult result, TournamentType type, Payor payor)
+      public CreateTournamentOptions(FindHostSettlementResult result, TournamentType type, Payor payor)
       {
         this.town = result.Town;
         this.type = type;

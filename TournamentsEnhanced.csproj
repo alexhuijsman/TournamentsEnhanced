@@ -137,7 +137,6 @@
     <Compile Include="src\Constants\ModuleConstants.cs" />
     <Compile Include="src\Constants\TournamentConstants.cs" />
     <Compile Include="src\Enums\PayorType.cs" />
-    <Compile Include="src\Enums\ResultStatus.cs" />
     <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\Extensions.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
@@ -159,10 +158,6 @@
     <Compile Include="src\Patches\TournamentRewardsPatch.cs" />
     <Compile Include="src\Patches\TournamentStartMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentXpOnHitPatch.cs" />
-    <Compile Include="src\Results\CreateTournamentResult.cs" />
-    <Compile Include="src\Results\FindHostTownResult.cs" />
-    <Compile Include="src\Results\ResultBase.cs" />
-    <Compile Include="src\Results\TownResultBase.cs" />
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\Utils\NotificationUtils.cs" />
     <Compile Include="src\Utils\Reflection.cs" />
@@ -225,6 +220,11 @@
     <Compile Include="src\Wrappers\CampaignSystem\MBTournamentMatch.cs" />
     <Compile Include="src\Finders\Comparers\ExistingTournamentRelationComparer.cs" />
     <Compile Include="src\Wrappers\Abstract\MBListBase.cs" />
+    <Compile Include="src\Enums\ResultStatus.cs" />
+    <Compile Include="src\Finders\Results\Abstract\ResultBase.cs" />
+    <Compile Include="src\Finders\Results\Abstract\FindSettlementResultBase.cs" />
+    <Compile Include="src\Finders\Results\CreateTournamentResult.cs" />
+    <Compile Include="src\Finders\Results\FindHostSettlementResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
