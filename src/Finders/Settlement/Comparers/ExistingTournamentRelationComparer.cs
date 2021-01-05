@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
   {
     public float MaxRelation { get; private set; }
 
-    public ExistingTournamentRelationComparer(Payor payor, bool canOverrideExisting, float maxRelation) : base(payor, canOverrideExisting)
+    public ExistingTournamentRelationComparer(Payor payor, float maxRelation) : base(payor, true)
     {
       MaxRelation = maxRelation;
     }
@@ -51,7 +51,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
     }
 
     private bool MeetsAllRequirements(TournamentRecord record) =>
-      record.tournamentType == TournamentType.None ||
+      !HasExistingTournament(record) ||
       (CanOverrideExisting && MeetsRelationRequirements(record));
 
     private bool MeetsRelationRequirements(TournamentRecord record) =>
