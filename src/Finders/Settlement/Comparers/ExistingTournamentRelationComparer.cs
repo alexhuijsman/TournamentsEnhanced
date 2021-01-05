@@ -2,7 +2,7 @@ using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced.Finder.Comparers
+namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class ExistingTournamentRelationComparer : ExistingTournamentComparer
   {
@@ -21,9 +21,9 @@ namespace TournamentsEnhanced.Finder.Comparers
       var xRecord = xHasRecord ? ModState.TournamentRecords[x] : default(TournamentRecord);
       var yRecord = yHasRecord ? ModState.TournamentRecords[y] : default(TournamentRecord);
 
-      var xMeetsRequirements = !x.IsNull && MeetsExistingTournamentRequirements(xRecord);
+      var xMeetsRequirements = !x.IsNull && MeetsAllRequirements(xRecord);
 
-      var yMeetsRequirements = !y.IsNull && MeetsExistingTournamentRequirements(yRecord);
+      var yMeetsRequirements = !y.IsNull && MeetsAllRequirements(yRecord);
 
       if (!xMeetsRequirements)
       {
@@ -50,12 +50,12 @@ namespace TournamentsEnhanced.Finder.Comparers
       return xHasWorseRelation ? XIsGreaterThanY : xHasBetterRelation ? XIsLessThanY : XIsEqualToY;
     }
 
-    private bool MeetsExistingTournamentRequirements(TournamentRecord record) =>
+    private bool MeetsAllRequirements(TournamentRecord record) =>
       record.tournamentType == TournamentType.None ||
       (CanOverrideExisting && MeetsRelationRequirements(record));
 
     private bool MeetsRelationRequirements(TournamentRecord record) =>
       record.IsSettlementPayor ||
-      (record.IsHeroPayor && record.FindPayorHero().GetRelation(Payor.Hero) < MaxRelation);
+      (record.IsHeroPayor && record.FindPayorHero().GetRelation(Payor.Hero) <= MaxRelation);
   }
 }

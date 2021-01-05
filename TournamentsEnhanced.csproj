@@ -233,7 +233,6 @@
     <Compile Include="src\Finders\Abstract\ComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentRelationComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentComparer.cs" />
-    <Compile Include="src\Finders\Settlement\Comparers\FactionRankComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\HostSettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\SettlementComparerBase.cs" />
@@ -250,6 +249,10 @@
     <Compile Include="src\Finders\HeroFinder.cs" />
     <Compile Include="src\Finders\KingdomFinder.cs" />
     <Compile Include="src\Finders\SettlementFinder.cs" />
+    <Compile Include="src\Finders\Clan\FindClanOptions.cs" />
+    <Compile Include="src\Finders\Clan\FindClanResult.cs" />
+    <Compile Include="src\Finders\ClanFinder.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentPayorComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

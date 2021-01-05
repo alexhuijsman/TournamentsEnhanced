@@ -27,11 +27,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
       set => UnwrappedObject.Prosperity = value;
     }
 
-    public bool IsLedBy(Hero leader)
-    {
-      return ClanLeader.Equals(leader) || FactionLeader.Equals(leader);
-    }
-
     public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
   }

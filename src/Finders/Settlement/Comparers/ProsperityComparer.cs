@@ -1,7 +1,7 @@
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced.Finder.Comparers
+namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class ProsperityComparer : HostSettlementComparerBase
   {
