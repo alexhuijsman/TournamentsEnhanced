@@ -16,7 +16,10 @@ namespace TournamentsEnhanced.Models.Serializable
     public bool IsHeroPayor => payorType == PayorType.Hero;
     public bool IsSettlementPayor => payorType == PayorType.Settlement;
 
+    public MBSettlement FindHostSettlement() => Settlement.Find(hostSettlementId);
     public MBSettlement FindPayorSettlement() => Settlement.Find(payorId);
     public MBHero FindPayorHero() => MBCharacterObject.Find(payorId).HeroObject;
+
+    public bool HasExistingTournament() => tournamentType != TournamentType.None;
   }
 }

@@ -41,9 +41,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       return xMeetsRequirements ? yMeetsRequirements ? XIsEqualToY : XIsGreaterThanY : XIsLessThanY;
     }
 
-    private bool MeetsAllRequirements(TournamentRecord record) =>
-      record.tournamentType != TournamentType.None && //TODO make these conditions into micro methods and make them reusable and move to base 
-      Payor.Hero.StringId != record.payorId &&
-      (Payor.Hero.IsFactionLeader || PayorIsClanLeaderAndRecordPayorIsSettlement);
+    private bool MeetsAllRequirements(TournamentRecord record) => HasExistingTournament(record) &&
+                                                                  PayorIsNotSameAs(record) &&
+                                                                  PayorOutranksPayorOf(record);
   }
 }

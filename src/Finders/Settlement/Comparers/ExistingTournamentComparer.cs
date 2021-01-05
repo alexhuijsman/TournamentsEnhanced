@@ -28,7 +28,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       return xMeetsRequirements ? yMeetsRequirements ? XIsEqualToY : XIsGreaterThanY : XIsLessThanY;
     }
 
-    private bool MeetsRequirements(TournamentRecord record) =>
-      CanOverrideExisting || record.tournamentType == TournamentType.None;
+    private bool MeetsRequirements(TournamentRecord record) => CanOverrideExisting ||
+                                                               !HasExistingTournament(record);
   }
 }

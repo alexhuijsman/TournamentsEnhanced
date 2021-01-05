@@ -32,6 +32,7 @@ namespace TournamentsEnhanced.Models.Serializable
     }
 
     public bool ContainsSettlement(MBSettlement settlement) => ContainsKey(settlement.StringId);
+    public bool ContainsSettlement(string stringId) => ContainsKey(stringId);
 
     public void AddOrUpdate(TournamentRecord record) => this[record.hostSettlementId] = record;
 
