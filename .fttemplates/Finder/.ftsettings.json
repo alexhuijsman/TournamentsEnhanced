@@ -1,0 +1,6 @@
+{
+  "name": "Finder",
+  "customVariables": ["TypeToFind", "PackageName=>CampaignSystem Core Localization ObjectSystem", "FileExt=>cs"],
+  "omitParentDirectory": true,
+  "omitFTName": true
+}

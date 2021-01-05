@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 {
   public class FinderBase<R, O, W, L, T>
     where R : FindResultBase<R, W, L, T>, new()
-    where O : IFindOptionsBase<W, L>
+    where O : FindOptionsBase<W, L>
     where W : MBWrapperBase<W, T>, new()
     where L : MBListBase<W, L>
   {
@@ -20,7 +20,7 @@ namespace TournamentsEnhanced.Finder.Abstract
         FindResultBase<R, W, L, T>.Success(remainingCandidates.First());
     }
 
-    private static L SortAndFilterByComparers(L candidates, IComparer<W>[] comparers)
+    protected static L SortAndFilterByComparers(L candidates, IComparer<W>[] comparers)
     {
       candidates.Add(MBWrapperBase<W, T>.Null);
 
@@ -37,7 +37,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
     private static void RemoveCandidatesRankedLowerThanNull(L candidates)
     {
-      var nullIndexSearchResult = GetNullIndexOfCandidates(candidates);
+      var nullIndexSearchResult = GetNullIndexFor(candidates);
       var nullIndex = nullIndexSearchResult.indexValue;
 
       if (!nullIndexSearchResult.wasSuccessful)
@@ -51,7 +51,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
     }
 
-    private static NullIndexSearchResult GetNullIndexOfCandidates(L candidates)
+    private static NullIndexSearchResult GetNullIndexFor(L candidates)
     {
       int nullIndex = -1;
       for (int i = 0; i < candidates.Count; i++)

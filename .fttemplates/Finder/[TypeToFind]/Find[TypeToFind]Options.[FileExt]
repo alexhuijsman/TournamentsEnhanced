@@ -1,0 +1,8 @@
+using TournamentsEnhanced.Wrappers.[PackageName];
+
+namespace TournamentsEnhanced.Finder
+{
+  public class Find[TypeToFind]Options : FindOptionsBase<MB[TypeToFind], MB[TypeToFind]List>
+  {
+  }
+}

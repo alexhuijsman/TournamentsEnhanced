@@ -1,0 +1,12 @@
+using TaleWorlds.[PackageName];
+
+using TournamentsEnhanced.Finder.Abstract;
+using TournamentsEnhanced.Wrappers.[PackageName];
+
+namespace TournamentsEnhanced.Finder
+{
+  public class [TypeToFind]Finder
+    : FinderBase<Find[TypeToFind]Result, Find[TypeToFind]Options, MB[TypeToFind], MB[TypeToFind]List, [TypeToFind]>
+  {
+  }
+}

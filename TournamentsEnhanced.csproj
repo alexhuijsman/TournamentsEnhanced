@@ -237,16 +237,19 @@
     <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\HostSettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\SettlementComparerBase.cs" />
-    <Compile Include="src\Finders\Settlement\SettlementFinder.cs" />
     <Compile Include="src\Finders\Settlement\FindHostSettlementOptions.cs" />
-    <Compile Include="src\Finders\Hero\HeroFinder.cs" />
     <Compile Include="src\Finders\Hero\FindHeroResult.cs" />
     <Compile Include="src\Finders\Hero\FindHeroOptions.cs" />
     <Compile Include="src\Finders\Abstract\FinderBase.cs" />
-    <Compile Include="src\Finders\Abstract\IFindOptionsBase.cs" />
     <Compile Include="src\Finders\Abstract\FindResultBase.cs" />
     <Compile Include="src\Finders\Abstract\ResultBase.cs" />
     <Compile Include="src\Finders\Settlement\FindSettlementResult.cs" />
+    <Compile Include="src\Finders\Abstract\FindOptionsBase.cs" />
+    <Compile Include="src\Finders\Kingdom\FindKingdomResult.cs" />
+    <Compile Include="src\Finders\Kingdom\FindKingdomOptions.cs" />
+    <Compile Include="src\Finders\HeroFinder.cs" />
+    <Compile Include="src\Finders\KingdomFinder.cs" />
+    <Compile Include="src\Finders\SettlementFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Finder
 
     public new static FindHeroResult Failure()
       => new FindHeroResult() { Status = ResultStatus.Failure };
-    public new static FindHeroResult Success(MBHero hero)
-      => new FindHeroResult() { Status = ResultStatus.Failure, Nominee = hero };
+    public new static FindHeroResult Success(MBHero nominee)
+      => new FindHeroResult() { Status = ResultStatus.Failure, Nominee = nominee };
   }
 }

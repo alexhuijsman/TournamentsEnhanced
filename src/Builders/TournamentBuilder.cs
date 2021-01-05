@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
+using TournamentsEnhanced.Finder.Comparers;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -49,7 +51,30 @@ namespace TournamentsEnhanced.Builders
 
     private static FindSettlementResult TryFindSettlementForPeaceTournament(IMBFaction faction)
     {
-      throw new NotImplementedException();
+      var payor = new Payor(faction.Leader);
+      var candidateSettlements = faction.Settlements;
+      var result = FindSettlementForPeaceTournament(candidateSettlements, payor);
+
+      if (result.Failed)
+      {
+        result = FindSettlementWithExistingTournamentForPeace(candidateSettlements, payor);
+      }
+
+      return result;
+    }
+
+    private static FindSettlementResult FindSettlementForPeaceTournament(MBSettlementList settlements, Payor payor)
+    {
+      var comparers = new IComparer<MBSettlement>[] { new ExistingTournamentComparer(payor, false) };
+      var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
+      return SettlementFinder.FindHostSettlement(options);
+    }
+
+    private static FindSettlementResult FindSettlementWithExistingTournamentForPeace(MBSettlementList settlements, Payor payor)
+    {
+      var comparers = new IComparer<MBSettlement>[] { new ExistingTournamentComparer(payor, true) };
+      var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
+      return SettlementFinder.FindHostSettlement(options);
     }
 
     public static CreateTournamentResult TryMakeLordTournamentForFaction(IMBFaction faction)

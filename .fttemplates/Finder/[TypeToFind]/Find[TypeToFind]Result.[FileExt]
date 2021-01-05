@@ -1,0 +1,18 @@
+using TaleWorlds.[PackageName];
+
+using TournamentsEnhanced.Finder.Abstract;
+using TournamentsEnhanced.Wrappers.[PackageName];
+
+namespace TournamentsEnhanced.Finder
+{
+  public class Find[TypeToFind]Result
+    : FindResultBase<Find[TypeToFind]Result, MB[TypeToFind], MB[TypeToFind]List, [TypeToFind]>
+  {
+    public Find[TypeToFind]Result() { }
+
+    public new static Find[TypeToFind]Result Failure()
+      => new Find[TypeToFind]Result() { Status = ResultStatus.Failure };
+    public new static Find[TypeToFind]Result Success(MB[TypeToFind] nominee)
+      => new Find[TypeToFind]Result() { Status = ResultStatus.Failure, Nominee = nominee };
+  }
+}
