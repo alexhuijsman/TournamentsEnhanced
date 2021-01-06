@@ -14,6 +14,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBStatExplainerList : MBListBase<MBStatExplainer, MBStatExplainerList>
   {
+    public MBStatExplainerList(IEnumerable<MBStatExplainer> wrappers) => AddRange(wrappers);
+    public MBStatExplainerList(MBStatExplainer wrapper) => Add(wrapper);
+    public MBStatExplainerList() { }
+
     public static implicit operator List<StatExplainer>(MBStatExplainerList wrapperList) => wrapperList.Unwrap<MBStatExplainer, StatExplainer>();
     public static implicit operator MBStatExplainerList(List<StatExplainer> objectList) => (MBStatExplainerList)objectList.Wrap<MBStatExplainer, StatExplainer>();
   }

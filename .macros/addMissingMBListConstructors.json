@@ -1,0 +1,13 @@
+[
+  {
+    "command": "ssmacro.replace",
+    "args": {
+        "info": "Add Missing MBList constructors",
+        "find": "^(\\s*public class )(\\w*)( : MBListBase<)(\\w*)(, )(\\w*)(>\\s*{)",
+        "replace": "$1$2$3$4$5$6$7\n    public $2(IEnumerable<$4> wrappers) => AddRange(wrappers);\n    public $2($4 wrapper) => Add(wrapper);\n    public $2() { }\n",
+        "all": true,
+        "reg": true,
+        "flag": "gm"
+    }
+  }
+]

@@ -228,8 +228,6 @@
     <Compile Include="src\Wrappers\CampaignSystem\Interfaces\IMBFaction.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\Interfaces\IMBHero.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\Interfaces\IMBTown.cs" />
-    <Compile Include="src\Builders\Options\CreateTournamentOptions.cs" />
-    <Compile Include="src\Builders\Results\CreateTournamentResult.cs" />
     <Compile Include="src\Finders\Abstract\ComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentRelationComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentComparer.cs" />
@@ -253,6 +251,9 @@
     <Compile Include="src\Finders\Clan\FindClanResult.cs" />
     <Compile Include="src\Finders\ClanFinder.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentPayorComparer.cs" />
+    <Compile Include="src\Builders\CreateTournamentResult.cs" />
+    <Compile Include="src\Builders\CreateTournamentOptions.cs" />
+    <Compile Include="src\Builders\Abstract\CreateResultBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

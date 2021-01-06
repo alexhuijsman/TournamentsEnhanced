@@ -6,7 +6,6 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Comparers;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -34,14 +33,14 @@ namespace TournamentsEnhanced.Builders
         return failureResult;
       }
 
-      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Settlement, TournamentType.Peace, payor);
+      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Nominee, TournamentType.Peace, payor);
 
       return CreateTournament(createTournamentOptions);
     }
 
     private static bool ValidatePayorHero(MBHero payorHero)
     {
-      return HeroFinder.FindPayorHero(new FindHeroOptions() { heroes = [payorHero] }).Succeeded;
+      return HeroFinder.Find(new FindHeroOptions() { Candidates = new MBHeroList(payorHero) };
     }
 
     private static bool ValidateFaction(IMBFaction faction)

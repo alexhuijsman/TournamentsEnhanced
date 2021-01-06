@@ -17,6 +17,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBCharacterObjectList : MBListBase<MBCharacterObject, MBCharacterObjectList>
   {
+    public MBCharacterObjectList(IEnumerable<MBCharacterObject> wrappers) => AddRange(wrappers);
+    public MBCharacterObjectList(MBCharacterObject wrapper) => Add(wrapper);
+    public MBCharacterObjectList() { }
+
     public static implicit operator List<CharacterObject>(MBCharacterObjectList wrapperList) => wrapperList.Unwrap<MBCharacterObject, CharacterObject>();
     public static implicit operator MBCharacterObjectList(List<CharacterObject> objectList) => (MBCharacterObjectList)objectList.Wrap<MBCharacterObject, CharacterObject>();
   }

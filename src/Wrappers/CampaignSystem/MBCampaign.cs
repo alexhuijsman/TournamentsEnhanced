@@ -32,6 +32,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBCampaignList : MBListBase<MBCampaign, MBCampaignList>
   {
+    public MBCampaignList(IEnumerable<MBCampaign> wrappers) => AddRange(wrappers);
+    public MBCampaignList(MBCampaign wrapper) => Add(wrapper);
+    public MBCampaignList() { }
+
     public static implicit operator List<Campaign>(MBCampaignList wrapperList) => wrapperList.Unwrap<MBCampaign, Campaign>();
     public static implicit operator MBCampaignList(List<Campaign> objectList) => (MBCampaignList)objectList.Wrap<MBCampaign, Campaign>();
   }

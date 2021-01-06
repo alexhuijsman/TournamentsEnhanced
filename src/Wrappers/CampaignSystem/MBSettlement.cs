@@ -33,6 +33,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBSettlementList : MBListBase<MBSettlement, MBSettlementList>
   {
+    public MBSettlementList(IEnumerable<MBSettlement> wrappers) => AddRange(wrappers);
+    public MBSettlementList(MBSettlement wrapper) => Add(wrapper);
+    public MBSettlementList() { }
+
     public static implicit operator List<Settlement>(MBSettlementList wrapperList) => wrapperList.Unwrap<MBSettlement, Settlement>();
     public static implicit operator MBSettlementList(List<Settlement> objectList) => (MBSettlementList)objectList.Wrap<MBSettlement, Settlement>();
   }

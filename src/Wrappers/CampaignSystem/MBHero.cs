@@ -316,6 +316,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBHeroList : MBListBase<MBHero, MBHeroList>
   {
+    public MBHeroList(IEnumerable<MBHero> wrappers) => AddRange(wrappers);
+    public MBHeroList(MBHero wrapper) => Add(wrapper);
+    public MBHeroList() { }
+
     public static implicit operator List<Hero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, Hero>();
     public static implicit operator MBHeroList(List<Hero> objectList) => (MBHeroList)objectList.Wrap<MBHero, Hero>();
   }

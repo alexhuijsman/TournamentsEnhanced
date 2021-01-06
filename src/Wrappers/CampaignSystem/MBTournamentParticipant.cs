@@ -14,6 +14,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBTournamentParticipantList : MBListBase<MBTournamentParticipant, MBTournamentParticipantList>
   {
+    public MBTournamentParticipantList(IEnumerable<MBTournamentParticipant> wrappers) => AddRange(wrappers);
+    public MBTournamentParticipantList(MBTournamentParticipant wrapper) => Add(wrapper);
+    public MBTournamentParticipantList() { }
+
     public static implicit operator List<TournamentParticipant>(MBTournamentParticipantList wrapperList) => wrapperList.Unwrap<MBTournamentParticipant, TournamentParticipant>();
     public static implicit operator MBTournamentParticipantList(List<TournamentParticipant> objectList) => (MBTournamentParticipantList)objectList.Wrap<MBTournamentParticipant, TournamentParticipant>();
   }

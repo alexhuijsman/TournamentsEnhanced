@@ -14,6 +14,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBCultureObjectList : MBListBase<MBCultureObject, MBCultureObjectList>
   {
+    public MBCultureObjectList(IEnumerable<MBCultureObject> wrappers) => AddRange(wrappers);
+    public MBCultureObjectList(MBCultureObject wrapper) => Add(wrapper);
+    public MBCultureObjectList() { }
+
     public static implicit operator List<CultureObject>(MBCultureObjectList wrapperList) => wrapperList.Unwrap<MBCultureObject, CultureObject>();
     public static implicit operator MBCultureObjectList(List<CultureObject> objectList) => (MBCultureObjectList)objectList.Wrap<MBCultureObject, CultureObject>();
   }

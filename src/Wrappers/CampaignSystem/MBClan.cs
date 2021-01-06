@@ -101,6 +101,10 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBClanList : MBListBase<MBClan, MBClanList>
   {
+    public MBClanList(IEnumerable<MBClan> wrappers) => AddRange(wrappers);
+    public MBClanList(MBClan wrapper) => Add(wrapper);
+    public MBClanList() { }
+
     public static implicit operator List<Clan>(MBClanList wrapperList) => wrapperList.Unwrap<MBClan, Clan>();
     public static implicit operator MBClanList(List<Clan> objectList) => (MBClanList)objectList.Wrap<MBClan, Clan>();
   }
