@@ -4,9 +4,9 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
-  public class ExistingTournamentPayorComparer : ExistingTournamentComparer
+  public class PayorRankComparer : ExistingTournamentComparer
   {
-    public ExistingTournamentPayorComparer(Payor payor) : base(payor, true) { }
+    public PayorRankComparer(Payor payor) : base(payor, true) { }
 
     internal override bool MeetsRequirements(MBSettlement settlement)
     {

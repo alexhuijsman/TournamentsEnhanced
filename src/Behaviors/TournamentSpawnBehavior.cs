@@ -112,8 +112,8 @@ namespace TournamentsEnhanced.Behaviors
 
     private void OnMakePeace(IMBFaction factionA, IMBFaction factionB)
     {
-      var resultsA = TournamentBuilder.TryMakePeaceTournamentForFaction(factionA);
-      var resultsB = TournamentBuilder.TryMakePeaceTournamentForFaction(factionB);
+      var resultsA = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionA);
+      var resultsB = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionB);
 
       if (!Settings.Instance.PeaceNotification || (!resultsA.Succeeded && !resultsB.Succeeded))
       {
@@ -137,39 +137,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
     {
-      var marriageIsBetweenTwoFactions = !firstHero.MapFaction.Equals(secondHero.MapFaction);
-
-      if (marriageIsBetweenTwoFactions)
-      {
-        OnInterFactionMarriage(firstHero, secondHero, showNotification);
-      }
-      else
-      {
-        OnIntraFactionMarriage(firstHero, secondHero, showNotification);
-      }
-    }
-
-    private void OnInterFactionMarriage(Hero firstHero, Hero secondHero, bool showNotification)
-    {
-      var resultsA = TournamentBuilder.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, firstHero.MapFaction);
-      var resultsB = TournamentBuilder.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, secondHero.MapFaction);
-
-      if (!resultsA.Succeeded && !resultsB.Succeeded)
-      {
-        return;
-      }
-
-      string hostTownNames;
-      if (resultsA.Succeeded && resultsB.Succeeded)
-      {
-        hostTownNames = $"{resultsA.Town.Name} and {resultsB.Town.Name}";
-      }
-      else
-      {
-        hostTownNames = resultsA.Succeeded ? $"{resultsA.Town.Name}" : $"{resultsB.Town.Name}";
-      }
-
-      NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {hostTownNames}");
+      TournamentBuilder.TryCreateWeddingTournament(firstHero, secondHero);
     }
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)

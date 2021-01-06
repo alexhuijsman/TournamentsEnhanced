@@ -7,75 +7,14 @@ using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Comparers.Hero;
-using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
 {
-  public static class TournamentBuilder
+  public abstract class TournamentBuilderBase
   {
-    public static CreateTournamentResult TryMakePeaceTournamentForFaction(IMBFaction faction)
-    {
-      var payor = new Payor(faction.Leader);
-      var payorHero = payor.Hero;
-      var failureResult = CreateTournamentResult.Failure();
-
-      if (!ValidatePayorHero(payorHero) || !ValidateFaction(faction))
-      {
-        return failureResult;
-      }
-
-      var findSettlementResult = TryFindSettlementForPeaceTournament(faction);
-
-      if (findSettlementResult.Failed)
-      {
-        return failureResult;
-      }
-
-      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Nominee, TournamentType.Peace, payor);
-
-      return CreateTournament(createTournamentOptions);
-    }
-
-    private static FindSettlementResult TryFindSettlementForPeaceTournament(IMBFaction faction)
-    {
-      var payor = new Payor(faction.Leader);
-      var candidateSettlements = faction.Settlements;
-
-      var result = FindSettlementForPeaceTournament(candidateSettlements, payor);
-
-      if (result.Failed)
-      {
-        result = FindSettlementWithExistingTournamentForPeace(candidateSettlements, payor);
-      }
-
-      return result;
-    }
-
-    private static FindSettlementResult FindSettlementForPeaceTournament(MBSettlementList settlements, Payor payor)
-    {
-      var comparers = new IComparer<MBSettlement>[] {
-        new ExistingTournamentComparer(payor, false),
-        new ProsperityComparer(payor)};
-      var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
-
-      return SettlementFinder.Find(options);
-    }
-
-    private static FindSettlementResult FindSettlementWithExistingTournamentForPeace(MBSettlementList settlements, Payor payor)
-    {
-      var comparers = new IComparer<MBSettlement>[] {
-        new ExistingTournamentComparer(payor, true),
-        new ExistingTournamentPayorComparer(payor),
-        new ExistingTournamentRelationComparer(payor, 50),
-        new ProsperityComparer(payor)};
-      var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
-
-      return SettlementFinder.Find(options);
-    }
-
-    private static bool ValidatePayorHero(MBHero payorHero)
+    internal static bool ValidatePayorHero(MBHero payorHero)
     {
       return HeroFinder.Find(
         new FindHeroOptions()
@@ -85,7 +24,7 @@ namespace TournamentsEnhanced.Builders
         }).Succeeded;
     }
 
-    private static bool ValidateFaction(IMBFaction faction)
+    internal static bool ValidateFaction(IMBFaction faction)
     {
       bool result;
 
@@ -105,39 +44,7 @@ namespace TournamentsEnhanced.Builders
       return result;
     }
 
-    public static void CreateInitialTournaments()
-    {
-      var townsWithExisting = MBTown.AllTownsWithTournaments;
-      var townsWithoutExisting = MBTown.AllTownsWithoutTournaments;
-      var numExisting = townsWithExisting.Count;
-      var maxPossible = townsWithoutExisting.Count;
-      var numRequested = Settings.Instance.TournamentInitialSpawnCount - numExisting;
-      var numToCreate = (numRequested <= maxPossible) ? numRequested : maxPossible;
-
-      CreateTournamentOptions options;
-      foreach (var town in townsWithExisting)
-      {
-        options = new CreateTournamentOptions(town.Settlement, TournamentType.Initial, Payor.NoPayor);
-        CreateTournament(options);
-      }
-
-      var numCreated = 0;
-      foreach (var town in townsWithoutExisting.Shuffle())
-      {
-        if (numCreated >= numToCreate)
-        {
-          break;
-        }
-
-        options = new CreateTournamentOptions(town.Settlement, TournamentType.Initial, Payor.NoPayor);
-        CreateTournament(options);
-
-        numCreated++;
-      }
-    }
-
-
-    private static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
+    internal static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
       var settlement = options.Settlement;
       var type = options.Type;

@@ -4,11 +4,11 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
-  public class ExistingTournamentRelationComparer : ExistingTournamentComparer
+  public class PayorRelationComparer : ExistingTournamentComparer
   {
     public float MaxRelation { get; private set; }
 
-    public ExistingTournamentRelationComparer(Payor payor, float maxRelation) : base(payor, true)
+    public PayorRelationComparer(Payor payor, float maxRelation) : base(payor, true)
     {
       MaxRelation = maxRelation;
     }
