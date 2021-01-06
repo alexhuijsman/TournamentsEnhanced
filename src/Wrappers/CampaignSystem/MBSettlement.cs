@@ -18,8 +18,8 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     private static MBSettlementList _allSettlements;
 
-    public Hero ClanLeader => UnwrappedObject.OwnerClan.Leader;
-    public Hero FactionLeader => UnwrappedObject.MapFaction.Leader;
+    public MBHero ClanLeader => UnwrappedObject.OwnerClan.Leader;
+    public MBHero FactionLeader => UnwrappedObject.MapFaction.Leader;
 
     public float Prosperity
     {

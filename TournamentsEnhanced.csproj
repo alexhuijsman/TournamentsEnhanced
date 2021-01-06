@@ -254,6 +254,8 @@
     <Compile Include="src\Builders\CreateTournamentResult.cs" />
     <Compile Include="src\Builders\CreateTournamentOptions.cs" />
     <Compile Include="src\Builders\Abstract\CreateResultBase.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\BasicHostRequirementsHeroComparer.cs" />
+    <Compile Include="src\Finders\Hero\Abstract\HeroComparerBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

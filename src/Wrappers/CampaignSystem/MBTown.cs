@@ -72,6 +72,8 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBSettlement Settlement => UnwrappedObject.Settlement;
 
+    public float FoodStocks { get => UnwrappedObject.FoodStocks; set => UnwrappedObject.FoodStocks = value; }
+
     public void ChangeGold(int amount) => UnwrappedObject.ChangeGold(amount);
 
     public int FoodStocksUpperLimit() => UnwrappedObject.FoodStocksUpperLimit();

@@ -1,4 +1,3 @@
-using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -13,22 +12,10 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       CanOverrideExisting = canOverrideExisting;
     }
 
-    public override int Compare(MBSettlement x, MBSettlement y)
+    internal override bool MeetsRequirements(MBSettlement settlement)
     {
-      var xHasRecord = ModState.TournamentRecords.ContainsSettlement(x);
-      var yHasRecord = ModState.TournamentRecords.ContainsSettlement(y);
-
-      var xRecord = xHasRecord ? ModState.TournamentRecords[x] : default(TournamentRecord);
-      var yRecord = yHasRecord ? ModState.TournamentRecords[y] : default(TournamentRecord);
-
-      var xMeetsRequirements = !x.IsNull && MeetsRequirements(xRecord);
-
-      var yMeetsRequirements = !y.IsNull && MeetsRequirements(yRecord);
-
-      return xMeetsRequirements ? yMeetsRequirements ? XIsEqualToY : XIsGreaterThanY : XIsLessThanY;
+      return CanOverrideExisting ||
+             !HasExistingTournament(settlement);
     }
-
-    private bool MeetsRequirements(TournamentRecord record) => CanOverrideExisting ||
-                                                               !HasExistingTournament(record);
   }
 }

@@ -10,39 +10,22 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 
     public override int Compare(MBSettlement x, MBSettlement y)
     {
-      var xHasRecord = ModState.TournamentRecords.ContainsSettlement(x);
-      var yHasRecord = ModState.TournamentRecords.ContainsSettlement(y);
+      var result = 0;
 
-      var xRecord = xHasRecord ? ModState.TournamentRecords[x] : default(TournamentRecord);
-      var yRecord = yHasRecord ? ModState.TournamentRecords[y] : default(TournamentRecord);
+      var wasResultAssigned =
+        TryComparePreconditions(x, y, ref result);
 
-      var xMeetsRequirements = !x.IsNull && MeetsAllRequirements(xRecord);
-      var yMeetsRequirements = !y.IsNull && MeetsAllRequirements(yRecord);
-
-      if (!xMeetsRequirements)
-      {
-        return yMeetsRequirements ? XIsLessThanY : XIsEqualToY;
-      }
-
-      if (!yMeetsRequirements)
-      {
-        return XIsGreaterThanY;
-      }
-
-      var payorIsKingdomLeader = Payor.Hero.IsFactionLeader;
-
-      // if payor is kingdom leader and x/y payor is not kingdom leader
-      // if payor is not kingdom leader but x/y payor is settlement
-      // 
-
-      var xOwner = x.ClanLeader;
-      var yOwner = y.ClanLeader;
-
-      return xMeetsRequirements ? yMeetsRequirements ? XIsEqualToY : XIsGreaterThanY : XIsLessThanY;
+      return result;
     }
 
-    private bool MeetsAllRequirements(TournamentRecord record) => HasExistingTournament(record) &&
-                                                                  PayorIsNotSameAs(record) &&
-                                                                  PayorOutranksPayorOf(record);
+    internal override bool MeetsRequirements(MBSettlement settlement)
+    {
+      var hasRecord = ModState.TournamentRecords.ContainsSettlement(settlement);
+      var record = hasRecord ? ModState.TournamentRecords[settlement] : default(TournamentRecord);
+
+      return HasExistingTournament(settlement) &&
+             PayorIsSameAs(record) &&
+             PayorOutranksPayorOf(record);
+    }
   }
 }

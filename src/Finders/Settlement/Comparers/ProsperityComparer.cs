@@ -14,23 +14,26 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 
     public override int Compare(MBSettlement x, MBSettlement y)
     {
-      var xMeetsRequirements = !x.IsNull && x.Prosperity >= MinProsperity;
-      var yMeetsRequirements = !y.IsNull && y.Prosperity >= MinProsperity;
+      var result = 0;
 
-      if (!xMeetsRequirements)
-      {
-        return yMeetsRequirements ? XIsLessThanY : XIsEqualToY;
-      }
+      var wasResultAssigned =
+        TryComparePreconditions(x, y, ref result) ? true :
+        CompareProsperity(x, y, out result);
 
-      if (!yMeetsRequirements)
-      {
-        return XIsGreaterThanY;
-      }
+      return result;
+    }
 
+    internal bool CompareProsperity(MBSettlement x, MBSettlement y, out int result)
+    {
       var xIsMoreProsperous = x.Prosperity > y.Prosperity;
       var xIsLessProsperous = x.Prosperity < y.Prosperity;
 
-      return xIsMoreProsperous ? XIsGreaterThanY : xIsLessProsperous ? XIsLessThanY : XIsEqualToY;
+      result = xIsMoreProsperous ? XIsGreaterThanY : xIsLessProsperous ? XIsLessThanY : XIsEqualToY;
+
+      return true;
     }
+
+    internal override bool MeetsRequirements(MBSettlement wrapper) =>
+      wrapper.Prosperity >= MinProsperity;
   }
 }

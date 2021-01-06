@@ -40,12 +40,22 @@ namespace TournamentsEnhanced.Builders
 
     private static bool ValidatePayorHero(MBHero payorHero)
     {
-      return HeroFinder.Find(new FindHeroOptions() { Candidates = new MBHeroList(payorHero) };
+      return HeroFinder.Find(
+        new FindHeroOptions()
+        {
+          Candidates = new MBHeroList(payorHero),
+          Comparers = new IComparer<MBHero>[] { }
+        }).Succeeded;
     }
 
     private static bool ValidateFaction(IMBFaction faction)
     {
-      return FactionFinder.FindHostFaction(new FindFactionOptions() { factions = [faction] }).Succeeded;
+      var factionLeader = faction.Leader;
+      var numTownsInFaction = faction.Settlements.FindAll((settlement) => settlement.IsTown);
+
+
+
+      return FactionFinder.Find(new FindFactionOptions() { factions = [faction] }).Succeeded;
     }
 
     private static FindSettlementResult TryFindSettlementForPeaceTournament(IMBFaction faction)
@@ -150,43 +160,43 @@ namespace TournamentsEnhanced.Builders
 
     private static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
-      var town = options.Settlement;
+      var settlement = options.Settlement;
       var type = options.Type;
-      var townHadExistingTournament = town.HasTournament;
+      var townHadExistingTournament = settlement.Town.HasTournament;
 
       if (!townHadExistingTournament)
       {
-        InstantiateTournamentForTown(town);
-        ApplyHostingEffectsOfTypeToTown(type, town);
+        InstantiateTournamentFor(settlement);
+        ApplyHostingEffectsOfTypeToTown(type, settlement);
       }
 
       DebitPayor(options.Payor);
 
-      return CreateTournamentResult.Success(town, townHadExistingTournament);
+      return CreateTournamentResult.Success(settlement, townHadExistingTournament);
     }
 
-    private static void InstantiateTournamentForTown(Town town)
+    private static void InstantiateTournamentFor(MBSettlement settlement)
     {
-      var tournament = new FightTournamentGame(town);
+      var tournament = new FightTournamentGame(settlement.Town);
       Campaign.Current.TournamentManager.AddTournament(tournament);
     }
 
 
-    private static void ApplyHostingEffectsOfTypeToTown(TournamentType type, Town town)
+    private static void ApplyHostingEffectsOfTypeToTown(TournamentType type, MBSettlement settlement)
     {
       if (type == TournamentType.Initial)
       {
         return;
       }
 
-      town.Settlement.Prosperity += Settings.Instance.ProsperityIncrease;
-      town.Loyalty += Settings.Instance.LoyaltyIncrease;
-      town.Security += Settings.Instance.SecurityIncrease;
-      town.FoodStocks -= Settings.Instance.FoodStocksDecrease;
+      settlement.Prosperity += Settings.Instance.ProsperityIncrease;
+      settlement.Town.Loyalty += Settings.Instance.LoyaltyIncrease;
+      settlement.Town.Security += Settings.Instance.SecurityIncrease;
+      settlement.Town.FoodStocks -= Settings.Instance.FoodStocksDecrease;
 
-      if (town.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
+      if (settlement.Town.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
       {
-        NotificationUtils.DisplayMessage(town.Name + "'s prosperity, loyalty and security have increased and food stocks have decreased");
+        NotificationUtils.DisplayMessage(settlement.Name + "'s prosperity, loyalty and security have increased and food stocks have decreased");
       }
     }
 
@@ -198,7 +208,7 @@ namespace TournamentsEnhanced.Builders
       }
       else if (payor.IsSettlement)
       {
-        payor.Settlement.ChangeGold(-Settings.Instance.TournamentCost);
+        payor.Settlement.Town.ChangeGold(-Settings.Instance.TournamentCost);
       }
     }
 

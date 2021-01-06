@@ -10,12 +10,21 @@ namespace TournamentsEnhanced.Finder.Comparers
 
     public HostSettlementComparerBase(Payor payor) => Payor = payor;
 
-    protected bool HasExistingTournament(MBSettlement settlement) => ModState.TournamentRecords.ContainsSettlement(settlement);
+    protected bool HasExistingTournament(MBSettlement settlement) =>
+      ModState.TournamentRecords.ContainsSettlement(settlement);
 
-    protected bool HasExistingTournament(TournamentRecord record) => record.tournamentType != TournamentType.None;
+    protected bool PayorIsSameAs(TournamentRecord record) =>
+      record.IsHeroPayor && record.FindPayorHero() == Payor.Hero;
 
-    protected bool PayorIsNotSameAs(TournamentRecord record) => record.IsHeroPayor && Payor.Hero.StringId == record.payorId;
-    protected bool PayorOutranksPayorOf(TournamentRecord record) => PayorIsFactionLeader() || record.payorType == PayorType.Settlement;
-    protected bool PayorIsFactionLeader() => Payor.IsHero && Payor.Hero.IsFactionLeader;
+    protected bool PayorOutranksPayorOf(TournamentRecord record) =>
+      (PayorIsFactionLeader() && PayorFactionIsKingdom()) ||
+      record.payorType == PayorType.Settlement;
+
+    protected bool PayorIsFactionLeader() =>
+      Payor.IsHero &&
+      Payor.Hero.IsFactionLeader;
+
+    protected bool PayorFactionIsKingdom() =>
+      Payor.Hero.MapFaction.IsKingdomFaction;
   }
 }
