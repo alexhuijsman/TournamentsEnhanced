@@ -6,6 +6,8 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
+using TournamentsEnhanced.Finder.Comparers.Hero;
+using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -19,8 +21,6 @@ namespace TournamentsEnhanced.Builders
       var payorHero = payor.Hero;
       var failureResult = CreateTournamentResult.Failure();
 
-      //TODO payor !payorHero.IsDead && !payorHero.IsPrisoner && canAffordTournamentCost
-      //TODO  faction faction.Settlements.IsEmpty || has no towns
       if (!ValidatePayorHero(payorHero) || !ValidateFaction(faction))
       {
         return failureResult;
@@ -38,30 +38,11 @@ namespace TournamentsEnhanced.Builders
       return CreateTournament(createTournamentOptions);
     }
 
-    private static bool ValidatePayorHero(MBHero payorHero)
-    {
-      return HeroFinder.Find(
-        new FindHeroOptions()
-        {
-          Candidates = new MBHeroList(payorHero),
-          Comparers = new IComparer<MBHero>[] { }
-        }).Succeeded;
-    }
-
-    private static bool ValidateFaction(IMBFaction faction)
-    {
-      var factionLeader = faction.Leader;
-      var numTownsInFaction = faction.Settlements.FindAll((settlement) => settlement.IsTown);
-
-
-
-      return FactionFinder.Find(new FindFactionOptions() { factions = [faction] }).Succeeded;
-    }
-
     private static FindSettlementResult TryFindSettlementForPeaceTournament(IMBFaction faction)
     {
       var payor = new Payor(faction.Leader);
       var candidateSettlements = faction.Settlements;
+
       var result = FindSettlementForPeaceTournament(candidateSettlements, payor);
 
       if (result.Failed)
@@ -74,56 +55,54 @@ namespace TournamentsEnhanced.Builders
 
     private static FindSettlementResult FindSettlementForPeaceTournament(MBSettlementList settlements, Payor payor)
     {
-      var comparers = new IComparer<MBSettlement>[] { new ExistingTournamentComparer(payor, false) };
+      var comparers = new IComparer<MBSettlement>[] {
+        new ExistingTournamentComparer(payor, false),
+        new ProsperityComparer(payor)};
       var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
-      return SettlementFinder.FindHostSettlement(options);
+
+      return SettlementFinder.Find(options);
     }
 
     private static FindSettlementResult FindSettlementWithExistingTournamentForPeace(MBSettlementList settlements, Payor payor)
     {
-      var comparers = new IComparer<MBSettlement>[] { new ExistingTournamentComparer(payor, true) };
+      var comparers = new IComparer<MBSettlement>[] {
+        new ExistingTournamentComparer(payor, true),
+        new ExistingTournamentPayorComparer(payor),
+        new ExistingTournamentRelationComparer(payor, 50),
+        new ProsperityComparer(payor)};
       var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
-      return SettlementFinder.FindHostSettlement(options);
+
+      return SettlementFinder.Find(options);
     }
 
-    public static CreateTournamentResult TryMakeLordTournamentForFaction(IMBFaction faction)
+    private static bool ValidatePayorHero(MBHero payorHero)
     {
-      var findHostTownResult =
-        HostTownFinder.FindForFaction(faction,
-                                      FindHostSettlementOptions.RejectExistingTournaments
-                                      );
-      var payor = new Payor(findHostTownResult.Town.FactionLeader());
-
-      return CreateTournament(new CreateTournamentOptions(findHostTownResult, TournamentType.Peace, payor));
+      return HeroFinder.Find(
+        new FindHeroOptions()
+        {
+          Candidates = new MBHeroList(payorHero),
+          Comparers = new IComparer<MBHero>[] { new BasicHostRequirementsHeroComparer() }
+        }).Succeeded;
     }
 
-    public static CreateTournamentResult TryMakeHostTournament()
+    private static bool ValidateFaction(IMBFaction faction)
     {
+      bool result;
 
-    }
-
-    public static CreateTournamentResult CreateInvitationTournamentFromSettlements(MBSettlementList settlements)
-    {
-      var result = HostTownFinder.FindHostTownFromSettlements(settlements);
-
-      if (!result.Status)
+      if (faction.IsKingdomFaction)
       {
-        return CreateInvitationTournamentFromFindSettlementResult(result);
+        result = KingdomFinder.Find(
+          new FindKingdomOptions() { Candidates = new MBKingdomList((MBKingdom)faction) })
+            .Succeeded;
       }
       else
       {
-        return CreateTournamentResult.Failure;
+        result = ClanFinder.Find(
+          new FindClanOptions() { Candidates = new MBClanList((MBClan)faction) })
+          .Succeeded;
       }
-    }
 
-    public static CreateTournamentResult CreateHostedTournamentAtSettlement(Settlement settlement)
-    {
-      TournamentRecords.CreateTournament(settlement, TournamentType.Hosted);
-
-      Hero.MainHero.ChangeHeroGold(-Settings.Instance.TournamentCost);
-      NotificationUtils.DisplayBannerMessage($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Town.Name}");
-
-      return CreateTournamentResult.Success(settlement.Town);
+      return result;
     }
 
     public static void CreateInitialTournaments()
@@ -138,7 +117,7 @@ namespace TournamentsEnhanced.Builders
       CreateTournamentOptions options;
       foreach (var town in townsWithExisting)
       {
-        options = new CreateTournamentOptions(FindSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions(town.Settlement, TournamentType.Initial, Payor.NoPayor);
         CreateTournament(options);
       }
 
@@ -150,7 +129,7 @@ namespace TournamentsEnhanced.Builders
           break;
         }
 
-        options = new CreateTournamentOptions(FindSettlementResult.Success(town), TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions(town.Settlement, TournamentType.Initial, Payor.NoPayor);
         CreateTournament(options);
 
         numCreated++;
@@ -167,10 +146,16 @@ namespace TournamentsEnhanced.Builders
       if (!townHadExistingTournament)
       {
         InstantiateTournamentFor(settlement);
-        ApplyHostingEffectsOfTypeToTown(type, settlement);
+        ApplyHostingEffects(type, settlement);
+        ApplyRelationsGain(type, settlement);
       }
 
-      DebitPayor(options.Payor);
+      PayTournamentFee(options.Payor, settlement);
+
+      if (options.Payor.IsHero && options.Payor.Hero.IsHumanPlayerCharacter)
+      {
+        NotificationUtils.DisplayBannerMessage($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
+      }
 
       return CreateTournamentResult.Success(settlement, townHadExistingTournament);
     }
@@ -182,7 +167,7 @@ namespace TournamentsEnhanced.Builders
     }
 
 
-    private static void ApplyHostingEffectsOfTypeToTown(TournamentType type, MBSettlement settlement)
+    private static void ApplyHostingEffects(TournamentType type, MBSettlement settlement)
     {
       if (type == TournamentType.Initial)
       {
@@ -200,39 +185,42 @@ namespace TournamentsEnhanced.Builders
       }
     }
 
-    private static void DebitPayor(Payor payor)
+    private static void PayTournamentFee(Payor payor, MBSettlement settlement)
     {
-      if (payor.IsHero)
+      if (!payor.IsHero)
       {
-        payor.Hero.ChangeHeroGold(-Settings.Instance.TournamentCost);
+        return;
       }
-      else if (payor.IsSettlement)
-      {
-        payor.Settlement.Town.ChangeGold(-Settings.Instance.TournamentCost);
-      }
+
+      var tournamentCost = Settings.Instance.TournamentCost;
+
+      payor.Hero.ChangeHeroGold(-tournamentCost);
+      payor.Settlement.Town.ChangeGold(tournamentCost);
     }
 
-    public static void ApplyRelationsGainFromTypeInTown(TournamentType type, Town town)
+    public static void ApplyRelationsGain(TournamentType type, MBSettlement settlement)
     {
       if (type != TournamentType.Hosted)
       {
         return;
       }
 
-      foreach (var notable in town.Settlement.Notables)
+      var mainHero = MBHero.MainHero;
+      int newRelation;
+
+      foreach (var notable in settlement.Notables)
       {
-        if (notable == Hero.MainHero)
+        if (notable == mainHero)
         {
           continue;
         }
 
-        notable.SetPersonalRelation(town.OwnerClan.Leader, notable.GetRelation(town.OwnerClan.Leader) + TournamentConstants.HostedTournamentEffects.NobleRelationshipModifier);
+        newRelation = notable.GetBaseHeroRelation(mainHero) + TournamentConstants.HostedTournamentEffects.NobleRelationshipModifier;
+
+        notable.SetPersonalRelation(mainHero, newRelation);
       }
 
-      if (town.OwnerClan.Leader.IsHumanPlayerCharacter)
-      {
-        NotificationUtils.DisplayBannerMessage("Your relationship with local notables at " + town.Name + " has improved");
-      }
+      NotificationUtils.DisplayBannerMessage("Your relationship with local notables at " + settlement.Name + " has improved");
     }
 
     public static ValueTuple<SkillObject, int> TournamentSkillXpGain(Hero winner)

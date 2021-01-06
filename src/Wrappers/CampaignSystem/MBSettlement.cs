@@ -15,6 +15,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public MBTown Town => UnwrappedObject.Town;
     public bool IsTown => UnwrappedObject.IsTown;
     public MBTextObject Name => UnwrappedObject.Name;
+    public MBHeroList Notables => UnwrappedObject.Notables.ToList();
 
     private static MBSettlementList _allSettlements;
 

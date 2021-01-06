@@ -12,6 +12,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       MinProsperity = minProsperity;
     }
 
+    public ProsperityComparer(Payor payor) : base(payor) { }
+
     public override int Compare(MBSettlement x, MBSettlement y)
     {
       var result = 0;

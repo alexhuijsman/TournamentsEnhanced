@@ -8,16 +8,6 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
   {
     public ExistingTournamentPayorComparer(Payor payor) : base(payor, true) { }
 
-    public override int Compare(MBSettlement x, MBSettlement y)
-    {
-      var result = 0;
-
-      var wasResultAssigned =
-        TryComparePreconditions(x, y, ref result);
-
-      return result;
-    }
-
     internal override bool MeetsRequirements(MBSettlement settlement)
     {
       var hasRecord = ModState.TournamentRecords.ContainsSettlement(settlement);

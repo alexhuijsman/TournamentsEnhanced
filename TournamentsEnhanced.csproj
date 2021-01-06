@@ -256,6 +256,10 @@
     <Compile Include="src\Builders\Abstract\CreateResultBase.cs" />
     <Compile Include="src\Finders\Hero\Comparers\BasicHostRequirementsHeroComparer.cs" />
     <Compile Include="src\Finders\Hero\Abstract\HeroComparerBase.cs" />
+    <Compile Include="src\Finders\Clan\Comparers\BasicHostRequirementsClanComparer.cs" />
+    <Compile Include="src\Finders\Clan\Abstract\ClanComparerBase.cs" />
+    <Compile Include="src\Finders\Kingdom\Abstract\KingdomComparerBase.cs" />
+    <Compile Include="src\Finders\Kingdom\Comparers\BasicHostRequirementsKingdomComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
