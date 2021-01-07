@@ -14,6 +14,11 @@ namespace TournamentsEnhanced.Wrappers.Localization
 
   public class MBTextObjectList : MBListBase<MBTextObject, MBTextObjectList>
   {
+    public MBTextObjectList(params MBTextObject[] wrappers) : this((IEnumerable<MBTextObject>)wrappers) { }
+    public MBTextObjectList(IEnumerable<MBTextObject> wrappers) => AddRange(wrappers);
+    public MBTextObjectList(MBTextObject wrapper) => Add(wrapper);
+    public MBTextObjectList() { }
+
     public static implicit operator List<TextObject>(MBTextObjectList wrapperList) => wrapperList.Unwrap<MBTextObject, TextObject>();
     public static implicit operator MBTextObjectList(List<TextObject> objectList) => (MBTextObjectList)objectList.Wrap<MBTextObject, TextObject>();
   }

@@ -14,6 +14,11 @@ namespace TournamentsEnhanced.Wrappers.Core
 
   public class MBArmorComponentList : MBListBase<MBArmorComponent, MBArmorComponentList>
   {
+    public MBArmorComponentList(params MBArmorComponent[] wrappers) : this((IEnumerable<MBArmorComponent>)wrappers) { }
+    public MBArmorComponentList(IEnumerable<MBArmorComponent> wrappers) => AddRange(wrappers);
+    public MBArmorComponentList(MBArmorComponent wrapper) => Add(wrapper);
+    public MBArmorComponentList() { }
+
     public static implicit operator List<ArmorComponent>(MBArmorComponentList wrapperList) => wrapperList.Unwrap<MBArmorComponent, ArmorComponent>();
     public static implicit operator MBArmorComponentList(List<ArmorComponent> objectList) => (MBArmorComponentList)objectList.Wrap<MBArmorComponent, ArmorComponent>();
   }

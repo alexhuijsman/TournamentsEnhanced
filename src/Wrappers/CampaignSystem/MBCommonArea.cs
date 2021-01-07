@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBCommonAreaList : MBListBase<MBCommonArea, MBCommonAreaList>
   {
+    public MBCommonAreaList(params MBCommonArea[] wrappers) : this((IEnumerable<MBCommonArea>)wrappers) { }
     public MBCommonAreaList(IEnumerable<MBCommonArea> wrappers) => AddRange(wrappers);
     public MBCommonAreaList(MBCommonArea wrapper) => Add(wrapper);
     public MBCommonAreaList() { }

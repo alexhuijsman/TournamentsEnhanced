@@ -27,6 +27,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBTournamentModelList : MBListBase<MBTournamentModel, MBTournamentModelList>
   {
+    public MBTournamentModelList(params MBTournamentModel[] wrappers) : this((IEnumerable<MBTournamentModel>)wrappers) { }
     public MBTournamentModelList(IEnumerable<MBTournamentModel> wrappers) => AddRange(wrappers);
     public MBTournamentModelList(MBTournamentModel wrapper) => Add(wrapper);
     public MBTournamentModelList() { }

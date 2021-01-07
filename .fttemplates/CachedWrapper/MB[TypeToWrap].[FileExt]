@@ -14,9 +14,10 @@ namespace TournamentsEnhanced.Wrappers.[PackageName]
 
   public class MB[TypeToWrap]List : MBListBase<MB[TypeToWrap], MB[TypeToWrap]List>
   {
-    public MBListBase(IEnumerable<MB[TypeToWrap]> wrappers) => AddRange(wrappers);
-    public MBListBase(MB[TypeToWrap] wrapper) => Add(wrapper);
-    public MBListBase() { }
+    public MB[TypeToWrap]List(params MBHero[] wrappers) : this((IEnumerable<MBHero>)wrappers) { }
+    public MB[TypeToWrap]List(IEnumerable<MB[TypeToWrap]> wrappers) => AddRange(wrappers);
+    public MB[TypeToWrap]List(MB[TypeToWrap] wrapper) => Add(wrapper);
+    public MB[TypeToWrap]List() { }
 
     public static implicit operator List<[TypeToWrap]>(MB[TypeToWrap]List wrapperList) => wrapperList.Unwrap<MB[TypeToWrap], [TypeToWrap]>();
     public static implicit operator MB[TypeToWrap]List(List<[TypeToWrap]> objectList) => (MB[TypeToWrap]List)objectList.Wrap<MB[TypeToWrap], [TypeToWrap]>();

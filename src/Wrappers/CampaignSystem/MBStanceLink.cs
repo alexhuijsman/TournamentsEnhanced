@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBStanceLinkList : MBListBase<MBStanceLink, MBStanceLinkList>
   {
+    public MBStanceLinkList(params MBStanceLink[] wrappers) : this((IEnumerable<MBStanceLink>)wrappers) { }
     public MBStanceLinkList(IEnumerable<MBStanceLink> wrappers) => AddRange(wrappers);
     public MBStanceLinkList(MBStanceLink wrapper) => Add(wrapper);
     public MBStanceLinkList() { }

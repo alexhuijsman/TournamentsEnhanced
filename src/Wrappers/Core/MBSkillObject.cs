@@ -14,6 +14,11 @@ namespace TournamentsEnhanced.Wrappers.Core
 
   public class MBSkillObjectList : MBListBase<MBSkillObject, MBSkillObjectList>
   {
+    public MBSkillObjectList(params MBSkillObject[] wrappers) : this((IEnumerable<MBSkillObject>)wrappers) { }
+    public MBSkillObjectList(IEnumerable<MBSkillObject> wrappers) => AddRange(wrappers);
+    public MBSkillObjectList(MBSkillObject wrapper) => Add(wrapper);
+    public MBSkillObjectList() { }
+
     public static implicit operator List<SkillObject>(MBSkillObjectList wrapperList) => wrapperList.Unwrap<MBSkillObject, SkillObject>();
     public static implicit operator MBSkillObjectList(List<SkillObject> objectList) => (MBSkillObjectList)objectList.Wrap<MBSkillObject, SkillObject>();
   }

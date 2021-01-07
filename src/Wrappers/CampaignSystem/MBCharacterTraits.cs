@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBCharacterTraitsList : MBListBase<MBCharacterTraits, MBCharacterTraitsList>
   {
+    public MBCharacterTraitsList(params MBCharacterTraits[] wrappers) : this((IEnumerable<MBCharacterTraits>)wrappers) { }
     public MBCharacterTraitsList(IEnumerable<MBCharacterTraits> wrappers) => AddRange(wrappers);
     public MBCharacterTraitsList(MBCharacterTraits wrapper) => Add(wrapper);
     public MBCharacterTraitsList() { }

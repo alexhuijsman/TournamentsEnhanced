@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBGameMenuOptionList : MBListBase<MBGameMenuOption, MBGameMenuOptionList>
   {
+    public MBGameMenuOptionList(params MBGameMenuOption[] wrappers) : this((IEnumerable<MBGameMenuOption>)wrappers) { }
     public MBGameMenuOptionList(IEnumerable<MBGameMenuOption> wrappers) => AddRange(wrappers);
     public MBGameMenuOptionList(MBGameMenuOption wrapper) => Add(wrapper);
     public MBGameMenuOptionList() { }

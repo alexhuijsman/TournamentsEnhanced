@@ -35,6 +35,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBSettlementAccessModelList : MBListBase<MBSettlementAccessModel, MBSettlementAccessModelList>
   {
+    public MBSettlementAccessModelList(params MBSettlementAccessModel[] wrappers) : this((IEnumerable<MBSettlementAccessModel>)wrappers) { }
     public MBSettlementAccessModelList(IEnumerable<MBSettlementAccessModel> wrappers) => AddRange(wrappers);
     public MBSettlementAccessModelList(MBSettlementAccessModel wrapper) => Add(wrapper);
     public MBSettlementAccessModelList() { }

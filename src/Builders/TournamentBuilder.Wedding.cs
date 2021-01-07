@@ -11,10 +11,17 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
-      //TODO if both male and both faction leaders, two tournaments, one in most prosperous city of each kingdom
-      //TODO if either is male and faction leader, one tournament in most prosperous city in leader's kingdom, else in most prosperous city of partner's clan
-      //TODO if one is male and not faction leader, one tournament in most prosperous city in male's clan, else in most prosperous city of partner's clan
+      MBSettlementList candidateSettlements;
+      MBSettlementList partnerCandidateSettlements;
 
+      var options = new FindHeroOptions() { Candidates = new MBHeroList(firstWeddedHero, secondWeddedHero) };
+      HeroFinder.Find(options);
+
+      // if either is (male + factionLeader), one tourn
+      //TODO if a hero is male and faction leader, one tournament in most prosperous city in leader's kingdom, else in most prosperous city of partner's clan
+      //TODO if a hero is male and not faction leader, one tournament in most prosperous city in male's clan, else in most prosperous city of partner's clan
+      //TODO if both female and at least one has high combat stats, one tournament in most prosperous city in fighter's clan, else in most prosperous city of partner's clan
+      //TODO preference for city where wedding happened
       var payor = new Payor(faction.Leader);
       var payorHero = payor.Hero;
       var failureResult = CreateTournamentResult.Failure();

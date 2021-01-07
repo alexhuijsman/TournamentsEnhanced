@@ -316,6 +316,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBHeroList : MBListBase<MBHero, MBHeroList>
   {
+    public MBHeroList(params MBHero[] wrappers) : this((IEnumerable<MBHero>)wrappers) { }
     public MBHeroList(IEnumerable<MBHero> wrappers) => AddRange(wrappers);
     public MBHeroList(MBHero wrapper) => Add(wrapper);
     public MBHeroList() { }

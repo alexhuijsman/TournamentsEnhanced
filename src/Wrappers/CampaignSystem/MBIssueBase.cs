@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBIssueBaseList : MBListBase<MBIssueBase, MBIssueBaseList>
   {
+    public MBIssueBaseList(params MBIssueBase[] wrappers) : this((IEnumerable<MBIssueBase>)wrappers) { }
     public MBIssueBaseList(IEnumerable<MBIssueBase> wrappers) => AddRange(wrappers);
     public MBIssueBaseList(MBIssueBase wrapper) => Add(wrapper);
     public MBIssueBaseList() { }

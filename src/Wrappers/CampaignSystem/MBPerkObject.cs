@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBPerkObjectList : MBListBase<MBPerkObject, MBPerkObjectList>
   {
+    public MBPerkObjectList(params MBPerkObject[] wrappers) : this((IEnumerable<MBPerkObject>)wrappers) { }
     public MBPerkObjectList(IEnumerable<MBPerkObject> wrappers) => AddRange(wrappers);
     public MBPerkObjectList(MBPerkObject wrapper) => Add(wrapper);
     public MBPerkObjectList() { }

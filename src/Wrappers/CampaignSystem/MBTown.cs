@@ -94,6 +94,11 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBTownList : MBListBase<MBTown, MBTownList>
   {
+    public MBTownList(params MBTown[] wrappers) : this((IEnumerable<MBTown>)wrappers) { }
+    public MBTownList(IEnumerable<MBTown> wrappers) => AddRange(wrappers);
+    public MBTownList(MBTown wrapper) => Add(wrapper);
+    public MBTownList() { }
+
     public static implicit operator List<Town>(MBTownList wrapperList) => wrapperList.Unwrap<MBTown, Town>();
     public static implicit operator MBTownList(List<Town> objectList) => (MBTownList)objectList.Wrap<MBTown, Town>();
   }

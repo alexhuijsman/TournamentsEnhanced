@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBBuildingList : MBListBase<MBBuilding, MBBuildingList>
   {
+    public MBBuildingList(params MBBuilding[] wrappers) : this((IEnumerable<MBBuilding>)wrappers) { }
     public MBBuildingList(IEnumerable<MBBuilding> wrappers) => AddRange(wrappers);
     public MBBuildingList(MBBuilding wrapper) => Add(wrapper);
     public MBBuildingList() { }

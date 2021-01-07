@@ -3,8 +3,8 @@
     "command": "ssmacro.replace",
     "args": {
         "info": "Add Missing MBList constructors",
-        "find": "^(\\s*public class )(\\w*)( : MBListBase<)(\\w*)(, )(\\w*)(>\\s*{)",
-        "replace": "$1$2$3$4$5$6$7\n    public $2(IEnumerable<$4> wrappers) => AddRange(wrappers);\n    public $2($4 wrapper) => Add(wrapper);\n    public $2() { }\n",
+        "find": "^(\\s*public class )(\\w*)( : MBListBase<)(\\w*)(, )(\\w*)(>\\s*{)\\s*public static implicit operator",
+        "replace": "$1$2$3$4$5$6$7\n    public $2(params $4[] wrappers) : this((IEnumerable<$4>)wrappers) { }\n    public $2(IEnumerable<$4> wrappers) => AddRange(wrappers);\n    public $2($4 wrapper) => Add(wrapper);\n    public $2() { }\n\n    public static implicit operator",
         "all": true,
         "reg": true,
         "flag": "gm"

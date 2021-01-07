@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBHeroDeveloperList : MBListBase<MBHeroDeveloper, MBHeroDeveloperList>
   {
+    public MBHeroDeveloperList(params MBHeroDeveloper[] wrappers) : this((IEnumerable<MBHeroDeveloper>)wrappers) { }
     public MBHeroDeveloperList(IEnumerable<MBHeroDeveloper> wrappers) => AddRange(wrappers);
     public MBHeroDeveloperList(MBHeroDeveloper wrapper) => Add(wrapper);
     public MBHeroDeveloperList() { }

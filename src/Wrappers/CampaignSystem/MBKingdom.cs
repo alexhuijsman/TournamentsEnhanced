@@ -100,6 +100,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBKingdomList : MBListBase<MBKingdom, MBKingdomList>
   {
+    public MBKingdomList(params MBKingdom[] wrappers) : this((IEnumerable<MBKingdom>)wrappers) { }
     public MBKingdomList(IEnumerable<MBKingdom> wrappers) => AddRange(wrappers);
     public MBKingdomList(MBKingdom wrapper) => Add(wrapper);
     public MBKingdomList() { }

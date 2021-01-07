@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBMobilePartyList : MBListBase<MBMobileParty, MBMobilePartyList>
   {
+    public MBMobilePartyList(params MBMobileParty[] wrappers) : this((IEnumerable<MBMobileParty>)wrappers) { }
     public MBMobilePartyList(IEnumerable<MBMobileParty> wrappers) => AddRange(wrappers);
     public MBMobilePartyList(MBMobileParty wrapper) => Add(wrapper);
     public MBMobilePartyList() { }

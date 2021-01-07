@@ -34,6 +34,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBSettlementList : MBListBase<MBSettlement, MBSettlementList>
   {
+    public MBSettlementList(params MBSettlement[] wrappers) : this((IEnumerable<MBSettlement>)wrappers) { }
     public MBSettlementList(IEnumerable<MBSettlement> wrappers) => AddRange(wrappers);
     public MBSettlementList(MBSettlement wrapper) => Add(wrapper);
     public MBSettlementList() { }

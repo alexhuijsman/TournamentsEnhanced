@@ -236,6 +236,11 @@ namespace TournamentsEnhanced.Wrappers.Core
 
   public class MBItemObjectList : MBListBase<MBItemObject, MBItemObjectList>
   {
+    public MBItemObjectList(params MBItemObject[] wrappers) : this((IEnumerable<MBItemObject>)wrappers) { }
+    public MBItemObjectList(IEnumerable<MBItemObject> wrappers) => AddRange(wrappers);
+    public MBItemObjectList(MBItemObject wrapper) => Add(wrapper);
+    public MBItemObjectList() { }
+
     public static implicit operator List<ItemObject>(MBItemObjectList wrapperList) => wrapperList.Unwrap<MBItemObject, ItemObject>();
     public static implicit operator MBItemObjectList(List<ItemObject> objectList) => (MBItemObjectList)objectList.Wrap<MBItemObject, ItemObject>();
   }

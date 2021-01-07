@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBCaravanPartyComponentList : MBListBase<MBCaravanPartyComponent, MBCaravanPartyComponentList>
   {
+    public MBCaravanPartyComponentList(params MBCaravanPartyComponent[] wrappers) : this((IEnumerable<MBCaravanPartyComponent>)wrappers) { }
     public MBCaravanPartyComponentList(IEnumerable<MBCaravanPartyComponent> wrappers) => AddRange(wrappers);
     public MBCaravanPartyComponentList(MBCaravanPartyComponent wrapper) => Add(wrapper);
     public MBCaravanPartyComponentList() { }
