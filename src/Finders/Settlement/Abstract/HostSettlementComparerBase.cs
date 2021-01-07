@@ -14,7 +14,8 @@ namespace TournamentsEnhanced.Finder.Comparers
       ModState.TournamentRecords.ContainsSettlement(settlement);
 
     protected bool PayorIsSameAs(TournamentRecord record) =>
-      record.IsHeroPayor && record.FindPayorHero() == Payor.Hero;
+      record.IsHeroPayor &&
+      record.FindPayorHero() == Payor.Hero;
 
     protected bool PayorOutranksPayorOf(TournamentRecord record) =>
       (PayorIsFactionLeader() && PayorFactionIsKingdom()) ||
