@@ -7,12 +7,13 @@ namespace TournamentsEnhanced.Finder.Abstract
   where W : MBWrapperBase<W, T>, new()
   where L : MBListBase<W, L>
   {
-    public L Nominees { get; protected set; }
+    public L AllQualifiedCandidates { get; protected set; }
+    public W Nominee => Failed ? AllQualifiedCandidates[0] : null;
 
     public static R Success(L nominees) => new R()
     {
       Status = ResultStatus.Success,
-      Nominees = nominees,
+      AllQualifiedCandidates = nominees,
     };
 
     public static R Failure() => new R()

@@ -10,7 +10,8 @@ namespace TournamentsEnhanced.Finder
   {
     public FindSettlementResult() { }
 
-    public new static FindSettlementResult Success(MBSettlement nominee) => new FindSettlementResult() { Status = ResultStatus.Success, Nominee = nominee };
+    public new static FindSettlementResult Success(MBSettlementList nominees)
+      => new FindSettlementResult() { Status = ResultStatus.Success, AllQualifiedCandidates = nominees };
     public new static FindSettlementResult Failure() => new FindSettlementResult() { Status = ResultStatus.Failure };
   }
 }

@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Finder
 
     public new static FindKingdomResult Failure()
       => new FindKingdomResult() { Status = ResultStatus.Failure };
-    public new static FindKingdomResult Success(MBKingdom hero)
-      => new FindKingdomResult() { Status = ResultStatus.Failure, Nominee = hero };
+    public new static FindKingdomResult Success(MBKingdomList nominees)
+      => new FindKingdomResult() { Status = ResultStatus.Failure, AllQualifiedCandidates = nominees };
   }
 }
