@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using TournamentsEnhanced.Finder;
+using TournamentsEnhanced.Finder.Comparers.Hero;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
@@ -11,11 +12,44 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
+      var failureResult = CreateTournamentResult.Failure();
       MBSettlementList candidateSettlements;
       MBSettlementList partnerCandidateSettlements;
 
-      var options = new FindHeroOptions() { Candidates = new MBHeroList(firstWeddedHero, secondWeddedHero) };
-      HeroFinder.Find(options);
+      var options = new FindHeroOptions()
+      {
+        Candidates = new MBHeroList(firstWeddedHero, secondWeddedHero),
+        Comparers = new IComparer<MBHero>[] { new WeddedKingdomLeaderComparer() }
+      };
+
+      var result = HeroFinder.Find(options);
+
+      if (result.Succeeded)
+      {
+        candidateSettlements = result.Nominee.MapFaction.Settlements;
+        partnerCandidateSettlements = result.Nominee == firstWeddedHero ? secondWeddedHero.
+      }
+      else
+      {
+        options = new FindHeroOptions()
+        {
+          Candidates = new MBHeroList(firstWeddedHero, secondWeddedHero),
+          Comparers = new IComparer<MBHero>[] { new WeddedClanLeaderComparer() }
+        };
+        result = HeroFinder.Find(options);
+      }
+
+      if (!result.Succeeded)
+      {
+        //TODO ask clan leader to host
+      }
+
+      if (!result.Succeeded)
+      {
+        return failureResult;
+      }
+
+      candidateSettlements =
 
       // if either is (male + factionLeader), one tourn
       //TODO if a hero is male and faction leader, one tournament in most prosperous city in leader's kingdom, else in most prosperous city of partner's clan

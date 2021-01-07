@@ -264,7 +264,7 @@
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
     <Compile Include="src\Finders\Hero\Comparers\WeddedClanLeaderComparer.cs" />
-    <Compile Include="src\Finders\Hero\Comparers\WeddedHostKingdomLeaderComparer.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\WeddedKingdomLeaderComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
