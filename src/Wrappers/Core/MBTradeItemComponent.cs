@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<TradeItemComponent>(MBTradeItemComponentList wrapperList) => wrapperList.Unwrap<MBTradeItemComponent, TradeItemComponent>();
     public static implicit operator MBTradeItemComponentList(List<TradeItemComponent> objectList) => (MBTradeItemComponentList)objectList.Wrap<MBTradeItemComponent, TradeItemComponent>();
+    public static implicit operator MBTradeItemComponent[](MBTradeItemComponentList wrapperList) => wrapperList.ToArray();
   }
 }

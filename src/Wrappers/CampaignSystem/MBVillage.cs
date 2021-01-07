@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<Village>(MBVillageList wrapperList) => wrapperList.Unwrap<MBVillage, Village>();
     public static implicit operator MBVillageList(List<Village> objectList) => (MBVillageList)objectList.Wrap<MBVillage, Village>();
+    public static implicit operator MBVillage[](MBVillageList wrapperList) => wrapperList.ToArray();
   }
 }

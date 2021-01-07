@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+
 using ModLib.Definitions;
 using ModLib.Definitions.Attributes;
 
@@ -45,6 +46,11 @@ namespace TournamentsEnhanced
     [SettingProperty("Food Stocks Decrease", 0.00f, 30.00f, "Food stock decrease for certain tournament types")]
     [SettingPropertyGroup("Tournament affects on Towns")]
     public float FoodStocksDecrease { get; set; } = 20.00f;
+
+    //Tournament Cost
+    [SettingProperty("Prosperity Tournament Min Prosperity", 0, 10000, "Cost of tournaments")]
+    [SettingPropertyGroup("Tournaments")]
+    public float ProsperityTournamentMinProsperity { get; set; } = 5000;
 
     //Tournament Cost
     [SettingProperty("Tournament Cost", 0, 10000, "Cost of tournaments")]

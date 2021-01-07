@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<StatExplainer>(MBStatExplainerList wrapperList) => wrapperList.Unwrap<MBStatExplainer, StatExplainer>();
     public static implicit operator MBStatExplainerList(List<StatExplainer> objectList) => (MBStatExplainerList)objectList.Wrap<MBStatExplainer, StatExplainer>();
+    public static implicit operator MBStatExplainer[](MBStatExplainerList wrapperList) => wrapperList.ToArray();
   }
 }

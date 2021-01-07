@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<CommonArea>(MBCommonAreaList wrapperList) => wrapperList.Unwrap<MBCommonArea, CommonArea>();
     public static implicit operator MBCommonAreaList(List<CommonArea> objectList) => (MBCommonAreaList)objectList.Wrap<MBCommonArea, CommonArea>();
+    public static implicit operator MBCommonArea[](MBCommonAreaList wrapperList) => wrapperList.ToArray();
   }
 }

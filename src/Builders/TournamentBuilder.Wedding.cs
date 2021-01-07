@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Comparers.Hero;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
@@ -12,80 +11,18 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
-      var failureResult = CreateTournamentResult.Failure();
-      MBSettlementList candidateSettlements;
-      MBSettlementList partnerCandidateSettlements;
+      var findSettlementResult = SettlementFinder.FindSettlementForWeddingTournament(firstWeddedHero, secondWeddedHero);
 
-      var options = new FindHeroOptions()
+      if (!findSettlementResult.Succeeded)
       {
-        Candidates = new MBHeroList(firstWeddedHero, secondWeddedHero),
-        Comparers = new IComparer<MBHero>[] { new WeddedKingdomLeaderComparer() }
-      };
-
-      var result = HeroFinder.Find(options);
-
-      if (result.Succeeded)
-      {
-        candidateSettlements = result.Nominee.MapFaction.Settlements;
-        partnerCandidateSettlements = result.Nominee == firstWeddedHero ? secondWeddedHero.
-      }
-      else
-      {
-        options = new FindHeroOptions()
-        {
-          Candidates = new MBHeroList(firstWeddedHero, secondWeddedHero),
-          Comparers = new IComparer<MBHero>[] { new WeddedClanLeaderComparer() }
-        };
-        result = HeroFinder.Find(options);
+        return CreateTournamentResult.Failure();
       }
 
-      if (!result.Succeeded)
-      {
-        //TODO ask clan leader to host
-      }
+      var options = new CreateTournamentOptions(findSettlementResult.Nominee, TournamentType.Wedding, )
+      CreateTournament()
 
-      if (!result.Succeeded)
-      {
-        return failureResult;
-      }
 
-      candidateSettlements =
-
-      // if either is (male + factionLeader), one tourn
-      //TODO if a hero is male and faction leader, one tournament in most prosperous city in leader's kingdom, else in most prosperous city of partner's clan
-      //TODO if a hero is male and not faction leader, one tournament in most prosperous city in male's clan, else in most prosperous city of partner's clan
-      //TODO if both female and at least one has high combat stats, one tournament in most prosperous city in fighter's clan, else in most prosperous city of partner's clan
-      //TODO preference for city where wedding happened
-      var payor = new Payor(faction.Leader);
-      var payorHero = payor.Hero;
-      var failureResult = CreateTournamentResult.Failure();
-
-      if (!ValidatePayorHero(payorHero) || !ValidateFaction(faction))
-      {
-        return failureResult;
-      }
-
-      var findSettlementResult = TryFindSettlementForWeddingTournament(faction);
-
-      if (findSettlementResult.Failed)
-      {
-        return failureResult;
-      }
-
-      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Nominee, TournamentType.Wedding, payor);
-
-      return CreateTournament(createTournamentOptions);
-
-      var marriageIsBetweenTwoFactions = !firstHero.MapFaction.Equals(secondHero.MapFaction);
-
-      if (marriageIsBetweenTwoFactions)
-      {
-        OnInterFactionMarriage(firstHero, secondHero, showNotification);
-      }
-      else
-      {
-        OnIntraFactionMarriage(firstHero, secondHero, showNotification);
-      }
+      return CreateTournamentResult.Success(findSettlementResult.Nominee, findSettlementResult.Nominee.Town.HasTournament);
     }
 
     private void OnInterFactionMarriage(Hero firstHero, Hero secondHero, bool showNotification)
@@ -111,7 +48,7 @@ namespace TournamentsEnhanced.Builders
       NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {hostTownNames}");
     }
 
-    private static FindSettlementResult TryFindSettlementForWeddingTournament(IMBFaction faction)
+    private static FindHostSettlementResult TryFindSettlementForWeddingTournament(IMBFaction faction)
     {
       var payor = new Payor(faction.Leader);
       var candidateSettlements = faction.Settlements;
@@ -126,7 +63,7 @@ namespace TournamentsEnhanced.Builders
       return result;
     }
 
-    private static FindSettlementResult FindSettlementForWeddingTournament(MBSettlementList settlements, Payor payor)
+    private static FindHostSettlementResult FindSettlementForWeddingTournament(MBSettlementList settlements, Payor payor)
     {
       var comparers = new IComparer<MBSettlement>[] {
         new ExistingTournamentComparer(payor, false),
@@ -136,7 +73,7 @@ namespace TournamentsEnhanced.Builders
       return SettlementFinder.Find(options);
     }
 
-    private static FindSettlementResult FindSettlementWithExistingForWeddingTournament(MBSettlementList settlements, Payor payor)
+    private static FindHostSettlementResult FindSettlementWithExistingForWeddingTournament(MBSettlementList settlements, Payor payor)
     {
       var comparers = new IComparer<MBSettlement>[] {
         new ExistingTournamentComparer(payor, true),

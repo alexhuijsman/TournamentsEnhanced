@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<IssueBase>(MBIssueBaseList wrapperList) => wrapperList.Unwrap<MBIssueBase, IssueBase>();
     public static implicit operator MBIssueBaseList(List<IssueBase> objectList) => (MBIssueBaseList)objectList.Wrap<MBIssueBase, IssueBase>();
+    public static implicit operator MBIssueBase[](MBIssueBaseList wrapperList) => wrapperList.ToArray();
   }
 }

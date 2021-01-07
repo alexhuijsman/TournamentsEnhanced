@@ -8,7 +8,9 @@ namespace TournamentsEnhanced.Finder.Abstract
   where L : MBListBase<W, L>
   {
     public L AllQualifiedCandidates { get; protected set; }
-    public W Nominee => Failed ? AllQualifiedCandidates[0] : null;
+    public W Nominee => Failed ? null : AllQualifiedCandidates[0];
+    public W RunnerUp => Failed ? null : AllQualifiedCandidates.Count <= 1 ? null : AllQualifiedCandidates[1];
+    public bool HasRunnerUp => RunnerUp != null;
 
     public static R Success(L nominees) => new R()
     {

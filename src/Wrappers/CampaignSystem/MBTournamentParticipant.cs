@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<TournamentParticipant>(MBTournamentParticipantList wrapperList) => wrapperList.Unwrap<MBTournamentParticipant, TournamentParticipant>();
     public static implicit operator MBTournamentParticipantList(List<TournamentParticipant> objectList) => (MBTournamentParticipantList)objectList.Wrap<MBTournamentParticipant, TournamentParticipant>();
+    public static implicit operator MBTournamentParticipant[](MBTournamentParticipantList wrapperList) => wrapperList.ToArray();
   }
 }

@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<GameMenuOption>(MBGameMenuOptionList wrapperList) => wrapperList.Unwrap<MBGameMenuOption, GameMenuOption>();
     public static implicit operator MBGameMenuOptionList(List<GameMenuOption> objectList) => (MBGameMenuOptionList)objectList.Wrap<MBGameMenuOption, GameMenuOption>();
+    public static implicit operator MBGameMenuOption[](MBGameMenuOptionList wrapperList) => wrapperList.ToArray();
   }
 }

@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<PerkObject>(MBPerkObjectList wrapperList) => wrapperList.Unwrap<MBPerkObject, PerkObject>();
     public static implicit operator MBPerkObjectList(List<PerkObject> objectList) => (MBPerkObjectList)objectList.Wrap<MBPerkObject, PerkObject>();
+    public static implicit operator MBPerkObject[](MBPerkObjectList wrapperList) => wrapperList.ToArray();
   }
 }

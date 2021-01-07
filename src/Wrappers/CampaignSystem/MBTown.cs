@@ -101,5 +101,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<Town>(MBTownList wrapperList) => wrapperList.Unwrap<MBTown, Town>();
     public static implicit operator MBTownList(List<Town> objectList) => (MBTownList)objectList.Wrap<MBTown, Town>();
+    public static implicit operator MBTown[](MBTownList wrapperList) => wrapperList.ToArray();
   }
 }

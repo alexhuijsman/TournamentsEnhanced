@@ -23,7 +23,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     }
 
     public static MBCampaign Current => Campaign.Current;
-    public ITournamentManager TournamentManager => UnwrappedObject.TournamentManager;
+    public MBTournamentManager TournamentManager => (MBTournamentManager)UnwrappedObject.TournamentManager;
     public MBGameModels Models => UnwrappedObject.Models;
 
     public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrappedObject;
@@ -39,5 +39,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<Campaign>(MBCampaignList wrapperList) => wrapperList.Unwrap<MBCampaign, Campaign>();
     public static implicit operator MBCampaignList(List<Campaign> objectList) => (MBCampaignList)objectList.Wrap<MBCampaign, Campaign>();
+    public static implicit operator MBCampaign[](MBCampaignList wrapperList) => wrapperList.ToArray();
   }
 }

@@ -179,7 +179,6 @@
     <Compile Include="src\Finders\Settlement\Comparers\PayorRelationComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
     <Compile Include="src\Finders\Settlement\FindHostSettlementOptions.cs" />
-    <Compile Include="src\Finders\Settlement\FindSettlementResult.cs" />
     <Compile Include="src\Finders\SettlementFinder.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Models\CampaignModel.cs" />
@@ -263,8 +262,10 @@
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
-    <Compile Include="src\Finders\Hero\Comparers\WeddedClanLeaderComparer.cs" />
-    <Compile Include="src\Finders\Hero\Comparers\WeddedKingdomLeaderComparer.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\MaleKingdomLeaderHostComparer.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\MaleClanLeaderHostComparer.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBTournamentManager.cs" />
+    <Compile Include="src\Finders\Settlement\FindHostSettlementResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

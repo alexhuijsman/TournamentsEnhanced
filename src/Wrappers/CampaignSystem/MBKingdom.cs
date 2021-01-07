@@ -107,5 +107,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<Kingdom>(MBKingdomList wrapperList) => wrapperList.Unwrap<MBKingdom, Kingdom>();
     public static implicit operator MBKingdomList(List<Kingdom> objectList) => (MBKingdomList)objectList.Wrap<MBKingdom, Kingdom>();
+    public static implicit operator MBKingdom[](MBKingdomList wrapperList) => wrapperList.ToArray();
   }
 }

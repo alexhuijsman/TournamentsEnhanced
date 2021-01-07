@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<SaddleComponent>(MBSaddleComponentList wrapperList) => wrapperList.Unwrap<MBSaddleComponent, SaddleComponent>();
     public static implicit operator MBSaddleComponentList(List<SaddleComponent> objectList) => (MBSaddleComponentList)objectList.Wrap<MBSaddleComponent, SaddleComponent>();
+    public static implicit operator MBSaddleComponent[](MBSaddleComponentList wrapperList) => wrapperList.ToArray();
   }
 }

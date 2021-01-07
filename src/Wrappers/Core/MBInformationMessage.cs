@@ -27,5 +27,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<InformationMessage>(MBInformationMessageList wrapperList) => wrapperList.Unwrap<MBInformationMessage, InformationMessage>();
     public static implicit operator MBInformationMessageList(List<InformationMessage> objectList) => (MBInformationMessageList)objectList.Wrap<MBInformationMessage, InformationMessage>();
+    public static implicit operator MBInformationMessage[](MBInformationMessageList wrapperList) => wrapperList.ToArray();
   }
 }

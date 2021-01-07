@@ -1,6 +1,6 @@
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced.Finder.Comparers.Hero
+namespace TournamentsEnhanced.Finder.Comparers.Clan
 {
   public class BasicHostRequirementsClanComparer : ClanComparerBase
   {

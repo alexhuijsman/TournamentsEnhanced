@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Localization
 
     public static implicit operator List<TextObject>(MBTextObjectList wrapperList) => wrapperList.Unwrap<MBTextObject, TextObject>();
     public static implicit operator MBTextObjectList(List<TextObject> objectList) => (MBTextObjectList)objectList.Wrap<MBTextObject, TextObject>();
+    public static implicit operator MBTextObject[](MBTextObjectList wrapperList) => wrapperList.ToArray();
   }
 }

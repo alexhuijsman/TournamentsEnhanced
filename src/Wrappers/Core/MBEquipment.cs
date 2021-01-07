@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<Equipment>(MBEquipmentList wrapperList) => wrapperList.Unwrap<MBEquipment, Equipment>();
     public static implicit operator MBEquipmentList(List<Equipment> objectList) => (MBEquipmentList)objectList.Wrap<MBEquipment, Equipment>();
+    public static implicit operator MBEquipment[](MBEquipmentList wrapperList) => wrapperList.ToArray();
   }
 }

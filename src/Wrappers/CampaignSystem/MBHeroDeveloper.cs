@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<HeroDeveloper>(MBHeroDeveloperList wrapperList) => wrapperList.Unwrap<MBHeroDeveloper, HeroDeveloper>();
     public static implicit operator MBHeroDeveloperList(List<HeroDeveloper> objectList) => (MBHeroDeveloperList)objectList.Wrap<MBHeroDeveloper, HeroDeveloper>();
+    public static implicit operator MBHeroDeveloper[](MBHeroDeveloperList wrapperList) => wrapperList.ToArray();
   }
 }

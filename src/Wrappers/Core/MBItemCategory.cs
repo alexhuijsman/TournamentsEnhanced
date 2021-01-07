@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<ItemCategory>(MBItemCategoryList wrapperList) => wrapperList.Unwrap<MBItemCategory, ItemCategory>();
     public static implicit operator MBItemCategoryList(List<ItemCategory> objectList) => (MBItemCategoryList)objectList.Wrap<MBItemCategory, ItemCategory>();
+    public static implicit operator MBItemCategory[](MBItemCategoryList wrapperList) => wrapperList.ToArray();
   }
 }

@@ -323,5 +323,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<Hero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, Hero>();
     public static implicit operator MBHeroList(List<Hero> objectList) => (MBHeroList)objectList.Wrap<MBHero, Hero>();
+    public static implicit operator MBHero[](MBHeroList wrapperList) => wrapperList;
+    public static implicit operator MBHeroList(MBHero[] wrapperArray) => wrapperArray;
   }
 }

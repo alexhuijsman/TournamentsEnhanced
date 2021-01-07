@@ -20,5 +20,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<Banner>(MBBannerList wrapperList) => wrapperList.Unwrap<MBBanner, Banner>();
     public static implicit operator MBBannerList(List<Banner> objectList) => (MBBannerList)objectList.Wrap<MBBanner, Banner>();
+    public static implicit operator MBBanner[](MBBannerList wrapperList) => wrapperList.ToArray();
   }
 }

@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<WeaponComponentData>(MBWeaponComponentDataList wrapperList) => wrapperList.Unwrap<MBWeaponComponentData, WeaponComponentData>();
     public static implicit operator MBWeaponComponentDataList(List<WeaponComponentData> objectList) => (MBWeaponComponentDataList)objectList.Wrap<MBWeaponComponentData, WeaponComponentData>();
+    public static implicit operator MBWeaponComponentData[](MBWeaponComponentDataList wrapperList) => wrapperList.ToArray();
   }
 }

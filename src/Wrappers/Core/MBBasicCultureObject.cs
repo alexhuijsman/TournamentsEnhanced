@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<BasicCultureObject>(MBBasicCultureObjectList wrapperList) => wrapperList.Unwrap<MBBasicCultureObject, BasicCultureObject>();
     public static implicit operator MBBasicCultureObjectList(List<BasicCultureObject> objectList) => (MBBasicCultureObjectList)objectList.Wrap<MBBasicCultureObject, BasicCultureObject>();
+    public static implicit operator MBBasicCultureObject[](MBBasicCultureObjectList wrapperList) => wrapperList.ToArray();
   }
 }

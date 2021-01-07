@@ -42,5 +42,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<SettlementAccessModel>(MBSettlementAccessModelList wrapperList) => wrapperList.Unwrap<MBSettlementAccessModel, SettlementAccessModel>();
     public static implicit operator MBSettlementAccessModelList(List<SettlementAccessModel> objectList) => (MBSettlementAccessModelList)objectList.Wrap<MBSettlementAccessModel, SettlementAccessModel>();
+    public static implicit operator MBSettlementAccessModel[](MBSettlementAccessModelList wrapperList) => wrapperList.ToArray();
   }
 }

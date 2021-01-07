@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<TraitObject>(MBTraitObjectList wrapperList) => wrapperList.Unwrap<MBTraitObject, TraitObject>();
     public static implicit operator MBTraitObjectList(List<TraitObject> objectList) => (MBTraitObjectList)objectList.Wrap<MBTraitObject, TraitObject>();
+    public static implicit operator MBTraitObject[](MBTraitObjectList wrapperList) => wrapperList.ToArray();
   }
 }

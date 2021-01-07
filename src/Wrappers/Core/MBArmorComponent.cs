@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<ArmorComponent>(MBArmorComponentList wrapperList) => wrapperList.Unwrap<MBArmorComponent, ArmorComponent>();
     public static implicit operator MBArmorComponentList(List<ArmorComponent> objectList) => (MBArmorComponentList)objectList.Wrap<MBArmorComponent, ArmorComponent>();
+    public static implicit operator MBArmorComponent[](MBArmorComponentList wrapperList) => wrapperList.ToArray();
   }
 }

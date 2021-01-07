@@ -108,5 +108,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<Clan>(MBClanList wrapperList) => wrapperList.Unwrap<MBClan, Clan>();
     public static implicit operator MBClanList(List<Clan> objectList) => (MBClanList)objectList.Wrap<MBClan, Clan>();
+    public static implicit operator MBClan[](MBClanList wrapperList) => wrapperList.ToArray();
   }
 }

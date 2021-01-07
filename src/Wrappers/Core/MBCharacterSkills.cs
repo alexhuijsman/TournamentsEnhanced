@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<CharacterSkills>(MBCharacterSkillsList wrapperList) => wrapperList.Unwrap<MBCharacterSkills, CharacterSkills>();
     public static implicit operator MBCharacterSkillsList(List<CharacterSkills> objectList) => (MBCharacterSkillsList)objectList.Wrap<MBCharacterSkills, CharacterSkills>();
+    public static implicit operator MBCharacterSkills[](MBCharacterSkillsList wrapperList) => wrapperList.ToArray();
   }
 }

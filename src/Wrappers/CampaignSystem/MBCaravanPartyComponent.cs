@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator List<CaravanPartyComponent>(MBCaravanPartyComponentList wrapperList) => wrapperList.Unwrap<MBCaravanPartyComponent, CaravanPartyComponent>();
     public static implicit operator MBCaravanPartyComponentList(List<CaravanPartyComponent> objectList) => (MBCaravanPartyComponentList)objectList.Wrap<MBCaravanPartyComponent, CaravanPartyComponent>();
+    public static implicit operator MBCaravanPartyComponent[](MBCaravanPartyComponentList wrapperList) => wrapperList.ToArray();
   }
 }

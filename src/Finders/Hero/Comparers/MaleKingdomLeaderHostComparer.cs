@@ -2,7 +2,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Hero
 {
-  public class WeddedKingdomLeaderComparer : BasicHostRequirementsHeroComparer
+  public class MaleKingdomLeaderHostComparer : BasicHostRequirementsHeroComparer
   {
     internal override bool MeetsRequirements(MBHero hero) =>
       base.MeetsRequirements(hero) &&

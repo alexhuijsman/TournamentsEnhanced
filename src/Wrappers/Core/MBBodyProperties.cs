@@ -21,5 +21,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<BodyProperties>(MBBodyPropertiesList wrapperList) => wrapperList.Unwrap<MBBodyProperties, BodyProperties>();
     public static implicit operator MBBodyPropertiesList(List<BodyProperties> objectList) => (MBBodyPropertiesList)objectList.Wrap<MBBodyProperties, BodyProperties>();
+    public static implicit operator MBBodyProperties[](MBBodyPropertiesList wrapperList) => wrapperList.ToArray();
   }
 }

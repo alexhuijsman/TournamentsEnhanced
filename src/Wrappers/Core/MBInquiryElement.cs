@@ -23,5 +23,6 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator List<InquiryElement>(MBInquiryElementList wrapperList) => wrapperList.Unwrap<MBInquiryElement, InquiryElement>();
     public static implicit operator MBInquiryElementList(List<InquiryElement> objectList) => (MBInquiryElementList)objectList.Wrap<MBInquiryElement, InquiryElement>();
+    public static implicit operator MBInquiryElement[](MBInquiryElementList wrapperList) => wrapperList.ToArray();
   }
 }

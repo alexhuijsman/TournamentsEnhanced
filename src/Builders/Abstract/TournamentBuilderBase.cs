@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Comparers.Hero;
+using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -14,31 +12,32 @@ namespace TournamentsEnhanced.Builders
 {
   public abstract class TournamentBuilderBase
   {
-    internal static bool ValidatePayorHero(MBHero payorHero)
+    internal static FindHeroResult ValidatePayorHero(MBHero payorHero)
     {
-      return HeroFinder.Find(
-        new FindHeroOptions()
-        {
-          Candidates = new MBHeroList(payorHero),
-          Comparers = new IComparer<MBHero>[] { new BasicHostRequirementsHeroComparer() }
-        }).Succeeded;
+      return ValidatePayorHeroes(payorHero);
     }
 
-    internal static bool ValidateFaction(IMBFaction faction)
+    internal static FindHeroResult ValidatePayorHeroes(params MBHero[] payorHeroes)
     {
-      bool result;
+      return HeroFinder.FindHostsThatMeetBasicRequirements(payorHeroes);
+    }
+
+    internal static ResultBase ValidateFaction(IMBFaction faction)
+    {
+      ResultBase result;
 
       if (faction.IsKingdomFaction)
       {
-        result = KingdomFinder.Find(
-          new FindKingdomOptions() { Candidates = new MBKingdomList((MBKingdom)faction) })
-            .Succeeded;
+        result = KingdomFinder.FindHostKingdomThatMeetBasicRequirements((MBKingdom)faction);
       }
       else
       {
-        result = ClanFinder.Find(
-          new FindClanOptions() { Candidates = new MBClanList((MBClan)faction) })
-          .Succeeded;
+        result = ClanFinder.FindHostClanThatMeetBasicRequirements((MBClan)faction);
+        ClanFinder.Find(
+          new FindClanOptions()
+          {
+            Candidates = new MBClanList((MBClan)faction)
+          });
       }
 
       return result;
@@ -70,7 +69,7 @@ namespace TournamentsEnhanced.Builders
     private static void InstantiateTournamentFor(MBSettlement settlement)
     {
       var tournament = new FightTournamentGame(settlement.Town);
-      Campaign.Current.TournamentManager.AddTournament(tournament);
+      MBCampaign.Current.TournamentManager.AddTournament(tournament);
     }
 
 
@@ -130,7 +129,7 @@ namespace TournamentsEnhanced.Builders
       NotificationUtils.DisplayBannerMessage("Your relationship with local notables at " + settlement.Name + " has improved");
     }
 
-    public static ValueTuple<SkillObject, int> TournamentSkillXpGain(Hero winner)
+    public static ValueTuple<SkillObject, int> TournamentSkillXpGain(MBHero winner)
     {
       float randomFloat = MBRandom.DeterministicRandom.NextFloat();
       SkillObject item = (randomFloat < 0.2f) ? DefaultSkills.OneHanded : ((randomFloat < 0.4f) ? DefaultSkills.TwoHanded : ((randomFloat < 0.6f) ? DefaultSkills.Polearm : ((randomFloat < 0.8f) ? DefaultSkills.Riding : DefaultSkills.Athletics)));
