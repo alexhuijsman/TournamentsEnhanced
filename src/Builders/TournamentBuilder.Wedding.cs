@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult CreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
+    public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
       var failureResult = CreateTournamentResult.Failure;
 
@@ -31,8 +31,6 @@ namespace TournamentsEnhanced.Builders
       {
         return failureResult;
       }
-
-      NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstWeddedHero.Name} and {secondWeddedHero.Name}, local nobles have called a tournament at {createTournamentResult.HostSettlement.Name}");
 
       return CreateTournamentResult.Success(findSettlementResult.Nominee,
                                             options.Payor,

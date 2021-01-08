@@ -43,7 +43,7 @@ namespace TournamentsEnhanced.Builders
       return result;
     }
 
-    internal static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
+    protected static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
       var settlement = options.Settlement;
       var type = options.Type;

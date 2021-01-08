@@ -48,7 +48,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void DailyTick()
     {
-      TrySpawnProsperityTournament();
+      TryCreateProsperityTournament();
     }
 
     private void TrySpawnLordTournament()
@@ -76,15 +76,14 @@ namespace TournamentsEnhanced.Behaviors
              settlement.Town.Gold >= 10000;
     }
 
-    private void TrySpawnProsperityTournament()
+    private void TryCreateProsperityTournament()
     {
-      var settlements =
-        MBSettlement
-          .All
-          .FindAll(settlement => SettlementIsEligibleForProsperityTournament(settlement));
-      settlements.Shuffle();
+      var result = TournamentBuilder.TryCreateProsperityTournament();
 
-      TrySpawnProsperityTournamentInSettlements(settlements);
+      if (result.Succeeded)
+      {
+
+      }
     }
 
     private CreateTournamentResult TrySpawnProsperityTournamentInSettlements(MBSettlementList settlements)
@@ -115,7 +114,8 @@ namespace TournamentsEnhanced.Behaviors
       var resultsA = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionA);
       var resultsB = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionB);
 
-      if (!Settings.Instance.PeaceNotification || (!resultsA.Succeeded && !resultsB.Succeeded))
+      if (!Settings.Instance.PeaceNotification ||
+         (!resultsA.Succeeded && !resultsB.Succeeded))
       {
         return;
       }
@@ -123,11 +123,11 @@ namespace TournamentsEnhanced.Behaviors
       string hostTownNames;
       if (resultsA.Succeeded && resultsB.Succeeded)
       {
-        hostTownNames = $"{resultsA.Settlement.Name} and {resultsB.Settlement.Name}";
+        hostTownNames = $"{resultsA.HostSettlement.Name} and {resultsB.HostSettlement.Name}";
       }
       else
       {
-        hostTownNames = resultsA.Succeeded ? $"{resultsA.Settlement.Name}" : $"{resultsB.Settlement.Name}";
+        hostTownNames = resultsA.Succeeded ? $"{resultsA.HostSettlement.Name}" : $"{resultsB.HostSettlement.Name}";
       }
 
       NotificationUtils.DisplayMessage(
@@ -137,7 +137,12 @@ namespace TournamentsEnhanced.Behaviors
 
     private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
     {
-      TournamentBuilder.CreateWeddingTournament(firstHero, secondHero);
+      var result = TournamentBuilder.TryCreateWeddingTournament(firstHero, secondHero);
+
+      if (result.Succeeded)
+      {
+        NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
+      }
     }
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
