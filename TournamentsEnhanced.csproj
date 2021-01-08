@@ -266,6 +266,7 @@
     <Compile Include="src\Finders\Hero\Comparers\MaleClanLeaderHostComparer.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBTournamentManager.cs" />
     <Compile Include="src\Finders\Settlement\FindHostSettlementResult.cs" />
+    <Compile Include="src\Finders\Hero\FindHostHeroResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,9 +10,11 @@ namespace TournamentsEnhanced.Finder
   {
     public FindClanResult() { }
 
-    public new static FindClanResult Failure()
-      => new FindClanResult() { Status = ResultStatus.Failure };
-    public new static FindClanResult Success(MBClanList nominees)
-      => new FindClanResult() { Status = ResultStatus.Failure, AllQualifiedCandidates = nominees };
+    public new static FindClanResult Success(MBClanList nominees) =>
+      new FindClanResult()
+      {
+        Status = ResultStatus.Success,
+        AllQualifiedCandidates = nominees
+      };
   }
 }

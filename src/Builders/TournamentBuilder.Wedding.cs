@@ -9,23 +9,36 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
+    public static CreateTournamentResult CreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
-      var findSettlementResult = SettlementFinder.FindSettlementForWeddingTournament(firstWeddedHero, secondWeddedHero);
+      var failureResult = CreateTournamentResult.Failure;
 
-      if (!findSettlementResult.Succeeded)
+      var findSettlementResult =
+        SettlementFinder.FindSettlementForWeddingTournament(firstWeddedHero,
+                                                                secondWeddedHero);
+
+      if (findSettlementResult.Failed)
       {
-        return CreateTournamentResult.Failure();
+        return failureResult;
       }
 
-      var options = new CreateTournamentOptions(findSettlementResult.Nominee, TournamentType.Wedding, )
-      CreateTournament()
+      var options = new CreateTournamentOptions(findSettlementResult.Nominee,
+                                                TournamentType.Wedding,
+                                                findSettlementResult.Payor.Hero);
 
+      var createTournamentResult = CreateTournament(options);
 
-      return CreateTournamentResult.Success(findSettlementResult.Nominee, findSettlementResult.Nominee.Town.HasTournament);
+      if (createTournamentResult.Failed)
+      {
+        return failureResult;
+      }
+
+      NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstWeddedHero.Name} and {secondWeddedHero.Name}, local nobles have called a tournament at {createTournamentResult.HostSettlement.Name}");
+
+      return CreateTournamentResult.Success(findSettlementResult.Nominee, options.Payor, findSettlementResult.Nominee.Town.HasTournament);
     }
 
-    private void OnInterFactionMarriage(Hero firstHero, Hero secondHero, bool showNotification)
+    private void OnInterFactionMarriage(MBHero firstHero, MBHero secondHero, bool showNotification)
     {
       var resultsA = TournamentBuilder.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, firstHero.MapFaction);
       var resultsB = TournamentBuilder.CreateTournamentTypeInTownBelongingToFaction(TournamentType.Wedding, secondHero.MapFaction);
@@ -48,7 +61,7 @@ namespace TournamentsEnhanced.Builders
       NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {hostTownNames}");
     }
 
-    private static FindHostSettlementResult TryFindSettlementForWeddingTournament(IMBFaction faction)
+    private static FindHostSettlementResult FindSettlementForWeddingTournament(IMBFaction faction)
     {
       var payor = new Payor(faction.Leader);
       var candidateSettlements = faction.Settlements;

@@ -63,7 +63,7 @@ namespace TournamentsEnhanced.Builders
         NotificationUtils.DisplayBannerMessage($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
       }
 
-      return CreateTournamentResult.Success(settlement, townHadExistingTournament);
+      return CreateTournamentResult.Success(settlement, options.Payor, townHadExistingTournament);
     }
 
     private static void InstantiateTournamentFor(MBSettlement settlement)

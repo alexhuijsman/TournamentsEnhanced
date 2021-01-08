@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Finder.Abstract
       SortAndFilterByComparers(remainingCandidates, options.Comparers);
 
       return remainingCandidates.IsEmpty ?
-        FindResultBase<R, W, L, T>.Failure() :
+        FindResultBase<R, W, L, T>.Failure :
         FindResultBase<R, W, L, T>.Success(remainingCandidates);
     }
 

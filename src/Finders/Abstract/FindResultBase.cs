@@ -2,7 +2,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Finder.Abstract
 {
-  public abstract class FindResultBase<R, W, L, T> : ResultBase
+  public abstract class FindResultBase<R, W, L, T> : ResultBase<R>
   where R : FindResultBase<R, W, L, T>, new()
   where W : MBWrapperBase<W, T>, new()
   where L : MBListBase<W, L>
@@ -12,17 +12,16 @@ namespace TournamentsEnhanced.Finder.Abstract
     public W RunnerUp => Failed ? null : AllQualifiedCandidates.Count <= 1 ? null : AllQualifiedCandidates[1];
     public bool HasRunnerUp => RunnerUp != null;
 
-    public static R Success(L nominees) => new R()
-    {
-      Status = ResultStatus.Success,
-      AllQualifiedCandidates = nominees,
-    };
-
-    public static R Failure() => new R()
-    {
-      Status = ResultStatus.Failure
-    };
-
     public FindResultBase() { }
+
+    public new static R Success(params W[] nominees) => Success((L)nominees.ToList());
+
+    public new static R Success(L nominees) =>
+      new R()
+      {
+        Status = ResultStatus.Success,
+        AllQualifiedCandidates = nominees,
+      };
+
   }
 }

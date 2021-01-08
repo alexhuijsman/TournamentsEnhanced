@@ -13,8 +13,12 @@ namespace TournamentsEnhanced.Finder
 
     public FindHostSettlementResult() { }
 
-    public new static FindHostSettlementResult Success(MBSettlementList nominees)
-      => new FindHostSettlementResult() { Status = ResultStatus.Success, AllQualifiedCandidates = nominees };
-    public new static FindHostSettlementResult Failure() => new FindHostSettlementResult() { Status = ResultStatus.Failure };
+    public new static FindHostSettlementResult Success(MBSettlementList nominees, Payor payor) =>
+      new FindHostSettlementResult()
+      {
+        Status = ResultStatus.Success,
+        AllQualifiedCandidates = nominees,
+        Payor = payor
+      };
   }
 }

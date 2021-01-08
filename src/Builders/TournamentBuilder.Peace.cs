@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Builders
     public static CreateTournamentResult TryCreatePeaceTournamentForFaction(IMBFaction faction)
     {
       var payorHero = faction.Leader;
-      var failureResult = CreateTournamentResult.Failure();
+      var failureResult = CreateTournamentResult.Failure;
 
       if (ValidatePayorHero(payorHero).Failed || ValidateFaction(faction).Failed)
       {

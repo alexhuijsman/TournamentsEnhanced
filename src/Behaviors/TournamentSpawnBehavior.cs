@@ -137,7 +137,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
     {
-      TournamentBuilder.TryCreateWeddingTournament(firstHero, secondHero);
+      TournamentBuilder.CreateWeddingTournament(firstHero, secondHero);
     }
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
