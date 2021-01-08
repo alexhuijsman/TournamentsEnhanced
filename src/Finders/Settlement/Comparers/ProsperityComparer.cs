@@ -1,4 +1,3 @@
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
@@ -7,20 +6,19 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
   {
     public float MinProsperity { get; private set; }
 
-    public ProsperityComparer(Payor payor, float minProsperity) : base(payor)
+    public ProsperityComparer(MBHero payor, float minProsperity = 0) : base(payor)
     {
       MinProsperity = minProsperity;
     }
-
-    public ProsperityComparer(Payor payor) : base(payor) { }
 
     public override int Compare(MBSettlement x, MBSettlement y)
     {
       var result = 0;
 
-      var wasResultAssigned =
-        TryComparePreconditions(x, y, ref result) ? true :
+      if (!TryComparePreconditions(x, y, ref result))
+      {
         CompareProsperity(x, y, out result);
+      }
 
       return result;
     }
@@ -35,7 +33,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       return true;
     }
 
-    internal override bool MeetsRequirements(MBSettlement wrapper) =>
+    protected override bool MeetsRequirements(MBSettlement wrapper) =>
       wrapper.Prosperity >= MinProsperity;
   }
 }

@@ -9,10 +9,13 @@ namespace TournamentsEnhanced.Builders
     {
       var payorHero = MBHero.MainHero;
 
-      var createTournamentOptions = new CreateTournamentOptions(payorHero.CurrentSettlement,
-                                                                TournamentType.PlayerInitiated,
-                                                                payorHero);
-      return CreateTournament(createTournamentOptions);
+      var options = new CreateTournamentOptions()
+      {
+        Settlement = payorHero.CurrentSettlement,
+        Type = TournamentType.PlayerInitiated
+      };
+
+      return CreateTournament(options);
     }
   }
 }

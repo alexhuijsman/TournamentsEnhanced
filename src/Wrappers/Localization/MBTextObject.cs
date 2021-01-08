@@ -8,6 +8,11 @@ namespace TournamentsEnhanced.Wrappers.Localization
 {
   public class MBTextObject : MBWrapperBase<MBTextObject, TextObject>
   {
+    public MBTextObject(string message)
+    {
+      UnwrappedObject = new TextObject(message);
+    }
+    public MBTextObject() { }
     public static implicit operator TextObject(MBTextObject wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTextObject(TextObject obj) => MBTextObject.GetWrapperFor(obj);
   }

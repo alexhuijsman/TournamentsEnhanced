@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Comparers.Settlement;
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
@@ -21,9 +17,11 @@ namespace TournamentsEnhanced.Builders
         return failureResult;
       }
 
-      var options = new CreateTournamentOptions(findSettlementResult.Nominee,
-                                                TournamentType.Wedding,
-                                                findSettlementResult.Payor.Hero);
+      var options = new CreateTournamentOptions()
+      {
+        Settlement = findSettlementResult.Nominee,
+        Type = TournamentType.Wedding
+      };
 
       var createTournamentResult = CreateTournament(options);
 
@@ -33,22 +31,7 @@ namespace TournamentsEnhanced.Builders
       }
 
       return CreateTournamentResult.Success(findSettlementResult.Nominee,
-                                            options.Payor,
                                             findSettlementResult.Nominee.Town.HasTournament);
-    }
-
-    private static FindHostSettlementResult FindSettlementWithExistingForWeddingTournament(
-      MBSettlementList settlements,
-      Payor payor)
-    {
-      var comparers = new IComparer<MBSettlement>[] {
-        new ExistingTournamentComparer(payor, true),
-        new PayorRankComparer(payor),
-        new PayorRelationComparer(payor, 50),
-        new ProsperityComparer(payor)};
-      var options = new FindHostSettlementOptions() { Candidates = settlements, Comparers = comparers };
-
-      return SettlementFinder.Find(options);
     }
   }
 }

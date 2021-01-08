@@ -1,15 +1,23 @@
 using System.Collections.Generic;
 
 using TournamentsEnhanced.Wrappers.Abstract;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Abstract
 {
   public abstract class ComparerBase<W> : IComparer<W>
     where W : WrapperBase
   {
-    public static readonly int XIsGreaterThanY = 1;
-    public static readonly int XIsEqualToY = 0;
-    public static readonly int XIsLessThanY = -1;
+    protected static readonly int XIsGreaterThanY = 1;
+    protected static readonly int XIsEqualToY = 0;
+    protected static readonly int XIsLessThanY = -1;
+
+    protected MBHero InitiatingHero { get; private set; }
+    protected bool WasInitiatedByHero => InitiatingHero.IsNull;
+    public ComparerBase(MBHero initiatingHero)
+    {
+      InitiatingHero = initiatingHero;
+    }
 
     public virtual int Compare(W x, W y)
     {
@@ -20,9 +28,9 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
       return result;
     }
 
-    internal abstract bool MeetsRequirements(W wrapper);
+    protected abstract bool MeetsRequirements(W wrapper);
 
-    internal bool TryComparePreconditions(W x, W y, ref int result) =>
+    protected bool TryComparePreconditions(W x, W y, ref int result) =>
       TryCompareNull(x, y, ref result) ? true :
       TryCompareRequirements(x, y, ref result);
 

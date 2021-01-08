@@ -4,7 +4,10 @@ namespace TournamentsEnhanced.Finder.Comparers.Hero
 {
   public class MaleClanLeaderHostComparer : BasicHostRequirementsHeroComparer
   {
-    internal override bool MeetsRequirements(MBHero hero) =>
+
+    public MaleClanLeaderHostComparer(MBHero initiatingHero) : base(initiatingHero) { }
+
+    protected override bool MeetsRequirements(MBHero hero) =>
       base.MeetsRequirements(hero) &&
       !hero.IsFemale &&
       hero.IsFactionLeader &&

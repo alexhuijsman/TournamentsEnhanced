@@ -11,14 +11,14 @@ namespace TournamentsEnhanced.Finder
   public class KingdomFinder
     : FinderBase<FindKingdomResult, FindKingdomOptions, MBKingdom, MBKingdomList, Kingdom>
   {
-    public static FindKingdomResult FindHostKingdomThatMeetBasicRequirements(MBKingdom faction)
+    public static FindKingdomResult FindKingdomThatMeetBasicHostRequirements(MBKingdom faction, MBHero initiatingHero)
     {
       var options = new FindKingdomOptions()
       {
         Candidates = new MBKingdomList(faction),
         Comparers = new IComparer<MBKingdom>[]
         {
-          new BasicHostRequirementsKingdomComparer()
+          new BasicHostRequirementsKingdomComparer(initiatingHero)
         }
       };
 

@@ -10,34 +10,34 @@ namespace TournamentsEnhanced.Finder
 {
   public class HeroFinder : FinderBase<FindHeroResult, FindHeroOptions, MBHero, MBHeroList, Hero>
   {
-    public static FindHeroResult FindMaleKingdomLeaderHosts(params MBHero[] candidates)
+    public static FindHeroResult FindMaleKingdomLeaderHosts(MBHero initiatingHero, params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
         Candidates = candidates,
-        Comparers = new IComparer<MBHero>[] { new MaleKingdomLeaderHostComparer() }
+        Comparers = new IComparer<MBHero>[] { new MaleKingdomLeaderHostComparer(initiatingHero) }
       };
 
       return HeroFinder.Find(options);
     }
 
-    public static FindHeroResult FindHostsThatMeetBasicRequirements(params MBHero[] candidates)
+    public static FindHeroResult FindHostsThatMeetBasicRequirements(MBHero initiatingHero, params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
         Candidates = candidates,
-        Comparers = new IComparer<MBHero>[] { new BasicHostRequirementsHeroComparer() }
+        Comparers = new IComparer<MBHero>[] { new BasicHostRequirementsHeroComparer(initiatingHero) }
       };
 
       return Find(options);
     }
 
-    public static FindHeroResult FindMaleClanLeaderHosts(params MBHero[] candidates)
+    public static FindHeroResult FindMaleClanLeaderHosts(MBHero initiatingHero, params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
         Candidates = candidates,
-        Comparers = new IComparer<MBHero>[] { new MaleClanLeaderHostComparer() }
+        Comparers = new IComparer<MBHero>[] { new MaleClanLeaderHostComparer(initiatingHero) }
       };
 
       return HeroFinder.Find(options);
@@ -45,6 +45,8 @@ namespace TournamentsEnhanced.Finder
 
     public static FindHeroResult FindHostsFromWeddedHeroes(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
+
+      //TODO clan leader from current town should host tournament, if not, then do below
       var maleKingdomLeaderResult = HeroFinder.FindMaleKingdomLeaderHosts(firstWeddedHero, secondWeddedHero);
       var maleClanLeaderResult = HeroFinder.FindMaleClanLeaderHosts(firstWeddedHero, secondWeddedHero);
 

@@ -1,4 +1,3 @@
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
@@ -7,12 +6,12 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
   {
     public bool CanOverrideExisting { get; private set; }
 
-    public ExistingTournamentComparer(Payor payor, bool canOverrideExisting) : base(payor)
+    public ExistingTournamentComparer(MBHero initiatingHero, bool canOverrideExisting) : base(initiatingHero)
     {
       CanOverrideExisting = canOverrideExisting;
     }
 
-    internal override bool MeetsRequirements(MBSettlement settlement)
+    protected override bool MeetsRequirements(MBSettlement settlement)
     {
       return CanOverrideExisting ||
              !HasExistingTournament(settlement);

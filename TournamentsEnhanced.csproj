@@ -143,7 +143,6 @@
     <Compile Include="src\Constants\ItemConstants.cs" />
     <Compile Include="src\Constants\ModuleConstants.cs" />
     <Compile Include="src\Constants\TournamentConstants.cs" />
-    <Compile Include="src\Enums\PayorType.cs" />
     <Compile Include="src\Enums\ResultStatus.cs" />
     <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\Extensions.cs" />
@@ -179,7 +178,6 @@
     <Compile Include="src\Finders\Settlement\Abstract\HostSettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\SettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentComparer.cs" />
-    <Compile Include="src\Finders\Settlement\Comparers\PayorRankComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\PayorRelationComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
     <Compile Include="src\Finders\Settlement\FindHostSettlementOptions.cs" />
@@ -267,6 +265,10 @@
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
     <Compile Include="src\Wrappers\WrapperLookup.cs" />
     <Compile Include="src\Builders\TournamentBuilder.PlayerInitiated.cs" />
+    <Compile Include="src\Wrappers\Core\MBInformationData.cs" />
+    <Compile Include="src\Wrappers\Core\MBBasicCharacterObject.cs" />
+    <Compile Include="src\Wrappers\Core\MBInquiryData.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\InitiatingHeroRankComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

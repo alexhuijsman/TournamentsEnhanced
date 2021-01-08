@@ -3,5 +3,8 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers
 {
-  public abstract class HeroComparerBase : ComparerBase<MBHero> { }
+  public abstract class HeroComparerBase : ComparerBase<MBHero>
+  {
+    public HeroComparerBase(MBHero initiatingHero) : base(initiatingHero) { }
+  }
 }

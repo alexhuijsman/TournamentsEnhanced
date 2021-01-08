@@ -7,18 +7,14 @@ namespace TournamentsEnhanced.Models.Serializable
   public struct TournamentRecord
   {
     public TournamentType tournamentType;
-    public string hostSettlementId;
-    public string payorId;
-    public PayorType payorType;
+    public string hostSettlementStringId;
+    public string initiatingHeroStringId;
     public uint playerTeamColor;
     public bool HasPlayerTeam;
 
-    public bool IsHeroPayor => payorType == PayorType.Hero;
-    public bool IsSettlementPayor => payorType == PayorType.Settlement;
-
-    public MBSettlement FindHostSettlement() => Settlement.Find(hostSettlementId);
-    public MBSettlement FindPayorSettlement() => Settlement.Find(payorId);
-    public MBHero FindPayorHero() => MBCharacterObject.Find(payorId).HeroObject;
+    public MBSettlement FindHostSettlement() => Settlement.Find(hostSettlementStringId);
+    public MBHero FindInitiatingHero() => MBCharacterObject.Find(initiatingHeroStringId).HeroObject;
+    public MBHero FindPayorHero() => FindHostSettlement().ClanLeader;
 
     public bool HasExistingTournament() => tournamentType != TournamentType.None;
   }

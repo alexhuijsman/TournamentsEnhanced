@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
   {
     public float MaxRelation { get; private set; }
 
-    public PayorRelationComparer(Payor payor, float maxRelation) : base(payor, true)
+    public PayorRelationComparer(MBHero initiatingHero, float maxRelation) : base(initiatingHero, true)
     {
       MaxRelation = maxRelation;
     }
@@ -16,14 +16,16 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
     public override int Compare(MBSettlement x, MBSettlement y)
     {
       var result = 0;
-
-      var wasResultAssigned =
-        TryComparePreconditions(x, y, ref result) ? true :
+      //TODO adapt and use this style in all comparers
+      if (!TryComparePreconditions(x, y, ref result))
+      {
         ComparePayorRelation(x, y, out result);
+      }
 
       return result;
     }
 
+    //TODO move to Hero comparers
     internal bool ComparePayorRelation(MBSettlement x, MBSettlement y, out int result)
     {
       var xHasRecord = ModState.TournamentRecords.ContainsSettlement(x);
@@ -32,14 +34,11 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       var xRecord = xHasRecord ? ModState.TournamentRecords[x] : default(TournamentRecord);
       var yRecord = yHasRecord ? ModState.TournamentRecords[y] : default(TournamentRecord);
 
-      var xHasPayorHero = xRecord.IsHeroPayor;
-      var yHasPayorHero = yRecord.IsHeroPayor;
+      var xPayorHero = xRecord.FindPayorHero();
+      var yPayorHero = yRecord.FindPayorHero();
 
-      var xPayorHero = xHasPayorHero ? xRecord.FindPayorHero() : null;
-      var yPayorHero = yHasPayorHero ? yRecord.FindPayorHero() : null;
-
-      var xRelation = xHasPayorHero ? xPayorHero.GetRelation(Payor.Hero) : 0;
-      var yRelation = yHasPayorHero ? yPayorHero.GetRelation(Payor.Hero) : 0;
+      var xRelation = xPayorHero.GetRelation(InitiatingHero);
+      var yRelation = yPayorHero.GetRelation(InitiatingHero);
 
       var xHasWorseRelation = xRelation < yRelation;
       var xHasBetterRelation = xRelation > yRelation;

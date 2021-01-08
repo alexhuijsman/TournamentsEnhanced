@@ -7,24 +7,21 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreatePeaceTournamentForFaction(IMBFaction faction)
     {
-      var payorHero = faction.Leader;
-      var failureResult = CreateTournamentResult.Failure;
+      var initiatingHero = faction.Leader;
 
-      if (ValidatePayorHero(payorHero).Failed || ValidateFaction(faction).Failed)
-      {
-        return failureResult;
-      }
-
-      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction, payorHero);
+      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction, initiatingHero);
 
       if (findSettlementResult.Failed)
       {
-        return failureResult;
+        return CreateTournamentResult.Failure;
       }
 
-      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Nominee,
-                                                                TournamentType.Peace,
-                                                                payorHero);
+      var createTournamentOptions = new CreateTournamentOptions()
+      {
+        InitiatingHero = initiatingHero,
+        Settlement = findSettlementResult.Nominee,
+        Type = TournamentType.Peace
+      };
 
       return CreateTournament(createTournamentOptions);
     }

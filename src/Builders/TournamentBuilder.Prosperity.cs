@@ -6,19 +6,18 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreateProsperityTournament()
     {
-
-      var failureResult = CreateTournamentResult.Failure;
-
       var findSettlementResult = SettlementFinder.FindForProsperityTournament();
 
       if (findSettlementResult.Failed)
       {
-        return failureResult;
+        return CreateTournamentResult.Failure;
       }
 
-      var options = new CreateTournamentOptions(findSettlementResult.Nominee,
-                                                TournamentType.Peace,
-                                                payorHero);
+      var options = new CreateTournamentOptions()
+      {
+        Settlement = findSettlementResult.Nominee,
+        Type = TournamentType.PlayerInitiated
+      };
 
       return CreateTournament(options);
     }

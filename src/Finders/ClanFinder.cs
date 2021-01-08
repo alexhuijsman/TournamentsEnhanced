@@ -10,14 +10,14 @@ namespace TournamentsEnhanced.Finder
 {
   public class ClanFinder : FinderBase<FindClanResult, FindClanOptions, MBClan, MBClanList, Clan>
   {
-    public static FindClanResult FindHostClanThatMeetBasicRequirements(MBClan faction)
+    public static FindClanResult FindClanThatMeetsBasicHostRequirements(MBClan faction, MBHero initiatingHero)
     {
       var options = new FindClanOptions()
       {
         Candidates = new MBClanList(faction),
         Comparers = new IComparer<MBClan>[]
         {
-          new BasicHostRequirementsClanComparer()
+          new BasicHostRequirementsClanComparer(initiatingHero)
         }
       };
 

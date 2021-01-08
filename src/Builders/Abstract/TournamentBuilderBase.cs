@@ -5,39 +5,34 @@ using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Abstract;
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
+using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced.Builders
 {
   public abstract class TournamentBuilderBase
   {
-    internal static FindHeroResult ValidatePayorHero(MBHero payorHero)
+    internal static FindHeroResult ValidatePayorHero(MBHero initiatingHero, MBHero payorHero)
     {
-      return ValidatePayorHeroes(payorHero);
+      return ValidatePayorHeroes(initiatingHero, payorHero);
     }
 
-    internal static FindHeroResult ValidatePayorHeroes(params MBHero[] payorHeroes)
+    internal static FindHeroResult ValidatePayorHeroes(MBHero initiatingHero, params MBHero[] payorHeroes)
     {
-      return HeroFinder.FindHostsThatMeetBasicRequirements(payorHeroes);
+      return HeroFinder.FindHostsThatMeetBasicRequirements(initiatingHero, payorHeroes);
     }
 
-    internal static ResultBase ValidateFaction(IMBFaction faction)
+    internal static ResultBase ValidateFaction(MBHero initiatingHero, IMBFaction faction)
     {
       ResultBase result;
 
       if (faction.IsKingdomFaction)
       {
-        result = KingdomFinder.FindHostKingdomThatMeetBasicRequirements((MBKingdom)faction);
+        result = KingdomFinder.FindKingdomThatMeetBasicHostRequirements((MBKingdom)faction, initiatingHero);
       }
       else
       {
-        result = ClanFinder.FindHostClanThatMeetBasicRequirements((MBClan)faction);
-        ClanFinder.Find(
-          new FindClanOptions()
-          {
-            Candidates = new MBClanList((MBClan)faction)
-          });
+        result = ClanFinder.FindClanThatMeetsBasicHostRequirements((MBClan)faction, initiatingHero);
       }
 
       return result;
@@ -67,7 +62,7 @@ namespace TournamentsEnhanced.Builders
 
       if (payor.IsHumanPlayerCharacter)
       {
-        NotificationUtils.DisplayBannerMessage($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
+        MBInformationManager.AddQuickInformation($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
       }
 
       return result;
@@ -94,7 +89,7 @@ namespace TournamentsEnhanced.Builders
 
       if (settlement.Town.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
       {
-        NotificationUtils.DisplayMessage(settlement.Name + "'s prosperity, loyalty and security have increased and food stocks have decreased");
+        MBInformationManager.DisplayMessage(settlement.Name + "'s prosperity, loyalty and security have increased and food stocks have decreased");
       }
     }
 
@@ -128,7 +123,7 @@ namespace TournamentsEnhanced.Builders
         notable.SetPersonalRelation(mainHero, newRelation);
       }
 
-      NotificationUtils.DisplayBannerMessage("Your relationship with local notables at " + settlement.Name + " has improved");
+      MBInformationManager.AddQuickInformation("Your relationship with local notables at " + settlement.Name + " has improved");
     }
 
     public static ValueTuple<SkillObject, int> TournamentSkillXpGain(MBHero winner)
