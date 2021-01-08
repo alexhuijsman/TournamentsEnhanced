@@ -71,7 +71,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private static void game_menu_town_arena_host_tournament_consequence(MenuCallbackArgs args)
     {
-      TournamentBuilder.TryCreatePeaceTournamentForFaction();
+      TournamentBuilder.TryCreatePlayerInitiatedTournament();
       ModState.WeeksSinceHostedTournament = 0;
       GameMenu.ActivateGameMenu("town_arena");
     }

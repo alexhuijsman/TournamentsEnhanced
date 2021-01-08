@@ -24,6 +24,11 @@ TournamentTypeComparer, use for more than just overrides. E.g. sort by Prosperit
 Can only override underling's' tournaments.
 Worsten relations with previous payor if new payor steals their tournament
 A payor friendly with another payor may decide not to steal tournament
+Make Highborn tournaments different from invitational? or reknown level is only difference?
+Ask player to authorize any tournaments happening at player's expense
+all tournaments should be paid for by the clan leader of the town
+Charge 2000 upfront cost plus option-configurable scale of cost for prize, and add "host can afford tournament prize" logic
+Prize pool is filtered by what the host can afford. Configuration of % of total $ ClanLeaders are willing to spend on tournament prizes. Also configuration of scale of prize cost to host in options.
 
 REFACTOR
 --------

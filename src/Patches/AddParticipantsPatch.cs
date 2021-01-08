@@ -8,7 +8,7 @@ using TaleWorlds.Core;
 using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(TournamentMatch), "AddParticipant")]
   class AddParticipantsPatch

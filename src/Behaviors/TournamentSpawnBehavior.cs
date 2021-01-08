@@ -8,6 +8,7 @@ using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
+using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced.Behaviors
 {
@@ -29,12 +30,14 @@ namespace TournamentsEnhanced.Behaviors
 
     private void WeeklyTick()
     {
-      TrySpawnLordTournament();
+      if (TryCreateLordTournament().Failed)
+      {
+        TryCreateInvitationTournament();
+      }
       ModState.WeeksSinceHostedTournament++;
-      InvitePlayer();
     }
 
-    private static void InvitePlayer()
+    private static void TryCreateInvitationTournament()
     {
       if (Hero.MainHero.Clan.Renown > 800.00f || MBRandom.RandomFloat >= 0.8f)
       {
@@ -51,7 +54,7 @@ namespace TournamentsEnhanced.Behaviors
       TryCreateProsperityTournament();
     }
 
-    private void TrySpawnLordTournament()
+    private void TryCreateLordTournament()
     {
       foreach (var kingdom in MBKingdom.All)
       {
@@ -62,7 +65,13 @@ namespace TournamentsEnhanced.Behaviors
           continue;
         }
 
-        TournamentBuilder.TryMakeLordTournamentForFaction(kingdom.MapFaction);
+        var result = TournamentBuilder.TryCreateLordTournament(kingdom.MapFaction);
+
+        if (result.Succeeded)
+        {
+          MBInformationManager.DisplayBanner(kingdom.Leader.Name + " invites you to a Highborn tournament at " + result.HostSettlement.Name);
+        }
+
 
         break;
       }

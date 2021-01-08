@@ -9,12 +9,12 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
+    public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero,
+                                                                    MBHero secondWeddedHero)
     {
       var failureResult = CreateTournamentResult.Failure;
 
-      var findSettlementResult =
-        SettlementFinder.FindForWeddingTournament(firstWeddedHero, secondWeddedHero);
+      var findSettlementResult = SettlementFinder.FindForWeddingTournament(firstWeddedHero, secondWeddedHero);
 
       if (findSettlementResult.Failed)
       {

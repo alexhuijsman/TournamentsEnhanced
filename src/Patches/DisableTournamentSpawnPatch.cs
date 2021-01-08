@@ -6,7 +6,7 @@ using TaleWorlds.Core;
 
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(TournamentCampaignBehavior), "ConsiderStartOrEndTournament")]
   class DisableTournamentSpawnPatch

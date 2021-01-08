@@ -9,7 +9,7 @@ namespace TournamentsEnhanced
     Prosperity,
     Peace,
     Invitation,
-    Hosted,
-    Lord
+    PlayerInitiated,
+    Highborn
   }
 }

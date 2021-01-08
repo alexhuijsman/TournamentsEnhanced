@@ -5,7 +5,7 @@ using TaleWorlds.Core;
 
 using TournamentsEnhanced.Wrappers.Core;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(TournamentGame), "GetTournamentPrize")]
   class TournamentRewardsPatch

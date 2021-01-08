@@ -6,26 +6,21 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreateProsperityTournament()
     {
-      var payorHero = faction.Leader;
+
       var failureResult = CreateTournamentResult.Failure;
 
-      if (ValidatePayorHero(payorHero).Failed || ValidateFaction(faction).Failed)
-      {
-        return failureResult;
-      }
-
-      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction, payorHero);
+      var findSettlementResult = SettlementFinder.FindForProsperityTournament();
 
       if (findSettlementResult.Failed)
       {
         return failureResult;
       }
 
-      var createTournamentOptions = new CreateTournamentOptions(findSettlementResult.Nominee,
-                                                                TournamentType.Peace,
-                                                                payorHero);
+      var options = new CreateTournamentOptions(findSettlementResult.Nominee,
+                                                TournamentType.Peace,
+                                                payorHero);
 
-      return CreateTournament(createTournamentOptions);
+      return CreateTournament(options);
     }
   }
 }

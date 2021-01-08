@@ -49,6 +49,7 @@ namespace TournamentsEnhanced.Builders
       var type = options.Type;
       var townHadExistingTournament = settlement.Town.HasTournament;
 
+
       if (!townHadExistingTournament)
       {
         InstantiateTournamentFor(settlement);
@@ -56,14 +57,20 @@ namespace TournamentsEnhanced.Builders
         ApplyRelationsGain(type, settlement);
       }
 
-      PayTournamentFee(options.Payor, settlement);
+      var result = CreateTournamentResult.Success(settlement, townHadExistingTournament);
+      var payor = result.Payor;
 
-      if (options.Payor.IsHero && options.Payor.Hero.IsHumanPlayerCharacter)
+      if (result.HasPayor)
+      {
+        PayTournamentFee(result.Payor, settlement);
+      }
+
+      if (payor.IsHumanPlayerCharacter)
       {
         NotificationUtils.DisplayBannerMessage($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
       }
 
-      return CreateTournamentResult.Success(settlement, options.Payor, townHadExistingTournament);
+      return result;
     }
 
     private static void InstantiateTournamentFor(MBSettlement settlement)
@@ -91,22 +98,17 @@ namespace TournamentsEnhanced.Builders
       }
     }
 
-    private static void PayTournamentFee(Payor payor, MBSettlement settlement)
+    private static void PayTournamentFee(MBHero payor, MBSettlement settlement)
     {
-      if (!payor.IsHero)
-      {
-        return;
-      }
-
       var tournamentCost = Settings.Instance.TournamentCost;
 
-      payor.Hero.ChangeHeroGold(-tournamentCost);
-      payor.Settlement.Town.ChangeGold(tournamentCost);
+      payor.ChangeHeroGold(-tournamentCost);
+      settlement.Town.ChangeGold(tournamentCost);
     }
 
     public static void ApplyRelationsGain(TournamentType type, MBSettlement settlement)
     {
-      if (type != TournamentType.Hosted)
+      if (type != TournamentType.PlayerInitiated)
       {
         return;
       }

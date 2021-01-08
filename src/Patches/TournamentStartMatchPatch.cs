@@ -5,7 +5,7 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
 using TournamentsEnhanced.Models;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(TournamentMatch), "Start")]
   class TournamentStartMatchPatch

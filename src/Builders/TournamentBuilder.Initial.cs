@@ -1,4 +1,3 @@
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
@@ -18,7 +17,12 @@ namespace TournamentsEnhanced.Builders
       CreateTournamentOptions options;
       foreach (var town in townsWithExisting)
       {
-        options = new CreateTournamentOptions(town.Settlement, TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions()
+        {
+          Settlement = town.Settlement,
+          Type = TournamentType.Initial
+        };
+
         CreateTournament(options);
       }
 
@@ -30,7 +34,12 @@ namespace TournamentsEnhanced.Builders
           break;
         }
 
-        options = new CreateTournamentOptions(town.Settlement, TournamentType.Initial, Payor.NoPayor);
+        options = new CreateTournamentOptions()
+        {
+          Settlement = town.Settlement,
+          Type = TournamentType.Initial,
+        };
+
         CreateTournament(options);
 
         numCreated++;

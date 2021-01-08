@@ -1,10 +1,12 @@
 ﻿using System;
+
 using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 using TaleWorlds.Library;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(DefaultCombatXpModel), "GetXpFromHit")]
   class TournamentXpOnHitPatch

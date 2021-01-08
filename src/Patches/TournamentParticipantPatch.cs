@@ -7,7 +7,7 @@ using TaleWorlds.Core;
 
 using TournamentsEnhanced.Models.ModState;
 
-namespace TournamentsEnhanced
+namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(TournamentGame), "GetParticipantCharacters")]
   class TournamentParticipantPatch
@@ -19,7 +19,7 @@ namespace TournamentsEnhanced
         return;
       }
 
-      if (ModState.TournamentRecords.ForCurrentSettlement().tournamentType == TournamentType.Lord)
+      if (ModState.TournamentRecords.ForCurrentSettlement().tournamentType == TournamentType.Highborn)
       {
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i < 15; i++)
