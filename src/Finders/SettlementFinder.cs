@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
@@ -13,22 +12,22 @@ namespace TournamentsEnhanced.Finder
   public class SettlementFinder
     : FinderBase<FindHostSettlementResult, FindHostSettlementOptions, MBSettlement, MBSettlementList, Settlement>
   {
-    public static FindHostSettlementResult FindSettlementForPeaceTournament(IMBFaction faction, MBHero payorHero)
+    public static FindHostSettlementResult FindForPeaceTournament(IMBFaction faction, MBHero payorHero)
     {
       var payor = new Payor(payorHero);
       var candidateSettlements = faction.Settlements;
 
-      var result = FindMostProsperousExistingHostSettlementForPeace(candidateSettlements, payor);
+      var result = FindMostProsperousExisting(candidateSettlements, payor);
 
       if (result.Failed)
       {
-        result = FindMostProsperousExistingHostSettlementForPeace(candidateSettlements, payor);
+        result = FindMostProsperousExisting(candidateSettlements, payor);
       }
 
       return result;
     }
 
-    public static FindHostSettlementResult FindSettlementForWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
+    public static FindHostSettlementResult FindForWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
       var failureResult = FindHostSettlementResult.Failure;
       var findHostHeroResult = HeroFinder.FindHostsFromWeddedHeroes(firstWeddedHero, secondWeddedHero);
@@ -41,55 +40,56 @@ namespace TournamentsEnhanced.Finder
 
       //TODO "local nobles have called a tournament in your honor" but currently the wedded person is the host
       //TODO instead, check if wedded persons own current town, and ask player if they want to host a tournament.
-
+      //TODO make host of wedding town the owner
       var primaryHostHero = findHostHeroResult.Nominee;
       var secondaryHostHero = findHostHeroResult.RunnerUp;
 
-      var result = FindHostSettlementsForFactionLeaderWedding(findHostHeroResult.Nominee);
+      var result = FindForFactionLeaderWedding(findHostHeroResult.Nominee);
 
       if (result.Failed && findHostHeroResult.HasRunnerUp)
       {
-        result = FindHostSettlementsForFactionLeaderWedding(findHostHeroResult.RunnerUp);
+        result = FindForFactionLeaderWedding(findHostHeroResult.RunnerUp);
       }
 
       return result;
 
     }
 
-    private static FindHostSettlementResult FindHostSettlementsForFactionLeaderWedding(MBHero factionLeader)
+    private static FindHostSettlementResult FindForFactionLeaderWedding(MBHero factionLeader)
       => factionLeader.MapFaction.IsKingdomFaction ?
-           FindHostSettlementsForKingdomLeaderWedding(factionLeader) :
-           FindHostSettlementsForClanLeaderWedding(factionLeader);
+           FindForKingdomLeaderWedding(factionLeader) :
+           FindForClanLeaderWedding(factionLeader);
 
-    private static FindHostSettlementResult FindHostSettlementsForClanLeaderWedding(MBHero clanLeader)
+
+    private static FindHostSettlementResult FindForKingdomLeaderWedding(MBHero kingdomLeader)
     {
-      var options = new FindHostSettlementOptions()
-      {
-        Candidates = clanLeader.MapFaction.Settlements,
-        Comparers = { new Comparer}
-      };
+      var candidateSettlements = kingdomLeader.Clan.Settlements;
+      var payor = new Payor(kingdomLeader);
 
-      return Find(options);
-    }
-
-    private static FindHostSettlementResult FindHostSettlementsForKingdomLeaderWedding(MBHero kingdomLeader)
-    {
-      throw new NotImplementedException();
-    }
-
-    public static FindHostSettlementResult FindSettlementForPeace(MBSettlementList settlements,
-                                                                  Payor payor)
-    {
-      var result = FindMostProsperousAvailableHostSettlement(settlements, payor);
+      var result = FindMostProsperousAvailable(candidateSettlements, payor);
       if (result.Failed)
       {
-        result = FindMostProsperousExistingHostSettlementForPeace(settlements, payor);
+        result = FindMostProsperousExisting(candidateSettlements, payor);
       }
 
       return result;
     }
 
-    private static FindHostSettlementResult FindMostProsperousAvailableHostSettlement(MBSettlementList settlements, Payor payor)
+    private static FindHostSettlementResult FindForClanLeaderWedding(MBHero clanLeader)
+    {
+      var candidateSettlements = clanLeader.Clan.Settlements;
+      var payor = new Payor(clanLeader);
+
+      var result = FindMostProsperousAvailable(candidateSettlements, payor);
+      if (result.Failed)
+      {
+        result = FindMostProsperousExisting(candidateSettlements, payor);
+      }
+
+      return result;
+    }
+
+    private static FindHostSettlementResult FindMostProsperousAvailable(MBSettlementList settlements, Payor payor)
     {
       var comparers = new IComparer<MBSettlement>[]
       {
@@ -106,7 +106,7 @@ namespace TournamentsEnhanced.Finder
       return SettlementFinder.Find(options);
     }
 
-    private static FindHostSettlementResult FindMostProsperousExistingHostSettlementForPeace(MBSettlementList settlements,
+    private static FindHostSettlementResult FindMostProsperousExisting(MBSettlementList settlements,
                                                                                Payor payor)
     {
       var comparers = new IComparer<MBSettlement>[] {

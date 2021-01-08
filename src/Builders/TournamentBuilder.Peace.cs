@@ -15,7 +15,7 @@ namespace TournamentsEnhanced.Builders
         return failureResult;
       }
 
-      var findSettlementResult = SettlementFinder.FindSettlementForPeaceTournament(faction, payorHero);
+      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction, payorHero);
 
       if (findSettlementResult.Failed)
       {
