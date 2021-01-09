@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static MBSettlementList FindSettlementsAroundPosition(TaleWorlds.Library.Vec2 position, float radius, Func<Settlement, bool> condition = null) => (MBSettlementList)Settlement.FindSettlementsAroundPosition(position, radius, condition);
 
     public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);
+    public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapper(obj);
   }
 
   public class MBSettlementList : MBListBase<MBSettlement, MBSettlementList>

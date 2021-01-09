@@ -1,3 +1,5 @@
+using TaleWorlds.CampaignSystem;
+
 using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 

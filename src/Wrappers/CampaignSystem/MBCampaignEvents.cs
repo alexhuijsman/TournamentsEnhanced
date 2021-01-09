@@ -264,7 +264,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public void OnUnitRecruited(CharacterObject character, int amount) => UnwrappedObject.OnUnitRecruited(character, amount);
 
     public static implicit operator CampaignEvents(MBCampaignEvents wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBCampaignEvents(CampaignEvents obj) => MBCampaignEvents.GetWrapperFor(obj);
+    public static implicit operator MBCampaignEvents(CampaignEvents obj) => MBCampaignEvents.GetWrapper(obj);
   }
 
   public class MBCampaignEventsList : MBListBase<MBCampaignEvents, MBCampaignEventsList>

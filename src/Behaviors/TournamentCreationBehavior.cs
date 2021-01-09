@@ -75,7 +75,12 @@ namespace TournamentsEnhanced.Behaviors
         return;
       }
 
-      TournamentBuilder.TryCreateInvitationTournament();
+      var result = TournamentBuilder.TryCreateInvitationTournament();
+
+      if (result.Succeeded)
+      {
+        MBInformationManagerFacade.DisplayAsQuickBanner("A local lord is looking for tournament contestants at " + result.HostSettlement.Name);
+      }
     }
 
     private void OnMakePeace(IFaction a, IFaction b)
@@ -83,16 +88,16 @@ namespace TournamentsEnhanced.Behaviors
       var factionA = a.ToIMBFaction();
       var factionB = b.ToIMBFaction();
 
-      OnMakePeace(factionA, factionB);
+      TryCreatePeaceTournaments(factionA, factionB);
     }
 
-    private void OnMakePeace(IMBFaction factionA, IMBFaction factionB)
+    private void TryCreatePeaceTournaments(IMBFaction factionA, IMBFaction factionB)
     {
       var resultsA = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionA);
       var resultsB = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionB);
 
       if (!Settings.Instance.PeaceNotification ||
-         (!resultsA.Succeeded && !resultsB.Succeeded))
+         (resultsA.Failed && resultsB.Failed))
       {
         return;
       }
@@ -109,7 +114,6 @@ namespace TournamentsEnhanced.Behaviors
 
       MBInformationManagerFacade.DisplayAsLogEntry(
         $"To celebrate the peace of { factionA.Name } and { factionB.Name }, faction leaders have called a tournament at { hostTownNames }");
-
     }
 
     private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
@@ -118,37 +122,17 @@ namespace TournamentsEnhanced.Behaviors
 
       if (result.Succeeded)
       {
-        MBInformationManagerFacade.DisplayAsQuickBanner($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
+        MBInformationManagerFacade.DisplayAsQuickBanner(
+          $"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
       }
     }
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
     {
-      var resultsA = TournamentBuilder.TryMakeBirthTournamentFor(mother);
+      var result = TournamentBuilder.TryMakeBirthTournament(mother);
 
-      foreach (var settlement in settlements)
-      {
-        if (maxTournaments >= MAX_TOURNAMENTS)
-        {
-          break;
-        }
-        if (settlement.IsTown)
-        {
-          if (!settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(mother.Name) || mother.Spouse != null && settlement.OwnerClan.Leader.Name.Equals(mother.Spouse.Name))
-          {
-            TournamentBuilder.CreateTournament(settlement, TournamentType.Birth);
-            NotificationUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + "and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
-            BannerlordUtils.WeddingSettlementStatChange(settlement);
-            maxTournaments++;
-          }
-          else if (settlement.Town.HasTournament && settlement.OwnerClan.Leader.Name.Equals(mother.Name) || mother.Spouse != null && settlement.OwnerClan.Leader.Name.Equals(mother.Spouse.Name))
-          {
-            NotificationUtils.DisplayBannerMessage("To celebrate the birth of " + mother.Name + " and " + mother.Spouse.Name + "'s child, local nobles have called a tournament at " + settlement.Town.Name);
-            BannerlordUtils.WeddingSettlementStatChange(settlement);
-            maxTournaments++;
-          }
-        }
-      }
+      MBInformationManagerFacade.DisplayAsQuickBanner(
+        $"To celebrate the birth of {mother.Name} and {mother.Spouse.Name}'s child, local nobles have called a tournament at {result.Settlement.Name}");
     }
   }
 }

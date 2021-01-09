@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.Core
   public class MBTradeItemComponent : MBObjectBaseWrapper<MBTradeItemComponent, TradeItemComponent>
   {
     public static implicit operator TradeItemComponent(MBTradeItemComponent wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTradeItemComponent(TradeItemComponent obj) => MBTradeItemComponent.GetWrapperFor(obj);
+    public static implicit operator MBTradeItemComponent(TradeItemComponent obj) => MBTradeItemComponent.GetWrapper(obj);
   }
 
   public class MBTradeItemComponentList : MBListBase<MBTradeItemComponent, MBTradeItemComponentList>

@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public object Identifier => UnwrappedObject.Identifier;
     public static implicit operator InquiryElement(MBInquiryElement wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBInquiryElement(InquiryElement obj) => MBInquiryElement.GetWrapperFor(obj);
+    public static implicit operator MBInquiryElement(InquiryElement obj) => MBInquiryElement.GetWrapper(obj);
   }
 
   public class MBInquiryElementList : MBListBase<MBInquiryElement, MBInquiryElementList>

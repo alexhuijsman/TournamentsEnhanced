@@ -36,7 +36,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     }
 
     public static implicit operator MultiSelectionInquiryData(MBMultiSelectionInquiryData wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBMultiSelectionInquiryData(MultiSelectionInquiryData obj) => MBMultiSelectionInquiryData.GetWrapperFor(obj);
+    public static implicit operator MBMultiSelectionInquiryData(MultiSelectionInquiryData obj) => MBMultiSelectionInquiryData.GetWrapper(obj);
   }
 
   public class MBMultiSelectionInquiryDataList : MBListBase<MBMultiSelectionInquiryData, MBMultiSelectionInquiryDataList>

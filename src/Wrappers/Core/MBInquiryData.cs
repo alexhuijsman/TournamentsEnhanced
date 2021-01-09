@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.Core
   public class MBInquiryData : MBWrapperBase<MBInquiryData, InquiryData>
   {
     public static implicit operator InquiryData(MBInquiryData wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBInquiryData(InquiryData obj) => MBInquiryData.GetWrapperFor(obj);
+    public static implicit operator MBInquiryData(InquiryData obj) => MBInquiryData.GetWrapper(obj);
   }
 
   public class MBInquiryDataList : MBListBase<MBInquiryData, MBInquiryDataList>

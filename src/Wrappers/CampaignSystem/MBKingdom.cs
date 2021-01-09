@@ -95,7 +95,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith((IFaction)other);
 
     public static implicit operator Kingdom(MBKingdom wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBKingdom(Kingdom obj) => MBKingdom.GetWrapperFor(obj);
+    public static implicit operator MBKingdom(Kingdom obj) => MBKingdom.GetWrapper(obj);
   }
 
   public class MBKingdomList : MBListBase<MBKingdom, MBKingdomList>

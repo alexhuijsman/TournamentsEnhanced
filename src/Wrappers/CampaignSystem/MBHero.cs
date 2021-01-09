@@ -311,7 +311,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public void SetSkillValue(MBSkillObject skill, int value) => UnwrappedObject.SetSkillValue(skill, value);
 
     public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBHero(Hero obj) => MBHero.GetWrapperFor(obj);
+    public static implicit operator MBHero(Hero obj) => MBHero.GetWrapper(obj);
   }
 
   public class MBHeroList : MBListBase<MBHero, MBHeroList>

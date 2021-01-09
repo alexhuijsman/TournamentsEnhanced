@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBIssueBase : MBWrapperBase<MBIssueBase, IssueBase>
   {
     public static implicit operator IssueBase(MBIssueBase wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBIssueBase(IssueBase obj) => MBIssueBase.GetWrapperFor(obj);
+    public static implicit operator MBIssueBase(IssueBase obj) => MBIssueBase.GetWrapper(obj);
   }
 
   public class MBIssueBaseList : MBListBase<MBIssueBase, MBIssueBaseList>

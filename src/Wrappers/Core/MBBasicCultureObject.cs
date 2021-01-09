@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.Core
   public class MBBasicCultureObject : MBObjectBaseWrapper<MBBasicCultureObject, BasicCultureObject>
   {
     public static implicit operator BasicCultureObject(MBBasicCultureObject wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBBasicCultureObject(BasicCultureObject obj) => MBBasicCultureObject.GetWrapperFor(obj);
+    public static implicit operator MBBasicCultureObject(BasicCultureObject obj) => MBBasicCultureObject.GetWrapper(obj);
   }
 
   public class MBBasicCultureObjectList : MBListBase<MBBasicCultureObject, MBBasicCultureObjectList>

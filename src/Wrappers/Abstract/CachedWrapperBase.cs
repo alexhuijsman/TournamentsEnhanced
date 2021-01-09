@@ -10,7 +10,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
     public CachedWrapperBase() : base() { }
     public CachedWrapperBase(T obj) : base(obj) { }
 
-    public static W GetWrapperFor(T obj)
+    public static W GetWrapper(T obj)
     {
       if (!Cache.ContainsKey(obj))
       {
@@ -35,7 +35,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
     public static WW Wrap<WW, TT>(TT obj)
       where WW : WrapperBase<WW, TT>, new()
     {
-      return CachedWrapperBase<WW, TT>.GetWrapperFor(obj);
+      return CachedWrapperBase<WW, TT>.GetWrapper(obj);
     }
     public static TT Unwrap<WW, TT>(WW wrapper)
       where WW : WrapperBase<WW, TT>, new()

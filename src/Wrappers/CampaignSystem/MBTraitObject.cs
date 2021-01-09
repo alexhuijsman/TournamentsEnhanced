@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBTraitObject : MBWrapperBase<MBTraitObject, TraitObject>
   {
     public static implicit operator TraitObject(MBTraitObject wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTraitObject(TraitObject obj) => MBTraitObject.GetWrapperFor(obj);
+    public static implicit operator MBTraitObject(TraitObject obj) => MBTraitObject.GetWrapper(obj);
   }
 
   public class MBTraitObjectList : MBListBase<MBTraitObject, MBTraitObjectList>

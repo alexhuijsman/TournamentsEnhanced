@@ -43,7 +43,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
     private static void RemoveCandidatesRankedLowerThanNull(L candidates)
     {
-      var nullIndexSearchResult = GetNullIndexFor(candidates);
+      var nullIndexSearchResult = GetNullIndex(candidates);
       var nullIndex = nullIndexSearchResult.indexValue;
 
       if (!nullIndexSearchResult.wasSuccessful)
@@ -57,7 +57,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
     }
 
-    private static NullIndexSearchResult GetNullIndexFor(L candidates)
+    private static NullIndexSearchResult GetNullIndex(L candidates)
     {
       int nullIndex = -1;
       for (int i = 0; i < candidates.Count; i++)

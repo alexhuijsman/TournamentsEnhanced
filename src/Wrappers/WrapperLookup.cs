@@ -28,7 +28,7 @@ namespace TournamentsEnhanced.Wrappers
       Type unwrappedType;
       foreach (var wrappedType in wrappedTypes)
       {
-        unwrappedType = Reflection.GetUnwrappedTypeFor(wrappedType);
+        unwrappedType = Reflection.GetUnwrappedType(wrappedType);
 
         WrappedTypeDictionary.Add(unwrappedType, wrappedType);
       }
@@ -46,7 +46,7 @@ namespace TournamentsEnhanced.Wrappers
     public static W GetWrapperFor<T, W>(T obj)
       where W : WrapperBase<W, T>, new()
     {
-      return CachedWrapperBase<W, T>.GetWrapperFor(obj);
+      return CachedWrapperBase<W, T>.GetWrapper(obj);
     }
 
     private static class Reflection
@@ -69,7 +69,7 @@ namespace TournamentsEnhanced.Wrappers
         return obj;
       }
 
-      public static Type GetUnwrappedTypeFor(Type wrapperType)
+      public static Type GetUnwrappedType(Type wrapperType)
       {
         var wrapper = (IWrapperBase)InstantiateByTypeAndArgs(wrapperType, null);
 

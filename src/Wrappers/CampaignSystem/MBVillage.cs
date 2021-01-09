@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBVillage : MBWrapperBase<MBVillage, Village>
   {
     public static implicit operator Village(MBVillage wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBVillage(Village obj) => MBVillage.GetWrapperFor(obj);
+    public static implicit operator MBVillage(Village obj) => MBVillage.GetWrapper(obj);
   }
 
   public class MBVillageList : MBListBase<MBVillage, MBVillageList>

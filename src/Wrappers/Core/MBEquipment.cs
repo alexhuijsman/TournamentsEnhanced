@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.Core
   public class MBEquipment : MBWrapperBase<MBEquipment, Equipment>
   {
     public static implicit operator Equipment(MBEquipment wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBEquipment(Equipment obj) => MBEquipment.GetWrapperFor(obj);
+    public static implicit operator MBEquipment(Equipment obj) => MBEquipment.GetWrapper(obj);
   }
 
   public class MBEquipmentList : MBListBase<MBEquipment, MBEquipmentList>

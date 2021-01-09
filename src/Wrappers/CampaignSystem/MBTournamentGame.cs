@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public MBTown Town => UnwrappedObject.Town;
 
     public static implicit operator TournamentGame(MBTournamentGame wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTournamentGame(TournamentGame obj) => MBTournamentGame.GetWrapperFor(obj);
+    public static implicit operator MBTournamentGame(TournamentGame obj) => MBTournamentGame.GetWrapper(obj);
   }
 
   public class MBTournamentGameList : MBListBase<MBTournamentGame, MBTournamentGameList>

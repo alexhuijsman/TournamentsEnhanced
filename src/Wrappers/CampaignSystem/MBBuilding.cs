@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBBuilding : MBWrapperBase<MBBuilding, Building>
   {
     public static implicit operator Building(MBBuilding wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBBuilding(Building obj) => MBBuilding.GetWrapperFor(obj);
+    public static implicit operator MBBuilding(Building obj) => MBBuilding.GetWrapper(obj);
   }
 
   public class MBBuildingList : MBListBase<MBBuilding, MBBuildingList>

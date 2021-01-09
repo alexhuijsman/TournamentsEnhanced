@@ -10,12 +10,12 @@ namespace TournamentsEnhanced
     public static W Wrap<W, T>(this T obj)
       where W : CachedWrapperBase<W, T>, new()
     {
-      return CachedWrapperBase<W, T>.GetWrapperFor(obj);
+      return CachedWrapperBase<W, T>.GetWrapper(obj);
     }
 
     public static Type GetWrapperType<T>(this T obj)
     {
-      return WrapperLookup.GetWrapperTypeFor(obj);
+      return WrapperLookup.GetWrapperType(obj);
     }
   }
 }

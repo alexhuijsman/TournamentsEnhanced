@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.Core
   public class MBInformationData : MBWrapperBase<MBInformationData, InformationData>
   {
     public static implicit operator InformationData(MBInformationData wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBInformationData(InformationData obj) => MBInformationData.GetWrapperFor(obj);
+    public static implicit operator MBInformationData(InformationData obj) => MBInformationData.GetWrapper(obj);
   }
 
   public class MBInformationDataList : MBListBase<MBInformationData, MBInformationDataList>

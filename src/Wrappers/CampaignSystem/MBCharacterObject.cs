@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     internal static MBCharacterObject Find(string stringId) => CharacterObject.Find(stringId);
 
     public static implicit operator CharacterObject(MBCharacterObject wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBCharacterObject(CharacterObject obj) => MBCharacterObject.GetWrapperFor(obj);
+    public static implicit operator MBCharacterObject(CharacterObject obj) => MBCharacterObject.GetWrapper(obj);
   }
 
   public class MBCharacterObjectList : MBListBase<MBCharacterObject, MBCharacterObjectList>

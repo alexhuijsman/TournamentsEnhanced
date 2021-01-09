@@ -277,6 +277,7 @@
     <Compile Include="src\Builders\TournamentBuilder.Invitation.cs" />
     <Compile Include="src\Builders\TournamentBuilder.Highborn.cs" />
     <Compile Include="src\Behaviors\TournamentCreationBehavior.cs" />
+    <Compile Include="src\Builders\TournamentBuilder.Birth.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

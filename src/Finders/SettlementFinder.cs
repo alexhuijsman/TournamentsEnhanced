@@ -93,13 +93,10 @@ namespace TournamentsEnhanced.Finder
 
       if (findHostHeroResult.Failed)
       {
-        //TODO ask clan leader to host
         return failureResult;
       }
 
-      //TODO "local nobles have called a tournament in your honor" but currently the wedded person is the host
-      //TODO instead, check if wedded persons own current town, and ask player if they want to host a tournament.
-      //TODO make host of wedding town the owner
+      //TODO instead, check if player is wedded hero and ask player if they want to host a tournament.
       var primaryHostHero = findHostHeroResult.Nominee;
       var secondaryHostHero = findHostHeroResult.RunnerUp;
 
@@ -157,5 +154,21 @@ namespace TournamentsEnhanced.Finder
 
       return SettlementFinder.Find(options);
     }
+
+    public static FindHostSettlementResult FindForBirthTournament(MBHero mother)
+    {
+
+      var comparers = new IComparer<MBSettlement>[]
+      {
+        new ExistingTournamentComparer(MBHero.Null, false),
+      };
+
+      var options = new FindHostSettlementOptions()
+      {
+        Candidates = settlements,
+        Comparers = comparers,
+      };
+
+      return SettlementFinder.Find(options);
+    }
   }
-}

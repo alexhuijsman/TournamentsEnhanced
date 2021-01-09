@@ -47,7 +47,7 @@ namespace TournamentsEnhanced.Builders.Abstract
 
       if (!townHadExistingTournament)
       {
-        InstantiateTournamentFor(settlement);
+        InstantiateTournament(settlement);
         ApplyHostingEffects(type, settlement);
         ApplyRelationsGain(type, settlement);
       }
@@ -68,7 +68,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       return result;
     }
 
-    private static void InstantiateTournamentFor(MBSettlement settlement)
+    private static void InstantiateTournament(MBSettlement settlement)
     {
       var tournament = new FightTournamentGame(settlement.Town);
       MBCampaign.Current.TournamentManager.AddTournament(tournament);

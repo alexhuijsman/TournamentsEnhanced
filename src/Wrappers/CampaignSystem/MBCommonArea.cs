@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBCommonArea : MBWrapperBase<MBCommonArea, CommonArea>
   {
     public static implicit operator CommonArea(MBCommonArea wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBCommonArea(CommonArea obj) => MBCommonArea.GetWrapperFor(obj);
+    public static implicit operator MBCommonArea(CommonArea obj) => MBCommonArea.GetWrapper(obj);
   }
 
   public class MBCommonAreaList : MBListBase<MBCommonArea, MBCommonAreaList>
