@@ -62,7 +62,7 @@ namespace TournamentsEnhanced.Builders
 
       if (payor.IsHumanPlayerCharacter)
       {
-        MBInformationManager.AddQuickInformation($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
+        MBInformationManagerFacade.DisplayAsQuickBanner($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
       }
 
       return result;
@@ -89,7 +89,7 @@ namespace TournamentsEnhanced.Builders
 
       if (settlement.Town.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
       {
-        MBInformationManager.DisplayMessage(settlement.Name + "'s prosperity, loyalty and security have increased and food stocks have decreased");
+        MBInformationManagerFacade.DisplayAsLogEntry($"{settlement.Name}'s prosperity, loyalty and security have increased and food stocks have decreased");
       }
     }
 
@@ -123,7 +123,7 @@ namespace TournamentsEnhanced.Builders
         notable.SetPersonalRelation(mainHero, newRelation);
       }
 
-      MBInformationManager.AddQuickInformation("Your relationship with local notables at " + settlement.Name + " has improved");
+      MBInformationManagerFacade.DisplayAsQuickBanner($"Your relationship with local notables at {settlement.Name} has improved");
     }
 
     public static ValueTuple<SkillObject, int> TournamentSkillXpGain(MBHero winner)

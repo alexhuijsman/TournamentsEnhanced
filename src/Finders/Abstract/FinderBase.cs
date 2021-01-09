@@ -12,8 +12,14 @@ namespace TournamentsEnhanced.Finder.Abstract
   {
     public static R Find(O options)
     {
-      var remainingCandidates = options.Candidates.ToList();
-      SortAndFilterByComparers(remainingCandidates, options.Comparers);
+      L remainingCandidates;
+
+      remainingCandidates = SortAndFilterByComparers(options.Candidates.ToList(), options.Comparers);
+
+      if (remainingCandidates.IsEmpty && options.HasFallbackComparers)
+      {
+        remainingCandidates = SortAndFilterByComparers(options.Candidates.ToList(), options.FallbackComparers);
+      }
 
       return remainingCandidates.IsEmpty ?
         FindResultBase<R, W, L, T>.Failure :

@@ -7,8 +7,7 @@ using TaleWorlds.Core;
 using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models.ModState;
-using TournamentsEnhanced.Wrappers.CampaignSystem;
-using TournamentsEnhanced.Wrappers.Core;
+using TournamentsEnhanced.Random;
 
 namespace TournamentsEnhanced.Behaviors
 {
@@ -30,10 +29,15 @@ namespace TournamentsEnhanced.Behaviors
 
     private void WeeklyTick()
     {
-      if (TryCreateLordTournament().Failed)
+      if (Lottery.IsWinner(TournamentType.Highborn))
       {
-        TryCreateInvitationTournament();
+        TournamentBuilder.TryCreateHighbornTournament();
       }
+      if (TournamentBuilder.TryCreateHighbornTournament().Failed)
+      {
+        TournamentBuilder.TryCreateInvitationTournament();
+      }
+
       ModState.WeeksSinceHostedTournament++;
     }
 
@@ -51,7 +55,16 @@ namespace TournamentsEnhanced.Behaviors
 
     private void DailyTick()
     {
-      TryCreateProsperityTournament();
+      TryCreateTournaments();
+
+    }
+
+    private void TryCreateTournaments()
+    {
+      if (Lottery.IsWinner(TournamentType.Prosperity))
+      {
+        TryCreateProsperityTournament();
+      }
     }
 
     private void TryCreateLordTournament()

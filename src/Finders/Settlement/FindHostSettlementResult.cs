@@ -8,16 +8,16 @@ namespace TournamentsEnhanced.Finder
   public class FindHostSettlementResult
     : FindResultBase<FindHostSettlementResult, MBSettlement, MBSettlementList, Settlement>
   {
-    public MBHero Payor { get; private set; }
+    public MBHero InitiatingHero { get; private set; }
 
     public FindHostSettlementResult() { }
 
-    public new static FindHostSettlementResult Success(MBSettlementList nominees, MBHero payor) =>
+    public new static FindHostSettlementResult Success(MBSettlementList nominees, MBHero initiatingHero) =>
       new FindHostSettlementResult()
       {
         Status = ResultStatus.Success,
         AllQualifiedCandidates = nominees,
-        Payor = payor
+        InitiatingHero = initiatingHero
       };
   }
 }

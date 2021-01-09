@@ -4,7 +4,9 @@ namespace TournamentsEnhanced.Models.Serializable
 {
   public struct SerializableModState
   {
+    public DaysSinceTracker<TournamentType> daysSince;
     public TournamentRecordDictionary tournamentRecords;
     public int weeksSinceHostedTournament;
+    public int dailyLotteryWinners;
   }
 }

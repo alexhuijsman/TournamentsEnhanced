@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Builders
       var options = new CreateTournamentOptions()
       {
         Settlement = findSettlementResult.Nominee,
-        Type = TournamentType.PlayerInitiated
+        Type = TournamentType.Prosperity
       };
 
       return CreateTournament(options);

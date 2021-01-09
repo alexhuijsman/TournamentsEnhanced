@@ -51,6 +51,8 @@ namespace TournamentsEnhanced
       {
         var campaignStarter = (CampaignGameStarter)gameStarter;
 
+        campaignStarter.AddBehavior(new LotteryBehavior());
+        campaignStarter.AddBehavior(new ModStateBehavior());
         campaignStarter.AddBehavior(new TownMenuBehavior());
         campaignStarter.AddBehavior(new SyncDataBehavior());
         campaignStarter.AddBehavior(new TournamentSpawnBehavior());
@@ -61,7 +63,7 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        ModState.WeeksSinceHostedTournament = 1;
+        ModState.ResetDaysSince()
 
         TournamentBuilder.CreateInitialTournaments();
       }

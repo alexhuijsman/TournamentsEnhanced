@@ -7,7 +7,7 @@ namespace TournamentsEnhanced.Finder
   public class CreateTournamentResult : CreateResultBase<CreateTournamentResult>
   {
     public MBHero Payor { get; protected set; }
-    public bool HasPayor => Payor == null;
+    public bool HasPayor => Payor == MBHero.Null;
     public MBSettlement HostSettlement { get; protected set; }
     public bool HadExistingTournament { get; protected set; }
     public new static CreateTournamentResult Success(MBSettlement settlement,

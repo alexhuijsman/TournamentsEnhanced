@@ -7,9 +7,7 @@ namespace TournamentsEnhanced.Builders
   {
     public static CreateTournamentResult TryCreatePeaceTournamentForFaction(IMBFaction faction)
     {
-      var initiatingHero = faction.Leader;
-
-      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction, initiatingHero);
+      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction);
 
       if (findSettlementResult.Failed)
       {
@@ -18,7 +16,7 @@ namespace TournamentsEnhanced.Builders
 
       var createTournamentOptions = new CreateTournamentOptions()
       {
-        InitiatingHero = initiatingHero,
+        InitiatingHero = findSettlementResult.InitiatingHero,
         Settlement = findSettlementResult.Nominee,
         Type = TournamentType.Peace
       };

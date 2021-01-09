@@ -11,18 +11,16 @@ namespace TournamentsEnhanced.Finder
   public class SettlementFinder
     : FinderBase<FindHostSettlementResult, FindHostSettlementOptions, MBSettlement, MBSettlementList, Settlement>
   {
-    public static FindHostSettlementResult FindForPeaceTournament(IMBFaction faction, MBHero initiatingHero)
+    public static FindHostSettlementResult FindForProsperityTournament()
     {
-      var candidateSettlements = faction.Settlements;
+      var MBKingdom.All.Shuffle();
+      //TODO FindKingdomForProsperityTournament
+      return FindMostProsperousAvailable(faction.Leader, faction.Settlements);
+    }
 
-      var result = FindMostProsperousAvailable(candidateSettlements, initiatingHero);
-
-      if (result.Failed)
-      {
-        result = FindMostProsperousExisting(candidateSettlements, initiatingHero);
-      }
-
-      return result;
+    public static FindHostSettlementResult FindForPeaceTournament(IMBFaction faction)
+    {
+      return FindMostProsperousAvailable(faction.Leader, faction.Settlements);
     }
 
     public static FindHostSettlementResult FindForWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
@@ -63,29 +61,17 @@ namespace TournamentsEnhanced.Finder
     {
       var candidateSettlements = kingdomLeader.Clan.Settlements;
 
-      var result = FindMostProsperousAvailable(candidateSettlements, kingdomLeader);
-      if (result.Failed)
-      {
-        result = FindMostProsperousExisting(candidateSettlements, kingdomLeader);
-      }
-
-      return result;
+      return FindMostProsperousAvailable(kingdomLeader, candidateSettlements);
     }
 
     private static FindHostSettlementResult FindForClanLeaderWedding(MBHero clanLeader)
     {
       var candidateSettlements = clanLeader.Clan.Settlements;
 
-      var result = FindMostProsperousAvailable(candidateSettlements, clanLeader);
-      if (result.Failed)
-      {
-        result = FindMostProsperousExisting(candidateSettlements, clanLeader);
-      }
-
-      return result;
+      return FindMostProsperousAvailable(clanLeader, candidateSettlements);
     }
 
-    private static FindHostSettlementResult FindMostProsperousAvailable(MBSettlementList settlements, MBHero initiatingHero)
+    private static FindHostSettlementResult FindMostProsperousAvailable(MBHero initiatingHero, MBSettlementList settlements)
     {
       var comparers = new IComparer<MBSettlement>[]
       {
@@ -93,25 +79,17 @@ namespace TournamentsEnhanced.Finder
         new ProsperityComparer(initiatingHero)
       };
 
-      var options = new FindHostSettlementOptions()
+      var fallbackComparers = new IComparer<MBSettlement>[]
       {
-        Candidates = settlements,
-        Comparers = comparers
+        new InitiatingHeroRankComparer(initiatingHero),
+        new ProsperityComparer(initiatingHero)
       };
 
-      return SettlementFinder.Find(options);
-    }
-
-    private static FindHostSettlementResult FindMostProsperousExisting(MBSettlementList settlements, MBHero initiatingHero)
-    {
-      var comparers = new IComparer<MBSettlement>[] {
-        new InitiatingHeroRankComparer(initiatingHero),
-        new ProsperityComparer(initiatingHero)};
-
       var options = new FindHostSettlementOptions()
       {
         Candidates = settlements,
-        Comparers = comparers
+        Comparers = comparers,
+        FallbackComparers = fallbackComparers
       };
 
       return SettlementFinder.Find(options);

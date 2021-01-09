@@ -4,11 +4,18 @@ namespace TournamentsEnhanced.Models.ModState
 {
   public class ModState
   {
+    public static DaysSinceTracker<TournamentType> DaysSince => _state.daysSince;
     public static TournamentRecordDictionary TournamentRecords => _state.tournamentRecords;
-    public static int WeeksSinceHostedTournament
+
+    public static int LotteryWinners
     {
-      get => _state.weeksSinceHostedTournament;
-      set => _state.weeksSinceHostedTournament = value;
+      get => _state.dailyLotteryWinners;
+      set => _state.dailyLotteryWinners = value;
+    }
+
+    public static void DailyTick()
+    {
+      DaysSince.DailyTick();
     }
 
     private static SerializableModState _state;

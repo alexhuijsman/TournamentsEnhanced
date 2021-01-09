@@ -6,10 +6,10 @@ using TaleWorlds.Library;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public static class MBMBRandom
+  public class MBMBRandom
   {
-    public static Random Random => MBRandom.Random;
-    public static Random DeterministicRandom => MBRandom.DeterministicRandom;
+    public static System.Random Random => MBRandom.Random;
+    public static System.Random DeterministicRandom => MBRandom.DeterministicRandom;
     public static float RandomFloat => MBRandom.RandomFloat;
     public static float RandomFloatNormal => MBRandom.RandomFloatNormal;
     public static Vec3 InsideUnitSphere => MBRandom.InsideUnitSphere;

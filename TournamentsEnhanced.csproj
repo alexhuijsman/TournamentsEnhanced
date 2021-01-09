@@ -127,7 +127,6 @@
   </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="src\Behaviors\Abstract\MBCampaignBehaviorBase.cs" />
     <Compile Include="src\Behaviors\Abstract\MBEncounterGameMenuBehavior.cs" />
     <Compile Include="src\Behaviors\SyncDataBehavior.cs" />
     <Compile Include="src\Behaviors\TournamentSpawnBehavior.cs" />
@@ -198,7 +197,6 @@
     <Compile Include="src\Patches\TournamentStartMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentXpOnHitPatch.cs" />
     <Compile Include="src\Settings.cs" />
-    <Compile Include="src\Utils\Reflection.cs" />
     <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.cs" />
     <Compile Include="src\Wrappers\Abstract\MBListBase.cs" />
     <Compile Include="src\Wrappers\Abstract\MBObjectBaseWrapper.cs" />
@@ -269,6 +267,14 @@
     <Compile Include="src\Wrappers\Core\MBBasicCharacterObject.cs" />
     <Compile Include="src\Wrappers\Core\MBInquiryData.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\InitiatingHeroRankComparer.cs" />
+    <Compile Include="src\Random\Lottery.cs" />
+    <Compile Include="src\Wrappers\Core\MBInformationManagerFacade.cs" />
+    <Compile Include="src\Behaviors\ModStateBehavior.cs" />
+    <Compile Include="src\Behaviors\LotteryBehavior.cs" />
+    <Compile Include="src\Models\Serializable\DaysSinceTracker.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBCampaignBehaviorBase.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBCampaignEvents.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBMapEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

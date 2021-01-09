@@ -10,5 +10,8 @@ namespace TournamentsEnhanced.Finder
   {
     public L Candidates { get; set; }
     public IComparer<W>[] Comparers { get; set; }
+    public IComparer<W>[] FallbackComparers { get; set; }
+
+    public bool HasFallbackComparers => FallbackComparers != null;
   }
 }
