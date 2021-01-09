@@ -66,13 +66,13 @@ namespace TournamentsEnhanced.Behaviors
       return !Settlement.CurrentSettlement.Town.HasTournament &&
               Settlement.CurrentSettlement.IsTown &&
               Settlement.CurrentSettlement.OwnerClan.Leader.IsHumanPlayerCharacter &&
-              ModState.WeeksSinceHostedTournament >= 1;
+              ModState.DaysSince[TournamentType.PlayerInitiated] >= Settings.Instance.MinDaysBetweenHostedTournaments;
     }
 
     private static void game_menu_town_arena_host_tournament_consequence(MenuCallbackArgs args)
     {
       TournamentBuilder.TryCreatePlayerInitiatedTournament();
-      ModState.WeeksSinceHostedTournament = 0;
+      ModState.DaysSince[TournamentType.PlayerInitiated] = 0;
       GameMenu.ActivateGameMenu("town_arena");
     }
 

@@ -1,0 +1,11 @@
+Implement Wrapped Static Getters
+static (\w*<?.*?>?) (\w*) \{ get; \}
+static $1 $2 => CampaignEvents.$2;
+
+Implement Wrapped Static Methods (up to 5 args per method)
+public static ((\w*<.*?>)|(\w*)) (\w*)\(((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?\);
+public static $3 $4($5$11$17$23$29) => CampaignEvents.$4($6$10$12$16$18$22$24$28$30$34);
+
+Implement Wrapped Nonstatic Methods (up to 5 args per method)
+public ((\w*<.*?>)|(\w*)) (\w*)\(((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?((ref |out )?(([\w\.]*<.*?>)|([\w\.]*)) (\w*\s*?=?\s*?[\w\d]*?,?\s*))?\);
+public $3 $4($5$11$17$23$29) => UnwrappedObject.$4($6$10$12$16$18$22$24$28$30$34);

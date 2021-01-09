@@ -48,7 +48,7 @@ namespace TournamentsEnhanced
     public float FoodStocksDecrease { get; set; } = 20.00f;
 
     //Tournament Cost
-    [SettingProperty("Prosperity Tournament Min Prosperity", 0, 10000, "Cost of tournaments")]
+    [SettingProperty("Prosperity Tournament Min Prosperity", 0, 10000, "The minimum prosperity needed for a Town to be eligible for a prosperity tournament")]
     [SettingPropertyGroup("Tournaments")]
     public float ProsperityTournamentMinProsperity { get; set; } = 5000;
 
@@ -84,5 +84,9 @@ namespace TournamentsEnhanced
     [SettingProperty("Bring Companions", "I want my companions to join me in tournaments (on my team when possible)")]
     [SettingPropertyGroup("Tournaments")]
     public bool BringCompanions { get; set; } = true;
+
+    [SettingProperty("Hosted Tournament Cooldown", "Minimum number of days between player-hosted tournaments.")]
+    [SettingPropertyGroup("Tournaments")]
+    public int MinDaysBetweenHostedTournaments { get; internal set; }
   }
 }
