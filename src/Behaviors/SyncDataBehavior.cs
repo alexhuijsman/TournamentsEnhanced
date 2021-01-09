@@ -21,7 +21,7 @@ namespace TournamentsEnhanced.Behaviors
         json = JsonSerializer.Serialize(ModState.SerializableObject);
       }
 
-      var wasSuccessful = dataStore.SyncData(ModuleConstants.ProductName, ref json);
+      var wasSuccessful = dataStore.SyncData(Constants.Module.ProductName, ref json);
 
       if (dataStore.IsLoading && wasSuccessful)
       {

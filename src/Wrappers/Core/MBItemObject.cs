@@ -207,7 +207,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public bool IsTierable()
     {
-      return IsOfAnyMatchingType(ItemConstants.TierableItemTypes);
+      return IsOfAnyMatchingType(Constants.Item.TierableItemTypes);
     }
 
     private bool IsOfAnyMatchingType(params ItemTypeEnum[] matchingItemTypes)

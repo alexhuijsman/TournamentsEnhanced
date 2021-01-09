@@ -22,21 +22,21 @@ namespace TournamentsEnhanced
     {
       try
       {
-        FileDatabase.Initialise(ModuleConstants.Name);
+        FileDatabase.Initialise(Constants.Module.Name);
       }
       catch (Exception ex)
       {
-        throw new UnauthorizedAccessException($"Exception while calling ModLib.FileDataBase.Initialise(\"${ModuleConstants.Name}\"", ex);
+        throw new UnauthorizedAccessException($"Exception while calling ModLib.FileDataBase.Initialise(\"${Constants.Module.Name}\"", ex);
       }
     }
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
     {
-      InformationManager.DisplayMessage(new InformationMessage($"Loaded {ModuleConstants.Name} v{ModuleConstants.Version}", Color.FromUint(4282569842U)));
+      InformationManager.DisplayMessage(new InformationMessage($"Loaded {Constants.Module.Name} v{Constants.Module.Version}", Color.FromUint(4282569842U)));
 
       try
       {
-        var harmony = new Harmony(ModuleConstants.Name);
+        var harmony = new Harmony(Constants.Module.Name);
         harmony.PatchAll();
       }
       catch (Exception ex)
@@ -63,7 +63,7 @@ namespace TournamentsEnhanced
     {
       if (game.GameType is Campaign)
       {
-        ModState.ResetDaysSince()
+        ModState.Reset();
 
         TournamentBuilder.CreateInitialTournaments();
       }

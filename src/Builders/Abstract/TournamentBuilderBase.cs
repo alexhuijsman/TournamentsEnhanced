@@ -118,7 +118,7 @@ namespace TournamentsEnhanced.Builders
           continue;
         }
 
-        newRelation = notable.GetBaseHeroRelation(mainHero) + TournamentConstants.HostedTournamentEffects.NobleRelationshipModifier;
+        newRelation = notable.GetBaseHeroRelation(mainHero) + Settings.Instance.NoblesRelationIncrease;
 
         notable.SetPersonalRelation(mainHero, newRelation);
       }

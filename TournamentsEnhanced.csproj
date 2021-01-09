@@ -139,9 +139,6 @@
     <Compile Include="src\Builders\TournamentBuilder.Peace.cs" />
     <Compile Include="src\Builders\TournamentBuilder.Prosperity.cs" />
     <Compile Include="src\Builders\TournamentBuilder.Wedding.cs" />
-    <Compile Include="src\Constants\ItemConstants.cs" />
-    <Compile Include="src\Constants\ModuleConstants.cs" />
-    <Compile Include="src\Constants\TournamentConstants.cs" />
     <Compile Include="src\Enums\ResultStatus.cs" />
     <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\Extensions.cs" />
@@ -275,6 +272,8 @@
     <Compile Include="src\Wrappers\CampaignSystem\MBCampaignBehaviorBase.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBCampaignEvents.cs" />
     <Compile Include="src\Wrappers\CampaignSystem\MBMapEvent.cs" />
+    <Compile Include="src\Constants\Constants.cs" />
+    <Compile Include="src\Constants\Defaults.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

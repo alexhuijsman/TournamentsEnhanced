@@ -18,10 +18,22 @@ namespace TournamentsEnhanced.Models.ModState
       DaysSince.DailyTick();
     }
 
+    private static void Initialize()
+    {
+      _state.tournamentRecords = new TournamentRecordDictionary();
+      _state.daysSince = new DaysSinceTracker(Constants.DaysSince.TournamentTypes);
+      DaysSince.
+    }
+
+    public static void Reset()
+    {
+      _state = default(SerializableModState);
+    }
+
     private static SerializableModState _state;
 
     public static SerializableModState SerializableObject { get => _state; set => _state = value; }
 
-    static ModState() => _state = default(SerializableModState);
+    static ModState() => Initialize();
   }
 }

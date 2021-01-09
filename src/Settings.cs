@@ -8,7 +8,7 @@ namespace TournamentsEnhanced
   public class Settings : SettingsBase
   {
     public const string InstanceID = "TournamentsEnhancedSettings";
-    public override string ModName => ModuleConstants.Name;
+    public override string ModName => Constants.Module.Name;
     public override string ModuleFolderName => "TournamentsEnhanced";
 
     [XmlElement]
@@ -87,6 +87,7 @@ namespace TournamentsEnhanced
 
     [SettingProperty("Hosted Tournament Cooldown", "Minimum number of days between player-hosted tournaments.")]
     [SettingPropertyGroup("Tournaments")]
-    public int MinDaysBetweenHostedTournaments { get; internal set; }
+    public int MinDaysBetweenHostedTournaments { get; set; } = Defaults.Settings.MinDaysBetweenHostedTournaments;
+    public int NoblesRelationIncrease { get; set; } = Defaults.Settings.NoblesRelationIncrease;
   }
 }
