@@ -32,12 +32,19 @@ namespace TournamentsEnhanced
       return wrappedObjects.ConvertAll<T>(converter);
     }
 
-    public static List<W> Wrap<W, T>(this List<T> objects)
+    public static List<W> Wrap<W, T>(this List<T> list)
     where W : CachedWrapperBase<W, T>, new()
     {
       var converter = new Converter<T, W>(CachedWrapperBase<W, T>.Wrap<W, T>);
 
-      return objects.ConvertAll<W>(converter);
+      return list.ConvertAll<W>(converter);
     }
+
+    public static L ToWrapperList<W, L>(this List<W> list)
+    where L : List<W>
+    {
+      return (L)list;
+    }
+
   }
 }

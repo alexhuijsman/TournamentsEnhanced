@@ -13,9 +13,72 @@ namespace TournamentsEnhanced.Finder
   {
     public static FindHostSettlementResult FindForProsperityTournament()
     {
-      var MBKingdom.All.Shuffle();
-      //TODO FindKingdomForProsperityTournament
-      return FindMostProsperousAvailable(faction.Leader, faction.Settlements);
+      return FindForProsperityTournament(MBSettlement.All);
+    }
+
+    public static FindHostSettlementResult FindForInvitationTournament()
+    {
+      return FindForInvitationTournament(MBSettlementFacade.AllNearMainHero);
+    }
+
+    public static FindHostSettlementResult FindForHighbornTournament()
+    {
+      var settlements =
+        (MBSettlementList)MBSettlement
+          .All
+            .FindAll((settlement) => settlement.MapFaction.IsKingdomFaction &&
+                      settlement.OwnerClan.Leader == settlement.MapFaction.Leader);
+
+      return FindForHighbornTournament(settlements);
+    }
+
+    private static FindHostSettlementResult FindForHighbornTournament(MBSettlementList settlements)
+    {
+      var comparers = new IComparer<MBSettlement>[]
+      {
+        new ExistingTournamentComparer(MBHero.Null, false),
+      };
+
+      var options = new FindHostSettlementOptions()
+      {
+        Candidates = settlements,
+        Comparers = comparers,
+      };
+
+      return SettlementFinder.Find(options);
+    }
+
+    private static FindHostSettlementResult FindForInvitationTournament(MBSettlementList settlements)
+    {
+      var comparers = new IComparer<MBSettlement>[]
+      {
+        new ExistingTournamentComparer(MBHero.Null, false),
+      };
+
+      var options = new FindHostSettlementOptions()
+      {
+        Candidates = settlements,
+        Comparers = comparers,
+      };
+
+      return SettlementFinder.Find(options);
+    }
+
+    private static FindHostSettlementResult FindForProsperityTournament(MBSettlementList settlements)
+    {
+      var comparers = new IComparer<MBSettlement>[]
+      {
+        new ExistingTournamentComparer(MBHero.Null, false),
+        new ProsperityComparer(MBHero.Null, Settings.Instance.RequiredMinProsperity),
+      };
+
+      var options = new FindHostSettlementOptions()
+      {
+        Candidates = settlements,
+        Comparers = comparers,
+      };
+
+      return SettlementFinder.Find(options);
     }
 
     public static FindHostSettlementResult FindForPeaceTournament(IMBFaction faction)

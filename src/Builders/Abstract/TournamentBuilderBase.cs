@@ -8,7 +8,7 @@ using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 
-namespace TournamentsEnhanced.Builders
+namespace TournamentsEnhanced.Builders.Abstract
 {
   public abstract class TournamentBuilderBase
   {

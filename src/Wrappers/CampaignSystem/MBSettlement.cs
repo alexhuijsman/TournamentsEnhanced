@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
@@ -11,22 +12,18 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   {
     public static MBSettlementList All => Settlement.All.ToList();
     public static MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
-    public static MBTown CurrentTown => CurrentSettlement.Town;
+
+    public static MBSettlement Find(string stringId) => Settlement.Find(stringId);
+
     public MBTown Town => UnwrappedObject.Town;
     public bool IsTown => UnwrappedObject.IsTown;
     public MBTextObject Name => UnwrappedObject.Name;
     public MBHeroList Notables => UnwrappedObject.Notables.ToList();
+    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
+    public MBClan OwnerClan => UnwrappedObject.OwnerClan;
+    public float Prosperity { get => UnwrappedObject.Prosperity; set => UnwrappedObject.Prosperity = value; }
 
-    private static MBSettlementList _allSettlements;
-
-    public MBHero ClanLeader => UnwrappedObject.OwnerClan.Leader;
-    public MBHero FactionLeader => UnwrappedObject.MapFaction.Leader;
-
-    public float Prosperity
-    {
-      get => UnwrappedObject.Prosperity;
-      set => UnwrappedObject.Prosperity = value;
-    }
+    public static MBSettlementList FindSettlementsAroundPosition(TaleWorlds.Library.Vec2 position, float radius, Func<Settlement, bool> condition = null) => (MBSettlementList)Settlement.FindSettlementsAroundPosition(position, radius, condition);
 
     public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => MBSettlement.GetWrapperFor(obj);

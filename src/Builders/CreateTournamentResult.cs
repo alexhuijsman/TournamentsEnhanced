@@ -1,8 +1,8 @@
-using TournamentsEnhanced.Finder.Abstract;
+using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace TournamentsEnhanced.Finder
+namespace TournamentsEnhanced.Builders
 {
   public class CreateTournamentResult : CreateResultBase<CreateTournamentResult>
   {
@@ -19,7 +19,7 @@ namespace TournamentsEnhanced.Finder
       {
         HadExistingTournament = hadExistingTournament,
         Status = ResultStatus.Success,
-        Payor = isInitialTournament ? MBHero.Null : settlement.ClanLeader
+        Payor = isInitialTournament ? MBHero.Null : settlement.OwnerClan.Leader
       };
     }
   }

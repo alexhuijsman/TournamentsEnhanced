@@ -1,3 +1,4 @@
+using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Finder;
 
 namespace TournamentsEnhanced.Builders
@@ -15,7 +16,7 @@ namespace TournamentsEnhanced.Builders
 
       var options = new CreateTournamentOptions()
       {
-        Settlement = findSettlementResult.Nominee,
+        Settlement = findSettlementResult.AllQualifiedCandidates.Shuffle().First(),
         Type = TournamentType.Prosperity
       };
 

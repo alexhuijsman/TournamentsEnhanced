@@ -11,7 +11,8 @@ namespace TournamentsEnhanced.Behaviors
   {
     public override void RegisterEvents()
     {
-      CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(ModState.DailyTick));
+      MBCampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(ModState.DailyTick));
+      MBCampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(ModState.DailyTick));
     }
   }
 }

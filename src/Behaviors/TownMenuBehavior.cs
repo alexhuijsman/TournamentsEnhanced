@@ -45,7 +45,7 @@ namespace TournamentsEnhanced.Behaviors
     {
       if (prizes.Count > 0)
       {
-        TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(MBSettlement.CurrentTown);
+        TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(MBSettlement.CurrentSettlement.Town);
         ItemObject prize = MBObjectManager.Instance.GetObject<ItemObject>(prizes.First().Identifier.ToString());
         typeof(TournamentGame).GetProperty("Prize").SetValue(tournamentGame, prize);
         GameMenu.SwitchToMenu("town_arena");

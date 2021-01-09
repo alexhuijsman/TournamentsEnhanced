@@ -1,3 +1,4 @@
+using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 

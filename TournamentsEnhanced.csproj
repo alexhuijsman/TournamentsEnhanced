@@ -129,7 +129,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="src\Behaviors\Abstract\MBEncounterGameMenuBehavior.cs" />
     <Compile Include="src\Behaviors\SyncDataBehavior.cs" />
-    <Compile Include="src\Behaviors\TournamentSpawnBehavior.cs" />
     <Compile Include="src\Behaviors\TownMenuBehavior.cs" />
     <Compile Include="src\Builders\Abstract\CreateResultBase.cs" />
     <Compile Include="src\Builders\Abstract\TournamentBuilderBase.cs" />
@@ -274,6 +273,10 @@
     <Compile Include="src\Wrappers\CampaignSystem\MBMapEvent.cs" />
     <Compile Include="src\Constants\Constants.cs" />
     <Compile Include="src\Constants\Defaults.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBSettlementFacade.cs" />
+    <Compile Include="src\Builders\TournamentBuilder.Invitation.cs" />
+    <Compile Include="src\Builders\TournamentBuilder.Highborn.cs" />
+    <Compile Include="src\Behaviors\TournamentCreationBehavior.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,3 @@
-using TaleWorlds.CampaignSystem;
-
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Models.Serializable
@@ -11,11 +9,16 @@ namespace TournamentsEnhanced.Models.Serializable
     public string initiatingHeroStringId;
     public uint playerTeamColor;
     public bool HasPlayerTeam;
+    public bool IsNull => tournamentType == TournamentType.None;
+    public bool HasInitiatingHero => !string.IsNullOrEmpty(initiatingHeroStringId);
 
-    public MBSettlement FindHostSettlement() => Settlement.Find(hostSettlementStringId);
-    public MBHero FindInitiatingHero() => MBCharacterObject.Find(initiatingHeroStringId).HeroObject;
-    public MBHero FindPayorHero() => FindHostSettlement().ClanLeader;
+    public MBHero FindInitiatingHero() =>
+      HasInitiatingHero ?
+        MBHero.Null :
+        MBCharacterObject.Find(initiatingHeroStringId).HeroObject;
 
-    public bool HasExistingTournament() => tournamentType != TournamentType.None;
+    public MBSettlement FindHostSettlement() => MBSettlement.Find(hostSettlementStringId);
+
+    public MBHero FindPayorHero() => FindHostSettlement().OwnerClan.Leader;
   }
 }

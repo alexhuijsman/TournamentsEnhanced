@@ -2,125 +2,80 @@
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
 
 using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Builders;
-using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Random;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
+using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced.Behaviors
 {
-  class TournamentSpawnBehavior : MBEncounterGameMenuBehavior
+  class TournamentCreationBehavior : MBEncounterGameMenuBehavior
   {
     public override void RegisterEvents()
     {
-      CampaignEvents.OnGivenBirthEvent
-        .AddNonSerializedListener(this, new Action<Hero, List<Hero>, int>(this.OnGivenBirth));
-      CampaignEvents.WeeklyTickEvent
-        .AddNonSerializedListener(this, new Action(this.WeeklyTick));
-      CampaignEvents.HeroesMarried
-        .AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
-      CampaignEvents.MakePeace
-        .AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
-      CampaignEvents.DailyTickEvent
+      MBCampaignEvents.DailyTickEvent
         .AddNonSerializedListener(this, new Action(this.DailyTick));
-    }
-
-    private void WeeklyTick()
-    {
-      if (Lottery.IsWinner(TournamentType.Highborn))
-      {
-        TournamentBuilder.TryCreateHighbornTournament();
-      }
-      if (TournamentBuilder.TryCreateHighbornTournament().Failed)
-      {
-        TournamentBuilder.TryCreateInvitationTournament();
-      }
-
-      ModState.WeeksSinceHostedTournament++;
-    }
-
-    private static void TryCreateInvitationTournament()
-    {
-      if (Hero.MainHero.Clan.Renown > 800.00f || MBRandom.RandomFloat >= 0.8f)
-      {
-        return;
-      }
-
-      var settlements = Settlement.FindSettlementsAroundPosition(Hero.MainHero.GetPosition().AsVec2, 60.00f).ToList().Shuffle();
-
-      TournamentBuilder.CreateInvitationTournamentFromSettlements(settlements);
+      MBCampaignEvents.MakePeace
+        .AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
+      MBCampaignEvents.HeroesMarried
+        .AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
+      MBCampaignEvents.OnGivenBirthEvent
+        .AddNonSerializedListener(this, new Action<Hero, List<Hero>, int>(this.OnGivenBirth));
     }
 
     private void DailyTick()
     {
       TryCreateTournaments();
-
     }
 
     private void TryCreateTournaments()
     {
-      if (Lottery.IsWinner(TournamentType.Prosperity))
-      {
-        TryCreateProsperityTournament();
-      }
-    }
-
-    private void TryCreateLordTournament()
-    {
-      foreach (var kingdom in MBKingdom.All)
-      {
-        if (kingdom.Leader.Clan.Settlements.IsEmpty() ||
-            kingdom.Leader == MBHero.MainHero ||
-            MBRandom.RandomFloat >= 0.7)
-        {
-          continue;
-        }
-
-        var result = TournamentBuilder.TryCreateLordTournament(kingdom.MapFaction);
-
-        if (result.Succeeded)
-        {
-          MBInformationManager.DisplayBanner(kingdom.Leader.Name + " invites you to a Highborn tournament at " + result.HostSettlement.Name);
-        }
-
-
-        break;
-      }
-    }
-
-    public bool SettlementIsEligibleForProsperityTournament(MBSettlement settlement)
-    {
-      return settlement.IsTown &&
-            !settlement.Town.HasTournament &&
-             settlement.Prosperity >= 5000.00f &&
-             settlement.Town.Gold >= 10000;
+      TryCreateProsperityTournament();
+      TryCreateHighbornTournament();
+      TryCreateInvitationTournament();
     }
 
     private void TryCreateProsperityTournament()
     {
+      if (!Lottery.IsWinner(TournamentType.Prosperity))
+      {
+        return;
+      }
+
       var result = TournamentBuilder.TryCreateProsperityTournament();
 
       if (result.Succeeded)
       {
-
+        MBInformationManagerFacade.DisplayAsLogEntry($"Local nobles at {result.HostSettlement.Name} have called a tournament due to high prosperity");
       }
     }
 
-    private CreateTournamentResult TrySpawnProsperityTournamentInSettlements(MBSettlementList settlements)
+    private void TryCreateHighbornTournament()
     {
-      var finderOptions = new Options
-      var result = HostTownFinder.FindInSettlements(settlements);
+      if (!Lottery.IsWinner(TournamentType.Highborn))
+      {
+        return;
+      }
 
-      if (result.Status)
+      var result = TournamentBuilder.TryCreateHighbornTournament();
+
+      if (result.Succeeded)
       {
-        return CreateProsperityTournamentFromFindSettlementResult(result);
+        MBInformationManagerFacade.DisplayAsQuickBanner($"{result.Payor.Name} invites you to a Highborn tournament at {result.HostSettlement.Name}");
       }
-      else
+    }
+
+    private static void TryCreateInvitationTournament()
+    {
+      if (!Lottery.IsWinner(TournamentType.Invitation) &&
+          MBHero.MainHero.Clan.Renown >= Settings.Instance.MaxRenownForInvitationTournaments)
       {
-        return CreateTournamentResult.Failure;
+        return;
       }
+
+      TournamentBuilder.TryCreateInvitationTournament();
     }
 
     private void OnMakePeace(IFaction a, IFaction b)
@@ -152,7 +107,7 @@ namespace TournamentsEnhanced.Behaviors
         hostTownNames = resultsA.Succeeded ? $"{resultsA.HostSettlement.Name}" : $"{resultsB.HostSettlement.Name}";
       }
 
-      NotificationUtils.DisplayMessage(
+      MBInformationManagerFacade.DisplayAsLogEntry(
         $"To celebrate the peace of { factionA.Name } and { factionB.Name }, faction leaders have called a tournament at { hostTownNames }");
 
     }
@@ -163,13 +118,13 @@ namespace TournamentsEnhanced.Behaviors
 
       if (result.Succeeded)
       {
-        NotificationUtils.DisplayBannerMessage($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
+        MBInformationManagerFacade.DisplayAsQuickBanner($"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
       }
     }
 
     private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
     {
-      var resultsA = TournamentBuilder.TryMakeBirthTournamentForMother(mother);
+      var resultsA = TournamentBuilder.TryMakeBirthTournamentFor(mother);
 
       foreach (var settlement in settlements)
       {

@@ -1,14 +1,13 @@
 using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreatePeaceTournamentForFaction(IMBFaction faction)
+    public static CreateTournamentResult TryCreateInvitationTournament()
     {
-      var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction);
+      var findSettlementResult = SettlementFinder.FindForInvitationTournament();
 
       if (findSettlementResult.Failed)
       {

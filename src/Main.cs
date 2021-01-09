@@ -55,7 +55,7 @@ namespace TournamentsEnhanced
         campaignStarter.AddBehavior(new ModStateBehavior());
         campaignStarter.AddBehavior(new TownMenuBehavior());
         campaignStarter.AddBehavior(new SyncDataBehavior());
-        campaignStarter.AddBehavior(new TournamentSpawnBehavior());
+        campaignStarter.AddBehavior(new TournamentCreationBehavior());
       }
     }
 

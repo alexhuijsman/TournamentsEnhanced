@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace TournamentsEnhanced.Models.Serializable
 {
   public class DaysSinceTracker<T> : Dictionary<T, int>
-  where T : Enum
+  where T : IConvertible
   {
     private static readonly int DefaultValue = int.MaxValue;
 
@@ -41,5 +41,10 @@ namespace TournamentsEnhanced.Models.Serializable
         this[key]++;
       }
     }
+  }
+
+  public class DaysSinceTournamentTracker : DaysSinceTracker<TournamentType>
+  {
+    public DaysSinceTournamentTracker(params TournamentType[] types) : base(types) { }
   }
 }

@@ -13,27 +13,28 @@ namespace TournamentsEnhanced.Models.ModState
       set => _state.dailyLotteryWinners = value;
     }
 
-    public static void DailyTick()
-    {
-      DaysSince.DailyTick();
-    }
+    static ModState() => Initialize();
 
     private static void Initialize()
     {
       _state.tournamentRecords = new TournamentRecordDictionary();
-      _state.daysSince = new DaysSinceTracker(Constants.DaysSince.TournamentTypes);
-      DaysSince.
+      _state.daysSince = new DaysSinceTournamentTracker(Constants.DaysSince.TournamentTypes);
     }
 
     public static void Reset()
     {
-      _state = default(SerializableModState);
+      TournamentRecords.Clear();
+      DaysSince.Reset();
+    }
+
+    public static void DailyTick()
+    {
+      DaysSince.DailyTick();
     }
 
     private static SerializableModState _state;
 
     public static SerializableModState SerializableObject { get => _state; set => _state = value; }
 
-    static ModState() => Initialize();
   }
 }

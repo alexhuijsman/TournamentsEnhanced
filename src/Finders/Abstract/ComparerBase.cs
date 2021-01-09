@@ -13,7 +13,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
     protected static readonly int XIsLessThanY = -1;
 
     protected MBHero InitiatingHero { get; private set; }
-    protected bool WasInitiatedByHero => InitiatingHero.IsNull;
+    protected bool HasInitiatingHero => InitiatingHero.IsNull;
+
     public ComparerBase(MBHero initiatingHero)
     {
       InitiatingHero = initiatingHero;
