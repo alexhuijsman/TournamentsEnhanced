@@ -36,14 +36,14 @@ namespace TournamentsEnhanced.Wrappers
       return result;
     }
 
-    public static Type GetWrapperTypeFor<T>(T obj)
+    public static Type GetWrapperType<T>(T obj)
     {
       var type = obj.GetType();
 
       return WrappedTypeDictionary[type];
     }
 
-    public static W GetWrapperFor<T, W>(T obj)
+    public static W GetWrapper<T, W>(T obj)
       where W : WrapperBase<W, T>, new()
     {
       return CachedWrapperBase<W, T>.GetWrapper(obj);

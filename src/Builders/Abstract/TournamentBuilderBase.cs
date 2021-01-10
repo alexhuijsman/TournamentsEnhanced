@@ -17,26 +17,13 @@ namespace TournamentsEnhanced.Builders.Abstract
       return ValidatePayorHeroes(initiatingHero, payorHero);
     }
 
-    internal static FindHeroResult ValidatePayorHeroes(MBHero initiatingHero, params MBHero[] payorHeroes)
+    internal static FindHeroResult ValidatePayorHeroes(params MBHero[] payorHeroes)
     {
-      return HeroFinder.FindHostsThatMeetBasicRequirements(initiatingHero, payorHeroes);
+      return HeroFinder.FindHostsThatMeetBasicRequirements(payorHeroes);
     }
 
-    internal static ResultBase ValidateFaction(MBHero initiatingHero, IMBFaction faction)
-    {
-      ResultBase result;
-
-      if (faction.IsKingdomFaction)
-      {
-        result = KingdomFinder.FindKingdomThatMeetBasicHostRequirements((MBKingdom)faction, initiatingHero);
-      }
-      else
-      {
-        result = ClanFinder.FindClanThatMeetsBasicHostRequirements((MBClan)faction, initiatingHero);
-      }
-
-      return result;
-    }
+    internal static ResultBase ValidateFaction(IMBFaction faction)
+      => FactionFinder.FindFactionThatMeetBasicHostRequirements(faction);
 
     protected static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {

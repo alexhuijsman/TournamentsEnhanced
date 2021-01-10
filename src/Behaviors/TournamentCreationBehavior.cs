@@ -132,7 +132,7 @@ namespace TournamentsEnhanced.Behaviors
       var result = TournamentBuilder.TryMakeBirthTournament(mother);
 
       MBInformationManagerFacade.DisplayAsQuickBanner(
-        $"To celebrate the birth of {mother.Name} and {mother.Spouse.Name}'s child, local nobles have called a tournament at {result.Settlement.Name}");
+        $"To celebrate the birth of {mother.Name} and {mother.Spouse.Name}'s child, local nobles have called a tournament at {result.HostSettlement.Name}");
     }
   }
 }

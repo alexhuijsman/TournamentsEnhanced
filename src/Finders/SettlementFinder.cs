@@ -69,7 +69,7 @@ namespace TournamentsEnhanced.Finder
       var comparers = new IComparer<MBSettlement>[]
       {
         ExistingTournamentComparer.Instance,
-        ProsperityComparer.NewInstance(true),
+        ProsperityComparer.Instance,
       };
 
       var options = new FindHostSettlementOptions()
@@ -142,7 +142,7 @@ namespace TournamentsEnhanced.Finder
       var fallbackComparers = new IComparer<MBSettlement>[]
       {
         InitiatingHeroRankComparer.Instance,
-        ProsperityComparer(initiatingHero)
+        ProsperityComparer.Instance
       };
 
       var options = new FindHostSettlementOptions()
