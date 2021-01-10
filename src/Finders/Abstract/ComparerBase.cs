@@ -15,16 +15,16 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
     protected MBHero InitiatingHero { get; private set; }
     protected bool HasInitiatingHero => InitiatingHero.IsNull;
 
-    public ComparerBase(MBHero initiatingHero)
+    protected ComparerBase(MBHero initiatingHero = null)
     {
-      InitiatingHero = initiatingHero;
+      InitiatingHero = initiatingHero ?? MBHero.Null;
     }
 
     public virtual int Compare(W x, W y)
     {
       var result = 0;
 
-      var wasResultAssigned = TryComparePreconditions(x, y, ref result);
+      TryComparePreconditions(x, y, ref result);
 
       return result;
     }

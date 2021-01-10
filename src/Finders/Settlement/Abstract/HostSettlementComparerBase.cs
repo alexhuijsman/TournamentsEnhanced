@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Finder.Comparers
 {
   public abstract class HostSettlementComparerBase : SettlementComparerBase
   {
-    public HostSettlementComparerBase(MBHero initiatingHero) : base(initiatingHero) { }
+    protected HostSettlementComparerBase(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected bool HasExistingTournament(MBSettlement settlement) =>
       ModState.TournamentRecords.ContainsSettlement(settlement);

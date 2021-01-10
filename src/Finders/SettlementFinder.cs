@@ -36,7 +36,7 @@ namespace TournamentsEnhanced.Finder
     {
       var comparers = new IComparer<MBSettlement>[]
       {
-        new ExistingTournamentComparer(MBHero.Null, false),
+        ExistingTournamentComparer.Instance,
       };
 
       var options = new FindHostSettlementOptions()
@@ -52,7 +52,7 @@ namespace TournamentsEnhanced.Finder
     {
       var comparers = new IComparer<MBSettlement>[]
       {
-        new ExistingTournamentComparer(MBHero.Null, false),
+        ExistingTournamentComparer.Instance,
       };
 
       var options = new FindHostSettlementOptions()
@@ -68,8 +68,8 @@ namespace TournamentsEnhanced.Finder
     {
       var comparers = new IComparer<MBSettlement>[]
       {
-        new ExistingTournamentComparer(MBHero.Null, false),
-        new ProsperityComparer(MBHero.Null, Settings.Instance.RequiredMinProsperity),
+        ExistingTournamentComparer.Instance,
+        ProsperityComparer.NewInstance(true),
       };
 
       var options = new FindHostSettlementOptions()
@@ -135,14 +135,14 @@ namespace TournamentsEnhanced.Finder
     {
       var comparers = new IComparer<MBSettlement>[]
       {
-        new ExistingTournamentComparer(initiatingHero, false),
-        new ProsperityComparer(initiatingHero)
+        ExistingTournamentComparer.Instance,
+        ProsperityComparer.Instance
       };
 
       var fallbackComparers = new IComparer<MBSettlement>[]
       {
-        new InitiatingHeroRankComparer(initiatingHero),
-        new ProsperityComparer(initiatingHero)
+        InitiatingHeroRankComparer.Instance,
+        ProsperityComparer(initiatingHero)
       };
 
       var options = new FindHostSettlementOptions()
@@ -157,10 +157,11 @@ namespace TournamentsEnhanced.Finder
 
     public static FindHostSettlementResult FindForBirthTournament(MBHero mother)
     {
+      var settlements = GetSettlementsForBirthTournament(mother);
 
       var comparers = new IComparer<MBSettlement>[]
       {
-        new ExistingTournamentComparer(MBHero.Null, false),
+        ExistingTournamentComparer.Instance
       };
 
       var options = new FindHostSettlementOptions()
@@ -171,4 +172,10 @@ namespace TournamentsEnhanced.Finder
 
       return SettlementFinder.Find(options);
     }
+
+    private static MBSettlementList GetSettlementsForBirthTournament(MBHero parent)
+    {
+      var leaderResult = HeroFinder.FindFactionLeaders(parent, parent.Spouse);
+    }
   }
+}

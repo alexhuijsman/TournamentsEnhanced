@@ -1,25 +1,31 @@
 using TournamentsEnhanced.Models.ModState;
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class InitiatingHeroRankComparer : ExistingTournamentComparer
   {
-    public InitiatingHeroRankComparer(MBHero initiatingHero) : base(initiatingHero, true) { }
+    private new static InitiatingHeroRankComparer Instance { get; } = null;
+    private new static InitiatingHeroRankComparer InstanceIncludingExisting { get; } = null;
+
+    public InitiatingHeroRankComparer(MBHero initiatingHero) : base(true, initiatingHero) { }
 
     protected override bool MeetsRequirements(MBSettlement settlement)
     {
-      var hasRecord = ModState.TournamentRecords.ContainsSettlement(settlement);
-      var record = hasRecord ? ModState.TournamentRecords[settlement] : default(TournamentRecord);
+      if (!base.MeetsRequirements(settlement))
+      {
+        return false;
+      }
 
-      return HasExistingTournament(settlement) &&
-             InitiatingHeroOutranksOther(record);
+      if (!HasExistingTournament(settlement))
+      {
+        return true;
+      }
+
+      var record = ModState.TournamentRecords[settlement];
+
+      return InitiatingHero.IsFactionLeader &&
+             (!record.HasInitiatingHero || InitiatingHero == record.FindInitiatingHero().MapFaction.Leader);
     }
-
-    protected bool InitiatingHeroOutranksOther(TournamentRecord record) =>
-      HeroIsKingdomLeader(InitiatingHero) &&
-      !InitiatingHeroIsSameAs(record);
-
   }
 }

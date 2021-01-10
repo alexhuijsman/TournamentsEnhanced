@@ -2,9 +2,11 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Clan
 {
-  public class BasicHostRequirementsClanComparer : ClanComparerBase
+  public class BasicHostRequirementsComparer : ClanComparerBase
   {
-    public BasicHostRequirementsClanComparer(MBHero initiatingHero) : base(initiatingHero) { }
+    public static BasicHostRequirementsComparer Instance { get; } = new BasicHostRequirementsComparer();
+
+    protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBClan clan) =>
       !clan.Settlements.IsEmpty &&

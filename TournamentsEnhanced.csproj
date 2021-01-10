@@ -153,27 +153,21 @@
     <Compile Include="src\Finders\Abstract\FindResultBase.cs" />
     <Compile Include="src\Finders\Abstract\ResultBase.cs" />
     <Compile Include="src\Finders\Clan\Abstract\ClanComparerBase.cs" />
-    <Compile Include="src\Finders\Clan\Comparers\BasicHostRequirementsClanComparer.cs" />
     <Compile Include="src\Finders\Clan\FindClanOptions.cs" />
     <Compile Include="src\Finders\Clan\FindClanResult.cs" />
     <Compile Include="src\Finders\ClanFinder.cs" />
     <Compile Include="src\Finders\Hero\Abstract\HeroComparerBase.cs" />
-    <Compile Include="src\Finders\Hero\Comparers\BasicHostRequirementsHeroComparer.cs" />
-    <Compile Include="src\Finders\Hero\Comparers\MaleClanLeaderHostComparer.cs" />
-    <Compile Include="src\Finders\Hero\Comparers\MaleKingdomLeaderHostComparer.cs" />
     <Compile Include="src\Finders\Hero\FindHeroOptions.cs" />
     <Compile Include="src\Finders\Hero\FindHeroResult.cs" />
     <Compile Include="src\Finders\Hero\FindHostHeroResult.cs" />
     <Compile Include="src\Finders\HeroFinder.cs" />
     <Compile Include="src\Finders\Kingdom\Abstract\KingdomComparerBase.cs" />
-    <Compile Include="src\Finders\Kingdom\Comparers\BasicHostRequirementsKingdomComparer.cs" />
     <Compile Include="src\Finders\Kingdom\FindKingdomOptions.cs" />
     <Compile Include="src\Finders\Kingdom\FindKingdomResult.cs" />
     <Compile Include="src\Finders\KingdomFinder.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\HostSettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Abstract\SettlementComparerBase.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ExistingTournamentComparer.cs" />
-    <Compile Include="src\Finders\Settlement\Comparers\PayorRelationComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\ProsperityComparer.cs" />
     <Compile Include="src\Finders\Settlement\FindHostSettlementOptions.cs" />
     <Compile Include="src\Finders\Settlement\FindHostSettlementResult.cs" />
@@ -278,6 +272,13 @@
     <Compile Include="src\Builders\TournamentBuilder.Highborn.cs" />
     <Compile Include="src\Behaviors\TournamentCreationBehavior.cs" />
     <Compile Include="src\Builders\TournamentBuilder.Birth.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\ClanLeaderHostComparer.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\KingdomLeaderHostComparer.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\FactionLeaderHostComparer.cs" />
+    <Compile Include="src\Finders\Settlement\Comparers\BasicHostRequirementsComparer.cs" />
+    <Compile Include="src\Finders\Hero\Comparers\BasicHostRequirementsComparer.cs" />
+    <Compile Include="src\Finders\Clan\Comparers\BasicHostRequirementsComparer.cs" />
+    <Compile Include="src\Finders\Kingdom\Comparers\BasicHostRequirementsComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

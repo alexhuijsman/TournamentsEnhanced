@@ -2,9 +2,11 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Hero
 {
-  public class BasicHostRequirementsHeroComparer : HeroComparerBase
+  public class BasicHostRequirementsComparer : HeroComparerBase
   {
-    public BasicHostRequirementsHeroComparer(MBHero initiatingHero) : base(initiatingHero) { }
+    public static BasicHostRequirementsComparer Instance { get; } = new BasicHostRequirementsComparer();
+
+    protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBHero hero) =>
       hero.IsActive &&

@@ -2,13 +2,20 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
-  public class ProsperityComparer : HostSettlementComparerBase
+  public class ProsperityComparer : ExistingTournamentComparer
   {
-    public float MinProsperity { get; private set; }
+    public new static ProsperityComparer Instance { get; } = new ProsperityComparer();
+    public new static ProsperityComparer InstanceIncludingExisting { get; } = new ProsperityComparer(false, true);
+    public static ProsperityComparer InstanceMinProsperityRequirement { get; } = new ProsperityComparer(true);
+    public static ProsperityComparer InstanceMinProsperityRequirementIncludingExisting { get; } = new ProsperityComparer(true, true);
 
-    public ProsperityComparer(MBHero payor, float minProsperity = 0) : base(payor)
+    public bool RequireMinProsperity { get; private set; }
+
+    protected ProsperityComparer(bool hasProsperityRequirement = false,
+                              bool canOverrideExisting = false,
+                              MBHero initiatingHero = null) : base(canOverrideExisting, initiatingHero)
     {
-      MinProsperity = minProsperity;
+      RequireMinProsperity = hasProsperityRequirement;
     }
 
     public override int Compare(MBSettlement x, MBSettlement y)
@@ -33,7 +40,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       return true;
     }
 
-    protected override bool MeetsRequirements(MBSettlement wrapper) =>
-      wrapper.Prosperity >= MinProsperity;
+    protected override bool MeetsRequirements(MBSettlement settlement) =>
+      base.MeetsRequirements(settlement) &&
+      (!RequireMinProsperity || settlement.Prosperity >= Settings.Instance.MinProsperityRequirement);
   }
 }

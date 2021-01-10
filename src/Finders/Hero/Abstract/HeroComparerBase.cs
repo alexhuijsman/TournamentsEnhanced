@@ -5,6 +5,6 @@ namespace TournamentsEnhanced.Finder.Comparers
 {
   public abstract class HeroComparerBase : ComparerBase<MBHero>
   {
-    public HeroComparerBase(MBHero initiatingHero) : base(initiatingHero) { }
+    protected HeroComparerBase(MBHero initiatingHero = null) : base(initiatingHero) { }
   }
 }

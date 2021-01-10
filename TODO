@@ -12,6 +12,7 @@ S money spent on tournament costs should go to the town
 S Don't hide Select Prize button after selecting a prize
 S Enable determinism in random number generator (does bannerlord provide a random number api?)
 S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value
+XS Make wedding tournaments not sexist (IsFactionLeader is all that matters) and use only settlements owned by either leader
 
 TEST
 ----
@@ -32,6 +33,7 @@ Prize pool is filtered by what the host can afford. Configuration of % of total 
 
 REFACTOR
 --------
+S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
 s Wrap MB enums and make a converter
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 S add "best experience" version that requires harmony and mcm
