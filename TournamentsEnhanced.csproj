@@ -284,6 +284,8 @@
     <Compile Include="src\Wrappers\CampaignSystem\MBFaction.cs" />
     <Compile Include="src\Finders\Faction\FindFactionResult.cs" />
     <Compile Include="src\Finders\FactionFinder.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\Faction.cs" />
+    <Compile Include="src\Extensions\IMBFactionExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
