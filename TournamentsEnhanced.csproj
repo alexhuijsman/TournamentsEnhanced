@@ -279,6 +279,11 @@
     <Compile Include="src\Finders\Hero\Comparers\BasicHostRequirementsComparer.cs" />
     <Compile Include="src\Finders\Clan\Comparers\BasicHostRequirementsComparer.cs" />
     <Compile Include="src\Finders\Kingdom\Comparers\BasicHostRequirementsComparer.cs" />
+    <Compile Include="src\Finders\Faction\Abstract\FactionComparerBase.cs" />
+    <Compile Include="src\Finders\Faction\FindFactionOptions.cs" />
+    <Compile Include="src\Wrappers\CampaignSystem\MBFaction.cs" />
+    <Compile Include="src\Finders\Faction\FindFactionResult.cs" />
+    <Compile Include="src\Finders\FactionFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
