@@ -10,7 +10,6 @@ FIX
 ---
 S Don't hide Select Prize button after selecting a prize
 S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value
-XS Make wedding tournaments not sexist (IsFactionLeader is all that matters) and use only settlements owned by either leader
 
 TEST
 ----
