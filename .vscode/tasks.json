@@ -26,6 +26,18 @@
             "problemMatcher": "$msCompile",
         },
         {
+            "label": "build (DEBUG) (LAPTOP) (INSTALL TO BANNERLORD)",
+            "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe",
+            "args": [
+                "/t:build",
+                "/p:GenerateFullPaths=true",
+                "/p:Platform=x64",
+                "/p:Configuration=DebugOutputToBannerlordLaptop",
+                "${workspaceFolder}/TournamentsEnhanced.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
             "label": "build (RELEASE)",
             "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe",
             "args": [
