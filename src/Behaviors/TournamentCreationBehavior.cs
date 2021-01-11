@@ -30,6 +30,55 @@ namespace TournamentsEnhanced.Behaviors
       TryCreateTournaments();
     }
 
+    private void OnMakePeace(IFaction a, IFaction b)
+    {
+      var factionA = a.ToIMBFaction();
+      var factionB = b.ToIMBFaction();
+
+      var result = TryCreatePeaceTournaments(factionA, factionB);
+
+      if (!Settings.Instance.PeaceNotification || result.Failed)
+      {
+        return;
+      }
+
+      MBInformationManagerFacade.DisplayAsLogEntry(
+        $"To celebrate the peace between { factionA.Name } and { factionB.Name }, faction leaders have called a tournament at { result.HostSettlementNames }");
+    }
+
+    private CreatePeaceTournamentsResult TryCreatePeaceTournaments(IMBFaction factionA, IMBFaction factionB)
+    {
+      var factionAResults = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionA);
+      var factionBResults = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionB);
+
+      if (factionAResults.Failed && factionBResults.Failed)
+      {
+        return CreatePeaceTournamentsResult.Failure;
+      }
+
+      return CreatePeaceTournamentsResult.Success(factionAResults, factionBResults);
+    }
+
+    private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
+    {
+      var result = TournamentBuilder.TryCreateWeddingTournament(firstHero, secondHero);
+
+      if (result.Succeeded)
+      {
+        MBInformationManagerFacade.DisplayAsQuickBanner(
+          $"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
+      }
+    }
+
+    private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
+    {
+      var result = TournamentBuilder.TryMakeBirthTournament(mother);
+
+      MBInformationManagerFacade.DisplayAsQuickBanner(
+        $"To celebrate the birth of {mother.Name} and {mother.Spouse.Name}'s child, local nobles have called a tournament at {result.HostSettlement.Name}");
+    }
+
+
     private void TryCreateTournaments()
     {
       TryCreateProsperityTournament();
@@ -81,58 +130,6 @@ namespace TournamentsEnhanced.Behaviors
       {
         MBInformationManagerFacade.DisplayAsQuickBanner("A local lord is looking for tournament contestants at " + result.HostSettlement.Name);
       }
-    }
-
-    private void OnMakePeace(IFaction a, IFaction b)
-    {
-      var factionA = a.ToIMBFaction();
-      var factionB = b.ToIMBFaction();
-
-      TryCreatePeaceTournaments(factionA, factionB);
-    }
-
-    private void TryCreatePeaceTournaments(IMBFaction factionA, IMBFaction factionB)
-    {
-      var resultsA = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionA);
-      var resultsB = TournamentBuilder.TryCreatePeaceTournamentForFaction(factionB);
-
-      if (!Settings.Instance.PeaceNotification ||
-         (resultsA.Failed && resultsB.Failed))
-      {
-        return;
-      }
-
-      string hostTownNames;
-      if (resultsA.Succeeded && resultsB.Succeeded)
-      {
-        hostTownNames = $"{resultsA.HostSettlement.Name} and {resultsB.HostSettlement.Name}";
-      }
-      else
-      {
-        hostTownNames = resultsA.Succeeded ? $"{resultsA.HostSettlement.Name}" : $"{resultsB.HostSettlement.Name}";
-      }
-
-      MBInformationManagerFacade.DisplayAsLogEntry(
-        $"To celebrate the peace of { factionA.Name } and { factionB.Name }, faction leaders have called a tournament at { hostTownNames }");
-    }
-
-    private void OnHeroesMarried(Hero firstHero, Hero secondHero, bool showNotification)
-    {
-      var result = TournamentBuilder.TryCreateWeddingTournament(firstHero, secondHero);
-
-      if (result.Succeeded)
-      {
-        MBInformationManagerFacade.DisplayAsQuickBanner(
-          $"To celebrate the wedding of {firstHero.Name} and {secondHero.Name}, local nobles have called a tournament at {result.HostSettlement.Name}");
-      }
-    }
-
-    private void OnGivenBirth(Hero mother, List<Hero> aliveChildren, int stillBornCount)
-    {
-      var result = TournamentBuilder.TryMakeBirthTournament(mother);
-
-      MBInformationManagerFacade.DisplayAsQuickBanner(
-        $"To celebrate the birth of {mother.Name} and {mother.Spouse.Name}'s child, local nobles have called a tournament at {result.HostSettlement.Name}");
     }
   }
 }

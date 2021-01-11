@@ -45,8 +45,6 @@ namespace TournamentsEnhanced.Finder
 
     public static FindHeroResult FindHostsFromWeddedHeroes(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
-
-      //TODO clan leader from current town should host tournament, if not, then do below
       var maleKingdomLeaderResult = HeroFinder.FindKingdomLeaders(firstWeddedHero, secondWeddedHero);
       var maleClanLeaderResult = HeroFinder.FindClanLeaders(firstWeddedHero, secondWeddedHero);
 

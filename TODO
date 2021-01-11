@@ -8,9 +8,7 @@ XS Copy TODO tasks from email
 
 FIX
 ---
-S money spent on tournament costs should go to the town
 S Don't hide Select Prize button after selecting a prize
-S Enable determinism in random number generator (does bannerlord provide a random number api?)
 S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value
 XS Make wedding tournaments not sexist (IsFactionLeader is all that matters) and use only settlements owned by either leader
 
@@ -20,16 +18,15 @@ Write unit tests for existing methods with NUnit, Moq, and Shouldly
 
 IMPROVE
 -------
-Make Popup at peace time asking player if they want to host a tournament
-TournamentTypeComparer, use for more than just overrides. E.g. sort by Prosperity for such tournys, Payor's appeal of towns (distance + prosperity + number of lords for lord tourny)  
-Can only override underling's' tournaments.
+Make Popup at peace time asking player if they want to host a tournament (and where)
+if player is wedded hero ask player if they want to host a tournament (and where).
 Worsten relations with previous payor if new payor steals their tournament
 A payor friendly with another payor may decide not to steal tournament
 Make Highborn tournaments different from invitational? or reknown level is only difference?
 Ask player to authorize any tournaments happening at player's expense
-all tournaments should be paid for by the clan leader of the town
 Charge 2000 upfront cost plus option-configurable scale of cost for prize, and add "host can afford tournament prize" logic
 Prize pool is filtered by what the host can afford. Configuration of % of total $ ClanLeaders are willing to spend on tournament prizes. Also configuration of scale of prize cost to host in options.
+Simplify logic for finding wedding tournament host settlement
 
 REFACTOR
 --------

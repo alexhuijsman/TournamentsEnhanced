@@ -288,6 +288,7 @@
     <Compile Include="src\Wrappers\CampaignSystem\MBFactionImpl.cs" />
     <Compile Include="src\Finders\Faction\Comparers\BasicHostRequirementsComparer.cs" />
     <Compile Include="src\Finders\Settlement\Comparers\InitiatingHeroOwnershipComparer.cs" />
+    <Compile Include="src\Builders\CreatePeaceTournamentsResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

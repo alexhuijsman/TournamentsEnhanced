@@ -96,7 +96,6 @@ namespace TournamentsEnhanced.Finder
         return failureResult;
       }
 
-      //TODO instead, check if player is wedded hero and ask player if they want to host a tournament.
       var primaryHostHero = findHostHeroResult.Nominee;
       var secondaryHostHero = findHostHeroResult.RunnerUp;
 
