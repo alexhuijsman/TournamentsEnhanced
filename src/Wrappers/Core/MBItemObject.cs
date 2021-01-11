@@ -37,7 +37,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     float Tierf { get; }
     ItemTiers Tier { get; }
     MBItemObject PrerequisiteItem { get; }
-    MBWeaponComponentDataList Weapons { get; }
+    List<MBWeaponComponentData> Weapons { get; }
     ItemTypeEnum ItemType { get; }
     bool IsMountable { get; }
     bool IsTradeGood { get; }
@@ -72,8 +72,8 @@ namespace TournamentsEnhanced.Wrappers.Core
   }
   public class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
   {
-    public static MBItemObjectList AllTradeGoods => ItemObject.AllTradeGoods.ToList();
-    public static MBItemObjectList All => ItemObject.All.ToList();
+    public static List<MBItemObject> AllTradeGoods => ItemObject.AllTradeGoods.CastList<MBItemObject>();
+    public static List<MBItemObject> All => ItemObject.All.CastList<MBItemObject>();
 
     public MBWeaponComponent WeaponComponent => UnwrappedObject.WeaponComponent;
 
@@ -123,7 +123,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public MBItemObject PrerequisiteItem => UnwrappedObject.PrerequisiteItem;
 
-    public MBWeaponComponentDataList Weapons => UnwrappedObject.Weapons.ToList();
+    public List<MBWeaponComponentData> Weapons => UnwrappedObject.Weapons.CastList<MBWeaponComponentData>();
 
     public ItemTypeEnum ItemType => UnwrappedObject.ItemType;
 
@@ -187,10 +187,10 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public bool RecalculateBody => UnwrappedObject.RecalculateBody;
 
-    public static MBItemObjectList GetAvailableTournamentPrizes()
+    public static List<MBItemObject> GetAvailableTournamentPrizes()
     {
       var allItems = All;
-      var prizeItems = (MBItemObjectList)allItems.FindAll((MBItemObject item) => item.IsWorthyTournamentPrizeForMainHero());
+      var prizeItems = (List<MBItemObject>)allItems.FindAll((MBItemObject item) => item.IsWorthyTournamentPrizeForMainHero());
 
       if (prizeItems.Count == 0)
       {
@@ -232,17 +232,5 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator ItemObject(MBItemObject wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBItemObject(ItemObject obj) => MBItemObject.GetWrapper(obj);
-  }
-
-  public class MBItemObjectList : MBListBase<MBItemObject, MBItemObjectList>
-  {
-    public MBItemObjectList(params MBItemObject[] wrappers) : this((IEnumerable<MBItemObject>)wrappers) { }
-    public MBItemObjectList(IEnumerable<MBItemObject> wrappers) => AddRange(wrappers);
-    public MBItemObjectList(MBItemObject wrapper) => Add(wrapper);
-    public MBItemObjectList() { }
-
-    public static implicit operator List<ItemObject>(MBItemObjectList wrapperList) => wrapperList.Unwrap<MBItemObject, ItemObject>();
-    public static implicit operator MBItemObjectList(List<ItemObject> objectList) => (MBItemObjectList)objectList.Wrap<MBItemObject, ItemObject>();
-    public static implicit operator MBItemObject[](MBItemObjectList wrapperList) => wrapperList.ToArray();
   }
 }

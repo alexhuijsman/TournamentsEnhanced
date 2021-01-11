@@ -14,7 +14,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     uint TeamColor { get; }
     MBBanner TeamBanner { get; }
     bool IsPlayerTeam { get; }
-    MBTournamentParticipantList Participants { get; }
+    List<MBTournamentParticipant> Participants { get; }
     int Score { get; }
 
     void AddParticipant(MBTournamentParticipant participant);
@@ -31,7 +31,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsPlayerTeam => UnwrappedObject.IsPlayerTeam;
 
-    public MBTournamentParticipantList Participants => UnwrappedObject.Participants.ToList();
+    public List<MBTournamentParticipant> Participants => UnwrappedObject.Participants.CastList<MBTournamentParticipant>();
 
     public int Score => UnwrappedObject.Score;
 
@@ -40,17 +40,5 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public bool IsParticipantRequired() => UnwrappedObject.IsParticipantRequired();
     public static implicit operator TournamentTeam(MBTournamentTeam wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTournamentTeam(TournamentTeam obj) => MBTournamentTeam.GetWrapper(obj);
-  }
-
-  public class MBTournamentTeamList : MBListBase<MBTournamentTeam, MBTournamentTeamList>
-  {
-    public MBTournamentTeamList(params MBTournamentTeam[] wrappers) : this((IEnumerable<MBTournamentTeam>)wrappers) { }
-    public MBTournamentTeamList(IEnumerable<MBTournamentTeam> wrappers) => AddRange(wrappers);
-    public MBTournamentTeamList(MBTournamentTeam wrapper) => Add(wrapper);
-    public MBTournamentTeamList() { }
-
-    public static implicit operator List<TournamentTeam>(MBTournamentTeamList wrapperList) => wrapperList.Unwrap<MBTournamentTeam, TournamentTeam>();
-    public static implicit operator MBTournamentTeamList(List<TournamentTeam> objectList) => (MBTournamentTeamList)objectList.Wrap<MBTournamentTeam, TournamentTeam>();
-    public static implicit operator MBTournamentTeam[](MBTournamentTeamList wrapperList) => wrapperList.ToArray();
   }
 }

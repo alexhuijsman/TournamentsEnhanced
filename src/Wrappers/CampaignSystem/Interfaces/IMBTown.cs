@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using TournamentsEnhanced.Wrappers.Core;
 
 using static TaleWorlds.CampaignSystem.SettlementComponent;
@@ -7,7 +9,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public interface IMBTown
   {
     int DaysAtUnrest { get; }
-    MBBuildingList Buildings { get; }
+    List<MBBuilding> Buildings { get; }
     int BoostBuildingProcess { get; }
     bool InRebelliousState { get; }
     IMBFaction MapFaction { get; }
@@ -16,14 +18,14 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBClan OwnerClan { get; set; }
     float Security { get; set; }
     float Loyalty { get; set; }
-    MBWorkshopList Workshops { get; }
+    List<MBWorkshop> Workshops { get; }
     MBBuilding CurrentBuilding { get; }
     bool IsUnderSiege { get; }
     MBBuilding CurrentDefaultBuilding { get; }
     int TradeTaxAccumulated { get; set; }
     MBHero Governor { get; set; }
     MBClan LastCapturedBy { get; set; }
-    MBVillageList Villages { get; }
+    List<MBVillage> Villages { get; }
     MBMobileParty MilitiaParty { get; }
     MBTownMarketData MarketData { get; }
     float SecurityChange { get; }

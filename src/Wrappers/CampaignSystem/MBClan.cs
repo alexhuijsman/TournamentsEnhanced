@@ -43,17 +43,17 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBBanner Banner => UnwrappedObject.Banner;
 
-    public MBSettlementList Settlements => UnwrappedObject.Settlements.ToList();
+    public List<MBSettlement> Settlements => UnwrappedObject.Settlements.CastList<MBSettlement>();
 
-    public MBTownList Fiefs => UnwrappedObject.Fiefs.ToList();
+    public List<MBTown> Fiefs => UnwrappedObject.Fiefs.CastList<MBTown>();
 
-    public MBHeroList Lords => UnwrappedObject.Lords.ToList();
+    public List<MBHero> Lords => UnwrappedObject.Lords.CastList<MBHero>();
 
-    public MBHeroList Heroes => UnwrappedObject.Heroes.ToList();
+    public List<MBHero> Heroes => UnwrappedObject.Heroes.CastList<MBHero>();
 
-    public MBMobilePartyList AllParties => UnwrappedObject.AllParties.ToList();
+    public List<MBMobileParty> AllParties => UnwrappedObject.AllParties.CastList<MBMobileParty>();
 
-    public MBMobilePartyList WarParties => UnwrappedObject.WarParties.ToList();
+    public List<MBMobileParty> WarParties => UnwrappedObject.WarParties.CastList<MBMobileParty>();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
@@ -75,7 +75,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public Vec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
-    public MBStanceLinkList Stances => UnwrappedObject.Stances.ToList();
+    public List<MBStanceLink> Stances => UnwrappedObject.Stances.CastList<MBStanceLink>();
 
     public int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
 
@@ -97,17 +97,5 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBClan(Clan obj) => MBClan.GetWrapper(obj);
-  }
-
-  public class MBClanList : MBListBase<MBClan, MBClanList>
-  {
-    public MBClanList(params MBClan[] wrappers) : this((IEnumerable<MBClan>)wrappers) { }
-    public MBClanList(IEnumerable<MBClan> wrappers) => AddRange(wrappers);
-    public MBClanList(MBClan wrapper) => Add(wrapper);
-    public MBClanList() { }
-
-    public static implicit operator List<Clan>(MBClanList wrapperList) => wrapperList.Unwrap<MBClan, Clan>();
-    public static implicit operator MBClanList(List<Clan> objectList) => (MBClanList)objectList.Wrap<MBClan, Clan>();
-    public static implicit operator MBClan[](MBClanList wrapperList) => wrapperList.ToArray();
   }
 }

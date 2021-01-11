@@ -33,12 +33,12 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static void ShowTextInquiry(TextInquiryData textData, bool pauseGameActiveState = false) => InformationManager.ShowTextInquiry(textData, pauseGameActiveState);
     public static void UpdateTooltipFromArray(int id, int mode, object[] props) => InformationManager.UpdateTooltipFromArray(id, mode, props);
 
-    public static void ShowPrizeSelectionMenu(MBItemObjectList items,
-                                                   Action<MBInquiryElementList> affirmativeAction,
-                                                   Action<MBInquiryElementList> negativeAction)
+    public static void ShowPrizeSelectionMenu(List<MBItemObject> items,
+                                                   Action<List<MBInquiryElement>> affirmativeAction,
+                                                   Action<List<MBInquiryElement>> negativeAction)
     {
       var inquiryElements = CreateElementListFromItems(items);
-      MBInquiryElementList selectedElements;
+      List<MBInquiryElement> selectedElements;
       bool isAffirmative;
 
       if (inquiryElements.Count > 0)
@@ -69,22 +69,22 @@ namespace TournamentsEnhanced.Wrappers.Core
       }
     }
 
-    private static void OnAffirmativeAction(List<InquiryElement> list, out bool affirmativeResult, out MBInquiryElementList selectedInquiryElements)
+    private static void OnAffirmativeAction(List<InquiryElement> list, out bool affirmativeResult, out List<MBInquiryElement> selectedInquiryElements)
     {
       affirmativeResult = true;
-      selectedInquiryElements = list;
+      selectedInquiryElements = list.CastList<MBInquiryElement>();
     }
 
-    private static void OnNegativeAction(List<InquiryElement> list, out bool affirmativeResult, out MBInquiryElementList selectedInquiryElements)
+    private static void OnNegativeAction(List<InquiryElement> list, out bool affirmativeResult, out List<MBInquiryElement> selectedInquiryElements)
     {
       affirmativeResult = false;
-      selectedInquiryElements = list;
+      selectedInquiryElements = list.CastList<MBInquiryElement>();
     }
 
 
-    private static MBInquiryElementList CreateElementListFromItems(MBItemObjectList itemList)
+    private static List<MBInquiryElement> CreateElementListFromItems(List<MBItemObject> itemList)
     {
-      var inquiryElements = new List<InquiryElement>();
+      var inquiryElements = new List<MBInquiryElement>();
 
       foreach (var item in itemList)
       {

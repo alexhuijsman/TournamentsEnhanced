@@ -11,16 +11,4 @@ namespace TournamentsEnhanced.Wrappers.[PackageName]
     public static implicit operator [TypeToWrap](MB[TypeToWrap] wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MB[TypeToWrap]([TypeToWrap] obj) => MB[TypeToWrap].GetWrapperFor(obj);
   }
-
-  public class MB[TypeToWrap]List : MBListBase<MB[TypeToWrap], MB[TypeToWrap]List>
-  {
-    public MB[TypeToWrap]List(params MB[TypeToWrap][] wrappers) : this((IEnumerable<MB[TypeToWrap]>)wrappers) { }
-    public MB[TypeToWrap]List(IEnumerable<MB[TypeToWrap]> wrappers) => AddRange(wrappers);
-    public MB[TypeToWrap]List(MB[TypeToWrap] wrapper) => Add(wrapper);
-    public MB[TypeToWrap]List() { }
-
-    public static implicit operator List<[TypeToWrap]>(MB[TypeToWrap]List wrapperList) => wrapperList.Unwrap<MB[TypeToWrap], [TypeToWrap]>();
-    public static implicit operator MB[TypeToWrap]List(List<[TypeToWrap]> objectList) => (MB[TypeToWrap]List)objectList.Wrap<MB[TypeToWrap], [TypeToWrap]>();
-    public static implicit operator MB[TypeToWrap][](MB[TypeToWrap]List wrapperList) => wrapperList.ToArray();
-  }
 }

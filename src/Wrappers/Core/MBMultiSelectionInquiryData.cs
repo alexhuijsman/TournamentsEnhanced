@@ -13,7 +13,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public MBMultiSelectionInquiryData(
       string titleText,
       string descriptionText,
-      MBInquiryElementList inquiryElements,
+      List<MBInquiryElement> inquiryElements,
       bool isExitShown,
       int maxSelectableOptionCount,
       string affirmativeText,
@@ -25,7 +25,7 @@ namespace TournamentsEnhanced.Wrappers.Core
       UnwrappedObject = new MultiSelectionInquiryData(
         titleText,
         descriptionText,
-        inquiryElements,
+        inquiryElements.CastList<InquiryElement>(),
         isExitShown,
         maxSelectableOptionCount,
         affirmativeText,
@@ -37,17 +37,5 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public static implicit operator MultiSelectionInquiryData(MBMultiSelectionInquiryData wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBMultiSelectionInquiryData(MultiSelectionInquiryData obj) => MBMultiSelectionInquiryData.GetWrapper(obj);
-  }
-
-  public class MBMultiSelectionInquiryDataList : MBListBase<MBMultiSelectionInquiryData, MBMultiSelectionInquiryDataList>
-  {
-    public MBMultiSelectionInquiryDataList(params MBMultiSelectionInquiryData[] wrappers) : this((IEnumerable<MBMultiSelectionInquiryData>)wrappers) { }
-    public MBMultiSelectionInquiryDataList(IEnumerable<MBMultiSelectionInquiryData> wrappers) => AddRange(wrappers);
-    public MBMultiSelectionInquiryDataList(MBMultiSelectionInquiryData wrapper) => Add(wrapper);
-    public MBMultiSelectionInquiryDataList() { }
-
-    public static implicit operator List<MultiSelectionInquiryData>(MBMultiSelectionInquiryDataList wrapperList) => wrapperList.Unwrap<MBMultiSelectionInquiryData, MultiSelectionInquiryData>();
-    public static implicit operator MBMultiSelectionInquiryDataList(List<MultiSelectionInquiryData> objectList) => (MBMultiSelectionInquiryDataList)objectList.Wrap<MBMultiSelectionInquiryData, MultiSelectionInquiryData>();
-    public static implicit operator MBMultiSelectionInquiryData[](MBMultiSelectionInquiryDataList wrapperList) => wrapperList.ToArray();
   }
 }

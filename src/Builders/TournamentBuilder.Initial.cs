@@ -1,5 +1,3 @@
-using TaleWorlds.CampaignSystem;
-
 using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -30,7 +28,7 @@ namespace TournamentsEnhanced.Builders
       }
 
       var numCreated = 0;
-      foreach (var town in townsWithoutExisting.Shuffle())
+      foreach (var town in townsWithoutExisting.DeterministicShuffle())
       {
         if (numCreated >= numToCreate)
         {

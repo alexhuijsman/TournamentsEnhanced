@@ -32,16 +32,4 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator SettlementAccessModel(MBSettlementAccessModel wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlementAccessModel(SettlementAccessModel obj) => MBSettlementAccessModel.GetWrapper(obj);
   }
-
-  public class MBSettlementAccessModelList : MBListBase<MBSettlementAccessModel, MBSettlementAccessModelList>
-  {
-    public MBSettlementAccessModelList(params MBSettlementAccessModel[] wrappers) : this((IEnumerable<MBSettlementAccessModel>)wrappers) { }
-    public MBSettlementAccessModelList(IEnumerable<MBSettlementAccessModel> wrappers) => AddRange(wrappers);
-    public MBSettlementAccessModelList(MBSettlementAccessModel wrapper) => Add(wrapper);
-    public MBSettlementAccessModelList() { }
-
-    public static implicit operator List<SettlementAccessModel>(MBSettlementAccessModelList wrapperList) => wrapperList.Unwrap<MBSettlementAccessModel, SettlementAccessModel>();
-    public static implicit operator MBSettlementAccessModelList(List<SettlementAccessModel> objectList) => (MBSettlementAccessModelList)objectList.Wrap<MBSettlementAccessModel, SettlementAccessModel>();
-    public static implicit operator MBSettlementAccessModel[](MBSettlementAccessModelList wrapperList) => wrapperList.ToArray();
-  }
 }

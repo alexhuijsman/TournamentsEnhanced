@@ -18,12 +18,12 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     int RandomValueRarelyChanging { get; }
     int RandomValueDeterministic { get; }
     int RandomValue { get; }
-    MBItemObjectList SpecialItems { get; }
+    List<MBItemObject> SpecialItems { get; }
     MBCultureObject Culture { get; }
     int SpcDaysInLocation { get; }
     bool IsMercenary { get; }
     int Level { get; }
-    MBHeroList ExSpouses { get; }
+    List<MBHero> ExSpouses { get; }
     bool AlwaysDie { get; }
     bool NeverBecomePrisoner { get; }
     bool Detected { get; }
@@ -32,7 +32,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     string HairTags { get; }
     MBTextObject Name { get; }
     MBTextObject FirstName { get; }
-    MBCharacterObjectList VolunteerTypes { get; }
+    List<MBCharacterObject> VolunteerTypes { get; }
     int LastTimeStampForActivity { get; }
     float LastVisitTimeOfHomeSettlement { get; }
     bool IsHeadman { get; }
@@ -56,7 +56,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     bool CanBeCompanion { get; }
     bool Noncombatant { get; }
     bool AwaitingTrial { get; }
-    MBHeroList CompanionsInParty { get; }
+    List<MBHero> CompanionsInParty { get; }
     MBCharacterObject Template { get; set; }
     bool IsDead { get; }
     bool IsFugitive { get; }
@@ -81,12 +81,12 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBHero Father { get; set; }
     MBHero Mother { get; set; }
     MBHero Spouse { get; set; }
-    MBHeroList Children { get; }
-    MBHeroList Siblings { get; }
+    List<MBHero> Children { get; }
+    List<MBHero> Siblings { get; }
     MBHeroDeveloper HeroDeveloper { get; }
-    MBWorkshopList OwnedWorkshops { get; }
-    MBCommonAreaList OwnedCommonAreas { get; }
-    MBPartyBaseList OwnedParties { get; }
+    List<MBWorkshop> OwnedWorkshops { get; }
+    List<MBCommonArea> OwnedCommonAreas { get; }
+    List<MBPartyBase> OwnedParties { get; }
     CampaignTime LastMeetingTimeWithPlayer { get; set; }
     int HitPoints { get; set; }
     bool HasMet { get; set; }
@@ -102,7 +102,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBTown GovernorOf { get; set; }
     IMBFaction MapFaction { get; }
     bool IsFactionLeader { get; }
-    MBCaravanPartyComponentList OwnedCaravans { get; }
+    List<MBCaravanPartyComponent> OwnedCaravans { get; }
     MBMobileParty PartyBelongedTo { get; }
     MBIssueBase Issue { get; }
     MBSettlement StayingInSettlementOfNotable { get; set; }

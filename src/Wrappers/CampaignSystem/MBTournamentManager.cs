@@ -38,16 +38,4 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator TournamentManager(MBTournamentManager wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTournamentManager(TournamentManager obj) => MBTournamentManager.GetWrapper(obj);
   }
-
-  public class MBTournamentManagerList : MBListBase<MBTournamentManager, MBTournamentManagerList>
-  {
-    public MBTournamentManagerList(params MBTournamentManager[] wrappers) : this((IEnumerable<MBTournamentManager>)wrappers) { }
-    public MBTournamentManagerList(IEnumerable<MBTournamentManager> wrappers) => AddRange(wrappers);
-    public MBTournamentManagerList(MBTournamentManager wrapper) => Add(wrapper);
-    public MBTournamentManagerList() { }
-
-    public static implicit operator List<TournamentManager>(MBTournamentManagerList wrapperList) => wrapperList.Unwrap<MBTournamentManager, TournamentManager>();
-    public static implicit operator MBTournamentManagerList(List<TournamentManager> objectList) => (MBTournamentManagerList)objectList.Wrap<MBTournamentManager, TournamentManager>();
-    public static implicit operator MBTournamentManager[](MBTournamentManagerList wrapperList) => wrapperList.ToArray();
-  }
 }

@@ -228,10 +228,8 @@
     <Compile Include="src\Builders\TournamentBuilder.Wedding.cs" />
     <Compile Include="src\Enums\ResultStatus.cs" />
     <Compile Include="src\Enums\TournamentType.cs" />
-    <Compile Include="src\Extensions\Extensions.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="src\Extensions\IFactionExtensions.cs" />
-    <Compile Include="src\Extensions\ListExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentMatchExtensions.cs" />
     <Compile Include="src\Extensions\MBTournamentParticipantExtensions.cs" />
     <Compile Include="src\Extensions\MBTownExtensions.cs" />
@@ -275,7 +273,6 @@
     <Compile Include="src\Patches\TournamentXpOnHitPatch.cs" />
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.cs" />
-    <Compile Include="src\Wrappers\Abstract\MBListBase.cs" />
     <Compile Include="src\Wrappers\Abstract\MBObjectBaseWrapper.cs" />
     <Compile Include="src\Wrappers\Abstract\MBWrapperBase.cs" />
     <Compile Include="src\Wrappers\Abstract\WrapperBase.cs" />
@@ -377,6 +374,8 @@
     <Compile Include="src\Finders\Settlement\Comparers\InitiatingHeroOwnershipComparer.cs" />
     <Compile Include="src\Builders\CreatePeaceTournamentsResult.cs" />
     <Compile Include="src\SubModule.cs" />
+    <Compile Include="src\Extensions\IListExtensions.cs" />
+    <Compile Include="src\Extensions\GenericExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- <Import Project="PreBuild.targets" /> -->

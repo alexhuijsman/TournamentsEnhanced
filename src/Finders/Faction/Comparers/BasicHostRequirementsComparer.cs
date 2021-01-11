@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Faction
     protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBFaction faction) =>
-      !faction.Settlements.IsEmpty &&
+      !faction.Settlements.IsEmpty() &&
       faction.Settlements.FindIndex(
         (settlement) => settlement.IsTown &&
         PayorMeetsRequirements(settlement.OwnerClan.Leader)

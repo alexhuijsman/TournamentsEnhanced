@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBKingdom : MBObjectBaseWrapper<MBKingdom, Kingdom>, IMBFaction
   {
-    public static MBKingdomList All => Kingdom.All.ToList();
+    public static List<MBKingdom> All => Kingdom.All.CastList<MBKingdom>();
     public MBTextObject Name => UnwrappedObject.Name;
 
     public MBTextObject InformalName => UnwrappedObject.InformalName;
@@ -42,17 +42,17 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBBanner Banner => UnwrappedObject.Banner;
 
-    public MBSettlementList Settlements => UnwrappedObject.Settlements.ToList();
+    public List<MBSettlement> Settlements => UnwrappedObject.Settlements.CastList<MBSettlement>();
 
-    public MBTownList Fiefs => UnwrappedObject.Fiefs.ToList();
+    public List<MBTown> Fiefs => UnwrappedObject.Fiefs.CastList<MBTown>();
 
-    public MBHeroList Lords => UnwrappedObject.Lords.ToList();
+    public List<MBHero> Lords => UnwrappedObject.Lords.CastList<MBHero>();
 
-    public MBHeroList Heroes => UnwrappedObject.Heroes.ToList();
+    public List<MBHero> Heroes => UnwrappedObject.Heroes.CastList<MBHero>();
 
-    public MBMobilePartyList AllParties => UnwrappedObject.AllParties.ToList();
+    public List<MBMobileParty> AllParties => UnwrappedObject.AllParties.CastList<MBMobileParty>();
 
-    public MBMobilePartyList WarParties => UnwrappedObject.WarParties.ToList();
+    public List<MBMobileParty> WarParties => UnwrappedObject.WarParties.CastList<MBMobileParty>();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
@@ -74,7 +74,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public Vec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
-    public MBStanceLinkList Stances => UnwrappedObject.Stances.ToList();
+    public List<MBStanceLink> Stances => UnwrappedObject.Stances.CastList<MBStanceLink>();
 
     public int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
 
@@ -96,17 +96,5 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator Kingdom(MBKingdom wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBKingdom(Kingdom obj) => MBKingdom.GetWrapper(obj);
-  }
-
-  public class MBKingdomList : MBListBase<MBKingdom, MBKingdomList>
-  {
-    public MBKingdomList(params MBKingdom[] wrappers) : this((IEnumerable<MBKingdom>)wrappers) { }
-    public MBKingdomList(IEnumerable<MBKingdom> wrappers) => AddRange(wrappers);
-    public MBKingdomList(MBKingdom wrapper) => Add(wrapper);
-    public MBKingdomList() { }
-
-    public static implicit operator List<Kingdom>(MBKingdomList wrapperList) => wrapperList.Unwrap<MBKingdom, Kingdom>();
-    public static implicit operator MBKingdomList(List<Kingdom> objectList) => (MBKingdomList)objectList.Wrap<MBKingdom, Kingdom>();
-    public static implicit operator MBKingdom[](MBKingdomList wrapperList) => wrapperList.ToArray();
   }
 }

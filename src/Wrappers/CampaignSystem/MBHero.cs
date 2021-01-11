@@ -17,12 +17,12 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBHero : MBObjectBaseWrapper<MBHero, Hero>, IMBHero
   {
-    public static MBHeroList All => MBHero.All.ToList();
+    public static List<MBHero> All => MBHero.All.ToList();
     public static MBHero MainHero => MBHero.MainHero;
     public static bool IsMainHeroIll => MBHero.IsMainHeroIll;
-    public static MBHeroList ConversationHeroes => MBHero.ConversationHeroes.ToList();
+    public static List<MBHero> ConversationHeroes => MBHero.ConversationHeroes.ToList();
     public static MBHero OneToOneConversationHero => MBHero.OneToOneConversationHero;
-    public static MBHeroList FindAll(Func<MBHero, bool> predicate) => (MBHeroList)MBHero.FindAll((Func<MBHero, bool>)predicate);
+    public static List<MBHero> FindAll(Func<MBHero, bool> predicate) => (List<MBHero>)MBHero.FindAll((Func<MBHero, bool>)predicate);
     public static MBHero FindFirst(Func<MBHero, bool> predicate) => MBHero.FindFirst((Func<MBHero, bool>)predicate);
     public float GetRelationWithPlayer() => UnwrappedObject.GetRelationWithPlayer();
     public float GetRelation(MBHero otherHero) => UnwrappedObject.GetRelation(otherHero);
@@ -40,7 +40,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public int RandomValue => UnwrappedObject.RandomValue;
 
-    public MBItemObjectList SpecialItems => UnwrappedObject.SpecialItems;
+    public List<MBItemObject> SpecialItems => UnwrappedObject.SpecialItems.CastList<MBItemObject>();
 
     public MBCultureObject Culture => UnwrappedObject.Culture;
 
@@ -50,7 +50,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public int Level => UnwrappedObject.Level;
 
-    public MBHeroList ExSpouses => UnwrappedObject.ExSpouses.ToList();
+    public List<MBHero> ExSpouses => UnwrappedObject.ExSpouses.CastList<MBHero>();
 
     public bool AlwaysDie => UnwrappedObject.AlwaysDie;
 
@@ -68,7 +68,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBTextObject FirstName => UnwrappedObject.FirstName;
 
-    public MBCharacterObjectList VolunteerTypes => UnwrappedObject.VolunteerTypes.ToList();
+    public List<MBCharacterObject> VolunteerTypes => UnwrappedObject.VolunteerTypes.CastList<MBCharacterObject>();
 
     public int LastTimeStampForActivity => UnwrappedObject.LastTimeStampForActivity;
 
@@ -116,7 +116,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool AwaitingTrial => UnwrappedObject.AwaitingTrial;
 
-    public MBHeroList CompanionsInParty => UnwrappedObject.CompanionsInParty.ToList();
+    public List<MBHero> CompanionsInParty => UnwrappedObject.CompanionsInParty.CastList<MBHero>();
 
     public MBCharacterObject Template { get => UnwrappedObject.Template; set => UnwrappedObject.Template = value; }
 
@@ -161,17 +161,17 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public MBHero Mother { get => UnwrappedObject.Mother; set => UnwrappedObject.Mother = value; }
     public MBHero Spouse { get => UnwrappedObject.Spouse; set => UnwrappedObject.Spouse = value; }
 
-    public MBHeroList Children => UnwrappedObject.Children;
+    public List<MBHero> Children => UnwrappedObject.Children.CastList<MBHero>();
 
-    public MBHeroList Siblings => UnwrappedObject.Siblings.ToList();
+    public List<MBHero> Siblings => UnwrappedObject.Siblings.CastList<MBHero>();
 
     public MBHeroDeveloper HeroDeveloper => UnwrappedObject.HeroDeveloper;
 
-    public MBWorkshopList OwnedWorkshops => UnwrappedObject.OwnedWorkshops.ToList();
+    public List<MBWorkshop> OwnedWorkshops => UnwrappedObject.OwnedWorkshops.CastList<MBWorkshop>();
 
-    public MBCommonAreaList OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas.ToList();
+    public List<MBCommonArea> OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas.CastList<MBCommonArea>();
 
-    public MBPartyBaseList OwnedParties => UnwrappedObject.OwnedParties.ToList();
+    public List<MBPartyBase> OwnedParties => UnwrappedObject.OwnedParties.CastList<MBPartyBase>();
 
     public CampaignTime LastMeetingTimeWithPlayer { get => UnwrappedObject.LastMeetingTimeWithPlayer; set => UnwrappedObject.LastMeetingTimeWithPlayer = value; }
     public int HitPoints { get => UnwrappedObject.HitPoints; set => UnwrappedObject.HitPoints = value; }
@@ -195,7 +195,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsFactionLeader => UnwrappedObject.IsFactionLeader;
 
-    public MBCaravanPartyComponentList OwnedCaravans => UnwrappedObject.OwnedCaravans;
+    public List<MBCaravanPartyComponent> OwnedCaravans => UnwrappedObject.OwnedCaravans.CastList<MBCaravanPartyComponent>();
 
     public MBMobileParty PartyBelongedTo => UnwrappedObject.PartyBelongedTo;
 
@@ -312,18 +312,5 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBHero(Hero obj) => MBHero.GetWrapper(obj);
-  }
-
-  public class MBHeroList : MBListBase<MBHero, MBHeroList>
-  {
-    public MBHeroList(params MBHero[] wrappers) : this((IEnumerable<MBHero>)wrappers) { }
-    public MBHeroList(IEnumerable<MBHero> wrappers) => AddRange(wrappers);
-    public MBHeroList(MBHero wrapper) => Add(wrapper);
-    public MBHeroList() { }
-
-    public static implicit operator List<Hero>(MBHeroList wrapperList) => wrapperList.Unwrap<MBHero, Hero>();
-    public static implicit operator MBHeroList(List<Hero> objectList) => (MBHeroList)objectList.Wrap<MBHero, Hero>();
-    public static implicit operator MBHero[](MBHeroList wrapperList) => wrapperList;
-    public static implicit operator MBHeroList(MBHero[] wrapperArray) => wrapperArray;
   }
 }

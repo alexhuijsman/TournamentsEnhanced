@@ -4,29 +4,28 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Finder.Abstract
 {
-  public class FinderBase<R, O, W, L, T>
-    where R : FindResultBase<R, W, L, T>, new()
-    where O : FindOptionsBase<W, L>
+  public class FinderBase<R, O, W, T>
+    where R : FindResultBase<R, W, T>, new()
+    where O : FindOptionsBase<W>
     where W : MBWrapperBase<W, T>, new()
-    where L : MBListBase<W, L>
   {
     public static R Find(O options)
     {
-      L remainingCandidates;
+      List<W> remainingCandidates;
 
       remainingCandidates = SortAndFilterByComparers(options.Candidates.ToList(), options.Comparers);
 
-      if (remainingCandidates.IsEmpty && options.HasFallbackComparers)
+      if (remainingCandidates.IsEmpty() && options.HasFallbackComparers)
       {
         remainingCandidates = SortAndFilterByComparers(options.Candidates.ToList(), options.FallbackComparers);
       }
 
-      return remainingCandidates.IsEmpty ?
-        FindResultBase<R, W, L, T>.Failure :
-        FindResultBase<R, W, L, T>.Success(remainingCandidates);
+      return remainingCandidates.IsEmpty() ?
+        FindResultBase<R, W, T>.Failure :
+        FindResultBase<R, W, T>.Success(remainingCandidates);
     }
 
-    protected static L SortAndFilterByComparers(L candidates, IComparer<W>[] comparers)
+    protected static List<W> SortAndFilterByComparers(List<W> candidates, IComparer<W>[] comparers)
     {
       candidates.Add(MBWrapperBase<W, T>.Null);
 
@@ -41,7 +40,7 @@ namespace TournamentsEnhanced.Finder.Abstract
       return candidates;
     }
 
-    private static void RemoveCandidatesRankedLowerThanNull(L candidates)
+    private static void RemoveCandidatesRankedLowerThanNull(List<W> candidates)
     {
       var nullIndexSearchResult = GetNullIndex(candidates);
       var nullIndex = nullIndexSearchResult.indexValue;
@@ -57,7 +56,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
     }
 
-    private static NullIndexSearchResult GetNullIndex(L candidates)
+    private static NullIndexSearchResult GetNullIndex(List<W> candidates)
     {
       int nullIndex = -1;
       for (int i = 0; i < candidates.Count; i++)

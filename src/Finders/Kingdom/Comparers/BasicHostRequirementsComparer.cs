@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Kingdom
     protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBKingdom kingdom) =>
-      !kingdom.Settlements.IsEmpty &&
+      !kingdom.Settlements.IsEmpty() &&
       kingdom.Settlements.FindIndex(
         (settlement) => settlement.IsTown &&
         PayorMeetsRequirements(settlement.OwnerClan.Leader)

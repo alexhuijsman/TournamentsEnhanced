@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 
@@ -8,8 +10,8 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public interface IMBFaction
   {
-    MBHeroList Lords { get; }
-    MBMobilePartyList WarParties { get; }
+    List<MBHero> Lords { get; }
+    List<MBMobileParty> WarParties { get; }
     bool IsBanditFaction { get; }
     bool IsMinorFaction { get; }
     bool IsKingdomFaction { get; }
@@ -20,16 +22,16 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     IMBFaction MapFaction { get; }
     float TotalStrength { get; }
     Vec2 FactionMidPoint { get; }
-    MBStanceLinkList Stances { get; }
+    List<MBStanceLink> Stances { get; }
     int TributeWallet { get; set; }
     float MainHeroCrimeRating { get; set; }
     float DailyCrimeRatingChange { get; }
     float Aggressiveness { get; }
     bool IsEliminated { get; }
-    MBMobilePartyList AllParties { get; }
-    MBHeroList Heroes { get; }
+    List<MBMobileParty> AllParties { get; }
+    List<MBHero> Heroes { get; }
     CampaignTime NotAttackableByPlayerUntilTime { get; set; }
-    MBTownList Fiefs { get; }
+    List<MBTown> Fiefs { get; }
     MBTextObject Name { get; }
     string StringId { get; }
     MBTextObject InformalName { get; }
@@ -46,7 +48,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBCharacterObject BasicTroop { get; }
     MBHero Leader { get; }
     MBBanner Banner { get; }
-    MBSettlementList Settlements { get; }
+    List<MBSettlement> Settlements { get; }
     uint LabelColor { get; }
 
     MBStanceLink GetStanceWith(IMBFaction other);

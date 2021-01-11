@@ -4,11 +4,10 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.Finder
 {
-  public class FindOptionsBase<W, L>
+  public class FindOptionsBase<W>
   where W : IWrapperBase
-  where L : MBListBase<W, L>
   {
-    public L Candidates { get; set; }
+    public List<W> Candidates { get; set; }
     public IComparer<W>[] Comparers { get; set; }
     public IComparer<W>[] FallbackComparers { get; set; }
 

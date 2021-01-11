@@ -8,13 +8,13 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder
 {
-  public class HeroFinder : FinderBase<FindHeroResult, FindHeroOptions, MBHero, MBHeroList, Hero>
+  public class HeroFinder : FinderBase<FindHeroResult, FindHeroOptions, MBHero, Hero>
   {
     public static FindHeroResult FindKingdomLeaders(params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
-        Candidates = candidates,
+        Candidates = candidates.ToList(),
         Comparers = new IComparer<MBHero>[] { KingdomLeaderHostComparer.Instance }
       };
 
@@ -25,7 +25,7 @@ namespace TournamentsEnhanced.Finder
     {
       var options = new FindHeroOptions()
       {
-        Candidates = candidates,
+        Candidates = candidates.ToList(),
         Comparers = new IComparer<MBHero>[] { BasicHostRequirementsComparer.Instance }
       };
 
@@ -36,7 +36,7 @@ namespace TournamentsEnhanced.Finder
     {
       var options = new FindHeroOptions()
       {
-        Candidates = candidates,
+        Candidates = candidates.ToList(),
         Comparers = new IComparer<MBHero>[] { ClanLeaderHostComparer.Instance }
       };
 
@@ -82,7 +82,7 @@ namespace TournamentsEnhanced.Finder
     {
       var options = new FindHeroOptions()
       {
-        Candidates = candidates,
+        Candidates = candidates.ToList(),
         Comparers = new IComparer<MBHero>[] { FactionLeaderHostComparer.Instance }
       };
 

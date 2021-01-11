@@ -11,16 +11,4 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator StanceLink(MBStanceLink wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBStanceLink(StanceLink obj) => MBStanceLink.GetWrapper(obj);
   }
-
-  public class MBStanceLinkList : MBListBase<MBStanceLink, MBStanceLinkList>
-  {
-    public MBStanceLinkList(params MBStanceLink[] wrappers) : this((IEnumerable<MBStanceLink>)wrappers) { }
-    public MBStanceLinkList(IEnumerable<MBStanceLink> wrappers) => AddRange(wrappers);
-    public MBStanceLinkList(MBStanceLink wrapper) => Add(wrapper);
-    public MBStanceLinkList() { }
-
-    public static implicit operator List<StanceLink>(MBStanceLinkList wrapperList) => wrapperList.Unwrap<MBStanceLink, StanceLink>();
-    public static implicit operator MBStanceLinkList(List<StanceLink> objectList) => (MBStanceLinkList)objectList.Wrap<MBStanceLink, StanceLink>();
-    public static implicit operator MBStanceLink[](MBStanceLinkList wrapperList) => wrapperList.ToArray();
-  }
 }

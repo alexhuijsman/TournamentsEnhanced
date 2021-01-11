@@ -3,7 +3,6 @@
 using HarmonyLib;
 
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
-using TaleWorlds.Core;
 
 using TournamentsEnhanced.Models.ModState;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
@@ -21,9 +20,9 @@ namespace TournamentsEnhanced.Patches
         return true;
       }
 
-      MBTournamentTeamList teams = __instance.Teams.ToList();
+      var teams = __instance.Teams.CastList<MBTournamentTeam>();
       var playerTeam = GetPlayerTeamFrom(teams);
-      var nonPlayerTeams = teams.ToList();
+      var nonPlayerTeams = teams;
       nonPlayerTeams.Remove(playerTeam);
 
       MBTournamentParticipant wrappedParticipant = participant;
@@ -38,7 +37,7 @@ namespace TournamentsEnhanced.Patches
         return false;
       }
 
-      if ((firstTime && participant.TryPlaceInNewOrSameTeam((List<TournamentTeam>)teams)) || participant.TryPlaceInAnyTeam((List<TournamentTeam>)teams))
+      if ((firstTime && participant.TryPlaceInNewOrSameTeam(teams.CastList<TournamentTeam>())) || participant.TryPlaceInAnyTeam(teams.CastList<TournamentTeam>()))
       {
         return false;
       }
@@ -46,7 +45,7 @@ namespace TournamentsEnhanced.Patches
       return false;
     }
 
-    private static MBTournamentTeam GetPlayerTeamFrom(MBTournamentTeamList teams)
+    private static MBTournamentTeam GetPlayerTeamFrom(IEnumerable<MBTournamentTeam> teams)
     {
       var tournamentRecord = ModState.TournamentRecords.ForCurrentSettlement();
 
@@ -66,7 +65,7 @@ namespace TournamentsEnhanced.Patches
       return playerTeam;
     }
 
-    private static MBTournamentTeam GetTeamByColor(MBTournamentTeamList teams, uint playerTeamColor)
+    private static MBTournamentTeam GetTeamByColor(IEnumerable<MBTournamentTeam> teams, uint playerTeamColor)
     {
       MBTournamentTeam matchingTeam = null;
       foreach (var team in teams)
@@ -81,7 +80,7 @@ namespace TournamentsEnhanced.Patches
       return matchingTeam;
     }
 
-    private static MBTournamentTeam GetEmptyTeam(MBTournamentTeamList teams)
+    private static MBTournamentTeam GetEmptyTeam(IEnumerable<MBTournamentTeam> teams)
     {
       MBTournamentTeam emptyTeam = null;
 

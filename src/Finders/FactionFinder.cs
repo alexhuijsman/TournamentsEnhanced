@@ -7,13 +7,16 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 namespace TournamentsEnhanced.Finder
 {
   public class FactionFinder
-    : FinderBase<FindFactionResult, FindFactionOptions, MBFaction, MBFactionList, MBFactionImpl>
+    : FinderBase<FindFactionResult, FindFactionOptions, MBFaction, MBFactionImpl>
   {
     public static FindFactionResult FindFactionThatMeetBasicHostRequirements(MBFaction faction)
     {
+      var candidiates = new List<MBFaction>();
+      candidiates.Add(faction);
+
       var options = new FindFactionOptions()
       {
-        Candidates = new MBFactionList(faction),
+        Candidates = candidiates,
         Comparers = new IComparer<MBFaction>[]
         {
           BasicHostRequirementsComparer.Instance

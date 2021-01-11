@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
       {
         var wrapper = InstantiateWrapperForObject(obj);
 
-        Cache.Add(obj, new W());
+        Cache.Add(obj, wrapper);
       }
 
       return Cache[obj];

@@ -9,13 +9,16 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 namespace TournamentsEnhanced.Finder
 {
   public class KingdomFinder
-    : FinderBase<FindKingdomResult, FindKingdomOptions, MBKingdom, MBKingdomList, Kingdom>
+    : FinderBase<FindKingdomResult, FindKingdomOptions, MBKingdom, Kingdom>
   {
-    public static FindKingdomResult FindKingdomThatMeetBasicHostRequirements(MBKingdom faction)
+    public static FindKingdomResult FindKingdomThatMeetBasicHostRequirements(MBKingdom kingdom)
     {
+      var candidiates = new List<MBKingdom>();
+      candidiates.Add(kingdom);
+
       var options = new FindKingdomOptions()
       {
-        Candidates = new MBKingdomList(faction),
+        Candidates = candidiates,
         Comparers = new IComparer<MBKingdom>[]
         {
           BasicHostRequirementsComparer.Instance

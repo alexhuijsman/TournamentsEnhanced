@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Clan
     protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBClan clan) =>
-      !clan.Settlements.IsEmpty &&
+      !clan.Settlements.IsEmpty() &&
       clan.Settlements.FindIndex((settlement) => settlement.IsTown) != -1;
   }
 }

@@ -13,11 +13,11 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   {
     public IFaction IFactionObject => UnwrappedObject.IFactionObject;
 
-    public MBSettlementList Settlements => UnwrappedObject.Settlements.ToList();
+    public List<MBSettlement> Settlements => UnwrappedObject.Settlements.CastList<MBSettlement>();
 
-    public MBHeroList Lords => UnwrappedObject.Lords.ToList();
+    public List<MBHero> Lords => UnwrappedObject.Lords.CastList<MBHero>();
 
-    public MBMobilePartyList WarParties => UnwrappedObject.WarParties.ToList();
+    public List<MBMobileParty> WarParties => UnwrappedObject.WarParties.CastList<MBMobileParty>();
 
     public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
@@ -39,7 +39,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public Vec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
-    public MBStanceLinkList Stances => UnwrappedObject.Stances.ToList();
+    public List<MBStanceLink> Stances => UnwrappedObject.Stances.CastList<MBStanceLink>();
 
     public int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
     public float MainHeroCrimeRating { get => UnwrappedObject.MainHeroCrimeRating; set => UnwrappedObject.MainHeroCrimeRating = value; }
@@ -50,13 +50,13 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsEliminated => UnwrappedObject.IsEliminated;
 
-    public MBMobilePartyList AllParties => UnwrappedObject.AllParties.ToList();
+    public List<MBMobileParty> AllParties => UnwrappedObject.AllParties.CastList<MBMobileParty>();
 
-    public MBHeroList Heroes => UnwrappedObject.Heroes.ToList();
+    public List<MBHero> Heroes => UnwrappedObject.Heroes.CastList<MBHero>();
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
-    public MBTownList Fiefs => UnwrappedObject.Fiefs.ToList();
+    public List<MBTown> Fiefs => UnwrappedObject.Fiefs.CastList<MBTown>();
 
     public MBTextObject Name => UnwrappedObject.Name;
 
@@ -104,17 +104,5 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator MBFactionImpl(MBFaction wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBFaction(MBFactionImpl obj) => MBFaction.GetWrapper(obj);
-  }
-
-  public class MBFactionList : MBListBase<MBFaction, MBFactionList>
-  {
-    public MBFactionList(params MBFaction[] wrappers) : this((IEnumerable<MBFaction>)wrappers) { }
-    public MBFactionList(IEnumerable<MBFaction> wrappers) => AddRange(wrappers);
-    public MBFactionList(MBFaction wrapper) => Add(wrapper);
-    public MBFactionList() { }
-
-    public static implicit operator List<MBFactionImpl>(MBFactionList wrapperList) => wrapperList.Unwrap<MBFaction, MBFactionImpl>();
-    public static implicit operator MBFactionList(List<MBFactionImpl> objectList) => (MBFactionList)objectList.Wrap<MBFaction, MBFactionImpl>();
-    public static implicit operator MBFaction[](MBFactionList wrapperList) => wrapperList.ToArray();
   }
 }

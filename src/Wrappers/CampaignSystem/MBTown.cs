@@ -11,15 +11,15 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBTown : CachedWrapperBase<MBTown, Town>, IMBTown
   {
-    public static MBTownList AllFiefs { get; }
-    public static MBTownList AllCastles { get; }
-    public static MBTownList AllTownsWithoutTournaments => AllTowns;
-    public static MBTownList AllTownsWithTournaments => (MBTownList)AllTowns.ToList().FindAll((town) => town.HasTournament);
-    public static MBTownList AllTowns => Town.AllTowns.ToList();
+    public static List<MBTown> AllFiefs { get; }
+    public static List<MBTown> AllCastles { get; }
+    public static List<MBTown> AllTownsWithoutTournaments => AllTowns;
+    public static List<MBTown> AllTownsWithTournaments => (List<MBTown>)AllTowns.ToList().FindAll((town) => town.HasTournament);
+    public static List<MBTown> AllTowns => Town.AllTowns.CastList<MBTown>();
 
     public int DaysAtUnrest => UnwrappedObject.DaysAtUnrest;
 
-    public MBBuildingList Buildings => UnwrappedObject.Buildings.ToList();
+    public List<MBBuilding> Buildings => UnwrappedObject.Buildings.CastList<MBBuilding>();
 
     public int BoostBuildingProcess => UnwrappedObject.BoostBuildingProcess;
 
@@ -35,7 +35,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public float Security { get => UnwrappedObject.Security; set => UnwrappedObject.Security = value; }
     public float Loyalty { get => UnwrappedObject.Loyalty; set => UnwrappedObject.Loyalty = value; }
 
-    public MBWorkshopList Workshops => UnwrappedObject.Workshops.ToList();
+    public List<MBWorkshop> Workshops => UnwrappedObject.Workshops.CastList<MBWorkshop>();
 
     public MBBuilding CurrentBuilding => UnwrappedObject.CurrentBuilding;
 
@@ -47,7 +47,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public MBHero Governor { get => UnwrappedObject.Governor; set => UnwrappedObject.Governor = value; }
     public MBClan LastCapturedBy { get => UnwrappedObject.LastCapturedBy; set => UnwrappedObject.LastCapturedBy = value; }
 
-    public MBVillageList Villages => UnwrappedObject.Villages.ToList();
+    public List<MBVillage> Villages => UnwrappedObject.Villages.CastList<MBVillage>();
 
     public MBMobileParty MilitiaParty => UnwrappedObject.MilitiaParty;
 
@@ -90,17 +90,5 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public static implicit operator Town(MBTown wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTown(Town obj) => MBTown.GetWrapper(obj);
-  }
-
-  public class MBTownList : MBListBase<MBTown, MBTownList>
-  {
-    public MBTownList(params MBTown[] wrappers) : this((IEnumerable<MBTown>)wrappers) { }
-    public MBTownList(IEnumerable<MBTown> wrappers) => AddRange(wrappers);
-    public MBTownList(MBTown wrapper) => Add(wrapper);
-    public MBTownList() { }
-
-    public static implicit operator List<Town>(MBTownList wrapperList) => wrapperList.Unwrap<MBTown, Town>();
-    public static implicit operator MBTownList(List<Town> objectList) => (MBTownList)objectList.Wrap<MBTown, Town>();
-    public static implicit operator MBTown[](MBTownList wrapperList) => wrapperList.ToArray();
   }
 }

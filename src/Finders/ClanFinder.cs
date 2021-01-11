@@ -8,13 +8,16 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder
 {
-  public class ClanFinder : FinderBase<FindClanResult, FindClanOptions, MBClan, MBClanList, Clan>
+  public class ClanFinder : FinderBase<FindClanResult, FindClanOptions, MBClan, Clan>
   {
-    public static FindClanResult FindClanThatMeetsBasicHostRequirements(MBClan faction)
+    public static FindClanResult FindClanThatMeetsBasicHostRequirements(MBClan clan)
     {
+      var candidiates = new List<MBClan>();
+      candidiates.Add(clan);
+
       var options = new FindClanOptions()
       {
-        Candidates = new MBClanList(faction),
+        Candidates = candidiates,
         Comparers = new IComparer<MBClan>[]
         {
           BasicHostRequirementsComparer.Instance

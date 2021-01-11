@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Helpers;
 
@@ -41,7 +42,7 @@ namespace TournamentsEnhanced.Behaviors
       CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
     }
 
-    private static void OnSelectPrize(MBInquiryElementList prizes)
+    private static void OnSelectPrize(List<MBInquiryElement> prizes)
     {
       if (prizes.Count > 0)
       {
@@ -53,7 +54,7 @@ namespace TournamentsEnhanced.Behaviors
 
     }
 
-    private static void OnDeSelectPrize(MBInquiryElementList prizeSelections)
+    private static void OnDeSelectPrize(List<MBInquiryElement> prizeSelections)
     {
 
     }
