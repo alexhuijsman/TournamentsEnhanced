@@ -14,6 +14,10 @@ Don't allow Highborn tournaments for faction led by player
 Show prize selection during hosted tournament
 S Don't hide Select Prize button after selecting a prize and ensure reselecting prize keeps same items
 
+RECOMMEND
+---------
+Try out mods to recommend: pacemaker, houses of calradia and noble titles
+
 TEST
 ----
 Write unit tests for existing methods with NUnit, Moq, and Shouldly
