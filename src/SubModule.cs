@@ -16,7 +16,7 @@ using TournamentsEnhanced.Models.ModState;
 
 namespace TournamentsEnhanced
 {
-  public class Main : MBSubModuleBase
+  public class SubModule : MBSubModuleBase
   {
     protected override void OnSubModuleLoad()
     {
