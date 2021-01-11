@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-using TaleWorlds.CampaignSystem;
-
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Finder.Comparers.Faction;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
@@ -9,7 +7,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 namespace TournamentsEnhanced.Finder
 {
   public class FactionFinder
-    : FinderBase<FindFactionResult, FindFactionOptions, MBFaction, MBFactionList, Faction>
+    : FinderBase<FindFactionResult, FindFactionOptions, MBFaction, MBFactionList, MBFactionImpl>
   {
     public static FindFactionResult FindFactionThatMeetBasicHostRequirements(MBFaction faction)
     {

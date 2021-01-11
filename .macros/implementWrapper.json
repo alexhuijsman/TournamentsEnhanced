@@ -1,0 +1,11 @@
+[{
+  "command": "ssmacro.replace",
+  "args": {
+      "info": "Implement Wrapped Instance Methods (up to 5 args per method)",
+      "find": "public ((\\w*<.*?>)|(\\w*)) (\\w*)\\(((ref |out )?(([\\w\\.]*<.*?>)|([\\w\\.]*)) (\\w*\\s*?=?\\s*?[\\w\\d]*?,?\\s*))?((ref |out )?(([\\w\\.]*<.*?>)|([\\w\\.]*)) (\\w*\\s*?=?\\s*?[\\w\\d]*?,?\\s*))?((ref |out )?(([\\w\\.]*<.*?>)|([\\w\\.]*)) (\\w*\\s*?=?\\s*?[\\w\\d]*?,?\\s*))?((ref |out )?(([\\w\\.]*<.*?>)|([\\w\\.]*)) (\\w*\\s*?=?\\s*?[\\w\\d]*?,?\\s*))?((ref |out )?(([\\w\\.]*<.*?>)|([\\w\\.]*)) (\\w*\\s*?=?\\s*?[\\w\\d]*?,?\\s*))?\\);",
+      "replace": "public $3 $4($5$11$17$23$29) => UnwrappedObject.$4($6$10$12$16$18$22$24$28$30$34);",
+      "all": true,
+      "reg": true,
+      "flag": "gm"
+  }
+}]

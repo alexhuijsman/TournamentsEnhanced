@@ -4,7 +4,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 namespace TournamentsEnhanced.Finder
 {
   public class FindFactionResult
-    : FindResultBase<FindFactionResult, MBFaction, MBFactionList, Faction>
+    : FindResultBase<FindFactionResult, MBFaction, MBFactionList, MBFactionImpl>
   {
     public FindFactionResult() { }
 

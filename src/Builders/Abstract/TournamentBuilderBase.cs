@@ -22,7 +22,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       return HeroFinder.FindHostsThatMeetBasicRequirements(payorHeroes);
     }
 
-    internal static ResultBase ValidateFaction(IMBFaction faction)
+    internal static ResultBase ValidateFaction(MBFaction faction)
       => FactionFinder.FindFactionThatMeetBasicHostRequirements(faction);
 
     protected static CreateTournamentResult CreateTournament(CreateTournamentOptions options)

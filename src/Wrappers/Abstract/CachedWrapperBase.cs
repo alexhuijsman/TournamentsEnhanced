@@ -37,6 +37,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
     {
       return CachedWrapperBase<WW, TT>.GetWrapper(obj);
     }
+
     public static TT Unwrap<WW, TT>(WW wrapper)
       where WW : WrapperBase<WW, TT>, new()
     {
