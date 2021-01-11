@@ -4,20 +4,17 @@
   <Id value="TournamentsEnhanced" />
   <Version value="v1.5.6.2" />
   <Official value="false" />
-  <DefaultModule value="false" />
   <SingleplayerModule value="true" />
   <MultiplayerModule value="false" />
   <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/1449" />
-  <!-- Prototype -->
-  <DependedModuleMetadatas>
-    <DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" version="v2.*" />
-    <DependedModuleMetadata id="Native" order="LoadBeforeThis" version="e1.5.6.*" optional="true" />
-    <DependedModuleMetadata id="SandBoxCore" order="LoadBeforeThis" version="e1.5.6.*" optional="true" />
-    <DependedModuleMetadata id="Sandbox" order="LoadBeforeThis" version="e1.5.6.*" optional="true" />
-    <DependedModuleMetadata id="StoryMode" order="LoadBeforeThis" version="e1.5.6.*" optional="true" />
-    <DependedModuleMetadata id="CustomBattle" order="LoadBeforeThis" version="e1.5.6.*" optional="true" />
-  </DependedModuleMetadatas>
-  <!-- Prototype -->
+  <DependedModules>
+    <DependedModule Id="Bannerlord.Harmony" />
+    <DependedModule Id="Native" />
+    <DependedModule Id="SandBoxCore" />
+    <DependedModule Id="Sandbox" />
+    <DependedModule Id="CustomBattle" />
+    <DependedModule Id="StoryMode" />
+  </DependedModules>
   <SubModules>
     <SubModule>
       <Name value="TournamentsEnhanced" />
