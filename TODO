@@ -8,8 +8,11 @@ XS Copy TODO tasks from email
 
 FIX
 ---
-S Don't hide Select Prize button after selecting a prize
-S replace WeeksSinceHostedTournament with DaysUntilCanHostTournament and persist value
+Don’t offer player-crafted items as reward options
+Hide tournament icon after player plays it
+Don't allow Highborn tournaments for faction led by player
+Show prize selection during hosted tournament
+S Don't hide Select Prize button after selecting a prize and ensure reselecting prize keeps same items
 
 TEST
 ----
@@ -17,6 +20,7 @@ Write unit tests for existing methods with NUnit, Moq, and Shouldly
 
 IMPROVE
 -------
+Make individual tournament type spawn chances improve the more days its been since the last
 Make Popup at peace time asking player if they want to host a tournament (and where)
 if player is wedded hero ask player if they want to host a tournament (and where).
 Worsten relations with previous payor if new payor steals their tournament
@@ -30,7 +34,7 @@ Simplify logic for finding wedding tournament host settlement
 REFACTOR
 --------
 S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
-s Wrap MB enums and make a converter
+s Wrap enums and structs
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 S add "best experience" version that requires harmony and mcm
 refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
@@ -45,10 +49,11 @@ OPTION
 ------
 Make number of companions in tournament configurable (was/is 10)
 Make companion selection window, or add criteria or block/allow list of companions that fight in tournament
+Make Prosperity tournaments once per 15 or 30 days (configurable)
 
-DESCRIBE
+COMMUNICATE
 --------
-
+Update banner and screenshots with photo mode
 
 BUILD
 -------------
