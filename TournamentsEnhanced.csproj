@@ -334,7 +334,6 @@
     <Compile Include="src\Wrappers\Core\MBWeaponDesign.cs" />
     <Compile Include="src\Wrappers\Localization\MBTextObject.cs" />
     <Compile Include="src\Wrappers\ObjectSystem\MBMBObjectManager.cs" />
-    <Compile Include="src\Wrappers\WrapperLookup.cs" />
     <Compile Include="src\Builders\TournamentBuilder.PlayerInitiated.cs" />
     <Compile Include="src\Wrappers\Core\MBInformationData.cs" />
     <Compile Include="src\Wrappers\Core\MBBasicCharacterObject.cs" />
@@ -374,7 +373,6 @@
     <Compile Include="src\Builders\CreatePeaceTournamentsResult.cs" />
     <Compile Include="src\SubModule.cs" />
     <Compile Include="src\Extensions\IListExtensions.cs" />
-    <Compile Include="src\Extensions\GenericExtensions.cs" />
     <Compile Include="src\AssemblyInfo.cs" />
     <Compile Include="src\Builders\TournamentBuilder.cs" />
   </ItemGroup>
