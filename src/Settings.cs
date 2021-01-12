@@ -7,12 +7,11 @@ namespace TournamentsEnhanced
 {
   public class Settings : SettingsBase
   {
-    public const string InstanceID = "TournamentsEnhancedSettings";
     public override string ModName => Constants.Module.Name;
-    public override string ModuleFolderName => "TournamentsEnhanced";
+    public override string ModuleFolderName => Constants.Module.ProductName;
 
     [XmlElement]
-    public override string ID { get; set; } = InstanceID;
+    public override string ID { get; set; } = $"{Constants.Module.ProductName}Settings";
 
     public static Settings Instance
     {

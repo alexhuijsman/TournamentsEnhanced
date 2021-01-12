@@ -1,5 +1,5 @@
 {
   "nxunitExplorer.modules":[
-    "test/bin/Debug/*Tests.{dll}"
+    "bin/Debug/*Tests.{dll}"
   ]
 }

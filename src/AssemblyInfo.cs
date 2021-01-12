@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TournamentsEnhanced")]
-[assembly: AssemblyCopyright("Copyright © 2020 Alexrok  Copyright © 2020 FallenFromGr4ce")]
+[assembly: AssemblyCopyright("Copyright © 2021 Alex Huijsman  Copyright © 2020 FallenFromGr4ce")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("cda89b54-0795-4e72-9bbe-49220be96d17")]
