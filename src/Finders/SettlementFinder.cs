@@ -11,17 +11,23 @@ namespace TournamentsEnhanced.Finder
   public class SettlementFinder
     : FinderBase<FindHostSettlementResult, FindHostSettlementOptions, MBSettlement, Settlement>
   {
-    public static FindHostSettlementResult FindForProsperityTournament()
+    public static SettlementFinder Instance { get; } = new SettlementFinder();
+    public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
+    public MBSettlementFacade MBSettlementFacade { protected get; set; } = MBSettlementFacade.Instance;
+
+    private SettlementFinder() { }
+
+    public FindHostSettlementResult FindForProsperityTournament()
     {
       return FindForProsperityTournament(MBSettlement.All);
     }
 
-    public static FindHostSettlementResult FindForInvitationTournament()
+    public FindHostSettlementResult FindForInvitationTournament()
     {
       return FindForInvitationTournament(MBSettlementFacade.AllNearMainHero);
     }
 
-    public static FindHostSettlementResult FindForHighbornTournament()
+    public FindHostSettlementResult FindForHighbornTournament()
     {
       var settlements =
         (List<MBSettlement>)MBSettlement
@@ -32,7 +38,7 @@ namespace TournamentsEnhanced.Finder
       return FindForHighbornTournament(settlements);
     }
 
-    private static FindHostSettlementResult FindForHighbornTournament(List<MBSettlement> settlements)
+    private FindHostSettlementResult FindForHighbornTournament(List<MBSettlement> settlements)
     {
       var comparers = new IComparer<MBSettlement>[]
       {
@@ -48,7 +54,7 @@ namespace TournamentsEnhanced.Finder
       return Find(options);
     }
 
-    private static FindHostSettlementResult FindForInvitationTournament(List<MBSettlement> settlements)
+    private FindHostSettlementResult FindForInvitationTournament(List<MBSettlement> settlements)
     {
       var comparers = new IComparer<MBSettlement>[]
       {
@@ -64,7 +70,7 @@ namespace TournamentsEnhanced.Finder
       return Find(options);
     }
 
-    private static FindHostSettlementResult FindForProsperityTournament(List<MBSettlement> settlements)
+    private FindHostSettlementResult FindForProsperityTournament(List<MBSettlement> settlements)
     {
       var comparers = new IComparer<MBSettlement>[]
       {
@@ -81,12 +87,12 @@ namespace TournamentsEnhanced.Finder
       return Find(options);
     }
 
-    public static FindHostSettlementResult FindForPeaceTournament(IMBFaction faction)
+    public FindHostSettlementResult FindForPeaceTournament(IMBFaction faction)
     {
       return FindMostProsperousAvailable(faction.Settlements);
     }
 
-    public static FindHostSettlementResult FindForWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
+    public FindHostSettlementResult FindForWeddingTournament(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
       var failureResult = FindHostSettlementResult.Failure;
       var findHostHeroResult = HeroFinder.FindHostsFromWeddedHeroes(firstWeddedHero, secondWeddedHero);
@@ -110,27 +116,27 @@ namespace TournamentsEnhanced.Finder
 
     }
 
-    private static FindHostSettlementResult FindForFactionLeaderWedding(MBHero factionLeader)
+    private FindHostSettlementResult FindForFactionLeaderWedding(MBHero factionLeader)
       => factionLeader.MapFaction.IsKingdomFaction ?
            FindForKingdomLeaderWedding(factionLeader) :
            FindForClanLeaderWedding(factionLeader);
 
 
-    private static FindHostSettlementResult FindForKingdomLeaderWedding(MBHero kingdomLeader)
+    private FindHostSettlementResult FindForKingdomLeaderWedding(MBHero kingdomLeader)
     {
       var candidateSettlements = kingdomLeader.Clan.Settlements;
 
       return FindMostProsperousAvailable(candidateSettlements);
     }
 
-    private static FindHostSettlementResult FindForClanLeaderWedding(MBHero clanLeader)
+    private FindHostSettlementResult FindForClanLeaderWedding(MBHero clanLeader)
     {
       var candidateSettlements = clanLeader.Clan.Settlements;
 
       return FindMostProsperousAvailable(candidateSettlements);
     }
 
-    private static FindHostSettlementResult FindMostProsperousAvailable(List<MBSettlement> settlements)
+    private FindHostSettlementResult FindMostProsperousAvailable(List<MBSettlement> settlements)
     {
       var comparers = new IComparer<MBSettlement>[]
       {
@@ -154,7 +160,7 @@ namespace TournamentsEnhanced.Finder
       return Find(options);
     }
 
-    public static FindHostSettlementResult FindForBirthTournament(MBHero mother)
+    public FindHostSettlementResult FindForBirthTournament(MBHero mother)
     {
       var findCandidateSettlementResults = FindBirthTournamentSettlementsForParent(mother);
 
@@ -175,7 +181,7 @@ namespace TournamentsEnhanced.Finder
       return Find(options);
     }
 
-    private static FindHostSettlementResult FindBirthTournamentSettlementsForParent(MBHero parent)
+    private FindHostSettlementResult FindBirthTournamentSettlementsForParent(MBHero parent)
     {
       var leaderResult = HeroFinder.FindFactionLeaders(parent, parent.Spouse);
 
@@ -203,7 +209,7 @@ namespace TournamentsEnhanced.Finder
       return FindHostSettlementResult.Success(candidateSettlements);
     }
 
-    private static FindHostSettlementResult FindHostSettlementsOwnedByHero(MBHero hero)
+    private FindHostSettlementResult FindHostSettlementsOwnedByHero(MBHero hero)
     {
       var options = new FindHostSettlementOptions()
       {

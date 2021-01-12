@@ -13,6 +13,9 @@ namespace TournamentsEnhanced.Behaviors
 {
   class TournamentCreationBehavior : MBEncounterGameMenuBehavior
   {
+    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
+    public Lottery Lottery { protected get; set; } = Lottery.Instance;
+
     public override void RegisterEvents()
     {
       MBCampaignEvents.DailyTickEvent
@@ -116,14 +119,13 @@ namespace TournamentsEnhanced.Behaviors
       }
     }
 
-    private static void TryCreateInvitationTournament()
+    private void TryCreateInvitationTournament()
     {
       if (!Lottery.IsWinner(TournamentType.Invitation) &&
           MBHero.MainHero.Clan.Renown >= Settings.Instance.MaxRenownForInvitationTournaments)
       {
         return;
       }
-
       var result = TournamentBuilder.TryCreateInvitationTournament();
 
       if (result.Succeeded)

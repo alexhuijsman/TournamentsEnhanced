@@ -15,7 +15,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static List<MBTown> AllCastles { get; }
     public static List<MBTown> AllTownsWithoutTournaments => AllTowns;
     public static List<MBTown> AllTownsWithTournaments => (List<MBTown>)AllTowns.ToList().FindAll((town) => town.HasTournament);
-    public static List<MBTown> AllTowns => Town.AllTowns.CastList<MBTown>();
+    public static List<MBTown> AllTowns => Town.AllTowns?.CastList<MBTown>();
 
     public int DaysAtUnrest => UnwrappedObject.DaysAtUnrest;
 

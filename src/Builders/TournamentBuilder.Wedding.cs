@@ -6,8 +6,8 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero,
-                                                                    MBHero secondWeddedHero)
+    public CreateTournamentResult TryCreateWeddingTournament(MBHero firstWeddedHero,
+                                                             MBHero secondWeddedHero)
     {
       var failureResult = CreateTournamentResult.Failure;
 

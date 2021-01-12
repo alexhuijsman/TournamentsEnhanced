@@ -23,7 +23,7 @@ namespace TournamentsEnhanced.Models.Serializable
 
     public void Reset()
     {
-      foreach (var key in Keys)
+      foreach (var key in Keys.ToList())
       {
         this[key] = DefaultValue;
       }

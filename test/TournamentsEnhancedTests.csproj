@@ -38,8 +38,36 @@
       <HintPath>..\lib\Shouldly.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Smocks" Version="0.7.*">
+      <HintPath>..\lib\Smocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil" Version="0.10.*">
+      <HintPath>..\lib\Mono.Cecil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb" Version="0.10.*">
+      <HintPath>..\lib\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb" Version="0.10.*">
+      <HintPath>..\lib\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks" Version="0.10.*">
+      <HintPath>..\lib\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Text.Json" Version="5.0.*">
       <HintPath>..\lib\System.Text.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions" Version="4.6.*">
+      <HintPath>..\lib\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core" Version="4.4.*">
+      <HintPath>..\lib\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Memory" Version="4.6.*">
@@ -189,8 +217,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\SimpleTest.cs" />
     <Compile Include="src\AssemblyInfo.cs" />
+    <Compile Include="src\SubModule.test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

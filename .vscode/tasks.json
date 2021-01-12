@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "Build & Test",
+        "label": "Build Tests",
         "dependsOn": [
           "build (DEBUG)",
           "build unit tests"

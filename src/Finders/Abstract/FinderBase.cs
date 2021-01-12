@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Finder.Abstract
     where O : FindOptionsBase<W>
     where W : MBWrapperBase<W, T>, new()
   {
-    public static R Find(O options)
+    public R Find(O options)
     {
       List<W> remainingCandidates;
 
@@ -25,7 +25,7 @@ namespace TournamentsEnhanced.Finder.Abstract
         FindResultBase<R, W, T>.Success(remainingCandidates);
     }
 
-    protected static List<W> SortAndFilterByComparers(List<W> candidates, IComparer<W>[] comparers)
+    protected List<W> SortAndFilterByComparers(List<W> candidates, IComparer<W>[] comparers)
     {
       candidates.Add(MBWrapperBase<W, T>.Null);
 
@@ -40,7 +40,7 @@ namespace TournamentsEnhanced.Finder.Abstract
       return candidates;
     }
 
-    private static void RemoveCandidatesRankedLowerThanNull(List<W> candidates)
+    private void RemoveCandidatesRankedLowerThanNull(List<W> candidates)
     {
       var nullIndexSearchResult = GetNullIndex(candidates);
       var nullIndex = nullIndexSearchResult.indexValue;
@@ -56,7 +56,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
     }
 
-    private static NullIndexSearchResult GetNullIndex(List<W> candidates)
+    private NullIndexSearchResult GetNullIndex(List<W> candidates)
     {
       int nullIndex = -1;
       for (int i = 0; i < candidates.Count; i++)

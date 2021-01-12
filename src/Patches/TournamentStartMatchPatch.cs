@@ -10,6 +10,7 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(TournamentMatch), "Start")]
   class TournamentStartMatchPatch
   {
+    public static CampaignModel CampaignModel { protected get; set; } = CampaignModel.Instance;
 
     static void Postfix()
     {

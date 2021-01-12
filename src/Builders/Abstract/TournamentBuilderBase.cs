@@ -12,20 +12,24 @@ namespace TournamentsEnhanced.Builders.Abstract
 {
   public abstract class TournamentBuilderBase
   {
-    internal static FindHeroResult ValidatePayorHero(MBHero initiatingHero, MBHero payorHero)
+    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
+    public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
+    public FactionFinder FactionFinder { protected get; set; } = FactionFinder.Instance;
+
+    internal FindHeroResult ValidatePayorHero(MBHero initiatingHero, MBHero payorHero)
     {
       return ValidatePayorHeroes(initiatingHero, payorHero);
     }
 
-    internal static FindHeroResult ValidatePayorHeroes(params MBHero[] payorHeroes)
+    internal FindHeroResult ValidatePayorHeroes(params MBHero[] payorHeroes)
     {
       return HeroFinder.FindHostsThatMeetBasicRequirements(payorHeroes);
     }
 
-    internal static ResultBase ValidateFaction(MBFaction faction)
+    internal ResultBase ValidateFaction(MBFaction faction)
       => FactionFinder.FindFactionThatMeetBasicHostRequirements(faction);
 
-    protected static CreateTournamentResult CreateTournament(CreateTournamentOptions options)
+    protected CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
       var settlement = options.Settlement;
       var type = options.Type;
@@ -55,14 +59,14 @@ namespace TournamentsEnhanced.Builders.Abstract
       return result;
     }
 
-    private static void InstantiateTournament(MBSettlement settlement)
+    private void InstantiateTournament(MBSettlement settlement)
     {
       var tournament = new FightTournamentGame(settlement.Town);
       MBCampaign.Current.TournamentManager.AddTournament(tournament);
     }
 
 
-    private static void ApplyHostingEffects(TournamentType type, MBSettlement settlement)
+    private void ApplyHostingEffects(TournamentType type, MBSettlement settlement)
     {
       if (type == TournamentType.Initial)
       {
@@ -80,7 +84,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       }
     }
 
-    private static void PayTournamentFee(MBHero payor, MBSettlement settlement)
+    private void PayTournamentFee(MBHero payor, MBSettlement settlement)
     {
       var tournamentCost = Settings.Instance.TournamentCost;
 
@@ -88,7 +92,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       settlement.Town.ChangeGold(tournamentCost);
     }
 
-    public static void ApplyRelationsGain(TournamentType type, MBSettlement settlement)
+    public void ApplyRelationsGain(TournamentType type, MBSettlement settlement)
     {
       if (type != TournamentType.PlayerInitiated)
       {
@@ -113,7 +117,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       MBInformationManagerFacade.DisplayAsQuickBanner($"Your relationship with local notables at {settlement.Name} has improved");
     }
 
-    public static ValueTuple<SkillObject, int> TournamentSkillXpGain(MBHero winner)
+    public ValueTuple<SkillObject, int> TournamentSkillXpGain(MBHero winner)
     {
       float randomFloat = MBRandom.DeterministicRandom.NextFloat();
       SkillObject item = (randomFloat < 0.2f) ? DefaultSkills.OneHanded : ((randomFloat < 0.4f) ? DefaultSkills.TwoHanded : ((randomFloat < 0.6f) ? DefaultSkills.Polearm : ((randomFloat < 0.8f) ? DefaultSkills.Riding : DefaultSkills.Athletics)));

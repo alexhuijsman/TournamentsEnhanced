@@ -18,6 +18,9 @@ namespace TournamentsEnhanced
 {
   public class SubModule : MBSubModuleBase
   {
+    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
+    public ModState ModState { protected get; set; } = ModState.Instance;
+
     protected override void OnSubModuleLoad()
     {
       try

@@ -12,6 +12,7 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(TournamentMatch), "AddParticipant")]
   class AddParticipantsPatch
   {
+    public static ModState ModState { protected get; set; } = ModState.Instance;
 
     static bool Prefix(ref List<TournamentParticipant> ____participants, TournamentParticipant participant, bool firstTime, TournamentMatch __instance)
     {

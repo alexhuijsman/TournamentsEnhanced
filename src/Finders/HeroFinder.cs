@@ -10,7 +10,10 @@ namespace TournamentsEnhanced.Finder
 {
   public class HeroFinder : FinderBase<FindHeroResult, FindHeroOptions, MBHero, Hero>
   {
-    public static FindHeroResult FindKingdomLeaders(params MBHero[] candidates)
+    public static HeroFinder Instance { get; } = new HeroFinder();
+
+    private HeroFinder() { }
+    public FindHeroResult FindKingdomLeaders(params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
@@ -18,10 +21,10 @@ namespace TournamentsEnhanced.Finder
         Comparers = new IComparer<MBHero>[] { KingdomLeaderHostComparer.Instance }
       };
 
-      return HeroFinder.Find(options);
+      return Find(options);
     }
 
-    public static FindHeroResult FindHostsThatMeetBasicRequirements(params MBHero[] candidates)
+    public FindHeroResult FindHostsThatMeetBasicRequirements(params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
@@ -32,7 +35,7 @@ namespace TournamentsEnhanced.Finder
       return Find(options);
     }
 
-    public static FindHeroResult FindClanLeaders(params MBHero[] candidates)
+    public FindHeroResult FindClanLeaders(params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
@@ -40,13 +43,13 @@ namespace TournamentsEnhanced.Finder
         Comparers = new IComparer<MBHero>[] { ClanLeaderHostComparer.Instance }
       };
 
-      return HeroFinder.Find(options);
+      return Find(options);
     }
 
-    public static FindHeroResult FindHostsFromWeddedHeroes(MBHero firstWeddedHero, MBHero secondWeddedHero)
+    public FindHeroResult FindHostsFromWeddedHeroes(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
-      var maleKingdomLeaderResult = HeroFinder.FindKingdomLeaders(firstWeddedHero, secondWeddedHero);
-      var maleClanLeaderResult = HeroFinder.FindClanLeaders(firstWeddedHero, secondWeddedHero);
+      var maleKingdomLeaderResult = FindKingdomLeaders(firstWeddedHero, secondWeddedHero);
+      var maleClanLeaderResult = FindClanLeaders(firstWeddedHero, secondWeddedHero);
 
       var primaryHostHero =
           maleKingdomLeaderResult.Succeeded ?
@@ -78,7 +81,7 @@ namespace TournamentsEnhanced.Finder
       return didFindHost ? FindHeroResult.Success(primaryHostHero, secondaryHostHero) : FindHeroResult.Failure;
     }
 
-    public static FindHeroResult FindFactionLeaders(params MBHero[] candidates)
+    public FindHeroResult FindFactionLeaders(params MBHero[] candidates)
     {
       var options = new FindHeroOptions()
       {
@@ -86,7 +89,7 @@ namespace TournamentsEnhanced.Finder
         Comparers = new IComparer<MBHero>[] { FactionLeaderHostComparer.Instance }
       };
 
-      return HeroFinder.Find(options);
+      return Find(options);
     }
   }
 }

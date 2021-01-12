@@ -12,6 +12,8 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(TournamentGame), "GetParticipantCharacters")]
   class TournamentParticipantPatch
   {
+    public static ModState ModState { protected get; set; } = ModState.Instance;
+
     static void Postfix(ref List<CharacterObject> __result, Settlement settlement, int maxParticipantCount, bool includePlayer = true, bool includeHeroes = true)
     {
       if (!includePlayer)

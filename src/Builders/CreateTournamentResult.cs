@@ -6,6 +6,8 @@ namespace TournamentsEnhanced.Builders
 {
   public class CreateTournamentResult : CreateResultBase<CreateTournamentResult>
   {
+    public static ModState ModState { protected get; set; } = ModState.Instance;
+
     public MBHero Payor { get; protected set; }
     public bool HasPayor => Payor == MBHero.Null;
     public MBSettlement HostSettlement { get; protected set; }

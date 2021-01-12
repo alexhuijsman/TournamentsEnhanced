@@ -5,7 +5,7 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreateHighbornTournament()
+    public CreateTournamentResult TryCreateHighbornTournament()
     {
       var findSettlementResult = SettlementFinder.FindForHighbornTournament();
 

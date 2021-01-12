@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Builders
   public partial class TournamentBuilder : TournamentBuilderBase
   {
 
-    public static void CreateInitialTournaments()
+    public virtual void CreateInitialTournaments()
     {
       var townsWithExisting = MBTown.AllTownsWithTournaments;
       var townsWithoutExisting = MBTown.AllTownsWithoutTournaments;

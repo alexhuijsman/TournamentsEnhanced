@@ -5,20 +5,25 @@ using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced.Random
 {
-  public static class Lottery
+  public class Lottery
   {
-    public static void DeterministicallyRefreshWinners()
+    public static Lottery Instance { get; } = new Lottery();
+    public ModState ModState { protected get; set; } = ModState.Instance;
+
+    private Lottery() { }
+
+    public void DeterministicallyRefreshWinners()
     {
       ModState.LotteryWinners = MBMBRandom.DeterministicRandom.Next();
     }
 
-    public static bool IsWinner<T>(T value)
+    public bool IsWinner<T>(T value)
     where T : IConvertible
     {
       return ((ModState.LotteryWinners >> Convert.ToInt32(value)) & 1) == 1;
     }
 
-    public static void DailyTick()
+    public void DailyTick()
     {
       DeterministicallyRefreshWinners();
     }

@@ -21,7 +21,11 @@ namespace TournamentsEnhanced.Behaviors
 {
   class TownMenuBehavior : MBEncounterGameMenuBehavior
   {
-    public static bool PrizeSelectCondition(MenuCallbackArgs args)
+    public ModState ModState { protected get; set; } = ModState.Instance;
+
+    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
+
+    public bool OnPrizeSelectMenuCondition(MenuCallbackArgs args)
     {
       bool shouldBeDisabled;
       MBTextObject disabledText;
@@ -30,7 +34,7 @@ namespace TournamentsEnhanced.Behaviors
       return MenuHelper.SetOptionProperties(args, canPlayerDo, shouldBeDisabled, disabledText);
     }
 
-    public static void PrizeSelectConsequence(MenuCallbackArgs args)
+    public void OnPrizeSelectMenuConsequence(MenuCallbackArgs args)
     {
       var prizeList = MBItemObject.GetAvailableTournamentPrizes();
       MBInformationManager.ShowPrizeSelectionMenu(prizeList, OnSelectPrize, OnDeSelectPrize);
@@ -42,7 +46,7 @@ namespace TournamentsEnhanced.Behaviors
       CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
     }
 
-    private static void OnSelectPrize(List<MBInquiryElement> prizes)
+    private void OnSelectPrize(List<MBInquiryElement> prizes)
     {
       if (prizes.Count > 0)
       {
@@ -54,14 +58,14 @@ namespace TournamentsEnhanced.Behaviors
 
     }
 
-    private static void OnDeSelectPrize(List<MBInquiryElement> prizeSelections)
+    private void OnDeSelectPrize(List<MBInquiryElement> prizeSelections)
     {
 
     }
 
 
 
-    private static bool game_menu_town_arena_host_tournament_condition(MenuCallbackArgs args)
+    private bool OnHostTournamentMenuCondition(MenuCallbackArgs args)
     {
       args.optionLeaveType = GameMenuOption.LeaveType.Continue;
       return !Settlement.CurrentSettlement.Town.HasTournament &&
@@ -70,7 +74,7 @@ namespace TournamentsEnhanced.Behaviors
               ModState.DaysSince[TournamentType.PlayerInitiated] >= Settings.Instance.MinDaysBetweenHostedTournaments;
     }
 
-    private static void game_menu_town_arena_host_tournament_consequence(MenuCallbackArgs args)
+    private void OnHostTournamentMenuConsequence(MenuCallbackArgs args)
     {
       TournamentBuilder.TryCreatePlayerInitiatedTournament();
       ModState.DaysSince[TournamentType.PlayerInitiated] = 0;
@@ -81,12 +85,12 @@ namespace TournamentsEnhanced.Behaviors
     {
       campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
         Settings.Instance.TournamentCost.ToString() + "{GOLD_ICON})",
-        new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
-        new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
+        new GameMenuOption.OnConditionDelegate(OnHostTournamentMenuCondition),
+        new GameMenuOption.OnConsequenceDelegate(OnHostTournamentMenuConsequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(TownMenuBehavior.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(TownMenuBehavior.PrizeSelectConsequence), false, 1, true);
+        new GameMenuOption.OnConditionDelegate(OnPrizeSelectMenuCondition),
+        new GameMenuOption.OnConsequenceDelegate(OnPrizeSelectMenuConsequence), false, 1, true);
     }
   }
 }

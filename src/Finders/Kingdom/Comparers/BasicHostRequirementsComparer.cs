@@ -4,6 +4,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Kingdom
 {
   public class BasicHostRequirementsComparer : KingdomComparerBase
   {
+    public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
     public static BasicHostRequirementsComparer Instance { get; } = new BasicHostRequirementsComparer();
 
     protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }

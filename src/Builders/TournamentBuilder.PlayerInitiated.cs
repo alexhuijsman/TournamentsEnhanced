@@ -5,7 +5,7 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreatePlayerInitiatedTournament()
+    public CreateTournamentResult TryCreatePlayerInitiatedTournament()
     {
       var payorHero = MBHero.MainHero;
 

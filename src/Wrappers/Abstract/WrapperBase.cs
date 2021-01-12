@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
   public abstract class WrapperBase : IWrapperBase
   {
     public abstract Type UnwrappedType { get; }
-    internal object UnwrappedObject { get; set; }
+    public object UnwrappedObject { get; set; }
     public bool IsNull => UnwrappedObject == null;
 
   }
@@ -21,7 +21,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
   {
 
     public static W Null = new W();
-    internal new T UnwrappedObject { get; set; }
+    public new T UnwrappedObject { get; set; }
 
     public override Type UnwrappedType => typeof(T);
 

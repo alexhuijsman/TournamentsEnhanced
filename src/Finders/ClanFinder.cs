@@ -10,7 +10,10 @@ namespace TournamentsEnhanced.Finder
 {
   public class ClanFinder : FinderBase<FindClanResult, FindClanOptions, MBClan, Clan>
   {
-    public static FindClanResult FindClanThatMeetsBasicHostRequirements(MBClan clan)
+    public static ClanFinder Instance { get; } = new ClanFinder();
+
+    private ClanFinder() { }
+    public FindClanResult FindClanThatMeetsBasicHostRequirements(MBClan clan)
     {
       var candidiates = new List<MBClan>();
       candidiates.Add(clan);

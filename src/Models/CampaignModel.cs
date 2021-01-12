@@ -2,8 +2,9 @@ using TaleWorlds.CampaignSystem;
 
 namespace TournamentsEnhanced.Models
 {
-  public static class CampaignModel
+  public class CampaignModel
   {
-    public static CampaignOptions.Difficulty NonTournamentDifficulty;
+    public static CampaignModel Instance { get; } = new CampaignModel();
+    public CampaignOptions.Difficulty NonTournamentDifficulty { get; set; }
   }
 }

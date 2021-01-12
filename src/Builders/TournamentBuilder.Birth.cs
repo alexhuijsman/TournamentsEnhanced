@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryMakeBirthTournament(MBHero mother)
+    public CreateTournamentResult TryMakeBirthTournament(MBHero mother)
     {
       var findSettlementResult = SettlementFinder.FindForBirthTournament(mother);
 

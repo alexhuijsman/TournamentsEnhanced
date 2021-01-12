@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Builders
 {
   public partial class TournamentBuilder : TournamentBuilderBase
   {
-    public static CreateTournamentResult TryCreatePeaceTournamentForFaction(IMBFaction faction)
+    public CreateTournamentResult TryCreatePeaceTournamentForFaction(IMBFaction faction)
     {
       var findSettlementResult = SettlementFinder.FindForPeaceTournament(faction);
 
