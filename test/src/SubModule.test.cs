@@ -38,11 +38,6 @@ namespace TournamentsEnhanced.UnitTests
       sut.TournamentBuilder = mockTournamentBuilder.Object;
     }
 
-    private void SetGameType(GameType gameType)
-    {
-      game.GetType().GetProperty("GameType").SetValue(game, gameType);
-    }
-
     [Test]
     public void OnNewGameCreated_GameTypeIsCampaign_ModStateIsReset()
     {
@@ -83,6 +78,11 @@ namespace TournamentsEnhanced.UnitTests
       sut.OnNewGameCreated(game, mockObject.Object);
 
       mockTournamentBuilder.VerifyNoOtherCalls();
+    }
+
+    private void SetGameType(GameType gameType)
+    {
+      game.GetType().GetProperty("GameType").SetValue(game, gameType);
     }
   }
 }
