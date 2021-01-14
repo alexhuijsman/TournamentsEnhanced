@@ -51,23 +51,18 @@ namespace TournamentsEnhanced
     [SettingPropertyGroup("Tournaments")]
     public float MinProsperityRequirement { get; set; } = 5000;
 
-    //Tournament Cost
     [SettingProperty("Tournament Cost", 0, 10000, "Cost of tournaments")]
     [SettingPropertyGroup("Tournaments")]
     public int TournamentCost { get; set; } = 2000;
-    //Amount of initial tournaments on the map
-    [SettingProperty("Initial Tournament Spawns", 0, 20, "Number of tournaments spawned after a new game")]
-    [SettingPropertyGroup("Tournaments")]
+    [SettingProperty("Number to Spawn", 0, 20, "Number of tournaments to spawn when starting a new campaign.")]
+    [SettingPropertyGroup("Initial Tournaments")]
     public int TournamentInitialSpawnCount { get; set; } = 10;
-    //Tournament Skill XP gain
     [SettingProperty("Tournament Win Skill XP", 0, 10000, "Amount of XP gained for targeted skill on a tournament win")]
     [SettingPropertyGroup("Tournaments")]
     public int TournamentSkillXp { get; set; } = 1500;
-    //Tournament hit XP gain
     [SettingProperty("Tournament Hit Skill XP", 0f, 10f, "XP multiplier for hits in tournaments")]
     [SettingPropertyGroup("Tournaments")]
     public float TournamentHitXP { get; set; } = 1f;
-    //Arena hit XP gain
     [SettingProperty("Arena Hit Skill XP", 0f, 10f, "XP multiplier for hits in the arena")]
     [SettingPropertyGroup("Tournaments")]
     public float ArenaHitXP { get; set; } = 1f;
@@ -87,7 +82,11 @@ namespace TournamentsEnhanced
     [SettingProperty("Hosted Tournament Cooldown", "Minimum number of days between player-hosted tournaments.")]
     [SettingPropertyGroup("Tournaments")]
     public int MinDaysBetweenHostedTournaments { get; set; } = Defaults.Settings.MinDaysBetweenHostedTournaments;
+    [SettingProperty("Noble Relation Increase", "Your relation with local nobles will increase by this much when you host a tournament.")]
+    [SettingPropertyGroup("Player-Hosted Tournaments")]
     public int NoblesRelationIncrease { get; set; } = Defaults.Settings.NoblesRelationIncrease;
+    [SettingProperty("Max Renown For Invitation", "Once your renown is higher than this value, you will be too famous for these tournaments.")]
+    [SettingPropertyGroup("Invitation Tournaments")]
     public float MaxRenownForInvitationTournaments { get; set; } = Defaults.Settings.MaxRenownForInvitationTournaments;
   }
 }

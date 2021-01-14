@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{94F1D275-34A0-4B15-B492-F2D7A9196E72}</ProjectGuid>
+    <ProjectGuid>{D03E4009-D37C-45F1-A913-8BACC9698E1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>TournamentsEnhancedTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,6 +33,10 @@
     </Reference>
     <Reference Include="Moq" Version="4.15.*">
       <HintPath>..\lib\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DiffEngine" Version="*">
+      <HintPath>..\lib\DiffEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Shouldly" Version="4.0.*">
@@ -219,6 +224,8 @@
   <ItemGroup>
     <Compile Include="src\AssemblyInfo.cs" />
     <Compile Include="src\SubModule.test.cs" />
+    <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.test.cs" />
+    <Compile Include="src\Wrappers\Abstract\WrapperBase.test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

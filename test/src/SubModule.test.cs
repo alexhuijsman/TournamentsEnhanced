@@ -21,7 +21,7 @@ namespace TournamentsEnhanced.UnitTests
     private Mock<object> mockObject;
 
     [SetUp]
-    public void TestSetup()
+    public void SetUp()
     {
       mockTournamentBuilder = new Mock<TournamentBuilder>(MockBehavior.Strict);
       mockTournamentBuilder.Setup(tournamentBuilder => tournamentBuilder.CreateInitialTournaments());

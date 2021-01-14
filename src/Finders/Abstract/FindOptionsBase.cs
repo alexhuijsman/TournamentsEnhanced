@@ -5,7 +5,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 namespace TournamentsEnhanced.Finder
 {
   public class FindOptionsBase<W>
-  where W : IWrapperBase
+  where W : WrapperBase
   {
     public List<W> Candidates { get; set; }
     public IComparer<W>[] Comparers { get; set; }
