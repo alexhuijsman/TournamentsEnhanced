@@ -96,6 +96,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith((IFaction)other);
 
     public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBClan(Clan obj) => MBClan.GetWrapper(obj);
+    public static implicit operator MBClan(Clan obj) => GetWrapper(obj);
   }
 }

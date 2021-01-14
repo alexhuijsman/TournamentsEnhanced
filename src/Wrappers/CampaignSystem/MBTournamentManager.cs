@@ -36,6 +36,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public void ResolveTournament(TournamentGame tournament, Town town) => UnwrappedObject.ResolveTournament(tournament, town);
 
     public static implicit operator TournamentManager(MBTournamentManager wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTournamentManager(TournamentManager obj) => MBTournamentManager.GetWrapper(obj);
+    public static implicit operator MBTournamentManager(TournamentManager obj) => GetWrapper(obj);
   }
 }

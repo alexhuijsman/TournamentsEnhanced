@@ -22,6 +22,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public float GetTournamentStartChance(MBTown town) => UnwrappedObject.GetTournamentStartChance(town);
 
     public static implicit operator TournamentModel(MBTournamentModel wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTournamentModel(TournamentModel obj) => MBTournamentModel.GetWrapper(obj);
+    public static implicit operator MBTournamentModel(TournamentModel obj) => GetWrapper(obj);
   }
 }

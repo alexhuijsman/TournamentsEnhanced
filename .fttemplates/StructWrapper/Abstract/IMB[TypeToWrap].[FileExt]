@@ -1,0 +1,11 @@
+using TaleWorlds.[PackageName];
+
+using TournamentsEnhanced.Wrappers.Abstract;
+
+namespace TournamentsEnhanced.Wrappers.[PackageName]
+{
+  public interface IMB[TypeToWrap] : IStructWrapperBase<[TypeToWrap]>
+  {
+  
+  }
+}

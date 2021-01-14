@@ -89,6 +89,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public int GetWallLevel() => UnwrappedObject.GetWallLevel();
 
     public static implicit operator Town(MBTown wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTown(Town obj) => MBTown.GetWrapper(obj);
+    public static implicit operator MBTown(Town obj) => GetWrapper(obj);
   }
 }

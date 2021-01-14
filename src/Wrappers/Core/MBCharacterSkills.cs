@@ -9,6 +9,6 @@ namespace TournamentsEnhanced.Wrappers.Core
   public class MBCharacterSkills : MBWrapperBase<MBCharacterSkills, CharacterSkills>
   {
     public static implicit operator CharacterSkills(MBCharacterSkills wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBCharacterSkills(CharacterSkills obj) => MBCharacterSkills.GetWrapper(obj);
+    public static implicit operator MBCharacterSkills(CharacterSkills obj) => GetWrapper(obj);
   }
 }

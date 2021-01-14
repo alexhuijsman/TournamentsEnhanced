@@ -9,6 +9,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBTownMarketData : MBWrapperBase<MBTownMarketData, TownMarketData>
   {
     public static implicit operator TownMarketData(MBTownMarketData wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTownMarketData(TownMarketData obj) => MBTownMarketData.GetWrapper(obj);
+    public static implicit operator MBTownMarketData(TownMarketData obj) => GetWrapper(obj);
   }
 }

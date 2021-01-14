@@ -1,0 +1,6 @@
+{
+  "name": "Struct Wrapper",
+  "customVariables": ["TypeToWrap", "PackageName=>CampaignSystem Core Localization ObjectSystem", "FileExt=>cs"],
+  "omitParentDirectory": true,
+  "omitFTName": true
+}

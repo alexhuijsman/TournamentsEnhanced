@@ -9,6 +9,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBTournamentParticipant : MBWrapperBase<MBTournamentParticipant, TournamentParticipant>
   {
     public static implicit operator TournamentParticipant(MBTournamentParticipant wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTournamentParticipant(TournamentParticipant obj) => MBTournamentParticipant.GetWrapper(obj);
+    public static implicit operator MBTournamentParticipant(TournamentParticipant obj) => GetWrapper(obj);
   }
 }

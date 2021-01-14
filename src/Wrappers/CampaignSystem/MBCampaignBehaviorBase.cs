@@ -12,6 +12,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public virtual void RegisterEvents() { }
     public static implicit operator CampaignBehaviorBase(MBCampaignBehaviorBase wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBCampaignBehaviorBase(CampaignBehaviorBase obj) => MBCampaignBehaviorBase.GetWrapper(obj);
+    public static implicit operator MBCampaignBehaviorBase(CampaignBehaviorBase obj) => GetWrapper(obj);
   }
 }

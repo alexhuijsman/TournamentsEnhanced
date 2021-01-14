@@ -316,7 +316,6 @@
     <Compile Include="src\Wrappers\Core\MBBodyProperties.cs" />
     <Compile Include="src\Wrappers\Core\MBCharacterSkills.cs" />
     <Compile Include="src\Wrappers\Core\MBEquipment.cs" />
-    <Compile Include="src\Wrappers\Core\MBEquipmentElement.cs" />
     <Compile Include="src\Wrappers\Core\MBHorseComponent.cs" />
     <Compile Include="src\Wrappers\Core\MBInformationManager.cs" />
     <Compile Include="src\Wrappers\Core\MBInformationMessage.cs" />
@@ -375,6 +374,17 @@
     <Compile Include="src\Extensions\IListExtensions.cs" />
     <Compile Include="src\AssemblyInfo.cs" />
     <Compile Include="src\Builders\TournamentBuilder.cs" />
+    <Compile Include="src\Wrappers\Abstract\IStructWrapperBase.cs" />
+    <Compile Include="src\Wrappers\Core\Abstract\IMBBodyProperties.cs" />
+    <Compile Include="src\Wrappers\Core\Abstract\IMBDynamicBodyProperties.cs" />
+    <Compile Include="src\Wrappers\Core\MBDynamicBodyProperties.cs" />
+    <Compile Include="src\Wrappers\Core\Abstract\IMBStaticBodyProperties.cs" />
+    <Compile Include="src\Wrappers\Core\MBStaticBodyProperties.cs" />
+    <Compile Include="src\Wrappers\Core\Abstract\IMBEquipmentElement.cs" />
+    <Compile Include="src\Wrappers\Core\MBEquipmentElement.cs" />
+    <Compile Include="src\Wrappers\Core\MBItemModifier.cs" />
+    <Compile Include="src\Wrappers\Core\Abstract\IMBItemRosterElement.cs" />
+    <Compile Include="src\Wrappers\Core\MBItemRosterElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- <Import Project="PreBuild.targets" /> -->

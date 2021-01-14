@@ -231,6 +231,6 @@ namespace TournamentsEnhanced.Wrappers.Core
     public override string ToString() => UnwrappedObject.ToString();
 
     public static implicit operator ItemObject(MBItemObject wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBItemObject(ItemObject obj) => MBItemObject.GetWrapper(obj);
+    public static implicit operator MBItemObject(ItemObject obj) => GetWrapper(obj);
   }
 }

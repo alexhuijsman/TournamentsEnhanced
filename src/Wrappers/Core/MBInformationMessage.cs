@@ -15,6 +15,6 @@ namespace TournamentsEnhanced.Wrappers.Core
     public MBInformationMessage() : base() { }
 
     public static implicit operator InformationMessage(MBInformationMessage wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBInformationMessage(InformationMessage obj) => MBInformationMessage.GetWrapper(obj);
+    public static implicit operator MBInformationMessage(InformationMessage obj) => GetWrapper(obj);
   }
 }

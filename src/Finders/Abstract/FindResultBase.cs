@@ -7,6 +7,7 @@ namespace TournamentsEnhanced.Finder.Abstract
   public abstract class FindResultBase<R, W, T> : ResultBase<R>
   where R : FindResultBase<R, W, T>, new()
   where W : MBWrapperBase<W, T>, new()
+  where T : class
   {
     public List<W> AllQualifiedCandidates { get; protected set; }
     public W Nominee => Failed ? null : AllQualifiedCandidates[0];

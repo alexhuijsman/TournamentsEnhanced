@@ -8,6 +8,7 @@ namespace TournamentsEnhanced.Finder.Abstract
     where R : FindResultBase<R, W, T>, new()
     where O : FindOptionsBase<W>
     where W : MBWrapperBase<W, T>, new()
+    where T : class
   {
     public R Find(O options)
     {

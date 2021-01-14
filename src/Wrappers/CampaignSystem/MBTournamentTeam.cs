@@ -39,6 +39,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsParticipantRequired() => UnwrappedObject.IsParticipantRequired();
     public static implicit operator TournamentTeam(MBTournamentTeam wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBTournamentTeam(TournamentTeam obj) => MBTournamentTeam.GetWrapper(obj);
+    public static implicit operator MBTournamentTeam(TournamentTeam obj) => GetWrapper(obj);
   }
 }

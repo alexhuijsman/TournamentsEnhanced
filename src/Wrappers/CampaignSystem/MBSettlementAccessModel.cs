@@ -30,6 +30,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
       return result;
     }
     public static implicit operator SettlementAccessModel(MBSettlementAccessModel wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBSettlementAccessModel(SettlementAccessModel obj) => MBSettlementAccessModel.GetWrapper(obj);
+    public static implicit operator MBSettlementAccessModel(SettlementAccessModel obj) => GetWrapper(obj);
   }
 }

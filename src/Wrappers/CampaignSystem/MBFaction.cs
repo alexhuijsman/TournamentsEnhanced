@@ -103,6 +103,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     }
 
     public static implicit operator MBFactionImpl(MBFaction wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBFaction(MBFactionImpl obj) => MBFaction.GetWrapper(obj);
+    public static implicit operator MBFaction(MBFactionImpl obj) => GetWrapper(obj);
   }
 }

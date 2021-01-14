@@ -1,0 +1,13 @@
+using TaleWorlds.[PackageName];
+
+namespace TournamentsEnhanced.Wrappers.[PackageName]
+{
+  public struct MB[TypeToWrap] : IMB[TypeToWrap]
+  {
+    public IMB[TypeToWrap] UnwrappedStruct;
+    public [TypeToWrap] UnwrappedStruct { get; set; }
+
+    public static implicit operator [TypeToWrap](MB[TypeToWrap] wrapper) => wrapper.UnwrappedStruct;
+    public static implicit operator MB[TypeToWrap]([TypeToWrap] unwrapped) => new MB[TypeToWrap]() { UnwrappedStruct = unwrapped };
+  }
+}

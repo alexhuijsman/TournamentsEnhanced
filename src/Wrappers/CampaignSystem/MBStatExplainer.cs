@@ -9,6 +9,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBStatExplainer : MBWrapperBase<MBStatExplainer, StatExplainer>
   {
     public static implicit operator StatExplainer(MBStatExplainer wrapper) => wrapper.UnwrappedObject;
-    public static implicit operator MBStatExplainer(StatExplainer obj) => MBStatExplainer.GetWrapper(obj);
+    public static implicit operator MBStatExplainer(StatExplainer obj) => GetWrapper(obj);
   }
 }
