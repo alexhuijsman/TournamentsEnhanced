@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
-
 using TournamentsEnhanced.Wrappers.Core;
+using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
-
 using static TaleWorlds.CampaignSystem.Hero;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
@@ -137,7 +134,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBCharacterTraits GetHeroTraits();
     IMapPoint GetMapPoint();
     bool GetPerkValue(MBPerkObject perk);
-    Vec3 GetPosition();
+    MBVec3 GetPosition();
     float GetRelation(MBHero otherHero);
     float GetRelationWithPlayer();
     int GetSkillValue(MBSkillObject skill);

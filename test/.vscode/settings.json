@@ -1,5 +1,0 @@
-{
-  "nxunitExplorer.modules":[
-    "bin/Debug/*Tests.{dll}"
-  ]
-}

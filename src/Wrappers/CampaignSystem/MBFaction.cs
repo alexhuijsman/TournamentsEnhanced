@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
-
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.Core;
+using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
@@ -37,7 +35,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public float TotalStrength => UnwrappedObject.TotalStrength;
 
-    public Vec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
+    public MBVec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
     public List<MBStanceLink> Stances => UnwrappedObject.Stances.CastList<MBStanceLink>();
 
@@ -74,7 +72,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBStatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
 
-    public Vec2 InitialPosition => UnwrappedObject.InitialPosition;
+    public MBVec2 InitialPosition => UnwrappedObject.InitialPosition;
 
     public uint Color => UnwrappedObject.Color;
 

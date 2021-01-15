@@ -8,6 +8,12 @@ Write unit tests for existing methods with NUnit, Moq, and Shouldly
 
 FIX
 ---
+Revamp MCM integration - https://github.com/Aragas/Bannerlord.MBOptionScreen
+  -Global and PerCharacter options
+    -Is Per-Save better than per-character?
+  -ability to reset to defaults
+  -all variables tweakable
+  -Existing options revamped as well
 Don’t offer player-crafted items as reward options
 Hide tournament icon after player plays it
 Don't allow Highborn tournaments for faction led by player

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
+using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {

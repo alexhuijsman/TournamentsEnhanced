@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
@@ -59,6 +60,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony" Version="2.0.*">
       <HintPath>lib\0Harmony.dll</HintPath>
@@ -385,6 +389,13 @@
     <Compile Include="src\Wrappers\Core\MBItemModifier.cs" />
     <Compile Include="src\Wrappers\Core\Abstract\IMBItemRosterElement.cs" />
     <Compile Include="src\Wrappers\Core\MBItemRosterElement.cs" />
+    <Compile Include="src\Wrappers\Library\Abstract\IMBVec3.cs" />
+    <Compile Include="src\Wrappers\Library\MBVec3.cs" />
+    <Compile Include="src\Wrappers\Library\Abstract\IMBVec2.cs" />
+    <Compile Include="src\Wrappers\Library\MBVec2.cs" />
+    <Compile Include="src\Wrappers\Library\Abstract\IMBColor.cs" />
+    <Compile Include="src\Wrappers\Library\MBColor.cs" />
+    <Compile Include="src\Wrappers\Library\MBMathF.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- <Import Project="PreBuild.targets" /> -->

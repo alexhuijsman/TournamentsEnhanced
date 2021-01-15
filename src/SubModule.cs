@@ -1,18 +1,14 @@
 using System;
 using System.Windows;
-
 using HarmonyLib;
-
 using ModLib;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-
 using TournamentsEnhanced.Behaviors;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced
 {
@@ -35,7 +31,7 @@ namespace TournamentsEnhanced
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
     {
-      InformationManager.DisplayMessage(new InformationMessage($"Loaded {Constants.Module.Name} v{Constants.Module.Version}", Color.FromUint(4282569842U)));
+      InformationManager.DisplayMessage(new InformationMessage($"Loaded {Constants.Module.Name} v{Constants.Module.Version}", MBColor.FromUint(4282569842U)));
 
       try
       {

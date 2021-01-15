@@ -4,7 +4,7 @@ using HarmonyLib;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
-using TaleWorlds.Library;
+using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced.Patches
 {
@@ -36,7 +36,7 @@ namespace TournamentsEnhanced.Patches
       {
         num3 = ((missionType == CombatXpModel.MissionTypeEnum.Battle) ? 1f : 1f);
       }
-      xpAmount = MathF.Round(num2 * num3);
+      xpAmount = MBMathF.Round(num2 * num3);
     }
   }
 }

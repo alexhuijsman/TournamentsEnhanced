@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
 
 using TournamentsEnhanced.Wrappers.Core;
+using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
@@ -21,7 +21,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     bool IsMapFaction { get; }
     IMBFaction MapFaction { get; }
     float TotalStrength { get; }
-    Vec2 FactionMidPoint { get; }
+    MBVec2 FactionMidPoint { get; }
     List<MBStanceLink> Stances { get; }
     int TributeWallet { get; set; }
     float MainHeroCrimeRating { get; set; }
@@ -40,7 +40,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBTextObject EncyclopediaText { get; }
     MBCultureObject Culture { get; }
     MBStatExplainer DailyCrimeRatingChangeExplained { get; }
-    Vec2 InitialPosition { get; }
+    MBVec2 InitialPosition { get; }
     uint Color { get; }
     uint Color2 { get; }
     uint AlternativeColor { get; }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using TaleWorlds.Core;
-using TaleWorlds.Library;
+using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static System.Random DeterministicRandom => MBRandom.DeterministicRandom;
     public static float RandomFloat => MBRandom.RandomFloat;
     public static float RandomFloatNormal => MBRandom.RandomFloatNormal;
-    public static Vec3 InsideUnitSphere => MBRandom.InsideUnitSphere;
+    public static MBVec3 InsideUnitSphere => MBRandom.InsideUnitSphere;
 
     public static T ChooseWeighted<T>(IEnumerable<T> candidates, Func<T, float> weightFunction) => MBRandom.ChooseWeighted<T>(candidates, weightFunction);
     public static T ChooseWeighted<T>(IEnumerable<T> candidates, Func<T, float> weightFunction, out int chosenIndex) => MBRandom.ChooseWeighted<T>(candidates, weightFunction, out chosenIndex);

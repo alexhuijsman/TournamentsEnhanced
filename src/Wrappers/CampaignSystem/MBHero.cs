@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
-
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.Core;
+using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
-
 using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
@@ -280,7 +277,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool GetPerkValue(MBPerkObject perk) => UnwrappedObject.GetPerkValue(perk);
 
-    public Vec3 GetPosition() => UnwrappedObject.GetPosition();
+    public MBVec3 GetPosition() => UnwrappedObject.GetPosition();
 
 
 

@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-
 using TaleWorlds.Core;
-using TaleWorlds.Library;
-
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
+using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
-
 using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers.Core
@@ -52,7 +49,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     string HolsterMeshName { get; }
     string HolsterWithWeaponMeshName { get; }
     bool DoesNotHideChest { get; }
-    Vec3 HolsterPositionShift { get; }
+    MBVec3 HolsterPositionShift { get; }
     bool HasLowerHolsterPriority { get; }
     string FlyingMeshName { get; }
     string BodyName { get; }
@@ -153,7 +150,7 @@ namespace TournamentsEnhanced.Wrappers.Core
 
     public bool DoesNotHideChest => UnwrappedObject.DoesNotHideChest;
 
-    public Vec3 HolsterPositionShift => UnwrappedObject.HolsterPositionShift;
+    public MBVec3 HolsterPositionShift => UnwrappedObject.HolsterPositionShift;
 
     public bool HasLowerHolsterPriority => UnwrappedObject.HasLowerHolsterPriority;
 

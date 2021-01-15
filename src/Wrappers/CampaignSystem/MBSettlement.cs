@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Wrappers.Abstract;
+using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
@@ -23,7 +24,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public MBClan OwnerClan => UnwrappedObject.OwnerClan;
     public float Prosperity { get => UnwrappedObject.Prosperity; set => UnwrappedObject.Prosperity = value; }
 
-    public static List<MBSettlement> FindSettlementsAroundPosition(TaleWorlds.Library.Vec2 position, float radius, Func<Settlement, bool> condition = null) => (List<MBSettlement>)Settlement.FindSettlementsAroundPosition(position, radius, condition);
+    public static List<MBSettlement> FindSettlementsAroundPosition(MBVec2 position, float radius, Func<Settlement, bool> condition = null) => (List<MBSettlement>)Settlement.FindSettlementsAroundPosition(position, radius, condition);
 
     public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => GetWrapper(obj);
