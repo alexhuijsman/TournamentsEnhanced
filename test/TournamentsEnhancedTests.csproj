@@ -1,231 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.13.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.13.0\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{D03E4009-D37C-45F1-A913-8BACC9698E1D}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D575ECA-04B1-4261-A5BA-326AD4824A83}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TournamentsEnhanced.UnitTests</RootNamespace>
     <AssemblyName>TournamentsEnhancedTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <ApplicationVersion>1.5.6.2</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
-    <RootNamespace>TournamentsEnhanced</RootNamespace>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <PlatformTarget>x64</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="TournamentsEnhanced">
-      <HintPath>..\bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\TournamentsEnhanced.dll</HintPath>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NUnit.Framework" Version="3.13.*">
-      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    <Reference Include="DiffEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c7a34512ecd69090, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiffEngine.6.5.5\lib\net461\DiffEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Moq" Version="4.15.*">
-      <HintPath>..\lib\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DiffEngine" Version="*">
-      <HintPath>..\lib\DiffEngine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Shouldly" Version="4.0.*">
-      <HintPath>..\lib\Shouldly.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Smocks" Version="0.7.*">
-      <HintPath>..\lib\Smocks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil" Version="0.10.*">
-      <HintPath>..\lib\Mono.Cecil.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb" Version="0.10.*">
-      <HintPath>..\lib\Mono.Cecil.Mdb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb" Version="0.10.*">
-      <HintPath>..\lib\Mono.Cecil.Pdb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks" Version="0.10.*">
-      <HintPath>..\lib\Mono.Cecil.Rocks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Text.Json" Version="5.0.*">
-      <HintPath>..\lib\System.Text.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions" Version="4.6.*">
-      <HintPath>..\lib\System.Threading.Tasks.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Castle.Core" Version="4.4.*">
-      <HintPath>..\lib\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Memory" Version="4.6.*">
-      <HintPath>..\lib\System.Memory.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="0Harmony" Version="2.0.*">
-      <HintPath>..\lib\0Harmony.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ModLib.Definitions" Version="4.1.*">
-      <HintPath>..\lib\ModLib.Definitions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.CampaignSystem">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.CampaignSystem.ViewModelCollection">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.ViewModelCollection.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.ViewModelCollection.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Core">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Core.ViewModelCollection">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.ViewModelCollection.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Core.ViewModelCollection.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Library">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.AutoGenerated">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.AutoGenerated.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.AutoGenerated.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.Diamond">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Diamond.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Diamond.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.GauntletUI.Widgets">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.GauntletUI.Widgets.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.GauntletUI.Widgets.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.Helpers">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Helpers.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Helpers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.ViewModelCollection">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.ViewModelCollection.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.ViewModelCollection.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Localization">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.ObjectSystem">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Management">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\System.Management.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\System.Management.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond.AccessProvider.Test">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.AccessProvider.Test.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Diamond.AccessProvider.Test.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond.ChatSystem.Library">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.ChatSystem.Library.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Diamond.ChatSystem.Library.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Diamond.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.DotNet">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.DotNet.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.DotNet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Engine">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Engine.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Engine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.InputSystem">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.InputSystem.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.InputSystem.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Network">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Network.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.Network.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PlatformService">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PlatformService.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.PlatformService.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PlayerServices">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PlayerServices.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.PlayerServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PSAI">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PSAI.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.PSAI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.SaveSystem">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.SaveSystem.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\TaleWorlds.SaveSystem.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\Newtonsoft.Json.dll</HintPath>
-      <HintPath Condition="Exists('C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\')">C:\SteamApp\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\bin\Win64_Shipping_Client\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AssemblyInfo.cs" />
     <Compile Include="src\SubModule.test.cs" />
     <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.test.cs" />
     <Compile Include="src\Wrappers\Abstract\WrapperBase.test.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Behaviors\Abstract\" />
+    <Folder Include="src\Builders\Abstract\" />
+    <Folder Include="src\Constants\" />
+    <Folder Include="src\Enums\" />
+    <Folder Include="src\Extensions\" />
+    <Folder Include="src\Finders\Abstract\" />
+    <Folder Include="src\Finders\Clan\Abstract\" />
+    <Folder Include="src\Finders\Clan\Comparers\" />
+    <Folder Include="src\Finders\Faction\Abstract\" />
+    <Folder Include="src\Finders\Faction\Comparers\" />
+    <Folder Include="src\Finders\Hero\Abstract\" />
+    <Folder Include="src\Finders\Hero\Comparers\" />
+    <Folder Include="src\Finders\Kingdom\Abstract\" />
+    <Folder Include="src\Finders\Kingdom\Comparers\" />
+    <Folder Include="src\Finders\Settlement\Abstract\" />
+    <Folder Include="src\Finders\Settlement\Comparers\" />
+    <Folder Include="src\Models\ModState\" />
+    <Folder Include="src\Models\Serializable\" />
+    <Folder Include="src\Patches\" />
+    <Folder Include="src\Random\" />
+    <Folder Include="src\Wrappers\CampaignSystem\Interfaces\" />
+    <Folder Include="src\Wrappers\Core\" />
+    <Folder Include="src\Wrappers\Localization\" />
+    <Folder Include="src\Wrappers\ObjectSystem\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.13.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.13.0\build\NUnit.props'))" />
+  </Target>
 </Project>
