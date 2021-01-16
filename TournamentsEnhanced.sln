@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentsEnhancedTests", "test\TournamentsEnhancedTests.csproj", "{5D575ECA-04B1-4261-A5BA-326AD4824A83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23412472-399A-4E73-89BE-85163D8B14B2} = {23412472-399A-4E73-89BE-85163D8B14B2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentsEnhanced", "TournamentsEnhanced.csproj", "{23412472-399A-4E73-89BE-85163D8B14B2}"
 EndProject
