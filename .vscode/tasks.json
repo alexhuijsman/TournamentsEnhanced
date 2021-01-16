@@ -3,6 +3,7 @@
   "tasks": [
     {
       "label": "Build & Test",
+      "dependsOrder": "sequence",
       "dependsOn": [
         "build dotnet (DEBUG)",
         "build dotnet unit tests"
