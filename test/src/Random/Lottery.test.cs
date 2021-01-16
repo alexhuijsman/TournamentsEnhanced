@@ -11,15 +11,36 @@ namespace TournamentsEnhanced.UnitTests
 {
   public class LotteryTests
   {
+    private System.Random random = new System.Random();
+    private LotteryImpl sut = new LotteryImpl();
+    private Mock<System.Random> mockRandom;
+    private Mock<MBMBRandom> mockMBMBRandom;
+    private Mock<ModState> mockModState;
+    private int expectedValue;
+
+
+    [SetUp]
+    public void SetUp()
+    {
+      expectedValue = random.Next();
+
+      mockRandom = new Mock<System.Random>();
+      mockRandom.Setup(random => random.Next()).Returns(expectedValue);
+
+      mockMBMBRandom = new Mock<MBMBRandom>();
+      mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom).Returns(mockRandom.Object);
+
+      mockModState = new Mock<ModState>();
+      mockModState.SetupSet(modState => modState.LotteryWinners = expectedValue);
+
+      sut = new LotteryImpl();
+      sut.MBMBRandom = mockMBMBRandom.Object;
+      sut.ModState = mockModState.Object;
+    }
+
     [Test]
     public void DeterministicallyRefreshWinners_ShouldGetDeterministicRandom()
     {
-      var sut = new LotteryImpl();
-      var mockRandom = new Mock<System.Random>();
-      var mockMBMBRandom = new Mock<MBMBRandom>();
-      mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom).Returns(mockRandom.Object);
-      sut.MBMBRandom = mockMBMBRandom.Object;
-
       sut.DeterministicallyRefreshWinners();
 
       mockMBMBRandom.VerifyGet(mbMBRandom => mbMBRandom.DeterministicRandom, Times.Once);
@@ -28,12 +49,6 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void DeterministicallyRefreshWinners_ShouldCallRandomNext()
     {
-      var sut = new LotteryImpl();
-      var mockRandom = new Mock<System.Random>();
-      var mockMBMBRandom = new Mock<MBMBRandom>();
-      mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom).Returns(mockRandom.Object);
-      sut.MBMBRandom = mockMBMBRandom.Object;
-
       sut.DeterministicallyRefreshWinners();
 
       mockRandom.Verify(random => random.Next(), Times.Once);
@@ -42,22 +57,27 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void DeterministicallyRefreshWinners_ShouldUpdateModState()
     {
-      var sut = new LotteryImpl();
-      var mockRandom = new Mock<System.Random>();
-      var expectedValue = new System.Random().Next();
-      mockRandom.Setup(random => random.Next()).Returns(expectedValue);
-      var mockMBMBRandom = new Mock<MBMBRandom>();
-      mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom).Returns(mockRandom.Object);
-      var mockModState = new Mock<ModState>();
-      mockModState.SetupSet(modState => modState.LotteryWinners = expectedValue);
-
-      sut.MBMBRandom = mockMBMBRandom.Object;
-      sut.ModState = mockModState.Object;
-
       sut.DeterministicallyRefreshWinners();
 
       mockModState.VerifySet(modState => modState.LotteryWinners = expectedValue, Times.Once);
     }
+
+    [Test]
+    public void DailyTick_ShouldCallDeterministicallyRefreshWinners()
+    {
+      sut.DailyTick();
+
+      mockMBMBRandom.VerifyGet(mbMBRandom => mbMBRandom.DeterministicRandom, Times.Once);
+      mockRandom.Verify(random => random.Next(), Times.Once);
+      mockModState.VerifySet(modState => modState.LotteryWinners = expectedValue, Times.Once);
+    }
+
+    [Test]
+    public void IsWinner()
+    {
+
+    }
+
 
     private class LotteryImpl : Lottery
     {
