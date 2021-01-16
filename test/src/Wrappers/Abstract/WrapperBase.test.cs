@@ -7,39 +7,33 @@ namespace TournamentsEnhanced.UnitTests
   public class WrapperBaseTests
   {
     private WrapperBaseImpl sut;
-    private object unwrappedObject = new object();
-
-    [SetUp]
-    public void SetUp()
-    {
-      sut = new WrapperBaseImpl(unwrappedObject);
-    }
-
-    [Test]
-    public void Null_IsStatic()
-    {
-      WrapperBaseImpl.Null.ShouldBe(WrapperBaseImpl.Null);
-    }
-
-    [Test]
-    public void Null_IsNotNull()
-    {
-      WrapperBaseImpl.Null.ShouldNotBeNull();
-    }
-
-    [Test]
-    public void Null_HasNullUnwrappedObject()
-    {
-      WrapperBaseImpl.Null.UnwrappedObject.ShouldBeNull();
-    }
+    private readonly object unwrappedObject = new object();
 
     [Test]
     public void Ctor_ArgBecomesUnwrappedObject()
     {
+      sut = new WrapperBaseImpl(unwrappedObject);
+
       sut.UnwrappedObject.ShouldBe(unwrappedObject);
     }
 
-    private class WrapperBaseImpl : WrapperBase<WrapperBaseImpl, object>
+    [Test]
+    public void Ctor_NoArgsBecomesNullUnwrappedObject()
+    {
+      sut = new WrapperBaseImpl();
+
+      sut.IsNull.ShouldBeTrue();
+    }
+
+    [Test]
+    public void Ctor_IsNullShouldBeFalse()
+    {
+      sut = new WrapperBaseImpl(unwrappedObject);
+
+      sut.IsNull.ShouldBeFalse();
+    }
+
+    private class WrapperBaseImpl : WrapperBase
     {
       public WrapperBaseImpl() { }
       public WrapperBaseImpl(object obj) : base(obj) { }

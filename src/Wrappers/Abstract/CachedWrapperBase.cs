@@ -26,6 +26,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
       }
     }
 
+    public override bool IsNull => UnwrappedObject == null;
 
     protected CachedWrapperBase() : base() { }
     protected CachedWrapperBase(T obj) : base(new WeakReference<T>(obj)) { }
