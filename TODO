@@ -65,6 +65,7 @@ BUILD
 -------------
 S delete output folder on build to clean up pdb
 S Parameterize SubModule.xml to get version number dynamically
+Rewrite project files to allow for dotnet cli usage to remove vs2019 dependency
 
 CREATE
 ------
