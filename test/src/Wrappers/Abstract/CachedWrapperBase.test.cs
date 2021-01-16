@@ -6,13 +6,7 @@ namespace TournamentsEnhanced.UnitTests
 {
   public class CachedWrapperBaseTests
   {
-    private CachedWrapperBaseImpl sut;
     private object unwrappedObject = new object();
-
-    [SetUp]
-    public void SetUp()
-    {
-    }
 
     [Test]
     public void GetWrapper_UsesCache()
@@ -30,13 +24,23 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Null_HasNullUnwrappedObject()
     {
-      CachedWrapperBaseImpl.Null.UnwrappedObject.ShouldBeNull();
+      CachedWrapperBaseImpl.Null.IsNull.ShouldBeTrue();
     }
 
     [Test]
     public void Ctor_ArgBecomesUnwrappedObject()
     {
+      var sut = new CachedWrapperBaseImpl(unwrappedObject);
+
       sut.UnwrappedObject.ShouldBe(unwrappedObject);
+    }
+
+    [Test]
+    public void Ctor_NoArgsBecomesNullUnwrappedObject()
+    {
+      var sut = new CachedWrapperBaseImpl();
+
+      sut.IsNull.ShouldBeTrue();
     }
 
     private class CachedWrapperBaseImpl : CachedWrapperBase<CachedWrapperBaseImpl, object>
