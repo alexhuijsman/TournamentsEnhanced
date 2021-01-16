@@ -4,8 +4,8 @@
     {
       "label": "Build & Test",
       "dependsOn": [
-        "build (DEBUG)",
-        "build unit tests"
+        "build dotnet (DEBUG)",
+        "build dotnet unit tests"
       ],
       "problemMatcher": "$msCompile"
     },
@@ -13,6 +13,20 @@
       "label": "build unit tests",
       "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
       "args": [
+        "/t:build",
+        "/p:GenerateFullPaths=true",
+        "/p:Configuration=Debug",
+        "/p:Platform=x64",
+        "${workspaceFolder}\\test\\TournamentsEnhancedTests.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+    },
+    {
+      "label": "build dotnet unit tests",
+      "command": "dotnet",
+      "args": [
+        "msbuild",
+        "/v:d",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",

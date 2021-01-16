@@ -33,12 +33,12 @@ namespace TournamentsEnhanced.UnitTests
 
       game = (Game)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(Game));
 
-      sut = new SubModule
-      {
-        ModState = mockModState.Object,
-        TournamentBuilder = mockTournamentBuilder.Object
-      };
-    }
+        sut = new SubModule
+        {
+            ModState = mockModState.Object,
+            TournamentBuilder = mockTournamentBuilder.Object
+        };
+        }
 
     [Test]
     public void OnNewGameCreated_GameTypeIsCampaign_ModStateIsReset()
