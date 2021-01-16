@@ -26,7 +26,7 @@
       "command": "dotnet",
       "args": [
         "msbuild",
-        "/v:d",
+        // "/v:d",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
