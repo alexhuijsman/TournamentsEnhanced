@@ -31,17 +31,19 @@ namespace TournamentsEnhanced
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
     {
-      InformationManager.DisplayMessage(new InformationMessage($"Loaded {Constants.Module.Name} v{Constants.Module.Version}", MBColor.FromUint(4282569842U)));
+      var hadHarmonyException = false;
 
       try
       {
         var harmony = new Harmony(Constants.Module.Name);
         harmony.PatchAll();
       }
-      catch (Exception ex)
+      catch (Exception)
       {
-        MessageBox.Show($"Error Initialising Tournaments Enhanced:\n\n{ex}");
+        hadHarmonyException = true;
       }
+
+      InformationManager.DisplayMessage(new InformationMessage($"{(hadHarmonyException ? "Error Initialising" : "Loaded")} {Constants.Module.Name} v{Constants.Module.Version}", MBColor.FromUint(4282569842U)));
     }
 
     protected override void OnGameStart(Game game, IGameStarter gameStarter)
