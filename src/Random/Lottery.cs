@@ -8,9 +8,10 @@ namespace TournamentsEnhanced.Random
   public class Lottery
   {
     public static Lottery Instance { get; } = new Lottery();
+    public MBMBRandom MBMBRandom { protected get; set; } = MBMBRandom.Instance;
     public ModState ModState { protected get; set; } = ModState.Instance;
 
-    private Lottery() { }
+    protected Lottery() { }
 
     public void DeterministicallyRefreshWinners()
     {

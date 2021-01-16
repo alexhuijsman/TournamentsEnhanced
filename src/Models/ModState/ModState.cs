@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Models.ModState
     public DaysSinceTracker<TournamentType> DaysSince => _state.daysSince;
     public TournamentRecordDictionary TournamentRecords => _state.tournamentRecords;
 
-    public int LotteryWinners
+    public virtual int LotteryWinners
     {
       get => _state.dailyLotteryWinners;
       set => _state.dailyLotteryWinners = value;

@@ -33,12 +33,12 @@ namespace TournamentsEnhanced.UnitTests
 
       game = (Game)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(Game));
 
-        sut = new SubModule
-        {
-            ModState = mockModState.Object,
-            TournamentBuilder = mockTournamentBuilder.Object
-        };
-        }
+      sut = new SubModule
+      {
+        ModState = mockModState.Object,
+        TournamentBuilder = mockTournamentBuilder.Object
+      };
+    }
 
     [Test]
     public void OnNewGameCreated_GameTypeIsCampaign_ModStateIsReset()
@@ -47,7 +47,7 @@ namespace TournamentsEnhanced.UnitTests
 
       sut.OnNewGameCreated(game, mockObject.Object);
 
-      mockModState.Verify(modState => modState.Reset());
+      mockModState.Verify(modState => modState.Reset(), Times.Once);
       mockModState.VerifyNoOtherCalls();
     }
 
@@ -58,7 +58,7 @@ namespace TournamentsEnhanced.UnitTests
 
       sut.OnNewGameCreated(game, mockObject.Object);
 
-      mockTournamentBuilder.Verify(tournamentBuilder => tournamentBuilder.CreateInitialTournaments());
+      mockTournamentBuilder.Verify(tournamentBuilder => tournamentBuilder.CreateInitialTournaments(), Times.Once);
       mockTournamentBuilder.VerifyNoOtherCalls();
     }
 
