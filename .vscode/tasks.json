@@ -5,25 +5,13 @@
       "label": "Build & Test",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "build dotnet (DEBUG)",
-        "build dotnet unit tests"
+        "build (DEBUG)",
+        "build unit tests"
       ],
       "problemMatcher": "$msCompile"
     },
     {
       "label": "build unit tests",
-      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
-      "args": [
-        "/t:build",
-        "/p:GenerateFullPaths=true",
-        "/p:Configuration=Debug",
-        "/p:Platform=x64",
-        "${workspaceFolder}\\test\\TournamentsEnhancedTests.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-    },
-    {
-      "label": "build dotnet unit tests",
       "command": "dotnet",
       "args": [
         "msbuild",
@@ -37,7 +25,7 @@
       "problemMatcher": "$msCompile",
     },
     {
-      "label": "build dotnet (DEBUG)",
+      "label": "build (DEBUG)",
       "command": "dotnet",
       "args": [
         "msbuild",
@@ -50,21 +38,10 @@
       "problemMatcher": "$msCompile",
     },
     {
-      "label": "build (DEBUG)",
-      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
-      "args": [
-        "/t:build",
-        "/p:GenerateFullPaths=true",
-        "/p:Configuration=Debug",
-        "/p:Platform=x64",
-        "${workspaceFolder}/TournamentsEnhanced.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-    },
-    {
       "label": "build (DEBUG) (INSTALL TO BANNERLORD)",
-      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
+      "command": "dotnet",
       "args": [
+        "msbuild",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
@@ -76,8 +53,9 @@
     },
     {
       "label": "build (DEBUG) (LAPTOP) (INSTALL TO BANNERLORD)",
-      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
+      "command": "dotnet",
       "args": [
+        "msbuild",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
@@ -89,8 +67,9 @@
     },
     {
       "label": "build (RELEASE)",
-      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
+      "command": "dotnet",
       "args": [
+        "msbuild",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
@@ -105,8 +84,9 @@
     },
     {
       "label": "build (RELEASE) (INSTALL TO BANNERLORD)",
-      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
+      "command": "dotnet",
       "args": [
+        "msbuild",
         "/t:clean;build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
