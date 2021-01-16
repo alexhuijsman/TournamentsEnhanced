@@ -4,6 +4,8 @@ namespace TournamentsEnhanced.Models.ModState
 {
   public class ModState
   {
+    private SerializableModState _state;
+
     public static ModState Instance { get; } = new ModState();
     public DaysSinceTracker<TournamentType> DaysSince => _state.daysSince;
     public TournamentRecordDictionary TournamentRecords => _state.tournamentRecords;
@@ -32,9 +34,6 @@ namespace TournamentsEnhanced.Models.ModState
     {
       DaysSince.DailyTick();
     }
-
-    private SerializableModState _state;
-
     public SerializableModState SerializableObject { get => _state; set => _state = value; }
 
   }

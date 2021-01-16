@@ -1,5 +1,4 @@
 using System;
-using System.Timers;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
@@ -11,73 +10,130 @@ namespace TournamentsEnhanced.UnitTests
 {
   public class LotteryTests
   {
-    private System.Random random = new System.Random();
-    private LotteryImpl sut = new LotteryImpl();
-    private Mock<System.Random> mockRandom;
-    private Mock<MBMBRandom> mockMBMBRandom;
-    private Mock<ModState> mockModState;
-    private int expectedValue;
+    private static readonly int NoWinners = 0;
+    private static readonly int OneWinner = 1;
+    private static readonly int AllWinners = int.MaxValue;
+
+    private LotteryImpl _sut = new LotteryImpl();
+    private Mock<System.Random> _mockRandom;
+    private Mock<MBMBRandom> _mockMBMBRandom;
+    private Mock<ModState> _mockModState;
+    private int _expectedLotteryWinners;
 
 
     [SetUp]
     public void SetUp()
     {
-      expectedValue = random.Next();
+      SetUp(NoWinners);
+    }
 
-      mockRandom = new Mock<System.Random>();
-      mockRandom.Setup(random => random.Next()).Returns(expectedValue);
+    public void SetUp(int winners)
+    {
+      _expectedLotteryWinners = winners;
 
-      mockMBMBRandom = new Mock<MBMBRandom>();
-      mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom).Returns(mockRandom.Object);
+      _mockRandom = new Mock<System.Random>();
+      _mockRandom.Setup(random => random.Next()).Returns(_expectedLotteryWinners);
 
-      mockModState = new Mock<ModState>();
-      mockModState.SetupSet(modState => modState.LotteryWinners = expectedValue);
+      _mockMBMBRandom = new Mock<MBMBRandom>();
+      _mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom).Returns(_mockRandom.Object);
 
-      sut = new LotteryImpl();
-      sut.MBMBRandom = mockMBMBRandom.Object;
-      sut.ModState = mockModState.Object;
+      _mockModState = new Mock<ModState>();
+      _mockModState.SetupSet(modState => modState.LotteryWinners = _expectedLotteryWinners);
+      _mockModState.SetupGet(modState => modState.LotteryWinners).Returns(_expectedLotteryWinners);
+
+      _sut = new LotteryImpl();
+      _sut.MBMBRandom = _mockMBMBRandom.Object;
+      _sut.ModState = _mockModState.Object;
     }
 
     [Test]
     public void DeterministicallyRefreshWinners_ShouldGetDeterministicRandom()
     {
-      sut.DeterministicallyRefreshWinners();
+      _sut.DeterministicallyRefreshWinners();
 
-      mockMBMBRandom.VerifyGet(mbMBRandom => mbMBRandom.DeterministicRandom, Times.Once);
+      _mockMBMBRandom.VerifyGet(mbMBRandom => mbMBRandom.DeterministicRandom, Times.Once);
     }
 
     [Test]
     public void DeterministicallyRefreshWinners_ShouldCallRandomNext()
     {
-      sut.DeterministicallyRefreshWinners();
+      _sut.DeterministicallyRefreshWinners();
 
-      mockRandom.Verify(random => random.Next(), Times.Once);
+      _mockRandom.Verify(random => random.Next(), Times.Once);
     }
 
     [Test]
     public void DeterministicallyRefreshWinners_ShouldUpdateModState()
     {
-      sut.DeterministicallyRefreshWinners();
+      _sut.DeterministicallyRefreshWinners();
 
-      mockModState.VerifySet(modState => modState.LotteryWinners = expectedValue, Times.Once);
+      _mockModState.VerifySet(modState => modState.LotteryWinners = _expectedLotteryWinners, Times.Once);
     }
 
     [Test]
     public void DailyTick_ShouldCallDeterministicallyRefreshWinners()
     {
-      sut.DailyTick();
+      _sut.DailyTick();
 
-      mockMBMBRandom.VerifyGet(mbMBRandom => mbMBRandom.DeterministicRandom, Times.Once);
-      mockRandom.Verify(random => random.Next(), Times.Once);
-      mockModState.VerifySet(modState => modState.LotteryWinners = expectedValue, Times.Once);
+      _mockMBMBRandom.VerifyGet(mbMBRandom => mbMBRandom.DeterministicRandom, Times.Once);
+      _mockRandom.Verify(random => random.Next(), Times.Once);
+      _mockModState.VerifySet(modState => modState.LotteryWinners = _expectedLotteryWinners, Times.Once);
     }
 
     [Test]
-    public void IsWinner()
+    public void IsWinner_ShouldBeFalse_NoWinners()
     {
+      TestEnum testEnum;
+      for (int i = 0; i <= (int)TestEnum.Last; i++)
+      {
+        testEnum = (TestEnum)i;
 
+        _sut.IsWinner<TestEnum>(testEnum).ShouldBeFalse($"{((TestEnum)i)}");
+      }
     }
 
+    [Test]
+    public void IsWinner_ShouldBeTrue_AllWinners()
+    {
+      SetUp(AllWinners);
+
+      TestEnum testEnum;
+      for (int i = 0; i <= (int)TestEnum.Last; i++)
+      {
+        testEnum = (TestEnum)i;
+
+        _sut.IsWinner<TestEnum>(testEnum).ShouldBeTrue($"{((TestEnum)i)}");
+      }
+    }
+
+    [Test]
+    public void IsWinner_ShouldBeTrue_OneWinner()
+    {
+      SetUp(OneWinner);
+
+      _sut.IsWinner<TestEnum>(TestEnum.N0).ShouldBeTrue();
+    }
+
+    [Test]
+    public void IsWinner_ShouldBeFalse_OneWinner()
+    {
+      SetUp(OneWinner);
+
+      TestEnum testEnum;
+      for (int i = 1; i <= (int)TestEnum.Last; i++)
+      {
+        testEnum = (TestEnum)i;
+
+        _sut.IsWinner<TestEnum>(testEnum).ShouldBeFalse($"{((TestEnum)i)}");
+      }
+    }
+
+    private enum TestEnum
+    {
+      N0, N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, N12, N13, N14, N15,
+      N16, N17, N18, N19, N20, N21, N22, N23, N24, N25, N26, N27, N28, N29, N30,
+      Last = N30
+    }
 
     private class LotteryImpl : Lottery
     {
