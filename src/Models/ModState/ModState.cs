@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Models.ModState
       set => _state.dailyLotteryWinners = value;
     }
 
-    public ModState() => Initialize();
+    protected ModState() => Initialize();
 
     private void Initialize()
     {
@@ -34,7 +34,7 @@ namespace TournamentsEnhanced.Models.ModState
     {
       DaysSince.DailyTick();
     }
-    public SerializableModState SerializableObject { get => _state; set => _state = value; }
 
+    public SerializableModState SerializableObject { get => _state; set => _state = value; }
   }
 }

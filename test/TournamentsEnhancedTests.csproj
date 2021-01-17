@@ -144,6 +144,7 @@
     <Compile Include="src\Wrappers\Abstract\WrapperBase.test.cs" />
     <Compile Include="src\Wrappers\Abstract\WrapperBase.generic.test.cs" />
     <Compile Include="src\Random\Lottery.test.cs" />
+    <Compile Include="src\Models\ModState\ModState.test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
