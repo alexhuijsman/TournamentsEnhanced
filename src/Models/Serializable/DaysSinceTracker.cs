@@ -6,8 +6,6 @@ namespace TournamentsEnhanced.Models.Serializable
   public class DaysSinceTracker<T> : Dictionary<T, int>
   where T : IConvertible
   {
-    private static readonly int DefaultValue = int.MaxValue;
-
     public DaysSinceTracker(params T[] types)
     {
       InitializeDictionary(types);
@@ -17,24 +15,19 @@ namespace TournamentsEnhanced.Models.Serializable
     {
       foreach (var type in types)
       {
-        Add(type, DefaultValue);
+        Add(type, Constants.DaysSinceTracker.Default.KeyValue);
       }
     }
 
-    public void Reset()
+    public virtual void Reset()
     {
       foreach (var key in Keys.ToList())
       {
-        this[key] = DefaultValue;
+        this[key] = Constants.DaysSinceTracker.Default.KeyValue;
       }
     }
 
-    public void DailyTick()
-    {
-      IncrementAll();
-    }
-
-    private void IncrementAll()
+    public virtual void IncrementDay()
     {
       foreach (var key in Keys)
       {

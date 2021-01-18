@@ -4,7 +4,7 @@ using HarmonyLib;
 
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Patches

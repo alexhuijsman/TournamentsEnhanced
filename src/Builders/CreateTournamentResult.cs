@@ -1,5 +1,5 @@
 using TournamentsEnhanced.Builders.Abstract;
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders

@@ -10,7 +10,7 @@ using TaleWorlds.ObjectSystem;
 
 using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Builders;
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 using TournamentsEnhanced.Wrappers.Localization;

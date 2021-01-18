@@ -5,7 +5,7 @@ using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 
 namespace TournamentsEnhanced.Patches
 {

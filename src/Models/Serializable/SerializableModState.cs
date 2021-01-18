@@ -6,7 +6,6 @@ namespace TournamentsEnhanced.Models.Serializable
   {
     public DaysSinceTracker<TournamentType> daysSince;
     public TournamentRecordDictionary tournamentRecords;
-    public int weeksSinceHostedTournament;
-    public int dailyLotteryWinners;
+    public int lotteryResults;
   }
 }

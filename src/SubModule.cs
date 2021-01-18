@@ -1,5 +1,4 @@
 using System;
-using System.Windows;
 using HarmonyLib;
 using ModLib;
 using TaleWorlds.CampaignSystem;
@@ -7,7 +6,7 @@ using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 using TournamentsEnhanced.Behaviors;
 using TournamentsEnhanced.Builders;
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced
@@ -15,7 +14,7 @@ namespace TournamentsEnhanced
   public class SubModule : MBSubModuleBase
   {
     public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
-    public ModState ModState { protected get; set; } = ModState.Instance;
+    public ModState ModState { protected get; set; } = TournamentsEnhanced.Models.ModState.Instance;
 
     protected override void OnSubModuleLoad()
     {
@@ -52,7 +51,6 @@ namespace TournamentsEnhanced
       {
         var campaignStarter = (CampaignGameStarter)gameStarter;
 
-        campaignStarter.AddBehavior(new LotteryBehavior());
         campaignStarter.AddBehavior(new ModStateBehavior());
         campaignStarter.AddBehavior(new TownMenuBehavior());
         campaignStarter.AddBehavior(new SyncDataBehavior());

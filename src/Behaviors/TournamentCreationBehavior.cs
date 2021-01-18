@@ -5,7 +5,7 @@ using TaleWorlds.CampaignSystem;
 
 using TournamentsEnhanced.Behaviors.Abstract;
 using TournamentsEnhanced.Builders;
-using TournamentsEnhanced.Random;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 
@@ -14,7 +14,7 @@ namespace TournamentsEnhanced.Behaviors
   class TournamentCreationBehavior : MBEncounterGameMenuBehavior
   {
     public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
-    public Lottery Lottery { protected get; set; } = Lottery.Instance;
+    public ModState ModState { protected get; set; } = ModState.Instance;
 
     public override void RegisterEvents()
     {
@@ -91,7 +91,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void TryCreateProsperityTournament()
     {
-      if (!Lottery.IsWinner(TournamentType.Prosperity))
+      if (!ModState.IsLotteryWinner(TournamentType.Prosperity))
       {
         return;
       }
@@ -106,7 +106,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void TryCreateHighbornTournament()
     {
-      if (!Lottery.IsWinner(TournamentType.Highborn))
+      if (!ModState.IsLotteryWinner(TournamentType.Highborn))
       {
         return;
       }
@@ -121,7 +121,7 @@ namespace TournamentsEnhanced.Behaviors
 
     private void TryCreateInvitationTournament()
     {
-      if (!Lottery.IsWinner(TournamentType.Invitation) &&
+      if (!ModState.IsLotteryWinner(TournamentType.Invitation) &&
           MBHero.MainHero.Clan.Renown >= Settings.Instance.MaxRenownForInvitationTournaments)
       {
         return;

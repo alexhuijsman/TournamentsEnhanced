@@ -2,7 +2,7 @@ using System.Text.Json;
 
 using TaleWorlds.CampaignSystem;
 
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 

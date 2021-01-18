@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     public static MBMBRandom Instance { get; } = new MBMBRandom();
 
     protected MBMBRandom() { }
-    public System.Random Random => MBRandom.Random;
+    public System.Random Random => MBRandom.Random != null ? MBRandom.Random : new System.Random();
     public virtual System.Random DeterministicRandom => MBRandom.DeterministicRandom;
     public float RandomFloat => MBRandom.RandomFloat;
     public float RandomFloatNormal => MBRandom.RandomFloatNormal;

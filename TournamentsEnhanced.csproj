@@ -145,7 +145,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Behaviors\Abstract\MBEncounterGameMenuBehavior.cs" />
-    <Compile Include="src\Behaviors\LotteryBehavior.cs" />
     <Compile Include="src\Behaviors\ModStateBehavior.cs" />
     <Compile Include="src\Behaviors\SyncDataBehavior.cs" />
     <Compile Include="src\Behaviors\TournamentCreationBehavior.cs" />
@@ -164,8 +163,6 @@
     <Compile Include="src\Builders\TournamentBuilder.PlayerInitiated.cs" />
     <Compile Include="src\Builders\TournamentBuilder.Prosperity.cs" />
     <Compile Include="src\Builders\TournamentBuilder.Wedding.cs" />
-    <Compile Include="src\Constants\Constants.cs" />
-    <Compile Include="src\Constants\Defaults.cs" />
     <Compile Include="src\Enums\ResultStatus.cs" />
     <Compile Include="src\Enums\TournamentType.cs" />
     <Compile Include="src\Extensions\IEnumerableExtensions.cs" />
@@ -228,7 +225,6 @@
     <Compile Include="src\Patches\TournamentRewardsPatch.cs" />
     <Compile Include="src\Patches\TournamentStartMatchPatch.cs" />
     <Compile Include="src\Patches\TournamentXpOnHitPatch.cs" />
-    <Compile Include="src\Random\Lottery.cs" />
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\SubModule.cs" />
     <Compile Include="src\Wrappers\Abstract\CachedWrapperBase.cs" />
@@ -338,6 +334,13 @@
     <None Include="src\obj\x64\Debug\TournamentsEnhanced.csproj.CopyComplete" />
     <None Include="src\obj\x64\Debug\TournamentsEnhanced.csproj.CoreCompileInputs.cache" />
     <None Include="src\obj\x64\Debug\TournamentsEnhanced.csprojAssemblyReference.cache" />
+    <Compile Include="src\Constants\Constants.Module.cs" />
+    <Compile Include="src\Constants\Constants.ModState.cs" />
+    <Compile Include="src\Constants\Constants.LotteryResults.cs" />
+    <Compile Include="src\Constants\Constants.Item.cs" />
+    <Compile Include="src\Constants\Constants.Int32.cs" />
+    <Compile Include="src\Constants\Constants.DaysSince.cs" />
+    <Compile Include="src\Constants\Constants.Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.0\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets" Condition="Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.0\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets')" />

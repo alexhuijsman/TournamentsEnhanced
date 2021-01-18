@@ -81,12 +81,12 @@ namespace TournamentsEnhanced
 
     [SettingProperty("Hosted Tournament Cooldown", "Minimum number of days between player-hosted tournaments.")]
     [SettingPropertyGroup("Tournaments")]
-    public int MinDaysBetweenHostedTournaments { get; set; } = Defaults.Settings.MinDaysBetweenHostedTournaments;
+    public int MinDaysBetweenHostedTournaments { get; set; } = Constants.Settings.Default.MinDaysBetweenHostedTournaments;
     [SettingProperty("Noble Relation Increase", "Your relation with local nobles will increase by this much when you host a tournament.")]
     [SettingPropertyGroup("Player-Hosted Tournaments")]
-    public int NoblesRelationIncrease { get; set; } = Defaults.Settings.NoblesRelationIncrease;
+    public int NoblesRelationIncrease { get; set; } = Constants.Settings.Default.NoblesRelationIncrease;
     [SettingProperty("Max Renown For Invitation", "Once your renown is higher than this value, you will be too famous for these tournaments.")]
     [SettingPropertyGroup("Invitation Tournaments")]
-    public float MaxRenownForInvitationTournaments { get; set; } = Defaults.Settings.MaxRenownForInvitationTournaments;
+    public float MaxRenownForInvitationTournaments { get; set; } = Constants.Settings.Default.MaxRenownForInvitationTournaments;
   }
 }

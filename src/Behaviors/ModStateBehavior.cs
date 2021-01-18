@@ -1,6 +1,6 @@
 using System;
 
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Behaviors
@@ -11,7 +11,6 @@ namespace TournamentsEnhanced.Behaviors
 
     public override void RegisterEvents()
     {
-      MBCampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(ModState.DailyTick));
       MBCampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(ModState.DailyTick));
     }
   }

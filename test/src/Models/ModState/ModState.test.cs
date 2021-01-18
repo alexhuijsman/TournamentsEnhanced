@@ -1,65 +1,70 @@
 using System;
+using Moq;
 using NUnit.Framework;
 using Shouldly;
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Models.Serializable;
+using TournamentsEnhanced.Wrappers.Core;
 
 namespace TournamentsEnhanced.UnitTests
 {
-  public class ModStateTests
+  public partial class ModStateTests
   {
-    private ModStateImpl sut;
+    private ModStateImpl _sut;
+    private Mock<DaysSinceTracker<TournamentType>> _mockDaysSince;
+    private Mock<TournamentRecordDictionary> _mockTournamentRecords;
+    private Mock<MBMBRandom> _mockMBMBRandom;
+    private Mock<System.Random> _mockRandom;
 
     [SetUp]
     public void SetUp()
     {
-      sut = new ModStateImpl();
+      SetUpWithLotteryResults(Constants.LotteryResults.NoWinners);
     }
 
-    [Test]
-    public void Ctor_TournamentRecords_IsNotNull()
+    private void SetUpWithLotteryResults(int lotteryResults)
     {
-      Assert.IsNotNull(sut.TournamentRecords);
-    }
+      _mockDaysSince = new Mock<DaysSinceTracker<TournamentType>>();
+      _mockDaysSince.Setup(daysSince => daysSince.Reset());
+      _mockDaysSince.Setup(daysSince => daysSince.IncrementDay());
 
-    [Test]
-    public void Ctor_TournamentRecords_IsEmpty()
-    {
-      sut.TournamentRecords.Count.ShouldBe(0);
-    }
+      _mockTournamentRecords = new Mock<TournamentRecordDictionary>();
 
-    [Test]
-    public void Ctor_DaysSince_IsNotNull()
-    {
-      Assert.IsNotNull(sut.DaysSince);
-    }
+      _mockRandom = new Mock<System.Random>();
+      _mockRandom.Setup(random => random.Next()).Returns(lotteryResults);
 
-    [Test]
-    public void Ctor_DaysSince_ContainsExpectedNumberOfEntries()
-    {
-      sut.DaysSince.Count.ShouldBe(Constants.DaysSince.TournamentTypes.Length);
-    }
+      _mockMBMBRandom = new Mock<MBMBRandom>();
+      _mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom)
+        .Returns(_mockRandom.Object);
 
-    [Test]
-    public void Ctor_DaysSince_ContainsExpectedKeys()
-    {
-      foreach (var key in Constants.DaysSince.TournamentTypes)
+      _sut = new ModStateImpl();
+      _sut.MBMBRandom = _mockMBMBRandom.Object;
+      _sut.SerializableObject = new Models.Serializable.SerializableModState()
       {
-        sut.DaysSince.ContainsKey(key).ShouldBeTrue($"{key}");
-      }
+        lotteryResults = lotteryResults,
+        daysSince = _mockDaysSince.Object,
+        tournamentRecords = _mockTournamentRecords.Object
+      };
     }
 
-    [Test]
-    public void Ctor_DaysSince_ContainsExpectedValues()
+    private void AssertDaysSinceContainsDefaultValues()
     {
-      foreach (var keyValuePair in sut.DaysSince)
+      foreach (var keyValuePair in _sut.DaysSince)
       {
         keyValuePair.Value.ShouldBe(Int32.MaxValue, $"{keyValuePair.Key}");
       }
     }
 
+    private enum TestEnum
+    {
+      N0, N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, N12, N13, N14, N15,
+      N16, N17, N18, N19, N20, N21, N22, N23, N24, N25, N26, N27, N28, N29, N30,
+      HighestValidValue = N30,
+      InvalidValue = HighestValidValue + 1
+    }
+
     private class ModStateImpl : ModState
     {
-      public ModStateImpl() : base() { }
     }
   }
 }

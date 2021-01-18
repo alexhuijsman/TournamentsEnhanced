@@ -6,85 +6,83 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Builders;
-using TournamentsEnhanced.Models.ModState;
+using TournamentsEnhanced.Models;
 
 namespace TournamentsEnhanced.UnitTests
 {
   public class SubModuleTest
   {
-    private SubModule sut;
-    private Mock<TournamentBuilder> mockTournamentBuilder;
-    private Mock<ModState> mockModState;
-    private Mock<Campaign> mockCampaignGameType;
-    private Mock<GameType> mockNonCampaignGameType;
-    private Game game;
-    private Mock<object> mockObject;
+    private SubModule _sut;
+    private Mock<TournamentBuilder> _mockTournamentBuilder;
+    private Mock<ModState> _mockModState;
+    private Mock<Campaign> _mockCampaignGameType;
+    private Mock<GameType> _mockNonCampaignGameType;
+    private Game _game;
+    private Mock<object> _mockObject;
 
     [SetUp]
     public void SetUp()
     {
-      mockTournamentBuilder = new Mock<TournamentBuilder>(MockBehavior.Strict);
-      mockTournamentBuilder.Setup(tournamentBuilder => tournamentBuilder.CreateInitialTournaments());
-      mockModState = new Mock<ModState>(MockBehavior.Strict);
-      mockModState.Setup(modState => modState.Reset());
-      mockObject = new Mock<object>(MockBehavior.Strict);
-      mockCampaignGameType = new Mock<Campaign>(MockBehavior.Strict, CampaignGameMode.Campaign);
-      mockNonCampaignGameType = new Mock<GameType>(MockBehavior.Strict);
+      _mockTournamentBuilder = new Mock<TournamentBuilder>(MockBehavior.Strict);
+      _mockTournamentBuilder.Setup(tournamentBuilder => tournamentBuilder.CreateInitialTournaments());
+      _mockModState = new Mock<ModState>(MockBehavior.Strict);
+      _mockModState.Setup(modState => modState.Reset());
+      _mockObject = new Mock<object>(MockBehavior.Strict);
+      _mockCampaignGameType = new Mock<Campaign>(MockBehavior.Strict, CampaignGameMode.Campaign);
+      _mockNonCampaignGameType = new Mock<GameType>(MockBehavior.Strict);
 
-      game = (Game)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(Game));
+      _game = (Game)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(Game));
 
-      sut = new SubModule
-      {
-        ModState = mockModState.Object,
-        TournamentBuilder = mockTournamentBuilder.Object
-      };
+      _sut = new SubModule();
+      _sut.ModState = _mockModState.Object;
+      _sut.TournamentBuilder = _mockTournamentBuilder.Object;
     }
 
     [Test]
     public void OnNewGameCreated_GameTypeIsCampaign_ModStateIsReset()
     {
-      SetGameType(mockCampaignGameType.Object);
+      SetGameType(_mockCampaignGameType.Object);
 
-      sut.OnNewGameCreated(game, mockObject.Object);
+      _sut.OnNewGameCreated(_game, _mockObject.Object);
 
-      mockModState.Verify(modState => modState.Reset(), Times.Once);
-      mockModState.VerifyNoOtherCalls();
+      _mockModState.Verify(modState => modState.Reset(), Times.Once);
+      _mockModState.VerifyNoOtherCalls();
     }
 
     [Test]
     public void OnNewGameCreated_GameTypeIsCampaign_CreateInitialTournamentsIsCalled()
     {
-      SetGameType(mockCampaignGameType.Object);
+      SetGameType(_mockCampaignGameType.Object);
 
-      sut.OnNewGameCreated(game, mockObject.Object);
+      _sut.OnNewGameCreated(_game, _mockObject.Object);
 
-      mockTournamentBuilder.Verify(tournamentBuilder => tournamentBuilder.CreateInitialTournaments(), Times.Once);
-      mockTournamentBuilder.VerifyNoOtherCalls();
+      _mockTournamentBuilder.Verify(tournamentBuilder => tournamentBuilder.CreateInitialTournaments(), Times.Once);
+      _mockTournamentBuilder.VerifyNoOtherCalls();
     }
 
     [Test]
     public void OnNewGameCreated_GameTypeIsNotCampaign_ModStateIsNotReset()
     {
-      SetGameType(mockNonCampaignGameType.Object);
+      SetGameType(_mockNonCampaignGameType.Object);
 
-      sut.OnNewGameCreated(game, mockObject.Object);
+      _sut.OnNewGameCreated(_game, _mockObject.Object);
 
-      mockModState.VerifyNoOtherCalls();
+      _mockModState.VerifyNoOtherCalls();
     }
 
     [Test]
     public void OnNewGameCreated_GameTypeIsNotCampaign_CreateInitialTournamentsIsNotCalled()
     {
-      SetGameType(mockNonCampaignGameType.Object);
+      SetGameType(_mockNonCampaignGameType.Object);
 
-      sut.OnNewGameCreated(game, mockObject.Object);
+      _sut.OnNewGameCreated(_game, _mockObject.Object);
 
-      mockTournamentBuilder.VerifyNoOtherCalls();
+      _mockTournamentBuilder.VerifyNoOtherCalls();
     }
 
     private void SetGameType(GameType gameType)
     {
-      game.GetType().GetProperty("GameType").SetValue(game, gameType);
+      _game.GetType().GetProperty("GameType").SetValue(_game, gameType);
     }
   }
 }
