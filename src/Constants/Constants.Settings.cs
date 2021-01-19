@@ -8,10 +8,10 @@ namespace TournamentsEnhanced
     {
       public static class Default
       {
-        public static readonly int NobleRelationModifier = 3;
-        public static readonly int MinDaysBetweenHostedTournaments = 7;
-        public static readonly int NoblesRelationIncrease = 3;
-        public static readonly float MaxRenownForInvitationTournaments = 800.00f;
+        public const int NobleRelationModifier = 3;
+        public const int MinDaysBetweenHostedTournaments = 7;
+        public const int NoblesRelationIncrease = 3;
+        public const float MaxRenownForInvitationTournaments = 800.00f;
       }
     }
   }

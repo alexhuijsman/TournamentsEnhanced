@@ -4,7 +4,7 @@ namespace TournamentsEnhanced
   {
     public static class Int32
     {
-      public static readonly int NumberOfBits = 32;
+      public const int NumberOfBits = 32;
     }
   }
 }

@@ -6,7 +6,7 @@ namespace TournamentsEnhanced
     {
       public static class Default
       {
-        public static readonly int KeyValue = int.MaxValue;
+        public const int KeyValue = int.MaxValue;
       }
 
       public static readonly TournamentType[] TournamentTypes =

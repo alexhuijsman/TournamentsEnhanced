@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.UnitTests
   public partial class ModStateTests
   {
     private ModStateImpl _sut;
-    private Mock<DaysSinceTracker<TournamentType>> _mockDaysSince;
+    private Mock<DaysSinceTournamentTracker> _mockDaysSince;
     private Mock<TournamentRecordDictionary> _mockTournamentRecords;
     private Mock<MBMBRandom> _mockMBMBRandom;
     private Mock<System.Random> _mockRandom;
@@ -24,7 +24,7 @@ namespace TournamentsEnhanced.UnitTests
 
     private void SetUpWithLotteryResults(int lotteryResults)
     {
-      _mockDaysSince = new Mock<DaysSinceTracker<TournamentType>>();
+      _mockDaysSince = new Mock<DaysSinceTournamentTracker>();
       _mockDaysSince.Setup(daysSince => daysSince.Reset());
       _mockDaysSince.Setup(daysSince => daysSince.IncrementDay());
 
@@ -39,6 +39,10 @@ namespace TournamentsEnhanced.UnitTests
 
       _sut = new ModStateImpl();
       _sut.MBMBRandom = _mockMBMBRandom.Object;
+    }
+
+    private void SetUpSerializableModState(int lotteryResults = Constants.LotteryResults.NoWinners)
+    {
       _sut.SerializableObject = new Models.Serializable.SerializableModState()
       {
         lotteryResults = lotteryResults,

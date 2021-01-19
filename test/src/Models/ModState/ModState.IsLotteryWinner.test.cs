@@ -25,6 +25,7 @@ namespace TournamentsEnhanced.UnitTests
     public void IsLotteryWinner_ShouldBeTrue_AllWinners()
     {
       SetUpWithLotteryResults(Constants.LotteryResults.AllWinners);
+      SetUpSerializableModState(Constants.LotteryResults.AllWinners);
 
       TestEnum testEnum;
       for (int i = 0; i <= (int)TestEnum.HighestValidValue; i++)
@@ -39,6 +40,7 @@ namespace TournamentsEnhanced.UnitTests
     public void IsLotteryWinner_ShouldBeTrue_OnlyFirstIsWinner()
     {
       SetUpWithLotteryResults(TestConstants.LotteryResults.OnlyFirstIsWinner);
+      SetUpSerializableModState(TestConstants.LotteryResults.OnlyFirstIsWinner);
 
       _sut.IsLotteryWinner(TestEnum.N0).ShouldBeTrue();
     }
@@ -47,6 +49,7 @@ namespace TournamentsEnhanced.UnitTests
     public void IsLotteryWinner_ShouldBeFalse_OnlyFirstIsWinner()
     {
       SetUpWithLotteryResults(TestConstants.LotteryResults.OnlyFirstIsWinner);
+      SetUpSerializableModState(TestConstants.LotteryResults.OnlyFirstIsWinner);
 
       TestEnum testEnum;
       for (int i = 1; i <= (int)TestEnum.HighestValidValue; i++)
@@ -60,8 +63,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void IsLotteryWinner_ShouldThrow_Exception()
     {
-      Should.Throw<ArgumentOutOfRangeException>(() => _sut.IsLotteryWinner(TestEnum.InvalidValue))
-        .Message.ShouldBe($"value {(int)TestEnum.InvalidValue} was greater than maximum permitted value of {Constants.ModState.MaxIsWinnerArgValue}");
+      Should.Throw<ArgumentOutOfRangeException>(() => _sut.IsLotteryWinner(TestEnum.InvalidValue));
     }
   }
 }

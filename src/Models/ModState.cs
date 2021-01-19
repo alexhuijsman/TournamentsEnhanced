@@ -10,7 +10,7 @@ namespace TournamentsEnhanced.Models
     public static ModState Instance { get; } = new ModState();
     public SerializableModState SerializableObject { get => _state; set => _state = value; }
     public MBMBRandom MBMBRandom { protected get; set; } = MBMBRandom.Instance;
-    public DaysSinceTracker<TournamentType> DaysSince => _state.daysSince;
+    public DaysSinceTournamentTracker DaysSince => _state.daysSince;
     public TournamentRecordDictionary TournamentRecords => _state.tournamentRecords;
     public virtual int LotteryResults { get => _state.lotteryResults; set => _state.lotteryResults = value; }
 
@@ -47,7 +47,7 @@ namespace TournamentsEnhanced.Models
 
       if (intValue > Constants.ModState.MaxIsWinnerArgValue)
       {
-        throw new ArgumentOutOfRangeException($"value was greater than {Constants.ModState.MaxIsWinnerArgValue}");
+        throw new ArgumentOutOfRangeException($"value, Parameter value: {intValue}");
       }
 
       return ((LotteryResults >> intValue) & 1) != 0;

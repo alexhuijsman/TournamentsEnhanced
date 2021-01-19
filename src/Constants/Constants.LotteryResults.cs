@@ -4,8 +4,8 @@ namespace TournamentsEnhanced
   {
     public static class LotteryResults
     {
-      public static readonly int NoWinners = 0;
-      public static readonly int AllWinners = int.MaxValue;
+      public const int NoWinners = 0;
+      public const int AllWinners = int.MaxValue;
     }
   }
 }
