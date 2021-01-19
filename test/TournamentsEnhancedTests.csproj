@@ -150,6 +150,7 @@
     <Compile Include="src\Models\ModState\ModState.IsLotteryWinner.test.cs" />
     <Compile Include="src\Constants\TestConstants.cs" />
     <Compile Include="src\Finders\Abstract\ComparerBase.test.cs" />
+    <Compile Include="src\Finders\Abstract\FinderBase.test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
