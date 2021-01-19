@@ -8,10 +8,6 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
   public abstract class ComparerBase<W> : IComparer<W>
     where W : WrapperBase
   {
-    protected static readonly int XIsGreaterThanY = 1;
-    protected static readonly int XIsEqualToY = 0;
-    protected static readonly int XIsLessThanY = -1;
-
     protected MBHero InitiatingHero { get; private set; }
     protected bool HasInitiatingHero => InitiatingHero.IsNull;
 
@@ -29,11 +25,10 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
       return result;
     }
 
-    protected abstract bool MeetsRequirements(W wrapper);
-
     protected bool TryComparePreconditions(W x, W y, ref int result) =>
       TryCompareNull(x, y, ref result) ? true :
       TryCompareRequirements(x, y, ref result);
+
 
     private bool TryCompareNull(W x, W y, ref int result)
     {
@@ -43,19 +38,18 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
 
       if (x.IsNull)
       {
-        result = y.IsNull ? XIsEqualToY : yMeetsRequirements ? XIsLessThanY : XIsGreaterThanY;
+        result = y.IsNull ? Constants.Comparer.XIsEqualToY : yMeetsRequirements ? Constants.Comparer.XIsLessThanY : Constants.Comparer.XIsGreaterThanY;
         assignedResult = true;
       }
 
       if (y.IsNull)
       {
-        result = xMeetsRequirements ? XIsGreaterThanY : XIsLessThanY;
+        result = xMeetsRequirements ? Constants.Comparer.XIsGreaterThanY : Constants.Comparer.XIsLessThanY;
         assignedResult = true;
       }
 
       return assignedResult;
     }
-
 
     private bool TryCompareRequirements(W x, W y, ref int result)
     {
@@ -65,16 +59,18 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
 
       if (!xMeetsRequirements)
       {
-        result = !yMeetsRequirements ? XIsEqualToY : XIsLessThanY;
+        result = !yMeetsRequirements ? Constants.Comparer.XIsEqualToY : Constants.Comparer.XIsLessThanY;
         assignedResult = true;
       }
       else if (!yMeetsRequirements)
       {
-        result = XIsGreaterThanY;
+        result = Constants.Comparer.XIsGreaterThanY;
         assignedResult = true;
       }
 
       return assignedResult;
     }
+
+    protected abstract bool MeetsRequirements(W wrapper);
   }
 }

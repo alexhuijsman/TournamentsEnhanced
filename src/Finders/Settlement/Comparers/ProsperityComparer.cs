@@ -35,7 +35,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       var xIsMoreProsperous = x.Prosperity > y.Prosperity;
       var xIsLessProsperous = x.Prosperity < y.Prosperity;
 
-      result = xIsMoreProsperous ? XIsGreaterThanY : xIsLessProsperous ? XIsLessThanY : XIsEqualToY;
+      result = xIsMoreProsperous ? Constants.Comparer.XIsGreaterThanY : xIsLessProsperous ? Constants.Comparer.XIsLessThanY : Constants.Comparer.XIsEqualToY;
 
       return true;
     }

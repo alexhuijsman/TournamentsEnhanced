@@ -341,6 +341,7 @@
     <Compile Include="src\Models\Serializable\DaysSinceTracker.cs" />
     <Compile Include="src\Models\Serializable\DaysSinceTournamentTracker.cs" />
     <Compile Include="src\Models\ModState.cs" />
+    <Compile Include="src\Constants\Constants.Comparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.0\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets" Condition="Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.0\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets')" />
