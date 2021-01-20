@@ -178,6 +178,11 @@ namespace TournamentsEnhanced
 
       LimitPrizeSelect = false;
       OnProsperityTournament();
+      // OnLordTournament();
+      // InvitePlayer();
+      // OnMakePeace(Kingdom.All[0], Kingdom.All[1]);
+      // OnHeroesMarried(Kingdom.All[0].Leader, Kingdom.All[1].Leader, true);
+      // OnGivenBirth(Kingdom.All[0].Leader, Kingdom.All[0].Leader.Children, 0);
     }
 
     private void OnLordTournament()
