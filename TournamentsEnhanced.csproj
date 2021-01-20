@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>TournamentsEnhanced</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <ApplicationVersion>1.5.6.2</ApplicationVersion>
+    <ApplicationVersion>1.5.7.0</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>TournamentsEnhanced</RootNamespace>
   </PropertyGroup>
