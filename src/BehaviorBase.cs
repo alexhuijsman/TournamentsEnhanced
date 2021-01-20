@@ -177,7 +177,7 @@ namespace TournamentsEnhanced
     {
 
       LimitPrizeSelect = false;
-      OnProsperityTournament();
+      // OnProsperityTournament();
       // OnLordTournament();
       // InvitePlayer();
       // OnMakePeace(Kingdom.All[0], Kingdom.All[1]);
