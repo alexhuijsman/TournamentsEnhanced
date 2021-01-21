@@ -2,6 +2,7 @@ using System;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
+using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
@@ -16,7 +17,7 @@ namespace TournamentsEnhanced.UnitTests
     private class FindResultBaseImpl : FindResultBase<FindResultBaseImpl, MBWrapperBaseImpl, object>
     {
     }
-    private class FindOptionBaseImpl : FindResultBase<FindResultBaseImpl, MBWrapperBaseImpl, object>
+    private class FindOptionBaseImpl : FindOptionsBase<MBWrapperBaseImpl>
     {
     }
 

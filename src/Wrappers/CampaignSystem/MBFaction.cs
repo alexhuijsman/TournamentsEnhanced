@@ -70,7 +70,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public MBCultureObject Culture => UnwrappedObject.Culture;
 
-    public MBStatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
+    public MBExplainedNumber DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
 
     public MBVec2 InitialPosition => UnwrappedObject.InitialPosition;
 

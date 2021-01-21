@@ -85,7 +85,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsEliminated => UnwrappedObject.IsEliminated;
 
-    public MBStatExplainer DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
+    public MBExplainedNumber DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 

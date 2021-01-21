@@ -39,7 +39,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBTextObject EncyclopediaLinkWithName { get; }
     MBTextObject EncyclopediaText { get; }
     MBCultureObject Culture { get; }
-    MBStatExplainer DailyCrimeRatingChangeExplained { get; }
+    MBExplainedNumber DailyCrimeRatingChangeExplained { get; }
     MBVec2 InitialPosition { get; }
     uint Color { get; }
     uint Color2 { get; }

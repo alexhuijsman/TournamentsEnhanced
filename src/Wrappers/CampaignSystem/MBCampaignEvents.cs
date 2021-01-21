@@ -90,7 +90,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static IMbEvent<IssueBase> OnNewIssueCreatedEvent => CampaignEvents.OnNewIssueCreatedEvent;
     public static IMbEvent<IssueBase, Hero> OnIssueOwnerChangedEvent => CampaignEvents.OnIssueOwnerChangedEvent;
     public static IMbEvent OnGameOverEvent => CampaignEvents.OnGameOverEvent;
-    public static IMbEvent<List<(ItemRosterElement, int)>, List<(ItemRosterElement, int)>> PlayerInventoryExchangeEvent => CampaignEvents.PlayerInventoryExchangeEvent;
+    public static IMbEvent<List<(ItemRosterElement, int)>, List<(ItemRosterElement, int)>, bool> PlayerInventoryExchangeEvent => CampaignEvents.PlayerInventoryExchangeEvent;
     public static IMbEvent<Settlement, MobileParty, bool, bool> SiegeCompletedEvent => CampaignEvents.SiegeCompletedEvent;
     public static IMbEvent<BattleSideEnum, MapEvent> RaidCompletedEvent => CampaignEvents.RaidCompletedEvent;
     public static IMbEvent<BattleSideEnum, MapEvent> ForceVolunteersCompletedEvent => CampaignEvents.ForceVolunteersCompletedEvent;
@@ -103,7 +103,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static IMbEvent OnBeforeSaveEvent => CampaignEvents.OnBeforeSaveEvent;
     public static IMbEvent<FlattenedTroopRoster> OnPrisonerTakenEvent => CampaignEvents.OnPrisonerTakenEvent;
     public static IMbEvent<FlattenedTroopRoster> OnPrisonerReleasedEvent => CampaignEvents.OnPrisonerReleasedEvent;
-    public static IMbEvent<FlattenedTroopRoster> OnPrisonerRecruitedEvent => CampaignEvents.OnPrisonerRecruitedEvent;
+    public static IMbEvent<FlattenedTroopRoster> OnMainPartyPrisonerRecruitedEvent => CampaignEvents.OnMainPartyPrisonerRecruitedEvent;
     public static IMbEvent<SiegeEvent, BattleSideEnum, SiegeEngineType> SiegeEngineBuiltEvent => CampaignEvents.SiegeEngineBuiltEvent;
     public static IMbEvent<Hero, Hero, float> OnHeroSharedFoodWithAnotherHeroEvent => CampaignEvents.OnHeroSharedFoodWithAnotherHeroEvent;
     public static IMbEvent<Settlement> OnHideoutClearedEvent => CampaignEvents.OnHideoutClearedEvent;
@@ -250,7 +250,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public void OnPlayerStartedTournamentMatch(Town town) => UnwrappedObject.OnPlayerStartedTournamentMatch(town);
     public void OnPlayerStartRecruitment(CharacterObject recruitTroopCharacter) => UnwrappedObject.OnPlayerStartRecruitment(recruitTroopCharacter);
     public void OnPlayerStartTalkFromMenu(Hero hero) => UnwrappedObject.OnPlayerStartTalkFromMenu(hero);
-    public void OnPrisonerRecruited(FlattenedTroopRoster roster) => UnwrappedObject.OnPrisonerRecruited(roster);
+    public void OnMainPartyPrisonerRecruited(FlattenedTroopRoster roster) => UnwrappedObject.OnMainPartyPrisonerRecruited(roster);
     public void OnPrisonerReleased(FlattenedTroopRoster roster) => UnwrappedObject.OnPrisonerReleased(roster);
     public void OnPrisonersChangeInSettlement(Settlement settlement) => UnwrappedObject.OnPrisonersChangeInSettlement(settlement);
     public void OnPrisonerTaken(FlattenedTroopRoster roster) => UnwrappedObject.OnPrisonerTaken(roster);

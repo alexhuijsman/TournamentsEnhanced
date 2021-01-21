@@ -4,7 +4,6 @@ namespace TournamentsEnhanced.Wrappers.[PackageName]
 {
   public struct MB[TypeToWrap] : IMB[TypeToWrap]
   {
-    public IMB[TypeToWrap] UnwrappedStruct;
     public [TypeToWrap] UnwrappedStruct { get; set; }
 
     public static implicit operator [TypeToWrap](MB[TypeToWrap] wrapper) => wrapper.UnwrappedStruct;

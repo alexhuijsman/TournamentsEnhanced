@@ -7,6 +7,7 @@ using TournamentsEnhanced.Wrappers.Core;
 using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
 using static TaleWorlds.Core.ItemObject;
+using MBCharacterSkills = TournamentsEnhanced.Wrappers.Core.MBCharacterSkills;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {

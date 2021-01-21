@@ -5,6 +5,7 @@ using TournamentsEnhanced.Wrappers.Core;
 using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;
 using static TaleWorlds.CampaignSystem.Hero;
+using MBCharacterSkills = TournamentsEnhanced.Wrappers.Core.MBCharacterSkills;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {

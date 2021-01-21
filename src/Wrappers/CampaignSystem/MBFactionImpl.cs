@@ -45,9 +45,9 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public Banner Banner => _faction.Banner;
 
-    public IEnumerable<Settlement> Settlements => _faction.Settlements;
+    public MBReadOnlyList<Settlement> Settlements => _faction.Settlements;
 
-    public IEnumerable<Town> Fiefs => _faction.Fiefs;
+    public MBReadOnlyList<Town> Fiefs => _faction.Fiefs;
 
     public IEnumerable<Hero> Lords => _faction.Lords;
 
@@ -88,7 +88,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public bool IsEliminated => _faction.IsEliminated;
 
-    public StatExplainer DailyCrimeRatingChangeExplained => _faction.DailyCrimeRatingChangeExplained;
+    public ExplainedNumber DailyCrimeRatingChangeExplained => _faction.DailyCrimeRatingChangeExplained;
 
     public CampaignTime NotAttackableByPlayerUntilTime { get => _faction.NotAttackableByPlayerUntilTime; set => _faction.NotAttackableByPlayerUntilTime = value; }
 
