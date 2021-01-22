@@ -59,6 +59,29 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
+    public void Compare_XShouldBeGreaterThanY_XIsNull()
+    {
+      _mockX.SetupGet(x => x.IsNull).Returns(true);
+      _mockY.SetupGet(y => y.IsNull).Returns(false);
+
+      var result = _sut.Compare(_mockX.Object, _mockY.Object);
+
+      result.ShouldBe(Constants.Comparer.XIsGreaterThanY);
+    }
+
+    [Test]
+    public void Compare_XShouldBeLessThanY_XIsNull()
+    {
+      _mockX.SetupGet(x => x.IsNull).Returns(true);
+      _mockY.SetupGet(y => y.IsNull).Returns(false);
+      _yMeetsRequirements = true;
+
+      var result = _sut.Compare(_mockX.Object, _mockY.Object);
+
+      result.ShouldBe(Constants.Comparer.XIsLessThanY);
+    }
+
+    [Test]
     public void Compare_XShouldBeGreaterThanY_XMeetsRequirements()
     {
       _mockX.SetupGet(x => x.IsNull).Returns(false);

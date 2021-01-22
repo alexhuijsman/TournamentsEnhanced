@@ -6,13 +6,12 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "build (DEBUG)",
-        "build unit tests",
-        "generate code coverage report"
+        "build unit tests"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "generate code coverage report",
+      "label": "Generate code coverage report",
       "command": "dotnet",
       "args": [
         "test",
