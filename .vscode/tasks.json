@@ -6,12 +6,12 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "build (DEBUG)",
-        "test"
+        "build unit tests"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "test",
+      "label": "build unit tests",
       "command": "dotnet",
       "args": [
         "msbuild",
