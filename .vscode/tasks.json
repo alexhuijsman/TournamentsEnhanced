@@ -6,9 +6,22 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "build (DEBUG)",
-        "build unit tests"
+        "build unit tests",
+        "generate code coverage report"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "generate code coverage report",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "--no-build",
+        "/p:CollectCoverage=true",
+        "/p:CoverletOutputFormat=lcov",
+        "/p:CoverletOutput=../lcov.info",
+      ],
+      "problemMatcher": "$msCompile",
     },
     {
       "label": "build unit tests",

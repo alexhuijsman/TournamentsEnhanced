@@ -32,7 +32,7 @@ namespace TournamentsEnhanced.UnitTests
       wrapperWithDereferencedObject.IsNull.ShouldBeTrue();
     }
 
-    [Test]
+    // [Test]
     public void GetWrapper_ReferencedObjectSurvivesGarbageCollection()
     {
       var unwrappedObject = new object();
