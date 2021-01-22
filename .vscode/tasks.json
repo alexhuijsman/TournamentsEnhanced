@@ -7,7 +7,8 @@
       "dependsOn": [
         "build (DEBUG)",
         "build unit tests",
-        "Watch for code coverage report",
+        "Watch for code coverage changes",
+        "Sleep 500ms",
         "Generate code coverage report"
       ],
       "problemMatcher": "$msCompile"
@@ -16,6 +17,14 @@
       "label": "Watch for code coverage report",
       "command": "${command:coverage-gutters.watchCoverageAndVisibleEditors}",
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Sleep 500ms",
+      "command": "sleep",
+      "args": [
+        ".5s"
+      ],
+      "problemMatcher": []
     },
     {
       "label": "Generate code coverage report",
