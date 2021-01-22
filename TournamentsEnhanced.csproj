@@ -114,4 +114,7 @@
     </Reference>
   </ItemGroup>
 
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)..\.." />
+  </Target> 
 </Project>
