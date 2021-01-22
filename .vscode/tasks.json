@@ -8,7 +8,6 @@
         "build (DEBUG)",
         "build unit tests",
         "Watch for code coverage changes",
-        "Sleep",
         "Generate code coverage report"
       ],
       "problemMatcher": "$msCompile"
@@ -19,19 +18,13 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Sleep",
-      "command": "sleep",
-      "args": [
-        "1s"
-      ],
-      "problemMatcher": []
-    },
-    {
       "label": "Generate code coverage report",
       "command": "dotnet",
       "args": [
         "test",
         "--no-build",
+        "/p:Include=\"[TournamentsEnhanced[Test]?.dll]*\"",
+        "/p:SkipAutoProps=true",
         "/p:CollectCoverage=true",
         "/p:CoverletOutputFormat=lcov",
         "/p:CoverletOutput=../lcov.info"
