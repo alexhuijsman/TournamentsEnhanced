@@ -2,32 +2,31 @@ using System;
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using Shouldly;
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace TournamentsEnhanced.UnitTests
 {
-  public class FinderBaseTests
+  public partial class FinderBaseTests
   {
     private FinderBaseImpl _sut;
     private Mock<FindOptionBaseImpl> _mockFindOptions;
-    private List<Mock<MBWrapperBaseImpl>> _mockCandidates = new List<Mock<MBWrapperBaseImpl>>();
+    private List<MBWrapperBaseImpl> _candidates = new List<MBWrapperBaseImpl>();
+    private IComparer<MBWrapperBaseImpl>[] _comparers;
+    private IComparer<MBWrapperBaseImpl>[] _fallbackComparers;
 
     [SetUp]
     public void SetUp()
     {
       _sut = new FinderBaseImpl();
-      _mockCandidates.Clear();
+      _candidates.Clear();
+      _comparers = new IComparer<MBWrapperBaseImpl>[] { };
+      _fallbackComparers = new IComparer<MBWrapperBaseImpl>[] { };
       _mockFindOptions = new Mock<FindOptionBaseImpl>();
-      _mockFindOptions.SetupGet(findOptions => findOptions.Candidates).Returns(_mockCandidates.ConvertAll<MBWrapperBaseImpl>(mockCandidate => mockCandidate.Object));
-    }
-
-    [Test]
-    public void Find_EmptyOptions_DoesNotThrowException()
-    {
-      Should.NotThrow(() => _sut.Find(_mockFindOptions.Object));
+      _mockFindOptions.SetupGet(findOptions => findOptions.Candidates).Returns(_candidates);
+      _mockFindOptions.SetupGet(findOptions => findOptions.Comparers).Returns(_comparers);
+      _mockFindOptions.SetupGet(findOptions => findOptions.FallbackComparers).Returns(_fallbackComparers);
     }
 
     public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, MBWrapperBaseImpl, object>

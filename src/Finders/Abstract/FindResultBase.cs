@@ -10,9 +10,9 @@ namespace TournamentsEnhanced.Finder.Abstract
   where T : class
   {
     public List<W> AllQualifiedCandidates { get; protected set; }
-    public W Nominee => Failed ? null : AllQualifiedCandidates[0];
-    public W RunnerUp => Failed ? null : AllQualifiedCandidates.Count <= 1 ? null : AllQualifiedCandidates[1];
-    public bool HasRunnerUp => RunnerUp != null;
+    public W Nominee => Failed ? MBWrapperBase<W, T>.Null : AllQualifiedCandidates[0];
+    public W RunnerUp => Failed ? MBWrapperBase<W, T>.Null : AllQualifiedCandidates.Count <= 1 ? MBWrapperBase<W, T>.Null : AllQualifiedCandidates[1];
+    public bool HasRunnerUp => RunnerUp != MBWrapperBase<W, T>.Null;
 
     public FindResultBase() { }
 
