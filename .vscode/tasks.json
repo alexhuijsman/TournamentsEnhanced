@@ -8,7 +8,7 @@
         "build (DEBUG)",
         "build unit tests",
         "Watch for code coverage changes",
-        "Sleep 500ms",
+        "Sleep",
         "Generate code coverage report"
       ],
       "problemMatcher": "$msCompile"
@@ -19,10 +19,10 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Sleep 500ms",
+      "label": "Sleep",
       "command": "sleep",
       "args": [
-        ".5s"
+        "1s"
       ],
       "problemMatcher": []
     },
