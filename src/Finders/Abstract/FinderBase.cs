@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.Finder.Abstract
         FindResultBase<R, W, T>.Success(remainingCandidates);
     }
 
-    protected List<W> SortAndFilterByComparers(List<W> candidates, IComparer<W>[] comparers)
+    private List<W> SortAndFilterByComparers(List<W> candidates, IComparer<W>[] comparers)
     {
       candidates.Add(MBWrapperBase<W, T>.Null);
 

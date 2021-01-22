@@ -7,10 +7,10 @@ namespace TournamentsEnhanced.Finder
   public class FindOptionsBase<W>
   where W : WrapperBase
   {
-    public List<W> Candidates { get; set; }
-    public IComparer<W>[] Comparers { get; set; }
-    public IComparer<W>[] FallbackComparers { get; set; }
+    public virtual List<W> Candidates { get; set; }
+    public virtual IComparer<W>[] Comparers { get; set; }
+    public virtual IComparer<W>[] FallbackComparers { get; set; }
 
-    public bool HasFallbackComparers => FallbackComparers != null;
+    public virtual bool HasFallbackComparers => FallbackComparers != null;
   }
 }
