@@ -15,7 +15,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
       {
         T unwrappedObject = null;
 
-        base.UnwrappedObject.TryGetTarget(out unwrappedObject);
+        base.UnwrappedObject?.TryGetTarget(out unwrappedObject);
 
         return unwrappedObject;
       }
