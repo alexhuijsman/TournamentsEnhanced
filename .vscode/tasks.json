@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build & Test",
+      "label": "Build, Test, Report",
       "dependsOrder": "sequence",
       "dependsOn": [
         "build (DEBUG)",
@@ -10,6 +10,15 @@
         "Watch for code coverage changes",
         "Sleep",
         "Generate code coverage report"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Build & Test",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "build (DEBUG)",
+        "build unit tests"
       ],
       "problemMatcher": "$msCompile"
     },
