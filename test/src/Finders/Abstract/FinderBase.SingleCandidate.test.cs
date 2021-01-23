@@ -15,14 +15,6 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_DoesNotThrowException()
-    {
-      SetUpSingleCandidate();
-
-      Should.NotThrow(() => _sut.Find(_mockFindOptions.Object));
-    }
-
-    [Test]
     public void Find_SingleCandidate_Result_ShouldNotFail()
     {
       SetUpSingleCandidate();

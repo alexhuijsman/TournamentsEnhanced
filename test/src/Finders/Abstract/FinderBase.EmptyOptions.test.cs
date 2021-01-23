@@ -6,12 +6,6 @@ namespace TournamentsEnhanced.UnitTests
   public partial class FinderBaseTests
   {
     [Test]
-    public void Find_EmptyOptions_DoesNotThrowException()
-    {
-      Should.NotThrow(() => _sut.Find(_mockFindOptions.Object));
-    }
-
-    [Test]
     public void Find_EmptyOptions_Result_ShouldFail()
     {
       var result = _sut.Find(_mockFindOptions.Object);
