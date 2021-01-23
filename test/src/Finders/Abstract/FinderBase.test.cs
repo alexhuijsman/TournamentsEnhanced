@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
@@ -11,71 +12,172 @@ namespace TournamentsEnhanced.UnitTests
   {
     private FinderBaseImpl _sut;
     private Mock<FindOptionBaseImpl> _mockFindOptions;
-    private Mock<MBWrapperBaseImpl> _mockCandidate;
-    private Mock<IMBWrapperComparer> _mockQualifyAllComparer;
-    private List<MBWrapperBaseImpl> _candidates = new List<MBWrapperBaseImpl>();
-    private IComparer<MBWrapperBaseImpl>[] _comparers;
-    private IComparer<MBWrapperBaseImpl>[] _fallbackComparers;
+    private Mock<CandidateImpl>[] _mockCandidates;
+    private List<CandidateImpl> _candidates;
+    private Mock<IMBWrapperComparer>[] _mockComparers;
+    private IComparer<CandidateImpl>[] _comparers;
+    private Mock<IMBWrapperComparer>[] _mockFallbackComparers;
+    private IComparer<CandidateImpl>[] _fallbackComparers;
 
     [SetUp]
     public void SetUp()
     {
       _sut = new FinderBaseImpl();
-      _candidates.Clear();
-      _comparers = new IComparer<MBWrapperBaseImpl>[] { };
-      _fallbackComparers = new IComparer<MBWrapperBaseImpl>[] { };
-
-      _mockQualifyAllComparer = new Mock<IMBWrapperComparer>();
-      _mockQualifyAllComparer.Setup(
-        comparer => comparer.Compare(
-          It.IsAny<MBWrapperBaseImpl>(),
-          It.IsAny<MBWrapperBaseImpl>()))
-        .Returns((MBWrapperBaseImpl x, MBWrapperBaseImpl y) => Compare_QualifyAll(x, y));
-
       _mockFindOptions = new Mock<FindOptionBaseImpl>();
+
+      SetUpMockCandidates();
+      SetUpMockComparers();
+      SetUpMockFallbackComparers();
+    }
+
+    private void SetUpMockCandidates(params MockCandidateType[] candidateTypes)
+    {
+      _mockCandidates = new Mock<CandidateImpl>[candidateTypes.Length];
+      for (int i = 0; i < _mockCandidates.Length; i++)
+      {
+        _mockCandidates[i] = GetMockCandidateByType(candidateTypes[i]);
+      }
+
+      _candidates = new List<CandidateImpl>(_mockCandidates.Length);
+      for (int i = 0; i < _mockCandidates.Length; i++)
+      {
+        _candidates.Add(_mockCandidates[i].Object);
+      }
+
       _mockFindOptions.SetupGet(findOptions => findOptions.Candidates).Returns(_candidates);
+    }
+
+    private void SetUpMockComparers(params MockComparerType[] comparerTypes)
+    {
+      _mockComparers = new Mock<IMBWrapperComparer>[comparerTypes.Length];
+      for (int i = 0; i < _mockComparers.Length; i++)
+      {
+        _mockComparers[i] = GetMockComparerByType(comparerTypes[i]);
+      }
+
+      _comparers = new IComparer<CandidateImpl>[_mockComparers.Length];
+      for (int i = 0; i < _mockComparers.Length; i++)
+      {
+        _comparers[i] = _mockComparers[i].Object;
+      }
+
       _mockFindOptions.SetupGet(findOptions => findOptions.Comparers).Returns(_comparers);
+    }
+
+    private void SetUpMockFallbackComparers(params MockComparerType[] comparerTypes)
+    {
+
+      _mockFallbackComparers = new Mock<IMBWrapperComparer>[comparerTypes.Length];
+      for (int i = 0; i < _mockFallbackComparers.Length; i++)
+      {
+        _mockFallbackComparers[i] = GetMockComparerByType(comparerTypes[i]);
+      }
+
+      _fallbackComparers = new IComparer<CandidateImpl>[_mockFallbackComparers.Length];
+      for (int i = 0; i < _mockFallbackComparers.Length; i++)
+      {
+        _fallbackComparers[i] = _mockFallbackComparers[i].Object;
+      }
+
       _mockFindOptions.SetupGet(findOptions => findOptions.FallbackComparers).Returns(_fallbackComparers);
     }
 
-    private void SetUpSingleCandidate()
+    private Mock<IMBWrapperComparer> GetMockComparerByType(MockComparerType mockComparerType)
     {
-      _mockCandidate = new Mock<MBWrapperBaseImpl>();
-      _mockCandidate.SetupGet(candidate => candidate.IsNull).Returns(false);
-      _candidates.Add(_mockCandidate.Object);
-    }
+      Mock<IMBWrapperComparer> mockComparer;
 
-    private void SetUpSingleComparer()
-    {
-      _comparers = new IComparer<MBWrapperBaseImpl>[]
+      switch (mockComparerType)
       {
-        _mockQualifyAllComparer.Object
-      };
+        case MockComparerType.QualifyAll:
+          mockComparer = InstantiateMockComparer(Compare_QualifyAll);
+          break;
+        case MockComparerType.QualifyNone:
+          mockComparer = InstantiateMockComparer(Compare_QualifyNone);
+          break;
+        default:
+          throw new ArgumentOutOfRangeException("mockComparerType");
+      }
+
+      return mockComparer;
     }
 
-    private int Compare_QualifyAll(MBWrapperBaseImpl x, MBWrapperBaseImpl y)
+    private Mock<CandidateImpl> GetMockCandidateByType(MockCandidateType mockCandidateType)
+    {
+      var mockCandidate = new Mock<CandidateImpl>();
+      mockCandidate.SetupGet(candidate => candidate.MockCandidateType).Returns(mockCandidateType);
+
+      return mockCandidate;
+    }
+
+    private Mock<IMBWrapperComparer> InstantiateMockComparer(Func<CandidateImpl, CandidateImpl, int> compareFunc)
+    {
+      var mockComparer = new Mock<IMBWrapperComparer>();
+
+      mockComparer.Setup(
+        comparer => comparer.Compare(
+          It.IsAny<CandidateImpl>(),
+          It.IsAny<CandidateImpl>()))
+        .Returns(compareFunc);
+
+      return mockComparer;
+    }
+
+    private Mock<CandidateImpl> InstantiateMockCandidate(MockCandidateType mockCandidateType)
+    {
+      var mockCandidate = new Mock<CandidateImpl>();
+
+      mockCandidate.SetupGet(
+        candidate => candidate.MockCandidateType).Returns(mockCandidateType);
+
+      return mockCandidate;
+    }
+
+    private int Compare_QualifyAll(CandidateImpl x, CandidateImpl y)
     {
       if (x.IsNull) return Constants.Comparer.XIsLessThanY;
       if (y.IsNull) return Constants.Comparer.XIsGreaterThanY;
       return Constants.Comparer.XIsEqualToY;
     }
 
-    public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, MBWrapperBaseImpl, object>
+    private int Compare_QualifyNone(CandidateImpl x, CandidateImpl y)
+    {
+      if (x.IsNull) return Constants.Comparer.XIsGreaterThanY;
+      if (y.IsNull) return Constants.Comparer.XIsLessThanY;
+      return Constants.Comparer.XIsEqualToY;
+    }
+
+    public enum MockComparerType
+    {
+      QualifyAll,
+      QualifyNone
+    }
+
+    public enum MockCandidateType
+    {
+      MostQualified,
+      Qualified,
+      LeastQualified,
+      Unqualified,
+    }
+
+    public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, CandidateImpl, object>
     {
     }
-    public class FindResultBaseImpl : FindResultBase<FindResultBaseImpl, MBWrapperBaseImpl, object>
+    public class FindResultBaseImpl : FindResultBase<FindResultBaseImpl, CandidateImpl, object>
     {
     }
-    public class FindOptionBaseImpl : FindOptionsBase<MBWrapperBaseImpl>
+    public class FindOptionBaseImpl : FindOptionsBase<CandidateImpl>
     {
     }
 
-    public interface IMBWrapperComparer : IComparer<MBWrapperBaseImpl> { }
+    public interface IMBWrapperComparer : IComparer<CandidateImpl> { }
 
-    public class MBWrapperBaseImpl : MBWrapperBase<MBWrapperBaseImpl, object>
+    public class CandidateImpl : MBWrapperBase<CandidateImpl, object>
     {
-      public MBWrapperBaseImpl() { }
-      public MBWrapperBaseImpl(object obj) : base(obj) { }
+      public virtual MockCandidateType MockCandidateType { get; }
+
+      public CandidateImpl() { }
+      public CandidateImpl(object obj) : base(obj) { }
     }
   }
 }

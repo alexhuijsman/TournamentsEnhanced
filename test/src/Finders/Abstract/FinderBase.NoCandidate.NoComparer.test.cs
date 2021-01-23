@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.UnitTests
     {
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Nominee.ShouldBe(MBWrapperBaseImpl.Null);
+      result.Nominee.ShouldBe(CandidateImpl.Null);
     }
 
     [Test]
@@ -42,7 +42,7 @@ namespace TournamentsEnhanced.UnitTests
     {
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.RunnerUp.ShouldBe(MBWrapperBaseImpl.Null);
+      result.RunnerUp.ShouldBe(CandidateImpl.Null);
     }
 
     [Test]

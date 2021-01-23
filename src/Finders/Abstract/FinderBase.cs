@@ -51,9 +51,7 @@ namespace TournamentsEnhanced.Finder.Abstract
         return;
       }
 
-      var numRecordsToRemove = candidates.Count - nullIndex - 1;
-
-      candidates.RemoveRange(nullIndex + 1, numRecordsToRemove);
+      candidates.RemoveRange(0, nullIndex + 1);
 
     }
 
