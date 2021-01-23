@@ -6,16 +6,8 @@ namespace TournamentsEnhanced.UnitTests
 {
   public partial class FinderBaseTests
   {
-    private Mock<MBWrapperBaseImpl> _mockCandidate;
-    private void SetUpSingleCandidate()
-    {
-      _mockCandidate = new Mock<MBWrapperBaseImpl>();
-      _mockCandidate.SetupGet(candidate => candidate.IsNull).Returns(false);
-      _candidates.Add(_mockCandidate.Object);
-    }
-
     [Test]
-    public void Find_SingleCandidate_Result_ShouldNotFail()
+    public void Find_SingleCandidate_NoComparer_Result_ShouldNotFail()
     {
       SetUpSingleCandidate();
 
@@ -25,7 +17,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_Result_ShouldSucceed()
+    public void Find_SingleCandidate_NoComparer_Result_ShouldSucceed()
     {
       SetUpSingleCandidate();
 
@@ -35,7 +27,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_ResultNominee_ShouldBeExpected()
+    public void Find_SingleCandidate_NoComparer_ResultNominee_ShouldBeExpected()
     {
       SetUpSingleCandidate();
 
@@ -45,7 +37,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_ResultHasRunnerUp_ShouldBeFalse()
+    public void Find_SingleCandidate_NoComparer_ResultHasRunnerUp_ShouldBeFalse()
     {
       SetUpSingleCandidate();
 
@@ -55,7 +47,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_ResultRunnerUp_ShouldBeNull()
+    public void Find_SingleCandidate_NoComparer_ResultRunnerUp_ShouldBeNull()
     {
       SetUpSingleCandidate();
 
@@ -65,7 +57,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_ResultAllQualifiedCandidates_ShouldBeSingle()
+    public void Find_SingleCandidate_NoComparer_ResultAllQualifiedCandidates_ShouldBeSingle()
     {
       SetUpSingleCandidate();
 
