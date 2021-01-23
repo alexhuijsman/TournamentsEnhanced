@@ -35,7 +35,7 @@
       "label": "build unit tests",
       "command": "dotnet",
       "args": [
-        "msbuild",
+        "build",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
@@ -48,7 +48,7 @@
       "label": "build (DEBUG)",
       "command": "dotnet",
       "args": [
-        "msbuild",
+        "build",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
@@ -61,7 +61,7 @@
       "label": "build (DEBUG) (INSTALL TO BANNERLORD)",
       "command": "dotnet",
       "args": [
-        "msbuild",
+        "build",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
@@ -75,7 +75,7 @@
       "label": "build (DEBUG) (LAPTOP) (INSTALL TO BANNERLORD)",
       "command": "dotnet",
       "args": [
-        "msbuild",
+        "build",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
@@ -89,7 +89,7 @@
       "label": "build (RELEASE)",
       "command": "dotnet",
       "args": [
-        "msbuild",
+        "build",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
@@ -106,7 +106,7 @@
       "label": "build (RELEASE) (INSTALL TO BANNERLORD)",
       "command": "dotnet",
       "args": [
-        "msbuild",
+        "build",
         "/t:clean;build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
