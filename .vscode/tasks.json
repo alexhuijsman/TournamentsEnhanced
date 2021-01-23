@@ -8,6 +8,7 @@
         "build (DEBUG)",
         "build unit tests",
         "Watch for code coverage changes",
+        "Sleep",
         "Generate code coverage report"
       ],
       "problemMatcher": "$msCompile"
@@ -16,6 +17,14 @@
       "label": "Watch for code coverage report",
       "command": "${command:coverage-gutters.watchCoverageAndVisibleEditors}",
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Sleep",
+      "command": "sleep",
+      "args": [
+        "1s",
+      ],
+      "problemMatcher": []
     },
     {
       "label": "Generate code coverage report",
