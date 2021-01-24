@@ -1,16 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build"
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{94F1D275-34A0-4B15-B492-F2D7A9196E72}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>TournamentsEnhanced</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <ApplicationVersion>1.5.7.0</ApplicationVersion>
-    <FileAlignment>512</FileAlignment>
-    <RootNamespace>TournamentsEnhanced</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <!-- <PackageId>Tournaments Enhanced</PackageId> -->
+    <!-- <Authors>Alex Huijsman</Authors> -->
+    <!-- <Copyright>Copyright © 2021 Alex Huijsman  Copyright © 2020 FallenFromGr4ce</Copyright> -->
+    <!-- <Description></Description> -->
+    <!-- <AssemblyVersion>1.5.6.2</AssemblyVersion> -->
+    <!-- <FileVersion>1.5.6.2</FileVersion> -->
+  </PropertyGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <OutDir>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -27,7 +30,17 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <OutputPath>$(BannerlordPath)\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugOutputToBannerlordLaptop|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(BannerlordPath)\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,95 +58,65 @@
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <OutputPath>$(BannerlordPath)\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>lib\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Compile Remove="test\**" />
+    <EmbeddedResource Remove="test\**" />
+    <None Remove="test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.0.4" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ModLib.Definitions">
       <HintPath>lib\ModLib.Definitions.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.CampaignSystem.ViewModelCollection">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.Core">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
     </Reference>
-    <Reference Include="TaleWorlds.Core.ViewModelCollection">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="TaleWorlds.InputSystem">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.Library">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.AutoGenerated">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.AutoGenerated.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.Diamond">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Diamond.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.GauntletUI.Widgets">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.GauntletUI.Widgets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.Helpers">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Helpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.ViewModelCollection">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.Localization">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.ObjectSystem">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
+    <Reference Include="TaleWorlds.SaveSystem">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.SaveSystem.dll</HintPath>
+    </Reference>
   </ItemGroup>
+
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)\..\.." />
+    <Copy SourceFiles="SubModule.xml" DestinationFolder="$(OutDir)..\.." />
   </Target>
-  <ItemGroup>
-    <Compile Include="src/patches/AddParticipantsPatch.cs" />
-    <Compile Include="src/TournamentKB.cs" />
-    <Compile Include="src/patches/DisableTournamentSpawnPatch.cs" />
-    <Compile Include="src/patches/TournamentStartMatchPatch.cs" />
-    <Compile Include="src/patches/TournamentEndMatchPatch.cs" />
-    <Compile Include="src/patches/TournamentParticipantPatch.cs" />
-    <Compile Include="src/patches/TournamentXpOnHitPatch.cs" />
-    <Compile Include="src/patches/TournamentRenownPatch.cs" />
-    <Compile Include="src/patches/TournamentRewardsPatch.cs" />
-    <Compile Include="src/util/Utilities.cs" />
-    <Compile Include="src/util/ThreadSafeRandom.cs" />
-    <Compile Include="src/Settings.cs" />
-    <Compile Include="src/BehaviorBase.cs" />
-    <Compile Include="src/Main.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

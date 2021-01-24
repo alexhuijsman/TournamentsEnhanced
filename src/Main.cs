@@ -18,15 +18,8 @@ namespace TournamentsEnhanced
     {
       InformationManager.DisplayMessage(new InformationMessage($"Loaded {ModuleName} v{ModuleVersion}", Color.FromUint(4282569842U)));
 
-      try
-      {
         var harmony = new Harmony(ModuleName);
         harmony.PatchAll();
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show($"Error Initialising Tournaments Enhanced:\n\n{ex}");
-      }
     }
 
     protected override void OnGameStart(Game game, IGameStarter gameStarter)

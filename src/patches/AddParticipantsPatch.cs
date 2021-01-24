@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls.Primitives;
+﻿using System.Collections.Generic;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
-using TaleWorlds.MountAndBlade;
 
 namespace TournamentsEnhanced
 {
