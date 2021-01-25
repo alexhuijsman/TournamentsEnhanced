@@ -5,10 +5,7 @@
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",
-      "processId": "${command:pickProcess}",
-      "logging": {
-        "engineLogging": true
-      }
+      "processId": "${command:pickProcess}"
     }
   ]
 }

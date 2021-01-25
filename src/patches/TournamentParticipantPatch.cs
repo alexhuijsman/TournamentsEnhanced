@@ -61,7 +61,7 @@ namespace TournamentsEnhanced
       {
         IEnumerable<Hero> companions = Hero.MainHero.CompanionsInParty;
         List<Hero> companionList = companions.ToList();
-        if (Hero.MainHero.Spouse != null && Hero.MainHero.Spouse.CurrentSettlement.Name.Equals(settlement.Name))
+  if (Hero.MainHero.Spouse != null && Hero.MainHero.Spouse.CurrentSettlement != null && Hero.MainHero.Spouse.CurrentSettlement.Name.Equals(settlement.Name))
         {
           companionList.Add(Hero.MainHero.Spouse);
         }
