@@ -149,7 +149,7 @@ namespace TournamentsEnhanced
 
       while (enumerator.MoveNext())
       {
-        if (Utilities.IsTierable(enumerator.Current) && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
+        if (Utilities.IsTierable(enumerator.Current) && !enumerator.Current.IsCraftedByPlayer && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
         {
           tier.Add(enumerator.Current);
         }
