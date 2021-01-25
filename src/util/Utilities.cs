@@ -150,7 +150,7 @@ namespace TournamentsEnhanced
 
       while (enumerator.MoveNext())
       {
-        if (enumerator.Current.IsCraftedByPlayer)
+        if (enumerator.Current.IsCraftedByPlayer || enumerator.Current.IsCraftedWeapon)
         {
           continue;
         }
