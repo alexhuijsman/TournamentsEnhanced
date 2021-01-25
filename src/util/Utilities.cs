@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
@@ -144,34 +145,30 @@ namespace TournamentsEnhanced
 
     public static ItemObject GetTournamentPrize()
     {
-      List<ItemObject>.Enumerator enumerator = ItemObject.All.GetEnumerator();
-      List<ItemObject> qualifyingItems = new List<ItemObject>();
-      List<ItemObject> fallbackQualifyingItems = new List<ItemObject>();
+      var itemPool = ItemObject.All.ToList().Shuffle();
+      var qualifyingItems = new List<ItemObject>();
+      var fallbackQualifyingItems = new List<ItemObject>();
 
-      while (enumerator.MoveNext())
+      foreach (var item in itemPool)
       {
-        if (enumerator.Current.IsCraftedByPlayer || enumerator.Current.IsCraftedWeapon)
+        if (item.IsCraftedByPlayer || item.IsCraftedWeapon || !Utilities.IsTierable(item))
         {
           continue;
         }
 
-        if (Utilities.IsTierable(enumerator.Current) && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
+        if (item.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
         {
-          qualifyingItems.Add(enumerator.Current);
+          qualifyingItems.Add(item);
         }
         else
         {
-          fallbackQualifyingItems.Add(enumerator.Current);
+          fallbackQualifyingItems.Add(item);
         }
       }
-      if (!qualifyingItems.IsEmpty())
-      {
-        return qualifyingItems.GetRandomElement();
-      }
-      else
-      {
-        return fallbackQualifyingItems.GetRandomElement();
-      }
+
+      return qualifyingItems.IsEmpty() ?
+        fallbackQualifyingItems.GetRandomElement() :
+        qualifyingItems.GetRandomElement();
     }
 
     public static ValueTuple<SkillObject, int> TournamentSkillXpGain(Hero winner)
