@@ -48,8 +48,7 @@ refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
 INVESTIGATE
 -----------
 L companions joining in fights have incorrect or missing icon. May be bug in Bannerlord?
-S How many days until a tournament goes away on its own?
-S investigate other tournament logic
+M Possible to replace betting logic, allowing bets on others and increased betting limit?
 
 OPTION
 ------
