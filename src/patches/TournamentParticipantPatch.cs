@@ -21,7 +21,7 @@ namespace TournamentsEnhanced
           bool exists = false;
           for (int t = 0; t < __result.Count; t++)
           {
-            if (__result[t].Name.Equals(potentialParticipant.Name) || potentialParticipant.IsPlayerCharacter || potentialParticipant.Age < 18.00)
+            if (__result[t].Name.Equals(potentialParticipant.Name) || potentialParticipant.IsPlayerCharacter || potentialParticipant.HeroObject.IsDead || potentialParticipant.Age < 18.00)
             {
               exists = true;
               break;
@@ -44,7 +44,7 @@ namespace TournamentsEnhanced
           bool exists = false;
           for (int t = 0; t < __result.Count; t++)
           {
-            if (__result[t].Name.Equals(potentialParticipant.Name) || potentialParticipant.IsPlayerCharacter || potentialParticipant.Age < 18.00)
+            if (__result[t].Name.Equals(potentialParticipant.Name) || potentialParticipant.IsPlayerCharacter || potentialParticipant.HeroObject.IsDead || potentialParticipant.Age < 18.00)
             {
               exists = true;
               break;
@@ -56,12 +56,12 @@ namespace TournamentsEnhanced
           }
         }
       }
-      //If the player wants to bring companions with him
+
       if (includePlayer && TournamentsEnhancedSettings.Instance.BringCompanions)
       {
         IEnumerable<Hero> companions = Hero.MainHero.CompanionsInParty;
         List<Hero> companionList = companions.ToList();
-  if (Hero.MainHero.Spouse != null && Hero.MainHero.Spouse.CurrentSettlement != null && Hero.MainHero.Spouse.CurrentSettlement.Name.Equals(settlement.Name))
+        if (Hero.MainHero.Spouse != null && Hero.MainHero.Spouse.CurrentSettlement != null && Hero.MainHero.Spouse.IsAlive && Hero.MainHero.Spouse.CurrentSettlement.Name.Equals(settlement.Name))
         {
           companionList.Add(Hero.MainHero.Spouse);
         }
@@ -73,7 +73,7 @@ namespace TournamentsEnhanced
           bool exists = false;
           for (int t = 0; t < __result.Count; t++)
           {
-            if (__result[t].Name.Equals(companionEnumerator.Current.CharacterObject.Name) || companionEnumerator.Current.CharacterObject.IsPlayerCharacter || companionEnumerator.Current.CharacterObject.Age < 18.00)
+            if (__result[t].Name.Equals(companionEnumerator.Current.CharacterObject.Name) || companionEnumerator.Current.CharacterObject.IsPlayerCharacter || companionEnumerator.Current.CharacterObject.HeroObject.IsDead || companionEnumerator.Current.CharacterObject.Age < 18.00)
             {
               exists = true;
               break;
