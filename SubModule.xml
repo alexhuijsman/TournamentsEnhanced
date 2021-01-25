@@ -9,11 +9,11 @@
   <Official value="false" />
   <DependedModules>
     <DependedModule Id="Bannerlord.Harmony" Order="LoadBeforeThis" DependentVersion="v2.0.4.53" />
-    <DependedModule Id="Native" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
-    <DependedModule Id="SandBoxCore" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
-    <DependedModule Id="Sandbox" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
-    <DependedModule Id="CustomBattle" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
-    <DependedModule Id="StoryMode" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
+    <DependedModule Id="Native" Order="LoadBeforeThis" DependentVersion="e$(gameVersion)" />
+    <DependedModule Id="SandBoxCore" Order="LoadBeforeThis" DependentVersion="e$(gameVersion)" />
+    <DependedModule Id="Sandbox" Order="LoadBeforeThis" DependentVersion="e$(gameVersion)" />
+    <DependedModule Id="CustomBattle" Order="LoadBeforeThis" DependentVersion="e$(gameVersion)" />
+    <DependedModule Id="StoryMode" Order="LoadBeforeThis" DependentVersion="e$(gameVersion)" />
   </DependedModules>
   <SubModules>
     <SubModule>
