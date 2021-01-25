@@ -2,18 +2,18 @@
 <Module>
   <Name value="Tournaments Enhanced" />
   <Id value="TournamentsEnhanced" />
-  <Version value="v1.5.6.6" />
+  <Version value="v$(modVersion)" />
   <SingleplayerModule value="true" />
   <MultiplayerModule value="false" />
   <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/1449" />
   <Official value="false" />
   <DependedModules>
     <DependedModule Id="Bannerlord.Harmony" Order="LoadBeforeThis" DependentVersion="v2.0.4.53" />
-    <DependedModule Id="Native" Order="LoadBeforeThis" DependentVersion="e1.5.6"/>
-    <DependedModule Id="SandBoxCore" Order="LoadBeforeThis" DependentVersion="e1.5.6"/>
-    <DependedModule Id="Sandbox" Order="LoadBeforeThis" DependentVersion="e1.5.6"/>
-    <DependedModule Id="CustomBattle" Order="LoadBeforeThis" DependentVersion="e1.5.6"/>
-    <DependedModule Id="StoryMode" Order="LoadBeforeThis" DependentVersion="e1.5.6"/>
+    <DependedModule Id="Native" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
+    <DependedModule Id="SandBoxCore" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
+    <DependedModule Id="Sandbox" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
+    <DependedModule Id="CustomBattle" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
+    <DependedModule Id="StoryMode" Order="LoadBeforeThis" DependentVersion="$(gameVersion)"/>
   </DependedModules>
   <SubModules>
     <SubModule>
