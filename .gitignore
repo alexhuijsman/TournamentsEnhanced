@@ -223,4 +223,4 @@ stage1/
 
 # ETL traces    
 *.etl.zip
-lcov*.info
+lcov.info

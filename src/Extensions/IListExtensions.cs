@@ -8,13 +8,14 @@ namespace TournamentsEnhanced
 {
   static class IListExtensions
   {
-    public static IList<T> DeterministicShuffle<T>(this IList<T> list)
+    public static IList<T> Shuffle<T>(this IList<T> list)
     {
       int n = list.Count;
+      int k;
       while (n > 1)
       {
         n--;
-        int k = MBRandom.DeterministicRandomInt(n + 1);
+        k = MBRandom.DeterministicRandomInt(n + 1);
         T value = list[k];
         list[k] = list[n];
         list[n] = value;

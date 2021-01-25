@@ -5,8 +5,7 @@
       "label": "Build, Test, Report",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "build (DEBUG)",
-        "build unit tests",
+        "Build & Test",
         "Watch for code coverage changes",
         "Sleep",
         "Generate code coverage report"
@@ -19,6 +18,15 @@
       "dependsOn": [
         "build (DEBUG)",
         "build unit tests"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Build, Tag, Zip",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "build (DEBUG) (INSTALL TO BANNERLORD)",
+        "Tag & Zip Release"
       ],
       "problemMatcher": "$msCompile"
     },
@@ -67,6 +75,7 @@
       "command": "dotnet",
       "args": [
         "build",
+        "--no-incremental",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
@@ -80,62 +89,33 @@
       "command": "dotnet",
       "args": [
         "build",
+        "--no-incremental",
         "/t:build",
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
         "/p:Configuration=DebugOutputToBannerlord",
-        "/p:BannerlordPath=C:\\SteamApp\\steamapps\\common\\Mount & Blade II Bannerlord",
+        "/p:VersionTag=$(git describe --exact-match --tags)",
         "${workspaceFolder}/TournamentsEnhanced.csproj"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "build (DEBUG) (LAPTOP) (INSTALL TO BANNERLORD)",
-      "command": "dotnet",
+      "label": "Tag & Zip Release",
+      "type": "shell",
+      "command": "./sh/tag-and-zip-for-release.sh",
       "args": [
-        "build",
-        "/t:build",
-        "/p:GenerateFullPaths=true",
-        "/p:Platform=x64",
-        "/p:Configuration=DebugOutputToBannerlordLaptop",
-        "/p:BannerlordPath=C:\\Program Files (x86)\\Steam\\steamapps\\common\\Mount & Blade II Bannerlord",
-        "${workspaceFolder}/TournamentsEnhanced.csproj"
+        "${input:tag}",
+        "/mnt/c/Program Files (x86)/Steam/steamapps/common/Mount & Blade II Bannerlord/Modules"
       ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build (RELEASE)",
-      "command": "dotnet",
-      "args": [
-        "build",
-        "/t:build",
-        "/p:GenerateFullPaths=true",
-        "/p:Platform=x64",
-        "/p:Configuration=Release",
-        "${workspaceFolder}/TournamentsEnhanced.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    },
-    {
-      "label": "build (RELEASE) (INSTALL TO BANNERLORD)",
-      "command": "dotnet",
-      "args": [
-        "build",
-        "/t:clean;build",
-        "/p:GenerateFullPaths=true",
-        "/p:Platform=x64",
-        "/p:Configuration=ReleaseOutputToBannerlord",
-        "${workspaceFolder}/TournamentsEnhanced.csproj"
-      ],
-      "problemMatcher": "$msCompile",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      "problemMatcher": []
     }
+  ],
+  "inputs": [
+    {
+      "id": "tag",
+      "description": "tag name",
+      "default": "1.X.X.X-main|beta",
+      "type": "promptString"
+    },
   ]
 }

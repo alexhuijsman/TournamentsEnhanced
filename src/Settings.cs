@@ -82,6 +82,9 @@ namespace TournamentsEnhanced
     [SettingProperty("Hosted Tournament Cooldown", "Minimum number of days between player-hosted tournaments.")]
     [SettingPropertyGroup("Tournaments")]
     public int MinDaysBetweenHostedTournaments { get; set; } = Constants.Settings.Default.MinDaysBetweenHostedTournaments;
+    [SettingProperty("Number of Prizes To Choose From", 1, 25, "How many items to choose from when selecting a tournament prize. If set to 1, the prize selection menu option will be hidden.")]
+    [SettingPropertyGroup("Tournaments")]
+    public int NumberOfPrizesToChooseFrom { get; set; } = Constants.Settings.Default.NumberOfPrizesToChooseFrom;
     [SettingProperty("Noble Relation Increase", "Your relation with local nobles will increase by this much when you host a tournament.")]
     [SettingPropertyGroup("Player-Hosted Tournaments")]
     public int NoblesRelationIncrease { get; set; } = Constants.Settings.Default.NoblesRelationIncrease;

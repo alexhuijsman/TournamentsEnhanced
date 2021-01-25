@@ -28,7 +28,7 @@ namespace TournamentsEnhanced.Builders
       }
 
       var numCreated = 0;
-      foreach (var town in townsWithoutExisting.DeterministicShuffle())
+      foreach (var town in townsWithoutExisting.Shuffle())
       {
         if (numCreated >= numToCreate)
         {

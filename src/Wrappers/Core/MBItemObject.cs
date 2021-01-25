@@ -67,7 +67,7 @@ namespace TournamentsEnhanced.Wrappers.Core
     float Appearance { get; }
     bool RecalculateBody { get; }
   }
-  public class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
+  public partial class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
   {
     public static List<MBItemObject> AllTradeGoods => ItemObject.AllTradeGoods.CastList<MBItemObject>();
     public static List<MBItemObject> All => ItemObject.All.CastList<MBItemObject>();
@@ -183,46 +183,6 @@ namespace TournamentsEnhanced.Wrappers.Core
     public float Appearance => UnwrappedObject.Appearance;
 
     public bool RecalculateBody => UnwrappedObject.RecalculateBody;
-
-    public static List<MBItemObject> GetAvailableTournamentPrizes()
-    {
-      var allItems = All;
-      var prizeItems = (List<MBItemObject>)allItems.FindAll((MBItemObject item) => item.IsWorthyTournamentPrizeForMainHero());
-
-      if (prizeItems.Count == 0)
-      {
-        prizeItems.Add(allItems.GetRandomElement());
-      }
-
-      return prizeItems;
-    }
-
-    public bool IsWorthyTournamentPrizeForMainHero()
-    {
-      return IsTierable() && UnwrappedObject.Tier == MBHero.GetMainHeroTournamentRewardTier();
-    }
-
-    public bool IsTierable()
-    {
-      return IsOfAnyMatchingType(Constants.Item.TierableItemTypes);
-    }
-
-    private bool IsOfAnyMatchingType(params ItemTypeEnum[] matchingItemTypes)
-    {
-      var actualItemType = UnwrappedObject.ItemType;
-      var foundMatch = false;
-
-      foreach (var matchingItemType in matchingItemTypes)
-      {
-        if (actualItemType == matchingItemType)
-        {
-          foundMatch = true;
-          break;
-        }
-      }
-
-      return foundMatch;
-    }
 
     public override int GetHashCode() => UnwrappedObject.GetHashCode();
     public override string ToString() => UnwrappedObject.ToString();
