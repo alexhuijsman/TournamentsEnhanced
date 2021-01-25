@@ -5,8 +5,7 @@
       "label": "Build, Test, Report",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "build (DEBUG)",
-        "build unit tests",
+        "Build & Test",
         "Watch for code coverage changes",
         "Sleep",
         "Generate code coverage report"
@@ -86,9 +85,28 @@
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
         "/p:Configuration=DebugOutputToBannerlord",
+        "/p:VersionTag=$(git describe --exact-match --tags)",
         "${workspaceFolder}/TournamentsEnhanced.csproj"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Tag & Zip Release",
+      "type": "shell",
+      "command": "./sh/tag-and-zip-for-release.sh",
+      "args": [
+        "${input:tag}",
+        "/mnt/c/Program Files (x86)/Steam/steamapps/common/Mount & Blade II Bannerlord/Modules"
+      ],
+      "problemMatcher": []
     }
+  ],
+  "inputs": [
+    {
+      "id": "tag",
+      "description": "tag name",
+      "default": "1.X.X.X-main|beta",
+      "type": "promptString"
+    },
   ]
 }
