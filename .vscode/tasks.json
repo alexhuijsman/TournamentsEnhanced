@@ -22,6 +22,15 @@
       "problemMatcher": "$msCompile"
     },
     {
+      "label": "Build, Tag, Zip",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "build (DEBUG) (INSTALL TO BANNERLORD)",
+        "Tag & Zip Release"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
       "label": "Watch for code coverage report",
       "command": "${command:coverage-gutters.watchCoverageAndVisibleEditors}",
       "problemMatcher": "$msCompile"
