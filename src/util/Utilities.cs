@@ -145,22 +145,32 @@ namespace TournamentsEnhanced
     public static ItemObject GetTournamentPrize()
     {
       List<ItemObject>.Enumerator enumerator = ItemObject.All.GetEnumerator();
-      List<ItemObject> tier = new List<ItemObject>();
+      List<ItemObject> qualifyingItems = new List<ItemObject>();
+      List<ItemObject> fallbackQualifyingItems = new List<ItemObject>();
 
       while (enumerator.MoveNext())
       {
-        if (Utilities.IsTierable(enumerator.Current) && !enumerator.Current.IsCraftedByPlayer && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
+        if (enumerator.Current.IsCraftedByPlayer)
         {
-          tier.Add(enumerator.Current);
+          continue;
+        }
+
+        if (Utilities.IsTierable(enumerator.Current) && enumerator.Current.Tier.Equals((ItemObject.ItemTiers)Utilities.RewardTier()))
+        {
+          qualifyingItems.Add(enumerator.Current);
+        }
+        else
+        {
+          fallbackQualifyingItems.Add(enumerator.Current);
         }
       }
-      if (!tier.IsEmpty())
+      if (!qualifyingItems.IsEmpty())
       {
-        return tier.GetRandomElement();
+        return qualifyingItems.GetRandomElement();
       }
       else
       {
-        return ItemObject.All.GetRandomElement();
+        return fallbackQualifyingItems.GetRandomElement();
       }
     }
 
