@@ -6,10 +6,14 @@ namespace TournamentsEnhanced.UnitTests
 {
   public partial class FinderBaseTests
   {
-    [Test]
-    public void Find_SingleCandidate_NoComparer_Result_ShouldNotFail()
+    private void SetUpQualifiedCandidateWithoutComparer()
     {
       SetUpMockCandidates(MockCandidateType.Qualified);
+    }
+    [Test]
+    public void Find_OneCandidate_NoComparer_Result_ShouldNotFail()
+    {
+      SetUpQualifiedCandidateWithoutComparer();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -17,9 +21,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_NoComparer_Result_ShouldSucceed()
+    public void Find_OneCandidate_NoComparer_Result_ShouldSucceed()
     {
-      SetUpMockCandidates(MockCandidateType.Qualified);
+      SetUpQualifiedCandidateWithoutComparer();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -27,9 +31,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_NoComparer_ResultNominee_ShouldBeExpected()
+    public void Find_OneCandidate_NoComparer_ResultNominee_ShouldBeExpected()
     {
-      SetUpMockCandidates(MockCandidateType.Qualified);
+      SetUpQualifiedCandidateWithoutComparer();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -37,9 +41,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_NoComparer_ResultHasRunnerUp_ShouldBeFalse()
+    public void Find_OneCandidate_NoComparer_ResultHasRunnerUp_ShouldBeFalse()
     {
-      SetUpMockCandidates(MockCandidateType.Qualified);
+      SetUpQualifiedCandidateWithoutComparer();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -47,9 +51,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_NoComparer_ResultRunnerUp_ShouldBeNull()
+    public void Find_OneCandidate_NoComparer_ResultRunnerUp_ShouldBeNull()
     {
-      SetUpMockCandidates(MockCandidateType.Qualified);
+      SetUpQualifiedCandidateWithoutComparer();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -57,9 +61,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_NoComparer_ResultAllQualifiedCandidates_CountShouldBeOne()
+    public void Find_OneCandidate_NoComparer_ResultAllQualifiedCandidates_CountShouldBeOne()
     {
-      SetUpMockCandidates(MockCandidateType.Qualified);
+      SetUpQualifiedCandidateWithoutComparer();
 
       var result = _sut.Find(_mockFindOptions.Object);
 

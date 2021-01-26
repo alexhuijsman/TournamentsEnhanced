@@ -89,13 +89,13 @@ namespace TournamentsEnhanced.UnitTests
       switch (mockComparerType)
       {
         case MockComparerType.FailUnqualified:
-          mockComparer = InstantiateMockComparer(Compare_FailUnqualified);
+          mockComparer = InstantiateMockComparer(Compare_DisqualifyUnqualifiedCandidates);
           break;
         case MockComparerType.FailLeastQualified:
-          mockComparer = InstantiateMockComparer(Compare_FailLeastQualified);
+          mockComparer = InstantiateMockComparer(Compare_DisqualifyQualifiedCandidates);
           break;
         case MockComparerType.FailQualified:
-          mockComparer = InstantiateMockComparer(Compare_FailLeastQualified);
+          mockComparer = InstantiateMockComparer(Compare_DisqualifyQualifiedCandidates);
           break;
         default:
           throw new ArgumentOutOfRangeException("mockComparerType");
@@ -135,9 +135,9 @@ namespace TournamentsEnhanced.UnitTests
       return mockCandidate;
     }
 
-    private int Compare_FailUnqualified(CandidateImpl x, CandidateImpl y) => Compare(x, y, MockCandidateType.Unqualified);
+    private int Compare_DisqualifyUnqualifiedCandidates(CandidateImpl x, CandidateImpl y) => Compare(x, y, MockCandidateType.Unqualified);
 
-    private int Compare_FailLeastQualified(CandidateImpl x, CandidateImpl y) => Compare(x, y, MockCandidateType.LeastQualified);
+    private int Compare_DisqualifyQualifiedCandidates(CandidateImpl x, CandidateImpl y) => Compare(x, y, MockCandidateType.Qualified);
 
     private int Compare(CandidateImpl x, CandidateImpl y, MockCandidateType CandidateTypeFailureValue)
     {
@@ -185,9 +185,8 @@ namespace TournamentsEnhanced.UnitTests
     {
       None,
       Unqualified,
-      LeastQualified,
       Qualified,
-      MostQualified,
+      Perfect,
     }
 
     public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, CandidateImpl, object>
