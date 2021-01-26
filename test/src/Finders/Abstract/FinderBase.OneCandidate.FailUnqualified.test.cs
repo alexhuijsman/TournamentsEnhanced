@@ -8,38 +8,38 @@ namespace TournamentsEnhanced.UnitTests
   {
     private void SetUpUnqualifiedCandidateToDisqualify()
     {
-      SetUpMockCandidates(MockCandidateType.Unqualified);
+      SetUpMockCandidate(MockCandidateType.Unqualified);
       SetUpMockComparers(MockComparerType.FailUnqualified);
     }
 
     [Test]
-    public void Find_OneCandidate_OneComparer_FailUnqualified_Result_ShouldNotFail()
+    public void Find_OneCandidate_OneComparer_FailUnqualified_Result_ShouldFail()
     {
       SetUpUnqualifiedCandidateToDisqualify();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Failed.ShouldBe(false);
+      result.Failed.ShouldBe(true);
     }
 
     [Test]
-    public void Find_OneCandidate_OneComparer_FailUnqualified_Result_ShouldSucceed()
+    public void Find_OneCandidate_OneComparer_FailUnqualified_Result_ShouldNotSucceed()
     {
       SetUpUnqualifiedCandidateToDisqualify();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Succeeded.ShouldBe(true);
+      result.Succeeded.ShouldBe(false);
     }
 
     [Test]
-    public void Find_OneCandidate_OneComparer_FailUnqualified_ResultNominee_ShouldBeExpected()
+    public void Find_OneCandidate_OneComparer_FailUnqualified_ResultNominee_ShouldBeNull()
     {
       SetUpUnqualifiedCandidateToDisqualify();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Nominee.ShouldBe(_mockCandidates[0].Object);
+      result.Nominee.ShouldBe(CandidateImpl.Null);
     }
 
     [Test]
@@ -63,13 +63,13 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_OneCandidate_OneComparer_FailUnqualified_ResultAllQualifiedCandidates_ShouldBeSingle()
+    public void Find_OneCandidate_OneComparer_FailUnqualified_ResultAllQualifiedCandidates_ShouldBeNull()
     {
       SetUpUnqualifiedCandidateToDisqualify();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.AllQualifiedCandidates.Count.ShouldBe(1);
+      Assert.IsNull(result.AllQualifiedCandidates);
     }
   }
 }

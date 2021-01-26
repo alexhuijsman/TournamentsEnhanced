@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.UnitTests
   {
     private void SetUpQualifiedCandidateToQualify()
     {
-      SetUpMockCandidates(MockCandidateType.Qualified);
+      SetUpMockCandidate(MockCandidateType.Qualified);
       SetUpMockComparers(MockComparerType.FailUnqualified);
     }
 
@@ -69,7 +69,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.AllQualifiedCandidates.Count.ShouldBe(1);
+      result.AllQualifiedCandidates.ShouldHaveSingleItem();
     }
   }
 }
