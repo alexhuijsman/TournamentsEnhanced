@@ -33,21 +33,21 @@ namespace TournamentsEnhanced
     public bool SettlementStatNotification { get; set; } = true;
 
     //Tournament Affects
-    [SettingProperty("Prosperity Increase", 0.00f, 500.00f, "Prosperity increase for certain tournament types")]
+    [SettingProperty("Prosperity Increase", -500.00f, 500.00f, "Prosperity increase for certain tournament types. Negative values decreases prosperity instead.")]
     [SettingPropertyGroup("Tournament affects on Towns")]
     public float ProsperityIncrease { get; set; } = 100.00f;
-    [SettingProperty("Loyalty Increase", 0.00f, 30.00f, "Loyalty increase for certain tournament types")]
+    [SettingProperty("Loyalty Increase", -30.00f, 30.00f, "Loyalty increase for certain tournament types. Negative values decreases loyalty instead.")]
     [SettingPropertyGroup("Tournament affects on Towns")]
     public float LoyaltyIncrease { get; set; } = 10.00f;
-    [SettingProperty("Security Increase", 0.00f, 30.00f, "Security increase for certain tournament types")]
+    [SettingProperty("Security Increase", -30.00f, 30.00f, "Security increase for certain tournament types. Negative values decreases security instead.")]
     [SettingPropertyGroup("Tournament affects on Towns")]
     public float SecurityIncrease { get; set; } = 10.00f;
-    [SettingProperty("Food Stocks Decrease", 0.00f, 30.00f, "Food stock decrease for certain tournament types")]
+    [SettingProperty("Food Stocks Decrease", -30.00f, 30.00f, "Food stock decrease for certain tournament types. Negative values increase food stock instead.")]
     [SettingPropertyGroup("Tournament affects on Towns")]
     public float FoodStocksDecrease { get; set; } = 20.00f;
 
     //Tournament Cost
-    [SettingProperty("Tournament Cost", 0, 10000, "Cost of tournaments")]
+    [SettingProperty("Tournament Cost", -10000, 10000, "Cost of tournaments")]
     [SettingPropertyGroup("Tournaments")]
     public int TournamentCost { get; set; } = 2000;
     //Amount of initial tournaments on the map
