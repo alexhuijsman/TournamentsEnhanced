@@ -2,98 +2,63 @@ WELCOME
 -------
 Hello! This is my todo list for Tournaments Enhanced.
 
-TEST
-----
-Write unit tests for existing methods with NUnit, Moq, and Shouldly
-
-FIX
----
+DO NEXT
+-------
+Add remaining unit tests
+S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
+s Wrap enums
+S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
+refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
 Use Bannerlord's .GetRandomElement() or custom deterministic implementation for prize selection
+Make individual tournament type spawn chances improve the more days its been since the last.
+Allow Selection of companions & remember previous selections
+  -Add option: Select All, Select None
+  -Add option: Remember companion choices
+Hide tournament icon after player plays it
+M Possible to replace betting logic, allowing bets on others and increased betting limit?
+Possible to watch tournaments & bet without participating?
+
+IMPROVE
+-------
 Revamp MCM integration - https://github.com/Aragas/Bannerlord.MBOptionScreen
   -Global and PerCharacter options
     -Is Per-Save better than per-character?
   -ability to reset to defaults
   -all variables tweakable
   -Existing options revamped as well
-Don’t offer player-crafted items as reward options
-Hide tournament icon after player plays it
-Don't allow Highborn tournaments for faction led by player
-Show prize selection during hosted tournament
+  -add checkboxes for bonus/cost toggle for resource effects
+Don't allow Highborn tournaments for faction led by player, or allow player to host one.
 S Don't hide Select Prize button after selecting a prize and ensure reselecting prize keeps same items
-
-RECOMMEND
----------
-Try out mods to recommend: pacemaker, houses of calradia and noble titles
-
-IMPROVE
--------
-Make individual tournament type spawn chances improve the more days its been since the last
+Make prizes come from the town (and pay for the prize).
+When hosting a tournament, can choose the prize from own items or purchase from town
 Make Popup at peace time asking player if they want to host a tournament (and where)
 if player is wedded hero ask player if they want to host a tournament (and where).
 Worsten relations with previous payor if new payor steals their tournament
 A payor friendly with another payor may decide not to steal tournament
-Make Highborn tournaments different from invitational? or reknown level is only difference?
+Make Highborn tournaments different from invitational? How does this work, do all lords teleport to the arena? or reknown level is only difference?
 Ask player to authorize any tournaments happening at player's expense
 Charge 2000 upfront cost plus option-configurable scale of cost for prize, and add "host can afford tournament prize" logic
 Prize pool is filtered by what the host can afford. Configuration of % of total $ ClanLeaders are willing to spend on tournament prizes. Also configuration of scale of prize cost to host in options.
 Simplify logic for finding wedding tournament host settlement
 
-REFACTOR
---------
-S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
-s Wrap enums and structs
-S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
-S add "best experience" version that requires harmony and mcm
-refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
-
-INVESTIGATE
------------
-L companions joining in fights have incorrect or missing icon. May be bug in Bannerlord?
-M Possible to replace betting logic, allowing bets on others and increased betting limit?
-
-OPTION
-------
-Make number of companions in tournament configurable (was/is 10)
-Make companion selection window, or add criteria or block/allow list of companions that fight in tournament
-Make Prosperity tournaments once per 15 or 30 days (configurable)
-
-COMMUNICATE
---------
-Update banner and screenshots with photo mode
-
-BUILD
--------------
-S delete output folder on build to clean up pdb
-S Parameterize SubModule.xml to get version number dynamically
-Rewrite project files to allow for dotnet cli usage to remove vs2019 dependency
-
-CREATE
-------
-SPIKE is jousting feasible?
+REACH
+-----
+SM add notification that tournament is happening, and why, to the town description and menu items if possible
+SPIKE full item tooltips in prize selection screen? (try ImprovedTooltips mod for examples)
 XL Grand Tournaments, happening every x months, announced to player before it happens 1 month, 2 weeks, 1 week, and when tournament begins
   -What should defining characteristics be? Need high renown to compete? Pay to enter? Noble-worthy prizes? Much larger monetary and social gains?
+The Travelling Tournament idea: a special party of elite arena fighters travels the world initiating special tier tournaments
+  -Must pay fee to enter tournament, since the travellers offer their own reward if non-traveller wins.
 SM add mod options input to change language
 S if language is default option, select language from Bannerlord
 M externalize text resources for multilanguage support
-Menu to select who comes with you (choose preferred order of companion or spouse or a troop)
-
-SPIKE full item tooltips in prize selection screen? (try ImprovedTooltips mod for examples)
-
-SM Make settlement choice for tournaments as such:
-    -random
-    -one per side
-    -if can't have for a side then none for that side
-    -if cant have for both sides, then none at all
-    -do tournaments every go away?
-        -if not, allow peace tournament in city that already has one
-
-SM add notification that tournament is happening, and why, to the town description and menu items if possible
-
-
-SM Add tiny flag icon to towns with tournament (see SettlementIcons mod)
-
-
 M tournament champion "leaderboards" for towns, nations, and empire (or "world") (NOT online leaderboards)
+SPIKE is jousting feasible?
 
-The Travelling Tournament idea: a special party of elite arena fighters travels the world initiating special tier tournaments
-  -Must pay fee to enter tournament, since the travellers offer their own reward if non-traveller wins.
+COMMUNICATE
+-----------
+Update banner and screenshots with photo mode
+
+RECOMMEND
+---------
+Try out mods to recommend: pacemaker, houses of calradia and noble titles
