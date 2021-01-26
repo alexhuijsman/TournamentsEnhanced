@@ -239,12 +239,24 @@ namespace TournamentsEnhanced.UnitTests
 
     public interface IMBWrapperComparer : IComparer<CandidateImpl> { }
 
-    public class CandidateImpl : MBWrapperBase<CandidateImpl, object>
+    public class CandidateImpl : MBWrapperBase<CandidateImpl, object>, IComparable
     {
       public virtual MockCandidateType MockCandidateType { get; }
 
       public CandidateImpl() { }
       public CandidateImpl(object obj) : base(obj) { }
+
+      public int CompareTo(object obj)
+      {
+        var other = (CandidateImpl)obj;
+
+        return MockCandidateType > other.MockCandidateType ?
+          Constants.Comparer.XIsGreaterThanY :
+          MockCandidateType < other.MockCandidateType ?
+            Constants.Comparer.XIsLessThanY :
+            Constants.Comparer.XIsEqualToY;
+
+      }
     }
   }
 }

@@ -33,12 +33,12 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidate_NoComparer_ResultNominee_ShouldBeIdeal()
+    public void Find_ManyCandidate_NoComparer_ResultNominee_ShouldBeExpected()
     {
       SetUpManyCandidatesAndNoComparers();
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Nominee.MockCandidateType.ShouldBe(MockCandidateType.Ideal);
+      result.Nominee.ShouldBe(_candidates[0]);
     }
 
     [Test]
@@ -51,12 +51,12 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidate_NoComparer_ResultRunnerUp_ShouldBeIdeal()
+    public void Find_ManyCandidate_NoComparer_ResultRunnerUp_ShouldBeExpected()
     {
       SetUpManyCandidatesAndNoComparers();
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Nominee.MockCandidateType.ShouldBe(MockCandidateType.Ideal);
+      result.Nominee.ShouldBe(_candidates[1]);
     }
 
     [Test]
@@ -90,7 +90,20 @@ namespace TournamentsEnhanced.UnitTests
 
       _candidates
         .ShouldContain(
-          (candidate) => result.AllQualifiedCandidates.Contains(candidate), NumberOfUnqualifiedCandidates);
+          (candidate) => unqualifiedCandidates.Contains(candidate), NumberOfUnqualifiedCandidates);
+    }
+
+    [Test]
+    public void Find_ManyCandidate_NoComparer_ResultAllQualifiedCandidates_ShouldBeInExpectedOrder()
+    {
+      SetUpManyCandidatesAndNoComparers();
+      var result = _sut.Find(_mockFindOptions.Object);
+      var qualifiedCandidates = result.AllQualifiedCandidates;
+
+      for (int i = 0; i < _candidates.Count; i++)
+      {
+        qualifiedCandidates[i].ShouldBe(_candidates[i]);
+      }
     }
 
     [Test]
@@ -105,7 +118,7 @@ namespace TournamentsEnhanced.UnitTests
 
       _candidates
         .ShouldContain(
-          (candidate) => result.AllQualifiedCandidates.Contains(candidate), NumberOfQualifiedCandidates);
+          (candidate) => qualifiedCandidates.Contains(candidate), NumberOfQualifiedCandidates);
     }
 
     [Test]
@@ -120,7 +133,7 @@ namespace TournamentsEnhanced.UnitTests
 
       _candidates
         .ShouldContain(
-          (candidate) => result.AllQualifiedCandidates.Contains(candidate), NumberOfIdealCandidates);
+          (candidate) => idealCandidates.Contains(candidate), NumberOfIdealCandidates);
     }
   }
 }
