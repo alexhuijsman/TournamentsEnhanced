@@ -90,7 +90,7 @@
 
   <Target Name="Clean Output Dir" AfterTargets="BeforeBuild">
     <ItemGroup>
-      <FilesToDelete Include="$(OutDir)\**"/>
+      <FilesToDelete Include="$(OutDir)\**\*"/>
       <FilesToDelete Include="$(OutDir)..\..\SubModule.xml"/>
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
@@ -99,5 +99,14 @@
   <Target Name="Build SubModule XML" AfterTargets="AfterBuild">
     <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutDir)../../&quot;">
     </Exec>
+  </Target>
+  <Target Name="Remove Unneeded Reference DLLs" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <UnwantedFiles Include="$(OutDir)\TaleWorlds.*.dll"/>
+      <UnwantedFiles Include="$(OutDir)\Newtonsoft.Json.dll"/>
+      <UnwantedFiles Include="$(OutDir)\System.Management.dll"/>
+      <UnwantedFiles Include="$(OutDir)\System.Numerics.Vectors.dll"/>
+    </ItemGroup>
+    <Delete Files="@(UnwantedFiles)" />
   </Target>
 </Project>
