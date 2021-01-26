@@ -12,7 +12,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <OutDir>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,7 +22,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
+    <OutDir>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -90,14 +90,14 @@
 
   <Target Name="Clean Output Dir" AfterTargets="BeforeBuild">
     <ItemGroup>
-      <FilesToDelete Include="$(OutputPath)\**"/>
-      <FilesToDelete Include="$(OutputPath)..\..\SubModule.xml"/>
+      <FilesToDelete Include="$(OutDir)\**"/>
+      <FilesToDelete Include="$(OutDir)..\..\SubModule.xml"/>
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
   </Target>
 
   <Target Name="Build SubModule XML" AfterTargets="AfterBuild">
-    <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutputPath)../../&quot;">
+    <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutDir)../../&quot;">
     </Exec>
   </Target>
 </Project>
