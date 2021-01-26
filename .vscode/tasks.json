@@ -94,7 +94,6 @@
         "/p:GenerateFullPaths=true",
         "/p:Platform=x64",
         "/p:Configuration=DebugOutputToBannerlord",
-        "/p:VersionTag=$(git describe --exact-match --tags)",
         "${workspaceFolder}/TournamentsEnhanced.csproj"
       ],
       "problemMatcher": "$msCompile"
@@ -114,7 +113,7 @@
     {
       "id": "tag",
       "description": "tag name",
-      "default": "1.X.X.X-main|beta",
+      "default": "1.5.7.",
       "type": "promptString"
     },
   ]

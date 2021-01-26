@@ -12,7 +12,6 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <OutDir>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -23,7 +22,6 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutputPath>
     <OutDir>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
