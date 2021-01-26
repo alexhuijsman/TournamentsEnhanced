@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Find_NoCandidate_SingleComparer_Result_ShouldFail()
     {
-      SetUpMockComparers(MockComparerType.QualifyAll);
+      SetUpMockComparers(MockComparerType.FailUnqualified);
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -19,7 +19,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Find_NoCandidate_SingleComparer_Result_ShouldNotSucceed()
     {
-      SetUpMockComparers(MockComparerType.QualifyAll);
+      SetUpMockComparers(MockComparerType.FailUnqualified);
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -29,7 +29,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Find_NoCandidate_SingleComparer_ResultNominee_ShouldBeNull()
     {
-      SetUpMockComparers(MockComparerType.QualifyAll);
+      SetUpMockComparers(MockComparerType.FailUnqualified);
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -39,7 +39,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Find_NoCandidate_SingleComparer_ResultHasRunnerUp_ShouldBeFalse()
     {
-      SetUpMockComparers(MockComparerType.QualifyAll);
+      SetUpMockComparers(MockComparerType.FailUnqualified);
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -49,7 +49,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Find_NoCandidate_SingleComparer_ResultRunnerUp_ShouldBeNull()
     {
-      SetUpMockComparers(MockComparerType.QualifyAll);
+      SetUpMockComparers(MockComparerType.FailUnqualified);
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -59,7 +59,7 @@ namespace TournamentsEnhanced.UnitTests
     [Test]
     public void Find_NoCandidate_SingleComparer_ResultAllQualifiedCandidates_ShouldBeNull()
     {
-      SetUpMockComparers(MockComparerType.QualifyAll);
+      SetUpMockComparers(MockComparerType.FailUnqualified);
 
       var result = _sut.Find(_mockFindOptions.Object);
 

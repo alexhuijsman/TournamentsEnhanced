@@ -57,7 +57,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_SingleCandidate_NoComparer_ResultAllQualifiedCandidates_ShouldBeSingle()
+    public void Find_SingleCandidate_NoComparer_ResultAllQualifiedCandidates_CountShouldBeOne()
     {
       SetUpMockCandidates(MockCandidateType.Qualified);
 

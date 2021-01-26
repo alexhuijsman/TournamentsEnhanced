@@ -88,11 +88,14 @@ namespace TournamentsEnhanced.UnitTests
 
       switch (mockComparerType)
       {
-        case MockComparerType.QualifyAll:
-          mockComparer = InstantiateMockComparer(Compare_QualifyAll);
+        case MockComparerType.FailUnqualified:
+          mockComparer = InstantiateMockComparer(Compare_FailUnqualified);
           break;
-        case MockComparerType.QualifyNone:
-          mockComparer = InstantiateMockComparer(Compare_QualifyNone);
+        case MockComparerType.FailLeastQualified:
+          mockComparer = InstantiateMockComparer(Compare_FailLeastQualified);
+          break;
+        case MockComparerType.FailQualified:
+          mockComparer = InstantiateMockComparer(Compare_FailLeastQualified);
           break;
         default:
           throw new ArgumentOutOfRangeException("mockComparerType");
@@ -132,32 +135,59 @@ namespace TournamentsEnhanced.UnitTests
       return mockCandidate;
     }
 
-    private int Compare_QualifyAll(CandidateImpl x, CandidateImpl y)
-    {
-      if (x.IsNull) return Constants.Comparer.XIsLessThanY;
-      if (y.IsNull) return Constants.Comparer.XIsGreaterThanY;
-      return Constants.Comparer.XIsEqualToY;
-    }
+    private int Compare_FailUnqualified(CandidateImpl x, CandidateImpl y) => Compare(x, y, MockCandidateType.Unqualified);
 
-    private int Compare_QualifyNone(CandidateImpl x, CandidateImpl y)
+    private int Compare_FailLeastQualified(CandidateImpl x, CandidateImpl y) => Compare(x, y, MockCandidateType.LeastQualified);
+
+    private int Compare(CandidateImpl x, CandidateImpl y, MockCandidateType CandidateTypeFailureValue)
     {
-      if (x.IsNull) return Constants.Comparer.XIsGreaterThanY;
-      if (y.IsNull) return Constants.Comparer.XIsLessThanY;
-      return Constants.Comparer.XIsEqualToY;
+      int result;
+
+      if (x.IsNull)
+      {
+        result = y.MockCandidateType <= CandidateTypeFailureValue ?
+          Constants.Comparer.XIsGreaterThanY :
+          Constants.Comparer.XIsLessThanY;
+      }
+
+      if (y.IsNull)
+      {
+        result = x.MockCandidateType <= CandidateTypeFailureValue ?
+          Constants.Comparer.XIsLessThanY :
+          Constants.Comparer.XIsGreaterThanY;
+      }
+
+      if (x.MockCandidateType > y.MockCandidateType)
+      {
+        result = Constants.Comparer.XIsGreaterThanY;
+      }
+      else if (x.MockCandidateType < y.MockCandidateType)
+      {
+        result = Constants.Comparer.XIsLessThanY;
+      }
+      else
+      {
+        result = Constants.Comparer.XIsEqualToY;
+      }
+
+      return result;
     }
 
     public enum MockComparerType
     {
-      QualifyAll,
-      QualifyNone
+      None,
+      FailUnqualified,
+      FailLeastQualified,
+      FailQualified,
     }
 
     public enum MockCandidateType
     {
-      MostQualified,
-      Qualified,
-      LeastQualified,
+      None,
       Unqualified,
+      LeastQualified,
+      Qualified,
+      MostQualified,
     }
 
     public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, CandidateImpl, object>
