@@ -128,6 +128,16 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
+    public void Find_ManyCandidates_OneComparer_FailUnqualified_ResultAllQualifiedCandidates_ShouldHaveExpectedOrder()
+    {
+      SetUpManyCandidatesAndFailUnqualified();
+
+      var result = _sut.Find(_mockFindOptions.Object);
+
+      result.AllQualifiedCandidates.ShouldBeInOrder();
+    }
+
+    [Test]
     public void Find_ManyCandidates_OneComparer_FailUnqualified_ResultAllQualifiedCandidates_ShouldContainExpectedNumberOfIdeal()
     {
       SetUpManyCandidatesAndFailUnqualified();
