@@ -15,7 +15,9 @@ namespace TournamentsEnhanced.UnitTests
     private const int NumberOfQualifiedCandidates = 50;
     private const int NumberOfIdealCandidates = 10;
     private const int TotalNumberOfCandidates = NumberOfUnqualifiedCandidates + NumberOfQualifiedCandidates + NumberOfIdealCandidates;
-
+    private const int NumberOfFailUnqualifiedComparers = 2;
+    private const int NumberOfFailQualifiedComparers = 1;
+    private const int TotalNumberOfComparers = NumberOfFailUnqualifiedComparers + NumberOfFailQualifiedComparers;
     private FinderBaseImpl _sut;
     private Mock<FindOptionBaseImpl> _mockFindOptions;
     private Mock<CandidateImpl>[] _mockCandidates;
@@ -41,6 +43,41 @@ namespace TournamentsEnhanced.UnitTests
       SetUpMockCandidate();
       SetUpMockComparers();
       SetUpMockFallbackComparers();
+    }
+
+    private void SetUpManyMockComparers(bool areFallbackComparers = false)
+    {
+      ref var mockComparersRef = ref _mockComparers;
+      ref var comparersRef = ref _comparers;
+
+      if (areFallbackComparers)
+      {
+        mockComparersRef = ref _mockFallbackComparers;
+        comparersRef = ref _fallbackComparers;
+
+      }
+
+      var mockComparers = new List<Mock<IMBWrapperComparer>>(TotalNumberOfComparers);
+
+      for (int i = 0; i < NumberOfFailUnqualifiedComparers; i++)
+      {
+        mockComparers.Add(GetMockComparerByType(MockComparerType.FailUnqualified));
+      }
+
+      for (int i = 0; i < NumberOfQualifiedCandidates; i++)
+      {
+        mockComparers.Add(GetMockComparerByType(MockComparerType.FailQualified));
+      }
+
+      mockComparersRef = mockComparers.Shuffle().ToArray();
+
+      comparersRef = new IComparer<CandidateImpl>[mockComparersRef.Length];
+      for (int i = 0; i < mockComparersRef.Length; i++)
+      {
+        comparersRef[i] = mockComparersRef[i].Object;
+      }
+
+      _mockFindOptions.SetupGet(findOptions => findOptions.Comparers).Returns(comparersRef);
     }
 
     private void SetUpManyMockCandidates()
@@ -129,9 +166,6 @@ namespace TournamentsEnhanced.UnitTests
         case MockComparerType.FailUnqualified:
           mockComparer = InstantiateMockComparer(Compare_DisqualifyUnqualifiedCandidates);
           break;
-        case MockComparerType.FailLeastQualified:
-          mockComparer = InstantiateMockComparer(Compare_DisqualifyQualifiedCandidates);
-          break;
         case MockComparerType.FailQualified:
           mockComparer = InstantiateMockComparer(Compare_DisqualifyQualifiedCandidates);
           break;
@@ -215,7 +249,6 @@ namespace TournamentsEnhanced.UnitTests
     {
       None,
       FailUnqualified,
-      FailLeastQualified,
       FailQualified,
     }
 

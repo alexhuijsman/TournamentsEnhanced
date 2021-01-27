@@ -56,7 +56,7 @@ namespace TournamentsEnhanced.UnitTests
       SetUpManyCandidatesAndNoComparers();
       var result = _sut.Find(_mockFindOptions.Object);
 
-      result.Nominee.ShouldBe(_candidates[1]);
+      result.RunnerUp.ShouldBe(_candidates[1]);
     }
 
     [Test]
