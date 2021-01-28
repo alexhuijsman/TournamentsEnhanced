@@ -44,7 +44,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsGreaterThanY);
+      result.ShouldBe(Constants.Comparer.XOutranksY);
     }
 
     [Test]
@@ -55,7 +55,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsLessThanY);
+      result.ShouldBe(Constants.Comparer.YOutranksX);
     }
 
     [Test]
@@ -66,7 +66,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsGreaterThanY);
+      result.ShouldBe(Constants.Comparer.XOutranksY);
     }
 
     [Test]
@@ -78,7 +78,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsLessThanY);
+      result.ShouldBe(Constants.Comparer.YOutranksX);
     }
 
     [Test]
@@ -90,7 +90,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsGreaterThanY);
+      result.ShouldBe(Constants.Comparer.XOutranksY);
     }
 
     [Test]
@@ -102,7 +102,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsLessThanY);
+      result.ShouldBe(Constants.Comparer.YOutranksX);
     }
 
     [Test]
@@ -115,7 +115,7 @@ namespace TournamentsEnhanced.UnitTests
 
       var result = _sut.Compare(_mockX.Object, _mockY.Object);
 
-      result.ShouldBe(Constants.Comparer.XIsEqualToY);
+      result.ShouldBe(Constants.Comparer.BothEqualRank);
     }
 
     private class ComparerBaseImpl : ComparerBase<WrapperBase>

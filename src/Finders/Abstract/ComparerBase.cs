@@ -38,13 +38,13 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
 
       if (x.IsNull)
       {
-        result = y.IsNull ? Constants.Comparer.XIsEqualToY : yMeetsRequirements ? Constants.Comparer.XIsLessThanY : Constants.Comparer.XIsGreaterThanY;
+        result = y.IsNull ? Constants.Comparer.BothEqualRank : yMeetsRequirements ? Constants.Comparer.YOutranksX : Constants.Comparer.XOutranksY;
         assignedResult = true;
       }
 
       if (y.IsNull)
       {
-        result = xMeetsRequirements ? Constants.Comparer.XIsGreaterThanY : Constants.Comparer.XIsLessThanY;
+        result = xMeetsRequirements ? Constants.Comparer.XOutranksY : Constants.Comparer.YOutranksX;
         assignedResult = true;
       }
 
@@ -59,12 +59,12 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
 
       if (!xMeetsRequirements)
       {
-        result = !yMeetsRequirements ? Constants.Comparer.XIsEqualToY : Constants.Comparer.XIsLessThanY;
+        result = !yMeetsRequirements ? Constants.Comparer.BothEqualRank : Constants.Comparer.YOutranksX;
         assignedResult = true;
       }
       else if (!yMeetsRequirements)
       {
-        result = Constants.Comparer.XIsGreaterThanY;
+        result = Constants.Comparer.XOutranksY;
         assignedResult = true;
       }
 

@@ -6,11 +6,6 @@ namespace TournamentsEnhanced.UnitTests
 {
   public partial class FinderBaseTests
   {
-    private void SetUpWithoutCandidates()
-    {
-      SetUpMockComparers(MockComparerType.FailUnqualified);
-    }
-
     [Test]
     public void Find_NoCandidate_OneComparer_Result_ShouldFail()
     {

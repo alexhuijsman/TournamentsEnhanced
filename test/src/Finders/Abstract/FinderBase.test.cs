@@ -11,9 +11,9 @@ namespace TournamentsEnhanced.UnitTests
 {
   public partial class FinderBaseTests
   {
-    private const int NumberOfUnqualifiedCandidates = 100;
-    private const int NumberOfQualifiedCandidates = 50;
-    private const int NumberOfIdealCandidates = 10;
+    private const int NumberOfUnqualifiedCandidates = 11;
+    private const int NumberOfQualifiedCandidates = 7;
+    private const int NumberOfIdealCandidates = 3;
     private const int TotalNumberOfCandidates = NumberOfUnqualifiedCandidates + NumberOfQualifiedCandidates + NumberOfIdealCandidates;
     private const int NumberOfFailUnqualifiedComparers = 2;
     private const int NumberOfFailQualifiedComparers = 1;
@@ -43,6 +43,11 @@ namespace TournamentsEnhanced.UnitTests
       SetUpMockCandidate();
       SetUpMockComparers();
       SetUpMockFallbackComparers();
+    }
+
+    private void SetUpWithoutCandidates()
+    {
+      SetUpMockComparers(MockComparerType.FailUnqualified);
     }
 
     private void SetUpManyMockComparers(bool areFallbackComparers = false)
@@ -218,28 +223,26 @@ namespace TournamentsEnhanced.UnitTests
       if (x.IsNull)
       {
         result = y.MockCandidateType <= CandidateTypeFailureValue ?
-          Constants.Comparer.XIsGreaterThanY :
-          Constants.Comparer.XIsLessThanY;
+          Constants.Comparer.XOutranksY :
+          Constants.Comparer.YOutranksX;
       }
-
-      if (y.IsNull)
+      else if (y.IsNull)
       {
         result = x.MockCandidateType <= CandidateTypeFailureValue ?
-          Constants.Comparer.XIsLessThanY :
-          Constants.Comparer.XIsGreaterThanY;
+          Constants.Comparer.YOutranksX :
+          Constants.Comparer.XOutranksY;
       }
-
-      if (x.MockCandidateType > y.MockCandidateType)
+      else if (x.MockCandidateType > y.MockCandidateType)
       {
-        result = Constants.Comparer.XIsGreaterThanY;
+        result = Constants.Comparer.XOutranksY;
       }
       else if (x.MockCandidateType < y.MockCandidateType)
       {
-        result = Constants.Comparer.XIsLessThanY;
+        result = Constants.Comparer.YOutranksX;
       }
       else
       {
-        result = Constants.Comparer.XIsEqualToY;
+        result = Constants.Comparer.BothEqualRank;
       }
 
       return result;
@@ -284,10 +287,10 @@ namespace TournamentsEnhanced.UnitTests
         var other = (CandidateImpl)obj;
 
         return MockCandidateType > other.MockCandidateType ?
-          Constants.Comparer.XIsGreaterThanY :
+          Constants.Comparer.XOutranksY :
           MockCandidateType < other.MockCandidateType ?
-            Constants.Comparer.XIsLessThanY :
-            Constants.Comparer.XIsEqualToY;
+            Constants.Comparer.YOutranksX :
+            Constants.Comparer.BothEqualRank;
 
       }
     }
