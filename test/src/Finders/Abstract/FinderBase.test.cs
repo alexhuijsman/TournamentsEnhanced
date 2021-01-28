@@ -75,9 +75,39 @@ namespace TournamentsEnhanced.UnitTests
         mockComparers.Add(GetMockComparerByType(MockComparerType.FailUnqualified));
       }
 
-      for (int i = 0; i < NumberOfQualifiedCandidates; i++)
+      for (int i = 0; i < NumberOfFailQualifiedComparers; i++)
       {
         mockComparers.Add(GetMockComparerByType(MockComparerType.FailQualified));
+      }
+
+      mockComparersRef = mockComparers.Shuffle().ToArray();
+
+      comparersRef = new IComparer<CandidateImpl>[mockComparersRef.Length];
+      for (int i = 0; i < mockComparersRef.Length; i++)
+      {
+        comparersRef[i] = mockComparersRef[i].Object;
+      }
+
+      _mockFindOptions.SetupGet(findOptions => findOptions.Comparers).Returns(comparersRef);
+    }
+
+    private void SetUpManyMockFailUnqualifiedComparers(bool areFallbackComparers = false)
+    {
+      ref var mockComparersRef = ref _mockComparers;
+      ref var comparersRef = ref _comparers;
+
+      if (areFallbackComparers)
+      {
+        mockComparersRef = ref _mockFallbackComparers;
+        comparersRef = ref _fallbackComparers;
+
+      }
+
+      var mockComparers = new List<Mock<IMBWrapperComparer>>(TotalNumberOfComparers);
+
+      for (int i = 0; i < NumberOfFailUnqualifiedComparers; i++)
+      {
+        mockComparers.Add(GetMockComparerByType(MockComparerType.FailUnqualified));
       }
 
       mockComparersRef = mockComparers.Shuffle().ToArray();
@@ -118,6 +148,31 @@ namespace TournamentsEnhanced.UnitTests
 
       _mockFindOptions.SetupGet(findOptions => findOptions.Candidates).Returns(_candidates);
     }
+
+    private void SetUpManyMockNonIdealCandidates()
+    {
+      var mockCandidates = new List<Mock<CandidateImpl>>(TotalNumberOfCandidates - NumberOfIdealCandidates);
+
+      for (int i = 0; i < NumberOfUnqualifiedCandidates; i++)
+      {
+        mockCandidates.Add(GetMockCandidateByType(MockCandidateType.Unqualified));
+      }
+      for (int i = 0; i < NumberOfQualifiedCandidates; i++)
+      {
+        mockCandidates.Add(GetMockCandidateByType(MockCandidateType.Qualified));
+      }
+
+      _mockCandidates = mockCandidates.Shuffle().ToArray();
+
+      _candidates = new List<CandidateImpl>(_mockCandidates.Length);
+      for (int i = 0; i < _mockCandidates.Length; i++)
+      {
+        _candidates.Add(_mockCandidates[i].Object);
+      }
+
+      _mockFindOptions.SetupGet(findOptions => findOptions.Candidates).Returns(_candidates);
+    }
+
     private void SetUpMockCandidate(MockCandidateType candidateType = MockCandidateType.None)
     {
       var wantsCandidate = candidateType != MockCandidateType.None;

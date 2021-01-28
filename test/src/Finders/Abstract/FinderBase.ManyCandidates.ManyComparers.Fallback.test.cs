@@ -8,14 +8,15 @@ namespace TournamentsEnhanced.UnitTests
 {
   public partial class FinderBaseTests
   {
-    private void SetUpManyCandidatesAndManyComparers()
+    private void SetUpManyCandidatesAndManyComparersWithFallback()
     {
-      SetUpManyMockCandidates();
+      SetUpManyMockNonIdealCandidates();
       SetUpManyMockComparers();
+      SetUpManyMockFailUnqualifiedComparers(true);
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_Result_ShouldNotFail()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_Result_ShouldNotFail()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -25,7 +26,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_Result_ShouldSucceed()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_Result_ShouldSucceed()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -35,7 +36,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultNominee_ShouldBeIdeal()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultNominee_ShouldBeIdeal()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -45,7 +46,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultHasRunnerUp_ShouldBeTrue()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultHasRunnerUp_ShouldBeTrue()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -55,7 +56,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultRunnerUp_ShouldBeIdeal()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultRunnerUp_ShouldBeIdeal()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -65,7 +66,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultAllQualifiedCandidates_ShouldContainExpectedTotal()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultAllQualifiedCandidates_ShouldContainExpectedTotal()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -75,7 +76,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultAllQualifiedCandidates_ShouldNotContainNull()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultAllQualifiedCandidates_ShouldNotContainNull()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -86,7 +87,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultAllQualifiedCandidates_ShouldNotContainUnqualified()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultAllQualifiedCandidates_ShouldNotContainUnqualified()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -97,7 +98,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultAllQualifiedCandidates_ShouldNotContainQualified()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultAllQualifiedCandidates_ShouldNotContainQualified()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -108,7 +109,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultAllQualifiedCandidates_ShouldContainExpectedNumberOfIdeal()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultAllQualifiedCandidates_ShouldContainExpectedNumberOfIdeal()
     {
       SetUpManyCandidatesAndManyComparers();
 
@@ -122,7 +123,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_ManyCandidates_ManyComparers_ResultAllQualifiedCandidates_ShouldContainExpectedIdeal()
+    public void Find_ManyCandidates_ManyComparers_WithFallback_ResultAllQualifiedCandidates_ShouldContainExpectedIdeal()
     {
       SetUpManyCandidatesAndManyComparers();
 
