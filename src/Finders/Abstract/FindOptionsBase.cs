@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace TournamentsEnhanced.Finder
+namespace TournamentsEnhanced.Finder.Abstract
 {
   public class FindOptionsBase<W>
   where W : WrapperBase
@@ -11,6 +11,6 @@ namespace TournamentsEnhanced.Finder
     public virtual IComparer<W>[] Comparers { get; set; }
     public virtual IComparer<W>[] FallbackComparers { get; set; }
 
-    public virtual bool HasFallbackComparers => FallbackComparers != null && FallbackComparers.Length == 0;
+    public virtual bool HasFallbackComparers => FallbackComparers != null && FallbackComparers.Length > 0;
   }
 }

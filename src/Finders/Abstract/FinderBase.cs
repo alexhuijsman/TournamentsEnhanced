@@ -46,11 +46,6 @@ namespace TournamentsEnhanced.Finder.Abstract
       var nullIndexSearchResult = GetNullIndex(candidates);
       var nullIndex = nullIndexSearchResult.indexValue;
 
-      if (!nullIndexSearchResult.wasSuccessful)
-      {
-        return;
-      }
-
       var numRecordsToRemove = candidates.Count - nullIndex - 1;
       candidates.RemoveRange(nullIndex + 1, numRecordsToRemove);
     }
