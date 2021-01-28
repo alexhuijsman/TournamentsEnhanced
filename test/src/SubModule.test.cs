@@ -1,14 +1,12 @@
 using Moq;
-
 using NUnit.Framework;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-
+using TournamentsEnhanced;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models;
 
-namespace TournamentsEnhanced.UnitTests
+namespace Tests
 {
   public class SubModuleTest
   {

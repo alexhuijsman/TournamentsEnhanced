@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
+using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace TournamentsEnhanced.UnitTests
+namespace Tests
 {
   public class FindOptionsBaseTests
   {

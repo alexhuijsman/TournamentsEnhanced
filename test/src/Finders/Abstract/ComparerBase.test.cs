@@ -2,10 +2,11 @@ using System;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
+using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace TournamentsEnhanced.UnitTests
+namespace Tests
 {
   public class ComparerBaseTests
   {

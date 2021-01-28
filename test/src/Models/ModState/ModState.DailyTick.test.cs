@@ -2,7 +2,9 @@ using System;
 using Moq;
 using NUnit.Framework;
 
-namespace TournamentsEnhanced.UnitTests
+using TournamentsEnhanced;
+
+namespace Tests
 {
   public partial class ModStateTests
   {

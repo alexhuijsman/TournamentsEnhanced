@@ -2,11 +2,12 @@ using System;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
+using TournamentsEnhanced;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.Core;
 
-namespace TournamentsEnhanced.UnitTests
+namespace Tests
 {
   public partial class ModStateTests
   {
@@ -43,7 +44,7 @@ namespace TournamentsEnhanced.UnitTests
 
     private void SetUpSerializableModState(int lotteryResults = Constants.LotteryResults.NoWinners)
     {
-      _sut.SerializableObject = new Models.Serializable.SerializableModState()
+      _sut.SerializableObject = new SerializableModState()
       {
         lotteryResults = lotteryResults,
         daysSince = _mockDaysSince.Object,

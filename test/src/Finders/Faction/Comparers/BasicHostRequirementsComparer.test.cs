@@ -8,7 +8,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace Tests
 {
-  public class BasicHostRequirementsComparerTests
+  public class BasicHostRe2quirementsComparerTests
   {
     private BasicHostRequirementsComparerImpl _sut;
     private readonly List<MBSettlement> NoSettlements = new List<MBSettlement>();

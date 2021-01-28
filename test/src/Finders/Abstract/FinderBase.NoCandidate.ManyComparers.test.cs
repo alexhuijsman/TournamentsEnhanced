@@ -2,7 +2,9 @@ using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace TournamentsEnhanced.UnitTests
+using TournamentsEnhanced;
+
+namespace Tests
 {
   public partial class FinderBaseTests
   {

@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
+using TournamentsEnhanced;
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.Core;
 
-namespace TournamentsEnhanced.UnitTests
+namespace Tests
 {
   public partial class FinderBaseTests
   {

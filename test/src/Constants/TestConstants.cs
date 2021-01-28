@@ -1,4 +1,6 @@
-namespace TournamentsEnhanced.UnitTests
+using TournamentsEnhanced;
+
+namespace Tests
 {
   public static class TestConstants
   {
