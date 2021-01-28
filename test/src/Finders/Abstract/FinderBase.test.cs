@@ -45,9 +45,15 @@ namespace TournamentsEnhanced.UnitTests
       SetUpMockFallbackComparers();
     }
 
-    private void SetUpWithoutCandidates()
+    private void SetUpOneComparerWithoutCandidates()
     {
       SetUpMockComparers(MockComparerType.FailUnqualified);
+    }
+
+    private void SetUpOneComparerAndOneFallbackWithoutCandidates()
+    {
+      SetUpMockComparers(MockComparerType.FailUnqualified);
+      SetUpMockFallbackComparers(MockComparerType.FailUnqualified);
     }
 
     private void SetUpManyMockComparers(bool areFallbackComparers = false)
@@ -160,6 +166,7 @@ namespace TournamentsEnhanced.UnitTests
       }
 
       _mockFindOptions.SetupGet(findOptions => findOptions.FallbackComparers).Returns(_fallbackComparers);
+      _mockFindOptions.SetupGet(findOptions => findOptions.HasFallbackComparers).Returns(_fallbackComparers.Length > 0 ? true : false);
     }
 
     private Mock<IMBWrapperComparer> GetMockComparerByType(MockComparerType mockComparerType)

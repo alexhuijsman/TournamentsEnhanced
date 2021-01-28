@@ -11,6 +11,6 @@ namespace TournamentsEnhanced.Finder
     public virtual IComparer<W>[] Comparers { get; set; }
     public virtual IComparer<W>[] FallbackComparers { get; set; }
 
-    public virtual bool HasFallbackComparers => FallbackComparers != null;
+    public virtual bool HasFallbackComparers => FallbackComparers != null && FallbackComparers.Length == 0;
   }
 }

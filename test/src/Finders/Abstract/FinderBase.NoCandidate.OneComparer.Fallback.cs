@@ -7,9 +7,9 @@ namespace TournamentsEnhanced.UnitTests
   public partial class FinderBaseTests
   {
     [Test]
-    public void Find_NoCandidate_OneComparer_Result_ShouldFail()
+    public void Find_NoCandidate_OneComparer_OneFallback_Result_ShouldFail()
     {
-      SetUpOneComparerWithoutCandidates();
+      SetUpOneComparerAndOneFallbackWithoutCandidates();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -17,9 +17,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_NoCandidate_OneComparer_Result_ShouldNotSucceed()
+    public void Find_NoCandidate_OneComparer_OneFallback_Result_ShouldNotSucceed()
     {
-      SetUpOneComparerWithoutCandidates();
+      SetUpOneComparerAndOneFallbackWithoutCandidates();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -27,9 +27,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_NoCandidate_OneComparer_ResultNominee_ShouldBeNull()
+    public void Find_NoCandidate_OneComparer_OneFallback_ResultNominee_ShouldBeNull()
     {
-      SetUpOneComparerWithoutCandidates();
+      SetUpOneComparerAndOneFallbackWithoutCandidates();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -37,9 +37,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_NoCandidate_OneComparer_ResultHasRunnerUp_ShouldBeFalse()
+    public void Find_NoCandidate_OneComparer_OneFallback_ResultHasRunnerUp_ShouldBeFalse()
     {
-      SetUpOneComparerWithoutCandidates();
+      SetUpOneComparerAndOneFallbackWithoutCandidates();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -47,9 +47,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_NoCandidate_OneComparer_ResultRunnerUp_ShouldBeNull()
+    public void Find_NoCandidate_OneComparer_OneFallback_ResultRunnerUp_ShouldBeNull()
     {
-      SetUpOneComparerWithoutCandidates();
+      SetUpOneComparerAndOneFallbackWithoutCandidates();
 
       var result = _sut.Find(_mockFindOptions.Object);
 
@@ -57,9 +57,9 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Find_NoCandidate_OneComparer_ResultAllQualifiedCandidates_ShouldBeNull()
+    public void Find_NoCandidate_OneComparer_OneFallback_ResultAllQualifiedCandidates_ShouldBeNull()
     {
-      SetUpOneComparerWithoutCandidates();
+      SetUpOneComparerAndOneFallbackWithoutCandidates();
 
       var result = _sut.Find(_mockFindOptions.Object);
 

@@ -16,7 +16,7 @@ namespace TournamentsEnhanced.Finder.Abstract
 
       remainingCandidates = SortAndFilterByComparers(options.Candidates.ToList(), options.Comparers);
 
-      if (remainingCandidates.IsEmpty() && options.HasFallbackComparers)
+      if (remainingCandidates.Count == 0 && options.HasFallbackComparers)
       {
         remainingCandidates = SortAndFilterByComparers(options.Candidates.ToList(), options.FallbackComparers);
       }
