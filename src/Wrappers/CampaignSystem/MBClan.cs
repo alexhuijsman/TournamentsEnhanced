@@ -9,89 +9,89 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBClan : MBObjectBaseWrapper<MBClan, Clan>, IMBFaction
   {
-    public float Renown => UnwrappedObject.Renown;
+    public virtual float Renown => UnwrappedObject.Renown;
 
-    public MBTextObject Name => UnwrappedObject.Name;
+    public virtual MBTextObject Name => UnwrappedObject.Name;
 
-    public MBTextObject InformalName => UnwrappedObject.InformalName;
+    public virtual MBTextObject InformalName => UnwrappedObject.InformalName;
 
-    public string EncyclopediaLink => UnwrappedObject.EncyclopediaLink;
+    public virtual string EncyclopediaLink => UnwrappedObject.EncyclopediaLink;
 
-    public MBTextObject EncyclopediaLinkWithName => UnwrappedObject.EncyclopediaLinkWithName;
+    public virtual MBTextObject EncyclopediaLinkWithName => UnwrappedObject.EncyclopediaLinkWithName;
 
-    public MBTextObject EncyclopediaText => UnwrappedObject.EncyclopediaText;
+    public virtual MBTextObject EncyclopediaText => UnwrappedObject.EncyclopediaText;
 
-    public MBCultureObject Culture => UnwrappedObject.Culture;
+    public virtual MBCultureObject Culture => UnwrappedObject.Culture;
 
     public MBVec2 InitialPosition => UnwrappedObject.InitialPosition;
 
-    public uint LabelColor => UnwrappedObject.LabelColor;
+    public virtual uint LabelColor => UnwrappedObject.LabelColor;
 
-    public uint Color => UnwrappedObject.Color;
+    public virtual uint Color => UnwrappedObject.Color;
 
-    public uint Color2 => UnwrappedObject.Color2;
+    public virtual uint Color2 => UnwrappedObject.Color2;
 
-    public uint AlternativeColor => UnwrappedObject.AlternativeColor;
+    public virtual uint AlternativeColor => UnwrappedObject.AlternativeColor;
 
-    public uint AlternativeColor2 => UnwrappedObject.AlternativeColor2;
+    public virtual uint AlternativeColor2 => UnwrappedObject.AlternativeColor2;
 
-    public MBCharacterObject BasicTroop => UnwrappedObject.BasicTroop;
+    public virtual MBCharacterObject BasicTroop => UnwrappedObject.BasicTroop;
 
-    public MBHero Leader => UnwrappedObject.Leader;
+    public virtual MBHero Leader => UnwrappedObject.Leader;
 
-    public MBBanner Banner => UnwrappedObject.Banner;
+    public virtual MBBanner Banner => UnwrappedObject.Banner;
 
-    public List<MBSettlement> Settlements => UnwrappedObject.Settlements.CastList<MBSettlement>();
+    public virtual List<MBSettlement> Settlements => UnwrappedObject.Settlements.CastList<MBSettlement>();
 
-    public List<MBTown> Fiefs => UnwrappedObject.Fiefs.CastList<MBTown>();
+    public virtual List<MBTown> Fiefs => UnwrappedObject.Fiefs.CastList<MBTown>();
 
-    public List<MBHero> Lords => UnwrappedObject.Lords.CastList<MBHero>();
+    public virtual List<MBHero> Lords => UnwrappedObject.Lords.CastList<MBHero>();
 
-    public List<MBHero> Heroes => UnwrappedObject.Heroes.CastList<MBHero>();
+    public virtual List<MBHero> Heroes => UnwrappedObject.Heroes.CastList<MBHero>();
 
-    public List<MBMobileParty> AllParties => UnwrappedObject.AllParties.CastList<MBMobileParty>();
+    public virtual List<MBMobileParty> AllParties => UnwrappedObject.AllParties.CastList<MBMobileParty>();
 
-    public List<MBMobileParty> WarParties => UnwrappedObject.WarParties.CastList<MBMobileParty>();
+    public virtual List<MBMobileParty> WarParties => UnwrappedObject.WarParties.CastList<MBMobileParty>();
 
-    public bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
+    public virtual bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
-    public bool IsMinorFaction => UnwrappedObject.IsMinorFaction;
+    public virtual bool IsMinorFaction => UnwrappedObject.IsMinorFaction;
 
-    public bool IsKingdomFaction => UnwrappedObject.IsKingdomFaction;
+    public virtual bool IsKingdomFaction => UnwrappedObject.IsKingdomFaction;
 
-    public bool IsRebelClan => UnwrappedObject.IsRebelClan;
+    public virtual bool IsRebelClan => UnwrappedObject.IsRebelClan;
 
-    public bool IsClan => UnwrappedObject.IsClan;
+    public virtual bool IsClan => UnwrappedObject.IsClan;
 
-    public bool IsOutlaw => UnwrappedObject.IsOutlaw;
+    public virtual bool IsOutlaw => UnwrappedObject.IsOutlaw;
 
-    public bool IsMapFaction => UnwrappedObject.IsMapFaction;
+    public virtual bool IsMapFaction => UnwrappedObject.IsMapFaction;
 
-    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
+    public virtual IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
 
-    public float TotalStrength => UnwrappedObject.TotalStrength;
+    public virtual float TotalStrength => UnwrappedObject.TotalStrength;
 
     public MBVec2 FactionMidPoint => UnwrappedObject.FactionMidPoint;
 
-    public List<MBStanceLink> Stances => UnwrappedObject.Stances.CastList<MBStanceLink>();
+    public virtual List<MBStanceLink> Stances => UnwrappedObject.Stances.CastList<MBStanceLink>();
 
-    public int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
+    public virtual int TributeWallet { get => UnwrappedObject.TributeWallet; set => UnwrappedObject.TributeWallet = value; }
 
-    public float MainHeroCrimeRating { get => UnwrappedObject.MainHeroCrimeRating; set => UnwrappedObject.MainHeroCrimeRating = value; }
+    public virtual float MainHeroCrimeRating { get => UnwrappedObject.MainHeroCrimeRating; set => UnwrappedObject.MainHeroCrimeRating = value; }
 
-    public float DailyCrimeRatingChange => UnwrappedObject.DailyCrimeRatingChange;
+    public virtual float DailyCrimeRatingChange => UnwrappedObject.DailyCrimeRatingChange;
 
-    public float Aggressiveness => UnwrappedObject.Aggressiveness;
+    public virtual float Aggressiveness => UnwrappedObject.Aggressiveness;
 
-    public bool IsEliminated => UnwrappedObject.IsEliminated;
+    public virtual bool IsEliminated => UnwrappedObject.IsEliminated;
 
-    public MBExplainedNumber DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
+    public virtual MBExplainedNumber DailyCrimeRatingChangeExplained => UnwrappedObject.DailyCrimeRatingChangeExplained;
 
-    public CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
+    public virtual CampaignTime NotAttackableByPlayerUntilTime { get => UnwrappedObject.NotAttackableByPlayerUntilTime; set => UnwrappedObject.NotAttackableByPlayerUntilTime = value; }
 
-    public MBStanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith((IFaction)other);
+    public virtual MBStanceLink GetStanceWith(IMBFaction other) => UnwrappedObject.GetStanceWith((IFaction)other);
 
-    public bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith((IFaction)other);
+    public virtual bool IsAtWarWith(IMBFaction other) => UnwrappedObject.IsAtWarWith((IFaction)other);
 
     public static implicit operator Clan(MBClan wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBClan(Clan obj) => GetWrapper(obj);

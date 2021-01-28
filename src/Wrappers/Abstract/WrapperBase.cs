@@ -5,7 +5,7 @@ namespace TournamentsEnhanced.Wrappers.Abstract
 
   public abstract class WrapperBase
   {
-    public object UnwrappedObject { get; set; }
+    public virtual object UnwrappedObject { get; set; }
     public virtual bool IsNull => UnwrappedObject == null;
 
     public WrapperBase() { }

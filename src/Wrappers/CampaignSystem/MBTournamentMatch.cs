@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static implicit operator TournamentMatch(MBTournamentMatch wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTournamentMatch(TournamentMatch obj) => GetWrapper(obj);
 
-    public bool IsPlayerParticipating() => UnwrappedObject.IsPlayerParticipating();
-    public MBSettlement HostSettlement => UnwrappedObject.Winners.First().Character.HeroObject.CurrentSettlement;
+    public virtual bool IsPlayerParticipating() => UnwrappedObject.IsPlayerParticipating();
+    public virtual MBSettlement HostSettlement => UnwrappedObject.Winners.First().Character.HeroObject.CurrentSettlement;
   }
 }

@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.UnitTests
   public class CachedWrapperBaseTests
   {
     [Test]
-    public void GetWrapper_UsesCache()
+    public virtual void GetWrapper_UsesCache()
     {
       var unwrappedObject = new object();
 
@@ -19,7 +19,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void GetWrapper_CachedObjectsAreWeaklyReferenced()
+    public virtual void GetWrapper_CachedObjectsAreWeaklyReferenced()
     {
       var unwrappedObject = new object();
       var wrapperWithDereferencedObject = CachedWrapperBaseImpl.GetWrapper(unwrappedObject);
@@ -33,7 +33,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     // [Test]
-    public void GetWrapper_ReferencedObjectSurvivesGarbageCollection()
+    public virtual void GetWrapper_ReferencedObjectSurvivesGarbageCollection()
     {
       var unwrappedObject = new object();
 

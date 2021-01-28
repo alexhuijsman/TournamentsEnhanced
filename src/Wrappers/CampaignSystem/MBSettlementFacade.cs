@@ -6,6 +6,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   {
     public static MBSettlementFacade Instance { get; } = new MBSettlementFacade();
 
-    public List<MBSettlement> AllNearMainHero => MBSettlement.FindSettlementsAroundPosition(MBHero.MainHero.GetPosition().AsVec2, 60.00f);
+    public virtual List<MBSettlement> AllNearMainHero => MBSettlement.FindSettlementsAroundPosition(MBHero.MainHero.GetPosition().AsVec2, 60.00f);
   }
 }

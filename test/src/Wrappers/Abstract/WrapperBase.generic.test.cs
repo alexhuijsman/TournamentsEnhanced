@@ -10,25 +10,25 @@ namespace TournamentsEnhanced.UnitTests
     private readonly object unwrappedObject = new object();
 
     [Test]
-    public void Null_IsStatic()
+    public virtual void Null_IsStatic()
     {
       GenericWrapperBaseImpl.Null.ShouldBe(GenericWrapperBaseImpl.Null);
     }
 
     [Test]
-    public void Null_IsNotNull()
+    public virtual void Null_IsNotNull()
     {
       GenericWrapperBaseImpl.Null.ShouldNotBeNull();
     }
 
     [Test]
-    public void Null_HasNullUnwrappedObject()
+    public virtual void Null_HasNullUnwrappedObject()
     {
       GenericWrapperBaseImpl.Null.UnwrappedObject.ShouldBeNull();
     }
 
     [Test]
-    public void Ctor_ArgBecomesUnwrappedObject()
+    public virtual void Ctor_ArgBecomesUnwrappedObject()
     {
       sut = new GenericWrapperBaseImpl(unwrappedObject);
 
@@ -36,7 +36,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Ctor_NoArgsBecomesNullUnwrappedObject()
+    public virtual void Ctor_NoArgsBecomesNullUnwrappedObject()
     {
       sut = new GenericWrapperBaseImpl();
 
@@ -44,7 +44,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Ctor_IsNullShouldBeFalse()
+    public virtual void Ctor_IsNullShouldBeFalse()
     {
       sut = new GenericWrapperBaseImpl(unwrappedObject);
 

@@ -11,98 +11,98 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBFactionImpl : MBObjectBase, IFaction
   {
     private IFaction _faction;
-    public IFaction UnwrappedFaction => _faction;
+    public virtual IFaction UnwrappedFaction => _faction;
 
-    public IFaction IFactionObject => _faction;
+    public virtual IFaction IFactionObject => _faction;
 
-    public TextObject Name => _faction.Name;
+    public virtual TextObject Name => _faction.Name;
 
-    public TextObject InformalName => _faction.InformalName;
+    public virtual TextObject InformalName => _faction.InformalName;
 
-    public string EncyclopediaLink => _faction.EncyclopediaLink;
+    public virtual string EncyclopediaLink => _faction.EncyclopediaLink;
 
-    public TextObject EncyclopediaLinkWithName => _faction.EncyclopediaLinkWithName;
+    public virtual TextObject EncyclopediaLinkWithName => _faction.EncyclopediaLinkWithName;
 
-    public TextObject EncyclopediaText => _faction.EncyclopediaText;
+    public virtual TextObject EncyclopediaText => _faction.EncyclopediaText;
 
-    public CultureObject Culture => _faction.Culture;
+    public virtual CultureObject Culture => _faction.Culture;
 
     public Vec2 InitialPosition => _faction.InitialPosition;
 
-    public uint LabelColor => _faction.LabelColor;
+    public virtual uint LabelColor => _faction.LabelColor;
 
-    public uint Color => _faction.Color;
+    public virtual uint Color => _faction.Color;
 
-    public uint Color2 => _faction.Color2;
+    public virtual uint Color2 => _faction.Color2;
 
-    public uint AlternativeColor => _faction.AlternativeColor;
+    public virtual uint AlternativeColor => _faction.AlternativeColor;
 
-    public uint AlternativeColor2 => _faction.AlternativeColor2;
+    public virtual uint AlternativeColor2 => _faction.AlternativeColor2;
 
-    public CharacterObject BasicTroop => _faction.BasicTroop;
+    public virtual CharacterObject BasicTroop => _faction.BasicTroop;
 
-    public Hero Leader => _faction.Leader;
+    public virtual Hero Leader => _faction.Leader;
 
-    public Banner Banner => _faction.Banner;
+    public virtual Banner Banner => _faction.Banner;
 
-    public MBReadOnlyList<Settlement> Settlements => _faction.Settlements;
+    public virtual MBReadOnlyList<Settlement> Settlements => _faction.Settlements;
 
-    public MBReadOnlyList<Town> Fiefs => _faction.Fiefs;
+    public virtual MBReadOnlyList<Town> Fiefs => _faction.Fiefs;
 
-    public IEnumerable<Hero> Lords => _faction.Lords;
+    public virtual IEnumerable<Hero> Lords => _faction.Lords;
 
-    public IEnumerable<Hero> Heroes => _faction.Heroes;
+    public virtual IEnumerable<Hero> Heroes => _faction.Heroes;
 
-    public IEnumerable<MobileParty> AllParties => _faction.AllParties;
+    public virtual IEnumerable<MobileParty> AllParties => _faction.AllParties;
 
-    public IEnumerable<MobileParty> WarParties => _faction.WarParties;
+    public virtual IEnumerable<MobileParty> WarParties => _faction.WarParties;
 
-    public bool IsBanditFaction => _faction.IsBanditFaction;
+    public virtual bool IsBanditFaction => _faction.IsBanditFaction;
 
-    public bool IsMinorFaction => _faction.IsMinorFaction;
+    public virtual bool IsMinorFaction => _faction.IsMinorFaction;
 
-    public bool IsKingdomFaction => _faction.IsKingdomFaction;
+    public virtual bool IsKingdomFaction => _faction.IsKingdomFaction;
 
-    public bool IsRebelClan => _faction.IsRebelClan;
+    public virtual bool IsRebelClan => _faction.IsRebelClan;
 
-    public bool IsClan => _faction.IsClan;
+    public virtual bool IsClan => _faction.IsClan;
 
-    public bool IsOutlaw => _faction.IsOutlaw;
+    public virtual bool IsOutlaw => _faction.IsOutlaw;
 
-    public bool IsMapFaction => _faction.IsMapFaction;
+    public virtual bool IsMapFaction => _faction.IsMapFaction;
 
-    public IFaction MapFaction => _faction.MapFaction;
+    public virtual IFaction MapFaction => _faction.MapFaction;
 
-    public float TotalStrength => _faction.TotalStrength;
+    public virtual float TotalStrength => _faction.TotalStrength;
 
     public Vec2 FactionMidPoint => _faction.FactionMidPoint;
 
-    public IEnumerable<StanceLink> Stances => _faction.Stances;
+    public virtual IEnumerable<StanceLink> Stances => _faction.Stances;
 
-    public int TributeWallet { get => _faction.TributeWallet; set => _faction.TributeWallet = value; }
-    public float MainHeroCrimeRating { get => _faction.MainHeroCrimeRating; set => _faction.MainHeroCrimeRating = value; }
+    public virtual int TributeWallet { get => _faction.TributeWallet; set => _faction.TributeWallet = value; }
+    public virtual float MainHeroCrimeRating { get => _faction.MainHeroCrimeRating; set => _faction.MainHeroCrimeRating = value; }
 
-    public float DailyCrimeRatingChange => _faction.DailyCrimeRatingChange;
+    public virtual float DailyCrimeRatingChange => _faction.DailyCrimeRatingChange;
 
-    public float Aggressiveness => _faction.Aggressiveness;
+    public virtual float Aggressiveness => _faction.Aggressiveness;
 
-    public bool IsEliminated => _faction.IsEliminated;
+    public virtual bool IsEliminated => _faction.IsEliminated;
 
-    public ExplainedNumber DailyCrimeRatingChangeExplained => _faction.DailyCrimeRatingChangeExplained;
+    public virtual ExplainedNumber DailyCrimeRatingChangeExplained => _faction.DailyCrimeRatingChangeExplained;
 
-    public CampaignTime NotAttackableByPlayerUntilTime { get => _faction.NotAttackableByPlayerUntilTime; set => _faction.NotAttackableByPlayerUntilTime = value; }
+    public virtual CampaignTime NotAttackableByPlayerUntilTime { get => _faction.NotAttackableByPlayerUntilTime; set => _faction.NotAttackableByPlayerUntilTime = value; }
 
     public MBFactionImpl(IFaction faction)
     {
       _faction = faction;
     }
 
-    public bool IsAtWarWith(IFaction other)
+    public virtual bool IsAtWarWith(IFaction other)
     {
       return _faction.IsAtWarWith(other);
     }
 
-    public StanceLink GetStanceWith(IFaction other)
+    public virtual StanceLink GetStanceWith(IFaction other)
     {
       return _faction.GetStanceWith(other);
     }

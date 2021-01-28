@@ -34,17 +34,17 @@ namespace TournamentsEnhanced.Wrappers.Core
       return selectedPrizes;
     }
 
-    public bool IsWorthyTournamentPrizeForMainHero()
+    public virtual bool IsWorthyTournamentPrizeForMainHero()
     {
       return IsTournamentPrize() && UnwrappedObject.Tier == MBHero.GetMainHeroTournamentRewardTier();
     }
 
-    public bool IsTournamentPrize()
+    public virtual bool IsTournamentPrize()
     {
       return !IsCraftedByPlayer && !IsCraftedWeapon && IsTierable();
     }
 
-    public bool IsTierable()
+    public virtual bool IsTierable()
     {
       return IsOfAnyMatchingType(Constants.Item.TierableItemTypes);
     }

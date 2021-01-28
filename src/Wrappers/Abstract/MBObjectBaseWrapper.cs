@@ -6,6 +6,6 @@ namespace TournamentsEnhanced.Wrappers.Abstract
   where W : CachedWrapperBase<W, T>, new()
   where T : MBObjectBase
   {
-    public string StringId => UnwrappedObject.StringId;
+    public virtual string StringId => UnwrappedObject.StringId;
   }
 }

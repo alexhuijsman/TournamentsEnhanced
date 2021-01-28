@@ -23,8 +23,8 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     }
 
     public static MBCampaign Current => Campaign.Current;
-    public MBTournamentManager TournamentManager => (MBTournamentManager)UnwrappedObject.TournamentManager;
-    public MBGameModels Models => UnwrappedObject.Models;
+    public virtual MBTournamentManager TournamentManager => (MBTournamentManager)UnwrappedObject.TournamentManager;
+    public virtual MBGameModels Models => UnwrappedObject.Models;
 
     public static implicit operator Campaign(MBCampaign wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBCampaign(Campaign obj) => GetWrapper(obj);

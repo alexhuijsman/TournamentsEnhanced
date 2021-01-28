@@ -13,7 +13,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public class MBSettlementAccessModel : MBWrapperBase<MBSettlementAccessModel, SettlementAccessModel>
   {
 
-    public bool CanMainHeroDoSettlementAction(MBSettlement settlement,
+    public virtual bool CanMainHeroDoSettlementAction(MBSettlement settlement,
                                               SettlementAction settlementAction,
                                               out bool shouldBeDisabled,
                                               out MBTextObject wrappedDisabledText)

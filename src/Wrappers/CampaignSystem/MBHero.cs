@@ -22,218 +22,218 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static MBHero OneToOneConversationHero => MBHero.OneToOneConversationHero;
     public static List<MBHero> FindAll(Func<MBHero, bool> predicate) => (List<MBHero>)MBHero.FindAll((Func<MBHero, bool>)predicate);
     public static MBHero FindFirst(Func<MBHero, bool> predicate) => MBHero.FindFirst((Func<MBHero, bool>)predicate);
-    public float GetRelationWithPlayer() => UnwrappedObject.GetRelationWithPlayer();
-    public float GetRelation(MBHero otherHero) => UnwrappedObject.GetRelation(otherHero);
+    public virtual float GetRelationWithPlayer() => UnwrappedObject.GetRelationWithPlayer();
+    public virtual float GetRelation(MBHero otherHero) => UnwrappedObject.GetRelation(otherHero);
     public static ItemTiers GetMainHeroTournamentRewardTier() => GetRewardTierForHero(MainHero);
 
-    public MBClan Clan { get => UnwrappedObject.Clan; set => UnwrappedObject.Clan = value; }
+    public virtual MBClan Clan { get => UnwrappedObject.Clan; set => UnwrappedObject.Clan = value; }
 
-    public bool IsPregnant => UnwrappedObject.IsPregnant;
+    public virtual bool IsPregnant => UnwrappedObject.IsPregnant;
 
-    public bool IsFertile => UnwrappedObject.IsFertile;
+    public virtual bool IsFertile => UnwrappedObject.IsFertile;
 
-    public int RandomValueRarelyChanging => UnwrappedObject.RandomValueRarelyChanging;
+    public virtual int RandomValueRarelyChanging => UnwrappedObject.RandomValueRarelyChanging;
 
-    public int RandomValueDeterministic => UnwrappedObject.RandomValueDeterministic;
+    public virtual int RandomValueDeterministic => UnwrappedObject.RandomValueDeterministic;
 
-    public int RandomValue => UnwrappedObject.RandomValue;
+    public virtual int RandomValue => UnwrappedObject.RandomValue;
 
-    public List<MBItemObject> SpecialItems => UnwrappedObject.SpecialItems.CastList<MBItemObject>();
+    public virtual List<MBItemObject> SpecialItems => UnwrappedObject.SpecialItems.CastList<MBItemObject>();
 
-    public MBCultureObject Culture => UnwrappedObject.Culture;
+    public virtual MBCultureObject Culture => UnwrappedObject.Culture;
 
-    public int SpcDaysInLocation => UnwrappedObject.SpcDaysInLocation;
+    public virtual int SpcDaysInLocation => UnwrappedObject.SpcDaysInLocation;
 
-    public bool IsMercenary => UnwrappedObject.IsMercenary;
+    public virtual bool IsMercenary => UnwrappedObject.IsMercenary;
 
-    public int Level => UnwrappedObject.Level;
+    public virtual int Level => UnwrappedObject.Level;
 
-    public List<MBHero> ExSpouses => UnwrappedObject.ExSpouses.CastList<MBHero>();
+    public virtual List<MBHero> ExSpouses => UnwrappedObject.ExSpouses.CastList<MBHero>();
 
-    public bool AlwaysDie => UnwrappedObject.AlwaysDie;
+    public virtual bool AlwaysDie => UnwrappedObject.AlwaysDie;
 
-    public bool NeverBecomePrisoner => UnwrappedObject.NeverBecomePrisoner;
+    public virtual bool NeverBecomePrisoner => UnwrappedObject.NeverBecomePrisoner;
 
-    public bool Detected => UnwrappedObject.Detected;
+    public virtual bool Detected => UnwrappedObject.Detected;
 
-    public string TattooTags => UnwrappedObject.TattooTags;
+    public virtual string TattooTags => UnwrappedObject.TattooTags;
 
-    public string BeardTags => UnwrappedObject.BeardTags;
+    public virtual string BeardTags => UnwrappedObject.BeardTags;
 
-    public string HairTags => UnwrappedObject.HairTags;
+    public virtual string HairTags => UnwrappedObject.HairTags;
 
-    public MBTextObject Name => UnwrappedObject.Name;
+    public virtual MBTextObject Name => UnwrappedObject.Name;
 
-    public MBTextObject FirstName => UnwrappedObject.FirstName;
+    public virtual MBTextObject FirstName => UnwrappedObject.FirstName;
 
-    public List<MBCharacterObject> VolunteerTypes => UnwrappedObject.VolunteerTypes.CastList<MBCharacterObject>();
+    public virtual List<MBCharacterObject> VolunteerTypes => UnwrappedObject.VolunteerTypes.CastList<MBCharacterObject>();
 
-    public int LastTimeStampForActivity => UnwrappedObject.LastTimeStampForActivity;
+    public virtual int LastTimeStampForActivity => UnwrappedObject.LastTimeStampForActivity;
 
-    public float LastVisitTimeOfHomeSettlement => UnwrappedObject.LastVisitTimeOfHomeSettlement;
+    public virtual float LastVisitTimeOfHomeSettlement => UnwrappedObject.LastVisitTimeOfHomeSettlement;
 
-    public bool IsHeadman => UnwrappedObject.IsHeadman;
+    public virtual bool IsHeadman => UnwrappedObject.IsHeadman;
 
-    public bool IsWounded => UnwrappedObject.IsWounded;
+    public virtual bool IsWounded => UnwrappedObject.IsWounded;
 
-    public bool IsPlayerCompanion => UnwrappedObject.IsPlayerCompanion;
+    public virtual bool IsPlayerCompanion => UnwrappedObject.IsPlayerCompanion;
 
-    public bool IsMerchant => UnwrappedObject.IsMerchant;
+    public virtual bool IsMerchant => UnwrappedObject.IsMerchant;
 
-    public bool IsPreacher => UnwrappedObject.IsPreacher;
+    public virtual bool IsPreacher => UnwrappedObject.IsPreacher;
 
-    public bool IsGangLeader => UnwrappedObject.IsGangLeader;
+    public virtual bool IsGangLeader => UnwrappedObject.IsGangLeader;
 
-    public bool IsNotable => UnwrappedObject.IsNotable;
+    public virtual bool IsNotable => UnwrappedObject.IsNotable;
 
-    public bool IsRuralNotable => UnwrappedObject.IsRuralNotable;
+    public virtual bool IsRuralNotable => UnwrappedObject.IsRuralNotable;
 
-    public bool IsOutlaw => UnwrappedObject.IsOutlaw;
+    public virtual bool IsOutlaw => UnwrappedObject.IsOutlaw;
 
-    public bool IsSpecial => UnwrappedObject.IsSpecial;
+    public virtual bool IsSpecial => UnwrappedObject.IsSpecial;
 
-    public bool IsRebel => UnwrappedObject.IsRebel;
+    public virtual bool IsRebel => UnwrappedObject.IsRebel;
 
-    public bool IsCommander => UnwrappedObject.IsCommander;
+    public virtual bool IsCommander => UnwrappedObject.IsCommander;
 
-    public bool IsPartyLeader => UnwrappedObject.IsPartyLeader;
+    public virtual bool IsPartyLeader => UnwrappedObject.IsPartyLeader;
 
-    public bool IsTemplate => UnwrappedObject.IsTemplate;
+    public virtual bool IsTemplate => UnwrappedObject.IsTemplate;
 
-    public bool IsArtisan => UnwrappedObject.IsArtisan;
+    public virtual bool IsArtisan => UnwrappedObject.IsArtisan;
 
-    public bool IsWanderer => UnwrappedObject.IsWanderer;
+    public virtual bool IsWanderer => UnwrappedObject.IsWanderer;
 
-    public MBClan CompanionOf { get => UnwrappedObject.CompanionOf; set => UnwrappedObject.CompanionOf = value; }
+    public virtual MBClan CompanionOf { get => UnwrappedObject.CompanionOf; set => UnwrappedObject.CompanionOf = value; }
 
-    public CampaignTime LastSeenTime => UnwrappedObject.LastSeenTime;
+    public virtual CampaignTime LastSeenTime => UnwrappedObject.LastSeenTime;
 
-    public bool CanBeCompanion => UnwrappedObject.CanBeCompanion;
+    public virtual bool CanBeCompanion => UnwrappedObject.CanBeCompanion;
 
-    public bool Noncombatant => UnwrappedObject.Noncombatant;
+    public virtual bool Noncombatant => UnwrappedObject.Noncombatant;
 
-    public bool AwaitingTrial => UnwrappedObject.AwaitingTrial;
+    public virtual bool AwaitingTrial => UnwrappedObject.AwaitingTrial;
 
-    public List<MBHero> CompanionsInParty => UnwrappedObject.CompanionsInParty.CastList<MBHero>();
+    public virtual List<MBHero> CompanionsInParty => UnwrappedObject.CompanionsInParty.CastList<MBHero>();
 
-    public MBCharacterObject Template { get => UnwrappedObject.Template; set => UnwrappedObject.Template = value; }
+    public virtual MBCharacterObject Template { get => UnwrappedObject.Template; set => UnwrappedObject.Template = value; }
 
-    public bool IsDead => UnwrappedObject.IsDead;
+    public virtual bool IsDead => UnwrappedObject.IsDead;
 
-    public bool IsFugitive => UnwrappedObject.IsFugitive;
+    public virtual bool IsFugitive => UnwrappedObject.IsFugitive;
 
-    public bool LastSeenInSettlement => UnwrappedObject.LastSeenInSettlement;
+    public virtual bool LastSeenInSettlement => UnwrappedObject.LastSeenInSettlement;
 
-    public bool IsPrisoner => UnwrappedObject.IsPrisoner;
+    public virtual bool IsPrisoner => UnwrappedObject.IsPrisoner;
 
-    public bool IsActive => UnwrappedObject.IsActive;
+    public virtual bool IsActive => UnwrappedObject.IsActive;
 
-    public bool IsNotSpawned => UnwrappedObject.IsNotSpawned;
+    public virtual bool IsNotSpawned => UnwrappedObject.IsNotSpawned;
 
-    public bool IsDisabled => UnwrappedObject.IsDisabled;
+    public virtual bool IsDisabled => UnwrappedObject.IsDisabled;
 
-    public bool IsAlive => UnwrappedObject.IsAlive;
+    public virtual bool IsAlive => UnwrappedObject.IsAlive;
 
-    public MBHero DeathMarkKillerHero => UnwrappedObject.DeathMarkKillerHero;
+    public virtual MBHero DeathMarkKillerHero => UnwrappedObject.DeathMarkKillerHero;
 
-    public MBSettlement LastSeenPlace => UnwrappedObject.LastSeenPlace;
+    public virtual MBSettlement LastSeenPlace => UnwrappedObject.LastSeenPlace;
 
-    public bool IsReleased => UnwrappedObject.IsReleased;
+    public virtual bool IsReleased => UnwrappedObject.IsReleased;
 
-    public int MaxHitPoints => UnwrappedObject.MaxHitPoints;
+    public virtual int MaxHitPoints => UnwrappedObject.MaxHitPoints;
 
-    public MBPartyBase PartyBelongedToAsPrisoner => UnwrappedObject.PartyBelongedToAsPrisoner;
+    public virtual MBPartyBase PartyBelongedToAsPrisoner => UnwrappedObject.PartyBelongedToAsPrisoner;
 
-    public CampaignTime BirthDay => UnwrappedObject.BirthDay;
+    public virtual CampaignTime BirthDay => UnwrappedObject.BirthDay;
 
-    public MBSettlement BornSettlement { get => UnwrappedObject.BornSettlement; set => UnwrappedObject.BornSettlement = value; }
+    public virtual MBSettlement BornSettlement { get => UnwrappedObject.BornSettlement; set => UnwrappedObject.BornSettlement = value; }
 
-    public MBSettlement HomeSettlement => UnwrappedObject.HomeSettlement;
+    public virtual MBSettlement HomeSettlement => UnwrappedObject.HomeSettlement;
 
-    public int Gold { get => UnwrappedObject.Gold; set => UnwrappedObject.Gold = value; }
+    public virtual int Gold { get => UnwrappedObject.Gold; set => UnwrappedObject.Gold = value; }
 
     public Hero.FactionRank Rank => UnwrappedObject.Rank;
 
-    public float ProbabilityOfDeath { get => UnwrappedObject.ProbabilityOfDeath; set => UnwrappedObject.ProbabilityOfDeath = value; }
-    public MBHero Father { get => UnwrappedObject.Father; set => UnwrappedObject.Father = value; }
-    public MBHero Mother { get => UnwrappedObject.Mother; set => UnwrappedObject.Mother = value; }
-    public MBHero Spouse { get => UnwrappedObject.Spouse; set => UnwrappedObject.Spouse = value; }
+    public virtual float ProbabilityOfDeath { get => UnwrappedObject.ProbabilityOfDeath; set => UnwrappedObject.ProbabilityOfDeath = value; }
+    public virtual MBHero Father { get => UnwrappedObject.Father; set => UnwrappedObject.Father = value; }
+    public virtual MBHero Mother { get => UnwrappedObject.Mother; set => UnwrappedObject.Mother = value; }
+    public virtual MBHero Spouse { get => UnwrappedObject.Spouse; set => UnwrappedObject.Spouse = value; }
 
-    public List<MBHero> Children => UnwrappedObject.Children.CastList<MBHero>();
+    public virtual List<MBHero> Children => UnwrappedObject.Children.CastList<MBHero>();
 
-    public List<MBHero> Siblings => UnwrappedObject.Siblings.CastList<MBHero>();
+    public virtual List<MBHero> Siblings => UnwrappedObject.Siblings.CastList<MBHero>();
 
-    public MBHeroDeveloper HeroDeveloper => UnwrappedObject.HeroDeveloper;
+    public virtual MBHeroDeveloper HeroDeveloper => UnwrappedObject.HeroDeveloper;
 
-    public List<MBWorkshop> OwnedWorkshops => UnwrappedObject.OwnedWorkshops.CastList<MBWorkshop>();
+    public virtual List<MBWorkshop> OwnedWorkshops => UnwrappedObject.OwnedWorkshops.CastList<MBWorkshop>();
 
-    public List<MBCommonArea> OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas.CastList<MBCommonArea>();
+    public virtual List<MBCommonArea> OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas.CastList<MBCommonArea>();
 
-    public List<MBPartyBase> OwnedParties => UnwrappedObject.OwnedParties.CastList<MBPartyBase>();
+    public virtual List<MBPartyBase> OwnedParties => UnwrappedObject.OwnedParties.CastList<MBPartyBase>();
 
-    public CampaignTime LastMeetingTimeWithPlayer { get => UnwrappedObject.LastMeetingTimeWithPlayer; set => UnwrappedObject.LastMeetingTimeWithPlayer = value; }
-    public int HitPoints { get => UnwrappedObject.HitPoints; set => UnwrappedObject.HitPoints = value; }
-    public bool HasMet { get => UnwrappedObject.HasMet; set => UnwrappedObject.HasMet = value; }
-    public float Controversy { get => UnwrappedObject.Controversy; set => UnwrappedObject.Controversy = value; }
-    public CampaignTime DeathDay { get => UnwrappedObject.DeathDay; set => UnwrappedObject.DeathDay = value; }
+    public virtual CampaignTime LastMeetingTimeWithPlayer { get => UnwrappedObject.LastMeetingTimeWithPlayer; set => UnwrappedObject.LastMeetingTimeWithPlayer = value; }
+    public virtual int HitPoints { get => UnwrappedObject.HitPoints; set => UnwrappedObject.HitPoints = value; }
+    public virtual bool HasMet { get => UnwrappedObject.HasMet; set => UnwrappedObject.HasMet = value; }
+    public virtual float Controversy { get => UnwrappedObject.Controversy; set => UnwrappedObject.Controversy = value; }
+    public virtual CampaignTime DeathDay { get => UnwrappedObject.DeathDay; set => UnwrappedObject.DeathDay = value; }
 
-    public float Age => UnwrappedObject.Age;
+    public virtual float Age => UnwrappedObject.Age;
 
-    public bool IsChild => UnwrappedObject.IsChild;
+    public virtual bool IsChild => UnwrappedObject.IsChild;
 
-    public float Power => UnwrappedObject.Power;
+    public virtual float Power => UnwrappedObject.Power;
 
-    public MBBanner ClanBanner => UnwrappedObject.ClanBanner;
+    public virtual MBBanner ClanBanner => UnwrappedObject.ClanBanner;
 
-    public long LastExaminedLogEntryID { get => UnwrappedObject.LastExaminedLogEntryID; set => UnwrappedObject.LastExaminedLogEntryID = value; }
-    public MBClan SupporterOf { get => UnwrappedObject.SupporterOf; set => UnwrappedObject.SupporterOf = value; }
-    public MBTown GovernorOf { get => UnwrappedObject.GovernorOf; set => UnwrappedObject.GovernorOf = value; }
+    public virtual long LastExaminedLogEntryID { get => UnwrappedObject.LastExaminedLogEntryID; set => UnwrappedObject.LastExaminedLogEntryID = value; }
+    public virtual MBClan SupporterOf { get => UnwrappedObject.SupporterOf; set => UnwrappedObject.SupporterOf = value; }
+    public virtual MBTown GovernorOf { get => UnwrappedObject.GovernorOf; set => UnwrappedObject.GovernorOf = value; }
 
-    public IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
+    public virtual IMBFaction MapFaction => UnwrappedObject.MapFaction.ToIMBFaction();
 
-    public bool IsFactionLeader => UnwrappedObject.IsFactionLeader;
+    public virtual bool IsFactionLeader => UnwrappedObject.IsFactionLeader;
 
-    public List<MBCaravanPartyComponent> OwnedCaravans => UnwrappedObject.OwnedCaravans.CastList<MBCaravanPartyComponent>();
+    public virtual List<MBCaravanPartyComponent> OwnedCaravans => UnwrappedObject.OwnedCaravans.CastList<MBCaravanPartyComponent>();
 
-    public MBMobileParty PartyBelongedTo => UnwrappedObject.PartyBelongedTo;
+    public virtual MBMobileParty PartyBelongedTo => UnwrappedObject.PartyBelongedTo;
 
-    public MBIssueBase Issue => UnwrappedObject.Issue;
+    public virtual MBIssueBase Issue => UnwrappedObject.Issue;
 
-    public MBSettlement StayingInSettlementOfNotable { get => UnwrappedObject.StayingInSettlementOfNotable; set => UnwrappedObject.StayingInSettlementOfNotable = value; }
+    public virtual MBSettlement StayingInSettlementOfNotable { get => UnwrappedObject.StayingInSettlementOfNotable; set => UnwrappedObject.StayingInSettlementOfNotable = value; }
 
-    public bool IsHumanPlayerCharacter => UnwrappedObject.IsHumanPlayerCharacter;
+    public virtual bool IsHumanPlayerCharacter => UnwrappedObject.IsHumanPlayerCharacter;
 
-    public bool AlwaysUnconscious { get => UnwrappedObject.AlwaysUnconscious; set => UnwrappedObject.AlwaysUnconscious = value; }
-    public float PassedTimeAtHomeSettlement { get => UnwrappedObject.PassedTimeAtHomeSettlement; set => UnwrappedObject.PassedTimeAtHomeSettlement = value; }
-    public bool IsNoble { get => UnwrappedObject.IsNoble; set => UnwrappedObject.IsNoble = value; }
+    public virtual bool AlwaysUnconscious { get => UnwrappedObject.AlwaysUnconscious; set => UnwrappedObject.AlwaysUnconscious = value; }
+    public virtual float PassedTimeAtHomeSettlement { get => UnwrappedObject.PassedTimeAtHomeSettlement; set => UnwrappedObject.PassedTimeAtHomeSettlement = value; }
+    public virtual bool IsNoble { get => UnwrappedObject.IsNoble; set => UnwrappedObject.IsNoble = value; }
 
     public Hero.CharacterStates HeroState => UnwrappedObject.HeroState;
 
-    public CampaignTime CaptivityStartTime { get => UnwrappedObject.CaptivityStartTime; set => UnwrappedObject.CaptivityStartTime = value; }
+    public virtual CampaignTime CaptivityStartTime { get => UnwrappedObject.CaptivityStartTime; set => UnwrappedObject.CaptivityStartTime = value; }
 
-    public MBEquipment CivilianEquipment => UnwrappedObject.CivilianEquipment;
+    public virtual MBEquipment CivilianEquipment => UnwrappedObject.CivilianEquipment;
 
-    public MBEquipment BattleEquipment => UnwrappedObject.BattleEquipment;
+    public virtual MBEquipment BattleEquipment => UnwrappedObject.BattleEquipment;
 
-    public bool IsFemale => UnwrappedObject.IsFemale;
+    public virtual bool IsFemale => UnwrappedObject.IsFemale;
 
-    public MBTextObject EncyclopediaLinkWithName => UnwrappedObject.EncyclopediaLinkWithName;
+    public virtual MBTextObject EncyclopediaLinkWithName => UnwrappedObject.EncyclopediaLinkWithName;
 
-    public string EncyclopediaLink => UnwrappedObject.EncyclopediaLink;
+    public virtual string EncyclopediaLink => UnwrappedObject.EncyclopediaLink;
 
-    public MBTextObject EncyclopediaText { get => UnwrappedObject.EncyclopediaText; set => UnwrappedObject.EncyclopediaText = value; }
+    public virtual MBTextObject EncyclopediaText { get => UnwrappedObject.EncyclopediaText; set => UnwrappedObject.EncyclopediaText = value; }
 
-    public MBCharacterObject CharacterObject => UnwrappedObject.CharacterObject;
+    public virtual MBCharacterObject CharacterObject => UnwrappedObject.CharacterObject;
 
-    public bool CanHaveRecruits => UnwrappedObject.CanHaveRecruits;
+    public virtual bool CanHaveRecruits => UnwrappedObject.CanHaveRecruits;
 
-    public MBBodyProperties BodyProperties => UnwrappedObject.BodyProperties;
+    public virtual MBBodyProperties BodyProperties => UnwrappedObject.BodyProperties;
 
-    public float Build { get => UnwrappedObject.Build; set => UnwrappedObject.Build = value; }
-    public float Weight { get => UnwrappedObject.Weight; set => UnwrappedObject.Weight = value; }
-    public bool IsMinorFactionHero { get => UnwrappedObject.IsMinorFactionHero; set => UnwrappedObject.IsMinorFactionHero = value; }
+    public virtual float Build { get => UnwrappedObject.Build; set => UnwrappedObject.Build = value; }
+    public virtual float Weight { get => UnwrappedObject.Weight; set => UnwrappedObject.Weight = value; }
+    public virtual bool IsMinorFactionHero { get => UnwrappedObject.IsMinorFactionHero; set => UnwrappedObject.IsMinorFactionHero = value; }
 
-    public MBSettlement CurrentSettlement => UnwrappedObject.CurrentSettlement;
+    public virtual MBSettlement CurrentSettlement => UnwrappedObject.CurrentSettlement;
 
     private static ItemTiers GetRewardTierForHero(MBHero hero)
     {
@@ -256,57 +256,57 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
       return itemTier;
     }
 
-    public void AddInfluenceWithKingdom(float additionalInfluence) => UnwrappedObject.AddInfluenceWithKingdom(additionalInfluence);
+    public virtual void AddInfluenceWithKingdom(float additionalInfluence) => UnwrappedObject.AddInfluenceWithKingdom(additionalInfluence);
 
-    public void AddPower(float value) => UnwrappedObject.AddPower(value);
+    public virtual void AddPower(float value) => UnwrappedObject.AddPower(value);
 
-    public void AddSkillXp(MBSkillObject skill, float xpAmount) => UnwrappedObject.AddSkillXp(skill, xpAmount);
+    public virtual void AddSkillXp(MBSkillObject skill, float xpAmount) => UnwrappedObject.AddSkillXp(skill, xpAmount);
 
-    public void ChangeHeroGold(int changeAmount) => UnwrappedObject.ChangeHeroGold(changeAmount);
+    public virtual void ChangeHeroGold(int changeAmount) => UnwrappedObject.ChangeHeroGold(changeAmount);
 
-    public int GetAttributeValue(CharacterAttributesEnum charAttribute) => UnwrappedObject.GetAttributeValue(charAttribute);
+    public virtual int GetAttributeValue(CharacterAttributesEnum charAttribute) => UnwrappedObject.GetAttributeValue(charAttribute);
 
-    public int GetBaseHeroRelation(MBHero otherHero) => UnwrappedObject.GetBaseHeroRelation(otherHero);
+    public virtual int GetBaseHeroRelation(MBHero otherHero) => UnwrappedObject.GetBaseHeroRelation(otherHero);
 
-    public IEnumerable<string> GetHeroOccupiedEvents() => UnwrappedObject.GetHeroOccupiedEvents();
+    public virtual IEnumerable<string> GetHeroOccupiedEvents() => UnwrappedObject.GetHeroOccupiedEvents();
 
-    public MBCharacterSkills GetHeroSkills() => UnwrappedObject.GetHeroSkills();
+    public virtual MBCharacterSkills GetHeroSkills() => UnwrappedObject.GetHeroSkills();
 
-    public MBCharacterTraits GetHeroTraits() => UnwrappedObject.GetHeroTraits();
+    public virtual MBCharacterTraits GetHeroTraits() => UnwrappedObject.GetHeroTraits();
 
-    public IMapPoint GetMapPoint() => UnwrappedObject.GetMapPoint();
+    public virtual IMapPoint GetMapPoint() => UnwrappedObject.GetMapPoint();
 
-    public bool GetPerkValue(MBPerkObject perk) => UnwrappedObject.GetPerkValue(perk);
+    public virtual bool GetPerkValue(MBPerkObject perk) => UnwrappedObject.GetPerkValue(perk);
 
     public MBVec3 GetPosition() => UnwrappedObject.GetPosition();
 
 
 
-    public int GetSkillValue(MBSkillObject skill) => UnwrappedObject.GetSkillValue(skill);
+    public virtual int GetSkillValue(MBSkillObject skill) => UnwrappedObject.GetSkillValue(skill);
 
-    public int GetTraitLevel(MBTraitObject trait) => UnwrappedObject.GetTraitLevel(trait);
+    public virtual int GetTraitLevel(MBTraitObject trait) => UnwrappedObject.GetTraitLevel(trait);
 
-    public float GetUnmodifiedClanLeaderRelationshipWithPlayer() => UnwrappedObject.GetUnmodifiedClanLeaderRelationshipWithPlayer();
+    public virtual float GetUnmodifiedClanLeaderRelationshipWithPlayer() => UnwrappedObject.GetUnmodifiedClanLeaderRelationshipWithPlayer();
 
-    public void Heal(MBPartyBase party, int healAmount, bool addXp = false) => UnwrappedObject.Heal(party, healAmount, addXp);
+    public virtual void Heal(MBPartyBase party, int healAmount, bool addXp = false) => UnwrappedObject.Heal(party, healAmount, addXp);
 
-    public bool IsEnemy(MBHero otherHero) => UnwrappedObject.IsEnemy(otherHero);
+    public virtual bool IsEnemy(MBHero otherHero) => UnwrappedObject.IsEnemy(otherHero);
 
-    public bool IsFriend(MBHero otherHero) => UnwrappedObject.IsFriend(otherHero);
+    public virtual bool IsFriend(MBHero otherHero) => UnwrappedObject.IsFriend(otherHero);
 
-    public bool IsHealthFull() => UnwrappedObject.IsHealthFull();
+    public virtual bool IsHealthFull() => UnwrappedObject.IsHealthFull();
 
-    public bool IsNeutral(MBHero otherHero) => UnwrappedObject.IsNeutral(otherHero);
+    public virtual bool IsNeutral(MBHero otherHero) => UnwrappedObject.IsNeutral(otherHero);
 
-    public bool IsOccupiedByAnEvent() => UnwrappedObject.IsOccupiedByAnEvent();
+    public virtual bool IsOccupiedByAnEvent() => UnwrappedObject.IsOccupiedByAnEvent();
 
-    public void SetCharacterObject(MBCharacterObject characterObject) => UnwrappedObject.SetCharacterObject(characterObject);
+    public virtual void SetCharacterObject(MBCharacterObject characterObject) => UnwrappedObject.SetCharacterObject(characterObject);
 
-    public void SetPerkValue(MBPerkObject perk, bool value) => UnwrappedObject.SetPerkValue(perk, value);
+    public virtual void SetPerkValue(MBPerkObject perk, bool value) => UnwrappedObject.SetPerkValue(perk, value);
 
-    public void SetPersonalRelation(MBHero otherHero, int value) => UnwrappedObject.SetPersonalRelation(otherHero, value);
+    public virtual void SetPersonalRelation(MBHero otherHero, int value) => UnwrappedObject.SetPersonalRelation(otherHero, value);
 
-    public void SetSkillValue(MBSkillObject skill, int value) => UnwrappedObject.SetSkillValue(skill, value);
+    public virtual void SetSkillValue(MBSkillObject skill, int value) => UnwrappedObject.SetSkillValue(skill, value);
 
     public static implicit operator Hero(MBHero wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBHero(Hero obj) => GetWrapper(obj);

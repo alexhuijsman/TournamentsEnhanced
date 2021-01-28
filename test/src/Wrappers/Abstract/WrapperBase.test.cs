@@ -10,7 +10,7 @@ namespace TournamentsEnhanced.UnitTests
     private readonly object unwrappedObject = new object();
 
     [Test]
-    public void Ctor_ArgBecomesUnwrappedObject()
+    public virtual void Ctor_ArgBecomesUnwrappedObject()
     {
       sut = new WrapperBaseImpl(unwrappedObject);
 
@@ -18,7 +18,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Ctor_NoArgsBecomesNullUnwrappedObject()
+    public virtual void Ctor_NoArgsBecomesNullUnwrappedObject()
     {
       sut = new WrapperBaseImpl();
 
@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.UnitTests
     }
 
     [Test]
-    public void Ctor_IsNullShouldBeFalse()
+    public virtual void Ctor_IsNullShouldBeFalse()
     {
       sut = new WrapperBaseImpl(unwrappedObject);
 

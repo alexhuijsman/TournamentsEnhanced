@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBTournamentGame : MBWrapperBase<MBTournamentGame, TournamentGame>
   {
-    public MBTown Town => UnwrappedObject.Town;
+    public virtual MBTown Town => UnwrappedObject.Town;
 
     public static implicit operator TournamentGame(MBTournamentGame wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBTournamentGame(TournamentGame obj) => GetWrapper(obj);
