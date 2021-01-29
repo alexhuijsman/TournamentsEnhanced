@@ -6,9 +6,10 @@ using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace Tests
+
+namespace Test
 {
-  public class ComparerBaseTests
+  public class ComparerBaseTest
   {
     private ComparerBaseImpl _sut;
     private Mock<WrapperBase> _mockX;
@@ -134,5 +135,6 @@ namespace Tests
         return MeetsRequirementsFunc(wrapper);
       }
     }
+
   }
 }

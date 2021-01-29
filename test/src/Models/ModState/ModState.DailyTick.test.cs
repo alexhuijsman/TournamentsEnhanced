@@ -4,9 +4,10 @@ using NUnit.Framework;
 
 using TournamentsEnhanced;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class ModStateTests
+  public partial class ModStateTest
   {
     [Test]
     public void DailyTick_ShouldCallIncrementDay()
@@ -27,5 +28,6 @@ namespace Tests
 
       _mockRandom.Verify(random => random.Next(), Times.Once);
     }
+
   }
 }

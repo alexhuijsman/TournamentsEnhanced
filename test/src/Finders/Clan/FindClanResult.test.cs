@@ -8,9 +8,10 @@ using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Comparers.Clan;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace Tests
+
+namespace Test
 {
-  public class FindClanResultTests
+  public class FindClanResultTest
   {
     [Test]
     public void Success_ShouldReturnSuccess()
@@ -29,5 +30,6 @@ namespace Tests
 
       result.AllQualifiedCandidates.ShouldBe(expectedNominees);
     }
+
   }
 }

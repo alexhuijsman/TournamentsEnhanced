@@ -6,9 +6,10 @@ using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace Tests
+
+namespace Test
 {
-  public class FindOptionsBaseTests
+  public class FindOptionsBaseTest
   {
     private FindOptionsBaseImpl _sut;
 
@@ -47,5 +48,6 @@ namespace Tests
 
 
     private class FindOptionsBaseImpl : FindOptionsBase<WrapperBase> { }
+
   }
 }

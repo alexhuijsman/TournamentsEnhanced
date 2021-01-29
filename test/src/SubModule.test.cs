@@ -6,7 +6,8 @@ using TournamentsEnhanced;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models;
 
-namespace Tests
+
+namespace Test
 {
   public class SubModuleTest
   {
@@ -82,5 +83,7 @@ namespace Tests
     {
       _game.GetType().GetProperty("GameType").SetValue(_game, gameType);
     }
+
   }
+
 }

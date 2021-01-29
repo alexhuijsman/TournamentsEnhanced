@@ -6,9 +6,10 @@ using Shouldly;
 
 using TournamentsEnhanced;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class FinderBaseTests
+  public partial class FinderBaseTest
   {
     private void SetUpManyCandidatesAndManyComparers()
     {
@@ -138,5 +139,6 @@ namespace Tests
         .ShouldContain(
           (candidate) => idealCandidates.Contains(candidate), NumberOfIdealCandidates);
     }
+
   }
 }

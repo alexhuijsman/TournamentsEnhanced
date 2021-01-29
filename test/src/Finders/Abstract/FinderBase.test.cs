@@ -8,9 +8,10 @@ using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.Core;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class FinderBaseTests
+  public partial class FinderBaseTest
   {
     private const int NumberOfUnqualifiedCandidates = 11;
     private const int NumberOfQualifiedCandidates = 7;
@@ -357,5 +358,6 @@ namespace Tests
 
       }
     }
+
   }
 }

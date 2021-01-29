@@ -7,9 +7,10 @@ using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.Core;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class ModStateTests
+  public partial class ModStateTest
   {
     private ModStateImpl _sut;
     private Mock<DaysSinceTournamentTracker> _mockDaysSince;
@@ -71,5 +72,6 @@ namespace Tests
     private class ModStateImpl : ModState
     {
     }
+
   }
 }

@@ -5,9 +5,10 @@ using Shouldly;
 
 using TournamentsEnhanced;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class ModStateTests
+  public partial class ModStateTest
   {
     [Test]
     public void IsLotteryWinner_ShouldBeFalse_NoWinners()
@@ -67,5 +68,6 @@ namespace Tests
     {
       Should.Throw<ArgumentOutOfRangeException>(() => _sut.IsLotteryWinner(TestEnum.InvalidValue));
     }
+
   }
 }

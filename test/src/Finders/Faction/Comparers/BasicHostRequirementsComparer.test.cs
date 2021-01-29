@@ -6,9 +6,10 @@ using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Clan;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
-namespace Tests
+
+namespace Test
 {
-  public class BasicHostRe2quirementsComparerTests
+  public class BasicHostRe2quirementsComparerTest
   {
     private BasicHostRequirementsComparerImpl _sut;
     private readonly List<MBSettlement> NoSettlements = new List<MBSettlement>();
@@ -258,5 +259,6 @@ namespace Tests
     {
       public new bool MeetsRequirements(MBClan clan) => base.MeetsRequirements(clan);
     }
+
   }
 }

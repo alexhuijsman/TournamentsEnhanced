@@ -1,12 +1,8 @@
-using TournamentsEnhanced;
 
-namespace Tests
+public static class TestConstants
 {
-  public static class TestConstants
+  public static class LotteryResults
   {
-    public static class LotteryResults
-    {
-      public static readonly int OnlyFirstIsWinner = 1;
-    }
+    public static readonly int OnlyFirstIsWinner = 1;
   }
 }

@@ -3,9 +3,10 @@ using Shouldly;
 
 using TournamentsEnhanced;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class FinderBaseTests
+  public partial class FinderBaseTest
   {
     [Test]
     public void Find_NoCandidate_NoComparer_Result_ShouldFail()
@@ -54,5 +55,6 @@ namespace Tests
 
       Assert.IsNull(result.AllQualifiedCandidates);
     }
+
   }
 }

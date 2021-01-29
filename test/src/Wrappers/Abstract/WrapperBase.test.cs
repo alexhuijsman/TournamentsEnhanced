@@ -3,9 +3,10 @@ using Shouldly;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace Tests
+
+namespace Test
 {
-  public class WrapperBaseTests
+  public class WrapperBaseTest
   {
     private WrapperBaseImpl sut;
     private readonly object unwrappedObject = new object();
@@ -39,5 +40,6 @@ namespace Tests
       public WrapperBaseImpl() { }
       public WrapperBaseImpl(object obj) : base(obj) { }
     }
+
   }
 }

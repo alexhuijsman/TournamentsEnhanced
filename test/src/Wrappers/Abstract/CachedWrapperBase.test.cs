@@ -4,9 +4,10 @@ using Shouldly;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Wrappers.Abstract;
 
-namespace Tests
+
+namespace Test
 {
-  public class CachedWrapperBaseTests
+  public class CachedWrapperBaseTest
   {
     [Test]
     public virtual void GetWrapper_UsesCache()
@@ -52,5 +53,6 @@ namespace Tests
       public CachedWrapperBaseImpl() { }
       public CachedWrapperBaseImpl(object obj) : base(obj) { }
     }
+
   }
 }

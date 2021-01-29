@@ -3,9 +3,10 @@ using Shouldly;
 
 using TournamentsEnhanced;
 
-namespace Tests
+
+namespace Test
 {
-  public partial class ModStateTests
+  public partial class ModStateTest
   {
 
     [Test]
@@ -68,5 +69,6 @@ namespace Tests
 
       AssertDaysSinceContainsDefaultValues();
     }
+
   }
 }
