@@ -7,7 +7,7 @@ using TournamentsEnhanced;
 
 namespace Test
 {
-  public partial class FinderBaseTest
+  public partial class FinderBaseTest : TestBase
   {
     [Test]
     public void Find_NoCandidate_OneComparer_Result_ShouldFail()

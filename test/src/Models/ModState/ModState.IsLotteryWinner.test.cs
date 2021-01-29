@@ -8,7 +8,7 @@ using TournamentsEnhanced;
 
 namespace Test
 {
-  public partial class ModStateTest
+  public partial class ModStateTest : TestBase
   {
     [Test]
     public void IsLotteryWinner_ShouldBeFalse_NoWinners()

@@ -21,9 +21,9 @@ namespace TournamentsEnhanced.Behaviors
 {
   class TownMenuBehavior : MBEncounterGameMenuBehavior
   {
-    public ModState ModState { protected get; set; } = ModState.Instance;
-
-    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
+    protected ModState ModState { get; set; } = ModState.Instance;
+    protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
+    protected Settings Settings { get; set; } = Settings.Instance;
 
     public bool OnPrizeSelectMenuCondition(MenuCallbackArgs args)
     {
@@ -71,7 +71,7 @@ namespace TournamentsEnhanced.Behaviors
       return !Settlement.CurrentSettlement.Town.HasTournament &&
               Settlement.CurrentSettlement.IsTown &&
               Settlement.CurrentSettlement.OwnerClan.Leader.IsHumanPlayerCharacter &&
-              ModState.DaysSince[TournamentType.PlayerInitiated] >= Settings.Instance.MinDaysBetweenHostedTournaments;
+              ModState.DaysSince[TournamentType.PlayerInitiated] >= Settings.MinDaysBetweenHostedTournaments;
     }
 
     private void OnHostTournamentMenuConsequence(MenuCallbackArgs args)
@@ -84,7 +84,7 @@ namespace TournamentsEnhanced.Behaviors
     private void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
     {
       campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
-        Settings.Instance.TournamentCost.ToString() + "{GOLD_ICON})",
+        Settings.TournamentCost.ToString() + "{GOLD_ICON})",
         new GameMenuOption.OnConditionDelegate(OnHostTournamentMenuCondition),
         new GameMenuOption.OnConsequenceDelegate(OnHostTournamentMenuConsequence), false, 1, false);
 

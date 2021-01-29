@@ -9,7 +9,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace Test
 {
-  public class ComparerBaseTest
+  public class ComparerBaseTest : TestBase
   {
     private ComparerBaseImpl _sut;
     private Mock<WrapperBase> _mockX;
@@ -28,8 +28,8 @@ namespace Test
     [SetUp]
     public void SetUp()
     {
-      _mockX = new Mock<WrapperBase>();
-      _mockY = new Mock<WrapperBase>();
+      _mockX = MockRepository.Create<WrapperBase>();
+      _mockY = MockRepository.Create<WrapperBase>();
 
       _xMeetsRequirements = false;
       _yMeetsRequirements = false;

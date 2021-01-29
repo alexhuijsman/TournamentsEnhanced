@@ -12,7 +12,8 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(TournamentGame), "GetParticipantCharacters")]
   class TournamentParticipantPatch
   {
-    public static ModState ModState { protected get; set; } = ModState.Instance;
+    protected static Settings Settings { get; set; } = Settings.Instance;
+    protected static ModState ModState { get; set; } = ModState.Instance;
 
     static void Postfix(ref List<CharacterObject> __result, Settlement settlement, int maxParticipantCount, bool includePlayer = true, bool includeHeroes = true)
     {
@@ -45,7 +46,7 @@ namespace TournamentsEnhanced.Patches
       }
       else if (includePlayer)
       {
-        int numAddedHeroes = MBRandom.RandomInt(4, Settings.Instance.UpperBoundHeroesAdded);
+        int numAddedHeroes = MBRandom.RandomInt(4, Settings.UpperBoundHeroesAdded);
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i <= numAddedHeroes; i++)
         {
@@ -66,7 +67,7 @@ namespace TournamentsEnhanced.Patches
         }
       }
 
-      if (includePlayer && Settings.Instance.BringCompanions)
+      if (includePlayer && Settings.BringCompanions)
       {
         IEnumerable<Hero> companions = Hero.MainHero.CompanionsInParty;
         List<Hero> companionList = companions.ToList();

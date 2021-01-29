@@ -8,6 +8,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
   public abstract class ComparerBase<W> : IComparer<W>
     where W : WrapperBase
   {
+    protected Settings Settings { get; set; } = Settings.Instance;
     protected MBHero InitiatingHero { get; private set; }
     protected bool HasInitiatingHero => InitiatingHero.IsNull;
 

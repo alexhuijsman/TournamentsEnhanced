@@ -5,7 +5,7 @@ namespace TournamentsEnhanced.Finder.Comparers
 {
   public abstract class HostSettlementComparerBase : SettlementComparerBase
   {
-    public ModState ModState { protected get; set; } = ModState.Instance;
+    protected ModState ModState { get; set; } = ModState.Instance;
 
     protected HostSettlementComparerBase(MBHero initiatingHero = null) : base(initiatingHero) { }
 

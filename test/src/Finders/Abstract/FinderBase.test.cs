@@ -11,7 +11,7 @@ using TournamentsEnhanced.Wrappers.Core;
 
 namespace Test
 {
-  public partial class FinderBaseTest
+  public partial class FinderBaseTest : TestBase
   {
     private const int NumberOfUnqualifiedCandidates = 11;
     private const int NumberOfQualifiedCandidates = 7;
@@ -34,9 +34,9 @@ namespace Test
     public void SetUp()
     {
       _sut = new FinderBaseImpl();
-      _mockFindOptions = new Mock<FindOptionBaseImpl>();
+      _mockFindOptions = MockRepository.Create<FindOptionBaseImpl>();
 
-      var mockMBMBRandom = new Mock<MBMBRandom>();
+      var mockMBMBRandom = MockRepository.Create<MBMBRandom>();
       mockMBMBRandom
         .Setup(mbMbRandom => mbMbRandom.DeterministicRandomInt(It.IsAny<int>()))
         .Returns((int maxValue) => _random.Next(maxValue));
@@ -247,15 +247,16 @@ namespace Test
 
     private Mock<CandidateImpl> GetMockCandidateByType(MockCandidateType mockCandidateType)
     {
-      var mockCandidate = new Mock<CandidateImpl>();
+      var mockCandidate = MockRepository.Create<CandidateImpl>();
       mockCandidate.SetupGet(candidate => candidate.MockCandidateType).Returns(mockCandidateType);
+      mockCandidate.SetupGet(candidate => candidate.IsNull).Returns(false);
 
       return mockCandidate;
     }
 
     private Mock<IMBWrapperComparer> InstantiateMockComparer(Func<CandidateImpl, CandidateImpl, int> compareFunc)
     {
-      var mockComparer = new Mock<IMBWrapperComparer>();
+      var mockComparer = MockRepository.Create<IMBWrapperComparer>();
 
       mockComparer.Setup(
         comparer => comparer.Compare(
@@ -268,7 +269,7 @@ namespace Test
 
     private Mock<CandidateImpl> InstantiateMockCandidate(MockCandidateType mockCandidateType)
     {
-      var mockCandidate = new Mock<CandidateImpl>();
+      var mockCandidate = MockRepository.Create<CandidateImpl>();
 
       mockCandidate.SetupGet(
         candidate => candidate.MockCandidateType).Returns(mockCandidateType);

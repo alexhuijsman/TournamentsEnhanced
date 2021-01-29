@@ -2,14 +2,15 @@ using System.Collections.Generic;
 using TaleWorlds.Core;
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
-using TournamentsEnhanced.Wrappers.Library;
-using TournamentsEnhanced.Wrappers.Localization;
 using static TaleWorlds.Core.ItemObject;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
   public partial class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
   {
+    protected static Settings Settings { get; set; } = Settings.Instance;
+
+    //TODO Move logic to ItemFinder
     public static List<MBItemObject> GetAvailableTournamentPrizes()
     {
       var availablePrizes = (List<MBItemObject>)All.FindAll((MBItemObject item) => item.IsTournamentPrize());
@@ -17,7 +18,7 @@ namespace TournamentsEnhanced.Wrappers.Core
       availablePrizes.RemoveAll((prize) => selectedPrizes.Contains(prize));
 
       MBItemObject selectedPrize;
-      while (selectedPrizes.Count < Settings.Instance.NumberOfPrizesToChooseFrom && !availablePrizes.IsEmpty())
+      while (selectedPrizes.Count < Settings.NumberOfPrizesToChooseFrom && !availablePrizes.IsEmpty())
       {
         selectedPrize = availablePrizes.GetRandomElement();
         selectedPrizes.Add(selectedPrize);
@@ -26,9 +27,9 @@ namespace TournamentsEnhanced.Wrappers.Core
 
       selectedPrizes.Shuffle();
 
-      if (selectedPrizes.Count > Settings.Instance.NumberOfPrizesToChooseFrom)
+      if (selectedPrizes.Count > Settings.NumberOfPrizesToChooseFrom)
       {
-        selectedPrizes.RemoveRange(0, selectedPrizes.Count - Settings.Instance.NumberOfPrizesToChooseFrom);
+        selectedPrizes.RemoveRange(0, selectedPrizes.Count - Settings.NumberOfPrizesToChooseFrom);
       }
 
       return selectedPrizes;

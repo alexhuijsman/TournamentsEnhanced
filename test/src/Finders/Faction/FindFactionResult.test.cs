@@ -8,7 +8,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace Test
 {
-  public class FindFactionResultTest
+  public class FindFactionResultTest : TestBase
   {
     [Test]
     public void Success_ShouldReturnSuccess()

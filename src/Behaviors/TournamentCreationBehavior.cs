@@ -13,8 +13,9 @@ namespace TournamentsEnhanced.Behaviors
 {
   class TournamentCreationBehavior : MBEncounterGameMenuBehavior
   {
-    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
-    public ModState ModState { protected get; set; } = ModState.Instance;
+    protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
+    protected ModState ModState { get; set; } = ModState.Instance;
+    protected Settings Settings { get; set; } = Settings.Instance;
 
     public override void RegisterEvents()
     {
@@ -40,7 +41,7 @@ namespace TournamentsEnhanced.Behaviors
 
       var result = TryCreatePeaceTournaments(factionA, factionB);
 
-      if (!Settings.Instance.PeaceNotification || result.Failed)
+      if (!Settings.PeaceNotification || result.Failed)
       {
         return;
       }
@@ -122,7 +123,7 @@ namespace TournamentsEnhanced.Behaviors
     private void TryCreateInvitationTournament()
     {
       if (!ModState.IsLotteryWinner(TournamentType.Invitation) &&
-          MBHero.MainHero.Clan.Renown >= Settings.Instance.MaxRenownForInvitationTournaments)
+          MBHero.MainHero.Clan.Renown >= Settings.MaxRenownForInvitationTournaments)
       {
         return;
       }

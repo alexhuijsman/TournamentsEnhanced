@@ -5,7 +5,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Faction
   public class BasicFactionHostRequirementsComparer : FactionComparerBase
   {
     public static BasicFactionHostRequirementsComparer Instance { get; } = new BasicFactionHostRequirementsComparer();
-    public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
+    protected HeroFinder HeroFinder { get; set; } = HeroFinder.Instance;
 
     protected BasicFactionHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 

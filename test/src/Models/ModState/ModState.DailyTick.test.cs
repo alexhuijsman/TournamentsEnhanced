@@ -7,7 +7,7 @@ using TournamentsEnhanced;
 
 namespace Test
 {
-  public partial class ModStateTest
+  public partial class ModStateTest : TestBase
   {
     [Test]
     public void DailyTick_ShouldCallIncrementDay()

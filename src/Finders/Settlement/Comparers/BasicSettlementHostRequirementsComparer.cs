@@ -9,6 +9,6 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 
     protected override bool MeetsRequirements(MBSettlement settlement) =>
       settlement.IsTown &&
-      settlement.Town.FoodStocks >= Settings.Instance.FoodStocksDecrease;
+      settlement.Town.FoodStocks >= Settings.FoodStocksDecrease;
   }
 }

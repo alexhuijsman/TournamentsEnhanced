@@ -6,7 +6,7 @@ using TournamentsEnhanced;
 
 namespace Test
 {
-  public partial class FinderBaseTest
+  public partial class FinderBaseTest : TestBase
   {
     [Test]
     public void Find_NoCandidate_NoComparer_Result_ShouldFail()

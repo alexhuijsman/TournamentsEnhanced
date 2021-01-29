@@ -11,7 +11,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace Test
 {
-  public class BasicFactionHostRequirementsComparerTest
+  public class BasicFactionHostRequirementsComparerTest : TestBase
   {
     private BasicFactionHostRequirementsComparerImpl _sut;
     private Mock<MBFaction> _mockFaction;
@@ -21,9 +21,9 @@ namespace Test
     public void SetUp(Func<List<MBSettlement>> factionSettlementsFunc)
     {
       _sut = new BasicFactionHostRequirementsComparerImpl();
-      _mockFaction = new Mock<MBFaction>();
+      _mockFaction = MockRepository.Create<MBFaction>();
       _faction = _mockFaction.Object;
-      _mockHeroFinder = new Mock<HeroFinder>();
+      _mockHeroFinder = MockRepository.Create<HeroFinder>();
       _sut.HeroFinder = _mockHeroFinder.Object;
 
       _mockFaction.SetupGet(faction => faction.Settlements).Returns(factionSettlementsFunc);
@@ -408,14 +408,14 @@ namespace Test
 
     private MBSettlement GetSettlement(bool isTown = false, bool ownerMeetsRequirements = false)
     {
-      var mockClanLeader = new Mock<MBHero>();
-      var mockOwnerClan = new Mock<MBClan>();
+      var mockClanLeader = MockRepository.Create<MBHero>();
+      var mockOwnerClan = MockRepository.Create<MBClan>();
       mockOwnerClan.SetupGet(ownerClan => ownerClan.Leader).Returns(mockClanLeader.Object);
-      var mockSettlement = new Mock<MBSettlement>();
+      var mockSettlement = MockRepository.Create<MBSettlement>();
       mockSettlement.SetupGet(settlement => settlement.IsTown).Returns(isTown);
       mockSettlement.SetupGet(settlement => settlement.OwnerClan).Returns(mockOwnerClan.Object);
 
-      var mockFindHeroResults = new Mock<FindHeroResult>();
+      var mockFindHeroResults = MockRepository.Create<FindHeroResult>();
       mockFindHeroResults
         .SetupGet(findHeroResults => findHeroResults.Succeeded)
         .Returns(ownerMeetsRequirements);
@@ -429,6 +429,7 @@ namespace Test
 
     private class BasicFactionHostRequirementsComparerImpl : BasicFactionHostRequirementsComparer
     {
+      public new HeroFinder HeroFinder { set => base.HeroFinder = value; }
       public new bool MeetsRequirements(MBFaction faction) => base.MeetsRequirements(faction);
     }
   }

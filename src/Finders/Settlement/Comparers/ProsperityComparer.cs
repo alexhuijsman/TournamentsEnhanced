@@ -42,6 +42,6 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 
     protected override bool MeetsRequirements(MBSettlement settlement) =>
       base.MeetsRequirements(settlement) &&
-      (!RequireMinProsperity || settlement.Prosperity >= Settings.Instance.MinProsperityRequirement);
+      (!RequireMinProsperity || settlement.Prosperity >= Settings.MinProsperityRequirement);
   }
 }

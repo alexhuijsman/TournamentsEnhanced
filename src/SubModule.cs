@@ -13,8 +13,8 @@ namespace TournamentsEnhanced
 {
   public class SubModule : MBSubModuleBase
   {
-    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
-    public ModState ModState { protected get; set; } = TournamentsEnhanced.Models.ModState.Instance;
+    protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
+    protected ModState ModState { get; set; } = TournamentsEnhanced.Models.ModState.Instance;
 
     protected override void OnSubModuleLoad()
     {

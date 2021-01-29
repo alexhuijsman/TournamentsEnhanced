@@ -11,14 +11,15 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(TournamentMatch), "End")]
   class TournamentEndMatchPatch
   {
-    public static ModState ModState { protected get; set; } = ModState.Instance;
-    public static CampaignModel CampaignModel { protected get; set; } = CampaignModel.Instance;
+    protected static Settings Settings { get; set; } = Settings.Instance;
+    protected static ModState ModState { get; set; } = ModState.Instance;
+    protected static CampaignModel CampaignModel { get; set; } = CampaignModel.Instance;
 
     static void Postfix(TournamentMatch __instance)
     {
       var tournamentMatch = (MBTournamentMatch)__instance;
 
-      if (Settings.Instance.VeryHardTournaments && tournamentMatch.IsPlayerParticipating())
+      if (Settings.VeryHardTournaments && tournamentMatch.IsPlayerParticipating())
       {
         CampaignOptions.CombatAIDifficulty = CampaignModel.NonTournamentDifficulty;
       }

@@ -7,7 +7,7 @@ namespace TournamentsEnhanced.Behaviors
 {
   public class ModStateBehavior : MBCampaignBehaviorBase
   {
-    public ModState ModState { protected get; set; } = ModState.Instance;
+    protected ModState ModState { get; set; } = ModState.Instance;
 
     public override void RegisterEvents()
     {

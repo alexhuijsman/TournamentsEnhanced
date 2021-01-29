@@ -6,7 +6,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace Test
 {
-  public class WrapperBaseGenericTest
+  public class WrapperBaseGenericTest : TestBase
   {
     private GenericWrapperBaseImpl sut;
     private readonly object unwrappedObject = new object();

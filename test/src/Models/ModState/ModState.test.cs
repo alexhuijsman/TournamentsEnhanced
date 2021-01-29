@@ -10,7 +10,7 @@ using TournamentsEnhanced.Wrappers.Core;
 
 namespace Test
 {
-  public partial class ModStateTest
+  public partial class ModStateTest : TestBase
   {
     private ModStateImpl _sut;
     private Mock<DaysSinceTournamentTracker> _mockDaysSince;
@@ -26,16 +26,16 @@ namespace Test
 
     private void SetUpWithLotteryResults(int lotteryResults)
     {
-      _mockDaysSince = new Mock<DaysSinceTournamentTracker>();
+      _mockDaysSince = MockRepository.Create<DaysSinceTournamentTracker>();
       _mockDaysSince.Setup(daysSince => daysSince.Reset());
       _mockDaysSince.Setup(daysSince => daysSince.IncrementDay());
 
-      _mockTournamentRecords = new Mock<TournamentRecordDictionary>();
+      _mockTournamentRecords = MockRepository.Create<TournamentRecordDictionary>();
 
       _mockRandom = new Mock<System.Random>();
       _mockRandom.Setup(random => random.Next()).Returns(lotteryResults);
 
-      _mockMBMBRandom = new Mock<MBMBRandom>();
+      _mockMBMBRandom = MockRepository.Create<MBMBRandom>();
       _mockMBMBRandom.SetupGet(mbMBRandom => mbMBRandom.DeterministicRandom)
         .Returns(_mockRandom.Object);
 
@@ -71,7 +71,7 @@ namespace Test
 
     private class ModStateImpl : ModState
     {
+      public new MBMBRandom MBMBRandom { set => base.MBMBRandom = value; }
     }
-
   }
 }

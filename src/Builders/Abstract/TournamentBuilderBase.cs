@@ -4,7 +4,6 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 
@@ -12,22 +11,11 @@ namespace TournamentsEnhanced.Builders.Abstract
 {
   public abstract class TournamentBuilderBase
   {
-    public TournamentBuilder TournamentBuilder { protected get; set; } = TournamentBuilder.Instance;
-    public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
-    public FactionFinder FactionFinder { protected get; set; } = FactionFinder.Instance;
-
-    internal FindHeroResult ValidatePayorHero(MBHero initiatingHero, MBHero payorHero)
-    {
-      return ValidatePayorHeroes(initiatingHero, payorHero);
-    }
-
-    internal FindHeroResult ValidatePayorHeroes(params MBHero[] payorHeroes)
-    {
-      return HeroFinder.FindHostsThatMeetBasicRequirements(payorHeroes);
-    }
-
-    internal ResultBase ValidateFaction(MBFaction faction)
-      => FactionFinder.FindFactionThatMeetBasicHostRequirements(faction);
+    protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
+    protected HeroFinder HeroFinder { get; set; } = HeroFinder.Instance;
+    protected FactionFinder FactionFinder { get; set; } = FactionFinder.Instance;
+    protected SettlementFinder SettlementFinder { get; set; } = SettlementFinder.Instance;
+    protected Settings Settings { get; set; } = Settings.Instance;
 
     protected CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
@@ -53,7 +41,7 @@ namespace TournamentsEnhanced.Builders.Abstract
 
       if (payor.IsHumanPlayerCharacter)
       {
-        MBInformationManagerFacade.DisplayAsQuickBanner($"You've spent {Settings.Instance.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
+        MBInformationManagerFacade.DisplayAsQuickBanner($"You've spent {Settings.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
       }
 
       return result;
@@ -73,12 +61,12 @@ namespace TournamentsEnhanced.Builders.Abstract
         return;
       }
 
-      settlement.Prosperity += Settings.Instance.ProsperityIncrease;
-      settlement.Town.Loyalty += Settings.Instance.LoyaltyIncrease;
-      settlement.Town.Security += Settings.Instance.SecurityIncrease;
-      settlement.Town.FoodStocks -= Settings.Instance.FoodStocksDecrease;
+      settlement.Prosperity += Settings.ProsperityIncrease;
+      settlement.Town.Loyalty += Settings.LoyaltyIncrease;
+      settlement.Town.Security += Settings.SecurityIncrease;
+      settlement.Town.FoodStocks -= Settings.FoodStocksDecrease;
 
-      if (settlement.Town.MapFaction.Leader.IsHumanPlayerCharacter && Settings.Instance.SettlementStatNotification)
+      if (settlement.Town.MapFaction.Leader.IsHumanPlayerCharacter && Settings.SettlementStatNotification)
       {
         MBInformationManagerFacade.DisplayAsLogEntry($"{settlement.Name}'s prosperity, loyalty and security have increased and food stocks have decreased");
       }
@@ -86,7 +74,7 @@ namespace TournamentsEnhanced.Builders.Abstract
 
     private void PayTournamentFee(MBHero payor, MBSettlement settlement)
     {
-      var tournamentCost = Settings.Instance.TournamentCost;
+      var tournamentCost = Settings.TournamentCost;
 
       payor.ChangeHeroGold(-tournamentCost);
       settlement.Town.ChangeGold(tournamentCost);
@@ -109,7 +97,7 @@ namespace TournamentsEnhanced.Builders.Abstract
           continue;
         }
 
-        newRelation = notable.GetBaseHeroRelation(mainHero) + Settings.Instance.NoblesRelationIncrease;
+        newRelation = notable.GetBaseHeroRelation(mainHero) + Settings.NoblesRelationIncrease;
 
         notable.SetPersonalRelation(mainHero, newRelation);
       }
@@ -121,7 +109,7 @@ namespace TournamentsEnhanced.Builders.Abstract
     {
       float randomFloat = MBRandom.DeterministicRandom.NextFloat();
       SkillObject item = (randomFloat < 0.2f) ? DefaultSkills.OneHanded : ((randomFloat < 0.4f) ? DefaultSkills.TwoHanded : ((randomFloat < 0.6f) ? DefaultSkills.Polearm : ((randomFloat < 0.8f) ? DefaultSkills.Riding : DefaultSkills.Athletics)));
-      int item2 = Settings.Instance.TournamentSkillXp;
+      int item2 = Settings.TournamentSkillXp;
       return new ValueTuple<SkillObject, int>(item, item2);
     }
   }

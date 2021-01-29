@@ -12,8 +12,8 @@ namespace TournamentsEnhanced.Finder
     : FinderBase<FindHostSettlementResult, FindHostSettlementOptions, MBSettlement, Settlement>
   {
     public static SettlementFinder Instance { get; } = new SettlementFinder();
-    public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
-    public MBSettlementFacade MBSettlementFacade { protected get; set; } = MBSettlementFacade.Instance;
+    protected HeroFinder HeroFinder { get; set; } = HeroFinder.Instance;
+    protected MBSettlementFacade MBSettlementFacade { get; set; } = MBSettlementFacade.Instance;
 
     private SettlementFinder() { }
 

@@ -8,7 +8,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace Test
 {
-  public class BasicClanHostRequirementsComparerTest
+  public class BasicClanHostRequirementsComparerTest : TestBase
   {
     private BasicClanHostRequirementsComparerImpl _sut;
     private Mock<MBClan> _mockClan;
@@ -17,7 +17,7 @@ namespace Test
     public void SetUp(List<MBSettlement> clanSettlements)
     {
       _sut = new BasicClanHostRequirementsComparerImpl();
-      _mockClan = new Mock<MBClan>();
+      _mockClan = MockRepository.Create<MBClan>();
       _mockClan.SetupGet(clan => clan.Settlements).Returns(clanSettlements);
       _clan = _mockClan.Object;
     }
@@ -231,7 +231,7 @@ namespace Test
 
     private MBSettlement GetSettlement(bool isTown = false)
     {
-      var mockSettlement = new Mock<MBSettlement>();
+      var mockSettlement = MockRepository.Create<MBSettlement>();
       mockSettlement.SetupGet(settlement => settlement.IsTown).Returns(isTown);
       return mockSettlement.Object;
     }

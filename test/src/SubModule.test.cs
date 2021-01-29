@@ -9,9 +9,9 @@ using TournamentsEnhanced.Models;
 
 namespace Test
 {
-  public class SubModuleTest
+  public class SubModuleTest : TestBase
   {
-    private SubModule _sut;
+    private SubModuleImpl _sut;
     private Mock<TournamentBuilder> _mockTournamentBuilder;
     private Mock<ModState> _mockModState;
     private Mock<Campaign> _mockCampaignGameType;
@@ -22,17 +22,17 @@ namespace Test
     [SetUp]
     public void SetUp()
     {
-      _mockTournamentBuilder = new Mock<TournamentBuilder>(MockBehavior.Strict);
+      _mockTournamentBuilder = MockRepository.Create<TournamentBuilder>();
       _mockTournamentBuilder.Setup(tournamentBuilder => tournamentBuilder.CreateInitialTournaments());
-      _mockModState = new Mock<ModState>(MockBehavior.Strict);
+      _mockModState = MockRepository.Create<ModState>();
       _mockModState.Setup(modState => modState.Reset());
-      _mockObject = new Mock<object>(MockBehavior.Strict);
-      _mockCampaignGameType = new Mock<Campaign>(MockBehavior.Strict, CampaignGameMode.Campaign);
-      _mockNonCampaignGameType = new Mock<GameType>(MockBehavior.Strict);
+      _mockObject = MockRepository.Create<object>();
+      _mockCampaignGameType = MockRepository.Create<Campaign>(CampaignGameMode.Campaign);
+      _mockNonCampaignGameType = MockRepository.Create<GameType>();
 
       _game = (Game)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(Game));
 
-      _sut = new SubModule();
+      _sut = new SubModuleImpl();
       _sut.ModState = _mockModState.Object;
       _sut.TournamentBuilder = _mockTournamentBuilder.Object;
     }
@@ -84,6 +84,10 @@ namespace Test
       _game.GetType().GetProperty("GameType").SetValue(_game, gameType);
     }
 
+    private class SubModuleImpl : SubModule
+    {
+      public new TournamentBuilder TournamentBuilder { set => base.TournamentBuilder = value; }
+      public new ModState ModState { set => base.ModState = value; }
+    }
   }
-
 }

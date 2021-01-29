@@ -7,7 +7,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace Test
 {
-  public class CachedWrapperBaseTest
+  public class CachedWrapperBaseTest : TestBase
   {
     [Test]
     public virtual void GetWrapper_UsesCache()

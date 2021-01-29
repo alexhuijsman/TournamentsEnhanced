@@ -10,11 +10,12 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(TournamentMatch), "Start")]
   class TournamentStartMatchPatch
   {
-    public static CampaignModel CampaignModel { protected get; set; } = CampaignModel.Instance;
+    protected static Settings Settings { get; set; } = Settings.Instance;
+    protected static CampaignModel CampaignModel { get; set; } = CampaignModel.Instance;
 
     static void Postfix()
     {
-      if (Settings.Instance.VeryHardTournaments)
+      if (Settings.VeryHardTournaments)
       {
         CampaignModel.NonTournamentDifficulty = CampaignOptions.CombatAIDifficulty;
         CampaignOptions.CombatAIDifficulty = CampaignOptions.Difficulty.Realistic;

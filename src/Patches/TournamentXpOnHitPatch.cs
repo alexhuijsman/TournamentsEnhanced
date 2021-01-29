@@ -11,6 +11,8 @@ namespace TournamentsEnhanced.Patches
   [HarmonyPatch(typeof(DefaultCombatXpModel), "GetXpFromHit")]
   class TournamentXpOnHitPatch
   {
+    protected static Settings Settings { get; set; } = Settings.Instance;
+
     static void Postfix(CharacterObject attackerTroop, CharacterObject attackedTroop, int damage, bool isFatal, CombatXpModel.MissionTypeEnum missionType, out int xpAmount)
     {
       int num = attackedTroop.MaxHitPoints();
@@ -22,11 +24,11 @@ namespace TournamentsEnhanced.Patches
       }
       else if (missionType == CombatXpModel.MissionTypeEnum.PracticeFight)
       {
-        num3 = Settings.Instance.ArenaHitXP;
+        num3 = Settings.ArenaHitXP;
       }
       else if (missionType == CombatXpModel.MissionTypeEnum.Tournament)
       {
-        num3 = Settings.Instance.TournamentHitXP;
+        num3 = Settings.TournamentHitXP;
       }
       else if (missionType == CombatXpModel.MissionTypeEnum.SimulationBattle)
       {

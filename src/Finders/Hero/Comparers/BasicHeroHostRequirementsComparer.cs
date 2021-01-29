@@ -10,7 +10,6 @@ namespace TournamentsEnhanced.Finder.Comparers.Hero
 
     protected override bool MeetsRequirements(MBHero hero) =>
       hero.IsActive &&
-      !hero.IsPrisoner &&
-      hero.Gold >= Settings.Instance.TournamentCost;
+      hero.Gold >= Settings.TournamentCost;
   }
 }

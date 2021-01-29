@@ -12,7 +12,7 @@ namespace TournamentsEnhanced.Builders
       var townsWithoutExisting = MBTown.AllTownsWithoutTournaments;
       var numExisting = townsWithExisting.Count;
       var maxPossible = townsWithoutExisting.Count;
-      var numRequested = Settings.Instance.TournamentInitialSpawnCount - numExisting;
+      var numRequested = Settings.TournamentInitialSpawnCount - numExisting;
       var numToCreate = (numRequested <= maxPossible) ? numRequested : maxPossible;
 
       CreateTournamentOptions options;

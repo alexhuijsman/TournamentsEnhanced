@@ -13,6 +13,7 @@ namespace TournamentsEnhanced
         public const int NoblesRelationIncrease = 3;
         public const float MaxRenownForInvitationTournaments = 800.00f;
         public const int NumberOfPrizesToChooseFrom = 5;
+        public const int TournamentCost = 2000;
       }
     }
   }

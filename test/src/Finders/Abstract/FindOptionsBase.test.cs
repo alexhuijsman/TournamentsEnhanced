@@ -9,7 +9,7 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace Test
 {
-  public class FindOptionsBaseTest
+  public class FindOptionsBaseTest : TestBase
   {
     private FindOptionsBaseImpl _sut;
 
