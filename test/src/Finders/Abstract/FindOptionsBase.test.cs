@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
-using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 
@@ -13,6 +12,7 @@ namespace Test
   {
     private FindOptionsBaseImpl _sut;
 
+    //TODO remove use of [SetUp]
     [SetUp]
     public void SetUp()
     {

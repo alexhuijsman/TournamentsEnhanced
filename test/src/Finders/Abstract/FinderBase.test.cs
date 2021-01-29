@@ -30,6 +30,7 @@ namespace Test
     private IComparer<CandidateImpl>[] _fallbackComparers;
     private Random _random = new Random();
 
+    //TODO remove use of [SetUp]
     [SetUp]
     public void SetUp()
     {

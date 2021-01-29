@@ -18,6 +18,7 @@ namespace Test
     private Mock<MBMBRandom> _mockMBMBRandom;
     private Mock<System.Random> _mockRandom;
 
+    //TODO remove use of [SetUp]
     [SetUp]
     public void SetUp()
     {
