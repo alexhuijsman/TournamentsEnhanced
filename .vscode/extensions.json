@@ -26,7 +26,9 @@
     "gruntfuggly.todo-tree",
     "pflannery.vscode-versionlens",
     "alexdima.vscode-lcov",
-    "dotjoshjohnson.xml"
+    "dotjoshjohnson.xml",
+    "emilylilylime.vscode-test-explorer-diagnostics",
+    "connorshea.vscode-test-explorer-status-bar"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []
