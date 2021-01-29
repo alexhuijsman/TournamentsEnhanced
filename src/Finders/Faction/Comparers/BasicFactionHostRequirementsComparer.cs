@@ -2,12 +2,12 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Faction
 {
-  public class BasicHostRequirementsComparer : FactionComparerBase
+  public class BasicFactionHostRequirementsComparer : FactionComparerBase
   {
-    public static BasicHostRequirementsComparer Instance { get; } = new BasicHostRequirementsComparer();
+    public static BasicFactionHostRequirementsComparer Instance { get; } = new BasicFactionHostRequirementsComparer();
     public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
 
-    protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
+    protected BasicFactionHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBFaction faction) =>
       !faction.Settlements.IsEmpty() &&

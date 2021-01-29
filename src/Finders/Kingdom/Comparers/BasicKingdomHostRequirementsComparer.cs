@@ -2,12 +2,12 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Kingdom
 {
-  public class BasicHostRequirementsComparer : KingdomComparerBase
+  public class BasicKingdomHostRequirementsComparer : KingdomComparerBase
   {
     public HeroFinder HeroFinder { protected get; set; } = HeroFinder.Instance;
-    public static BasicHostRequirementsComparer Instance { get; } = new BasicHostRequirementsComparer();
+    public static BasicKingdomHostRequirementsComparer Instance { get; } = new BasicKingdomHostRequirementsComparer();
 
-    protected BasicHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
+    protected BasicKingdomHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }
 
     protected override bool MeetsRequirements(MBKingdom kingdom) =>
       !kingdom.Settlements.IsEmpty() &&

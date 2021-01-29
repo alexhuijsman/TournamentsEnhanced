@@ -2,7 +2,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
-  public class ExistingTournamentComparer : BasicHostRequirementsComparer
+  public class ExistingTournamentComparer : BasicSettlementHostRequirementsComparer
   {
     public new static ExistingTournamentComparer Instance { get; } = new ExistingTournamentComparer(false);
     public static ExistingTournamentComparer InstanceIncludingExisting { get; } = new ExistingTournamentComparer(true);

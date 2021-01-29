@@ -24,7 +24,7 @@ namespace TournamentsEnhanced.Finder
         Candidates = candidiates,
         Comparers = new IComparer<MBKingdom>[]
         {
-          BasicHostRequirementsComparer.Instance
+          BasicKingdomHostRequirementsComparer.Instance
         }
       };
 

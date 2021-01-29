@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
-using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Clan;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 
 namespace Test
 {
-  public class BasicHostRequirementsComparerTest
+  public class BasicFactionHostRequirementsComparerTest
   {
     private BasicHostRequirementsComparerImpl _sut;
     private readonly List<MBSettlement> NoSettlements = new List<MBSettlement>();
@@ -126,7 +125,7 @@ namespace Test
     [Test]
     public void Instance_IsSingleton()
     {
-      BasicHostRequirementsComparer.Instance.ShouldBe(BasicHostRequirementsComparer.Instance);
+      BasicClanHostRequirementsComparer.Instance.ShouldBe(BasicClanHostRequirementsComparer.Instance);
     }
 
     [Test]
@@ -255,7 +254,7 @@ namespace Test
       return mockSettlement.Object;
     }
 
-    private class BasicHostRequirementsComparerImpl : BasicHostRequirementsComparer
+    private class BasicHostRequirementsComparerImpl : BasicClanHostRequirementsComparer
     {
       public new bool MeetsRequirements(MBClan clan) => base.MeetsRequirements(clan);
     }

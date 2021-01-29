@@ -22,7 +22,7 @@ namespace TournamentsEnhanced.Finder
         Candidates = candidiates,
         Comparers = new IComparer<MBFaction>[]
         {
-          BasicHostRequirementsComparer.Instance
+          BasicFactionHostRequirementsComparer.Instance
         }
       };
 

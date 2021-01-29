@@ -29,7 +29,7 @@ namespace TournamentsEnhanced.Finder
       var options = new FindHeroOptions()
       {
         Candidates = candidates.ToList(),
-        Comparers = new IComparer<MBHero>[] { BasicHostRequirementsComparer.Instance }
+        Comparers = new IComparer<MBHero>[] { BasicHeroHostRequirementsComparer.Instance }
       };
 
       return Find(options);

@@ -2,7 +2,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Hero
 {
-  public class FactionLeaderHostComparer : BasicHostRequirementsComparer
+  public class FactionLeaderHostComparer : BasicHeroHostRequirementsComparer
   {
     public new static FactionLeaderHostComparer Instance { get; } = new FactionLeaderHostComparer();
 

@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using System.Xml;
-using Moq;
 using NUnit.Framework;
 using Shouldly;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Finder;
-using TournamentsEnhanced.Finder.Comparers.Clan;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 
