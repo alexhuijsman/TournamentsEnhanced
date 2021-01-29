@@ -10,116 +10,16 @@ namespace Test
 {
   public class BasicClanHostRequirementsComparerTest
   {
-    private BasicHostRequirementsComparerImpl _sut;
-    private readonly List<MBSettlement> NoSettlements = new List<MBSettlement>();
-    private readonly List<MBSettlement> NoTownsScenario1 = new List<MBSettlement>()
-    {
-      GetSettlement(),
-    };
+    private BasicClanHostRequirementsComparerImpl _sut;
+    private Mock<MBClan> _mockClan;
+    private MBClan _clan;
 
-    private readonly List<MBSettlement> NoTownsScenario2 = new List<MBSettlement>()
+    public void SetUp(List<MBSettlement> clanSettlements)
     {
-      GetSettlement(),
-      GetSettlement(),
-    };
-
-    private readonly List<MBSettlement> NoTownsScenario3 = new List<MBSettlement>()
-    {
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario1 = new List<MBSettlement>()
-    {
-      GetSettlement(true),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario2 = new List<MBSettlement>()
-    {
-      GetSettlement(),
-      GetSettlement(true),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario3 = new List<MBSettlement>()
-    {
-      GetSettlement(true),
-      GetSettlement(),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario4 = new List<MBSettlement>()
-    {
-      GetSettlement(true),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario5 = new List<MBSettlement>()
-    {
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(true),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario6 = new List<MBSettlement>()
-    {
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(true),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario7 = new List<MBSettlement>()
-    {
-      GetSettlement(true),
-      GetSettlement(true),
-      GetSettlement(true),
-    };
-
-    private readonly List<MBSettlement> WithTownsScenario8 = new List<MBSettlement>()
-    {
-      GetSettlement(true),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(),
-      GetSettlement(true),
-    };
-
-    [SetUp]
-    public void SetUp()
-    {
-      _sut = new BasicHostRequirementsComparerImpl();
+      _sut = new BasicClanHostRequirementsComparerImpl();
+      _mockClan = new Mock<MBClan>();
+      _mockClan.SetupGet(clan => clan.Settlements).Returns(clanSettlements);
+      _clan = _mockClan.Object;
     }
 
     [Test]
@@ -131,130 +31,212 @@ namespace Test
     [Test]
     public void MeetsRequirements_NoSettlements_ShouldReturnFalse()
     {
-      var mockClan = new Mock<MBClan>();
-      mockClan.SetupGet(clan => clan.Settlements).Returns(NoSettlements);
+      SetUp(GetNoSettlementsScenario());
 
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(false);
+      _sut.MeetsRequirements(_clan).ShouldBe(false);
     }
 
     [Test]
     public void MeetsRequirements_NoTownsScenario1_ShouldReturnFalse()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetNoTownsScenario1());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(NoTownsScenario1);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(false);
+      _sut.MeetsRequirements(_clan).ShouldBe(false);
     }
 
     [Test]
     public void MeetsRequirements_NoTownsScenario2_ShouldReturnFalse()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetNoTownsScenario2());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(NoTownsScenario2);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(false);
+      _sut.MeetsRequirements(_clan).ShouldBe(false);
     }
 
     [Test]
     public void MeetsRequirements_NoTownsScenario3_ShouldReturnFalse()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetNoTownsScenario3());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(NoTownsScenario3);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(false);
+      _sut.MeetsRequirements(_clan).ShouldBe(false);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario2_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario2());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario2);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario3_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario3());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario3);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario4_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario4());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario4);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario5_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario5());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario5);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario6_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario6());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario6);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario7_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario7());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario7);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario8_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario8());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario8);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
     [Test]
     public void MeetsRequirements_WithTownsScenario1_ShouldReturnTrue()
     {
-      var mockClan = new Mock<MBClan>();
+      SetUp(GetWithTownsScenario1());
 
-      mockClan.SetupGet(clan => clan.Settlements).Returns(WithTownsScenario1);
-
-      _sut.MeetsRequirements(mockClan.Object).ShouldBe(true);
+      _sut.MeetsRequirements(_clan).ShouldBe(true);
     }
 
-    private static MBSettlement GetSettlement(bool isTown = false)
+    private List<MBSettlement> GetNoSettlementsScenario() => new List<MBSettlement>();
+    private List<MBSettlement> GetNoTownsScenario1() => new List<MBSettlement>()
+    {
+      GetSettlement(),
+    };
+
+    private List<MBSettlement> GetNoTownsScenario2() => new List<MBSettlement>()
+    {
+      GetSettlement(),
+      GetSettlement(),
+    };
+
+    private List<MBSettlement> GetNoTownsScenario3() => new List<MBSettlement>()
+    {
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario1() => new List<MBSettlement>()
+    {
+      GetSettlement(true),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario2() => new List<MBSettlement>()
+    {
+      GetSettlement(),
+      GetSettlement(true),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario3() => new List<MBSettlement>()
+    {
+      GetSettlement(true),
+      GetSettlement(),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario4() => new List<MBSettlement>()
+    {
+      GetSettlement(true),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario5() => new List<MBSettlement>()
+    {
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(true),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario6() => new List<MBSettlement>()
+    {
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(true),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario7() => new List<MBSettlement>()
+    {
+      GetSettlement(true),
+      GetSettlement(true),
+      GetSettlement(true),
+    };
+
+    private List<MBSettlement> GetWithTownsScenario8() => new List<MBSettlement>()
+    {
+      GetSettlement(true),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(),
+      GetSettlement(true),
+    };
+
+    private MBSettlement GetSettlement(bool isTown = false)
     {
       var mockSettlement = new Mock<MBSettlement>();
       mockSettlement.SetupGet(settlement => settlement.IsTown).Returns(isTown);
       return mockSettlement.Object;
     }
 
-    private class BasicHostRequirementsComparerImpl : BasicClanHostRequirementsComparer
+    private class BasicClanHostRequirementsComparerImpl : BasicClanHostRequirementsComparer
     {
       public new bool MeetsRequirements(MBClan clan) => base.MeetsRequirements(clan);
     }
