@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="test/**" />
+    <Compile Remove="src/**/*.test.cs" />
     <EmbeddedResource Remove="test/**" />
     <None Remove="test/**" />
   </ItemGroup>
