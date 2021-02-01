@@ -36,8 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="src/**/test/*.cs" />
     <Compile Remove="test/**" />
-    <Compile Remove="src/**/*.test.cs" />
     <EmbeddedResource Remove="test/**" />
     <None Remove="test/**" />
   </ItemGroup>

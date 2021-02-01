@@ -23,10 +23,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="../src/**/*.test.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="3.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -42,6 +38,10 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="Shouldly" Version="4.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../src/**/test/*.cs" />
   </ItemGroup>
 
   <ItemGroup>
