@@ -1,3 +1,4 @@
+using HarmonyLib;
 using Moq;
 using NUnit.Framework;
 using TaleWorlds.CampaignSystem;
@@ -93,6 +94,12 @@ namespace Test
     {
       public new TournamentBuilder TournamentBuilder { set => base.TournamentBuilder = value; }
       public new ModState ModState { set => base.ModState = value; }
+    }
+    private class HarmonyImpl : Harmony
+    {
+      public HarmonyImpl(string id) : base(id)
+      {
+      }
     }
   }
 }

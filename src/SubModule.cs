@@ -1,5 +1,4 @@
 using System;
-using HarmonyLib;
 using ModLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -7,6 +6,7 @@ using TaleWorlds.MountAndBlade;
 using TournamentsEnhanced.Behaviors;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Wrappers;
 using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced
@@ -15,6 +15,7 @@ namespace TournamentsEnhanced
   {
     protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
     protected ModState ModState { get; set; } = TournamentsEnhanced.Models.ModState.Instance;
+    protected Harmony Harmony { get; set; } = new Harmony(Constants.Module.Name);
 
     protected override void OnSubModuleLoad()
     {
@@ -34,8 +35,7 @@ namespace TournamentsEnhanced
 
       try
       {
-        var harmony = new Harmony(Constants.Module.Name);
-        harmony.PatchAll();
+        Harmony.PatchAll();
       }
       catch (Exception)
       {

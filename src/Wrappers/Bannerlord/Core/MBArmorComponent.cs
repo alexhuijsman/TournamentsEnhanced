@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Wrappers.Abstract;
