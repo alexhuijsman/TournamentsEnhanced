@@ -6,6 +6,7 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <ModVersion>1.5.7.99</ModVersion>
   </PropertyGroup>
+
   <PropertyGroup>
     <LibPath>lib/</LibPath>
     <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
@@ -40,6 +41,9 @@
     <Compile Remove="test/**" />
     <EmbeddedResource Remove="test/**" />
     <None Remove="test/**" />
+    <Compile Remove="packages/**" />
+    <EmbeddedResource Remove="packages/**" />
+    <None Remove="packages/**" />
   </ItemGroup>
 
   <ItemGroup>

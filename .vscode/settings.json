@@ -1,5 +1,6 @@
 {
-  "nxunitExplorer.modules":[
+  "nxunitExplorer.modules": [
     "test/bin/Debug/*Tests.{dll}"
-  ]
+  ],
+  "nxunitExplorer.nunit": "packages/nunit.consolerunner/3.12.0/tools/nunit3-console.exe"
 }
