@@ -16,6 +16,9 @@
         "/p:CoverletOutput=../lcov.info",
         "${workspaceFolder}\\test\\TournamentsEnhancedTests.csproj"
       ],
+      "dependsOn": [
+        "Create Test Folders"
+      ],
       "problemMatcher": "$msCompile"
     },
     {
@@ -38,6 +41,15 @@
       "args": [
         "${input:tag}",
         "${env:PATH_TO_BANNERLORD}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Create Test Folders",
+      "type": "shell",
+      "command": "./sh/create-test-folders.sh",
+      "args": [
+        "src"
       ],
       "problemMatcher": []
     },
