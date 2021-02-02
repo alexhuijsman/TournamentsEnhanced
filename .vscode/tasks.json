@@ -2,112 +2,28 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build, Test, Report",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "Build & Test",
-        "Watch for code coverage changes",
-        "Sleep",
-        "Generate code coverage report"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "Build & Test",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "build (DEBUG)",
-        "build unit tests"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "Build, Tag, Zip",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "build (DEBUG) (INSTALL TO BANNERLORD)",
-        "Tag & Zip Release"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "Watch for code coverage report",
-      "command": "${command:coverage-gutters.watchCoverageAndVisibleEditors}",
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "Sleep",
-      "command": "sleep",
-      "args": [
-        "1s",
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "Generate code coverage report",
-      "command": "dotnet",
-      "args": [
-        "test",
-        "--no-build",
-        "/p:Include=\"[TournamentsEnhanced[Test]?.dll]*\"",
-        "/p:SkipAutoProps=true",
-        "/p:CollectCoverage=true",
-        "/p:CoverletOutputFormat=lcov",
-        "/p:CoverletOutput=../lcov.info"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build unit tests",
-      "command": "dotnet",
-      "args": [
-        "build",
-        "/t:build",
-        "/p:GenerateFullPaths=true",
-        "/p:Configuration=Debug",
-        "/p:Platform=x64",
-        "${workspaceFolder}\\test\\TournamentsEnhancedTests.csproj"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build (DEBUG)",
+      "label": "Build & Deploy",
       "command": "dotnet",
       "args": [
         "build",
         "--no-incremental",
-        "/t:build",
         "/p:GenerateFullPaths=true",
-        "/p:Configuration=Debug",
-        "/p:Platform=x64",
-        "./TournamentsEnhanced.csproj"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build (DEBUG) (INSTALL TO BANNERLORD)",
-      "command": "dotnet",
-      "args": [
-        "build",
-        "--no-incremental",
-        "/t:build",
-        "/p:GenerateFullPaths=true",
-        "/p:Platform=x64",
         "/p:Configuration=DebugOutputToBannerlord",
+        "/p:Platform=x64",
         "${workspaceFolder}/TournamentsEnhanced.csproj"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Tag & Zip Release",
+      "label": "Create Release From Deployed Build",
       "type": "shell",
       "command": "./sh/tag-and-zip-for-release.sh",
       "args": [
         "${input:tag}",
-        "/mnt/c/Program Files (x86)/Steam/steamapps/common/Mount & Blade II Bannerlord/Modules"
+        "${env:PATH_TO_BANNERLORD}"
       ],
       "problemMatcher": []
-    }
+    },
   ],
   "inputs": [
     {

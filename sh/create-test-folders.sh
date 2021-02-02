@@ -1,0 +1,1 @@
+find $1 -name 'test' -prune -o -type d -exec mkdir -p {}/test \;

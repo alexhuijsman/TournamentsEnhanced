@@ -4,7 +4,16 @@
     <PlatformTarget>x64</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ModVersion>1.5.6.7</ModVersion>
+    <ModVersion>1.5.6.8</ModVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LibPath>lib/</LibPath>
+    <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
+    <BannerlordModulesPath>$(PATH_TO_BANNERLORD)/Modules/</BannerlordModulesPath>
+    <BannerlordDLLPath>$(PATH_TO_BANNERLORD)/bin/Win64_Shipping_Client/</BannerlordDLLPath>
+    <DebugOutDir>bin/Debug/</DebugOutDir>
+    <ReleaseOutDir>$(BannerlordModulesPath)/TournamentsEnhanced/bin/Win64_Shipping_Client/</ReleaseOutDir>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
@@ -12,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutDir>bin\Debug\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
+    <OutDir>$(DebugOutDir)</OutDir>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,15 +31,19 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutDir>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\TournamentsEnhanced\bin\Win64_Shipping_Client\</OutDir>
+    <OutDir>$(ReleaseOutDir)</OutDir>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="test\**" />
-    <EmbeddedResource Remove="test\**" />
-    <None Remove="test\**" />
+    <Compile Remove="src/**/test/*.cs" />
+    <Compile Remove="test/**" />
+    <EmbeddedResource Remove="test/**" />
+    <None Remove="test/**" />
+    <Compile Remove="packages/**" />
+    <EmbeddedResource Remove="packages/**" />
+    <None Remove="packages/**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,51 +60,51 @@
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>lib\0Harmony.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(LibDir)/0Harmony.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="ModLib.Definitions">
-      <HintPath>lib\ModLib.Definitions.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>$(LibDir)/ModLib.Definitions.dll</HintPath>
+      <PrivateAssets>all</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.CampaignSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.Core">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.Core.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.InputSystem">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.InputSystem.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.InputSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.Library">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.Library.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.Localization">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.Localization.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.MountAndBlade">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.MountAndBlade.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.ObjectSystem">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.ObjectSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.SaveSystem">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.SaveSystem.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.SaveSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
   </ItemGroup>
 
   <Target Name="Clean Output Dir" AfterTargets="BeforeBuild">
     <ItemGroup>
-      <FilesToDelete Include="$(OutDir)\**"/>
-      <FilesToDelete Include="$(OutDir)..\..\SubModule.xml"/>
+      <FilesToDelete Include="$(OutDir)/**/*"/>
+      <FilesToDelete Include="$(OutDir)../../SubModule.xml"/>
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
   </Target>
@@ -99,5 +112,14 @@
   <Target Name="Build SubModule XML" AfterTargets="AfterBuild">
     <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutDir)../../&quot;">
     </Exec>
+  </Target>
+  <Target Name="Remove Unneeded Reference DLLs" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <UnwantedFiles Include="$(OutDir)/TaleWorlds.*.dll"/>
+      <UnwantedFiles Include="$(OutDir)/Newtonsoft.Json.dll"/>
+      <UnwantedFiles Include="$(OutDir)/System.Management.dll"/>
+      <UnwantedFiles Include="$(OutDir)/System.Numerics.Vectors.dll"/>
+    </ItemGroup>
+    <Delete Files="@(UnwantedFiles)" />
   </Target>
 </Project>
