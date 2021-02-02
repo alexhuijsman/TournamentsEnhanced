@@ -21,6 +21,7 @@ Possible to watch tournaments & bet without participating?
 IMPROVE
 -------
 Revamp MCM integration - https://github.com/Aragas/Bannerlord.MBOptionScreen
+  -Remove lib folder, use Bannerlord.MCM package instead
   -Global and PerCharacter options
     -Is Per-Save better than per-character?
   -ability to reset to defaults
