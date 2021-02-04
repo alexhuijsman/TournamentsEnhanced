@@ -13,7 +13,7 @@ namespace TournamentsEnhanced
       return settlement.OwnerClan.Leader.Name.Equals(leaderName);
     }
 
-    public static IList<T> Shuffle<T>(this IList<T> list)
+    public static List<T> Shuffle<T>(this List<T> list)
     {
       int n = list.Count;
       int k;

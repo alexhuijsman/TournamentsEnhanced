@@ -108,7 +108,7 @@ namespace TournamentsEnhanced
         IEnumerable<Settlement> settlementList = Settlement.FindSettlementsAroundPosition(Hero.MainHero.GetPosition().AsVec2, 60.00f);
         for (int i = 0; i < settlementList.Count(); i++)
         {
-          Settlement settlement = settlementList.GetRandomElement();
+          Settlement settlement = settlementList.GetRandomElementInefficiently();
           if (settlement.IsTown)
           {
             if (!settlement.Town.HasTournament)
