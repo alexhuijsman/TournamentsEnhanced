@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -143,11 +144,10 @@ namespace TournamentsEnhanced
       }
     }
 
-    public static ItemObject GetTournamentPrize()
+    public static ItemObject[] GetTournamentPrizes()
     {
       var itemPool = ItemObject.All.ToList().Shuffle();
       var qualifyingItems = new List<ItemObject>();
-      var fallbackQualifyingItems = new List<ItemObject>();
 
       foreach (var item in itemPool)
       {
@@ -160,15 +160,26 @@ namespace TournamentsEnhanced
         {
           qualifyingItems.Add(item);
         }
+      }
+
+      var weaponPrizes = qualifyingItems.Where(item => item.IsCraftedWeapon).ToList().Shuffle();
+      var selectedPrizes = new ItemObject[5];
+
+      for (int i = 1; i <= 5; i++)
+      {
+        if (i <= TournamentsEnhancedSettings.Instance.MinimumNumberOfWeaponsInPrizePool)
+        {
+          selectedPrizes[i] = weaponPrizes.GetRandomElement();
+          weaponPrizes.Remove(selectedPrizes[i]);
+        }
         else
         {
-          fallbackQualifyingItems.Add(item);
+          selectedPrizes[i] = qualifyingItems.GetRandomElement();
+          qualifyingItems.Remove(selectedPrizes[i]);
         }
       }
 
-      return qualifyingItems.IsEmpty() ?
-        fallbackQualifyingItems.GetRandomElement() :
-        qualifyingItems.GetRandomElement();
+      return selectedPrizes;
     }
 
     public static ValueTuple<SkillObject, int> TournamentSkillXpGain(Hero winner)
