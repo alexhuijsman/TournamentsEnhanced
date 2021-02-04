@@ -40,10 +40,11 @@ namespace TournamentsEnhanced
       List<InquiryElement> list = new List<InquiryElement>();
       TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town);
 
+      var prizes = Utilities.GetTournamentPrizes();
       for (int i = 0; i < 5; i++)
       {
         ItemModifier itemModifier = null;
-        ItemObject prize = Utilities.GetTournamentPrize();
+        ItemObject prize = prizes[i];
         if (!string.IsNullOrWhiteSpace(prize.StringId))
         {
           itemModifier = MBObjectManager.Instance.GetObject<ItemModifier>(prize.StringId);
@@ -80,7 +81,7 @@ namespace TournamentsEnhanced
       CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
       CampaignEvents.MakePeace.AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
       CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.DailyTick));
-      CampaignEvents.TournamentFinished.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
+      CampaignEvents.TournamentWon.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
     }
 
     private static void OnSelectPrize(List<InquiryElement> prizes)

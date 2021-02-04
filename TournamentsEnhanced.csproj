@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
@@ -67,9 +67,37 @@
       <HintPath>$(LibDir)/ModLib.Definitions.dll</HintPath>
       <PrivateAssets>all</PrivateAssets>
     </Reference>
-    <Reference Include="$(BannerlordDLLPath)/TaleWorlds.*.dll">
-      <HintPath>%(Identity)</HintPath>
-      <Private>False</Private>
+    <Reference Include="TaleWorlds.CampaignSystem">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.CampaignSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.Core">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.Core.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.InputSystem">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.InputSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.Library">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.Library.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.Localization">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.Localization.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.MountAndBlade.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.ObjectSystem">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.ObjectSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
+    </Reference>
+    <Reference Include="TaleWorlds.SaveSystem">
+      <HintPath>$(BannerlordDLLPath)/TaleWorlds.SaveSystem.dll</HintPath>
+      <PrivateAssets>none</PrivateAssets>
     </Reference>
   </ItemGroup>
 
