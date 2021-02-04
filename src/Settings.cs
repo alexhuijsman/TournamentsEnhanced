@@ -49,7 +49,7 @@ namespace TournamentsEnhanced
     //Tournament Cost
     [SettingProperty("Minimum # of Weapon in Prize Pool", 0, 5, "Minimum number of weapons to offer when selecting tournament prize.")]
     [SettingPropertyGroup("Tournament Prizes")]
-    public int MinimumNumberOfWeaponsInPrizePool { get; set; } = 2;
+    public int MinimumNumberOfWeaponsInPrizePool { get; set; } = 0;
     //Amount of initial tournaments on the map
     [SettingProperty("Tournament Cost", -10000, 10000, "Cost of tournaments")]
     [SettingPropertyGroup("Tournaments")]
