@@ -4,7 +4,6 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
-using TournamentsEnhanced.Wrappers.Library;
 
 namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
@@ -49,13 +48,9 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public virtual MBReadOnlyList<Town> Fiefs => _faction.Fiefs;
 
-    public virtual IEnumerable<Hero> Lords => _faction.Lords;
+    public virtual MBReadOnlyList<Hero> Lords => _faction.Lords;
 
-    public virtual IEnumerable<Hero> Heroes => _faction.Heroes;
-
-    public virtual IEnumerable<MobileParty> AllParties => _faction.AllParties;
-
-    public virtual IEnumerable<MobileParty> WarParties => _faction.WarParties;
+    public virtual MBReadOnlyList<Hero> Heroes => _faction.Heroes;
 
     public virtual bool IsBanditFaction => _faction.IsBanditFaction;
 
@@ -91,6 +86,8 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public virtual ExplainedNumber DailyCrimeRatingChangeExplained => _faction.DailyCrimeRatingChangeExplained;
 
     public virtual CampaignTime NotAttackableByPlayerUntilTime { get => _faction.NotAttackableByPlayerUntilTime; set => _faction.NotAttackableByPlayerUntilTime = value; }
+
+    public MBReadOnlyList<WarPartyComponent> WarPartyComponents => _faction.WarPartyComponents;
 
     public MBFactionImpl(IFaction faction)
     {

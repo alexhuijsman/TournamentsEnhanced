@@ -27,7 +27,7 @@ namespace TournamentsEnhanced.Patches
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i < 15; i++)
         {
-          CharacterObject potentialParticipant = list.GetRandomElement().CharacterObject;
+          CharacterObject potentialParticipant = list.GetRandomElementInefficiently().CharacterObject;
           bool exists = false;
           for (int t = 0; t < __result.Count; t++)
           {
@@ -50,7 +50,7 @@ namespace TournamentsEnhanced.Patches
         IEnumerable<Hero> list = settlement.OwnerClan.MapFaction.Heroes;
         for (int i = 0; i <= numAddedHeroes; i++)
         {
-          CharacterObject potentialParticipant = list.GetRandomElement().CharacterObject;
+          CharacterObject potentialParticipant = list.GetRandomElementInefficiently().CharacterObject;
           bool exists = false;
           for (int t = 0; t < __result.Count; t++)
           {

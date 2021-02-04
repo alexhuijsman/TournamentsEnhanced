@@ -26,7 +26,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBHero Governor { get; set; }
     MBClan LastCapturedBy { get; set; }
     List<MBVillage> Villages { get; }
-    MBMobileParty MilitiaParty { get; }
     MBTownMarketData MarketData { get; }
     float SecurityChange { get; }
     float LoyaltyChange { get; }

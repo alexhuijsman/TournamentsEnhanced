@@ -49,8 +49,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public virtual List<MBVillage> Villages => UnwrappedObject.Villages.CastList<MBVillage>();
 
-    public virtual MBMobileParty MilitiaParty => UnwrappedObject.MilitiaParty;
-
     public virtual MBTownMarketData MarketData => UnwrappedObject.MarketData;
 
     public virtual float SecurityChange => UnwrappedObject.SecurityChange;

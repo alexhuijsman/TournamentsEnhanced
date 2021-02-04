@@ -125,7 +125,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static IMbEvent<MobileParty, Settlement, BattleSideEnum, SiegeEngineType, bool> OnSiegeBombardmentWallHitEvent => CampaignEvents.OnSiegeBombardmentWallHitEvent;
     public static IMbEvent<MobileParty, Settlement, BattleSideEnum, SiegeEngineType> OnSiegeEngineDestroyedEvent => CampaignEvents.OnSiegeEngineDestroyedEvent;
     public static IMbEvent<List<TradeRumor>, Settlement> OnTradeRumorIsTakenEvent => CampaignEvents.OnTradeRumorIsTakenEvent;
-    public static IMbEvent<IssueArgs> OnCheckForIssueEvent => CampaignEvents.OnCheckForIssueEvent;
+    public static IMbEvent<Hero> OnCheckForIssueEvent => CampaignEvents.OnCheckForIssueEvent;
     public static IMbEvent<IssueBase, IssueBase.IssueUpdateDetails, Hero> OnIssueUpdatedEvent => CampaignEvents.OnIssueUpdatedEvent;
     public static IMbEvent<MobileParty, TroopRoster> OnTroopsDesertedEvent => CampaignEvents.OnTroopsDesertedEvent;
     public static IMbEvent<Hero, Settlement, Hero, CharacterObject, int> OnTroopRecruitedEvent => CampaignEvents.OnTroopRecruitedEvent;
@@ -140,7 +140,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public static IMbEvent<Hero, EquipmentElement> OnEquipmentSmeltedByHeroEvent => CampaignEvents.OnEquipmentSmeltedByHeroEvent;
     public static IMbEvent<Hero> CompanionRemoved => CampaignEvents.CompanionRemoved;
     public static IMbEvent<Hero, Hero, Romance.RomanceLevelEnum> RomanticStateChanged => CampaignEvents.RomanticStateChanged;
-    public static IMbEvent<CommonArea, Hero, bool> CommonAreaOwnerChanged => CampaignEvents.CommonAreaOwnerChanged;
+    public static IMbEvent<CommonArea, Hero, Hero> CommonAreaOwnerChanged => CampaignEvents.CommonAreaOwnerChanged;
     public static IMbEvent<MobileParty, MobileParty, Hero, Settlement> CommonAreaFightOccured => CampaignEvents.CommonAreaFightOccured;
     public static IMbEvent<Town, int, int> MercenaryNumberChangedInTown => CampaignEvents.MercenaryNumberChangedInTown;
     public static IMbEvent<Town, CharacterObject, CharacterObject> MercenaryTroopChangedInTown => CampaignEvents.MercenaryTroopChangedInTown;
@@ -222,7 +222,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public virtual void OnCharacterDefeated(Hero winner, Hero loser) => UnwrappedObject.OnCharacterDefeated(winner, loser);
     public virtual void OnCharacterPortraitPopUpClosed() => UnwrappedObject.OnCharacterPortraitPopUpClosed();
     public virtual void OnCharacterPortraitPopUpOpened(CharacterObject character) => UnwrappedObject.OnCharacterPortraitPopUpOpened(character);
-    public virtual void OnCheckForIssue(IssueArgs issueArgs) => UnwrappedObject.OnCheckForIssue(issueArgs);
+    public virtual void OnCheckForIssue(Hero hero) => UnwrappedObject.OnCheckForIssue(hero);
     public virtual void OnClanLeaderChanged(Hero oldLeader, Hero newLeader) => UnwrappedObject.OnClanLeaderChanged(oldLeader, newLeader);
     public virtual void OnCommonAreaStateChanged(CommonArea commonArea, CommonArea.AreaState oldState, CommonArea.AreaState newState) => UnwrappedObject.OnCommonAreaStateChanged(commonArea, oldState, newState);
     public virtual void OnEquipmentSmeltedByHero(Hero hero, EquipmentElement smeltedEquipmentElement) => UnwrappedObject.OnEquipmentSmeltedByHero(hero, smeltedEquipmentElement);

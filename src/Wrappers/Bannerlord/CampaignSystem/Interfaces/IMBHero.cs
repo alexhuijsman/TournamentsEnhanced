@@ -84,7 +84,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     MBHeroDeveloper HeroDeveloper { get; }
     List<MBWorkshop> OwnedWorkshops { get; }
     List<MBCommonArea> OwnedCommonAreas { get; }
-    List<MBPartyBase> OwnedParties { get; }
     CampaignTime LastMeetingTimeWithPlayer { get; set; }
     int HitPoints { get; set; }
     bool HasMet { get; set; }
@@ -131,7 +130,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     int GetAttributeValue(CharacterAttributesEnum charAttribute);
     int GetBaseHeroRelation(MBHero otherHero);
     IEnumerable<string> GetHeroOccupiedEvents();
-    MBCharacterSkills GetHeroSkills();
     MBCharacterTraits GetHeroTraits();
     IMapPoint GetMapPoint();
     bool GetPerkValue(MBPerkObject perk);

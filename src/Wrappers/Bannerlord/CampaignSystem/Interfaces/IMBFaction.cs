@@ -11,7 +11,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
   public interface IMBFaction
   {
     List<MBHero> Lords { get; }
-    List<MBMobileParty> WarParties { get; }
     bool IsBanditFaction { get; }
     bool IsMinorFaction { get; }
     bool IsKingdomFaction { get; }
@@ -28,7 +27,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     float DailyCrimeRatingChange { get; }
     float Aggressiveness { get; }
     bool IsEliminated { get; }
-    List<MBMobileParty> AllParties { get; }
     List<MBHero> Heroes { get; }
     CampaignTime NotAttackableByPlayerUntilTime { get; set; }
     List<MBTown> Fiefs { get; }

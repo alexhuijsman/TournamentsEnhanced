@@ -15,8 +15,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public virtual List<MBHero> Lords => UnwrappedObject.Lords.CastList<MBHero>();
 
-    public virtual List<MBMobileParty> WarParties => UnwrappedObject.WarParties.CastList<MBMobileParty>();
-
     public virtual bool IsBanditFaction => UnwrappedObject.IsBanditFaction;
 
     public virtual bool IsMinorFaction => UnwrappedObject.IsMinorFaction;
@@ -47,8 +45,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public virtual float Aggressiveness => UnwrappedObject.Aggressiveness;
 
     public virtual bool IsEliminated => UnwrappedObject.IsEliminated;
-
-    public virtual List<MBMobileParty> AllParties => UnwrappedObject.AllParties.CastList<MBMobileParty>();
 
     public virtual List<MBHero> Heroes => UnwrappedObject.Heroes.CastList<MBHero>();
 

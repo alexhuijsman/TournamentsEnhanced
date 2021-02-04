@@ -169,8 +169,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
     public virtual List<MBCommonArea> OwnedCommonAreas => UnwrappedObject.OwnedCommonAreas.CastList<MBCommonArea>();
 
-    public virtual List<MBPartyBase> OwnedParties => UnwrappedObject.OwnedParties.CastList<MBPartyBase>();
-
     public virtual CampaignTime LastMeetingTimeWithPlayer { get => UnwrappedObject.LastMeetingTimeWithPlayer; set => UnwrappedObject.LastMeetingTimeWithPlayer = value; }
     public virtual int HitPoints { get => UnwrappedObject.HitPoints; set => UnwrappedObject.HitPoints = value; }
     public virtual bool HasMet { get => UnwrappedObject.HasMet; set => UnwrappedObject.HasMet = value; }
@@ -269,8 +267,6 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public virtual int GetBaseHeroRelation(MBHero otherHero) => UnwrappedObject.GetBaseHeroRelation(otherHero);
 
     public virtual IEnumerable<string> GetHeroOccupiedEvents() => UnwrappedObject.GetHeroOccupiedEvents();
-
-    public virtual MBCharacterSkills GetHeroSkills() => UnwrappedObject.GetHeroSkills();
 
     public virtual MBCharacterTraits GetHeroTraits() => UnwrappedObject.GetHeroTraits();
 
