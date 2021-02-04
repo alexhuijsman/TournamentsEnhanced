@@ -178,12 +178,22 @@ namespace TournamentsEnhanced
     {
 
       LimitPrizeSelect = false;
+      // OnTestProsperityTournament();
       // OnProsperityTournament();
       // OnLordTournament();
       // InvitePlayer();
       // OnMakePeace(Kingdom.All[0], Kingdom.All[1]);
       // OnHeroesMarried(Kingdom.All[0].Leader, Kingdom.All[1].Leader, true);
       // OnGivenBirth(Kingdom.All[0].Leader, Kingdom.All[0].Leader.Children, 0);
+    }
+
+    private void OnTestProsperityTournament()
+    {
+      if (Hero.MainHero.CurrentSettlement != null && Hero.MainHero.CurrentSettlement.IsTown)
+      {
+        Utilities.CreateTournament(Hero.MainHero.CurrentSettlement, TournamentType.Prosperity);
+        Utilities.LogAnnouncer("Local nobles at " + Hero.MainHero.CurrentSettlement.Town.Name + " have called a tournament due to high prosperity");
+      }
     }
 
     private void OnLordTournament()
