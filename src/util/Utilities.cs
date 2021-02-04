@@ -151,7 +151,7 @@ namespace TournamentsEnhanced
 
       foreach (var item in itemPool)
       {
-        if (item.IsCraftedByPlayer || item.IsCraftedWeapon || !Utilities.IsTierable(item))
+        if (item.IsCraftedByPlayer || !Utilities.IsTierable(item))
         {
           continue;
         }
@@ -165,9 +165,10 @@ namespace TournamentsEnhanced
       var weaponPrizes = qualifyingItems.Where(item => item.IsCraftedWeapon).ToList().Shuffle();
       var selectedPrizes = new ItemObject[5];
 
-      for (int i = 1; i <= 5; i++)
+      for (int i = 0; i < 5; i++)
       {
-        if (i <= TournamentsEnhancedSettings.Instance.MinimumNumberOfWeaponsInPrizePool)
+        if (i < weaponPrizes.Count &&
+            i + 1 <= TournamentsEnhancedSettings.Instance.MinimumNumberOfWeaponsInPrizePool)
         {
           selectedPrizes[i] = weaponPrizes.GetRandomElement();
           weaponPrizes.Remove(selectedPrizes[i]);
