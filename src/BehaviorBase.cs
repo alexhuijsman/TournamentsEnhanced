@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Helpers;
@@ -40,10 +40,11 @@ namespace TournamentsEnhanced
       List<InquiryElement> list = new List<InquiryElement>();
       TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town);
 
+      var prizes = Utilities.GetTournamentPrizes();
       for (int i = 0; i < 5; i++)
       {
         ItemModifier itemModifier = null;
-        ItemObject prize = Utilities.GetTournamentPrize();
+        ItemObject prize = prizes[i];
         if (!string.IsNullOrWhiteSpace(prize.StringId))
         {
           itemModifier = MBObjectManager.Instance.GetObject<ItemModifier>(prize.StringId);
