@@ -11,8 +11,8 @@
     <LibPath>lib/</LibPath>
     <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
     <BannerlordModulesPath>$(PATH_TO_BANNERLORD)/Modules/</BannerlordModulesPath>
-    <BannerlordDLLPath>$(PATH_TO_BANNERLORD)/bin/Win64_Shipping_Client/</BannerlordDLLPath>
-    <DebugOutDir>bin/Debug/</DebugOutDir>
+    <BannerlordDLLPath>lib/Bannerlord/active/</BannerlordDLLPath>
+    <DebugOutDir>bin/Debug/TournamentsEnhanced/bin/Win64_Shipping_Client/</DebugOutDir>
     <ReleaseOutDir>$(BannerlordModulesPath)/TournamentsEnhanced/bin/Win64_Shipping_Client/</ReleaseOutDir>
   </PropertyGroup>
 
@@ -113,6 +113,7 @@
     <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutDir)../../&quot;">
     </Exec>
   </Target>
+
   <Target Name="Remove Unneeded Reference DLLs" AfterTargets="AfterBuild">
     <ItemGroup>
       <UnwantedFiles Include="$(OutDir)/TaleWorlds.*.dll"/>

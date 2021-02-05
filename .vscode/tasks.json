@@ -53,12 +53,33 @@
       ],
       "problemMatcher": []
     },
+    {
+      "label": "Cache Bannerlord DLLs",
+      "type": "shell",
+      "command": "./sh/cache-bannerlord-lib.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Switch to Cached Bannerlord DLLs",
+      "type": "shell",
+      "command": "./sh/switch-active-bannerlord-lib.sh",
+      "args": [
+        "${input:bannerlordVersion}"
+      ],
+      "problemMatcher": []
+    },
   ],
   "inputs": [
     {
       "id": "tag",
       "description": "tag name",
       "default": "1.5.7.",
+      "type": "promptString"
+    },
+    {
+      "id": "bannerlordVersion",
+      "description": "bannerlord lib version",
+      "default": "e1.5.7",
       "type": "promptString"
     },
   ]
