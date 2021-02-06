@@ -8,6 +8,7 @@ namespace TournamentsEnhanced
     {
       public static class Default
       {
+        public const float FoodStocksDecrease = 20.00f;
         public const int NobleRelationModifier = 3;
         public const int MinDaysBetweenHostedTournaments = 7;
         public const int NoblesRelationIncrease = 3;

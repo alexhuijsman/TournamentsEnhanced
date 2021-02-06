@@ -38,7 +38,7 @@ namespace TournamentsEnhanced
     public virtual float SecurityIncrease { get; set; } = 10.00f;
     [SettingProperty("Food Stocks Decrease", -30.00f, 30.00f, "Food stock decrease for certain tournament types. Negative values increase food stock instead.")]
     [SettingPropertyGroup("Tournament affects on Towns")]
-    public virtual float FoodStocksDecrease { get; set; } = 20.00f;
+    public virtual float FoodStocksDecrease { get; set; } = Constants.Settings.Default.FoodStocksDecrease;
 
     //Tournament Cost
     [SettingProperty("Required minimum Prosperity needed for a town to host a Prosperity Tournament", 0, 10000, "The minimum prosperity needed for a Town to be eligible for a prosperity tournament")]
