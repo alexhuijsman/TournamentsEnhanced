@@ -1,5 +1,5 @@
-zipFile="$2/Modules/TournamentsEnhanced$1.zip"
-folderToZip="$2/Modules/TournamentsEnhanced"
+zipFile="$2/TournamentsEnhanced$1.zip"
+folderToZip="$2/TournamentsEnhanced"
 git tag $1 --force
 git push
 git push origin $1 --force
