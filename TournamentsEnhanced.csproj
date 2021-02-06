@@ -4,7 +4,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ModVersion>1.5.7.99</ModVersion>
+    <ModVersion>1.5.99.99</ModVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -44,9 +44,9 @@
     <Compile Remove="packages/**" />
     <EmbeddedResource Remove="packages/**" />
     <None Remove="packages/**" />
-    <Compile Remove="lib/**" />
-    <EmbeddedResource Remove="lib/**" />
-    <None Remove="lib/**" />
+    <Compile Remove="lib/Bannerlord/**" />
+    <EmbeddedResource Remove="lib/Bannerlord/**" />
+    <None Remove="lib/Bannerlord/**" />
   </ItemGroup>
 
   <ItemGroup>
