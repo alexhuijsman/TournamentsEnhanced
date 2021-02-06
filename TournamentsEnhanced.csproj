@@ -11,7 +11,7 @@
     <LibPath>lib/</LibPath>
     <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
     <BannerlordModulesPath>$(PATH_TO_BANNERLORD)/Modules/</BannerlordModulesPath>
-    <BannerlordDLLPath>lib/Bannerlord/active/</BannerlordDLLPath>
+    <BannerlordDLLPath>lib/Bannerlord/target/</BannerlordDLLPath>
     <DebugOutDir>bin/Debug/TournamentsEnhanced/bin/Win64_Shipping_Client/</DebugOutDir>
     <ReleaseOutDir>$(BannerlordModulesPath)/TournamentsEnhanced/bin/Win64_Shipping_Client/</ReleaseOutDir>
   </PropertyGroup>

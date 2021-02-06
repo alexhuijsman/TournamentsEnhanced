@@ -6,7 +6,7 @@
     <IsPackable>false</IsPackable>
     <LibPath>../lib/</LibPath>
     <DebugOutDir>bin/Debug/</DebugOutDir>
-    <BannerlordDLLPath>$(LibPath)/Bannerlord/active/</BannerlordDLLPath>
+    <BannerlordDLLPath>$(LibPath)/Bannerlord/target/</BannerlordDLLPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">

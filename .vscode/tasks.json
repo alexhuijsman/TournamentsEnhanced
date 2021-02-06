@@ -62,7 +62,7 @@
     {
       "label": "Switch to Cached Bannerlord DLLs",
       "type": "shell",
-      "command": "./sh/switch-active-bannerlord-lib.sh",
+      "command": "./sh/switch-target-bannerlord-lib.sh",
       "args": [
         "${input:bannerlordVersion}"
       ],
