@@ -31,11 +31,8 @@ namespace TournamentsEnhanced.Models.Serializable
       return this[MBHero.MainHero.CurrentSettlement];
     }
 
-    public bool ContainsSettlement(MBSettlement settlement) => ContainsKey(settlement.StringId);
-    public bool ContainsSettlement(string stringId) => ContainsKey(stringId);
-
-    public void AddOrUpdate(TournamentRecord record) => this[record.hostSettlementStringId] = record;
-
-    public void Remove(MBSettlement settlement) => Remove(settlement.StringId);
+    public virtual bool ContainsSettlement(MBSettlement settlement) => ContainsKey(settlement.StringId);
+    public virtual void AddOrUpdate(TournamentRecord record) => this[record.hostSettlementStringId] = record;
+    public virtual void Remove(MBSettlement settlement) => Remove(settlement.StringId);
   }
 }

@@ -7,11 +7,12 @@ namespace TournamentsEnhanced.Models
   public class ModState
   {
     private SerializableModState _state;
+
     public static ModState Instance { get; } = new ModState();
-    public SerializableModState SerializableObject { get => _state; set => _state = value; }
-    protected MBMBRandom MBMBRandom { get; set; } = MBMBRandom.Instance;
-    public DaysSinceTournamentTracker DaysSince => _state.daysSince;
-    public TournamentRecordDictionary TournamentRecords => _state.tournamentRecords;
+    public virtual SerializableModState SerializableObject { get => _state; set => _state = value; }
+    protected virtual MBMBRandom MBMBRandom { get; set; } = MBMBRandom.Instance;
+    public virtual DaysSinceTournamentTracker DaysSince => _state.daysSince;
+    public virtual TournamentRecordDictionary TournamentRecords => _state.tournamentRecords;
     public virtual int LotteryResults { get => _state.lotteryResults; set => _state.lotteryResults = value; }
 
     protected ModState()

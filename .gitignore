@@ -225,3 +225,4 @@ stage1/
 *.etl.zip
 lcov.info
 lib/Bannerlord
+mono_crash.*.json
