@@ -11,5 +11,5 @@ export PATH_TO_BANNERLORD="/mnt/c/Program Files (x86)/Steam/steamapps/common/Mou
 
 Install the workspace-recommended vscode extensions, then click Watch in vscode status bar to view unit test code coverage in source files.
 
-Run Cache Bannerlord DLLs to copy the current version of bannerlord DLLs to a local folder.
-To set the target version to build against, run Switch to Cached Bannerlord DLLs.
+Run Cache Bannerlord DLLs to copy the current version of bannerlord DLLs to lib/Bannerlord
+To set the target version to build against, edit CachedBannerlordTargetVersion in TournamentsEnhancd.csproj.
