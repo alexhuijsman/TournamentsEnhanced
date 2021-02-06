@@ -5,13 +5,14 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <ModVersion>1.5.8.0</ModVersion>
+    <CachedBannerlordTargetVersion>e1.5.8</CachedBannerlordTargetVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <LibPath>lib/</LibPath>
     <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
     <BannerlordModulesPath>$(PATH_TO_BANNERLORD)/Modules/</BannerlordModulesPath>
-    <BannerlordDLLPath>$(LibPath)/Bannerlord/target/</BannerlordDLLPath>
+    <BannerlordDLLPath>$(LibPath)/Bannerlord/$(CachedBannerlordTargetVersion)/</BannerlordDLLPath>
     <DebugOutDir>bin/Debug/TournamentsEnhanced/bin/Win64_Shipping_Client/</DebugOutDir>
     <ReleaseOutDir>$(BannerlordModulesPath)/TournamentsEnhanced/bin/Win64_Shipping_Client/</ReleaseOutDir>
   </PropertyGroup>
