@@ -311,6 +311,12 @@ namespace TournamentsEnhanced
     {
       int maxTournaments = 0;
       var settlements = GetShuffledSettlements();
+
+      if (mother.Spouse == null)
+      {
+        return;
+      }
+
       foreach (var settlement in settlements)
       {
         if (maxTournaments >= MAX_TOURNAMENTS)
