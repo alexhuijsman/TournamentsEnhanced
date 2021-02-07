@@ -5,14 +5,15 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <ModVersion>1.5.5.1</ModVersion>
+    <CachedBannerlordTargetVersion>e1.5.5</CachedBannerlordTargetVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <LibPath>lib/</LibPath>
     <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
     <BannerlordModulesPath>$(PATH_TO_BANNERLORD)/Modules/</BannerlordModulesPath>
-    <BannerlordDLLPath>$(PATH_TO_BANNERLORD)/bin/Win64_Shipping_Client/</BannerlordDLLPath>
-    <DebugOutDir>bin/Debug/</DebugOutDir>
+    <BannerlordDLLPath>$(LibPath)/Bannerlord/$(CachedBannerlordTargetVersion)/</BannerlordDLLPath>
+    <DebugOutDir>bin/Debug/TournamentsEnhanced/bin/Win64_Shipping_Client/</DebugOutDir>
     <ReleaseOutDir>$(BannerlordModulesPath)/TournamentsEnhanced/bin/Win64_Shipping_Client/</ReleaseOutDir>
   </PropertyGroup>
 
@@ -44,6 +45,9 @@
     <Compile Remove="packages/**" />
     <EmbeddedResource Remove="packages/**" />
     <None Remove="packages/**" />
+    <Compile Remove="lib/**" />
+    <EmbeddedResource Remove="lib/**" />
+    <None Remove="lib/**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,14 +61,14 @@
     </PackageReference>
     <PackageReference Include="System.Text.Json" Version="5.0.1" />
     <PackageReference Include="Lib.Harmony" Version="2.0.4" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.ButterLib" Version="1.0.18" IncludeAssets="compile" />
+    <!-- <PackageReference Include="Bannerlord.ButterLib" Version="1.0.18" IncludeAssets="compile" />
     <PackageReference Include="Bannerlord.UIExtenderEx" Version="1.0.5" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.MCM" Version="4.1.2" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="4.1.2" IncludeAssets="compile" /> -->
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="ModLib.Definitions">
-      <HintPath>$(LibDir)/ModLib.Definitions.dll</HintPath>
+      <HintPath>$(LibPath)/ModLib.Definitions.dll</HintPath>
       <PrivateAssets>all</PrivateAssets>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
@@ -103,8 +107,8 @@
 
   <Target Name="Clean Output Dir" AfterTargets="BeforeBuild">
     <ItemGroup>
-      <FilesToDelete Include="$(OutDir)/**/*"/>
-      <FilesToDelete Include="$(OutDir)../../SubModule.xml"/>
+      <FilesToDelete Include="$(OutDir)/**/*" />
+      <FilesToDelete Include="$(OutDir)../../SubModule.xml" />
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
   </Target>
@@ -113,12 +117,13 @@
     <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutDir)../../&quot;">
     </Exec>
   </Target>
+
   <Target Name="Remove Unneeded Reference DLLs" AfterTargets="AfterBuild">
     <ItemGroup>
-      <UnwantedFiles Include="$(OutDir)/TaleWorlds.*.dll"/>
-      <UnwantedFiles Include="$(OutDir)/Newtonsoft.Json.dll"/>
-      <UnwantedFiles Include="$(OutDir)/System.Management.dll"/>
-      <UnwantedFiles Include="$(OutDir)/System.Numerics.Vectors.dll"/>
+      <UnwantedFiles Include="$(OutDir)/TaleWorlds.*.dll" />
+      <UnwantedFiles Include="$(OutDir)/Newtonsoft.Json.dll" />
+      <UnwantedFiles Include="$(OutDir)/System.Management.dll" />
+      <UnwantedFiles Include="$(OutDir)/System.Numerics.Vectors.dll" />
     </ItemGroup>
     <Delete Files="@(UnwantedFiles)" />
   </Target>

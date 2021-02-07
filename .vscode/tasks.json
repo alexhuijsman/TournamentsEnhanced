@@ -24,6 +24,12 @@
       ],
       "problemMatcher": []
     },
+    {
+      "label": "Cache Bannerlord DLLs",
+      "type": "shell",
+      "command": "./sh/cache-bannerlord-lib.sh",
+      "problemMatcher": []
+    },
   ],
   "inputs": [
     {
