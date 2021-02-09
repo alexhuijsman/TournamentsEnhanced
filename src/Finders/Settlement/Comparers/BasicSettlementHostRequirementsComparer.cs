@@ -2,7 +2,7 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
-  public class BasicSettlementHostRequirementsComparer : HostSettlementComparerBase
+  public class BasicSettlementHostRequirementsComparer : SettlementComparerBase
   {
     public static BasicSettlementHostRequirementsComparer Instance { get; } = new BasicSettlementHostRequirementsComparer();
     protected BasicSettlementHostRequirementsComparer(MBHero initiatingHero = null) : base(initiatingHero) { }

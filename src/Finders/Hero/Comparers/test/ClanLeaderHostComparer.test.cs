@@ -39,7 +39,7 @@ namespace Test
     }
 
     [Test]
-    public void Instance_IsSingleton()
+    public void Instance_ShouldBeSingleton()
     {
       ClanLeaderHostComparer.Instance.ShouldBe(ClanLeaderHostComparer.Instance);
     }

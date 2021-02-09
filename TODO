@@ -11,6 +11,8 @@ S Move all numeric constants and magic numbers to separate "default values" cons
 refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
 Use Bannerlord's .GetRandomElement() or custom deterministic implementation for prize selection
 Make individual tournament type spawn chances improve the more days its been since the last.
+Add option to show prizes from settlement's base culture
+Add options to select type of prizes (weapon type, armor type, item tier)
 Allow Selection of companions & remember previous selections
   -Add option: Select All, Select None
   -Add option: Remember companion choices
@@ -22,6 +24,7 @@ IMPROVE
 -------
 Revamp MCM integration - https://github.com/Aragas/Bannerlord.MBOptionScreen
   -Remove lib folder, use Bannerlord.MCM package instead
+  -Move Settings into ModState
   -Global and PerCharacter options
     -Is Per-Save better than per-character?
   -ability to reset to defaults

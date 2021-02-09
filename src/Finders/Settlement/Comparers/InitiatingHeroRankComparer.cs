@@ -17,7 +17,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
         return false;
       }
 
-      if (!HasExistingTournament(settlement))
+      if (!ModState.TournamentRecords.ContainsSettlement(settlement))
       {
         return true;
       }
