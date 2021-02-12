@@ -5,8 +5,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class InitiatingHeroOwnershipComparer : ExistingTournamentComparer
   {
-    private new static InitiatingHeroOwnershipComparer Instance { get; } = null;
-    private new static InitiatingHeroOwnershipComparer InstanceIncludingExisting { get; } = null;
+    public new static InitiatingHeroOwnershipComparer Instance { get; } = null;
+    public new static InitiatingHeroOwnershipComparer InstanceIncludingExisting { get; } = null;
 
     public InitiatingHeroOwnershipComparer(MBHero initiatingHero) : base(true, initiatingHero) { }
 
@@ -21,8 +21,6 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       {
         return true;
       }
-
-      var record = ModState.TournamentRecords[settlement];
 
       return settlement.OwnerClan.Leader == InitiatingHero;
     }

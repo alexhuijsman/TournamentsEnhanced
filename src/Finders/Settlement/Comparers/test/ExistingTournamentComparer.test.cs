@@ -1,12 +1,10 @@
 using System;
-using Moq;
 using NUnit.Framework;
 using Shouldly;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
-using static TournamentsEnhanced.Constants.Settings;
 
 namespace Test
 {

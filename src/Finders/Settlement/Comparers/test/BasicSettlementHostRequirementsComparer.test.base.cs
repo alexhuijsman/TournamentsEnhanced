@@ -1,4 +1,3 @@
-using System;
 using Moq;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
@@ -25,8 +24,6 @@ namespace Test
     protected T _sut;
     protected Mock<MBSettlement> _mockSettlement;
     protected MBSettlement _settlement;
-    protected Mock<ModState> _mockModState;
-    protected Mock<TournamentRecordDictionary> _mockTournamentRecords;
     protected Mock<Settings> _mockSettings;
     protected Mock<MBTown> _mockTown;
 

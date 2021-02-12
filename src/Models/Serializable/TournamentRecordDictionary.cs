@@ -6,7 +6,7 @@ namespace TournamentsEnhanced.Models.Serializable
 {
   public class TournamentRecordDictionary : Dictionary<string, TournamentRecord>
   {
-    public TournamentRecord this[MBSettlement settlement]
+    public virtual TournamentRecord this[MBSettlement settlement]
     {
       get
       {

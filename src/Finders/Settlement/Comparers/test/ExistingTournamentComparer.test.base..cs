@@ -1,6 +1,5 @@
 using System;
 using Moq;
-using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
@@ -14,6 +13,9 @@ namespace Test
   {
     protected const bool CanOverrideExisting = true;
     protected const bool CannotOverrideExisting = false;
+
+    protected Mock<ModState> _mockModState;
+    protected Mock<TournamentRecordDictionary> _mockTournamentRecords;
 
     protected override void SetUp(bool isTown, float foodStockValue = 0)
     {
