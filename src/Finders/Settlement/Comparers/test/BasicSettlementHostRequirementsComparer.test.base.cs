@@ -38,6 +38,9 @@ namespace Test
       _mockTown = MockRepository.Create<MBTown>();
       _mockSettings = MockRepository.Create<Settings>();
 
+      _mockSettings.SetupGet(settings => settings.FoodStocksDecrease)
+        .Returns(Default.FoodStocksDecrease);
+
       _mockSettlement.SetupGet(settlement => settlement.IsTown).Returns(isTown);
       if (isTown)
       {
