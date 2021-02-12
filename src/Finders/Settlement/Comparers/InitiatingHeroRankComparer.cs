@@ -5,8 +5,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class InitiatingHeroRankComparer : ExistingTournamentComparer
   {
-    private new static InitiatingHeroRankComparer Instance { get; } = null;
-    private new static InitiatingHeroRankComparer InstanceIncludingExisting { get; } = null;
+    public new static InitiatingHeroRankComparer Instance { get; } = null;
+    public new static InitiatingHeroRankComparer InstanceIncludingExisting { get; } = null;
 
     public InitiatingHeroRankComparer(MBHero initiatingHero) : base(true, initiatingHero) { }
 
