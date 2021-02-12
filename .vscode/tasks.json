@@ -30,6 +30,15 @@
       "command": "./sh/cache-bannerlord-lib.sh",
       "problemMatcher": []
     },
+    {
+      "label": "Delete Empty Folders",
+      "type": "shell",
+      "command": "./sh/delete-empty-folders.sh",
+      "args": [
+        "src",
+      ],
+      "problemMatcher": []
+    },
   ],
   "inputs": [
     {
