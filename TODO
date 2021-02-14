@@ -4,7 +4,6 @@ Hello! This is my todo list for Tournaments Enhanced.
 
 DO NEXT
 -------
-Remove arrows and ballista arrows from prize pool
 Add remaining unit tests
 S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
 s Wrap enums
@@ -14,7 +13,8 @@ refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
 Use Bannerlord's .GetRandomElement() or custom deterministic implementation for prize selection
 Make individual tournament type spawn chances improve the more days its been since the last.
 Add option to show prizes from settlement's base culture
-Add options to select type of prizes (weapon type, armor type, item tier)
+Add options to select type of prizes (weapon type, armor type, item tier, arrows)
+Exclude Ballista arrows from prizes if arrows are enabled
 Allow Selection of companions & remember previous selections
   -Add option: Select All, Select None
   -Add option: Remember companion choices
