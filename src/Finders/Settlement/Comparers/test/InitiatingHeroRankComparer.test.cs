@@ -75,6 +75,10 @@ namespace Test
 
         _mockTournamentRecord.SetupGet(record => record.HasInitiatingHero)
           .Returns(existingHasInitiatingHero);
+
+        _mockTournamentRecords.SetupGet(
+          tournamentRecords => tournamentRecords[_mockSettlement.Object])
+            .Returns(_mockTournamentRecord.Object);
       }
 
       _sut.InitiatingHero = _mockInitiatingHero.Object;
