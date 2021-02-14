@@ -15,7 +15,7 @@ namespace TournamentsEnhanced
 
     public static bool IsTierable(ItemObject item)
     {
-      if (item.ItemType.Equals(ItemObject.ItemTypeEnum.Arrows) || item.ItemType.Equals(ItemObject.ItemTypeEnum.BodyArmor) || item.ItemType.Equals(ItemObject.ItemTypeEnum.Bow) ||
+      if (/*item.ItemType.Equals(ItemObject.ItemTypeEnum.Arrows) ||*/ item.ItemType.Equals(ItemObject.ItemTypeEnum.BodyArmor) || item.ItemType.Equals(ItemObject.ItemTypeEnum.Bow) ||
         item.ItemType.Equals(ItemObject.ItemTypeEnum.Cape) || item.ItemType.Equals(ItemObject.ItemTypeEnum.ChestArmor) || item.ItemType.Equals(ItemObject.ItemTypeEnum.Crossbow) ||
         item.ItemType.Equals(ItemObject.ItemTypeEnum.HandArmor) || item.ItemType.Equals(ItemObject.ItemTypeEnum.HeadArmor) || item.ItemType.Equals(ItemObject.ItemTypeEnum.HorseHarness) ||
         item.ItemType.Equals(ItemObject.ItemTypeEnum.LegArmor) || item.ItemType.Equals(ItemObject.ItemTypeEnum.OneHandedWeapon) || item.ItemType.Equals(ItemObject.ItemTypeEnum.Polearm) ||
