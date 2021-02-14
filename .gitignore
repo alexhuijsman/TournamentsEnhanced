@@ -226,4 +226,4 @@ stage1/
 lcov.info
 TODO
 lib/Bannerlord
-mono_crash.*.json
+mono_crash.*
