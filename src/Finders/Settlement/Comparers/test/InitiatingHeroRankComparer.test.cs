@@ -15,6 +15,7 @@ namespace Test
   {
     private Mock<MBHero> _mockInitiatingHero;
     private Mock<MBHero> _mockExistingInitiatingHero;
+    private Mock<MBClan> _mockOwnerClan;
     private Mock<TournamentRecord> _mockTournamentRecord;
 
     protected enum TournamentRecordType
@@ -38,6 +39,7 @@ namespace Test
       base.SetUp(meetsBaseRequirements, hasExistingTournament);
 
       _mockInitiatingHero = MockRepository.Create<MBHero>();
+      _mockOwnerClan = MockRepository.Create<MBClan>();
       _mockTournamentRecord = MockRepository.Create<TournamentRecord>();
 
       switch (existingRecordType)
@@ -56,8 +58,14 @@ namespace Test
           throw new ArgumentOutOfRangeException();
       }
 
-      _mockSettlement.SetupGet(settlement => settlement.OwnerClan.Leader)
-        .Returns(_mockExistingInitiatingHero.Object);
+      _mockSettlement.SetupGet(settlement => settlement.OwnerClan)
+        .Returns(_mockOwnerClan.Object);
+
+      if (_mockExistingInitiatingHero != null)
+      {
+        _mockOwnerClan.SetupGet(clan => clan.Leader)
+          .Returns(_mockExistingInitiatingHero.Object);
+      }
 
       if (hasExistingTournament)
       {
