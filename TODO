@@ -9,6 +9,7 @@ S remove concept of InitiatingHero and refactor all uses to call HeroFinder inst
 s Wrap enums
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 Add option to disable prize patch and menu and behaviors for compatibility with other mods (look into dynamically enabling/disabling harmony patch)
+cherry-pick community patches into experimental
 refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
 Use Bannerlord's .GetRandomElement() or custom deterministic implementation for prize selection
 Make individual tournament type spawn chances improve the more days its been since the last.
