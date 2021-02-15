@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Helpers;
@@ -162,16 +163,16 @@ namespace TournamentsEnhanced
       // add all pending tournaments for tracking
       SetupInitialTournamentKBs();
 
-      #region debug setup
-#if DEBUG
-      campaignGameStarter.AddGameMenuOption("town_arena", "test_add_tournament_game", "Add Tournament",
-         new GameMenuOption.OnConditionDelegate(this.AddTournamentCondition),
-         new GameMenuOption.OnConsequenceDelegate(this.AddTournamentConsequence), false, 1, true);
-      campaignGameStarter.AddGameMenuOption("town_arena", "test_resolve_tournament_game", "Resolve Tournament",
-         new GameMenuOption.OnConditionDelegate(this.ResolveTournamentCondition),
-         new GameMenuOption.OnConsequenceDelegate(this.ResolveTournamentConsequence), false, 1, true);
-#endif
-      #endregion
+      if (TournamentsEnhancedSettings.Instance.DebugCreateAndResolveTournaments)
+      {
+        campaignGameStarter.AddGameMenuOption("town_arena", "test_add_tournament_game", "Add Tournament",
+          new GameMenuOption.OnConditionDelegate(this.AddTournamentCondition),
+          new GameMenuOption.OnConsequenceDelegate(this.AddTournamentConsequence), false, 1, true);
+
+        campaignGameStarter.AddGameMenuOption("town_arena", "test_resolve_tournament_game", "Resolve Tournament",
+           new GameMenuOption.OnConditionDelegate(this.ResolveTournamentCondition),
+           new GameMenuOption.OnConsequenceDelegate(this.ResolveTournamentConsequence), false, 1, true);
+      }
     }
 
     private void OnTournamentWin(CharacterObject character, Town town)
