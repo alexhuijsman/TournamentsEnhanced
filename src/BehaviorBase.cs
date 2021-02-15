@@ -363,6 +363,7 @@ namespace TournamentsEnhanced
       var activeTournaments = typeof(TournamentManager)
          .GetField("_activeTournaments", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.Instance)
          .GetValue(Campaign.Current.TournamentManager) as List<TournamentGame>;
+      var trackedAdded = new List<TournamentKB>();
       activeTournaments.ForEach(tournament =>
       {
         var savedKBType = TournamentType.Vanilla;
@@ -372,8 +373,10 @@ namespace TournamentsEnhanced
           savedKBType = savedKB.TournamentType;
           TournamentKB.Remove(tournament.Town.Settlement);
         }
-        new TournamentKB(tournament.Town.Settlement, savedKBType);
+        trackedAdded.Add(new TournamentKB(tournament.Town.Settlement, savedKBType));
       });
+      TournamentKB.RemoveAll(trackedAdded);
+      trackedAdded = null;
     }
 
     /// <summary>

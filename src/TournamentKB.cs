@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
@@ -80,6 +81,18 @@ namespace TournamentsEnhanced
     public static bool IsCurrentPrizeSelected() => Current != null && Current.SelectedPrize != null;
 
     public static TournamentKB Current => GetTournamentKB(Settlement.CurrentSettlement);
+
+    /// <summary>
+    /// Removes all TournamentKB from static list except given elements (if any).
+    /// </summary>
+    /// <param name="exceptElements"></param>
+    internal static void RemoveAll(List<TournamentKB> exceptElements = null)
+    {
+      if (exceptElements != null)
+        TournamentList = TournamentList.Where(tournamentKB => exceptElements.Contains(tournamentKB)).ToList();
+      else
+        TournamentList.Clear();
+    }
   }
 
   public enum TournamentType
