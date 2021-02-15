@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
+using TaleWorlds.Core;
 
 namespace TournamentsEnhanced
 {
@@ -9,12 +12,31 @@ namespace TournamentsEnhanced
     private static List<TournamentKB> TournamentList = new List<TournamentKB>();
 
     private Settlement settlement { get; set; }
-    private TournamentType tournamentType { get; set; }
+    public TournamentType TournamentType { get; private set; }
     public TournamentTeam playerTeam { get; set; }
+    private WeakReference<ItemObject> _selectedPrize;
+
+    public ItemObject SelectedPrize
+    {
+      get
+      {
+        if (_selectedPrize == null)
+          return null;
+
+        _selectedPrize.TryGetTarget(out var prizeOut);
+        return prizeOut;
+      }
+
+      set
+      {
+        _selectedPrize = new WeakReference<ItemObject>(value);
+        typeof(TournamentGame).GetProperty("Prize").SetValue(TournamentGame, value);
+      }
+    }
 
     public TournamentKB(Settlement settlement, TournamentType tournamentTypes)
     {
-      this.tournamentType = tournamentTypes;
+      this.TournamentType = tournamentTypes;
       this.settlement = settlement;
       TournamentList.Add(this);
     }
@@ -26,7 +48,7 @@ namespace TournamentsEnhanced
       {
         if (enumerator.Current.settlement.Town.Settlement.Name.Equals(settlement.Name))
         {
-          return enumerator.Current.tournamentType;
+          return enumerator.Current.TournamentType;
         }
       }
       return TournamentType.Vanilla;
@@ -52,6 +74,24 @@ namespace TournamentsEnhanced
         TournamentList.Remove(GetTournamentKB(settlement));
       }
 
+    }
+
+    public TournamentGame TournamentGame => Campaign.Current.TournamentManager.GetTournamentGame(settlement.Town);
+
+    public static bool IsCurrentPrizeSelected() => Current != null && Current.SelectedPrize != null;
+
+    public static TournamentKB Current => GetTournamentKB(Settlement.CurrentSettlement);
+
+    /// <summary>
+    /// Removes all TournamentKB from static list except given elements (if any).
+    /// </summary>
+    /// <param name="exceptElements"></param>
+    internal static void RemoveAll(List<TournamentKB> exceptElements = null)
+    {
+      if (exceptElements != null)
+        TournamentList = TournamentList.Where(tournamentKB => exceptElements.Contains(tournamentKB)).ToList();
+      else
+        TournamentList.Clear();
     }
   }
 
