@@ -82,5 +82,8 @@ namespace TournamentsEnhanced
     [SettingProperty("Bring Companions", "I want my companions to join me in tournaments (on my team when possible)")]
     [SettingPropertyGroup("Tournaments")]
     public bool BringCompanions { get; set; } = true;
+    [SettingProperty("Enable Create/Resolve Tournaments", "Adds town menu options for creating and resolving tournaments")]
+    [SettingPropertyGroup("Debug")]
+    public bool DebugCreateAndResolveTournaments { get; set; } = false;
   }
 }

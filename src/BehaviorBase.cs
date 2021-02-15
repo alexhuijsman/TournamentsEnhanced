@@ -1,11 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
@@ -16,30 +18,33 @@ namespace TournamentsEnhanced
     public static int weeksSinceHost = 1;
 
     private const int MAX_TOURNAMENTS = 2;
-    private static bool LimitPrizeSelect = false;
 
     private Random _random = new Random();
 
-    public static bool PrizeSelectCondition(MenuCallbackArgs args)
+    public bool PrizeSelectCondition(MenuCallbackArgs args)
     {
-      if (LimitPrizeSelect)
-      {
-        return false;
-      }
-      bool shouldBeDisabled;
-      TextObject disabledText;
-      bool canPlayerDo = Campaign.Current.Models.SettlementAccessModel.CanMainHeroDoSettlementAction(Settlement.CurrentSettlement,
-        SettlementAccessModel.SettlementAction.JoinTournament, out shouldBeDisabled, out disabledText);
+      bool canPlayerDo = Campaign.Current.Models.SettlementAccessModel.CanMainHeroDoSettlementAction(
+         Settlement.CurrentSettlement,
+         SettlementAccessModel.SettlementAction.JoinTournament,
+         out bool shouldBeDisabled,
+         out TextObject disabledText);
+
       args.optionLeaveType = GameMenuOption.LeaveType.Manage;
+
+      // if price was already selected, disable the button; same for "can do"
+      var priceWasSelected = TournamentKB.IsCurrentPrizeSelected();
+      shouldBeDisabled |= priceWasSelected;
+      canPlayerDo &= !priceWasSelected;
+
+      if (shouldBeDisabled || disabledText.ToString().IsStringNoneOrEmpty())
+        disabledText = new TextObject($"Prize is already selected.");
+
       return MenuHelper.SetOptionProperties(args, canPlayerDo, shouldBeDisabled, disabledText);
     }
 
-    public static void PrizeSelectConsequence(MenuCallbackArgs args)
+    public void PrizeSelectConsequence(MenuCallbackArgs args)
     {
-      LimitPrizeSelect = true;
       List<InquiryElement> list = new List<InquiryElement>();
-      TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town);
-
       var prizes = Utilities.GetTournamentPrizes();
       for (int i = 0; i < 5; i++)
       {
@@ -62,10 +67,11 @@ namespace TournamentsEnhanced
         InformationManager.ShowMultiSelectionInquiry(new MultiSelectionInquiryData(new TextObject("Prize Selection",
             null).ToString(), textObject.ToString(), list, true, 1,
           new TextObject("OK", null).ToString(), new TextObject("Cancel", null).ToString(),
-          new Action<List<InquiryElement>>(BehaviorBase.OnSelectPrize),
-          new Action<List<InquiryElement>>(BehaviorBase.OnDeSelectPrize),
+          new Action<List<InquiryElement>>(this.OnSelectPrize),
+          new Action<List<InquiryElement>>(this.OnDeSelectPrize),
           ""), true);
         GameMenu.SwitchToMenu("town_arena");
+
       }
       else
       {
@@ -84,24 +90,21 @@ namespace TournamentsEnhanced
       CampaignEvents.TournamentFinished.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
     }
 
-    private static void OnSelectPrize(List<InquiryElement> prizes)
+    private void OnSelectPrize(List<InquiryElement> prizes)
     {
       if (prizes.Count > 0)
       {
-        TournamentGame tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town);
-        ItemObject prize = MBObjectManager.Instance.GetObject<ItemObject>(prizes.First().Identifier.ToString());
-        typeof(TournamentGame).GetProperty("Prize").SetValue(tournamentGame, prize);
+        TournamentKB.Current.SelectedPrize = MBObjectManager.Instance.GetObject<ItemObject>(prizes.First().Identifier.ToString());
         GameMenu.SwitchToMenu("town_arena");
       }
-
     }
 
-    private static void OnDeSelectPrize(List<InquiryElement> prizeSelections)
+    private void OnDeSelectPrize(List<InquiryElement> prizeSelections)
     {
 
     }
 
-    private static void InvitePlayer()
+    private void InvitePlayer()
     {
       if (Hero.MainHero.Clan.Renown <= 800.00f && MBRandom.RandomFloat < 0.8f)
       {
@@ -152,9 +155,23 @@ namespace TournamentsEnhanced
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(BehaviorBase.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(BehaviorBase.PrizeSelectConsequence),
+        new GameMenuOption.OnConditionDelegate(this.PrizeSelectCondition),
+        new GameMenuOption.OnConsequenceDelegate(this.PrizeSelectConsequence),
         false, 1, true);
+
+      // add all pending tournaments for tracking
+      SetupInitialTournamentKBs();
+
+      if (TournamentsEnhancedSettings.Instance.DebugCreateAndResolveTournaments)
+      {
+        campaignGameStarter.AddGameMenuOption("town_arena", "test_add_tournament_game", "Add Tournament",
+          new GameMenuOption.OnConditionDelegate(this.AddTournamentCondition),
+          new GameMenuOption.OnConsequenceDelegate(this.AddTournamentConsequence), false, 1, true);
+
+        campaignGameStarter.AddGameMenuOption("town_arena", "test_resolve_tournament_game", "Resolve Tournament",
+           new GameMenuOption.OnConditionDelegate(this.ResolveTournamentCondition),
+           new GameMenuOption.OnConsequenceDelegate(this.ResolveTournamentConsequence), false, 1, true);
+      }
     }
 
     private void OnTournamentWin(CharacterObject character, Town town)
@@ -177,7 +194,6 @@ namespace TournamentsEnhanced
     private void DailyTick()
     {
 
-      LimitPrizeSelect = false;
       // OnProsperityTournament();
       // OnLordTournament();
       // InvitePlayer();
@@ -341,5 +357,72 @@ namespace TournamentsEnhanced
         }
       }
     }
+
+    private static void SetupInitialTournamentKBs()
+    {
+      var activeTournaments = typeof(TournamentManager)
+         .GetField("_activeTournaments", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.Instance)
+         .GetValue(Campaign.Current.TournamentManager) as List<TournamentGame>;
+      var trackedAdded = new List<TournamentKB>();
+      activeTournaments.ForEach(tournament =>
+      {
+        var savedKBType = TournamentType.Vanilla;
+        var savedKB = TournamentKB.GetTournamentKB(tournament.Town.Settlement);
+        if (savedKB != null)
+        {
+          savedKBType = savedKB.TournamentType;
+          TournamentKB.Remove(tournament.Town.Settlement);
+        }
+        trackedAdded.Add(new TournamentKB(tournament.Town.Settlement, savedKBType));
+      });
+      TournamentKB.RemoveAll(trackedAdded);
+      trackedAdded = null;
+    }
+
+    /// <summary>
+    /// Used for development help, maybe move out to another helper
+    /// </summary>
+    #region Development Helpers
+#if DEBUG
+    public void TestMethod_ResolveCurrentTournament()
+    {
+      var tournamentGame = TournamentKB.Current.TournamentGame;
+      if (tournamentGame != null)
+      {
+        Campaign.Current.TournamentManager.ResolveTournament(tournamentGame, Settlement.CurrentSettlement.Town);
+      }
+    }
+
+    public void TestMethod_AddTournamentToCurrentTown(TournamentType tournamentType = TournamentType.Lord)
+    {
+      var tournamentGame = TournamentKB.Current?.TournamentGame;
+      if (tournamentGame == null)
+      {
+        Utilities.CreateTournament(Settlement.CurrentSettlement, tournamentType);
+      }
+    }
+
+    private bool AddTournamentCondition(MenuCallbackArgs args)
+    {
+      return Campaign.Current.TournamentManager.GetTournamentGame(Settlement.CurrentSettlement.Town) == null;
+    }
+
+    private void AddTournamentConsequence(MenuCallbackArgs args)
+    {
+      this.TestMethod_AddTournamentToCurrentTown();
+      GameMenu.SwitchToMenu("town_arena");
+    }
+
+    private bool ResolveTournamentCondition(MenuCallbackArgs args)
+    {
+      return !this.AddTournamentCondition(null);
+    }
+    private void ResolveTournamentConsequence(MenuCallbackArgs args)
+    {
+      this.TestMethod_ResolveCurrentTournament();
+      GameMenu.SwitchToMenu("town_arena");
+    }
+#endif
+    #endregion
   }
 }
