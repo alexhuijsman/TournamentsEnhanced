@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
     public static ProsperityComparer InstanceMinProsperityRequirement { get; } = new ProsperityComparer(true);
     public static ProsperityComparer InstanceMinProsperityRequirementIncludingExisting { get; } = new ProsperityComparer(true, true);
 
-    public bool RequireMinProsperity { get; private set; }
+    public virtual bool RequireMinProsperity { get; private set; }
 
     protected ProsperityComparer(bool hasProsperityRequirement = false,
                               bool canOverrideExisting = false,
@@ -30,7 +30,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
       return result;
     }
 
-    internal bool CompareProsperity(MBSettlement x, MBSettlement y, out int result)
+    protected virtual bool CompareProsperity(MBSettlement x, MBSettlement y, out int result)
     {
       var xIsMoreProsperous = x.Prosperity > y.Prosperity;
       var xIsLessProsperous = x.Prosperity < y.Prosperity;
