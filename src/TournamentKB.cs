@@ -15,6 +15,7 @@ namespace TournamentsEnhanced
     public TournamentType TournamentType { get; private set; }
     public TournamentTeam playerTeam { get; set; }
     private WeakReference<ItemObject> _selectedPrize;
+    private TournamentGame _tournamentGame;
 
     public ItemObject SelectedPrize
     {
@@ -34,8 +35,9 @@ namespace TournamentsEnhanced
       }
     }
 
-    public TournamentKB(Settlement settlement, TournamentType tournamentTypes)
+    public TournamentKB(Settlement settlement, TournamentType tournamentTypes, TournamentGame tournamentGame = null)
     {
+      this._tournamentGame = tournamentGame;
       this.TournamentType = tournamentTypes;
       this.settlement = settlement;
       TournamentList.Add(this);
@@ -76,7 +78,16 @@ namespace TournamentsEnhanced
 
     }
 
-    public TournamentGame TournamentGame => Campaign.Current.TournamentManager.GetTournamentGame(settlement.Town);
+    public TournamentGame TournamentGame
+    {
+      get
+      {
+        if (this._tournamentGame == null)
+          this._tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(settlement.Town);
+
+        return this._tournamentGame;
+      }
+    }
 
     public static bool IsCurrentPrizeSelected() => Current != null && Current.SelectedPrize != null;
 
