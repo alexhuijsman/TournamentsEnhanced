@@ -6,6 +6,7 @@ DO NEXT
 -------
 Add remaining unit tests
 S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
+The duelist perk has a SecondaryBonus, which is to double the renown reward from tournaments (github bug)
 s Wrap enums
 S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
 Add option to disable prize patch and menu and behaviors for compatibility with other mods (look into dynamically enabling/disabling harmony patch)
