@@ -13,7 +13,7 @@ namespace TournamentsEnhanced.Models.Serializable
     public virtual bool IsNull => tournamentType == TournamentType.None;
     public virtual bool HasInitiatingHero => !string.IsNullOrEmpty(initiatingHeroStringId);
 
-    public MBHero FindInitiatingHero() =>
+    public virtual MBHero FindInitiatingHero() =>
       HasInitiatingHero ?
         MBHero.Null :
         MBCharacterObject.Find(initiatingHeroStringId).HeroObject;

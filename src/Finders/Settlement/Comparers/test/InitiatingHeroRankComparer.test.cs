@@ -13,10 +13,13 @@ namespace Test
   public class InitiatingHeroRankComparerTest
     : ExistingTournamentComparerTestBase<InitiatingHeroRankComparerImpl>
   {
+    private const bool IsNotFactionLeader = false;
+    private const bool IsFactionLeader = true;
+
     private Mock<MBHero> _mockInitiatingHero;
     private Mock<MBHero> _mockExistingInitiatingHero;
-    private Mock<MBClan> _mockOwnerClan;
     private Mock<TournamentRecord> _mockTournamentRecord;
+    private Mock<IMBFaction> _mockFaction;
 
     protected enum TournamentRecordType
     {
@@ -33,13 +36,14 @@ namespace Test
 
     protected void SetUp(
       bool meetsBaseRequirements,
-      TournamentRecordType existingRecordType)
+      TournamentRecordType existingRecordType,
+      bool initiatingHeroIsFactionLeader)
     {
       var hasExistingTournament = existingRecordType != TournamentRecordType.None;
       base.SetUp(meetsBaseRequirements, hasExistingTournament);
 
       _mockInitiatingHero = MockRepository.Create<MBHero>();
-      _mockOwnerClan = MockRepository.Create<MBClan>();
+      _mockFaction = MockRepository.Create<IMBFaction>();
       _mockTournamentRecord = MockRepository.Create<TournamentRecord>();
 
       switch (existingRecordType)
@@ -58,13 +62,19 @@ namespace Test
           throw new ArgumentOutOfRangeException();
       }
 
-      _mockSettlement.SetupGet(settlement => settlement.OwnerClan)
-        .Returns(_mockOwnerClan.Object);
+      _mockInitiatingHero.SetupGet(initiatingHero => initiatingHero.IsFactionLeader)
+        .Returns(initiatingHeroIsFactionLeader);
 
       if (_mockExistingInitiatingHero != null)
       {
-        _mockOwnerClan.SetupGet(clan => clan.Leader)
+        _mockFaction.SetupGet(faction => faction.Leader)
+          .Returns(initiatingHeroIsFactionLeader ? _mockInitiatingHero.Object : _mockExistingInitiatingHero.Object);
+
+        _mockTournamentRecord.Setup(record => record.FindInitiatingHero())
           .Returns(_mockExistingInitiatingHero.Object);
+
+        _mockExistingInitiatingHero.SetupGet(hero => hero.MapFaction)
+          .Returns(_mockFaction.Object);
       }
 
       if (hasExistingTournament)
@@ -100,65 +110,129 @@ namespace Test
     }
 
     [Test]
-    public void MeetsRequirements_FailsBaseRequirements_NoExistingTournament_ShouldReturnFalse()
+    public void MeetsRequirements_FailsBaseRequirements_IsNotFactionLeader_NoExistingTournament_ShouldReturnFalse()
     {
-      SetUp(FailsBaseRequirements, TournamentRecordType.None);
+      SetUp(FailsBaseRequirements, TournamentRecordType.None, IsNotFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(false);
     }
 
     [Test]
-    public void MeetsRequirements_FailsBaseRequirements_ExistingTournament_WithNoInitiatingHero_ShouldReturnFalse()
+    public void MeetsRequirements_FailsBaseRequirements_IsNotFactionLeader_ExistingTournament_WithNoInitiatingHero_ShouldReturnFalse()
     {
-      SetUp(FailsBaseRequirements, TournamentRecordType.HasNoInitiatingHero);
+      SetUp(FailsBaseRequirements, TournamentRecordType.HasNoInitiatingHero, IsNotFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(false);
     }
 
     [Test]
-    public void MeetsRequirements_FailsBaseRequirements_ExistingTournament_WithDifferentInitiatingHero_ShouldReturnFalse()
+    public void MeetsRequirements_FailsBaseRequirements_IsNotFactionLeader_ExistingTournament_WithDifferentInitiatingHero_ShouldReturnFalse()
     {
-      SetUp(FailsBaseRequirements, TournamentRecordType.HasDifferentInitiatingHero);
+      SetUp(FailsBaseRequirements, TournamentRecordType.HasDifferentInitiatingHero, IsNotFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(false);
     }
 
     [Test]
-    public void MeetsRequirements_FailsBaseRequirements_ExistingTournament_WithSameInitiatingHero_ShouldReturnFalse()
+    public void MeetsRequirements_FailsBaseRequirements_IsNotFactionLeader_ExistingTournament_WithSameInitiatingHero_ShouldReturnFalse()
     {
-      SetUp(FailsBaseRequirements, TournamentRecordType.HasSameInitiatingHero);
+      SetUp(FailsBaseRequirements, TournamentRecordType.HasSameInitiatingHero, IsNotFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(false);
     }
 
     [Test]
-    public void MeetsRequirements_MeetsBaseRequirements_NoExistingTournament_ShouldReturnTrue()
+    public void MeetsRequirements_MeetsBaseRequirements_IsNotFactionLeader_NoExistingTournament_ShouldReturnTrue()
     {
-      SetUp(MeetsBaseRequirements, TournamentRecordType.None);
+      SetUp(MeetsBaseRequirements, TournamentRecordType.None, IsNotFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(true);
     }
 
     [Test]
-    public void MeetsRequirements_MeetsBaseRequirements_ExistingTournament_WithNoInitiatingHero_ShouldReturnTrue()
+    public void MeetsRequirements_MeetsBaseRequirements_IsNotFactionLeader_ExistingTournament_WithNoInitiatingHero_ShouldReturnFalse()
     {
-      SetUp(MeetsBaseRequirements, TournamentRecordType.HasNoInitiatingHero);
-
-      _sut.MeetsRequirements(_settlement).ShouldBe(true);
-    }
-
-    [Test]
-    public void MeetsRequirements_MeetsBaseRequirements_ExistingTournament_WithDifferentInitiatingHero_ShouldReturnFalse()
-    {
-      SetUp(MeetsBaseRequirements, TournamentRecordType.HasDifferentInitiatingHero);
+      SetUp(MeetsBaseRequirements, TournamentRecordType.HasNoInitiatingHero, IsNotFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(false);
     }
 
     [Test]
-    public void MeetsRequirements_MeetsBaseRequirements_ExistingTournament_WithSameInitiatingHero_ShouldReturnTrue()
+    public void MeetsRequirements_MeetsBaseRequirements_IsNotFactionLeader_ExistingTournament_WithDifferentInitiatingHero_ShouldReturnFalse()
     {
-      SetUp(MeetsBaseRequirements, TournamentRecordType.HasSameInitiatingHero);
+      SetUp(MeetsBaseRequirements, TournamentRecordType.HasDifferentInitiatingHero, IsNotFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(false);
+    }
+
+    [Test]
+    public void MeetsRequirements_MeetsBaseRequirements_IsNotFactionLeader_ExistingTournament_WithSameInitiatingHero_ShouldReturnFalse()
+    {
+      SetUp(MeetsBaseRequirements, TournamentRecordType.HasSameInitiatingHero, IsNotFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(false);
+    }
+
+    [Test]
+    public void MeetsRequirements_FailsBaseRequirements_IsFactionLeader_NoExistingTournament_ShouldReturnFalse()
+    {
+      SetUp(FailsBaseRequirements, TournamentRecordType.None, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(false);
+    }
+
+    [Test]
+    public void MeetsRequirements_FailsBaseRequirements_IsFactionLeader_ExistingTournament_WithNoInitiatingHero_ShouldReturnFalse()
+    {
+      SetUp(FailsBaseRequirements, TournamentRecordType.HasNoInitiatingHero, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(false);
+    }
+
+    [Test]
+    public void MeetsRequirements_FailsBaseRequirements_IsFactionLeader_ExistingTournament_WithDifferentInitiatingHero_ShouldReturnFalse()
+    {
+      SetUp(FailsBaseRequirements, TournamentRecordType.HasDifferentInitiatingHero, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(false);
+    }
+
+    [Test]
+    public void MeetsRequirements_FailsBaseRequirements_IsFactionLeader_ExistingTournament_WithSameInitiatingHero_ShouldReturnFalse()
+    {
+      SetUp(FailsBaseRequirements, TournamentRecordType.HasSameInitiatingHero, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(false);
+    }
+
+    [Test]
+    public void MeetsRequirements_MeetsBaseRequirements_IsFactionLeader_NoExistingTournament_ShouldReturnTrue()
+    {
+      SetUp(MeetsBaseRequirements, TournamentRecordType.None, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(true);
+    }
+
+    [Test]
+    public void MeetsRequirements_MeetsBaseRequirements_IsFactionLeader_ExistingTournament_WithNoInitiatingHero_ShouldReturnTrue()
+    {
+      SetUp(MeetsBaseRequirements, TournamentRecordType.HasNoInitiatingHero, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(true);
+    }
+
+    [Test]
+    public void MeetsRequirements_MeetsBaseRequirements_IsFactionLeader_ExistingTournament_WithDifferentInitiatingHero_ShouldReturnTrue()
+    {
+      SetUp(MeetsBaseRequirements, TournamentRecordType.HasDifferentInitiatingHero, IsFactionLeader);
+
+      _sut.MeetsRequirements(_settlement).ShouldBe(true);
+    }
+
+    [Test]
+    public void MeetsRequirements_MeetsBaseRequirements_IsFactionLeader_ExistingTournament_WithSameInitiatingHero_ShouldReturnTrue()
+    {
+      SetUp(MeetsBaseRequirements, TournamentRecordType.HasSameInitiatingHero, IsFactionLeader);
 
       _sut.MeetsRequirements(_settlement).ShouldBe(true);
     }
