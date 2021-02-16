@@ -16,6 +16,7 @@ namespace TournamentsEnhanced
     public TournamentTeam playerTeam { get; set; }
     private WeakReference<ItemObject> _selectedPrize;
     private TournamentGame _tournamentGame;
+    private ItemObject[] _availablePrizes;
 
     public ItemObject SelectedPrize
     {
@@ -75,7 +76,6 @@ namespace TournamentsEnhanced
       {
         TournamentList.Remove(GetTournamentKB(settlement));
       }
-
     }
 
     public TournamentGame TournamentGame
@@ -92,6 +92,17 @@ namespace TournamentsEnhanced
     public static bool IsCurrentPrizeSelected() => Current != null && Current.SelectedPrize != null;
 
     public static TournamentKB Current => GetTournamentKB(Settlement.CurrentSettlement);
+
+    public ItemObject[] AvailableTournamentPrizes
+    {
+      get
+      {
+        if (_availablePrizes == null)
+          _availablePrizes = Utilities.GetTournamentPrizes();
+
+        return _availablePrizes;
+      }
+    }
 
     /// <summary>
     /// Removes all TournamentKB from static list except given elements (if any).
