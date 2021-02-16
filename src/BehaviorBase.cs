@@ -186,9 +186,7 @@ namespace TournamentsEnhanced
       // add prize to hero if tournament was won by one of his subordinates
       if (TournamentsEnhancedSettings.Instance.SubordinateWinsReward)
       {
-        character = Hero.MainHero.Siblings.First().CharacterObject;
-
-        if (character != null && character.IsHero && !character.IsPlayerCharacter)
+        if (character.IsHero && !character.IsPlayerCharacter)
         {
           // if is in clan NOTICE: this is true for StoryMode only, need to check for [IsFactionLeader and MapFaction is Clan] if at some other game mode
           var shouldReward = Hero.MainHero.Clan.Companions.Contains(character.HeroObject);
