@@ -184,7 +184,7 @@ namespace TournamentsEnhanced
       }
 
       // add prize to hero if tournament was won by one of his subordinates
-      if (TournamentsEnhancedSettings.Instance.SubordinateWinsReward)
+      if (TournamentsEnhancedSettings.Instance.SubordinatesGivePrizeToPlayer)
       {
         if (character.IsHero && !character.IsPlayerCharacter)
         {

@@ -57,9 +57,9 @@ namespace TournamentsEnhanced
     [SettingPropertyGroup("Tournament Prizes")]
     public int MinimumNumberOfWeaponsInPrizePool { get; set; } = 0;
 
-    [SettingProperty("Subordinate Win grants Reward", "You will get the price of the tournament if one of your subordinate wins.")]
+    [SettingProperty("Give Prize to Player if Subordinate Wins", "If enabled, whenever your subordinates win tournaments they will give the prize to you.")]
     [SettingPropertyGroup("Tournament Prizes")]
-    public bool SubordinateWinsReward { get; set; } = true;
+    public bool SubordinatesGivePrizeToPlayer { get; set; } = true;
 
     //Amount of initial tournaments on the map
     [SettingProperty("Tournament Cost", -10000, 10000, "Cost of tournaments")]
