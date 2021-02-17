@@ -33,8 +33,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
 
     private bool TryCompareNull(W x, W y, ref int result)
     {
-      var xMeetsRequirements = MeetsRequirements(x);
-      var yMeetsRequirements = MeetsRequirements(y);
+      var xMeetsRequirements = x.IsNull ? false : MeetsRequirements(x);
+      var yMeetsRequirements = y.IsNull ? false : MeetsRequirements(y);
       var assignedResult = false;
 
       if (x.IsNull)
