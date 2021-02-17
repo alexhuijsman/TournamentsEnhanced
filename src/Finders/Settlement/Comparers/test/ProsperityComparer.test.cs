@@ -19,6 +19,8 @@ namespace Test
 
       _sut.Settings = _mockSettings.Object;
       _sut.ModState = _mockModState.Object;
+
+      _sut.RequireMinProsperity = requiresMinProsperity;
     }
 
     [Test]
@@ -57,6 +59,8 @@ namespace Test
     public ProsperityComparerImpl() : base() { }
     public ProsperityComparerImpl(bool hasProsperityRequirement, bool canOverrideExisting, MBHero initiatingHero)
      : base(hasProsperityRequirement, canOverrideExisting, initiatingHero) { }
+
+    public new bool RequireMinProsperity { set => base.RequireMinProsperity = value; }
 
     public new bool MeetsRequirements(MBSettlement settlement) => base.MeetsRequirements(settlement);
   }

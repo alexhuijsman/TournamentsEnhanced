@@ -42,8 +42,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Abstract
         result = y.IsNull ? Constants.Comparer.BothEqualRank : yMeetsRequirements ? Constants.Comparer.YOutranksX : Constants.Comparer.XOutranksY;
         assignedResult = true;
       }
-
-      if (y.IsNull)
+      else if (y.IsNull)
       {
         result = xMeetsRequirements ? Constants.Comparer.XOutranksY : Constants.Comparer.YOutranksX;
         assignedResult = true;

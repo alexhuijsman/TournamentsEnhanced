@@ -9,7 +9,7 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
     public static ProsperityComparer InstanceMinProsperityRequirement { get; } = new ProsperityComparer(true);
     public static ProsperityComparer InstanceMinProsperityRequirementIncludingExisting { get; } = new ProsperityComparer(true, true);
 
-    public virtual bool RequireMinProsperity { get; private set; }
+    public virtual bool RequireMinProsperity { get; protected set; }
 
     protected ProsperityComparer(bool hasProsperityRequirement = false,
                               bool canOverrideExisting = false,

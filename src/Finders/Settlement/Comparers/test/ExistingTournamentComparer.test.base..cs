@@ -3,6 +3,7 @@ using Moq;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
+using TournamentsEnhanced.Wrappers.CampaignSystem;
 using static TournamentsEnhanced.Constants.Settings;
 
 namespace Test
@@ -34,12 +35,17 @@ namespace Test
       _mockModState.SetupGet(modState => modState.TournamentRecords)
         .Returns(_mockTournamentRecords.Object);
 
-      _mockTournamentRecords.Setup<bool>(
-        tournamentRecords => tournamentRecords.ContainsSettlement(_mockSettlement.Object))
-          .Returns(hasExistingTournament);
+      SetUpContainsSettlement(_mockSettlement, hasExistingTournament);
 
       _mockSettings.SetupGet(settings => settings.FoodStocksDecrease)
         .Returns(Default.FoodStocksDecrease);
+    }
+
+    protected void SetUpContainsSettlement(Mock<MBSettlement> mockSettlement, bool hasExistingTournament)
+    {
+      _mockTournamentRecords.Setup<bool>(
+         tournamentRecords => tournamentRecords.ContainsSettlement(mockSettlement.Object))
+           .Returns(hasExistingTournament);
     }
   }
 }

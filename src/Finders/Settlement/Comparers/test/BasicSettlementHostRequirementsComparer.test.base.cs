@@ -55,7 +55,7 @@ namespace Test
 
       if (isTown)
       {
-        mockSettlement.SetupGet(settlement => settlement.Town).Returns(_mockTown.Object);
+        mockSettlement.SetupGet(settlement => settlement.Town).Returns(mockTown.Object);
         mockTown.SetupGet(town => town.FoodStocks).Returns(foodStockValue);
       }
 
