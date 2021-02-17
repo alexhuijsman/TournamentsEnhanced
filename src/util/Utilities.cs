@@ -80,7 +80,7 @@ namespace TournamentsEnhanced
     {
       TournamentGame tournament = new FightTournamentGame(settlement.Town);
       Campaign.Current.TournamentManager.AddTournament(tournament);
-      TournamentKB tournamentKB = new TournamentKB(settlement, type);
+      TournamentKB tournamentKB = new TournamentKB(settlement, type, tournament);
     }
 
     public static void CreateInitialTournaments()
