@@ -43,7 +43,7 @@ namespace TournamentsEnhanced
     //Tournament Cost
     [SettingProperty("Required minimum Prosperity needed for a town to host a Prosperity Tournament", 0, 10000, "The minimum prosperity needed for a Town to be eligible for a prosperity tournament")]
     [SettingPropertyGroup("Tournaments")]
-    public virtual float MinProsperityRequirement { get; set; } = 5000;
+    public virtual float MinProsperityRequirement { get; set; } = Constants.Settings.Default.MinProsperityRequirement;
 
     [SettingProperty("Tournament Cost", 0, 10000, "Cost of tournaments")]
     [SettingPropertyGroup("Tournaments")]

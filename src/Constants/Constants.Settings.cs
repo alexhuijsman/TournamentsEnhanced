@@ -11,6 +11,7 @@ namespace TournamentsEnhanced
         public const float FoodStocksDecrease = 20.00f;
         public const int NobleRelationModifier = 3;
         public const int MinDaysBetweenHostedTournaments = 7;
+        public const int MinProsperityRequirement = 5000;
         public const int NoblesRelationIncrease = 3;
         public const float MaxRenownForInvitationTournaments = 800.00f;
         public const int NumberOfPrizesToChooseFrom = 5;
