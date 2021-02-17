@@ -33,9 +33,11 @@ namespace Test
       float yProsperity
       )
     {
+      SetUp(xMeetsBaseRequirements, requiresMinProsperity);
+
       if (xMeetsBaseRequirements)
       {
-        _mockSettlementX = MockRepository.Create<MBSettlement>();
+        _mockSettlementX = _mockSettlement;
         _mockSettlementX.SetupGet(settlement => settlement.Prosperity).Returns(xProsperity);
         _settlementX = _mockSettlementX.Object;
       }
@@ -47,7 +49,7 @@ namespace Test
 
       if (yMeetsBaseRequirements)
       {
-        _mockSettlementY = MockRepository.Create<MBSettlement>();
+        _mockSettlementY = CreateMockSettlement(true, Constants.Settings.Default.FoodStocksDecrease).mockSettlement;
         _mockSettlementY.SetupGet(settlement => settlement.Prosperity).Returns(yProsperity);
         _settlementY = _mockSettlementY.Object;
       }
@@ -72,8 +74,8 @@ namespace Test
         XFailsProsperityRequirement,
         YFailsProsperityRequirement);
 
-      _sut.Compare(_settlementX, _settlementY)
-        .ShouldBe(Constants.Comparer.BothEqualRank);
+      var x = _sut.Compare(_settlementX, _settlementY);
+      x.ShouldBe(Constants.Comparer.BothEqualRank);
     }
   }
 }

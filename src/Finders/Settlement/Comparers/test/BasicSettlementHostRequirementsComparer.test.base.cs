@@ -1,8 +1,6 @@
 using Moq;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Finder.Comparers.Settlement;
-using TournamentsEnhanced.Models;
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using static TournamentsEnhanced.Constants.Settings;
 
@@ -30,9 +28,11 @@ namespace Test
     protected virtual void SetUp(bool isTown, float foodStockValue = 0)
     {
       _sut = new T();
-      _mockSettlement = MockRepository.Create<MBSettlement>();
+
+      CreateMockSettlementResults results = CreateMockSettlement(isTown, foodStockValue);
+      _mockSettlement = results.mockSettlement;
       _settlement = _mockSettlement.Object;
-      _mockTown = MockRepository.Create<MBTown>();
+      _mockTown = results.mockTown;
       _mockSettings = MockRepository.Create<Settings>();
 
       _mockSettings.SetupGet(settings => settings.FoodStocksDecrease)
@@ -44,6 +44,32 @@ namespace Test
         _mockSettlement.SetupGet(settlement => settlement.Town).Returns(_mockTown.Object);
         _mockTown.SetupGet(town => town.FoodStocks).Returns(foodStockValue);
       }
+    }
+
+    protected CreateMockSettlementResults CreateMockSettlement(bool isTown, float foodStockValue)
+    {
+      var mockSettlement = MockRepository.Create<MBSettlement>();
+      var mockTown = MockRepository.Create<MBTown>();
+
+      mockSettlement.SetupGet(settlement => settlement.IsTown).Returns(isTown);
+
+      if (isTown)
+      {
+        mockSettlement.SetupGet(settlement => settlement.Town).Returns(_mockTown.Object);
+        mockTown.SetupGet(town => town.FoodStocks).Returns(foodStockValue);
+      }
+
+      return new CreateMockSettlementResults()
+      {
+        mockSettlement = mockSettlement,
+        mockTown = mockTown
+      };
+    }
+
+    protected struct CreateMockSettlementResults
+    {
+      public Mock<MBSettlement> mockSettlement;
+      public Mock<MBTown> mockTown;
     }
   }
 }
