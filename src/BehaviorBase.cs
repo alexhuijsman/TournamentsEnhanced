@@ -46,7 +46,7 @@ namespace TournamentsEnhanced
     public void PrizeSelectConsequence(MenuCallbackArgs args)
     {
       List<InquiryElement> list = new List<InquiryElement>();
-      var prizes = Utilities.GetTournamentPrizes();
+      var prizes = TournamentKB.Current.AvailableTournamentPrizes;
       for (int i = 0; i < 5; i++)
       {
         ItemModifier itemModifier = null;
@@ -181,6 +181,43 @@ namespace TournamentsEnhanced
       if (character.IsHero)
       {
         character.HeroObject.AddSkillXp(tuple.Item1, tuple.Item2);
+      }
+
+      // add prize to hero if tournament was won by one of his subordinates
+      if (TournamentsEnhancedSettings.Instance.SubordinatesGivePrizeToPlayer)
+      {
+        if (character.IsHero && !character.IsPlayerCharacter)
+        {
+          // if is in clan NOTICE: this is true for StoryMode only, need to check for [IsFactionLeader and MapFaction is Clan] if at some other game mode
+          var shouldReward = Hero.MainHero.Clan.Companions.Contains(character.HeroObject);
+
+          // if main hero is also kingdom leader, consider everyone from kingdom
+          if (!shouldReward && Hero.MainHero.IsFactionLeader && Hero.MainHero.MapFaction is Kingdom)
+          {
+            var kingdom = Hero.MainHero.MapFaction as Kingdom;
+            if (kingdom != null)
+            {
+              shouldReward |= kingdom.Lords.Contains(character.HeroObject);
+              if (!shouldReward)
+                shouldReward |= kingdom.Clans.Any(clan => clan.Companions.Contains(character.HeroObject));
+            }
+          }
+
+          // if still no reward, check family
+          if (!shouldReward)
+          {
+            shouldReward |= Hero.MainHero.Spouse == character.HeroObject;
+            shouldReward |= Hero.MainHero.Children != null && Hero.MainHero.Children.Contains(character.HeroObject);
+            shouldReward |= Hero.MainHero.Siblings != null && Hero.MainHero.Siblings.Contains(character.HeroObject);
+          }
+
+          if (shouldReward)
+          {
+            var prize = TournamentKB.GetTournamentKB(town.Settlement)?.TournamentGame?.Prize;
+            if (prize != null)
+              Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(prize, 1);
+          }
+        }
       }
       TournamentKB.Remove(town.Settlement);
     }
@@ -386,7 +423,6 @@ namespace TournamentsEnhanced
     /// Used for development help, maybe move out to another helper
     /// </summary>
     #region Development Helpers
-#if DEBUG
     public void TestMethod_ResolveCurrentTournament()
     {
       var tournamentGame = TournamentKB.Current.TournamentGame;
@@ -425,7 +461,6 @@ namespace TournamentsEnhanced
       this.TestMethod_ResolveCurrentTournament();
       GameMenu.SwitchToMenu("town_arena");
     }
-#endif
     #endregion
   }
 }
