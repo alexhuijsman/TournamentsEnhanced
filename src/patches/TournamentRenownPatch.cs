@@ -8,7 +8,7 @@ namespace TournamentsEnhanced
   [HarmonyPatch(typeof(DefaultTournamentModel), "GetRenownReward")]
   class TournamentRenownPatch
   {
-    static void Postfix(ref int __result)
+    static void Postfix(ref int __result, Hero winner)
     {
       __result = TournamentsEnhancedSettings.Instance.RenownReward;
       if (winner.GetPerkValue(DefaultPerks.OneHanded.Duelist))
