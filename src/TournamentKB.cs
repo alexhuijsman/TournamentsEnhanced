@@ -1,19 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Helpers;
+using SandBox.TournamentMissions.Missions;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
+using TournamentsEnhanced.TeamTournament;
 
 namespace TournamentsEnhanced
 {
   public class TournamentKB
   {
     private static List<TournamentKB> TournamentList = new List<TournamentKB>();
-
-    private Settlement settlement { get; set; }
+    private Settlement Settlement { get; set; }
+    public int TeamSize { get; private set; }
     public TournamentType TournamentType { get; private set; }
-    public TournamentTeam playerTeam { get; set; }
+    public TournamentTeam PlayerTeam { get; set; }
+    public bool IsTeamTournament => SelectedRoster != null;
+    public List<CharacterObject> SelectedRoster { get; internal set; }
+    public int TeamsCount { get; }
+    public int FirstRoundMatches { get; }
+    public int Rounds { get; internal set; }
+
+
     private WeakReference<ItemObject> _selectedPrize;
     private TournamentGame _tournamentGame;
     private ItemObject[] _availablePrizes;
@@ -40,8 +50,12 @@ namespace TournamentsEnhanced
     {
       this._tournamentGame = tournamentGame;
       this.TournamentType = tournamentTypes;
-      this.settlement = settlement;
+      this.Settlement = settlement;
       TournamentList.Add(this);
+      this.TeamSize = MBRandom.Random.Next(2, 9); // current interface allows up to 8 per team
+      this.TeamsCount = (int)Math.Pow(2, MBRandom.Random.Next(3, 6)); // 16, 32 teams possible -> also 4, 8 but needs more testing and fixing 
+      this.FirstRoundMatches = TeamsCount == 32 ? 8 : TeamsCount / (MBRandom.Random.Next(2) * 2 + 2); // if full (32) => 8 rounds, else can be 4 or 8
+      this.Rounds = (int)Math.Min(Math.Log(TeamsCount, 2), 4); // simple log2 round progression (members/2 in every round)
     }
 
     public static TournamentType GetTournamentType(Settlement settlement)
@@ -49,7 +63,7 @@ namespace TournamentsEnhanced
       List<TournamentKB>.Enumerator enumerator = TournamentList.GetEnumerator();
       while (enumerator.MoveNext())
       {
-        if (enumerator.Current.settlement.Town.Settlement.Name.Equals(settlement.Name))
+        if (enumerator.Current.Settlement.Town.Settlement.Name.Equals(settlement.Name))
         {
           return enumerator.Current.TournamentType;
         }
@@ -62,7 +76,7 @@ namespace TournamentsEnhanced
       List<TournamentKB>.Enumerator enumerator = TournamentList.GetEnumerator();
       while (enumerator.MoveNext())
       {
-        if (enumerator.Current.settlement.Town.Settlement.Name.Equals(settlement.Name))
+        if (enumerator.Current.Settlement.Town.Settlement.Name.Equals(settlement.Name))
         {
           return enumerator.Current;
         }
@@ -73,9 +87,7 @@ namespace TournamentsEnhanced
     public static void Remove(Settlement settlement)
     {
       if (GetTournamentKB(settlement) != null)
-      {
         TournamentList.Remove(GetTournamentKB(settlement));
-      }
     }
 
     public TournamentGame TournamentGame
@@ -83,7 +95,7 @@ namespace TournamentsEnhanced
       get
       {
         if (this._tournamentGame == null)
-          this._tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(settlement.Town);
+          this._tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.Town);
 
         return this._tournamentGame;
       }

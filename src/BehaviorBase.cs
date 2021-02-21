@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Helpers;
@@ -11,16 +10,14 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
+using TournamentsEnhanced.TeamTournament.Menu;
 
 namespace TournamentsEnhanced
 {
   class BehaviorBase : EncounterGameMenuBehavior
   {
     public static int weeksSinceHost = 1;
-
     private const int MAX_TOURNAMENTS = 2;
-
-    private Random _random = new Random();
 
     public bool PrizeSelectCondition(MenuCallbackArgs args)
     {
@@ -152,7 +149,8 @@ namespace TournamentsEnhanced
     {
       //add option to the menu
       campaignGameStarter.AddGameMenuOption("town_arena", "host_tournament", "Host a tournament in your honor (" +
-        TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + "{GOLD_ICON})", new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
+        TournamentsEnhancedSettings.Instance.TournamentCost.ToString() + "{GOLD_ICON})",
+        new GameMenuOption.OnConditionDelegate(game_menu_town_arena_host_tournament_condition),
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
@@ -167,11 +165,19 @@ namespace TournamentsEnhanced
       {
         campaignGameStarter.AddGameMenuOption("town_arena", "test_add_tournament_game", "Add Tournament",
           new GameMenuOption.OnConditionDelegate(this.AddTournamentCondition),
-          new GameMenuOption.OnConsequenceDelegate(this.AddTournamentConsequence), false, 1, true);
+          new GameMenuOption.OnConsequenceDelegate(this.AddTournamentConsequence), false, 2, true);
 
         campaignGameStarter.AddGameMenuOption("town_arena", "test_resolve_tournament_game", "Resolve Tournament",
            new GameMenuOption.OnConditionDelegate(this.ResolveTournamentCondition),
-           new GameMenuOption.OnConsequenceDelegate(this.ResolveTournamentConsequence), false, 1, true);
+           new GameMenuOption.OnConsequenceDelegate(this.ResolveTournamentConsequence), false, 3, true);
+      }
+
+      if (TournamentsEnhancedSettings.Instance.EnableTeamTournaments)
+      {
+        var teamTournamentMenu = new TeamTournamentTeamSelectionMenu();
+        campaignGameStarter.AddGameMenuOption("town_arena", "participate_as_team", "Join as Team",
+          new GameMenuOption.OnConditionDelegate(teamTournamentMenu.GameMenuSelectRosterCondition),
+          new GameMenuOption.OnConsequenceDelegate(teamTournamentMenu.GameMenuSelectRosterConsequence), false, 7, false);
       }
     }
 
