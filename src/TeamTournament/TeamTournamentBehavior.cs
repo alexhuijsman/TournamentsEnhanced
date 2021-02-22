@@ -370,82 +370,8 @@ namespace TournamentsEnhanced.TeamTournament
           this.BetOdd = 0f;
           return;
         }
-
-        List<KeyValuePair<Hero, int>> leaderboard = Campaign.Current.TournamentManager.GetLeaderboard();
-        int num = 0;
-        int num2 = 0;
-        for (int i = 0; i < leaderboard.Count; i++)
-        {
-          if (leaderboard[i].Key == Hero.MainHero)
-          {
-            num = leaderboard[i].Value;
-          }
-          if (leaderboard[i].Value > num2)
-          {
-            num2 = leaderboard[i].Value;
-          }
-        }
-
-        float baseOdd = 30f + (float)Hero.MainHero.Level + (float)Math.Max(0, num * 12 - num2 * 2);
-        float num4 = 0f;
-        float num5 = 0f;
-        float num6 = 0f;
-
-        foreach (var tournamentMatch in this.CurrentRound.Matches)
-        {
-          foreach (var tournamentTeam in tournamentMatch.Teams)
-          {
-            float num7 = 0f;
-            foreach (var tournamentParticipant in tournamentTeam.Members)
-            {
-              if (tournamentParticipant.Character != CharacterObject.PlayerCharacter)
-              {
-                int num8 = 0;
-                if (tournamentParticipant.Character.IsHero)
-                {
-                  for (int k = 0; k < leaderboard.Count; k++)
-                  {
-                    if (leaderboard[k].Key == tournamentParticipant.Character.HeroObject)
-                    {
-                      num8 = leaderboard[k].Value;
-                    }
-                  }
-                }
-                num7 += (float)(tournamentParticipant.Character.Level + Math.Max(0, num8 * 8 - num2 * 2));
-              }
-            }
-            if (tournamentTeam.IsPlayerTeam)
-            {
-              num5 = num7;
-              foreach (var tournamentTeam2 in tournamentMatch.Teams)
-              {
-                if (tournamentTeam != tournamentTeam2)
-                {
-                  foreach (var tournamentParticipant2 in tournamentTeam2.Members)
-                  {
-                    int num9 = 0;
-                    if (tournamentParticipant2.Character.IsHero)
-                    {
-                      for (int l = 0; l < leaderboard.Count; l++)
-                      {
-                        if (leaderboard[l].Key == tournamentParticipant2.Character.HeroObject)
-                        {
-                          num9 = leaderboard[l].Value;
-                        }
-                      }
-                    }
-                    num6 += (float)(tournamentParticipant2.Character.Level + Math.Max(0, num9 * 8 - num2 * 2));
-                  }
-                }
-              }
-            }
-            num4 += num7;
-          }
-        }
-        float num10 = (num5 + baseOdd) / (num6 + num5 + baseOdd);
-        float num11 = baseOdd / (num5 + baseOdd + 0.5f * (num4 - (num5 + num6)));
-        float num13 = MathF.Clamp((float)Math.Pow((double)(1f / num10 * num11), 0.75), 1.1f, 4f);
-        this.BetOdd = (int)(num13 * 10f) / 10f;
+        // TODO: make a better bet odd calculation
+        this.BetOdd = MBRandom.Random.Next(3, 5);
       }
     }
 
