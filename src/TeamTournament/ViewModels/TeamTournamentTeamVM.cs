@@ -47,15 +47,13 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     public void Initialize()
     {
       this.IsValid = this.Team != null;
-
-      for (var i = 0; Team != null && i < this.Count; i++)
-        this._members[i].Refresh(Team.Members.ElementAtOrDefault(i), Color.FromUint(this.Team.TeamColor));
+      this._members[0].Refresh(Team.GetTeamLeader(), Color.FromUint(this.Team.TeamColor));
     }
 
     public void Initialize(TeamTournamentTeam team)
     {
       this.Team = team;
-      this.Count = team.Members.Count();
+      this.Count = 1;
       this.Initialize();
     }
 

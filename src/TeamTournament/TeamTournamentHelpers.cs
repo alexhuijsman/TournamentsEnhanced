@@ -21,5 +21,33 @@ namespace TournamentsEnhanced.TeamTournament
             && !x.IsHidden)
         .Select(sel => sel.Character);
     }
+
+    public static IEnumerable<Hero> AllLivingRelatedHeroes(this Hero inHero)
+    {
+      if (inHero.Father != null && !inHero.Father.IsDead)
+        yield return inHero.Father;
+
+      if (inHero.Mother != null && !inHero.Mother.IsDead)
+        yield return inHero.Mother;
+
+      if (inHero.Spouse != null && !inHero.Spouse.IsDead)
+        yield return inHero.Spouse;
+
+      foreach (Hero hero in inHero.Children)
+      {
+        if (!hero.IsDead)
+          yield return hero;
+      }
+      foreach (Hero hero2 in inHero.Siblings)
+      {
+        if (!hero2.IsDead)
+          yield return hero2;
+      }
+      foreach (Hero hero3 in inHero.ExSpouses)
+      {
+        if (!hero3.IsDead)
+          yield return hero3;
+      }
+    }
   }
 }

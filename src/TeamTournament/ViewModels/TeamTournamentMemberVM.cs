@@ -35,7 +35,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
       this.IsInitialized = true;
       if (member != null)
       {
-        this.Name = member.Character.Name.ToString();
+        this.Name = member.Character.Name.ToString() + "'s Team";
         this.Character = new CharacterViewModel(CharacterViewModel.StanceTypes.CelebrateVictory);
         this.Character.FillFrom(member.Character, -1);
         this.Visual = new ImageIdentifierVM(CharacterCode.CreateFrom(member.Character));
