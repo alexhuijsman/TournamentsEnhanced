@@ -8,20 +8,14 @@ using TournamentsEnhanced.Wrappers.Abstract;
 
 namespace Test
 {
-  public class FindOptionsBaseTest : TestBase
+  public class FindOptionsBaseTest : TestBase<FindOptionsBaseImpl>
   {
-    private FindOptionsBaseImpl _sut;
-
-    //TODO remove use of [SetUp]
-    [SetUp]
-    public void SetUp()
-    {
-      _sut = new FindOptionsBaseImpl();
-    }
 
     [Test]
     public void HasFallbackComparers_NullComparers_ShouldBeFalse()
     {
+      SetUp();
+
       _sut.HasFallbackComparers.ShouldBe(false);
     }
 
@@ -29,6 +23,8 @@ namespace Test
     [Test]
     public void HasFallbackComparers_EmptyComparers_ShouldBeFalse()
     {
+      SetUp();
+
       _sut.FallbackComparers = new IComparer<WrapperBase>[0];
 
       _sut.HasFallbackComparers.ShouldBe(false);
@@ -38,6 +34,8 @@ namespace Test
     [Test]
     public void HasFallbackComparers_NonEmptyComparers_ShouldBeTrue()
     {
+      SetUp();
+
       _sut.FallbackComparers = new IComparer<WrapperBase>[]
       {
         new Mock<IComparer<WrapperBase>>().Object
@@ -45,9 +43,7 @@ namespace Test
 
       _sut.HasFallbackComparers.ShouldBe(true);
     }
-
-
-    private class FindOptionsBaseImpl : FindOptionsBase<WrapperBase> { }
-
   }
+
+  public class FindOptionsBaseImpl : FindOptionsBase<WrapperBase> { }
 }

@@ -7,7 +7,7 @@ using TournamentsEnhanced;
 
 namespace Test
 {
-  public partial class FinderBaseTest : TestBase
+  public partial class FinderBaseTest : TestBase<FinderBaseImpl>
   {
     [Test]
     public void Find_NoCandidate_OneComparer_OneFallback_Result_ShouldFail()

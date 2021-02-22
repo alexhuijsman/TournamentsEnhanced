@@ -6,7 +6,7 @@ using static TournamentsEnhanced.Constants.Settings;
 
 namespace Test
 {
-  public abstract class BasicSettlementHostRequirementsComparerTestBase<T> : TestBase
+  public abstract class BasicSettlementHostRequirementsComparerTestBase<T> : TestBase<T>
   where T : BasicSettlementHostRequirementsComparer, new()
   {
     protected const bool MeetsBaseRequirements = true;
@@ -19,7 +19,6 @@ namespace Test
     protected const bool HasExistingTournament = true;
     protected const bool NoExistingTournament = false;
 
-    protected T _sut;
     protected Mock<MBSettlement> _mockSettlement;
     protected MBSettlement _settlement;
     protected Mock<Settings> _mockSettings;
@@ -27,7 +26,7 @@ namespace Test
 
     protected virtual void SetUp(bool isTown, float foodStockValue = 0)
     {
-      _sut = new T();
+      base.SetUp();
 
       CreateMockSettlementResults results = CreateMockSettlement(isTown, foodStockValue);
       _mockSettlement = results.mockSettlement;

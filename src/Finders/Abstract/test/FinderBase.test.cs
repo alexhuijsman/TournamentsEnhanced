@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using TournamentsEnhanced;
-using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Finder.Abstract;
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.Core;
@@ -11,7 +10,7 @@ using TournamentsEnhanced.Wrappers.Core;
 
 namespace Test
 {
-  public partial class FinderBaseTest : TestBase
+  public partial class FinderBaseTest : TestBase<FinderBaseImpl>
   {
     private const int NumberOfUnqualifiedCandidates = 11;
     private const int NumberOfQualifiedCandidates = 7;
@@ -20,7 +19,6 @@ namespace Test
     private const int NumberOfFailUnqualifiedComparers = 2;
     private const int NumberOfFailQualifiedComparers = 1;
     private const int TotalNumberOfComparers = NumberOfFailUnqualifiedComparers + NumberOfFailQualifiedComparers;
-    private FinderBaseImpl _sut;
     private Mock<FindOptionBaseImpl> _mockFindOptions;
     private Mock<CandidateImpl>[] _mockCandidates;
     private List<CandidateImpl> _candidates;
@@ -32,9 +30,9 @@ namespace Test
 
     //TODO remove use of [SetUp]
     [SetUp]
-    public void SetUp()
+    protected override void SetUp()
     {
-      _sut = new FinderBaseImpl();
+      base.SetUp();
       _mockFindOptions = MockRepository.Create<FindOptionBaseImpl>();
 
       var mockMBMBRandom = MockRepository.Create<MBMBRandom>();
@@ -313,53 +311,53 @@ namespace Test
 
       return result;
     }
+  }
 
-    public enum MockComparerType
+  public enum MockComparerType
+  {
+    None,
+    FailUnqualified,
+    FailQualified,
+  }
+
+  public enum MockCandidateType
+  {
+    None,
+    Unqualified,
+    Qualified,
+    Ideal,
+  }
+
+  public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, CandidateImpl, object>
+  {
+  }
+
+  public class FindResultBaseImpl : FindResultBase<FindResultBaseImpl, CandidateImpl, object>
+  {
+  }
+  public class FindOptionBaseImpl : FindOptionsBase<CandidateImpl>
+  {
+  }
+
+  public interface IMBWrapperComparer : IComparer<CandidateImpl> { }
+
+  public class CandidateImpl : MBWrapperBase<CandidateImpl, object>, IComparable
+  {
+    public virtual MockCandidateType MockCandidateType { get; }
+
+    public CandidateImpl() { }
+    public CandidateImpl(object obj) : base(obj) { }
+
+    public int CompareTo(object obj)
     {
-      None,
-      FailUnqualified,
-      FailQualified,
+      var other = (CandidateImpl)obj;
+
+      return MockCandidateType > other.MockCandidateType ?
+        Constants.Comparer.XOutranksY :
+        MockCandidateType < other.MockCandidateType ?
+          Constants.Comparer.YOutranksX :
+          Constants.Comparer.BothEqualRank;
+
     }
-
-    public enum MockCandidateType
-    {
-      None,
-      Unqualified,
-      Qualified,
-      Ideal,
-    }
-
-    public class FinderBaseImpl : FinderBase<FindResultBaseImpl, FindOptionBaseImpl, CandidateImpl, object>
-    {
-    }
-    public class FindResultBaseImpl : FindResultBase<FindResultBaseImpl, CandidateImpl, object>
-    {
-    }
-    public class FindOptionBaseImpl : FindOptionsBase<CandidateImpl>
-    {
-    }
-
-    public interface IMBWrapperComparer : IComparer<CandidateImpl> { }
-
-    public class CandidateImpl : MBWrapperBase<CandidateImpl, object>, IComparable
-    {
-      public virtual MockCandidateType MockCandidateType { get; }
-
-      public CandidateImpl() { }
-      public CandidateImpl(object obj) : base(obj) { }
-
-      public int CompareTo(object obj)
-      {
-        var other = (CandidateImpl)obj;
-
-        return MockCandidateType > other.MockCandidateType ?
-          Constants.Comparer.XOutranksY :
-          MockCandidateType < other.MockCandidateType ?
-            Constants.Comparer.YOutranksX :
-            Constants.Comparer.BothEqualRank;
-
-      }
-    }
-
   }
 }

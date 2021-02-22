@@ -9,7 +9,7 @@ using TournamentsEnhanced;
 
 namespace Test
 {
-  public partial class FinderBaseTest : TestBase
+  public partial class FinderBaseTest : TestBase<FinderBaseImpl>
   {
     private void SetUpManyCandidatesAndFailUnqualified()
     {
