@@ -4,7 +4,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ModVersion>1.5.8.4</ModVersion>
+    <ModVersion>1.5.8.5</ModVersion>
     <CachedBannerlordTargetVersion>e1.5.8</CachedBannerlordTargetVersion>
   </PropertyGroup>
 
@@ -162,6 +162,8 @@
 
   <Target Name="Remove Unneeded Reference DLLs" AfterTargets="AfterBuild">
     <ItemGroup>
+      <UnwantedFiles Include="$(OutDir)/SandBox.dll" />
+      <UnwantedFiles Include="$(OutDir)/SandBox.*.dll" />
       <UnwantedFiles Include="$(OutDir)/TaleWorlds.*.dll" />
       <UnwantedFiles Include="$(OutDir)/Newtonsoft.Json.dll" />
       <UnwantedFiles Include="$(OutDir)/System.Management.dll" />
