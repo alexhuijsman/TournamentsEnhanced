@@ -104,5 +104,9 @@ namespace TournamentsEnhanced
     [SettingProperty("Enable Create/Resolve Tournaments", "Adds town menu options for creating and resolving tournaments")]
     [SettingPropertyGroup("Debug")]
     public bool DebugCreateAndResolveTournaments { get; set; } = false;
+
+    [SettingProperty("Enable Team Tournaments", "Adds an option for joining and participating in the tournaments as a team.")]
+    [SettingPropertyGroup("Tournaments")]
+    public bool EnableTeamTournaments { get; set; } = true;
   }
 }

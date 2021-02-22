@@ -191,7 +191,25 @@ namespace TournamentsEnhanced
       return new ValueTuple<SkillObject, int>(item, item2);
     }
 
+    public static void SetDifficulty()
+    {
+      if (TournamentsEnhancedSettings.Instance.VeryHardTournaments && difficultyFlag == -1)
+      {
+        difficultyFlag = (short)CampaignOptions.CombatAIDifficulty;
+        CampaignOptions.CombatAIDifficulty = CampaignOptions.Difficulty.Realistic;
+      }
+    }
+
+    public static void UnsetDifficulty()
+    {
+      if (TournamentsEnhancedSettings.Instance.VeryHardTournaments && difficultyFlag > -1)
+      {
+        CampaignOptions.CombatAIDifficulty = (CampaignOptions.Difficulty)difficultyFlag;
+        difficultyFlag = -1;
+      }
+    }
+
     private const int RELATIONSHIP_MODIFIER = 3;
-    public static CampaignOptions.Difficulty difficulty;
+    public static short difficultyFlag = -1;
   }
 }
