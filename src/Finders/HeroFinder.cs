@@ -48,21 +48,21 @@ namespace TournamentsEnhanced.Finder
 
     public virtual FindHeroResult FindHostsFromWeddedHeroes(MBHero firstWeddedHero, MBHero secondWeddedHero)
     {
-      var maleKingdomLeaderResult = FindKingdomLeaders(firstWeddedHero, secondWeddedHero);
-      var maleClanLeaderResult = FindClanLeaders(firstWeddedHero, secondWeddedHero);
+      var kingdomLeaderResult = FindKingdomLeaders(firstWeddedHero, secondWeddedHero);
+      var clanLeaderResult = FindClanLeaders(firstWeddedHero, secondWeddedHero);
 
       var primaryHostHero =
-          maleKingdomLeaderResult.Succeeded ?
-            maleKingdomLeaderResult.Nominee :
-            maleClanLeaderResult.Succeeded ?
-              maleClanLeaderResult.Nominee :
+          kingdomLeaderResult.Succeeded ?
+            kingdomLeaderResult.Nominee :
+            clanLeaderResult.Succeeded ?
+              clanLeaderResult.Nominee :
               null;
 
-      var firstIsKingdomLeader = maleKingdomLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero);
-      var secondIsKingdomLeader = maleKingdomLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero);
+      var firstIsKingdomLeader = kingdomLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero);
+      var secondIsKingdomLeader = kingdomLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero);
 
-      var firstIsClanLeader = maleClanLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero);
-      var secondIsClanLeader = maleClanLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero);
+      var firstIsClanLeader = clanLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero);
+      var secondIsClanLeader = clanLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero);
 
       var firstIsPrimaryHost = primaryHostHero == firstWeddedHero;
       var secondIsPrimaryHost = primaryHostHero == secondWeddedHero;
@@ -76,7 +76,7 @@ namespace TournamentsEnhanced.Finder
             firstWeddedHero :
             null;
 
-      var didFindHost = maleKingdomLeaderResult.Succeeded || maleClanLeaderResult.Succeeded;
+      var didFindHost = kingdomLeaderResult.Succeeded || clanLeaderResult.Succeeded;
 
       return didFindHost ? FindHeroResult.Success(primaryHostHero, secondaryHostHero) : FindHeroResult.Failure;
     }
