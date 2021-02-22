@@ -20,12 +20,12 @@ namespace TournamentsEnhanced
         {
           if (tournamentTeam3.Participants.IsEmpty() && !teamselected)
           {
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam = tournamentTeam3;
+            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).PlayerTeam = tournamentTeam3;
             teamselected = true;
           }
           if (TournamentsEnhancedSettings.Instance.BringCompanions &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam != null &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor == tournamentTeam3.TeamColor &&
+            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).PlayerTeam != null &&
+            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).PlayerTeam.TeamColor == tournamentTeam3.TeamColor &&
             tournamentTeam3.IsParticipantRequired() &&
             participant.Character.IsHero &&
             (participant.Character.IsPlayerCharacter || participant.Character.HeroObject.IsPlayerCompanion ||
@@ -35,8 +35,8 @@ namespace TournamentsEnhanced
             return false;
           }
           else if (TournamentsEnhancedSettings.Instance.BringCompanions &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam != null &&
-            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor == tournamentTeam3.TeamColor &&
+            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).PlayerTeam != null &&
+            TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).PlayerTeam.TeamColor == tournamentTeam3.TeamColor &&
             !tournamentTeam3.IsParticipantRequired() &&
             participant.Character.IsHero &&
             participant.Character.IsPlayerCharacter)
@@ -47,7 +47,7 @@ namespace TournamentsEnhanced
       }
       foreach (TournamentTeam tournamentTeam in __instance.Teams)
       {
-        if (firstTime && TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement) != null && tournamentTeam.TeamColor == TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).playerTeam.TeamColor)
+        if (firstTime && TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement) != null && tournamentTeam.TeamColor == TournamentKB.GetTournamentKB(Hero.MainHero.CurrentSettlement).PlayerTeam.TeamColor)
         {
           continue;
         }

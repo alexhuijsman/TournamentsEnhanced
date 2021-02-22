@@ -10,10 +10,7 @@ namespace TournamentsEnhanced
   {
     static void Postfix()
     {
-      if (TournamentsEnhancedSettings.Instance.VeryHardTournaments)
-      {
-        CampaignOptions.CombatAIDifficulty = Utilities.difficulty;
-      }
+      Utilities.UnsetDifficulty();
     }
   }
 }
