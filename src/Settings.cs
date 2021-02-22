@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 using ModLib.Definitions;
 using ModLib.Definitions.Attributes;
@@ -7,8 +8,7 @@ namespace TournamentsEnhanced
 {
   public class Settings : SettingsBase
   {
-    public static Settings Instance { get; } = (Settings)SettingsDatabase.GetSettings<Settings>();
-
+    public static Settings Instance { get; } = (Settings)SettingsDatabase.GetSettings<Settings>() ?? new Settings();
     public override string ModName => Constants.Module.Name;
     public override string ModuleFolderName => Constants.Module.ProductName;
 
@@ -18,7 +18,7 @@ namespace TournamentsEnhanced
     //Notifications
     [SettingProperty("Prosperity Tournament Notification", "Tell me when prosperity tournaments are announced")]
     [SettingPropertyGroup("Notifications")]
-    public bool ProsperityNotification { get; set; } = true;
+    public virtual bool ProsperityNotification { get; set; } = true;
     [SettingProperty("Peace Tournament Notification", "Tell me when peace tournaments are announced")]
     [SettingPropertyGroup("Notifications")]
     public virtual bool PeaceNotification { get; set; } = true;

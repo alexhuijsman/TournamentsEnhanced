@@ -11,7 +11,7 @@ namespace TournamentsEnhanced.Finder
   {
     public static FactionFinder Instance { get; } = new FactionFinder();
 
-    private FactionFinder() { }
+    protected FactionFinder() { }
     public FindFactionResult FindFactionThatMeetBasicHostRequirements(MBFaction faction)
     {
       var candidiates = new List<MBFaction>();
