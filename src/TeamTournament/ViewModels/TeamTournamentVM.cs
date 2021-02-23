@@ -178,7 +178,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
         if (this._isPlayerParticipating)
         {
-          GameTexts.SetVariable("TOURNAMENT_ELIMINATED_ROUND", this.Tournament.PlayerTeamLostAtRound + 1);
+          GameTexts.SetVariable("TOURNAMENT_ELIMINATED_ROUND", this.Tournament.PlayerTeamLostAtRound);
           this.WinnerIntro = GameTexts.FindText("str_tournament_result_eliminated", null).ToString();
         }
         else
@@ -199,9 +199,9 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       if (this.IsCurrentMatchActive && agent.IsHuman)
       {
-        var member = GetMemberForSeed(agent.Origin.UniqueSeed);
-        if (member != null)
-          member.IsDead = true;
+        var team = _currentMatch.Teams.First(x => x.Team.Members.Any(m => m.Descriptor.CompareTo(agent.Origin.UniqueSeed) == 0));
+        if (!team.Team.IsAlive)
+          team.GetTeamLeader().IsDead = true;
       }
     }
 
