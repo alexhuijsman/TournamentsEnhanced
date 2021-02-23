@@ -15,6 +15,7 @@ namespace TournamentsEnhanced.TeamTournament
     public Banner TeamBanner { get; set; }
     public uint TeamColor { get; set; }
     public bool IsPlayerTeam => this.Members.Any(x => x.IsPlayer);
+    public bool IsAlive { get; internal set; }
 
     public TeamTournamentTeam(IEnumerable<TeamTournamentMember> members, Banner teamBanner = null, uint teamColor = 0, TeamTournamentMember leader = null)
     {

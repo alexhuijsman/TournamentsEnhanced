@@ -214,8 +214,6 @@ namespace TournamentsEnhanced.TeamTournament
       }
     }
 
-    private bool IsTeamDead(TeamTournamentTeam team) => !this._aliveMembers.Any(x => x.Team == team);
-
     private void AddScoreToRemainingTeams() => this._aliveTeams.ForEach(x => x.AddScore(1));
 
     private void AddScoreToKillerTeam(int killerUniqueSeed)
@@ -235,12 +233,13 @@ namespace TournamentsEnhanced.TeamTournament
         var member = this._match.MatchMembers.FirstOrDefault(x => x.IsCharWithDescriptor(affectedAgent.Origin.UniqueSeed));
 
         this._aliveMembers.Remove(member);
+        member.Team.IsAlive = this._aliveMembers.Any(x => x.Team == member.Team);
 
         // apply score only if not on same team
         if (affectedAgent.Team != affectorAgent.Team)
           this.AddScoreToKillerTeam(affectorAgent.Origin.UniqueSeed);
 
-        if (this.IsTeamDead(member.Team))
+        if (!member.Team.IsAlive)
         {
           this._aliveTeams.Remove(member.Team);
 
@@ -372,8 +371,9 @@ namespace TournamentsEnhanced.TeamTournament
         {
           simAttacks.Remove(nextFighter);
           this._aliveMembers.Remove(nextFighter);
+          nextFighter.Team.IsAlive = this._aliveMembers.Any(x => x.Team == nextFighter.Team);
 
-          if (this.IsTeamDead(nextFighter.Team))
+          if (!nextFighter.Team.IsAlive)
           {
             this._aliveTeams.Remove(nextFighter.Team);
             this.AddScoreToRemainingTeams();
