@@ -175,9 +175,9 @@ namespace TournamentsEnhanced
       if (TournamentsEnhancedSettings.Instance.EnableTeamTournaments)
       {
         var teamTournamentMenu = new TeamTournamentTeamSelectionMenu();
-        campaignGameStarter.AddGameMenuOption("town_arena", "participate_as_team", "Join the tournament as a team",
+        campaignGameStarter.AddGameMenuOption("menu_town_tournament_join", "participate_as_team", "Join as a team",
           new GameMenuOption.OnConditionDelegate(teamTournamentMenu.GameMenuSelectRosterCondition),
-          new GameMenuOption.OnConsequenceDelegate(teamTournamentMenu.GameMenuSelectRosterConsequence), false, 7, false);
+          new GameMenuOption.OnConsequenceDelegate(teamTournamentMenu.GameMenuSelectRosterConsequence), false, 1, false);
       }
     }
 
