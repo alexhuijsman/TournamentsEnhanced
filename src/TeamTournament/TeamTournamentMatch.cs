@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.Core;
 using static TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames.TournamentMatch;
@@ -7,18 +8,18 @@ namespace TournamentsEnhanced.TeamTournament
 {
   public class TeamTournamentMatch
   {
+    private enum TeamIndex
+    {
+      First = 0,
+      Second = 1,
+      Third = 2,
+      Fourth = 3,
+    }
+
     public IEnumerable<TeamTournamentTeam> Teams { get => _teams; }
     public MatchState State { get; private set; }
     public bool IsReady => this.State == MatchState.Ready;
     public bool IsFinished => this.State == MatchState.Finished;
-
-    public static int[] TeamColors = new int[] // TODO: maybe make a setting out of this
-    {
-      119,
-      118,
-      120,
-      121
-    };
 
     public IEnumerable<TeamTournamentTeam> Winners => this.GetWinners();
 
@@ -33,10 +34,35 @@ namespace TournamentsEnhanced.TeamTournament
     {
       if (!team.IsPlayerTeam)
       {
-        team.TeamColor = BannerManager.GetColor(TeamColors[_teams.Count]);
+        team.TeamColor = BannerManager.GetColor(GetColorIndex((TeamIndex)_teams.Count));
         team.TeamBanner = Banner.CreateOneColoredEmptyBanner(_teams.Count);
       }
+
       _teams.Add(team);
+    }
+
+    private int GetColorIndex(TeamIndex teamIndex)
+    {
+      int colorIndex;
+      switch (teamIndex)
+      {
+        case TeamIndex.First:
+          colorIndex = TournamentsEnhancedSettings.Instance.Team1Color;
+          break;
+        case TeamIndex.Second:
+          colorIndex = TournamentsEnhancedSettings.Instance.Team2Color;
+          break;
+        case TeamIndex.Third:
+          colorIndex = TournamentsEnhancedSettings.Instance.Team3Color;
+          break;
+        case TeamIndex.Fourth:
+          colorIndex = TournamentsEnhancedSettings.Instance.Team4Color;
+          break;
+        default:
+          throw new ArgumentOutOfRangeException();
+      }
+
+      return colorIndex;
     }
 
     public void End()

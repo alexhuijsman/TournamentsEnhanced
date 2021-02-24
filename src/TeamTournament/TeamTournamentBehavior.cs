@@ -72,11 +72,8 @@ namespace TournamentsEnhanced.TeamTournament
 
       // now check out if we can form teams locally from other heroes
       var heroesInSettlement = this.Settlement
-        .GetHeroesInSettlement()
-        .Where(x => !CurrentTKB.SelectedRoster.Contains(x)
-            && !x.HeroObject.Noncombatant
-            && x.Age >= Campaign.Current.Models.AgeModel.HeroComesOfAge
-            && (x.HeroObject.IsWanderer || x.HeroObject.IsNoble));
+        .GetCombatantHeroesInSettlement()
+        .Where(x => !CurrentTKB.SelectedRoster.Contains(x));
 
       var createdTeams = new List<TeamTournamentTeam>();
       var addedParticipants = new List<CharacterObject>();
