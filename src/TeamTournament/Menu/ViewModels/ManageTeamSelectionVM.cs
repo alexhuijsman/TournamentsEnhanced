@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -51,10 +51,9 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
       var availableForSelection = TroopRoster.CreateDummyTroopRoster();
 
       // we add everyone is settlement that is relevant to the selection list
-      var selectableChars = Settlement.CurrentSettlement.LocationComplex
-        .GetListOfCharacters()
-        .Where(x => x != null && x.Character.IsHero && CanBeSelectedByHero(x.Character))
-        .Select(sel => sel.Character);
+      var selectableChars = Settlement.CurrentSettlement
+        .GetCombatantHeroesInSettlement()
+        .Where(x => CanBeSelectedByHero(x));
 
       var flattenTroopRoster = new FlattenedTroopRoster(0);
 
