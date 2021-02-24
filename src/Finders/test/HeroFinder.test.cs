@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
-using TournamentsEnhanced;
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using static TournamentsEnhanced.Constants.Settings;

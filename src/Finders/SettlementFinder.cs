@@ -15,7 +15,7 @@ namespace TournamentsEnhanced.Finder
     protected HeroFinder HeroFinder { get; set; } = HeroFinder.Instance;
     protected MBSettlementFacade MBSettlementFacade { get; set; } = MBSettlementFacade.Instance;
 
-    private SettlementFinder() { }
+    protected SettlementFinder() { }
 
     public FindHostSettlementResult FindForProsperityTournament()
     {
