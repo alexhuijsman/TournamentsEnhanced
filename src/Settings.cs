@@ -107,9 +107,6 @@ namespace TournamentsEnhanced
     [SettingProperty("Bring Companions", "I want my companions to join me in tournaments (on my team when possible)")]
     [SettingPropertyGroup("Tournaments")]
     public bool BringCompanions { get; set; } = true;
-    [SettingProperty("Enable Create/Resolve Tournaments", "Adds town menu options for creating and resolving tournaments")]
-    [SettingPropertyGroup("Debug")]
-    public bool DebugCreateAndResolveTournaments { get; set; } = false;
 
     [SettingProperty("Enable Team Tournaments", "Adds an option for joining and participating in the tournaments as a team.")]
     [SettingPropertyGroup("Tournaments")]
@@ -127,5 +124,13 @@ namespace TournamentsEnhanced
     [SettingProperty("Team 4 Color Index", 0, 157, "Set Team 4's banner color by index value. Check https://bannerlord.party/banner-colors/ for the list of available colors.")]
     [SettingPropertyGroup("Team Tournament Game Mode")]
     public int TeamFourColor { get; set; } = 84;
+
+    [SettingProperty("Enable Create/Resolve Tournaments", "Adds town menu options for creating and resolving tournaments.")]
+    [SettingPropertyGroup("Debug")]
+    public bool DebugCreateAndResolveTournaments { get; set; } = false;
+
+    [SettingProperty("Select From All Available Prizes", "When selecting a tournament prize, show all available prizes.")]
+    [SettingPropertyGroup("Debug")]
+    public bool DebugShowAllAvailablePrizes { get; set; } = false;
   }
 }
