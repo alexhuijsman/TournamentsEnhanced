@@ -29,6 +29,7 @@ IMPROVE
 -------
 Revamp MCM integration - https://github.com/Aragas/Bannerlord.MBOptionScreen
   -Remove lib folder, use Bannerlord.MCM package instead
+  -Remove need for restarting game when modifying settings
   -Move Settings into ModState
   -Global and PerCharacter options
     -Is Per-Save better than per-character?
