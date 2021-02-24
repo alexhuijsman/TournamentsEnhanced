@@ -22,6 +22,15 @@ namespace TournamentsEnhanced.TeamTournament
         .Select(sel => sel.Character);
     }
 
+    public static IEnumerable<CharacterObject> GetCombatantHeroesInSettlement(this Settlement settlement)
+    {
+      return settlement.GetHeroesInSettlement()
+        .Where(x =>
+            //!x.HeroObject.Noncombatant &&   // For some reason MainHero siblings appear not to have that set, TW bug?
+            x.Age >= Campaign.Current.Models.AgeModel.HeroComesOfAge
+            && (x.HeroObject.IsWanderer || x.HeroObject.IsNoble));
+    }
+
     public static IEnumerable<Hero> AllLivingRelatedHeroes(this Hero inHero)
     {
       if (inHero.Father != null && !inHero.Father.IsDead)
@@ -33,21 +42,14 @@ namespace TournamentsEnhanced.TeamTournament
       if (inHero.Spouse != null && !inHero.Spouse.IsDead)
         yield return inHero.Spouse;
 
-      foreach (Hero hero in inHero.Children)
-      {
-        if (!hero.IsDead)
-          yield return hero;
-      }
-      foreach (Hero hero2 in inHero.Siblings)
-      {
-        if (!hero2.IsDead)
-          yield return hero2;
-      }
-      foreach (Hero hero3 in inHero.ExSpouses)
-      {
-        if (!hero3.IsDead)
-          yield return hero3;
-      }
+      foreach (Hero hero in inHero.Children.Where(x => !x.IsDead))
+        yield return hero;
+
+      foreach (Hero hero2 in inHero.Siblings.Where(x => !x.IsDead))
+        yield return hero2;
+
+      foreach (Hero hero3 in inHero.ExSpouses.Where(x => !x.IsDead))
+        yield return hero3;
     }
   }
 }
