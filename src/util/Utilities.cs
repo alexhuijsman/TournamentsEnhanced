@@ -166,9 +166,13 @@ namespace TournamentsEnhanced
       }
 
       var weaponPrizes = qualifyingItems.Where(item => item.IsCraftedWeapon).ToList().Shuffle();
-      var selectedPrizes = new ItemObject[5];
+      var selectedPrizes 
+        = new ItemObject[
+          TournamentsEnhancedSettings.Instance.DebugShowAllAvailablePrizes ? 
+            qualifyingItems.Count : 
+            5];
 
-      for (int i = 0; i < 5; i++)
+      for (int i = 0; i < selectedPrizes.Length; i++)
       {
         if (i < weaponPrizes.Count &&
             i + 1 <= TournamentsEnhancedSettings.Instance.MinimumNumberOfWeaponsInPrizePool)

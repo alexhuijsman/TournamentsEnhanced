@@ -44,7 +44,7 @@ namespace TournamentsEnhanced
     {
       List<InquiryElement> list = new List<InquiryElement>();
       var prizes = TournamentKB.Current.AvailableTournamentPrizes;
-      for (int i = 0; i < 5; i++)
+      for (int i = 0; i < prizes.Length; i++)
       {
         ItemModifier itemModifier = null;
         ItemObject prize = prizes[i];
