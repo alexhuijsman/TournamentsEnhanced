@@ -52,6 +52,7 @@ Ask player to authorize any tournaments happening at player's expense
 Charge 2000 upfront cost plus option-configurable scale of cost for prize, and add "host can afford tournament prize" logic
 Prize pool is filtered by what the host can afford. Configuration of % of total $ ClanLeaders are willing to spend on tournament prizes. Also configuration of scale of prize cost to host in options.
 Simplify logic for finding wedding tournament host settlement
+Add MCM options to change practice tournament rewards and tiers
 
 REACH
 -----
