@@ -109,5 +109,18 @@ namespace TournamentsEnhanced
     [SettingProperty("Enable Team Tournaments", "Adds an option for joining and participating in the tournaments as a team.")]
     [SettingPropertyGroup("Tournaments")]
     public bool EnableTeamTournaments { get; set; } = true;
+
+    [SettingProperty("Team 1 Color Index", 0, 157, "Set Team 1's banner color by index value. (Currently cannot show color in menu screen.)")]
+    [SettingPropertyGroup("Team Tournament Game Mode")]
+    public int Team1Color { get; set; } = 118;
+    [SettingProperty("Team 2 Color Index", 0, 157, "Set Team 2's banner color by index value. (Currently cannot show color in menu screen.)")]
+    [SettingPropertyGroup("Team Tournament Game Mode")]
+    public int Team2Color { get; set; } = 119;
+    [SettingProperty("Team 3 Color Index", 0, 157, "Set Team 3's banner color by index value. (Currently cannot show color in menu screen.)")]
+    [SettingPropertyGroup("Team Tournament Game Mode")]
+    public int Team3Color { get; set; } = 120;
+    [SettingProperty("Team 4 Color Index", 0, 157, "Set Team 4's banner color by index value. (Currently cannot show color in menu screen.)")]
+    [SettingPropertyGroup("Team Tournament Game Mode")]
+    public int Team4Color { get; set; } = 121;
   }
 }
