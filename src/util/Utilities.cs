@@ -12,6 +12,9 @@ namespace TournamentsEnhanced
 {
   public class Utilities
   {
+    private const int Tier3 = 3;
+    private const int Tier4 = 4;
+    private const int Tier5 = 5;
 
     public static bool IsTierable(ItemObject item)
     {
@@ -31,17 +34,17 @@ namespace TournamentsEnhanced
 
     public static int RewardTier()
     {
-      if (Hero.MainHero.Clan.Renown <= 300)
+      if (Hero.MainHero.Clan.Renown < TournamentsEnhancedSettings.Instance.MinimumRenownForTier4Prizes)
       {
-        return 3;
+        return Tier3;
       }
-      else if (Hero.MainHero.Clan.Renown <= 600)
+      else if (Hero.MainHero.Clan.Renown < TournamentsEnhancedSettings.Instance.MinimumRenownForTier5Prizes)
       {
-        return 4;
+        return Tier4;
       }
       else
       {
-        return 5;
+        return Tier5;
       }
     }
 
