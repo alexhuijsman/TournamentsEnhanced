@@ -60,6 +60,12 @@ namespace TournamentsEnhanced
     [SettingProperty("Give Prize to Player if Subordinate Wins", "If enabled, whenever your subordinates win tournaments they will give the prize to you.")]
     [SettingPropertyGroup("Tournament Prizes")]
     public bool SubordinatesGivePrizeToPlayer { get; set; } = true;
+    [SettingProperty("Minimum Renown for Tier 5 Prizes", 0, 2000, "How much renown you need to earn tier 5 prizes.")]
+    [SettingPropertyGroup("Tournament Prizes")]
+    public int MinimumRenownForTier5Prizes { get; set; } = 600;
+    [SettingProperty("Minimum Renown for Tier 4 Prizes", 0, 2000, "How much renown you need to earn tier 4 prizes.")]
+    [SettingPropertyGroup("Tournament Prizes")]
+    public int MinimumRenownForTier4Prizes { get; set; } = 300;
 
     //Amount of initial tournaments on the map
     [SettingProperty("Tournament Cost", -10000, 10000, "Cost of tournaments")]
