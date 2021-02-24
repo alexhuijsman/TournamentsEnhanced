@@ -115,17 +115,17 @@ namespace TournamentsEnhanced
     [SettingPropertyGroup("Tournaments")]
     public bool EnableTeamTournaments { get; set; } = true;
 
-    [SettingProperty("Team 1 Color Index", 0, 157, "Set Team 1's banner color by index value. (Currently cannot show color in menu screen.)")]
+    [SettingProperty("Team 1 Color Index", 0, 157, "Set Team 1's banner color by index value. (Currently cannot show color in menu screen. Check banner_icons.xml for the list of available colors.)")]
     [SettingPropertyGroup("Team Tournament Game Mode")]
-    public int Team1Color { get; set; } = 118;
-    [SettingProperty("Team 2 Color Index", 0, 157, "Set Team 2's banner color by index value. (Currently cannot show color in menu screen.)")]
+    public int TeamOneColor { get; set; } = 83;
+    [SettingProperty("Team 2 Color Index", 0, 157, "Set Team 2's banner color by index value. (Currently cannot show color in menu screen. Check banner_icons.xml for the list of available colors.)")]
     [SettingPropertyGroup("Team Tournament Game Mode")]
-    public int Team2Color { get; set; } = 119;
-    [SettingProperty("Team 3 Color Index", 0, 157, "Set Team 3's banner color by index value. (Currently cannot show color in menu screen.)")]
+    public int TeamTwoColor { get; set; } = 119;
+    [SettingProperty("Team 3 Color Index", 0, 157, "Set Team 3's banner color by index value. (Currently cannot show color in menu screen. Check banner_icons.xml for the list of available colors.)")]
     [SettingPropertyGroup("Team Tournament Game Mode")]
-    public int Team3Color { get; set; } = 120;
-    [SettingProperty("Team 4 Color Index", 0, 157, "Set Team 4's banner color by index value. (Currently cannot show color in menu screen.)")]
+    public int TeamThreeColor { get; set; } = 88;
+    [SettingProperty("Team 4 Color Index", 0, 157, "Set Team 4's banner color by index value. (Currently cannot show color in menu screen. Check banner_icons.xml for the list of available colors.)")]
     [SettingPropertyGroup("Team Tournament Game Mode")]
-    public int Team4Color { get; set; } = 121;
+    public int TeamFourColor { get; set; } = 84;
   }
 }
