@@ -44,7 +44,7 @@
     {
       "id": "tag",
       "description": "tag name",
-      "default": "1.5.7.",
+      "default": "1.5.",
       "type": "promptString"
     },
   ]
