@@ -38,6 +38,7 @@ Revamp MCM integration - https://github.com/Aragas/Bannerlord.MBOptionScreen
   -add checkboxes for bonus/cost toggle for resource effects
 Don't allow Highborn tournaments for faction led by player, or allow player to host one.
 Review Tournaments XPanded
+Add Birthday Tournament for Empire Leaders
 S Don't hide Select Prize button after selecting a prize and ensure reselecting prize keeps same items
 Make prizes come from the town (and pay for the prize).
 When hosting a tournament, can choose the prize from own items or purchase from town
