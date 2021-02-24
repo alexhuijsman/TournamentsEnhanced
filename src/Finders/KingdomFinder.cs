@@ -13,7 +13,7 @@ namespace TournamentsEnhanced.Finder
   {
     public static KingdomFinder Instance { get; } = new KingdomFinder();
 
-    private KingdomFinder() { }
+    protected KingdomFinder() { }
     public FindKingdomResult FindKingdomThatMeetBasicHostRequirements(MBKingdom kingdom)
     {
       var candidiates = new List<MBKingdom>();
