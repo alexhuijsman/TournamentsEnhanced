@@ -47,16 +47,16 @@ namespace TournamentsEnhanced.TeamTournament
       switch (teamIndex)
       {
         case TeamIndex.First:
-          colorIndex = TournamentsEnhancedSettings.Instance.Team1Color;
+          colorIndex = TournamentsEnhancedSettings.Instance.TeamOneColor;
           break;
         case TeamIndex.Second:
-          colorIndex = TournamentsEnhancedSettings.Instance.Team2Color;
+          colorIndex = TournamentsEnhancedSettings.Instance.TeamTwoColor;
           break;
         case TeamIndex.Third:
-          colorIndex = TournamentsEnhancedSettings.Instance.Team3Color;
+          colorIndex = TournamentsEnhancedSettings.Instance.TeamThreeColor;
           break;
         case TeamIndex.Fourth:
-          colorIndex = TournamentsEnhancedSettings.Instance.Team4Color;
+          colorIndex = TournamentsEnhancedSettings.Instance.TeamFourColor;
           break;
         default:
           throw new ArgumentOutOfRangeException();
