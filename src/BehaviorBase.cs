@@ -43,7 +43,7 @@ namespace TournamentsEnhanced
     public void PrizeSelectConsequence(MenuCallbackArgs args)
     {
       List<InquiryElement> list = new List<InquiryElement>();
-      var prizes = TournamentKB.Current.AvailableTournamentPrizes;
+      var prizes = TournamentKB.Current?.AvailableTournamentPrizes ?? Utilities.GetTournamentPrizes();
       for (int i = 0; i < prizes.Length; i++)
       {
         ItemModifier itemModifier = null;
