@@ -1,3 +1,4 @@
+using System;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -5,8 +6,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class InitiatingHeroRankComparer : ExistingTournamentComparer
   {
-    public new static InitiatingHeroRankComparer Instance { get; } = null;
-    public new static InitiatingHeroRankComparer InstanceIncludingExisting { get; } = null;
+    public new static InitiatingHeroRankComparer Instance { get => throw new InvalidOperationException(); }
+    public new static InitiatingHeroRankComparer InstanceIncludingExisting { get => throw new InvalidOperationException(); }
 
     public InitiatingHeroRankComparer(MBHero initiatingHero) : base(true, initiatingHero) { }
 

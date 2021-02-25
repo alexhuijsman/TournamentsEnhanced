@@ -1,3 +1,4 @@
+using System;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
@@ -5,8 +6,8 @@ namespace TournamentsEnhanced.Finder.Comparers.Settlement
 {
   public class InitiatingHeroOwnershipComparer : ExistingTournamentComparer
   {
-    public new static InitiatingHeroOwnershipComparer Instance { get; } = null;
-    public new static InitiatingHeroOwnershipComparer InstanceIncludingExisting { get; } = null;
+    public new static InitiatingHeroOwnershipComparer Instance { get => throw new InvalidOperationException(); }
+    public new static InitiatingHeroOwnershipComparer InstanceIncludingExisting { get => throw new InvalidOperationException(); }
 
     public InitiatingHeroOwnershipComparer(MBHero initiatingHero) : base(true, initiatingHero) { }
 

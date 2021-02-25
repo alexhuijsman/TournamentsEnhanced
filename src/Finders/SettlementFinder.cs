@@ -216,7 +216,7 @@ namespace TournamentsEnhanced.Finder
         Candidates = hero.Clan.Settlements,
         Comparers = new IComparer<MBSettlement>[]
         {
-          InitiatingHeroOwnershipComparer.Instance,
+          new InitiatingHeroOwnershipComparer(hero),
         }
       };
 
