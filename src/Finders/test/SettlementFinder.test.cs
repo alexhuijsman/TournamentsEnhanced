@@ -24,7 +24,6 @@ namespace Test
     {
       base.SetUp();
 
-
       _mockFaction = MockRepository.Create<IMBFaction>();
 
       _mockClan = MockRepository.Create<MBClan>();
