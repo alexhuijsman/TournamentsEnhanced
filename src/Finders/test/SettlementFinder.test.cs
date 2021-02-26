@@ -11,6 +11,7 @@ namespace Test
   public class SettlementFinderTest : TestBase<SettlementFinderImpl>
   {
     protected Mock<IMBFaction> _mockFaction;
+    protected Mock<IMBFaction> _mockOtherFaction;
     protected Mock<MBClan> _mockClan;
     protected Mock<MBClan> _mockOtherClan;
     protected Mock<MBTown> _mockTown;
@@ -27,6 +28,14 @@ namespace Test
       base.SetUp();
 
       _mockFaction = MockRepository.Create<IMBFaction>();
+      _mockFaction.SetupGet(f => f.IsKingdomFaction).Returns(true);
+      _mockFaction.SetupGet(f => f.IsClan).Returns(false);
+      _mockFaction.SetupGet(c => c.Settlements).Returns(_settlements);
+
+      _mockOtherFaction = MockRepository.Create<IMBFaction>();
+      _mockOtherFaction.SetupGet(f => f.IsKingdomFaction).Returns(true);
+      _mockOtherFaction.SetupGet(f => f.IsClan).Returns(false);
+      _mockOtherFaction.SetupGet(c => c.Settlements).Returns(_otherSettlements);
 
       _mockClan = MockRepository.Create<MBClan>();
       _mockClan.SetupGet(c => c.Settlements).Returns(_settlements);
@@ -64,6 +73,7 @@ namespace Test
       _mockHero.SetupGet(h => h.Gold).Returns(Default.TournamentCost);
       _mockHero.SetupGet(h => h.IsFactionLeader).Returns(false);
       _mockHero.SetupGet(h => h.Clan).Returns(_mockClan.Object);
+      _mockHero.SetupGet(h => h.MapFaction).Returns(_mockFaction.Object);
 
       _mockOtherHero = MockRepository.Create<MBHero>();
       _mockOtherHero.SetupGet(h => h.IsNull).Returns(false);
@@ -71,9 +81,10 @@ namespace Test
       _mockOtherHero.SetupGet(h => h.Gold).Returns(Default.TournamentCost);
       _mockOtherHero.SetupGet(h => h.IsFactionLeader).Returns(true);
       _mockOtherHero.SetupGet(h => h.Clan).Returns(_mockOtherClan.Object);
+      _mockOtherHero.SetupGet(h => h.MapFaction).Returns(_mockOtherFaction.Object);
 
       _mockHero.SetupGet(h => h.Spouse).Returns(_mockOtherHero.Object);
-
+      _mockOtherHero.SetupGet(h => h.Spouse).Returns(_mockHero.Object);
     }
 
     [Test]
