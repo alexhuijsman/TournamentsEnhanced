@@ -4,26 +4,7 @@ Hello! This is my todo list for Tournaments Enhanced.
 
 DO NEXT
 -------
-Add remaining unit tests
-S remove concept of InitiatingHero and refactor all uses to call HeroFinder instead
-The duelist perk has a SecondaryBonus, which is to double the renown reward from tournaments (github bug)
-s Wrap enums
-S Move all numeric constants and magic numbers to separate "default values" constants file for easier tweaking of numbers
-Add option to disable prize patch and menu and behaviors for compatibility with other mods (look into dynamically enabling/disabling harmony patch)
-cherry-pick community patches into experimental
-refactor EncounterGameMenuBehavior from BehaviorBase and rename BehaviorBase
-Use Bannerlord's .GetRandomElement() or custom deterministic implementation for prize selection
-Make individual tournament type spawn chances improve the more days its been since the last.
-Add option to show prizes from settlement's base culture
-Add options to select type of prizes (weapon type, armor type, item tier, arrows)
-Exclude Ballista arrows from prizes if arrows are enabled
-Allow Selection of companions & remember previous selections
-  -Add option: Select All, Select None
-  -Add option: Remember companion choices
-Hide tournament icon after player plays it
-M Possible to replace betting logic, allowing bets on others and increased betting limit?
-Possible to watch tournaments & bet without participating?
-Add relation changes with fellow participants: worsen if beat multiple times
+Moved to https://github.com/alexhuijsman/TournamentsEnhanced/issues
 
 IMPROVE
 -------
