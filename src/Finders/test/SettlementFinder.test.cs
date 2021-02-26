@@ -13,6 +13,8 @@ namespace Test
     protected Mock<IMBFaction> _mockFaction;
     protected Mock<MBClan> _mockClan;
     protected Mock<MBClan> _mockOtherClan;
+    protected Mock<MBTown> _mockTown;
+    protected Mock<MBTown> _mockOtherTown;
     protected Mock<MBSettlement> _mockSettlement;
     protected List<MBSettlement> _settlements = new List<MBSettlement>();
     protected List<MBSettlement> _otherSettlements = new List<MBSettlement>();
@@ -32,13 +34,23 @@ namespace Test
       _mockOtherClan = MockRepository.Create<MBClan>();
       _mockOtherClan.SetupGet(c => c.Settlements).Returns(_otherSettlements);
 
+      _mockTown = MockRepository.Create<MBTown>();
+      _mockTown.SetupGet(t => t.FoodStocks).Returns(Default.FoodStocksDecrease);
+
+      _mockOtherTown = MockRepository.Create<MBTown>();
+      _mockOtherTown.SetupGet(t => t.FoodStocks).Returns(Default.FoodStocksDecrease);
+
       _mockSettlement = MockRepository.Create<MBSettlement>();
       _mockSettlement.SetupGet(s => s.IsTown).Returns(true);
       _mockSettlement.SetupGet(s => s.IsNull).Returns(false);
+      _mockSettlement.SetupGet(s => s.Town).Returns(_mockTown.Object);
+      _mockSettlement.SetupGet(s => s.StringId).Returns("settlement");
 
       _mockOtherSettlement = MockRepository.Create<MBSettlement>();
       _mockOtherSettlement.SetupGet(s => s.IsTown).Returns(true);
       _mockOtherSettlement.SetupGet(s => s.IsNull).Returns(false);
+      _mockOtherSettlement.SetupGet(s => s.Town).Returns(_mockOtherTown.Object);
+      _mockOtherSettlement.SetupGet(s => s.StringId).Returns("otherSettlement");
 
       _settlements.Clear();
       _settlements.Add(_mockSettlement.Object);
@@ -79,7 +91,7 @@ namespace Test
 
       result.ShouldSatisfyAllConditions
         (
-            () => result.Nominee.ShouldBe(_mockSettlement.Object),
+            () => result.Nominee.ShouldBe(_mockOtherSettlement.Object),
             () => result.HasRunnerUp.ShouldBe(false)
         );
     }
@@ -101,6 +113,8 @@ namespace Test
     [Test]
     public void FindForInvitationTournament_ShouldReturnExpected()
     {
+      Assert.Fail();
+
       SetUp();
 
       var result = _sut.FindForInvitationTournament();

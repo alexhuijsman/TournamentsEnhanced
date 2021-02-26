@@ -44,16 +44,15 @@ namespace Test
     }
 
     [Test]
-    public void Instance_ShouldBeNull()
+    public void Instance_ShouldThrowException()
     {
-      var x = InitiatingHeroOwnershipComparer.Instance;
-      Assert.IsNull(InitiatingHeroOwnershipComparer.Instance);
+      Should.Throw(() => InitiatingHeroOwnershipComparer.Instance, typeof(InvalidOperationException));
     }
 
     [Test]
-    public void InstanceIncludingExisting_ShouldBeNull()
+    public void InstanceIncludingExisting_ShouldThrowException()
     {
-      Assert.IsNull(InitiatingHeroOwnershipComparer.InstanceIncludingExisting);
+      Should.Throw(() => InitiatingHeroOwnershipComparer.InstanceIncludingExisting, typeof(InvalidOperationException));
     }
 
     [Test]

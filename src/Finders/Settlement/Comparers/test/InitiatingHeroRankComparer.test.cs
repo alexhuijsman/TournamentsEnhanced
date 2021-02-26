@@ -97,16 +97,15 @@ namespace Test
     }
 
     [Test]
-    public void Instance_ShouldBeNull()
+    public void Instance_ShouldThrowException()
     {
-      var x = InitiatingHeroRankComparer.Instance;
-      Assert.IsNull(InitiatingHeroRankComparer.Instance);
+      Should.Throw(() => InitiatingHeroRankComparer.Instance, typeof(InvalidOperationException));
     }
 
     [Test]
-    public void InstanceIncludingExisting_ShouldBeNull()
+    public void InstanceIncludingExisting_ShouldThrowException()
     {
-      Assert.IsNull(InitiatingHeroRankComparer.InstanceIncludingExisting);
+      Should.Throw(() => InitiatingHeroRankComparer.InstanceIncludingExisting, typeof(InvalidOperationException));
     }
 
     [Test]
