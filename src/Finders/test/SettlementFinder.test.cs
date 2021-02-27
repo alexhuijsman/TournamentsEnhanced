@@ -31,7 +31,11 @@ namespace Test
       var mockSettlementInstance = MockRepository.Create<MBSettlement>();
       mockSettlementInstance.SetupGet(s => s.All).Returns(_allSettlements);
 
+      var mockSettlementFacade = MockRepository.Create<MBSettlementFacade>();
+      mockSettlementFacade.SetupGet(f => f.AllNearMainHero).Returns(_allSettlements);
+
       _sut.MBSettlement = mockSettlementInstance.Object;
+      _sut.MBSettlementFacade = mockSettlementFacade.Object;
 
       _mockFaction = MockRepository.Create<IMBFaction>();
       _mockFaction.SetupGet(f => f.IsKingdomFaction).Returns(true);
@@ -145,15 +149,13 @@ namespace Test
     [Test]
     public void FindForInvitationTournament_ShouldReturnExpected()
     {
-      Assert.Fail();
-
       SetUp();
 
       var result = _sut.FindForInvitationTournament();
 
       result.ShouldSatisfyAllConditions
         (
-            () => result.Nominee.ShouldBe(_mockSettlement.Object),
+            () => result.Nominee.ShouldBe(_mockOtherSettlement.Object),
             () => result.HasRunnerUp.ShouldBe(false)
         );
     }
@@ -221,5 +223,6 @@ namespace Test
     public SettlementFinderImpl() { }
 
     public new MBSettlement MBSettlement { set => base.MBSettlement = value; }
+    public new MBSettlementFacade MBSettlementFacade { set => base.MBSettlementFacade = value; }
   }
 }
