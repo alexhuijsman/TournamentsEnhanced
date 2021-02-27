@@ -5,6 +5,8 @@ namespace TournamentsEnhanced.Models.Serializable
   public class TournamentRecord
   {
     protected MBCharacterObject MBCharacterObject { get; set; } = MBCharacterObject.Instance;
+    protected MBSettlement MBSettlement { get; set; } = MBSettlement.Instance;
+
     public TournamentType tournamentType;
     public string hostSettlementStringId;
     public string initiatingHeroStringId;

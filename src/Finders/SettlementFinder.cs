@@ -14,6 +14,7 @@ namespace TournamentsEnhanced.Finder
     public static SettlementFinder Instance { get; } = new SettlementFinder();
     protected HeroFinder HeroFinder { get; set; } = HeroFinder.Instance;
     protected MBSettlementFacade MBSettlementFacade { get; set; } = MBSettlementFacade.Instance;
+    protected MBSettlement MBSettlement { get; set; } = MBSettlement.Instance;
 
     protected SettlementFinder() { }
 
@@ -102,9 +103,6 @@ namespace TournamentsEnhanced.Finder
         return failureResult;
       }
 
-      var primaryHostHero = findHostHeroResult.Nominee;
-      var secondaryHostHero = findHostHeroResult.RunnerUp;
-
       var result = FindForFactionLeaderWedding(findHostHeroResult.Nominee);
 
       if (result.Failed && findHostHeroResult.HasRunnerUp)
@@ -144,17 +142,10 @@ namespace TournamentsEnhanced.Finder
         ProsperityComparer.Instance
       };
 
-      var fallbackComparers = new IComparer<MBSettlement>[]
-      {
-        InitiatingHeroRankComparer.Instance,
-        ProsperityComparer.Instance
-      };
-
       var options = new FindHostSettlementOptions()
       {
         Candidates = settlements,
-        Comparers = comparers,
-        FallbackComparers = fallbackComparers
+        Comparers = comparers
       };
 
       return Find(options);

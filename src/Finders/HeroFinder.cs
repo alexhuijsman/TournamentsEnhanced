@@ -58,11 +58,25 @@ namespace TournamentsEnhanced.Finder
               clanLeaderResult.Nominee :
               null;
 
-      var firstIsKingdomLeader = kingdomLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero);
-      var secondIsKingdomLeader = kingdomLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero);
+      var firstIsKingdomLeader =
+        kingdomLeaderResult.Succeeded ?
+          kingdomLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero) :
+          false;
 
-      var firstIsClanLeader = clanLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero);
-      var secondIsClanLeader = clanLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero);
+      var secondIsKingdomLeader =
+        kingdomLeaderResult.Succeeded ?
+          kingdomLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero) :
+          false;
+
+      var firstIsClanLeader =
+        clanLeaderResult.Succeeded ?
+          clanLeaderResult.AllQualifiedCandidates.Contains(firstWeddedHero) :
+          false;
+
+      var secondIsClanLeader =
+        clanLeaderResult.Succeeded ?
+        clanLeaderResult.AllQualifiedCandidates.Contains(secondWeddedHero) :
+        false;
 
       var firstIsPrimaryHost = primaryHostHero == firstWeddedHero;
       var secondIsPrimaryHost = primaryHostHero == secondWeddedHero;

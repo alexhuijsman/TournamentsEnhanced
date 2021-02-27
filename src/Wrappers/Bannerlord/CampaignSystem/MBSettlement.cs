@@ -11,10 +11,11 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBSettlement : MBObjectBaseWrapper<MBSettlement, Settlement>
   {
-    public static List<MBSettlement> All => Settlement.All.CastList<MBSettlement>();
-    public static MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
+    public static MBSettlement Instance { get; } = new MBSettlement();
+    public virtual List<MBSettlement> All => Settlement.All.CastList<MBSettlement>();
+    public virtual MBSettlement CurrentSettlement => Settlement.CurrentSettlement;
 
-    public static MBSettlement Find(string stringId) => Settlement.Find(stringId);
+    public virtual MBSettlement Find(string stringId) => Settlement.Find(stringId);
 
     public virtual MBTown Town => UnwrappedObject.Town;
     public virtual bool IsTown => UnwrappedObject.IsTown;
@@ -24,7 +25,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
     public virtual MBClan OwnerClan => UnwrappedObject.OwnerClan;
     public virtual float Prosperity { get => UnwrappedObject.Prosperity; set => UnwrappedObject.Prosperity = value; }
 
-    public static List<MBSettlement> FindSettlementsAroundPosition(MBVec2 position, float radius, Func<Settlement, bool> condition = null) => (List<MBSettlement>)Settlement.FindSettlementsAroundPosition(position, radius, condition);
+    public virtual List<MBSettlement> FindSettlementsAroundPosition(MBVec2 position, float radius, Func<Settlement, bool> condition = null) => (List<MBSettlement>)Settlement.FindSettlementsAroundPosition(position, radius, condition);
 
     public static implicit operator Settlement(MBSettlement wrapper) => wrapper.UnwrappedObject;
     public static implicit operator MBSettlement(Settlement obj) => GetWrapper(obj);

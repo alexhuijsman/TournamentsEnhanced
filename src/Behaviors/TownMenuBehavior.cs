@@ -24,6 +24,9 @@ namespace TournamentsEnhanced.Behaviors
     protected ModState ModState { get; set; } = ModState.Instance;
     protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
     protected Settings Settings { get; set; } = Settings.Instance;
+    protected MBSettlement MBSettlement { get; set; } = MBSettlement.Instance;
+    protected MBCampaign MBCampaign { get; set; } = MBCampaign.Instance;
+
 
     public bool OnPrizeSelectMenuCondition(MenuCallbackArgs args)
     {

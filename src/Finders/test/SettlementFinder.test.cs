@@ -19,6 +19,7 @@ namespace Test
     protected Mock<MBSettlement> _mockSettlement;
     protected List<MBSettlement> _settlements = new List<MBSettlement>();
     protected List<MBSettlement> _otherSettlements = new List<MBSettlement>();
+    protected List<MBSettlement> _allSettlements = new List<MBSettlement>();
     protected Mock<MBSettlement> _mockOtherSettlement;
     protected Mock<MBHero> _mockHero;
     protected Mock<MBHero> _mockOtherHero;
@@ -27,10 +28,15 @@ namespace Test
     {
       base.SetUp();
 
+      var mockSettlementInstance = MockRepository.Create<MBSettlement>();
+      mockSettlementInstance.SetupGet(s => s.All).Returns(_allSettlements);
+
+      _sut.MBSettlement = mockSettlementInstance.Object;
+
       _mockFaction = MockRepository.Create<IMBFaction>();
       _mockFaction.SetupGet(f => f.IsKingdomFaction).Returns(true);
       _mockFaction.SetupGet(f => f.IsClan).Returns(false);
-      _mockFaction.SetupGet(c => c.Settlements).Returns(_settlements);
+      _mockFaction.SetupGet(f => f.Settlements).Returns(_settlements);
 
       _mockOtherFaction = MockRepository.Create<IMBFaction>();
       _mockOtherFaction.SetupGet(f => f.IsKingdomFaction).Returns(true);
@@ -50,16 +56,20 @@ namespace Test
       _mockOtherTown.SetupGet(t => t.FoodStocks).Returns(Default.FoodStocksDecrease);
 
       _mockSettlement = MockRepository.Create<MBSettlement>();
-      _mockSettlement.SetupGet(s => s.IsTown).Returns(true);
+      _mockSettlement.SetupGet(s => s.IsTown).Returns(false);
       _mockSettlement.SetupGet(s => s.IsNull).Returns(false);
-      _mockSettlement.SetupGet(s => s.Town).Returns(_mockTown.Object);
+      // _mockSettlement.SetupGet(s => s.Town).Returns(_mockTown.Object);
       _mockSettlement.SetupGet(s => s.StringId).Returns("settlement");
+      _mockSettlement.SetupGet(s => s.MapFaction).Returns(_mockFaction.Object);
+      _mockSettlement.SetupGet(s => s.OwnerClan).Returns(_mockClan.Object);
 
       _mockOtherSettlement = MockRepository.Create<MBSettlement>();
       _mockOtherSettlement.SetupGet(s => s.IsTown).Returns(true);
       _mockOtherSettlement.SetupGet(s => s.IsNull).Returns(false);
       _mockOtherSettlement.SetupGet(s => s.Town).Returns(_mockOtherTown.Object);
       _mockOtherSettlement.SetupGet(s => s.StringId).Returns("otherSettlement");
+      _mockOtherSettlement.SetupGet(s => s.MapFaction).Returns(_mockOtherFaction.Object);
+      _mockOtherSettlement.SetupGet(s => s.OwnerClan).Returns(_mockOtherClan.Object);
 
       _settlements.Clear();
       _settlements.Add(_mockSettlement.Object);
@@ -67,11 +77,15 @@ namespace Test
       _otherSettlements.Clear();
       _otherSettlements.Add(_mockOtherSettlement.Object);
 
+      _allSettlements.Clear();
+      _allSettlements.AddRange(_settlements);
+      _allSettlements.AddRange(_otherSettlements);
+
       _mockHero = MockRepository.Create<MBHero>();
       _mockHero.SetupGet(h => h.IsNull).Returns(false);
       _mockHero.SetupGet(h => h.IsActive).Returns(true);
       _mockHero.SetupGet(h => h.Gold).Returns(Default.TournamentCost);
-      _mockHero.SetupGet(h => h.IsFactionLeader).Returns(false);
+      _mockHero.SetupGet(h => h.IsFactionLeader).Returns(true);
       _mockHero.SetupGet(h => h.Clan).Returns(_mockClan.Object);
       _mockHero.SetupGet(h => h.MapFaction).Returns(_mockFaction.Object);
 
@@ -85,6 +99,13 @@ namespace Test
 
       _mockHero.SetupGet(h => h.Spouse).Returns(_mockOtherHero.Object);
       _mockOtherHero.SetupGet(h => h.Spouse).Returns(_mockHero.Object);
+
+      _mockClan.SetupGet(c => c.Leader).Returns(_mockHero.Object);
+      _mockOtherClan.SetupGet(c => c.Leader).Returns(_mockOtherHero.Object);
+
+      _mockFaction.SetupGet(f => f.Leader).Returns(_mockHero.Object);
+      _mockOtherFaction.SetupGet(f => f.Leader).Returns(_mockOtherHero.Object);
+
     }
 
     [Test]
@@ -116,7 +137,7 @@ namespace Test
 
       result.ShouldSatisfyAllConditions
         (
-            () => result.Nominee.ShouldBe(_mockSettlement.Object),
+            () => result.Nominee.ShouldBe(_mockOtherSettlement.Object),
             () => result.HasRunnerUp.ShouldBe(false)
         );
     }
@@ -138,7 +159,7 @@ namespace Test
     }
 
     [Test]
-    public void FindForPeaceTournament_ShouldReturnExpected()
+    public void FindForPeaceTournament_ShouldFail()
     {
       SetUp();
 
@@ -146,7 +167,20 @@ namespace Test
 
       result.ShouldSatisfyAllConditions
         (
-            () => result.Nominee.ShouldBe(_mockSettlement.Object),
+            () => result.Failed.ShouldBe(true)
+        );
+    }
+
+    [Test]
+    public void FindForPeaceTournament_ShouldReturnExpected()
+    {
+      SetUp();
+
+      var result = _sut.FindForPeaceTournament(_mockOtherFaction.Object);
+
+      result.ShouldSatisfyAllConditions
+        (
+            () => result.Nominee.ShouldBe(_mockOtherSettlement.Object),
             () => result.HasRunnerUp.ShouldBe(false)
         );
     }
@@ -160,7 +194,7 @@ namespace Test
 
       result.ShouldSatisfyAllConditions
         (
-            () => result.Nominee.ShouldBe(_mockSettlement.Object),
+            () => result.Nominee.ShouldBe(_mockOtherSettlement.Object),
             () => result.HasRunnerUp.ShouldBe(false)
         );
     }
@@ -176,7 +210,7 @@ namespace Test
 
       result.ShouldSatisfyAllConditions
         (
-            () => result.Nominee.ShouldBe(_mockSettlement.Object),
+            () => result.Nominee.ShouldBe(_mockOtherSettlement.Object),
             () => result.HasRunnerUp.ShouldBe(false)
         );
     }
@@ -185,5 +219,7 @@ namespace Test
   public class SettlementFinderImpl : SettlementFinder
   {
     public SettlementFinderImpl() { }
+
+    public new MBSettlement MBSettlement { set => base.MBSettlement = value; }
   }
 }

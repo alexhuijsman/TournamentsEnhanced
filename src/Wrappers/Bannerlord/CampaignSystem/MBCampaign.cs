@@ -11,7 +11,11 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 {
   public class MBCampaign : MBWrapperBase<MBCampaign, Campaign>
   {
-    public static bool CanMainHeroJoinTournamentAtCurrentSettlement(out bool shouldBeDisabled, out MBTextObject disabledText)
+    public static MBCampaign Instance { get; } = new MBCampaign();
+
+    protected MBSettlement MBSettlement { get; set; } = MBSettlement.Instance;
+
+    public bool CanMainHeroJoinTournamentAtCurrentSettlement(out bool shouldBeDisabled, out MBTextObject disabledText)
     {
       return Current.Models.SettlementAccessModel
                       .CanMainHeroDoSettlementAction(
