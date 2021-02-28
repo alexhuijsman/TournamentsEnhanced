@@ -8,6 +8,8 @@ namespace TournamentsEnhanced.Wrappers.Core
 {
   public partial class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
   {
+    protected MBHero MBHero { get; set; } = MBHero.Instance;
+
     protected static Settings Settings { get; set; } = Settings.Instance;
 
     //TODO Move logic to ItemFinder

@@ -16,6 +16,7 @@ namespace TournamentsEnhanced.Behaviors
     protected TournamentBuilder TournamentBuilder { get; set; } = TournamentBuilder.Instance;
     protected ModState ModState { get; set; } = ModState.Instance;
     protected Settings Settings { get; set; } = Settings.Instance;
+    protected MBHero MBHero { get; set; } = MBHero.Instance;
 
     public override void RegisterEvents()
     {

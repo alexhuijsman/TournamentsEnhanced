@@ -16,6 +16,8 @@ namespace TournamentsEnhanced.Builders.Abstract
     protected FactionFinder FactionFinder { get; set; } = FactionFinder.Instance;
     protected SettlementFinder SettlementFinder { get; set; } = SettlementFinder.Instance;
     protected Settings Settings { get; set; } = Settings.Instance;
+    protected MBHero MBHero { get; set; } = MBHero.Instance;
+
 
     protected CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {

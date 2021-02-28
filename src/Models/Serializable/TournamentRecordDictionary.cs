@@ -6,6 +6,8 @@ namespace TournamentsEnhanced.Models.Serializable
 {
   public class TournamentRecordDictionary : Dictionary<string, TournamentRecord>
   {
+    protected MBHero MBHero { get; set; } = MBHero.Instance;
+
     public virtual TournamentRecord this[MBSettlement settlement]
     {
       get
@@ -28,7 +30,10 @@ namespace TournamentsEnhanced.Models.Serializable
 
     public TournamentRecord ForCurrentSettlement()
     {
-      return this[MBHero.MainHero.CurrentSettlement];
+      var currentSettlement = MBHero.MainHero?.CurrentSettlement;
+      return currentSettlement == null ?
+              default(TournamentRecord) :
+              this[currentSettlement];
     }
 
     public virtual bool ContainsSettlement(MBSettlement settlement) => ContainsKey(settlement.StringId);

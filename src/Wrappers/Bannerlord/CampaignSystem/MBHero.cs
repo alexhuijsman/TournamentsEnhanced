@@ -15,16 +15,18 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
 
   public class MBHero : MBObjectBaseWrapper<MBHero, Hero>, IMBHero
   {
-    public static List<MBHero> All => MBHero.All.ToList();
-    public static MBHero MainHero => MBHero.MainHero;
-    public static bool IsMainHeroIll => MBHero.IsMainHeroIll;
-    public static List<MBHero> ConversationHeroes => MBHero.ConversationHeroes.ToList();
-    public static MBHero OneToOneConversationHero => MBHero.OneToOneConversationHero;
-    public static List<MBHero> FindAll(Func<MBHero, bool> predicate) => (List<MBHero>)MBHero.FindAll((Func<MBHero, bool>)predicate);
-    public static MBHero FindFirst(Func<MBHero, bool> predicate) => MBHero.FindFirst((Func<MBHero, bool>)predicate);
+    public static MBHero Instance { get; } = new MBHero();
+
+    public virtual List<MBHero> All => Hero.All.CastList<MBHero>();
+    public virtual MBHero MainHero => Hero.MainHero;
+    public virtual bool IsMainHeroIll => Hero.IsMainHeroIll;
+    public virtual List<MBHero> ConversationHeroes => Hero.ConversationHeroes.CastList<MBHero>();
+    public virtual MBHero OneToOneConversationHero => Hero.OneToOneConversationHero;
+    public virtual List<MBHero> FindAll(Func<Hero, bool> predicate) => (List<MBHero>)Hero.FindAll((Func<Hero, bool>)predicate);
+    public virtual MBHero FindFirst(Func<Hero, bool> predicate) => Hero.FindFirst((Func<Hero, bool>)predicate);
     public virtual float GetRelationWithPlayer() => UnwrappedObject.GetRelationWithPlayer();
     public virtual float GetRelation(MBHero otherHero) => UnwrappedObject.GetRelation(otherHero);
-    public static ItemTiers GetMainHeroTournamentRewardTier() => GetRewardTierForHero(MainHero);
+    public virtual ItemTiers GetMainHeroTournamentRewardTier() => GetRewardTierForHero(MainHero);
 
     public virtual MBClan Clan { get => UnwrappedObject.Clan; set => UnwrappedObject.Clan = value; }
 
