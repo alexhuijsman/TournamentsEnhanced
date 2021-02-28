@@ -39,7 +39,7 @@ namespace TournamentsEnhanced.Behaviors
 
     public void OnPrizeSelectMenuConsequence(MenuCallbackArgs args)
     {
-      var prizeList = MBItemObject.GetAvailableTournamentPrizes();
+      var prizeList = MBItemObject.Instance.GetAvailableTournamentPrizes();
       MBInformationManager.ShowPrizeSelectionMenu(prizeList, OnSelectPrize, OnDeSelectPrize);
       GameMenu.SwitchToMenu("town_arena");
     }

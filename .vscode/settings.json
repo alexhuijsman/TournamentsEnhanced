@@ -1,6 +1,7 @@
 {
   "nxunitExplorer.modules": [
-    "test/bin/Debug/*Tests.{dll}"
+    "test/bin/Debug/TournamentsEnhancedTests.dll",
+    "wrappers/test/bin/Debug/WrapperLibTests.dll"
   ],
   "nxunitExplorer.nunit": "packages/nunit.consolerunner/3.12.0/tools/nunit3-console.exe"
 }

@@ -69,6 +69,8 @@ namespace TournamentsEnhanced.Wrappers.Core
   }
   public partial class MBItemObject : MBObjectBaseWrapper<MBItemObject, ItemObject>, IMBItemObject
   {
+    public static MBItemObject Instance { get; } = new MBItemObject();
+
     public static List<MBItemObject> AllTradeGoods => ItemObject.AllTradeGoods.CastList<MBItemObject>();
     public static List<MBItemObject> All => ItemObject.All.CastList<MBItemObject>();
 

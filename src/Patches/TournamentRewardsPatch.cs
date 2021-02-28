@@ -13,7 +13,7 @@ namespace TournamentsEnhanced.Patches
     static void Postfix(TournamentGame __instance, ref ItemObject __result)
     {
       {
-        __result = MBItemObject.GetAvailableTournamentPrizes().GetRandomElement();
+        __result = MBItemObject.Instance.GetAvailableTournamentPrizes().GetRandomElement();
         return;
       }
 

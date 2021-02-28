@@ -9,12 +9,32 @@
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
         "/p:Platform=x64",
-        "/p:Include=\"[TournamentsEnhanced[Test]?.dll]*\"",
+        "/p:Include=\"[.*[Test]?.dll]*\"",
+        "/p:SkipAutoProps=true",
+        "/p:CollectCoverage=true",
+        "/p:CoverletOutputFormat=lcov",
+        "/p:CoverletOutput=lcov.info",
+        "${workspaceFolder}/TournamentsEnhanced.sln",
+      ],
+      "dependsOn": [
+        "Create Test Folders"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Build & Test WrapperLib",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "/p:GenerateFullPaths=true",
+        "/p:Configuration=Debug",
+        "/p:Platform=x64",
+        "/p:Include=\"WrapperLibTest.dll\"",
         "/p:SkipAutoProps=true",
         "/p:CollectCoverage=true",
         "/p:CoverletOutputFormat=lcov",
         "/p:CoverletOutput=../lcov.info",
-        "${workspaceFolder}\\test\\TournamentsEnhancedTests.csproj"
+        "${workspaceFolder}/wrappers/test/WrapperLibTests.csproj",
       ],
       "dependsOn": [
         "Create Test Folders"
