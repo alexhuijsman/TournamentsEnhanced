@@ -10,6 +10,7 @@
         "/p:Configuration=Debug",
         "/p:Platform=x64",
         "/p:Include=\"[TournamentsEnhanced[Test]?.dll]*\"",
+        "/p:Exclude=\"[*]TournamentsEnhanced.Wrappers.*\"",
         "/p:SkipAutoProps=true",
         "/p:CollectCoverage=true",
         "/p:CoverletOutputFormat=lcov",
