@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using static TournamentsEnhanced.Constants.DaysSinceTracker;
 
 namespace TournamentsEnhanced.Models.Serializable
 {
   public class DaysSinceTracker<T> : Dictionary<T, int>
-  where T : IConvertible
+  where T : Enum
   {
     public DaysSinceTracker(params T[] types)
     {
@@ -15,7 +17,20 @@ namespace TournamentsEnhanced.Models.Serializable
     {
       foreach (var type in types)
       {
-        Add(type, Constants.DaysSinceTracker.Default.KeyValue);
+        Add(type, Default.DictionaryValue);
+      }
+    }
+
+    public virtual void IncrementDay()
+    {
+      foreach (var key in Keys.ToArray())
+      {
+        if (this[key] == Default.DictionaryValue)
+        {
+          continue;
+        }
+
+        this[key]++;
       }
     }
 
@@ -23,15 +38,7 @@ namespace TournamentsEnhanced.Models.Serializable
     {
       foreach (var key in Keys.ToList())
       {
-        this[key] = Constants.DaysSinceTracker.Default.KeyValue;
-      }
-    }
-
-    public virtual void IncrementDay()
-    {
-      foreach (var key in Keys)
-      {
-        this[key]++;
+        this[key] = Default.DictionaryValue;
       }
     }
   }
