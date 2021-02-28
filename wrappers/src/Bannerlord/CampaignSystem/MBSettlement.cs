@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
 
+using TournamentsEnhanced.Wrappers;
 using TournamentsEnhanced.Wrappers.Abstract;
 using TournamentsEnhanced.Wrappers.Library;
 using TournamentsEnhanced.Wrappers.Localization;

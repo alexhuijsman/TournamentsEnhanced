@@ -5,7 +5,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <IsPackable>false</IsPackable>
     <CachedBannerlordTargetVersion>e1.5.8</CachedBannerlordTargetVersion>
-    <LibPath>../lib/</LibPath>
+    <LibPath>../../lib/</LibPath>
     <DebugOutDir>bin/Debug/</DebugOutDir>
     <BannerlordDLLPath>$(LibPath)/Bannerlord/$(CachedBannerlordTargetVersion)/</BannerlordDLLPath>
   </PropertyGroup>
@@ -47,16 +47,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../TournamentsEnhanced.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="../wrappers/WrapperLib.csproj" />
+    <ProjectReference Include="../WrapperLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ModLib.Definitions">
+    <!-- <Reference Include="ModLib.Definitions">
       <HintPath>$(LibPath)/ModLib.Definitions.dll</HintPath>
-    </Reference>
+    </Reference> -->
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>$(BannerlordDLLPath)/TaleWorlds.CampaignSystem.dll</HintPath>
     </Reference>

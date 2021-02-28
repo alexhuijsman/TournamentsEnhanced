@@ -5,17 +5,15 @@
     <PlatformTarget>x64</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ModVersion>1.5.8.99</ModVersion>
     <CachedBannerlordTargetVersion>e1.5.8</CachedBannerlordTargetVersion>
   </PropertyGroup>
 
   <PropertyGroup>
-    <LibPath>lib/</LibPath>
+    <LibPath>../lib/</LibPath>
     <BannerlordPath>$(PATH_TO_BANNERLORD)</BannerlordPath>
     <BannerlordModulesPath>$(PATH_TO_BANNERLORD)/Modules/</BannerlordModulesPath>
     <BannerlordDLLPath>$(LibPath)/Bannerlord/$(CachedBannerlordTargetVersion)/</BannerlordDLLPath>
-    <DebugOutDir>bin/Debug/TournamentsEnhanced/bin/Win64_Shipping_Client/</DebugOutDir>
-    <ReleaseOutDir>$(BannerlordModulesPath)/TournamentsEnhanced/bin/Win64_Shipping_Client/</ReleaseOutDir>
+    <DebugOutDir>bin/Debug/</DebugOutDir>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
@@ -28,35 +26,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugOutputToBannerlord|x64' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <OutDir>$(ReleaseOutDir)</OutDir>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="wrappers/WrapperLib.csproj" />
-  </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="src/**/test/*.cs" />
     <Compile Remove="test/**" />
     <EmbeddedResource Remove="test/**" />
     <None Remove="test/**" />
-    <Compile Remove="packages/**" />
-    <EmbeddedResource Remove="packages/**" />
-    <None Remove="packages/**" />
-    <Compile Remove="wrappers/**" />
-    <EmbeddedResource Remove="wrappers/**" />
-    <None Remove="wrappers/**" />
-    <Compile Remove="lib/Bannerlord/**" />
-    <EmbeddedResource Remove="lib/Bannerlord/**" />
-    <None Remove="lib/Bannerlord/**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,18 +42,10 @@
       <PrivateAssets>none</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="5.0.1" />
     <PackageReference Include="Lib.Harmony" Version="2.0.4" IncludeAssets="compile" />
-    <!-- <PackageReference Include="Bannerlord.ButterLib" Version="1.0.18" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.UIExtenderEx" Version="1.0.5" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.MCM" Version="4.1.2" IncludeAssets="compile" /> -->
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ModLib.Definitions">
-      <HintPath>$(LibPath)/ModLib.Definitions.dll</HintPath>
-      <PrivateAssets>all</PrivateAssets>
-    </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>$(BannerlordDLLPath)/TaleWorlds.CampaignSystem.dll</HintPath>
       <PrivateAssets>none</PrivateAssets>
@@ -114,23 +80,9 @@
     </Reference>
   </ItemGroup>
 
-  <Target Name="Clean Output Dir" AfterTargets="BeforeBuild">
-    <ItemGroup>
-      <FilesToDelete Include="$(OutDir)/**/*"/>
-      <FilesToDelete Include="$(OutDir)../../SubModule.xml"/>
-    </ItemGroup>
-    <Delete Files="@(FilesToDelete)" />
-  </Target>
-
-  <Target Name="Build SubModule XML" AfterTargets="AfterBuild">
-    <Exec EchoOff="false" StandardOutputImportance="high" StandardErrorImportance="high" IgnoreExitCode="false" ConsoleToMSBuild="true" Command="./sh/build-submodule-xml.sh $(ModVersion) &quot;$(OutDir)../../&quot;">
-    </Exec>
-  </Target>
-
   <Target Name="Remove Unneeded Reference DLLs" AfterTargets="AfterBuild">
     <ItemGroup>
       <UnwantedFiles Include="$(OutDir)/TaleWorlds.*.dll"/>
-      <UnwantedFiles Include="$(OutDir)/Newtonsoft.Json.dll"/>
       <UnwantedFiles Include="$(OutDir)/System.Management.dll"/>
       <UnwantedFiles Include="$(OutDir)/System.Numerics.Vectors.dll"/>
     </ItemGroup>

@@ -4,7 +4,7 @@ using TournamentsEnhanced;
 using TournamentsEnhanced.Wrappers.Abstract;
 
 
-namespace Test
+namespace Test.WrapperLib
 {
   public class WrapperBaseGenericTest : TestBase
   {

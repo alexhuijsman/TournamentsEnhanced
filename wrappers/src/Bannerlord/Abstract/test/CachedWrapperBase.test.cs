@@ -1,11 +1,10 @@
 using System;
 using NUnit.Framework;
 using Shouldly;
-using TournamentsEnhanced;
 using TournamentsEnhanced.Wrappers.Abstract;
 
 
-namespace Test
+namespace Test.WrapperLib
 {
   public class CachedWrapperBaseTest : TestBase
   {
