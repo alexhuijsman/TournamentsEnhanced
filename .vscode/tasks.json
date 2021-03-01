@@ -15,9 +15,11 @@
         "/p:CollectCoverage=true",
         "/p:CoverletOutputFormat=lcov",
         "/p:CoverletOutput=../lcov.info",
-        "${workspaceFolder}\\test\\TournamentsEnhancedTests.csproj"
+        "${workspaceFolder}/test/TournamentsEnhancedTests.csproj"
       ],
+      "dependsOrder": "sequence",
       "dependsOn": [
+        "Delete Empty Folders",
         "Create Test Folders"
       ],
       "problemMatcher": "$msCompile"
@@ -60,12 +62,21 @@
       "command": "./sh/cache-bannerlord-lib.sh",
       "problemMatcher": []
     },
+    {
+      "label": "Delete Empty Folders",
+      "type": "shell",
+      "command": "./sh/delete-empty-folders.sh",
+      "args": [
+        "src",
+      ],
+      "problemMatcher": []
+    },
   ],
   "inputs": [
     {
       "id": "tag",
       "description": "tag name",
-      "default": "1.5.7.",
+      "default": "1.5.",
       "type": "promptString"
     },
   ]

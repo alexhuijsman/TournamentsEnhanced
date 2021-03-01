@@ -1,0 +1,1 @@
+find $1 -empty -type d -delete
