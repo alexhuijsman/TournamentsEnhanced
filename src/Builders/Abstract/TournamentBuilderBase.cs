@@ -60,7 +60,7 @@ namespace TournamentsEnhanced.Builders.Abstract
 
     private void InstantiateTournament(MBSettlement settlement)
     {
-      var tournament = new FightTournamentGame(settlement.Town);
+      var tournament = new MBFightTournamentGame(ModState.IsProduction, settlement.Town);
       MBCampaign.Current.TournamentManager.AddTournament(tournament);
     }
 

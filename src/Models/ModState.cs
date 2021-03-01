@@ -9,6 +9,7 @@ namespace TournamentsEnhanced.Models
     private SerializableModState _state;
 
     public static ModState Instance { get; } = new ModState();
+    public virtual bool IsProduction => true;
     public virtual SerializableModState SerializableObject { get => _state; set => _state = value; }
     protected virtual MBMBRandom MBMBRandom { get; set; } = MBMBRandom.Instance;
     public virtual DaysSinceTournamentTracker DaysSince => _state.daysSince;

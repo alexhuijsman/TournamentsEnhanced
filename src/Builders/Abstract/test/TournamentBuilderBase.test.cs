@@ -7,6 +7,7 @@ using TournamentsEnhanced;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Finder;
+using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 
@@ -25,6 +26,7 @@ namespace Test
     private Mock<MBTournamentManager> _mockTournamentManager;
     private Mock<MBCampaign> _mockCampaign;
     private Mock<MBSettlement> _mockSettlement;
+    private Mock<ModState> _mockModState;
     private CreateTournamentOptions _options;
     protected void SetUp(
       bool optionsAreValid,
@@ -42,6 +44,9 @@ namespace Test
       }
       else
       {
+        _mockModState = MockRepository.Create<ModState>();
+        _mockModState.SetupGet(m => m.IsProduction).Returns(false);
+
         _mockHero = MockRepository.Create<MBHero>();
         _mockHero.SetupGet(s => s.IsNull).Returns(false);
 
@@ -65,6 +70,8 @@ namespace Test
           Settlement = _mockSettlement.Object,
           Type = tournamentType
         };
+
+        _sut.ModState = _mockModState.Object;
       }
 
     }
@@ -94,6 +101,7 @@ namespace Test
   {
     public TournamentBuilderBaseImpl() { }
 
+    public new ModState ModState { set => base.ModState = value; }
     public new CreateTournamentResult CreateTournament(CreateTournamentOptions options)
       => base.CreateTournament(options);
   }
