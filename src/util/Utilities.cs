@@ -154,7 +154,7 @@ namespace TournamentsEnhanced
 
       foreach (var item in itemPool)
       {
-        if (item.IsCraftedByPlayer || !Utilities.IsTierable(item))
+        if (item.IsCraftedByPlayer || HasNumericStringId(item) || !Utilities.IsTierable(item))
         {
           continue;
         }
@@ -166,10 +166,10 @@ namespace TournamentsEnhanced
       }
 
       var weaponPrizes = qualifyingItems.Where(item => item.IsCraftedWeapon).ToList().Shuffle();
-      var selectedPrizes 
+      var selectedPrizes
         = new ItemObject[
-          TournamentsEnhancedSettings.Instance.DebugShowAllAvailablePrizes ? 
-            qualifyingItems.Count : 
+          TournamentsEnhancedSettings.Instance.DebugShowAllAvailablePrizes ?
+            qualifyingItems.Count :
             5];
 
       for (int i = 0; i < selectedPrizes.Length; i++)
@@ -188,6 +188,13 @@ namespace TournamentsEnhanced
       }
 
       return selectedPrizes;
+    }
+
+    private static bool HasNumericStringId(ItemObject item)
+    {
+      var intValue = 0;
+
+      return int.TryParse(item.StringId, out intValue);
     }
 
     public static ValueTuple<SkillObject, int> TournamentSkillXpGain(Hero winner)
