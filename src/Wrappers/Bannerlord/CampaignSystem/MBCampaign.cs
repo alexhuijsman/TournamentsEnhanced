@@ -26,7 +26,7 @@ namespace TournamentsEnhanced.Wrappers.CampaignSystem
                                                     );
     }
 
-    public static MBCampaign Current => Campaign.Current;
+    public virtual MBCampaign Current => Campaign.Current;
     public virtual MBTournamentManager TournamentManager => (MBTournamentManager)UnwrappedObject.TournamentManager;
     public virtual MBGameModels Models => UnwrappedObject.Models;
 

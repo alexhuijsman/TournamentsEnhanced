@@ -4,6 +4,8 @@ using TaleWorlds.CampaignSystem.SandBox.Source.TournamentGames;
 using TaleWorlds.Core;
 
 using TournamentsEnhanced.Finder;
+using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 
@@ -17,10 +19,16 @@ namespace TournamentsEnhanced.Builders.Abstract
     protected SettlementFinder SettlementFinder { get; set; } = SettlementFinder.Instance;
     protected Settings Settings { get; set; } = Settings.Instance;
     protected MBHero MBHero { get; set; } = MBHero.Instance;
-
+    protected MBCampaign MBCampaign { get; set; } = MBCampaign.Instance;
+    protected ModState ModState { get; set; } = ModState.Instance;
 
     protected CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
+      if (!options.AreValid)
+      {
+        throw new ArgumentException("CreateTournament called with invalid options.");
+      }
+
       var settlement = options.Settlement;
       var type = options.Type;
       var townHadExistingTournament = settlement.Town.HasTournament;
@@ -29,6 +37,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       if (!townHadExistingTournament)
       {
         InstantiateTournament(settlement);
+        CreateTournamentRecord(settlement, options.InitiatingHero, type);
         ApplyHostingEffects(type, settlement);
         ApplyRelationsGain(type, settlement);
       }
@@ -55,6 +64,19 @@ namespace TournamentsEnhanced.Builders.Abstract
       MBCampaign.Current.TournamentManager.AddTournament(tournament);
     }
 
+    private void CreateTournamentRecord(MBSettlement settlement, MBHero initiatingHero, TournamentType type)
+    {
+      var record = new TournamentRecord()
+      {
+        hostSettlementStringId = settlement.StringId,
+        initiatingHeroStringId = initiatingHero.IsNull ? null : initiatingHero.StringId,
+        tournamentType = type
+
+      };
+
+      ModState.TournamentRecords.AddOrUpdate(record);
+    }
+
 
     private void ApplyHostingEffects(TournamentType type, MBSettlement settlement)
     {
@@ -74,15 +96,7 @@ namespace TournamentsEnhanced.Builders.Abstract
       }
     }
 
-    private void PayTournamentFee(MBHero payor, MBSettlement settlement)
-    {
-      var tournamentCost = Settings.TournamentCost;
-
-      payor.ChangeHeroGold(-tournamentCost);
-      settlement.Town.ChangeGold(tournamentCost);
-    }
-
-    public void ApplyRelationsGain(TournamentType type, MBSettlement settlement)
+    private void ApplyRelationsGain(TournamentType type, MBSettlement settlement)
     {
       if (type != TournamentType.PlayerInitiated)
       {
@@ -107,12 +121,12 @@ namespace TournamentsEnhanced.Builders.Abstract
       MBInformationManagerFacade.DisplayAsQuickBanner($"Your relationship with local notables at {settlement.Name} has improved");
     }
 
-    public ValueTuple<SkillObject, int> TournamentSkillXpGain(MBHero winner)
+    private void PayTournamentFee(MBHero payor, MBSettlement settlement)
     {
-      float randomFloat = MBRandom.DeterministicRandom.NextFloat();
-      SkillObject item = (randomFloat < 0.2f) ? DefaultSkills.OneHanded : ((randomFloat < 0.4f) ? DefaultSkills.TwoHanded : ((randomFloat < 0.6f) ? DefaultSkills.Polearm : ((randomFloat < 0.8f) ? DefaultSkills.Riding : DefaultSkills.Athletics)));
-      int item2 = Settings.TournamentSkillXp;
-      return new ValueTuple<SkillObject, int>(item, item2);
+      var tournamentCost = Settings.TournamentCost;
+
+      payor.ChangeHeroGold(-tournamentCost);
+      settlement.Town.ChangeGold(tournamentCost);
     }
   }
 }

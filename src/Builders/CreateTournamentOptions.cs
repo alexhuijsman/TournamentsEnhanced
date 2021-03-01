@@ -4,8 +4,10 @@ namespace TournamentsEnhanced.Builders
 {
   public class CreateTournamentOptions
   {
-    public MBHero InitiatingHero { get; set; }
-    public MBSettlement Settlement { get; set; }
-    public TournamentType Type { get; set; }
+    public virtual MBHero InitiatingHero { get; set; } = MBHero.Null;
+    public virtual MBSettlement Settlement { get; set; } = MBSettlement.Null;
+    public virtual TournamentType Type { get; set; } = TournamentType.None;
+
+    public virtual bool AreValid => !Settlement.IsNull && Settlement.IsTown && Type != TournamentType.None;
   }
 }

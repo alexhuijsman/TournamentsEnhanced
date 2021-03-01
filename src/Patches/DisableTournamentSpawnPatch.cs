@@ -9,8 +9,10 @@ using TournamentsEnhanced.Wrappers.CampaignSystem;
 namespace TournamentsEnhanced.Patches
 {
   [HarmonyPatch(typeof(TournamentCampaignBehavior), "ConsiderStartOrEndTournament")]
-  class DisableTournamentSpawnPatch
+  public class DisableTournamentSpawnPatch
   {
+    protected static MBCampaign MBCampaign { get; set; } = MBCampaign.Instance;
+
     static bool Prefix(Town town)
     {
       MBTown wrappedTown = town;
