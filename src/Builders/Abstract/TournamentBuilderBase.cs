@@ -33,16 +33,16 @@ namespace TournamentsEnhanced.Builders.Abstract
       var type = options.Type;
       var townHadExistingTournament = settlement.Town.HasTournament;
 
+      AddOrUpdateTournamentRecord(settlement, options.InitiatingHero, type);
 
       if (!townHadExistingTournament)
       {
         InstantiateTournament(settlement);
-        CreateTournamentRecord(settlement, options.InitiatingHero, type);
         ApplyHostingEffects(type, settlement);
         ApplyRelationsGain(type, settlement);
       }
 
-      var result = CreateTournamentResult.Success(settlement, townHadExistingTournament);
+      var result = CreateTournamentResult.Success(type, townHadExistingTournament, settlement);
       var payor = result.Payor;
 
       if (result.HasPayor)
@@ -64,14 +64,13 @@ namespace TournamentsEnhanced.Builders.Abstract
       MBCampaign.Current.TournamentManager.AddTournament(tournament);
     }
 
-    private void CreateTournamentRecord(MBSettlement settlement, MBHero initiatingHero, TournamentType type)
+    private void AddOrUpdateTournamentRecord(MBSettlement settlement, MBHero initiatingHero, TournamentType type)
     {
       var record = new TournamentRecord()
       {
         hostSettlementStringId = settlement.StringId,
         initiatingHeroStringId = initiatingHero.IsNull ? null : initiatingHero.StringId,
         tournamentType = type
-
       };
 
       ModState.TournamentRecords.AddOrUpdate(record);

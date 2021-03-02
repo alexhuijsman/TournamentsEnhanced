@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
@@ -8,6 +9,7 @@ using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Models;
+using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 
@@ -21,13 +23,18 @@ namespace Test
     private const bool NoInitiatingHero = false;
     private const bool HasExistingTournament = true;
     private const bool NoExistingTournament = false;
+    private const string ExpectedSettlementStringId = "111111111111";
+    private const string ExpectedHeroStringId = "222222222222";
+
     private Mock<MBHero> _mockHero;
     private Mock<MBTown> _mockTown;
     private Mock<MBTournamentManager> _mockTournamentManager;
     private Mock<MBCampaign> _mockCampaign;
     private Mock<MBSettlement> _mockSettlement;
     private Mock<ModState> _mockModState;
+    private TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
     private CreateTournamentOptions _options;
+
     protected void SetUp(
       bool optionsAreValid,
       bool hasExistingTournament = false,
@@ -44,16 +51,21 @@ namespace Test
       }
       else
       {
+        _tournamentRecords.Clear();
+
         _mockModState = MockRepository.Create<ModState>();
         _mockModState.SetupGet(m => m.IsProduction).Returns(false);
+        _mockModState.SetupGet(m => m.TournamentRecords).Returns(_tournamentRecords);
 
         _mockHero = MockRepository.Create<MBHero>();
-        _mockHero.SetupGet(s => s.IsNull).Returns(false);
+        _mockHero.SetupGet(h => h.IsNull).Returns(false);
+        _mockHero.SetupGet(h => h.StringId).Returns(ExpectedHeroStringId);
 
         _mockTown = MockRepository.Create<MBTown>();
         _mockTown.SetupGet(t => t.HasTournament).Returns(hasExistingTournament);
 
         _mockTournamentManager = MockRepository.Create<MBTournamentManager>();
+        _mockTournamentManager.Setup(m => m.AddTournament(It.IsAny<MBFightTournamentGame>()));
 
         _mockCampaign = MockRepository.Create<MBCampaign>();
         _mockCampaign.SetupGet(c => c.Current).Returns(_mockCampaign.Object);
@@ -63,6 +75,7 @@ namespace Test
         _mockSettlement.SetupGet(s => s.IsNull).Returns(false);
         _mockSettlement.SetupGet(s => s.IsTown).Returns(true);
         _mockSettlement.SetupGet(s => s.Town).Returns(_mockTown.Object);
+        _mockSettlement.SetupGet(s => s.StringId).Returns(ExpectedSettlementStringId);
 
         _options = new CreateTournamentOptions()
         {
@@ -72,6 +85,7 @@ namespace Test
         };
 
         _sut.ModState = _mockModState.Object;
+        _sut.MBCampaign = _mockCampaign.Object;
       }
 
     }
@@ -102,6 +116,7 @@ namespace Test
     public TournamentBuilderBaseImpl() { }
 
     public new ModState ModState { set => base.ModState = value; }
+    public new MBCampaign MBCampaign { set => base.MBCampaign = value; }
     public new CreateTournamentResult CreateTournament(CreateTournamentOptions options)
       => base.CreateTournament(options);
   }
