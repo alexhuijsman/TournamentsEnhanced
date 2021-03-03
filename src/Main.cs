@@ -35,17 +35,13 @@ namespace TournamentsEnhanced
         CampaignGameStarter campaignStarter = (CampaignGameStarter)gameStarter;
         campaignStarter.AddBehavior(new BehaviorBase());
 
-        if (Assembly.GetExecutingAssembly().GetReferencedAssemblies()
+        if (Assembly.GetEntryAssembly().GetReferencedAssemblies()
             .FirstOrDefault(c => c.FullName == "TournamentFairArmour") == null)
         {
-          Type campaignStarterType = campaignStarter.GetType();
-          BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
-          FieldInfo field = campaignStarterType.GetField("_campaignBehaviors", bindingFlags);
-          var campaignBehaviors = (List<CampaignBehaviorBase>)field.GetValue(gameStarter);
           var overrideSpawnArmourMissionListenerType
             = Type.GetType("TournamentFairArmour.OverrideSpawnArmourMissionListener");
           _tournamentFairArmorSettingsCampaignBehavior
-            = campaignBehaviors.FirstOrDefault(b => b.GetType().Equals(campaignStarterType));
+            = campaignStarter.CampaignBehaviors.FirstOrDefault(b => b.GetType().Equals(overrideSpawnArmourMissionListenerType));
         }
       }
     }
