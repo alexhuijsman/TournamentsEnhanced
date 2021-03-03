@@ -19,6 +19,9 @@ namespace TournamentsEnhanced
     private static string ModuleVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
     protected object _tournamentFairArmorSettingsCampaignBehavior;
+    protected Assembly _tournamentFairArmorAssembly;
+    protected Type _tournamentFairArmorSettingsCampaignBehaviourType;
+    protected Type _tournamentFairArmorOverrideSpawnArmourMissionListenerType;
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
     {
@@ -35,13 +38,23 @@ namespace TournamentsEnhanced
         CampaignGameStarter campaignStarter = (CampaignGameStarter)gameStarter;
         campaignStarter.AddBehavior(new BehaviorBase());
 
-        if (Assembly.GetCallingAssembly().GetReferencedAssemblies()
-            .FirstOrDefault(c => c.FullName == "TournamentFairArmour") == null)
+        _tournamentFairArmorAssembly =
+          AppDomain.CurrentDomain.GetAssemblies()
+            .FirstOrDefault(c => c.FullName == "TournamentFairArmour");
+
+        if (_tournamentFairArmorAssembly != null)
         {
-          var overrideSpawnArmourMissionListenerType
-            = Type.GetType("TournamentFairArmour.OverrideSpawnArmourMissionListener");
-          _tournamentFairArmorSettingsCampaignBehavior
-            = campaignStarter.CampaignBehaviors.FirstOrDefault(b => b.GetType().Equals(overrideSpawnArmourMissionListenerType));
+          _tournamentFairArmorOverrideSpawnArmourMissionListenerType =
+            _tournamentFairArmorAssembly.ExportedTypes.FirstOrDefault(
+              t => t.Name.Equals("OverrideSpawnArmourMissionListener"));
+
+          _tournamentFairArmorSettingsCampaignBehaviourType =
+            _tournamentFairArmorAssembly.ExportedTypes.FirstOrDefault(
+              t => t.Name.Equals("SettingsCampaignBehaviour"));
+
+          _tournamentFairArmorSettingsCampaignBehavior =
+              campaignStarter.CampaignBehaviors.FirstOrDefault(
+                b => b.GetType().Equals(_tournamentFairArmorSettingsCampaignBehaviourType));
         }
       }
     }
@@ -57,7 +70,8 @@ namespace TournamentsEnhanced
 
     public override void OnMissionBehaviourInitialize(Mission mission)
     {
-      if (_tournamentFairArmorSettingsCampaignBehavior != null && mission.HasMissionBehaviour<TeamTournamentMissionController>())
+      if (_tournamentFairArmorSettingsCampaignBehavior != null &&
+          mission.HasMissionBehaviour<TeamTournamentMissionController>())
       {
         AddOverrideSpawnArmourMissionListener(mission);
       }
@@ -70,9 +84,8 @@ namespace TournamentsEnhanced
       {
         IMissionListener overrideSpawnArmourMissionListener =
           (IMissionListener)Activator.CreateInstance(
-            "TournamentFairArmour",
-            "TournamentFairArmour.OverrideSpawnArmourMissionListener",
-            new object[] { mission });
+            _tournamentFairArmorOverrideSpawnArmourMissionListenerType,
+            new object[] { equipment });
 
         mission.AddListener(overrideSpawnArmourMissionListener);
       }
@@ -81,8 +94,7 @@ namespace TournamentsEnhanced
     private Equipment GetEquipmentByCultureOfCurrentSettlement()
     {
       var cultureStringId = Settlement.CurrentSettlement?.Culture?.StringId;
-      var type = Type.GetType("TournamentFairArmour.OverrideSpawnArmourMissionListener");
-      MethodInfo methodInfo = type.GetMethod("GetEquipmentOrDefaultIfDisabled");
+      MethodInfo methodInfo = _tournamentFairArmorSettingsCampaignBehaviourType.GetMethod("GetEquipmentOrDefaultIfDisabled");
       return (Equipment)methodInfo.Invoke(_tournamentFairArmorSettingsCampaignBehavior, new object[] { cultureStringId });
     }
   }
