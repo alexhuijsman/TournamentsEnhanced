@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace TournamentsEnhanced.extensions
+namespace TournamentsEnhanced
 {
   /// <summary>
   /// TAKEN FROM 
