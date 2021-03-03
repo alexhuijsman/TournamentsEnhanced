@@ -38,7 +38,7 @@ Add MCM options to change practice tournament rewards and tiers
 REACH
 -----
 SM add notification that tournament is happening, and why, to the town description and menu items if possible
-SPIKE full item tooltips in prize selection screen? (try ImprovedTooltips mod for examples)
+SPIKE full item tooltips in prize selection screen? (try ObjectManagerUtils.BuildTooltipString or ImprovedTooltips mod for examples)
 XL Grand Tournaments, happening every x months, announced to player before it happens 1 month, 2 weeks, 1 week, and when tournament begins
   -What should defining characteristics be? Need high renown to compete? Pay to enter? Noble-worthy prizes? Much larger monetary and social gains?
 The Travelling Tournament idea: a special party of elite arena fighters travels the world initiating special tier tournaments
