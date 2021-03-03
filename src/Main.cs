@@ -73,13 +73,13 @@ namespace TournamentsEnhanced
       if (_tournamentFairArmorSettingsCampaignBehavior != null &&
           mission.HasMissionBehaviour<TeamTournamentMissionController>())
       {
-        AddOverrideSpawnArmourMissionListener(mission);
+        TournamentFairArmor_AddOverrideSpawnArmourMissionListener(mission);
       }
     }
 
-    private void AddOverrideSpawnArmourMissionListener(Mission mission)
+    private void TournamentFairArmor_AddOverrideSpawnArmourMissionListener(Mission mission)
     {
-      var equipment = GetEquipmentByCultureOfCurrentSettlement();
+      var equipment = TournamentFairArmor_GetEquipmentByCultureOfCurrentSettlement();
       if (equipment != null)
       {
         IMissionListener overrideSpawnArmourMissionListener =
@@ -91,7 +91,7 @@ namespace TournamentsEnhanced
       }
     }
 
-    private Equipment GetEquipmentByCultureOfCurrentSettlement()
+    private Equipment TournamentFairArmor_GetEquipmentByCultureOfCurrentSettlement()
     {
       var cultureStringId = Settlement.CurrentSettlement?.Culture?.StringId;
       MethodInfo methodInfo = _tournamentFairArmorSettingsCampaignBehaviourType.GetMethod("GetEquipmentOrDefaultIfDisabled");
