@@ -4,7 +4,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TournamentsEnhanced.extensions;
 
 namespace TournamentsEnhanced.TeamTournament.Menu
 {

@@ -10,8 +10,13 @@
         "/p:GenerateFullPaths=true",
         "/p:Configuration=DebugOutputToBannerlord",
         "/p:Platform=x64",
+        "/consoleloggerparameters:NoSummary",
         "${workspaceFolder}/TournamentsEnhanced.csproj"
       ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
       "problemMatcher": "$msCompile"
     },
     {
