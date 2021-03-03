@@ -35,7 +35,7 @@ namespace TournamentsEnhanced
         CampaignGameStarter campaignStarter = (CampaignGameStarter)gameStarter;
         campaignStarter.AddBehavior(new BehaviorBase());
 
-        if (Assembly.GetEntryAssembly().GetReferencedAssemblies()
+        if (Assembly.GetCallingAssembly().GetReferencedAssemblies()
             .FirstOrDefault(c => c.FullName == "TournamentFairArmour") == null)
         {
           var overrideSpawnArmourMissionListenerType
