@@ -40,7 +40,7 @@ namespace TournamentsEnhanced
 
         _tournamentFairArmorAssembly =
           AppDomain.CurrentDomain.GetAssemblies()
-            .FirstOrDefault(c => c.FullName == "TournamentFairArmour");
+            .FirstOrDefault(c => c.GetName().Name.Equals("TournamentFairArmour"));
 
         if (_tournamentFairArmorAssembly != null)
         {
