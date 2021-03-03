@@ -15,8 +15,13 @@
         "/p:CollectCoverage=true",
         "/p:CoverletOutputFormat=lcov",
         "/p:CoverletOutput=../lcov.info",
+        "/consoleloggerparameters:NoSummary",
         "${workspaceFolder}/test/TournamentsEnhancedTests.csproj"
       ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
       "dependsOrder": "sequence",
       "dependsOn": [
         "Delete Empty Folders",
