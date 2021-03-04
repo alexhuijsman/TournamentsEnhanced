@@ -43,14 +43,15 @@ namespace TournamentsEnhanced.Builders.Abstract
       }
 
       var result = CreateTournamentResult.Success(type, townHadExistingTournament, settlement);
-      var payor = result.Payor;
 
-      if (result.HasPayor)
+      if (!result.HasPayor)
       {
-        PayTournamentFee(result.Payor, settlement);
+        return result;
       }
 
-      if (payor.IsHumanPlayerCharacter)
+      PayTournamentFee(result.Payor, settlement);
+
+      if (result.Payor.IsHumanPlayerCharacter)
       {
         MBInformationManagerFacade.DisplayAsQuickBanner($"You've spent {Settings.TournamentCost.ToString()} gold on hosting a Tournament at {settlement.Name}");
       }

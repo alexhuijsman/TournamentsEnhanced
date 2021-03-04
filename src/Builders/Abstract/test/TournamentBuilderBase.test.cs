@@ -1,17 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.IO.Pipes;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
 using TournamentsEnhanced;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Builders.Abstract;
-using TournamentsEnhanced.Finder;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
-
+using static TournamentsEnhanced.Constants.Settings;
 
 namespace Test
 {
@@ -23,6 +20,8 @@ namespace Test
     private const bool NoInitiatingHero = false;
     private const bool HasExistingTournament = true;
     private const bool NoExistingTournament = false;
+    private const bool HeroIsHumanPlayerCharacter = true;
+    private const bool HeroIsNotHumanPlayerCharacter = false;
     private const string ExpectedSettlementStringId = "111111111111";
     private const string ExpectedHeroStringId = "222222222222";
 
@@ -30,8 +29,10 @@ namespace Test
     private Mock<MBTown> _mockTown;
     private Mock<MBTournamentManager> _mockTournamentManager;
     private Mock<MBCampaign> _mockCampaign;
+    private Mock<MBClan> _mockClan;
     private Mock<MBSettlement> _mockSettlement;
     private Mock<ModState> _mockModState;
+    private Mock<Settings> _mockSettings;
     private TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
     private CreateTournamentOptions _options;
 
@@ -39,7 +40,8 @@ namespace Test
       bool optionsAreValid,
       bool hasExistingTournament = false,
       bool hasInitiatingHero = false,
-      TournamentType tournamentType = TournamentType.None)
+      TournamentType tournamentType = TournamentType.None,
+      bool heroIsHumanPlayerCharacter = false)
     {
       base.SetUp();
 
@@ -60,9 +62,12 @@ namespace Test
         _mockHero = MockRepository.Create<MBHero>();
         _mockHero.SetupGet(h => h.IsNull).Returns(false);
         _mockHero.SetupGet(h => h.StringId).Returns(ExpectedHeroStringId);
+        _mockHero.SetupGet(h => h.IsHumanPlayerCharacter).Returns(heroIsHumanPlayerCharacter);
+        _mockHero.Setup(h => h.ChangeHeroGold(Default.TournamentCost));
 
         _mockTown = MockRepository.Create<MBTown>();
         _mockTown.SetupGet(t => t.HasTournament).Returns(hasExistingTournament);
+        _mockTown.Setup(m => m.ChangeGold(It.IsAny<int>()));
 
         _mockTournamentManager = MockRepository.Create<MBTournamentManager>();
         _mockTournamentManager.Setup(m => m.AddTournament(It.IsAny<MBFightTournamentGame>()));
@@ -71,11 +76,15 @@ namespace Test
         _mockCampaign.SetupGet(c => c.Current).Returns(_mockCampaign.Object);
         _mockCampaign.SetupGet(c => c.TournamentManager).Returns(_mockTournamentManager.Object);
 
+        _mockClan = MockRepository.Create<MBClan>();
+        _mockClan.SetupGet(c => c.Leader).Returns(_mockHero.Object);
+
         _mockSettlement = MockRepository.Create<MBSettlement>();
         _mockSettlement.SetupGet(s => s.IsNull).Returns(false);
         _mockSettlement.SetupGet(s => s.IsTown).Returns(true);
         _mockSettlement.SetupGet(s => s.Town).Returns(_mockTown.Object);
         _mockSettlement.SetupGet(s => s.StringId).Returns(ExpectedSettlementStringId);
+        _mockSettlement.SetupGet(s => s.OwnerClan).Returns(_mockClan.Object);
 
         _options = new CreateTournamentOptions()
         {
@@ -84,10 +93,14 @@ namespace Test
           Type = tournamentType
         };
 
+        _mockSettings = MockRepository.Create<Settings>();
+        _mockSettings.SetupGet(s => s.TournamentCost).Returns(Default.TournamentCost);
+
         _sut.ModState = _mockModState.Object;
         _sut.MBCampaign = _mockCampaign.Object;
+        _sut.Settings = _mockSettings.Object;
+        _sut.MBInformationManagerFacade = _mockMBInformationManagerFacade.Object;
       }
-
     }
 
     [Test]
@@ -109,6 +122,26 @@ namespace Test
 
       result.Succeeded.ShouldBe(true);
     }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_BirthTournament_HeroIsNotPlayerCharacter_ShouldReturnSuccess()
+    {
+      SetUp(ValidOptions, NoExistingTournament, NoInitiatingHero, TournamentType.Birth, HeroIsNotHumanPlayerCharacter);
+
+      var result = _sut.CreateTournament(_options);
+
+      result.Succeeded.ShouldBe(true);
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_BirthTournament_HeroIsPlayerCharacter_ShouldReturnSuccess()
+    {
+      SetUp(ValidOptions, NoExistingTournament, NoInitiatingHero, TournamentType.Birth, HeroIsHumanPlayerCharacter);
+
+      var result = _sut.CreateTournament(_options);
+
+      result.Succeeded.ShouldBe(true);
+    }
   }
 
   public class TournamentBuilderBaseImpl : TournamentBuilderBase
@@ -116,6 +149,7 @@ namespace Test
     public TournamentBuilderBaseImpl() { }
 
     public new ModState ModState { set => base.ModState = value; }
+    public new Settings Settings { set => base.Settings = value; }
     public new MBCampaign MBCampaign { set => base.MBCampaign = value; }
     public new CreateTournamentResult CreateTournament(CreateTournamentOptions options)
       => base.CreateTournament(options);

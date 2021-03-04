@@ -8,7 +8,7 @@ namespace TournamentsEnhanced.Builders
   public class CreateTournamentResult : CreateResultBase<CreateTournamentResult>
   {
     public MBHero Payor { get; protected set; }
-    public bool HasPayor => Payor == MBHero.Null;
+    public bool HasPayor => Payor != MBHero.Null;
     public MBSettlement HostSettlement { get; protected set; }
     public bool HadExistingTournament { get; protected set; }
     public new static CreateTournamentResult Success(TournamentType tournamentType, bool hadExistingTournament, MBSettlement settlement)
