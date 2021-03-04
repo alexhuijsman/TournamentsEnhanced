@@ -65,8 +65,8 @@ namespace TournamentsEnhanced
         InformationManager.ShowMultiSelectionInquiry(new MultiSelectionInquiryData(new TextObject("Prize Selection",
             null).ToString(), textObject.ToString(), list, true, 1,
           new TextObject("OK", null).ToString(), new TextObject("Cancel", null).ToString(),
-          new Action<List<InquiryElement>>(this.OnSelectPrize),
-          new Action<List<InquiryElement>>(this.OnDeSelectPrize),
+          new Action<List<InquiryElement>>(OnSelectPrize),
+          new Action<List<InquiryElement>>(OnDeSelectPrize),
           ""), true);
         GameMenu.SwitchToMenu("town_arena");
 
@@ -79,13 +79,13 @@ namespace TournamentsEnhanced
 
     public override void RegisterEvents()
     {
-      CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
-      CampaignEvents.OnGivenBirthEvent.AddNonSerializedListener(this, new Action<Hero, List<Hero>, int>(this.OnGivenBirth));
-      CampaignEvents.WeeklyTickEvent.AddNonSerializedListener(this, new Action(this.WeeklyTick));
-      CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(this.OnHeroesMarried));
-      CampaignEvents.MakePeace.AddNonSerializedListener(this, new Action<IFaction, IFaction>(this.OnMakePeace));
-      CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.DailyTick));
-      CampaignEvents.TournamentFinished.AddNonSerializedListener(this, new Action<CharacterObject, Town>(this.OnTournamentWin));
+      CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(OnSessionLaunched));
+      CampaignEvents.OnGivenBirthEvent.AddNonSerializedListener(this, new Action<Hero, List<Hero>, int>(OnGivenBirth));
+      CampaignEvents.WeeklyTickEvent.AddNonSerializedListener(this, new Action(WeeklyTick));
+      CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(OnHeroesMarried));
+      CampaignEvents.MakePeace.AddNonSerializedListener(this, new Action<IFaction, IFaction>(OnMakePeace));
+      CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(DailyTick));
+      CampaignEvents.TournamentFinished.AddNonSerializedListener(this, new Action<CharacterObject, Town>(OnTournamentWin));
     }
 
     private void OnSelectPrize(List<InquiryElement> prizes)
@@ -154,8 +154,8 @@ namespace TournamentsEnhanced
         new GameMenuOption.OnConsequenceDelegate(game_menu_town_arena_host_tournament_consequence), false, 1, false);
 
       campaignGameStarter.AddGameMenuOption("town_arena", "select_prize", "Select your prize",
-        new GameMenuOption.OnConditionDelegate(this.PrizeSelectCondition),
-        new GameMenuOption.OnConsequenceDelegate(this.PrizeSelectConsequence),
+        new GameMenuOption.OnConditionDelegate(PrizeSelectCondition),
+        new GameMenuOption.OnConsequenceDelegate(PrizeSelectConsequence),
         false, 1, true);
 
       // add all pending tournaments for tracking
@@ -164,12 +164,12 @@ namespace TournamentsEnhanced
       if (TournamentsEnhancedSettings.Instance.DebugCreateAndResolveTournaments)
       {
         campaignGameStarter.AddGameMenuOption("town_arena", "test_add_tournament_game", "Add Tournament",
-          new GameMenuOption.OnConditionDelegate(this.AddTournamentCondition),
-          new GameMenuOption.OnConsequenceDelegate(this.AddTournamentConsequence), false, 2, true);
+          new GameMenuOption.OnConditionDelegate(AddTournamentCondition),
+          new GameMenuOption.OnConsequenceDelegate(AddTournamentConsequence), false, 2, true);
 
         campaignGameStarter.AddGameMenuOption("town_arena", "test_resolve_tournament_game", "Resolve Tournament",
-           new GameMenuOption.OnConditionDelegate(this.ResolveTournamentCondition),
-           new GameMenuOption.OnConsequenceDelegate(this.ResolveTournamentConsequence), false, 3, true);
+           new GameMenuOption.OnConditionDelegate(ResolveTournamentCondition),
+           new GameMenuOption.OnConsequenceDelegate(ResolveTournamentConsequence), false, 3, true);
       }
 
       if (TournamentsEnhancedSettings.Instance.EnableTeamTournaments)
@@ -452,17 +452,17 @@ namespace TournamentsEnhanced
 
     private void AddTournamentConsequence(MenuCallbackArgs args)
     {
-      this.TestMethod_AddTournamentToCurrentTown();
+      TestMethod_AddTournamentToCurrentTown();
       GameMenu.SwitchToMenu("town_arena");
     }
 
     private bool ResolveTournamentCondition(MenuCallbackArgs args)
     {
-      return !this.AddTournamentCondition(null);
+      return !AddTournamentCondition(null);
     }
     private void ResolveTournamentConsequence(MenuCallbackArgs args)
     {
-      this.TestMethod_ResolveCurrentTournament();
+      TestMethod_ResolveCurrentTournament();
       GameMenu.SwitchToMenu("town_arena");
     }
     #endregion

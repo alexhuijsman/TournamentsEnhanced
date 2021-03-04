@@ -22,59 +22,59 @@ namespace TournamentsEnhanced.TeamTournament
 
     public MissionGauntletTeamTournamentView()
     {
-      this.ViewOrderPriorty = 48;
+      ViewOrderPriorty = 48;
     }
 
     public override void OnMissionScreenInitialize()
     {
       base.OnMissionScreenInitialize();
-      this._dataSource = new TeamTournamentVM(this.DisableUi, this._behavior);
-      this._gauntletLayer = new GauntletLayer(this.ViewOrderPriorty, "GauntletLayer");
-      this._gauntletMovie = this._gauntletLayer.LoadMovie("Tournament", this._dataSource);
-      base.MissionScreen.CustomCamera = this._customCamera;
-      this._gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
-      base.MissionScreen.AddLayer(this._gauntletLayer);
+      _dataSource = new TeamTournamentVM(DisableUi, _behavior);
+      _gauntletLayer = new GauntletLayer(ViewOrderPriorty, "GauntletLayer");
+      _gauntletMovie = _gauntletLayer.LoadMovie("Tournament", _dataSource);
+      base.MissionScreen.CustomCamera = _customCamera;
+      _gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
+      base.MissionScreen.AddLayer(_gauntletLayer);
     }
 
     public override void OnMissionScreenFinalize()
     {
-      this._gauntletLayer.InputRestrictions.ResetInputRestrictions();
-      this._gauntletMovie = null;
-      this._gauntletLayer = null;
-      this._dataSource.OnFinalize();
-      this._dataSource = null;
+      _gauntletLayer.InputRestrictions.ResetInputRestrictions();
+      _gauntletMovie = null;
+      _gauntletLayer = null;
+      _dataSource.OnFinalize();
+      _dataSource = null;
       base.OnMissionScreenFinalize();
     }
 
     public override void AfterStart()
     {
-      this._behavior = base.Mission.GetMissionBehaviour<TeamTournamentBehavior>();
+      _behavior = base.Mission.GetMissionBehaviour<TeamTournamentBehavior>();
       var gameEntity = base.Mission.Scene.FindEntityWithTag("camera_instance");
-      this._customCamera = Camera.CreateCamera();
+      _customCamera = Camera.CreateCamera();
       var vec = default(Vec3);
-      gameEntity.GetCameraParamsFromCameraScript(this._customCamera, ref vec);
+      gameEntity.GetCameraParamsFromCameraScript(_customCamera, ref vec);
     }
 
     public override void OnMissionTick(float dt)
     {
-      if (this._behavior == null)
+      if (_behavior == null)
       {
         return;
       }
-      if (!this._showUi && ((this._behavior.LastMatch != null && this._behavior.CurrentMatch == null) || this._behavior.CurrentMatch.IsReady))
+      if (!_showUi && ((_behavior.LastMatch != null && _behavior.CurrentMatch == null) || _behavior.CurrentMatch.IsReady))
       {
-        this._dataSource.Refresh();
-        this.ShowUi();
+        _dataSource.Refresh();
+        ShowUi();
       }
-      if (!this._showUi && this._dataSource.CurrentMatch.IsValid)
+      if (!_showUi && _dataSource.CurrentMatch.IsValid)
       {
-        var currentMatch = this._behavior.CurrentMatch;
+        var currentMatch = _behavior.CurrentMatch;
         if (currentMatch != null && currentMatch.State == TournamentMatch.MatchState.Started)
         {
-          this._dataSource.CurrentMatch.RefreshActiveMatch();
+          _dataSource.CurrentMatch.RefreshActiveMatch();
         }
       }
-      if (this._dataSource.IsOver && this._showUi && !base.DebugInput.IsControlDown() && base.DebugInput.IsHotKeyPressed("ShowHighlightsSummary"))
+      if (_dataSource.IsOver && _showUi && !base.DebugInput.IsControlDown() && base.DebugInput.IsHotKeyPressed("ShowHighlightsSummary"))
       {
         HighlightsController missionBehaviour = base.Mission.GetMissionBehaviour<HighlightsController>();
         if (missionBehaviour == null)
@@ -87,43 +87,43 @@ namespace TournamentsEnhanced.TeamTournament
 
     private void DisableUi()
     {
-      if (!this._showUi)
+      if (!_showUi)
       {
         return;
       }
-      base.MissionScreen.UpdateFreeCamera(this._customCamera.Frame);
+      base.MissionScreen.UpdateFreeCamera(_customCamera.Frame);
       base.MissionScreen.CustomCamera = null;
-      this._showUi = false;
-      this._gauntletLayer.InputRestrictions.ResetInputRestrictions();
+      _showUi = false;
+      _gauntletLayer.InputRestrictions.ResetInputRestrictions();
     }
 
     private void ShowUi()
     {
-      if (this._showUi)
+      if (_showUi)
       {
         return;
       }
-      base.MissionScreen.CustomCamera = this._customCamera;
-      this._showUi = true;
-      this._gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
+      base.MissionScreen.CustomCamera = _customCamera;
+      _showUi = true;
+      _gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
     }
 
     public override void OnAgentRemoved(Agent affectedAgent, Agent affectorAgent, AgentState agentState, KillingBlow killingBlow)
     {
       base.OnAgentRemoved(affectedAgent, affectorAgent, agentState, killingBlow);
-      this._dataSource.OnAgentRemoved(affectedAgent);
+      _dataSource.OnAgentRemoved(affectedAgent);
     }
 
     public override void OnPhotoModeActivated()
     {
       base.OnPhotoModeActivated();
-      this._gauntletLayer._gauntletUIContext.ContextAlpha = 0f;
+      _gauntletLayer._gauntletUIContext.ContextAlpha = 0f;
     }
 
     public override void OnPhotoModeDeactivated()
     {
       base.OnPhotoModeDeactivated();
-      this._gauntletLayer._gauntletUIContext.ContextAlpha = 1f;
+      _gauntletLayer._gauntletUIContext.ContextAlpha = 1f;
     }
   }
 

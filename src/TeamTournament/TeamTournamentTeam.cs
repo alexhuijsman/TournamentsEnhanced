@@ -14,19 +14,19 @@ namespace TournamentsEnhanced.TeamTournament
     public int Score { get => _score; }
     public Banner TeamBanner { get; set; }
     public uint TeamColor { get; set; }
-    public bool IsPlayerTeam => this.Members.Any(x => x.IsPlayer);
+    public bool IsPlayerTeam => Members.Any(x => x.IsPlayer);
     public bool IsAlive { get; internal set; }
 
     public TeamTournamentTeam(IEnumerable<TeamTournamentMember> members, Banner teamBanner = null, uint teamColor = 0, TeamTournamentMember leader = null)
     {
       _members = new List<TeamTournamentMember>(members);
-      this.TeamBanner = teamBanner;
-      this.TeamColor = teamColor;
+      TeamBanner = teamBanner;
+      TeamColor = teamColor;
 
       foreach (var el in _members)
         el.SetTeam(this);
 
-      this._leader = leader;
+      _leader = leader;
     }
 
     public void AddScore(int score)
@@ -37,22 +37,22 @@ namespace TournamentsEnhanced.TeamTournament
 
     public void ResetScore()
     {
-      this._score = 0;
+      _score = 0;
       Members.ToList().ForEach(x => x.ResetScore());
     }
 
     public TeamTournamentMember GetTeamLeader()
     {
-      if (this._leader != null)
-        return this._leader;
+      if (_leader != null)
+        return _leader;
 
       if (IsPlayerTeam)
-        return this.Members.First(x => x.IsPlayer);
+        return Members.First(x => x.IsPlayer);
       else
       {
         return
-          this.Members.OrderByDescending(x => x.Character.GetPower()).FirstOrDefault(x => x.Character.IsHero)
-          ?? this.Members.OrderByDescending(x => x.Character.GetPower()).First();
+          Members.OrderByDescending(x => x.Character.GetPower()).FirstOrDefault(x => x.Character.IsHero)
+          ?? Members.OrderByDescending(x => x.Character.GetPower()).First();
       }
     }
   }
