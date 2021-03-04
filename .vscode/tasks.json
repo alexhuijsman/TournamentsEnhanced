@@ -3,9 +3,22 @@
   "tasks": [
     {
       "label": "Build & Test",
+      "command": "${command:test-explorer.run-all}",
+      "group": "test",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "dotnet build"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "dotnet build",
       "command": "dotnet",
       "args": [
-        "test",
+        "build",
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
         "/p:Platform=x64",
@@ -40,6 +53,10 @@
         "/p:Platform=x64",
         "${workspaceFolder}/TournamentsEnhanced.csproj"
       ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
       "problemMatcher": "$msCompile"
     },
     {
@@ -50,6 +67,9 @@
         "${input:tag}",
         "${env:PATH_TO_BANNERLORD}"
       ],
+      "presentation": {
+        "reveal": "silent"
+      },
       "problemMatcher": []
     },
     {
@@ -59,6 +79,9 @@
       "args": [
         "src"
       ],
+      "presentation": {
+        "reveal": "silent"
+      },
       "problemMatcher": []
     },
     {
@@ -74,6 +97,9 @@
       "args": [
         "src",
       ],
+      "presentation": {
+        "reveal": "silent"
+      },
       "problemMatcher": []
     },
   ],
