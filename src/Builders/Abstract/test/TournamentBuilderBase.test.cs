@@ -34,7 +34,7 @@ namespace Test
     private Mock<MBSettlement> _mockSettlement;
     private Mock<ModState> _mockModState;
     private Mock<Settings> _mockSettings;
-    Mock<MBInformationManagerFacade> _mockMBInformationManagerFacade;
+    Mock<MBInformationManagerFacade> _mockInformationManagerFacade;
     private TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
     private CreateTournamentOptions _options;
 
@@ -98,10 +98,13 @@ namespace Test
         _mockSettings = MockRepository.Create<Settings>();
         _mockSettings.SetupGet(s => s.TournamentCost).Returns(Default.TournamentCost);
 
+        _mockInformationManagerFacade = MockRepository.Create<MBInformationManagerFacade>();
+        _mockInformationManagerFacade.Setup(f => f.DisplayAsQuickBanner(It.IsAny<string>()));
+
         _sut.ModState = _mockModState.Object;
         _sut.MBCampaign = _mockCampaign.Object;
         _sut.Settings = _mockSettings.Object;
-        _sut.MBInformationManagerFacade = _mockMBInformationManagerFacade.Object;
+        _sut.MBInformationManagerFacade = _mockInformationManagerFacade.Object;
       }
     }
 
@@ -132,7 +135,10 @@ namespace Test
 
       var result = _sut.CreateTournament(_options);
 
-      result.Succeeded.ShouldBe(true);
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true)
+      );
     }
 
     [Test]
@@ -142,7 +148,10 @@ namespace Test
 
       var result = _sut.CreateTournament(_options);
 
-      result.Succeeded.ShouldBe(true);
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true)
+      );
     }
   }
 
