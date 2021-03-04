@@ -119,17 +119,24 @@ namespace Test
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_InitialTournament_ShouldReturnSuccess()
+    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_InitialTournament_ShouldReturnExpected()
     {
       SetUp(ValidOptions, NoExistingTournament, NoInitiatingHero, TournamentType.Initial);
 
       var result = _sut.CreateTournament(_options);
 
-      result.Succeeded.ShouldBe(true);
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.HadExistingTournament.ShouldBe(NoExistingTournament),
+        () => result.HasPayor.ShouldBe(false),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.Succeeded.ShouldBe(true)
+      );
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_BirthTournament_HeroIsNotPlayerCharacter_ShouldReturnSuccess()
+    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_BirthTournament_HeroIsNotPlayerCharacter_ShouldReturnExpected()
     {
       SetUp(ValidOptions, NoExistingTournament, NoInitiatingHero, TournamentType.Birth, HeroIsNotHumanPlayerCharacter);
 
@@ -137,12 +144,16 @@ namespace Test
 
       result.ShouldSatisfyAllConditions(
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.Payor.ShouldBe(_mockHero.Object),
         () => result.Succeeded.ShouldBe(true)
       );
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_BirthTournament_HeroIsPlayerCharacter_ShouldReturnSuccess()
+    public void CreateTournament_OptionsAreValid_HasNoInitiatingHero_BirthTournament_HeroIsPlayerCharacter_ShouldReturnExpected()
     {
       SetUp(ValidOptions, NoExistingTournament, NoInitiatingHero, TournamentType.Birth, HeroIsHumanPlayerCharacter);
 
@@ -150,6 +161,10 @@ namespace Test
 
       result.ShouldSatisfyAllConditions(
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.Payor.ShouldBe(_mockHero.Object),
         () => result.Succeeded.ShouldBe(true)
       );
     }
