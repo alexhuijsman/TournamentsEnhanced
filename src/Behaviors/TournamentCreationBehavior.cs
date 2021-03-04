@@ -17,6 +17,7 @@ namespace TournamentsEnhanced.Behaviors
     protected ModState ModState { get; set; } = ModState.Instance;
     protected Settings Settings { get; set; } = Settings.Instance;
     protected MBHero MBHero { get; set; } = MBHero.Instance;
+    protected MBInformationManagerFacade MBInformationManagerFacade { get; set; } = MBInformationManagerFacade.Instance;
 
     public override void RegisterEvents()
     {

@@ -2,14 +2,15 @@ using TournamentsEnhanced.Wrappers.Localization;
 
 namespace TournamentsEnhanced.Wrappers.Core
 {
-  public static class MBInformationManagerFacade
+  public class MBInformationManagerFacade
   {
-    public static void DisplayAsLogEntry(string message)
+    public static MBInformationManagerFacade Instance { get; } = new MBInformationManagerFacade();
+    public virtual void DisplayAsLogEntry(string message)
     {
       MBInformationManager.DisplayMessage(new MBInformationMessage(message));
     }
 
-    public static void DisplayAsQuickBanner(string message)
+    public virtual void DisplayAsQuickBanner(string message)
     {
       MBInformationManager.AddQuickInformation(new MBTextObject(message));
     }

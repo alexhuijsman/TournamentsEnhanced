@@ -8,6 +8,7 @@ using TournamentsEnhanced.Builders.Abstract;
 using TournamentsEnhanced.Models;
 using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
+using TournamentsEnhanced.Wrappers.Core;
 using static TournamentsEnhanced.Constants.Settings;
 
 namespace Test
@@ -33,6 +34,7 @@ namespace Test
     private Mock<MBSettlement> _mockSettlement;
     private Mock<ModState> _mockModState;
     private Mock<Settings> _mockSettings;
+    Mock<MBInformationManagerFacade> _mockMBInformationManagerFacade;
     private TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
     private CreateTournamentOptions _options;
 
@@ -151,6 +153,7 @@ namespace Test
     public new ModState ModState { set => base.ModState = value; }
     public new Settings Settings { set => base.Settings = value; }
     public new MBCampaign MBCampaign { set => base.MBCampaign = value; }
+    public new MBInformationManagerFacade MBInformationManagerFacade { set => base.MBInformationManagerFacade = value; }
     public new CreateTournamentResult CreateTournament(CreateTournamentOptions options)
       => base.CreateTournament(options);
   }

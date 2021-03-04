@@ -21,6 +21,7 @@ namespace TournamentsEnhanced.Builders.Abstract
     protected MBHero MBHero { get; set; } = MBHero.Instance;
     protected MBCampaign MBCampaign { get; set; } = MBCampaign.Instance;
     protected ModState ModState { get; set; } = ModState.Instance;
+    protected MBInformationManagerFacade MBInformationManagerFacade { get; set; } = MBInformationManagerFacade.Instance;
 
     protected CreateTournamentResult CreateTournament(CreateTournamentOptions options)
     {
