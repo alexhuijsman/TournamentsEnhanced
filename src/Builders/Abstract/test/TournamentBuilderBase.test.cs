@@ -22,28 +22,10 @@ namespace Test
   public class TournamentBuilderBaseTest : TestBase<TournamentBuilderBaseImpl>
   {
     protected enum OptionsAre { Valid, Invalid }
-    protected enum InitiatingHero
-    {
-      IsSpecified,
-      IsNotSpecified,
-    }
-    protected enum TownHas
-    {
-      ExistingTournament,
-      NoExistingTournament,
-    }
-
-    protected enum PayorIs
-    {
-      HumanPlayer,
-      NotHumanPlayer,
-    }
-
-    protected enum SettlementStatNotification
-    {
-      Show,
-      Hide,
-    }
+    protected enum InitiatingHero { IsSpecified, IsNotSpecified }
+    protected enum TownHas { ExistingTournament, NoExistingTournament }
+    protected enum PayorIs { HumanPlayer, NotHumanPlayer }
+    protected enum SettlementStatNotification { Show, Hide }
 
     protected const string ExpectedSettlementStringId = "111111111111";
     protected const string ExpectedHeroStringId = "222222222222";
