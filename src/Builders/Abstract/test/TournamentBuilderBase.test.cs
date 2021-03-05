@@ -1,7 +1,11 @@
 using System;
+
 using Moq;
+
 using NUnit.Framework;
+
 using Shouldly;
+
 using TournamentsEnhanced;
 using TournamentsEnhanced.Builders;
 using TournamentsEnhanced.Builders.Abstract;
@@ -10,50 +14,65 @@ using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 using TournamentsEnhanced.Wrappers.Core;
 using TournamentsEnhanced.Wrappers.Localization;
+
 using static TournamentsEnhanced.Constants.Settings;
 
 namespace Test
 {
   public class TournamentBuilderBaseTest : TestBase<TournamentBuilderBaseImpl>
   {
-    private const bool ValidOptions = true;
-    private const bool InvalidOptions = false;
-    private const bool HasInitiatingHero = true;
-    private const bool NoInitiatingHero = false;
-    private const bool HasExistingTournament = true;
-    private const bool NoExistingTournament = false;
-    private const bool PayorIsPlayer = true;
-    private const bool PayorIsNotPlayer = false;
-    private const bool ShowSettlementStatNotification = true;
-    private const bool HideSettlementStatNotification = false;
-    private const string ExpectedSettlementStringId = "111111111111";
-    private const string ExpectedHeroStringId = "222222222222";
-    private const string SettlementName = "Test Settlement";
+    protected enum OptionsAre { Valid, Invalid }
+    protected enum InitiatingHero
+    {
+      IsSpecified,
+      IsNotSpecified,
+    }
+    protected enum TownHas
+    {
+      ExistingTournament,
+      NoExistingTournament,
+    }
 
-    private Mock<MBHero> _mockHero;
-    private Mock<MBTown> _mockTown;
-    private Mock<MBTextObject> _mockTextObject;
-    private Mock<MBTournamentManager> _mockTournamentManager;
-    private Mock<MBCampaign> _mockCampaign;
-    private Mock<MBClan> _mockClan;
-    private Mock<MBSettlement> _mockSettlement;
-    private Mock<ModState> _mockModState;
-    private Mock<Settings> _mockSettings;
+    protected enum PayorIs
+    {
+      HumanPlayer,
+      NotHumanPlayer,
+    }
+
+    protected enum SettlementStatNotification
+    {
+      Show,
+      Hide,
+    }
+
+    protected const string ExpectedSettlementStringId = "111111111111";
+    protected const string ExpectedHeroStringId = "222222222222";
+    protected const string SettlementName = "Test Settlement";
+
+    protected Mock<MBHero> _mockHero;
+    protected Mock<MBTown> _mockTown;
+    protected Mock<MBTextObject> _mockTextObject;
+    protected Mock<MBTournamentManager> _mockTournamentManager;
+    protected Mock<MBCampaign> _mockCampaign;
+    protected Mock<MBClan> _mockClan;
+    protected Mock<MBSettlement> _mockSettlement;
+    protected Mock<ModState> _mockModState;
+    protected Mock<Settings> _mockSettings;
     Mock<MBInformationManagerFacade> _mockInformationManagerFacade;
-    private TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
-    private CreateTournamentOptions _options;
+    protected TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
+    protected CreateTournamentOptions _options;
 
     protected void SetUp(
-      bool optionsAreValid,
+      OptionsAre optionsType,
       TournamentType tournamentType = TournamentType.None,
-      bool hasExistingTournament = false,
-      bool hasInitiatingHero = false,
-      bool payorIsPlayer = false,
-      bool showSettlementStatNotification = false)
+      TownHas townType = TownHas.NoExistingTournament,
+      InitiatingHero intiatingHeroType = InitiatingHero.IsNotSpecified,
+      PayorIs payorType = PayorIs.NotHumanPlayer,
+      SettlementStatNotification settlementStatNotificationType = SettlementStatNotification.Hide)
     {
       base.SetUp();
 
-      if (!optionsAreValid)
+      if (optionsType == OptionsAre.Invalid)
       {
         var mockOptions = MockRepository.Create<CreateTournamentOptions>();
         mockOptions.SetupGet(o => o.AreValid).Returns(false);
@@ -70,14 +89,14 @@ namespace Test
         _mockHero = MockRepository.Create<MBHero>();
         _mockHero.SetupGet(h => h.IsNull).Returns(false);
         _mockHero.SetupGet(h => h.StringId).Returns(ExpectedHeroStringId);
-        _mockHero.SetupGet(h => h.IsHumanPlayerCharacter).Returns(payorIsPlayer);
+        _mockHero.SetupGet(h => h.IsHumanPlayerCharacter).Returns(payorType == PayorIs.HumanPlayer);
         _mockHero.Setup(h => h.ChangeHeroGold(-Default.TournamentCost));
 
         _mockClan = MockRepository.Create<MBClan>();
         _mockClan.SetupGet(c => c.Leader).Returns(_mockHero.Object);
 
         _mockTown = MockRepository.Create<MBTown>();
-        _mockTown.SetupGet(t => t.HasTournament).Returns(hasExistingTournament);
+        _mockTown.SetupGet(t => t.HasTournament).Returns(townType == TownHas.ExistingTournament);
         _mockTown.Setup(m => m.ChangeGold(Default.TournamentCost));
         _mockTown.SetupGet(m => m.Loyalty).Returns(0);
         _mockTown.SetupGet(m => m.Security).Returns(0);
@@ -109,7 +128,10 @@ namespace Test
 
         _options = new CreateTournamentOptions()
         {
-          InitiatingHero = hasInitiatingHero ? _mockHero.Object : MBHero.Null,
+          InitiatingHero =
+            intiatingHeroType == InitiatingHero.IsSpecified
+              ? _mockHero.Object
+              : MBHero.Null,
           Settlement = _mockSettlement.Object,
           Type = tournamentType
         };
@@ -120,7 +142,7 @@ namespace Test
         _mockSettings.SetupGet(s => s.LoyaltyIncrease).Returns(Default.LoyaltyIncrease);
         _mockSettings.SetupGet(s => s.SecurityIncrease).Returns(Default.SecurityIncrease);
         _mockSettings.SetupGet(s => s.FoodStocksDecrease).Returns(Default.FoodStocksDecrease);
-        _mockSettings.SetupGet(s => s.SettlementStatNotification).Returns(showSettlementStatNotification);
+        _mockSettings.SetupGet(s => s.SettlementStatNotification).Returns(settlementStatNotificationType == SettlementStatNotification.Show);
 
         _mockInformationManagerFacade = MockRepository.Create<MBInformationManagerFacade>();
         _mockInformationManagerFacade.Setup(f => f.DisplayAsQuickBanner(It.IsAny<string>()));
@@ -136,7 +158,7 @@ namespace Test
     [Test]
     public void CreateTournament_OptionsAreNotValid_ShouldThrowArgumentException()
     {
-      SetUp(InvalidOptions);
+      SetUp(OptionsAre.Invalid);
 
       Should.Throw<ArgumentException>(
         () => _sut.CreateTournament(_options)
@@ -144,13 +166,13 @@ namespace Test
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_InitialTournament_NoExistingTournament_HasNoInitiatingHero_ShouldReturnExpected()
+    public void CreateTournament_OptionsAreValid_InitialTournament_NoExistingTournament_NoInitiatingHero_ShouldReturnExpected()
     {
       SetUp(
-        ValidOptions,
+        OptionsAre.Valid,
         TournamentType.Initial,
-        NoExistingTournament,
-        NoInitiatingHero
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified
       );
 
       var result = _sut.CreateTournament(_options);
@@ -158,7 +180,7 @@ namespace Test
       result.ShouldSatisfyAllConditions(
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
-        () => result.HadExistingTournament.ShouldBe(NoExistingTournament),
+        () => result.HadExistingTournament.ShouldBe(false),
         () => result.HasPayor.ShouldBe(false),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
         () => result.Succeeded.ShouldBe(true)
@@ -166,15 +188,15 @@ namespace Test
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasNoInitiatingHero_PayorIsNotPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
     {
       SetUp(
-        ValidOptions,
+        OptionsAre.Valid,
         TournamentType.Birth,
-        NoExistingTournament,
-        NoInitiatingHero,
-        PayorIsNotPlayer,
-        HideSettlementStatNotification
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
       );
 
       var result = _sut.CreateTournament(_options);
@@ -190,15 +212,15 @@ namespace Test
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasNoInitiatingHero_PayorIsNotPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
     {
       SetUp(
-        ValidOptions,
+        OptionsAre.Valid,
         TournamentType.Birth,
-        NoExistingTournament,
-        NoInitiatingHero,
-        PayorIsNotPlayer,
-        ShowSettlementStatNotification
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
       );
 
       var result = _sut.CreateTournament(_options);
@@ -214,15 +236,15 @@ namespace Test
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasNoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
     {
       SetUp(
-        ValidOptions,
+        OptionsAre.Valid,
         TournamentType.Birth,
-        NoExistingTournament,
-        NoInitiatingHero,
-        PayorIsPlayer,
-        HideSettlementStatNotification
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
       );
 
       var result = _sut.CreateTournament(_options);
@@ -238,15 +260,15 @@ namespace Test
     }
 
     [Test]
-    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasNoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
     {
       SetUp(
-        ValidOptions,
+        OptionsAre.Valid,
         TournamentType.Birth,
-        NoExistingTournament,
-        NoInitiatingHero,
-        PayorIsPlayer,
-        ShowSettlementStatNotification
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
       );
 
       var result = _sut.CreateTournament(_options);
@@ -254,6 +276,30 @@ namespace Test
       result.ShouldSatisfyAllConditions(
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
         () => result.HasPayor.ShouldBe(true),
