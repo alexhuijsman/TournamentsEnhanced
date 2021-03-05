@@ -1,6 +1,4 @@
 using TournamentsEnhanced.Builders.Abstract;
-using TournamentsEnhanced.Models;
-using TournamentsEnhanced.Models.Serializable;
 using TournamentsEnhanced.Wrappers.CampaignSystem;
 
 namespace TournamentsEnhanced.Builders
@@ -19,7 +17,8 @@ namespace TournamentsEnhanced.Builders
       {
         HadExistingTournament = hadExistingTournament,
         Status = ResultStatus.Success,
-        Payor = isInitialTournament ? MBHero.Null : settlement.OwnerClan.Leader
+        Payor = isInitialTournament ? MBHero.Null : settlement.OwnerClan.Leader,
+        HostSettlement = settlement
       };
     }
   }
