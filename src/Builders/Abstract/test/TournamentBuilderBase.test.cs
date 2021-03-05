@@ -288,6 +288,2406 @@ namespace Test
         () => result.Payor.ShouldBe(_mockHero.Object)
       );
     }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_BirthTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Birth,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_HighbornTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Highborn,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_InvitationTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Invitation,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PeaceTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Peace,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_PlayerInitiatedTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.PlayerInitiated,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_ProsperityTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Prosperity,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_NoInitiatingHero_PayorIsPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_NoExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.NoExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_NoInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_NoInitiatingHero_PayorIsHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsNotSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_HasInitiatingHero_PayorIsNotHumanPlayer_ShowSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.NotHumanPlayer,
+        SettlementStatNotification.Show
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
+
+    [Test]
+    public void CreateTournament_OptionsAreValid_WeddingTournament_HasExistingTournament_HasInitiatingHero_PayorIsHumanPlayer_HideSettlementStatNotification_ShouldReturnExpected()
+    {
+      SetUp(
+        OptionsAre.Valid,
+        TournamentType.Wedding,
+        TownHas.ExistingTournament,
+        InitiatingHero.IsSpecified,
+        PayorIs.HumanPlayer,
+        SettlementStatNotification.Hide
+      );
+
+      var result = _sut.CreateTournament(_options);
+
+      result.ShouldSatisfyAllConditions(
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
+        () => result.Succeeded.ShouldBe(true),
+        () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
+        () => result.HasPayor.ShouldBe(true),
+        () => result.Payor.ShouldBe(_mockHero.Object)
+      );
+    }
   }
 
   public class TournamentBuilderBaseImpl : TournamentBuilderBase
