@@ -16,7 +16,9 @@ namespace TournamentsEnhanced.TeamTournament
     private TeamTournamentBehavior _behavior;
     private Camera _customCamera;
     private bool _showUi = true;
-    private GauntletMovie _gauntletMovie;
+#pragma warning disable IDE0052 // Remove unread private members
+    private IGauntletMovie _gauntletMovie;
+#pragma warning restore IDE0052 // Remove unread private members
     private GauntletLayer _gauntletLayer;
     private TeamTournamentVM _dataSource;
 
@@ -31,9 +33,9 @@ namespace TournamentsEnhanced.TeamTournament
       _dataSource = new TeamTournamentVM(DisableUi, _behavior);
       _gauntletLayer = new GauntletLayer(ViewOrderPriorty, "GauntletLayer");
       _gauntletMovie = _gauntletLayer.LoadMovie("Tournament", _dataSource);
-      base.MissionScreen.CustomCamera = _customCamera;
+      MissionScreen.CustomCamera = _customCamera;
       _gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
-      base.MissionScreen.AddLayer(_gauntletLayer);
+      MissionScreen.AddLayer(_gauntletLayer);
     }
 
     public override void OnMissionScreenFinalize()
@@ -91,8 +93,8 @@ namespace TournamentsEnhanced.TeamTournament
       {
         return;
       }
-      base.MissionScreen.UpdateFreeCamera(_customCamera.Frame);
-      base.MissionScreen.CustomCamera = null;
+      MissionScreen.UpdateFreeCamera(_customCamera.Frame);
+      MissionScreen.CustomCamera = null;
       _showUi = false;
       _gauntletLayer.InputRestrictions.ResetInputRestrictions();
     }
@@ -103,7 +105,7 @@ namespace TournamentsEnhanced.TeamTournament
       {
         return;
       }
-      base.MissionScreen.CustomCamera = _customCamera;
+      MissionScreen.CustomCamera = _customCamera;
       _showUi = true;
       _gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
     }
