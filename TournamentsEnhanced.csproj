@@ -4,8 +4,8 @@
     <PlatformTarget>x64</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ModVersion>1.5.8.12</ModVersion>
-    <CachedBannerlordTargetVersion>e1.5.8</CachedBannerlordTargetVersion>
+    <ModVersion>1.5.9.1</ModVersion>
+    <CachedBannerlordTargetVersion>e1.5.9</CachedBannerlordTargetVersion>
   </PropertyGroup>
 
   <PropertyGroup>
