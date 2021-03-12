@@ -21,22 +21,22 @@ namespace TournamentsEnhanced.TeamTournament.Menu
     protected override void OnInitialize()
     {
       base.OnInitialize();
-      _dataSource = new ManageTeamSelectionVM(_tournamentKB)
-      {
-        IsEnabled = true
-      };
-      _gauntletLayer = new GauntletLayer(205, "GauntletLayer")
-      {
-        Name = "MenuManageHideoutTroops"
-      };
-      _gauntletLayer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
-      _gauntletLayer.Input.RegisterHotKeyCategory(HotKeyManager.GetCategory("GenericCampaignPanelsGameKeyCategory"));
+
+      _dataSource = new ManageTeamSelectionVM(_tournamentKB) { IsEnabled = true };
+
+      Layer = new GauntletLayer(206) { Name = "MenuManageHideoutTroops" };
+      Layer.InputRestrictions.SetInputRestrictions(true, InputUsageMask.All);
+      Layer.Input.RegisterHotKeyCategory(HotKeyManager.GetCategory("GenericCampaignPanelsGameKeyCategory"));
+
+      _gauntletLayer = (Layer as GauntletLayer);
       _movie = _gauntletLayer.LoadMovie("GameMenuManageHideoutTroops", _dataSource);
-      _gauntletLayer.IsFocusLayer = true;
-      ScreenManager.TrySetFocus(_gauntletLayer);
-      base.MenuViewContext.AddLayer(_gauntletLayer);
-      MapScreen mapScreen = ScreenManager.TopScreen as MapScreen;
-      if (mapScreen != null)
+
+      Layer.IsFocusLayer = true;
+
+      ScreenManager.TrySetFocus(Layer);
+      MenuViewContext.AddLayer(Layer);
+
+      if (ScreenManager.TopScreen is MapScreen mapScreen)
         mapScreen.IsInHideoutTroopManage = true;
     }
 
@@ -47,11 +47,11 @@ namespace TournamentsEnhanced.TeamTournament.Menu
       _dataSource.OnFinalize();
       _dataSource = null;
       _gauntletLayer.ReleaseMovie(_movie);
-      base.MenuViewContext.RemoveLayer(_gauntletLayer);
+      MenuViewContext.RemoveLayer(_gauntletLayer);
       _movie = null;
       _gauntletLayer = null;
-      MapScreen mapScreen = ScreenManager.TopScreen as MapScreen;
-      if (mapScreen != null)
+
+      if (ScreenManager.TopScreen is MapScreen mapScreen)
         mapScreen.IsInHideoutTroopManage = false;
 
       base.OnFinalize();
@@ -60,20 +60,18 @@ namespace TournamentsEnhanced.TeamTournament.Menu
     protected override void OnFrameTick(float dt)
     {
       base.OnFrameTick(dt);
+
       if (_gauntletLayer.Input.IsHotKeyPressed("Exit"))
-      {
         _dataSource.IsEnabled = false;
-      }
+
       if (!_dataSource.IsEnabled)
-      {
-        base.MenuViewContext.CloseManageHideoutTroops();
-      }
+        MenuViewContext.CloseManageHideoutTroops();
     }
 
     private readonly TournamentKB _tournamentKB;
     private GauntletLayer _gauntletLayer;
     private ManageTeamSelectionVM _dataSource;
-    private GauntletMovie _movie;
+    private IGauntletMovie _movie;
   }
 
   // Gauntlet Dummy
