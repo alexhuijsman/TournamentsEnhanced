@@ -218,12 +218,12 @@ namespace TournamentsEnhanced.TeamTournament
 
     private void AddScoreToKillerTeam(int killerUniqueSeed)
     {
-      _aliveTeams.FirstOrDefault(x => x.Members.Any(m => m.IsCharWithDescriptor(killerUniqueSeed))).AddScore(1);
+      _aliveTeams.FirstOrDefault(x => x.Members.Any(m => m.IsCharWithDescriptor(killerUniqueSeed)))?.AddScore(1);
     }
 
     private void AddLastTeamScore()
     {
-      _aliveTeams.First().AddScore(_match.Teams.Count());
+      _aliveTeams.FirstOrDefault()?.AddScore(_match.Teams.Count());
     }
 
     public override void OnAgentRemoved(Agent affectedAgent, Agent affectorAgent, AgentState agentState, KillingBlow killingBlow)
