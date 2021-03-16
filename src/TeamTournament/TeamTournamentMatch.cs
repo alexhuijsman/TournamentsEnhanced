@@ -18,16 +18,16 @@ namespace TournamentsEnhanced.TeamTournament
 
     public IEnumerable<TeamTournamentTeam> Teams { get => _teams; }
     public MatchState State { get; private set; }
-    public bool IsReady => this.State == MatchState.Ready;
-    public bool IsFinished => this.State == MatchState.Finished;
+    public bool IsReady => State == MatchState.Ready;
+    public bool IsFinished => State == MatchState.Finished;
 
-    public IEnumerable<TeamTournamentTeam> Winners => this.GetWinners();
+    public IEnumerable<TeamTournamentTeam> Winners => GetWinners();
 
     public TeamTournamentMatch(int teamCount, int winnerTeamsPerMatch)
     {
-      this._winnerTeamsPerMatch = winnerTeamsPerMatch;
+      _winnerTeamsPerMatch = winnerTeamsPerMatch;
       _teams = new List<TeamTournamentTeam>(teamCount);
-      this.State = MatchState.Ready;
+      State = MatchState.Ready;
     }
 
     public void AddTeam(TeamTournamentTeam team)
@@ -67,28 +67,28 @@ namespace TournamentsEnhanced.TeamTournament
 
     public void End()
     {
-      this.State = MatchState.Finished;
-      this._winners = this.GetWinners();
+      State = MatchState.Finished;
+      _winners = GetWinners();
     }
 
     public void Start()
     {
-      if (this.State != MatchState.Started)
+      if (State != MatchState.Started)
       {
-        this.State = MatchState.Started;
+        State = MatchState.Started;
         _teams.ForEach(t => t.ResetScore());
       }
     }
-    public IEnumerable<TeamTournamentMember> MatchMembers => this.Teams.SelectMany(x => x.Members);
-    public bool IsPlayerParticipating => this.Teams.Any(x => x.IsPlayerTeam);
+    public IEnumerable<TeamTournamentMember> MatchMembers => Teams.SelectMany(x => x.Members);
+    public bool IsPlayerParticipating => Teams.Any(x => x.IsPlayerTeam);
     public bool IsPlayerTeamWinner => GetWinners().Any(x => x.IsPlayerTeam);
 
     public bool IsFullMatch => _teams.Count == _teams.Capacity;
 
     private List<TeamTournamentTeam> GetWinners()
     {
-      if (this.State != MatchState.Finished || _winners == null)
-        _winners = this.Teams.OrderByDescending(x => x.Score).Take(this._winnerTeamsPerMatch).ToList();
+      if (State != MatchState.Finished || _winners == null)
+        _winners = Teams.OrderByDescending(x => x.Score).Take(_winnerTeamsPerMatch).ToList();
 
       return _winners;
     }
