@@ -203,7 +203,7 @@ namespace TournamentsEnhanced.TeamTournament
 
     private void AddRandomClothes(CultureObject culture, TeamTournamentMember member)
     {
-      var randomBattleEquipment = member.Character.RandomBattleEquipment;
+      var randomBattleEquipment = member.Character.BattleEquipments.GetRandomElement();
       for (int i = 5; i < 10; i++)
       {
         var equipmentFromSlot = randomBattleEquipment.GetEquipmentFromSlot((EquipmentIndex)i);
