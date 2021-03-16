@@ -13,16 +13,16 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
     public TeamTournamentMatchVM()
     {
-      this.Team1 = new TeamTournamentTeamVM();
-      this.Team2 = new TeamTournamentTeamVM();
-      this.Team3 = new TeamTournamentTeamVM();
-      this.Team4 = new TeamTournamentTeamVM();
-      this._teams = new List<TeamTournamentTeamVM>
+      Team1 = new TeamTournamentTeamVM();
+      Team2 = new TeamTournamentTeamVM();
+      Team3 = new TeamTournamentTeamVM();
+      Team4 = new TeamTournamentTeamVM();
+      _teams = new List<TeamTournamentTeamVM>
       {
-        this.Team1,
-        this.Team2,
-        this.Team3,
-        this.Team4
+        Team1,
+        Team2,
+        Team3,
+        Team4
       };
     }
 
@@ -31,12 +31,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     public override void RefreshValues()
     {
       base.RefreshValues();
-      this._teams.ForEach(x => x.RefreshValues());
+      _teams.ForEach(x => x.RefreshValues());
     }
 
     public void Initialize()
     {
-      foreach (var tournamentTeamVM in this.Teams)
+      foreach (var tournamentTeamVM in Teams)
       {
         if (tournamentTeamVM.IsValid)
           tournamentTeamVM.Initialize();
@@ -46,14 +46,14 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     public void Initialize(TeamTournamentMatch match)
     {
       int index = 0;
-      this.Match = match;
-      this.IsValid = (this.Match != null);
-      this.Count = match.Teams.Count();
+      Match = match;
+      IsValid = (Match != null);
+      Count = match.Teams.Count();
 
       foreach (var team in match.Teams)
-        this._teams[index++].Initialize(team);
+        _teams[index++].Initialize(team);
 
-      this.State = 0;
+      State = 0;
     }
 
     public void Refresh(bool forceRefresh)
@@ -62,9 +62,9 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
       {
         OnPropertyChanged("Count");
       }
-      for (int i = 0; i < this.Count; i++)
+      for (int i = 0; i < Count; i++)
       {
-        var tournamentTeamVM = this._teams[i];
+        var tournamentTeamVM = _teams[i];
         if (forceRefresh)
         {
           OnPropertyChanged("Team" + i + 1);
@@ -74,16 +74,16 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
         {
           var teamMemberVM = tournamentTeamVM.Members.ElementAt(j);
           teamMemberVM.Score = teamMemberVM.Member.Score.ToString();
-          teamMemberVM.IsQualifiedForNextRound = this.Match.Winners != null && this.Match.Winners.Any(x => x.Members.Contains(teamMemberVM.Member));
+          teamMemberVM.IsQualifiedForNextRound = Match.Winners != null && Match.Winners.Any(x => x.Members.Contains(teamMemberVM.Member));
         }
       }
     }
 
     public void RefreshActiveMatch()
     {
-      for (int i = 0; i < this.Count; i++)
+      for (int i = 0; i < Count; i++)
       {
-        var tournamentTeamVM = this._teams[i];
+        var tournamentTeamVM = _teams[i];
         for (int j = 0; j < tournamentTeamVM.Count; j++)
         {
           var tournamentParticipantVM = tournamentTeamVM.Members.ElementAt(j);
@@ -96,7 +96,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       OnPropertyChanged("Count");
       int num = 0;
-      foreach (var tournamentTeamVM in from t in this.Teams
+      foreach (var tournamentTeamVM in from t in Teams
                                        where t.IsValid
                                        select t)
       {
@@ -113,13 +113,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._isValid;
+        return _isValid;
       }
       set
       {
-        if (value != this._isValid)
+        if (value != _isValid)
         {
-          this._isValid = value;
+          _isValid = value;
           OnPropertyChangedWithValue(value, "IsValid");
         }
       }
@@ -130,13 +130,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._state;
+        return _state;
       }
       set
       {
-        if (value != this._state)
+        if (value != _state)
         {
-          this._state = value;
+          _state = value;
           OnPropertyChangedWithValue(value, "State");
         }
       }
@@ -147,13 +147,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._count;
+        return _count;
       }
       set
       {
-        if (value != this._count)
+        if (value != _count)
         {
-          this._count = value;
+          _count = value;
           OnPropertyChangedWithValue(value, "Count");
         }
       }
@@ -164,13 +164,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._team1;
+        return _team1;
       }
       set
       {
-        if (value != this._team1)
+        if (value != _team1)
         {
-          this._team1 = value;
+          _team1 = value;
           OnPropertyChangedWithValue(value, "Team1");
         }
       }
@@ -181,13 +181,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._team2;
+        return _team2;
       }
       set
       {
-        if (value != this._team2)
+        if (value != _team2)
         {
-          this._team2 = value;
+          _team2 = value;
           OnPropertyChangedWithValue(value, "Team2");
         }
       }
@@ -198,13 +198,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._team3;
+        return _team3;
       }
       set
       {
-        if (value != this._team3)
+        if (value != _team3)
         {
-          this._team3 = value;
+          _team3 = value;
           OnPropertyChangedWithValue(value, "Team3");
         }
       }
@@ -215,13 +215,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._team4;
+        return _team4;
       }
       set
       {
-        if (value != this._team4)
+        if (value != _team4)
         {
-          this._team4 = value;
+          _team4 = value;
           OnPropertyChangedWithValue(value, "Team4");
         }
       }

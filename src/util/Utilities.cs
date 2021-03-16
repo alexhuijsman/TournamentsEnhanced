@@ -154,7 +154,10 @@ namespace TournamentsEnhanced
 
       foreach (var item in itemPool)
       {
-        if (item.IsCraftedByPlayer || HasNumericStringId(item) || !Utilities.IsTierable(item))
+        if (item.IsCraftedByPlayer ||
+            HasNumericStringId(item) ||
+            string.IsNullOrWhiteSpace(item.StringId) ||
+            !Utilities.IsTierable(item))
         {
           continue;
         }

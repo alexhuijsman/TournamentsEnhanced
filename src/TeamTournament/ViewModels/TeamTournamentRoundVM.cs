@@ -15,49 +15,49 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
     public TeamTournamentRoundVM()
     {
-      this.Match1 = new TeamTournamentMatchVM();
-      this.Match2 = new TeamTournamentMatchVM();
-      this.Match3 = new TeamTournamentMatchVM();
-      this.Match4 = new TeamTournamentMatchVM();
-      this.Match5 = new TeamTournamentMatchVM();
-      this.Match6 = new TeamTournamentMatchVM();
-      this.Match7 = new TeamTournamentMatchVM();
-      this.Match8 = new TeamTournamentMatchVM();
-      this._matchVMs = new List<TeamTournamentMatchVM>
+      Match1 = new TeamTournamentMatchVM();
+      Match2 = new TeamTournamentMatchVM();
+      Match3 = new TeamTournamentMatchVM();
+      Match4 = new TeamTournamentMatchVM();
+      Match5 = new TeamTournamentMatchVM();
+      Match6 = new TeamTournamentMatchVM();
+      Match7 = new TeamTournamentMatchVM();
+      Match8 = new TeamTournamentMatchVM();
+      _matchVMs = new List<TeamTournamentMatchVM>
       {
-        this.Match1,
-        this.Match2,
-        this.Match3,
-        this.Match4,
-        this.Match5,
-        this.Match6,
-        this.Match7,
-        this.Match8
+        Match1,
+        Match2,
+        Match3,
+        Match4,
+        Match5,
+        Match6,
+        Match7,
+        Match8
       };
     }
 
     public override void RefreshValues()
     {
       base.RefreshValues();
-      this._matchVMs.ForEach(x => x.RefreshValues());
+      _matchVMs.ForEach(x => x.RefreshValues());
     }
 
-    public void Initialize() => this._matchVMs.ForEach(x => x.Initialize());
+    public void Initialize() => _matchVMs.ForEach(x => x.Initialize());
 
     public void Initialize(TeamTournamentRound round, TextObject name)
     {
-      this.Initialize(round);
-      this.Name = name.ToString();
+      Initialize(round);
+      Name = name.ToString();
     }
 
     public void Initialize(TeamTournamentRound round)
     {
-      this.IsValid = round != null;
+      IsValid = round != null;
 
       if (round != null)
       {
-        this.Round = round;
-        this.Count = round.MatchCount; // count of machtes
+        Round = round;
+        Count = round.MatchCount; // count of machtes
         var index = 0;
         foreach (var match in round.Matches)
           _matchVMs[index++].Initialize(match);
@@ -70,13 +70,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._isValid;
+        return _isValid;
       }
       set
       {
-        if (value != this._isValid)
+        if (value != _isValid)
         {
-          this._isValid = value;
+          _isValid = value;
           OnPropertyChangedWithValue(value, "IsValid");
         }
       }
@@ -87,13 +87,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._name;
+        return _name;
       }
       set
       {
-        if (value != this._name)
+        if (value != _name)
         {
-          this._name = value;
+          _name = value;
           OnPropertyChangedWithValue(value, "Name");
         }
       }
@@ -104,13 +104,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._count;
+        return _count;
       }
       set
       {
-        if (value != this._count)
+        if (value != _count)
         {
-          this._count = value;
+          _count = value;
           OnPropertyChangedWithValue(value, "Count");
         }
       }
@@ -121,13 +121,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match1;
+        return _match1;
       }
       set
       {
-        if (value != this._match1)
+        if (value != _match1)
         {
-          this._match1 = value;
+          _match1 = value;
           OnPropertyChangedWithValue(value, "Match1");
         }
       }
@@ -138,13 +138,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match2;
+        return _match2;
       }
       set
       {
-        if (value != this._match2)
+        if (value != _match2)
         {
-          this._match2 = value;
+          _match2 = value;
           OnPropertyChangedWithValue(value, "Match2");
         }
       }
@@ -155,13 +155,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match3;
+        return _match3;
       }
       set
       {
-        if (value != this._match3)
+        if (value != _match3)
         {
-          this._match3 = value;
+          _match3 = value;
           OnPropertyChangedWithValue(value, "Match3");
         }
       }
@@ -172,13 +172,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match4;
+        return _match4;
       }
       set
       {
-        if (value != this._match4)
+        if (value != _match4)
         {
-          this._match4 = value;
+          _match4 = value;
           OnPropertyChangedWithValue(value, "Match4");
         }
       }
@@ -189,13 +189,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match5;
+        return _match5;
       }
       set
       {
-        if (value != this._match5)
+        if (value != _match5)
         {
-          this._match5 = value;
+          _match5 = value;
           OnPropertyChangedWithValue(value, "Match5");
         }
       }
@@ -206,13 +206,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match6;
+        return _match6;
       }
       set
       {
-        if (value != this._match6)
+        if (value != _match6)
         {
-          this._match6 = value;
+          _match6 = value;
           OnPropertyChangedWithValue(value, "Match6");
         }
       }
@@ -223,13 +223,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match7;
+        return _match7;
       }
       set
       {
-        if (value != this._match7)
+        if (value != _match7)
         {
-          this._match7 = value;
+          _match7 = value;
           OnPropertyChangedWithValue(value, "Match7");
         }
       }
@@ -240,13 +240,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._match8;
+        return _match8;
       }
       set
       {
-        if (value != this._match8)
+        if (value != _match8)
         {
-          this._match8 = value;
+          _match8 = value;
           OnPropertyChangedWithValue(value, "Match8");
         }
       }

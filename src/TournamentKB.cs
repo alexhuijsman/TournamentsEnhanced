@@ -48,14 +48,14 @@ namespace TournamentsEnhanced
 
     public TournamentKB(Settlement settlement, TournamentType tournamentTypes, TournamentGame tournamentGame = null)
     {
-      this._tournamentGame = tournamentGame;
-      this.TournamentType = tournamentTypes;
-      this.Settlement = settlement;
+      _tournamentGame = tournamentGame;
+      TournamentType = tournamentTypes;
+      Settlement = settlement;
       TournamentList.Add(this);
-      this.TeamSize = MBRandom.Random.Next(2, 9); // current interface allows up to 8 per team
-      this.TeamsCount = (int)Math.Pow(2, MBRandom.Random.Next(3, 6)); // 16, 32 teams possible -> also 4, 8 but needs more testing and fixing 
-      this.FirstRoundMatches = TeamsCount == 32 ? 8 : TeamsCount / (MBRandom.Random.Next(2) * 2 + 2); // if full (32) => 8 rounds, else can be 4 or 8
-      this.Rounds = (int)Math.Min(Math.Log(TeamsCount, 2), 4); // simple log2 round progression (members/2 in every round)
+      TeamSize = MBRandom.Random.Next(2, 9); // current interface allows up to 8 per team
+      TeamsCount = (int)Math.Pow(2, MBRandom.Random.Next(3, 6)); // 16, 32 teams possible -> also 4, 8 but needs more testing and fixing 
+      FirstRoundMatches = TeamsCount == 32 ? 8 : TeamsCount / (MBRandom.Random.Next(2) * 2 + 2); // if full (32) => 8 rounds, else can be 4 or 8
+      Rounds = (int)Math.Min(Math.Log(TeamsCount, 2), 4); // simple log2 round progression (members/2 in every round)
     }
 
     public static TournamentType GetTournamentType(Settlement settlement)
@@ -94,10 +94,10 @@ namespace TournamentsEnhanced
     {
       get
       {
-        if (this._tournamentGame == null)
-          this._tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.Town);
+        if (_tournamentGame == null)
+          _tournamentGame = Campaign.Current.TournamentManager.GetTournamentGame(Settlement.Town);
 
-        return this._tournamentGame;
+        return _tournamentGame;
       }
     }
 

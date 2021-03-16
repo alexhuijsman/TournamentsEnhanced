@@ -14,20 +14,20 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
   {
     public ManageTeamSelectionVM(TournamentKB tkb)
     {
-      this._tournamentKB = tkb;
-      this._maxSelectableTroopCount = _tournamentKB.TeamSize;
-      this.InitializeAvailableSelection();
-      this.RefreshValues();
-      this.OnCurrentSelectedAmountChange();
+      _tournamentKB = tkb;
+      _maxSelectableTroopCount = _tournamentKB.TeamSize;
+      InitializeAvailableSelection();
+      RefreshValues();
+      OnCurrentSelectedAmountChange();
     }
 
     public override void RefreshValues()
     {
       base.RefreshValues();
-      this.TitleText = new TextObject("Select Team").ToString();
-      this.DoneText = GameTexts.FindText("str_done").ToString();
-      this.CancelText = GameTexts.FindText("str_cancel").ToString();
-      this.CurrentSelectedAmountTitle = new TextObject("Selected Tournament Team").ToString();
+      TitleText = new TextObject("Select Team").ToString();
+      DoneText = GameTexts.FindText("str_done").ToString();
+      CancelText = GameTexts.FindText("str_cancel").ToString();
+      CurrentSelectedAmountTitle = new TextObject("Selected Tournament Team").ToString();
     }
 
     private bool CanBeSelectedByHero(CharacterObject character)
@@ -46,8 +46,8 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
 
     private void InitializeAvailableSelection()
     {
-      this.Troops = new MBBindingList<ManageHideoutTroopItemVM>();
-      this._currentTotalSelectedTroopCount = 0;
+      Troops = new MBBindingList<ManageHideoutTroopItemVM>();
+      _currentTotalSelectedTroopCount = 0;
       var availableForSelection = TroopRoster.CreateDummyTroopRoster();
 
       // we add everyone is settlement that is relevant to the selection list
@@ -76,16 +76,16 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
       {
         member = availableForSelectionEnumerator.Current;
         var troopItemVM = new ManageHideoutTroopItemVM(member,
-          new Action<ManageHideoutTroopItemVM>(this.OnAddCount),
-          new Action<ManageHideoutTroopItemVM>(this.OnRemoveCount));
+          new Action<ManageHideoutTroopItemVM>(OnAddCount),
+          new Action<ManageHideoutTroopItemVM>(OnRemoveCount));
 
         troopItemVM.IsLocked = member.Character.IsPlayerCharacter || (member.Number - member.WoundedNumber <= 0);
-        this.Troops.Add(troopItemVM);
+        Troops.Add(troopItemVM);
 
         if (member.Character.IsPlayerCharacter)
         {
           troopItemVM.CurrentAmount = 1;
-          this._currentTotalSelectedTroopCount += 1;
+          _currentTotalSelectedTroopCount += 1;
         }
       }
     }
@@ -95,30 +95,30 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
       if (troopItem.CurrentAmount > 0)
       {
         troopItem.CurrentAmount--;
-        this._currentTotalSelectedTroopCount--;
+        _currentTotalSelectedTroopCount--;
       }
-      this.OnCurrentSelectedAmountChange();
+      OnCurrentSelectedAmountChange();
     }
 
     private void OnAddCount(ManageHideoutTroopItemVM troopItem)
     {
-      if (troopItem.CurrentAmount < troopItem.MaxAmount && this._currentTotalSelectedTroopCount < this._maxSelectableTroopCount)
+      if (troopItem.CurrentAmount < troopItem.MaxAmount && _currentTotalSelectedTroopCount < _maxSelectableTroopCount)
       {
         troopItem.CurrentAmount++;
-        this._currentTotalSelectedTroopCount++;
+        _currentTotalSelectedTroopCount++;
       }
-      this.OnCurrentSelectedAmountChange();
+      OnCurrentSelectedAmountChange();
     }
 
     private void OnCurrentSelectedAmountChange()
     {
-      foreach (ManageHideoutTroopItemVM manageHideoutTroopItemVM in this.Troops)
+      foreach (ManageHideoutTroopItemVM manageHideoutTroopItemVM in Troops)
       {
-        manageHideoutTroopItemVM.IsRosterFull = this._currentTotalSelectedTroopCount >= this._maxSelectableTroopCount;
+        manageHideoutTroopItemVM.IsRosterFull = _currentTotalSelectedTroopCount >= _maxSelectableTroopCount;
       }
-      GameTexts.SetVariable("LEFT", this._currentTotalSelectedTroopCount);
-      GameTexts.SetVariable("RIGHT", this._maxSelectableTroopCount);
-      this.CurrentSelectedAmountText = GameTexts.FindText("str_LEFT_over_RIGHT_in_paranthesis", null).ToString();
+      GameTexts.SetVariable("LEFT", _currentTotalSelectedTroopCount);
+      GameTexts.SetVariable("RIGHT", _maxSelectableTroopCount);
+      CurrentSelectedAmountText = GameTexts.FindText("str_LEFT_over_RIGHT_in_paranthesis", null).ToString();
     }
 
     #region DYN CALLED METHODS
@@ -128,13 +128,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     /// </summary>
     private void ExecuteDone()
     {
-      if (this._currentTotalSelectedTroopCount != this._tournamentKB.TeamSize)
+      if (_currentTotalSelectedTroopCount != _tournamentKB.TeamSize)
       {
-        InformationManager.DisplayMessage(new InformationMessage($"Selected team members count must be {this._tournamentKB.TeamSize}."));
+        InformationManager.DisplayMessage(new InformationMessage($"Selected team members count must be {_tournamentKB.TeamSize}."));
         return;
       }
       var troopRoster = new List<CharacterObject>();
-      foreach (ManageHideoutTroopItemVM manageHideoutTroopItemVM in this.Troops)
+      foreach (ManageHideoutTroopItemVM manageHideoutTroopItemVM in Troops)
       {
         if (manageHideoutTroopItemVM.CurrentAmount > 0)
         {
@@ -142,11 +142,11 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
             troopRoster.Add(manageHideoutTroopItemVM.Troop.Character);
         }
       }
-      this._tournamentKB.SelectedRoster = troopRoster;
-      this.IsEnabled = false;
+      _tournamentKB.SelectedRoster = troopRoster;
+      IsEnabled = false;
       GameMenu.SwitchToMenu("town");
-      this._tournamentKB.TournamentGame.PrepareForTournamentGame(true);
-      Campaign.Current.TournamentManager.OnPlayerJoinTournament(this._tournamentKB.TournamentGame.GetType(), Settlement.CurrentSettlement);
+      _tournamentKB.TournamentGame.PrepareForTournamentGame(true);
+      Campaign.Current.TournamentManager.OnPlayerJoinTournament(_tournamentKB.TournamentGame.GetType(), Settlement.CurrentSettlement);
     }
 
     /// <summary>
@@ -156,7 +156,7 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     private void ExecuteCancel()
 
     {
-      this.IsEnabled = false;
+      IsEnabled = false;
     }
 
     /// <summary>
@@ -164,9 +164,9 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     /// </summary>
     private void ExecuteReset()
     {
-      this.InitializeAvailableSelection();
-      this._maxSelectableTroopCount = _tournamentKB.TeamSize;
-      this.OnCurrentSelectedAmountChange();
+      InitializeAvailableSelection();
+      _maxSelectableTroopCount = _tournamentKB.TeamSize;
+      OnCurrentSelectedAmountChange();
     }
 #pragma warning restore IDE0051 // Remove unused private members
     #endregion
@@ -176,13 +176,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public bool IsEnabled
     {
-      get => this._isEnabled;
+      get => _isEnabled;
 
       set
       {
-        if (value != this._isEnabled)
+        if (value != _isEnabled)
         {
-          this._isEnabled = value;
+          _isEnabled = value;
           OnPropertyChangedWithValue(value, "IsEnabled");
         }
       }
@@ -191,13 +191,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public MBBindingList<ManageHideoutTroopItemVM> Troops
     {
-      get => this._troops;
+      get => _troops;
 
       set
       {
-        if (value != this._troops)
+        if (value != _troops)
         {
-          this._troops = value;
+          _troops = value;
           OnPropertyChangedWithValue(value, "Troops");
         }
       }
@@ -206,13 +206,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public string DoneText
     {
-      get => this._doneText;
+      get => _doneText;
 
       set
       {
-        if (value != this._doneText)
+        if (value != _doneText)
         {
-          this._doneText = value;
+          _doneText = value;
           OnPropertyChangedWithValue(value, "DoneText");
         }
       }
@@ -221,13 +221,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public string CancelText
     {
-      get => this._cancelText;
+      get => _cancelText;
 
       set
       {
-        if (value != this._cancelText)
+        if (value != _cancelText)
         {
-          this._cancelText = value;
+          _cancelText = value;
           OnPropertyChangedWithValue(value, "CancelText");
         }
       }
@@ -236,13 +236,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public string TitleText
     {
-      get => this._titleText;
+      get => _titleText;
 
       set
       {
-        if (value != this._titleText)
+        if (value != _titleText)
         {
-          this._titleText = value;
+          _titleText = value;
           OnPropertyChangedWithValue(value, "TitleText");
         }
       }
@@ -251,13 +251,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public string CurrentSelectedAmountText
     {
-      get => this._currentSelectedAmountText;
+      get => _currentSelectedAmountText;
 
       set
       {
-        if (value != this._currentSelectedAmountText)
+        if (value != _currentSelectedAmountText)
         {
-          this._currentSelectedAmountText = value;
+          _currentSelectedAmountText = value;
           OnPropertyChangedWithValue(value, "CurrentSelectedAmountText");
         }
       }
@@ -266,13 +266,13 @@ namespace TournamentsEnhanced.TeamTournament.Menu.ViewModels
     [DataSourceProperty]
     public string CurrentSelectedAmountTitle
     {
-      get => this._currentSelectedAmountTitle;
+      get => _currentSelectedAmountTitle;
 
       set
       {
-        if (value != this._currentSelectedAmountTitle)
+        if (value != _currentSelectedAmountTitle)
         {
-          this._currentSelectedAmountTitle = value;
+          _currentSelectedAmountTitle = value;
           OnPropertyChangedWithValue(value, "CurrentSelectedAmountTitle");
         }
       }

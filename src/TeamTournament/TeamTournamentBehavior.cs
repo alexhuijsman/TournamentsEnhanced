@@ -22,15 +22,15 @@ namespace TournamentsEnhanced.TeamTournament
     public TeamTournamentMatch LastMatch { get; private set; }
     public TeamTournamentRound[] Rounds { get; private set; }
     public SpectatorCameraTypes GetMissionCameraLockMode(bool lockedToMainPlayer)
-      => !this.IsPlayerParticipating ? SpectatorCameraTypes.LockToAnyAgent : SpectatorCameraTypes.Invalid;
-    public TeamTournamentRound CurrentRound => this.Rounds[this.CurrentRoundIndex];
-    public TeamTournamentRound NextRound => this.CurrentRoundIndex < this.Rounds.Length - 1 ? this.Rounds[this.CurrentRoundIndex + 1] : null;
-    public TeamTournamentMatch CurrentMatch => this.CurrentRound != null ? this.CurrentRound.CurrentMatch : null;
+      => !IsPlayerParticipating ? SpectatorCameraTypes.LockToAnyAgent : SpectatorCameraTypes.Invalid;
+    public TeamTournamentRound CurrentRound => Rounds[CurrentRoundIndex];
+    public TeamTournamentRound NextRound => CurrentRoundIndex < Rounds.Length - 1 ? Rounds[CurrentRoundIndex + 1] : null;
+    public TeamTournamentMatch CurrentMatch => CurrentRound != null ? CurrentRound.CurrentMatch : null;
     public TeamTournamentMember Winner { get; private set; }
     public bool IsPlayerParticipating { get; private set; }
     public Settlement Settlement { get; private set; }
     public float BetOdd { get; private set; }
-    public int MaximumBetInstance => Math.Min(150, this.PlayerDenars);
+    public int MaximumBetInstance => Math.Min(150, PlayerDenars);
     public int BettedDenars { get; private set; }
     public int OverallExpectedDenars { get; private set; }
     public int PlayerDenars => Hero.MainHero.Gold;
@@ -39,16 +39,16 @@ namespace TournamentsEnhanced.TeamTournament
 
     public TeamTournamentBehavior(TournamentGame tournamentGame, Settlement settlement, ITournamentGameBehavior gameBehavior, bool isPlayerParticipating)
     {
-      this.Settlement = settlement;
-      this.TournamentGame = tournamentGame;
-      this.MissionBehavior = gameBehavior as TeamTournamentMissionController;
-      this.CurrentTKB = TournamentKB.Current;
-      this.Rounds = new TeamTournamentRound[CurrentTKB.Rounds];
-      this.CreateTeams();
-      this.CurrentRoundIndex = -1;
-      this.LastMatch = null;
-      this.Winner = null;
-      this.IsPlayerParticipating = isPlayerParticipating;
+      Settlement = settlement;
+      TournamentGame = tournamentGame;
+      MissionBehavior = gameBehavior as TeamTournamentMissionController;
+      CurrentTKB = TournamentKB.Current;
+      Rounds = new TeamTournamentRound[CurrentTKB.Rounds];
+      CreateTeams();
+      CurrentRoundIndex = -1;
+      LastMatch = null;
+      Winner = null;
+      IsPlayerParticipating = isPlayerParticipating;
     }
 
     private void CreateTeams()
@@ -71,7 +71,7 @@ namespace TournamentsEnhanced.TeamTournament
       var teamComposition = new List<TournamentParticipant>();
 
       // now check out if we can form teams locally from other heroes
-      var heroesInSettlement = this.Settlement
+      var heroesInSettlement = Settlement
         .GetCombatantHeroesInSettlement()
         .Where(x => !CurrentTKB.SelectedRoster.Contains(x));
 
@@ -182,122 +182,122 @@ namespace TournamentsEnhanced.TeamTournament
 
     public override void AfterStart()
     {
-      this.CurrentRoundIndex = 0;
-      this.CreateTorunamentTree();
-      this.CalculateBet();
+      CurrentRoundIndex = 0;
+      CreateTorunamentTree();
+      CalculateBet();
       Utilities.SetDifficulty();
     }
 
     public override void OnMissionTick(float dt)
     {
-      if (this.CurrentMatch != null && this.CurrentMatch.State == TournamentMatch.MatchState.Started && this.MissionBehavior.IsMatchEnded())
-        this.EndCurrentMatch();
+      if (CurrentMatch != null && CurrentMatch.State == TournamentMatch.MatchState.Started && MissionBehavior.IsMatchEnded())
+        EndCurrentMatch();
     }
 
     public void StartMatch()
     {
-      if (this.CurrentMatch.IsPlayerParticipating)
+      if (CurrentMatch.IsPlayerParticipating)
       {
-        Campaign.Current.TournamentManager.OnPlayerJoinMatch(this.TournamentGame.GetType());
+        Campaign.Current.TournamentManager.OnPlayerJoinMatch(TournamentGame.GetType());
       }
-      this.CurrentMatch.Start();
+      CurrentMatch.Start();
       base.Mission.SetMissionMode(MissionMode.Tournament, true);
-      this.MissionBehavior.StartMatch(this.CurrentMatch, this.NextRound == null);
-      CampaignEventDispatcher.Instance.OnPlayerStartedTournamentMatch(this.Settlement.Town);
+      MissionBehavior.StartMatch(CurrentMatch, NextRound == null);
+      CampaignEventDispatcher.Instance.OnPlayerStartedTournamentMatch(Settlement.Town);
     }
 
     public void SkipMatch()
     {
-      if (this.CurrentMatch.IsReady)
-        this.CurrentMatch.Start();
+      if (CurrentMatch.IsReady)
+        CurrentMatch.Start();
 
-      this.MissionBehavior.SkipMatch(this.CurrentMatch);
-      this.EndCurrentMatch();
+      MissionBehavior.SkipMatch(CurrentMatch);
+      EndCurrentMatch();
     }
 
     private void EndCurrentMatch()
     {
-      this.LastMatch = this.CurrentMatch;
-      this.CurrentRound.EndMatch();
-      this.MissionBehavior.OnMatchEnded();
+      LastMatch = CurrentMatch;
+      CurrentRound.EndMatch();
+      MissionBehavior.OnMatchEnded();
 
       // add winners to next round
-      if (this.NextRound != null)
+      if (NextRound != null)
       {
         // fill in round
-        this.LastMatch.Winners.ToList().ForEach(x => NextRound.AddTeam(x));
-        this.MatchEnd?.Invoke(this.LastMatch);
+        LastMatch.Winners.ToList().ForEach(x => NextRound.AddTeam(x));
+        MatchEnd?.Invoke(LastMatch);
       }
 
       // fire off events if player was disqualified 
-      if (this.LastMatch.IsPlayerParticipating)
+      if (LastMatch.IsPlayerParticipating)
       {
-        if (!this.LastMatch.IsPlayerTeamWinner)
-          this.OnPlayerTeamEliminated();
+        if (!LastMatch.IsPlayerTeamWinner)
+          OnPlayerTeamEliminated();
         else
-          this.OnPlayerTeamWinMatch();
+          OnPlayerTeamWinMatch();
       }
 
-      if (this.CurrentRound.CurrentMatch == null) // done with this round
+      if (CurrentRound.CurrentMatch == null) // done with this round
       {
         // check if done with Tournament or not
-        if (this.CurrentRoundIndex < this.Rounds.Length - 1)
+        if (CurrentRoundIndex < Rounds.Length - 1)
         {
           // not done yet, go to next round
-          this.CurrentRoundIndex++;
-          this.CalculateBet();
+          CurrentRoundIndex++;
+          CalculateBet();
         }
         else
         {
           // done with Tournament
-          this.CalculateBet();
+          CalculateBet();
           InformationManager.AddQuickInformation(new TextObject("{=tWzLqegB}Tournament is over.", null), 0, null, "");
-          this.Winner = this.LastMatch.Winners.First().GetTeamLeader();
-          if (this.Winner.Character.IsHero)
+          Winner = LastMatch.Winners?.FirstOrDefault()?.GetTeamLeader();
+          if (Winner?.Character.IsHero ?? false)
           {
-            if (this.Winner.Character == CharacterObject.PlayerCharacter)
-              this.OnPlayerWinTournament();
+            if (Winner.Character == CharacterObject.PlayerCharacter)
+              OnPlayerWinTournament();
 
-            Campaign.Current.TournamentManager.AddLeaderboardEntry(this.Winner.Character.HeroObject);
+            Campaign.Current.TournamentManager.AddLeaderboardEntry(Winner.Character.HeroObject);
           }
           Utilities.UnsetDifficulty();
-          CampaignEventDispatcher.Instance.OnTournamentWon(this.Winner.Character, this.Settlement.Town);
-          this.TournamentEnd?.Invoke();
+          CampaignEventDispatcher.Instance.OnTournamentWon(Winner?.Character, Settlement.Town);
+          TournamentEnd?.Invoke();
         }
       }
     }
 
     private void OnPlayerTeamEliminated()
     {
-      this._playerLostAtRound = this.CurrentRoundIndex + 1;
-      this.IsPlayerEliminated = true;
-      this.BetOdd = 0f;
-      if (this.BettedDenars > 0)
+      _playerLostAtRound = CurrentRoundIndex + 1;
+      IsPlayerEliminated = true;
+      BetOdd = 0f;
+      if (BettedDenars > 0)
       {
-        GiveGoldAction.ApplyForCharacterToSettlement(null, Settlement.CurrentSettlement, this.BettedDenars, false);
+        GiveGoldAction.ApplyForCharacterToSettlement(null, Settlement.CurrentSettlement, BettedDenars, false);
       }
-      this.OverallExpectedDenars = 0;
-      CampaignEventDispatcher.Instance.OnPlayerEliminatedFromTournament(this.CurrentRoundIndex, this.Settlement.Town);
+      OverallExpectedDenars = 0;
+      CampaignEventDispatcher.Instance.OnPlayerEliminatedFromTournament(CurrentRoundIndex, Settlement.Town);
     }
 
-    private void OnPlayerTeamWinMatch() => Campaign.Current.TournamentManager.OnPlayerWinMatch(this.TournamentGame.GetType());
+    private void OnPlayerTeamWinMatch() => Campaign.Current.TournamentManager.OnPlayerWinMatch(TournamentGame.GetType());
 
     private void OnPlayerWinTournament()
     {
       if (Campaign.Current.GameMode != CampaignGameMode.Campaign)
         return;
 
-      GainRenownAction.Apply(Hero.MainHero, this.TournamentGame.TournamentWinRenown, false);
+      GainRenownAction.Apply(Hero.MainHero, TournamentGame.TournamentWinRenown, false);
 
       if (Hero.MainHero.MapFaction.IsKingdomFaction && Hero.MainHero.MapFaction.Leader != Hero.MainHero)
         GainKingdomInfluenceAction.ApplyForDefault(Hero.MainHero, 1f);
 
-      Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(this.TournamentGame.Prize, 1);
+      Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(TournamentGame.Prize, 1);
 
-      if (this.OverallExpectedDenars > 0)
-        GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, this.OverallExpectedDenars, false);
+      if (OverallExpectedDenars > 0)
+        GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, OverallExpectedDenars, false);
 
-      Campaign.Current.TournamentManager.OnPlayerWinTournament(this.TournamentGame.GetType());
+      Campaign.Current.TournamentManager.OnPlayerWinTournament(TournamentGame.GetType());
     }
 
     private void CreateTorunamentTree()
@@ -325,7 +325,7 @@ namespace TournamentsEnhanced.TeamTournament
       }
 
       // fill in first round
-      this._teams.ForEach(x => Rounds[0].AddTeam(x));
+      _teams.ForEach(x => Rounds[0].AddTeam(x));
     }
 
     public override InquiryData OnEndMissionRequest(out bool canPlayerLeave)
@@ -336,12 +336,12 @@ namespace TournamentsEnhanced.TeamTournament
 
     public void PlaceABet(int bet)
     {
-      this.BettedDenars += bet;
-      this.OverallExpectedDenars += this.GetExpectedDenarsForBet(bet);
+      BettedDenars += bet;
+      OverallExpectedDenars += GetExpectedDenarsForBet(bet);
       GiveGoldAction.ApplyBetweenCharacters(Hero.MainHero, null, bet, true);
     }
 
-    public int GetExpectedDenarsForBet(int bet) => (int)(this.BetOdd * bet);
+    public int GetExpectedDenarsForBet(int bet) => (int)(BetOdd * bet);
 
     public int GetMaximumBet()
     {
@@ -353,22 +353,22 @@ namespace TournamentsEnhanced.TeamTournament
     // TODO: this needs "rework"
     private void CalculateBet()
     {
-      if (this.IsPlayerParticipating)
+      if (IsPlayerParticipating)
       {
-        if (this.CurrentRound.CurrentMatch == null)
+        if (CurrentRound.CurrentMatch == null)
         {
-          this.BetOdd = 0f;
+          BetOdd = 0f;
           return;
         }
 
-        if (this.IsPlayerEliminated || !this.IsPlayerParticipating)
+        if (IsPlayerEliminated || !IsPlayerParticipating)
         {
-          this.OverallExpectedDenars = 0;
-          this.BetOdd = 0f;
+          OverallExpectedDenars = 0;
+          BetOdd = 0f;
           return;
         }
         // TODO: make a better bet odd calculation
-        this.BetOdd = MBRandom.Random.Next(3, 5);
+        BetOdd = MBRandom.Random.Next(3, 5);
       }
     }
 
