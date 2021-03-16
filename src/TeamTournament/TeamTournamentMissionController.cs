@@ -21,29 +21,29 @@ namespace TournamentsEnhanced.TeamTournament
 
     public TeamTournamentMissionController(CultureObject culture)
     {
-      this._culture = culture;
+      _culture = culture;
     }
 
     public override void AfterStart()
     {
       TournamentBehavior.DeleteTournamentSetsExcept(base.Mission.Scene.FindEntityWithTag("tournament_fight"));
-      this._spawnPoints = new List<GameEntity>();
+      _spawnPoints = new List<GameEntity>();
 
       for (int i = 0; i < 4; i++)
       {
         var gameEntity = base.Mission.Scene.FindEntityWithTag("sp_arena_" + (i + 1));
         if (gameEntity != null)
-          this._spawnPoints.Add(gameEntity);
+          _spawnPoints.Add(gameEntity);
       }
 
-      if (this._spawnPoints.Count < 4)
-        this._spawnPoints = base.Mission.Scene.FindEntitiesWithTag("sp_arena").ToList<GameEntity>();
+      if (_spawnPoints.Count < 4)
+        _spawnPoints = base.Mission.Scene.FindEntitiesWithTag("sp_arena").ToList<GameEntity>();
     }
 
     public void PrepareForMatch() // also called from skip SkipMatch
     {
-      var numMembers = Math.Max(Math.Min(this._match.Teams.Max(x => x.Members.Count()), 4), 2);
-      var teamWeaponEquipmentList = this.GetTeamWeaponEquipmentList(numMembers);
+      var numMembers = Math.Max(Math.Min(_match.Teams.Max(x => x.Members.Count()), 4), 2);
+      var teamWeaponEquipmentList = GetTeamWeaponEquipmentList(numMembers);
 
       foreach (var team in _match.Teams)
       {
@@ -51,7 +51,7 @@ namespace TournamentsEnhanced.TeamTournament
         foreach (var tournamentMember in team.Members)
         {
           tournamentMember.MatchEquipment = teamWeaponEquipmentList[num].Clone(false);
-          this.AddRandomClothes(this._culture, tournamentMember);
+          AddRandomClothes(_culture, tournamentMember);
           num = num++ % numMembers;
         }
       }
@@ -59,33 +59,33 @@ namespace TournamentsEnhanced.TeamTournament
 
     public void StartMatch(TeamTournamentMatch match, bool isLastRound)
     {
-      this._match = match;
-      this._isLastRound = isLastRound;
-      this.PrepareForMatch();
+      _match = match;
+      _isLastRound = isLastRound;
+      PrepareForMatch();
       base.Mission.SetMissionMode(MissionMode.Battle, true);
       var tmpList = new List<Team>();
-      int count = this._spawnPoints.Count;
-      foreach (var tournamentTeam in this._match.Teams)
+      int count = _spawnPoints.Count;
+      foreach (var tournamentTeam in _match.Teams)
       {
         var side = tournamentTeam.IsPlayerTeam ? BattleSideEnum.Defender : BattleSideEnum.Attacker;
         var team = base.Mission.Teams.Add(side, tournamentTeam.TeamColor, uint.MaxValue, tournamentTeam.TeamBanner, true, false, true);
-        var spawnPoint = this._spawnPoints[tmpList.Count % count];
+        var spawnPoint = _spawnPoints[tmpList.Count % count];
 
         foreach (var tournamentMember in tournamentTeam.Members)
-          this.SpawnTournamentMember(spawnPoint, tournamentMember, team);
+          SpawnTournamentMember(spawnPoint, tournamentMember, team);
 
         tmpList.ForEach(x => x.SetIsEnemyOf(team, true));
         tmpList.Add(team);
       }
-      this._aliveMembers = new List<TeamTournamentMember>(this._match.MatchMembers);
-      this._aliveTeams = new List<TeamTournamentTeam>(this._match.Teams);
+      _aliveMembers = new List<TeamTournamentMember>(_match.MatchMembers);
+      _aliveTeams = new List<TeamTournamentTeam>(_match.Teams);
     }
 
     private void SpawnTournamentMember(GameEntity spawnPoint, TeamTournamentMember member, Team team)
     {
       MatrixFrame globalFrame = spawnPoint.GetGlobalFrame();
       globalFrame.rotation.OrthonormalizeAccordingToForwardAndKeepUpAsZAxis();
-      this.SpawnAgentWithRandomItems(member, team, globalFrame);
+      SpawnAgentWithRandomItems(member, team, globalFrame);
     }
 
     private List<Equipment> GetTeamWeaponEquipmentList(int teamSize)
@@ -98,7 +98,7 @@ namespace TournamentsEnhanced.TeamTournament
       if (equiptmentSet.Count > 0)
         characterObject = equiptmentSet[MBRandom.RandomInt(equiptmentSet.Count)];
       else
-        characterObject = teamSize == 4 ? this._defaultWeaponTemplatesIdTeamSizeFour : (teamSize == 2 ? this._defaultWeaponTemplatesIdTeamSizeTwo : this._defaultWeaponTemplatesIdTeamSizeOne);
+        characterObject = teamSize == 4 ? _defaultWeaponTemplatesIdTeamSizeFour : (teamSize == 2 ? _defaultWeaponTemplatesIdTeamSizeTwo : _defaultWeaponTemplatesIdTeamSizeOne);
 
       foreach (var sourceEquipment in characterObject.BattleEquipments)
       {
@@ -111,27 +111,27 @@ namespace TournamentsEnhanced.TeamTournament
 
     public void SkipMatch(TeamTournamentMatch match)
     {
-      this._match = match;
-      this.PrepareForMatch();
-      this.Simulate();
+      _match = match;
+      PrepareForMatch();
+      Simulate();
     }
 
     public bool IsMatchEnded()
     {
-      if (this._isSimulated || this._match == null)
+      if (_isSimulated || _match == null)
         return true;
 
-      if ((this._endTimer != null && this._endTimer.ElapsedTime > 6f) || this._forceEndMatch)
+      if ((_endTimer != null && _endTimer.ElapsedTime > 6f) || _forceEndMatch)
       {
-        this._forceEndMatch = false;
-        this._endTimer = null;
+        _forceEndMatch = false;
+        _endTimer = null;
         return true;
       }
 
-      if (this._cheerTimer != null && this._cheerTimer.ElapsedTime > 1f)
+      if (_cheerTimer != null && _cheerTimer.ElapsedTime > 1f)
       {
-        this.OnMatchResultsReady();
-        this._cheerTimer = null;
+        OnMatchResultsReady();
+        _cheerTimer = null;
 
         foreach (Agent agent in base.Mission.Agents)
         {
@@ -142,10 +142,10 @@ namespace TournamentsEnhanced.TeamTournament
         return false;
       }
 
-      if (this._endTimer == null && !this.CheckIfIsThereAnyEnemies())
+      if (_endTimer == null && !CheckIfIsThereAnyEnemies())
       {
-        this._endTimer = new BasicTimer(MBCommon.TimeType.Mission);
-        this._cheerTimer = new BasicTimer(MBCommon.TimeType.Mission);
+        _endTimer = new BasicTimer(MBCommon.TimeType.Mission);
+        _cheerTimer = new BasicTimer(MBCommon.TimeType.Mission);
       }
 
       return false;
@@ -153,11 +153,11 @@ namespace TournamentsEnhanced.TeamTournament
 
     public void OnMatchResultsReady()
     {
-      if (!this._match.IsPlayerParticipating)
+      if (!_match.IsPlayerParticipating)
         InformationManager.AddQuickInformation(new TextObject("{=UBd0dEPp}Match is over", null), 0, null, "");
-      else if (this._match.IsPlayerTeamWinner)
+      else if (_match.IsPlayerTeamWinner)
       {
-        if (this._isLastRound)
+        if (_isLastRound)
           InformationManager.AddQuickInformation(new TextObject("{=wOqOQuJl}Round is over, your team survived the final round of the tournament.", null), 0, null, "");
         else
           InformationManager.AddQuickInformation(new TextObject("{=fkOYvnVG}Round is over, your team is qualified for the next stage of the tournament.", null), 0, null, "");
@@ -175,10 +175,10 @@ namespace TournamentsEnhanced.TeamTournament
       base.Mission.ClearCorpses(false);
       base.Mission.Teams.Clear();
       base.Mission.RemoveSpawnedItemsAndMissiles();
-      this._match = null;
-      this._endTimer = null;
-      this._cheerTimer = null;
-      this._isSimulated = false;
+      _match = null;
+      _endTimer = null;
+      _cheerTimer = null;
+      _isSimulated = false;
     }
 
     private void SpawnAgentWithRandomItems(TeamTournamentMember member, Team team, MatrixFrame frame)
@@ -203,7 +203,7 @@ namespace TournamentsEnhanced.TeamTournament
 
     private void AddRandomClothes(CultureObject culture, TeamTournamentMember member)
     {
-      var randomBattleEquipment = member.Character.BattleEquipments.GetRandomElement();
+      var randomBattleEquipment = member.Character.RandomBattleEquipment;
       for (int i = 5; i < 10; i++)
       {
         var equipmentFromSlot = randomBattleEquipment.GetEquipmentFromSlot((EquipmentIndex)i);
@@ -214,38 +214,38 @@ namespace TournamentsEnhanced.TeamTournament
       }
     }
 
-    private void AddScoreToRemainingTeams() => this._aliveTeams.ForEach(x => x.AddScore(1));
+    private void AddScoreToRemainingTeams() => _aliveTeams.ForEach(x => x.AddScore(1));
 
     private void AddScoreToKillerTeam(int killerUniqueSeed)
     {
-      this._aliveTeams.FirstOrDefault(x => x.Members.Any(m => m.IsCharWithDescriptor(killerUniqueSeed))).AddScore(1);
+      _aliveTeams.FirstOrDefault(x => x.Members.Any(m => m.IsCharWithDescriptor(killerUniqueSeed)))?.AddScore(1);
     }
 
     private void AddLastTeamScore()
     {
-      this._aliveTeams.First().AddScore(_match.Teams.Count());
+      _aliveTeams.FirstOrDefault()?.AddScore(_match.Teams.Count());
     }
 
     public override void OnAgentRemoved(Agent affectedAgent, Agent affectorAgent, AgentState agentState, KillingBlow killingBlow)
     {
-      if (!this.IsMatchEnded() && affectorAgent != null && affectedAgent != affectorAgent && affectedAgent.IsHuman && affectorAgent.IsHuman)
+      if (!IsMatchEnded() && affectorAgent != null && affectedAgent != affectorAgent && affectedAgent.IsHuman && affectorAgent.IsHuman)
       {
-        var member = this._match.MatchMembers.FirstOrDefault(x => x.IsCharWithDescriptor(affectedAgent.Origin.UniqueSeed));
+        var member = _match.MatchMembers.FirstOrDefault(x => x.IsCharWithDescriptor(affectedAgent.Origin.UniqueSeed));
 
-        this._aliveMembers.Remove(member);
-        member.Team.IsAlive = this._aliveMembers.Any(x => x.Team == member.Team);
+        _aliveMembers.Remove(member);
+        member.Team.IsAlive = _aliveMembers.Any(x => x.Team == member.Team);
 
         // apply score only if not on same team
         if (affectedAgent.Team != affectorAgent.Team)
-          this.AddScoreToKillerTeam(affectorAgent.Origin.UniqueSeed);
+          AddScoreToKillerTeam(affectorAgent.Origin.UniqueSeed);
 
         if (!member.Team.IsAlive)
         {
-          this._aliveTeams.Remove(member.Team);
+          _aliveTeams.Remove(member.Team);
 
           // give last team a bonus
-          if (this._aliveTeams.Count == 1)
-            this.AddLastTeamScore();
+          if (_aliveTeams.Count == 1)
+            AddLastTeamScore();
         }
       }
     }
@@ -269,7 +269,7 @@ namespace TournamentsEnhanced.TeamTournament
           if (damage > affectedAgent.HealthLimit)
             damage = affectedAgent.HealthLimit;
 
-          this.EnemyHitReward(affectedAgent, affectorAgent, movementSpeedDamageModifier, shotDifficulty, attackerWeapon, XpShareForDamage * damage / affectedAgent.HealthLimit, damage);
+          EnemyHitReward(affectedAgent, affectorAgent, movementSpeedDamageModifier, shotDifficulty, attackerWeapon, XpShareForDamage * damage / affectedAgent.HealthLimit, damage);
         }
       }
     }
@@ -318,15 +318,15 @@ namespace TournamentsEnhanced.TeamTournament
 
     private void Simulate()
     {
-      this._isSimulated = false;
+      _isSimulated = false;
 
       if (base.Mission.Agents.Count == 0)
       {
-        this._aliveMembers = new List<TeamTournamentMember>(this._match.MatchMembers);
-        this._aliveTeams = new List<TeamTournamentTeam>(this._match.Teams);
+        _aliveMembers = new List<TeamTournamentMember>(_match.MatchMembers);
+        _aliveTeams = new List<TeamTournamentTeam>(_match.Teams);
       }
 
-      var player = this._aliveMembers.FirstOrDefault(x => x.IsPlayer);
+      var player = _aliveMembers.FirstOrDefault(x => x.IsPlayer);
 
       // if player is still alive => player quit, remove and take teams score too
       if (player != null)
@@ -334,32 +334,32 @@ namespace TournamentsEnhanced.TeamTournament
         foreach (var member in player.Team.Members)
         {
           member.ResetScore();
-          this._aliveMembers.Remove(member);
+          _aliveMembers.Remove(member);
         }
-        this._aliveTeams.Remove(player.Team);
+        _aliveTeams.Remove(player.Team);
         player.Team?.ResetScore();
-        this.AddScoreToRemainingTeams();
+        AddScoreToRemainingTeams();
       }
 
       var simAttacks = new Dictionary<TeamTournamentMember, Tuple<float, float>>();
-      foreach (var member in this._aliveMembers)
+      foreach (var member in _aliveMembers)
       {
         member.Character.GetSimulationAttackPower(out float item, out float item2, member.MatchEquipment);
         simAttacks.Add(member, new Tuple<float, float>(item, item2));
       }
 
       int runningIndex = 0;
-      while (this._aliveMembers.Count() > 1 && this._aliveTeams.Count() > 1)
+      while (_aliveMembers.Count() > 1 && _aliveTeams.Count() > 1)
       {
-        runningIndex = ++runningIndex % this._aliveMembers.Count();
-        var currentFighter = this._aliveMembers[runningIndex];
+        runningIndex = ++runningIndex % _aliveMembers.Count();
+        var currentFighter = _aliveMembers[runningIndex];
         int nextIndex;
 
         TeamTournamentMember nextFighter;
         do
         {
-          nextIndex = MBRandom.RandomInt(this._aliveMembers.Count);
-          nextFighter = this._aliveMembers[nextIndex];
+          nextIndex = MBRandom.RandomInt(_aliveMembers.Count);
+          nextFighter = _aliveMembers[nextIndex];
         }
         while (currentFighter == nextFighter || currentFighter.Team == nextFighter.Team);
 
@@ -370,20 +370,20 @@ namespace TournamentsEnhanced.TeamTournament
         else
         {
           simAttacks.Remove(nextFighter);
-          this._aliveMembers.Remove(nextFighter);
-          nextFighter.Team.IsAlive = this._aliveMembers.Any(x => x.Team == nextFighter.Team);
+          _aliveMembers.Remove(nextFighter);
+          nextFighter.Team.IsAlive = _aliveMembers.Any(x => x.Team == nextFighter.Team);
 
           if (!nextFighter.Team.IsAlive)
           {
-            this._aliveTeams.Remove(nextFighter.Team);
-            this.AddScoreToRemainingTeams();
+            _aliveTeams.Remove(nextFighter.Team);
+            AddScoreToRemainingTeams();
           }
 
           if (nextIndex < runningIndex)
             runningIndex--;
         }
       }
-      this._isSimulated = true;
+      _isSimulated = true;
     }
 
     private bool IsThereAnyPlayerAgent() => Mission.MainAgent != null && base.Mission.MainAgent.IsActive() || Mission.Agents.Any(agent => agent.IsPlayerControlled);
@@ -393,45 +393,45 @@ namespace TournamentsEnhanced.TeamTournament
       InquiryData result = null;
       canPlayerLeave = true;
       var missionBehaviour = Mission.Current.GetMissionBehaviour<TeamTournamentBehavior>();
-      if (this._match != null && missionBehaviour != null)
+      if (_match != null && missionBehaviour != null)
       {
-        if (this._match.IsPlayerParticipating)
+        if (_match.IsPlayerParticipating)
         {
           MBTextManager.SetTextVariable("SETTLEMENT_NAME", Hero.MainHero.CurrentSettlement.EncyclopediaLinkWithName, false);
-          if (this.IsThereAnyPlayerAgent())
+          if (IsThereAnyPlayerAgent())
           {
             if (base.Mission.IsPlayerCloseToAnEnemy(5f))
             {
               canPlayerLeave = false;
               InformationManager.AddQuickInformation(GameTexts.FindText("str_can_not_retreat", null), 0, null, "");
             }
-            else if (this.CheckIfIsThereAnyEnemies())
+            else if (CheckIfIsThereAnyEnemies())
             {
               result = new InquiryData(GameTexts.FindText("str_tournament", null).ToString(), GameTexts.FindText("str_tournament_forfeit_game", null).ToString(), true, true, GameTexts.FindText("str_yes", null).ToString(), GameTexts.FindText("str_no", null).ToString(), new Action(missionBehaviour.SkipMatch), null, "");
             }
             else
             {
-              this._forceEndMatch = true;
+              _forceEndMatch = true;
               canPlayerLeave = false;
             }
           }
-          else if (this.CheckIfIsThereAnyEnemies())
+          else if (CheckIfIsThereAnyEnemies())
           {
             result = new InquiryData(GameTexts.FindText("str_tournament", null).ToString(), GameTexts.FindText("str_tournament_skip", null).ToString(), true, true, GameTexts.FindText("str_yes", null).ToString(), GameTexts.FindText("str_no", null).ToString(), new Action(missionBehaviour.SkipMatch), null, "");
           }
           else
           {
-            this._forceEndMatch = true;
+            _forceEndMatch = true;
             canPlayerLeave = false;
           }
         }
-        else if (this.CheckIfIsThereAnyEnemies())
+        else if (CheckIfIsThereAnyEnemies())
         {
           result = new InquiryData(GameTexts.FindText("str_tournament", null).ToString(), GameTexts.FindText("str_tournament_skip", null).ToString(), true, true, GameTexts.FindText("str_yes", null).ToString(), GameTexts.FindText("str_no", null).ToString(), new Action(missionBehaviour.SkipMatch), null, "");
         }
         else
         {
-          this._forceEndMatch = true;
+          _forceEndMatch = true;
           canPlayerLeave = false;
         }
       }

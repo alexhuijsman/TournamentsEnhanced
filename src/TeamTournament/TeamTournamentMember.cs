@@ -14,22 +14,22 @@ namespace TournamentsEnhanced.TeamTournament
 
     public TeamTournamentMember(CharacterObject character)
     {
-      this.Character = character;
-      this.Descriptor = new UniqueTroopDescriptor(Game.Current.NextUniqueTroopSeed);
+      Character = character;
+      Descriptor = new UniqueTroopDescriptor(Game.Current.NextUniqueTroopSeed);
     }
 
     public int AddScore(int score)
     {
-      this.Score += score;
-      return this.Score;
+      Score += score;
+      return Score;
     }
 
-    public void SetTeam(TeamTournamentTeam team) => this.Team = team;
+    public void SetTeam(TeamTournamentTeam team) => Team = team;
 
     private TeamTournamentTeam _team;
 
-    public void ResetScore() => this.Score = 0;
+    public void ResetScore() => Score = 0;
 
-    public bool IsCharWithDescriptor(int uniqueTroopSeed) => this.Descriptor.CompareTo(uniqueTroopSeed) == 0;
+    public bool IsCharWithDescriptor(int uniqueTroopSeed) => Descriptor.CompareTo(uniqueTroopSeed) == 0;
   }
 }

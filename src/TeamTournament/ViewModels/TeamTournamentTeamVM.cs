@@ -13,57 +13,57 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
 
     public TeamTournamentTeamVM()
     {
-      this.Participant1 = new TeamTournamentMemberVM();
-      this.Participant2 = new TeamTournamentMemberVM();
-      this.Participant3 = new TeamTournamentMemberVM();
-      this.Participant4 = new TeamTournamentMemberVM();
-      this.Participant5 = new TeamTournamentMemberVM();
-      this.Participant6 = new TeamTournamentMemberVM();
-      this.Participant7 = new TeamTournamentMemberVM();
-      this.Participant8 = new TeamTournamentMemberVM();
+      Participant1 = new TeamTournamentMemberVM();
+      Participant2 = new TeamTournamentMemberVM();
+      Participant3 = new TeamTournamentMemberVM();
+      Participant4 = new TeamTournamentMemberVM();
+      Participant5 = new TeamTournamentMemberVM();
+      Participant6 = new TeamTournamentMemberVM();
+      Participant7 = new TeamTournamentMemberVM();
+      Participant8 = new TeamTournamentMemberVM();
       _members = new List<TeamTournamentMemberVM>
       {
-        this.Participant1,
-        this.Participant2,
-        this.Participant3,
-        this.Participant4,
-        this.Participant5,
-        this.Participant6,
-        this.Participant7,
-        this.Participant8
+        Participant1,
+        Participant2,
+        Participant3,
+        Participant4,
+        Participant5,
+        Participant6,
+        Participant7,
+        Participant8
       };
     }
 
-    public IEnumerable<TeamTournamentMemberVM> GetMembers() => this.Members.Where(x => x.IsValid);
+    public IEnumerable<TeamTournamentMemberVM> GetMembers() => Members.Where(x => x.IsValid);
 
     public TeamTournamentMemberVM GetTeamLeader() => Members.FirstOrDefault(x => x.Member == Team.GetTeamLeader());
 
     public override void RefreshValues()
     {
       base.RefreshValues();
-      this._members.ForEach(x => x.RefreshValues());
+      _members.ForEach(x => x.RefreshValues());
     }
 
     public void Initialize()
     {
-      this.IsValid = this.Team != null;
-      this._members[0].Refresh(Team.GetTeamLeader(), Color.FromUint(this.Team.TeamColor));
+      IsValid = Team != null;
+      _members[0].Refresh(Team.GetTeamLeader(), Color.FromUint(Team.TeamColor));
     }
 
     public void Initialize(TeamTournamentTeam team)
     {
-      this.Team = team;
-      this.Count = 1;
-      this.Initialize();
+      Team = team;
+      Count = 1;
+      Initialize();
     }
 
     public void Refresh()
     {
-      this.IsValid = (this.Team != null);
+      IsValid = (Team != null);
       OnPropertyChanged("Count");
 
       int num = 0;
-      foreach (var member in this.Members.Where(x => x.IsValid))
+      foreach (var member in Members.Where(x => x.IsValid))
       {
         OnPropertyChanged("Participant" + num++);
         member.Refresh();
@@ -77,9 +77,9 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
       get => _isValid;
       set
       {
-        if (value != this._isValid)
+        if (value != _isValid)
         {
-          this._isValid = value;
+          _isValid = value;
           OnPropertyChangedWithValue(value, "IsValid");
         }
       }
@@ -88,12 +88,12 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     [DataSourceProperty]
     public int Score
     {
-      get => this._score;
+      get => _score;
       set
       {
-        if (value != this._score)
+        if (value != _score)
         {
-          this._score = value;
+          _score = value;
           OnPropertyChangedWithValue(value, "Score");
         }
       }
@@ -102,12 +102,12 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentMemberVM Participant1
     {
-      get => this._participant1;
+      get => _participant1;
       set
       {
-        if (value != this._participant1)
+        if (value != _participant1)
         {
-          this._participant1 = value;
+          _participant1 = value;
           OnPropertyChangedWithValue(value, "Participant1");
         }
       }
@@ -116,12 +116,12 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentMemberVM Participant2
     {
-      get => this._participant2;
+      get => _participant2;
       set
       {
-        if (value != this._participant2)
+        if (value != _participant2)
         {
-          this._participant2 = value;
+          _participant2 = value;
           OnPropertyChangedWithValue(value, "Participant2");
         }
       }
@@ -130,12 +130,12 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentMemberVM Participant3
     {
-      get => this._participant3;
+      get => _participant3;
       set
       {
-        if (value != this._participant3)
+        if (value != _participant3)
         {
-          this._participant3 = value;
+          _participant3 = value;
           OnPropertyChangedWithValue(value, "Participant3");
         }
       }
@@ -146,13 +146,13 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     {
       get
       {
-        return this._participant4;
+        return _participant4;
       }
       set
       {
-        if (value != this._participant4)
+        if (value != _participant4)
         {
-          this._participant4 = value;
+          _participant4 = value;
           OnPropertyChangedWithValue(value, "Participant4");
         }
       }
@@ -163,13 +163,13 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     {
       get
       {
-        return this._participant5;
+        return _participant5;
       }
       set
       {
-        if (value != this._participant5)
+        if (value != _participant5)
         {
-          this._participant5 = value;
+          _participant5 = value;
           OnPropertyChangedWithValue(value, "Participant5");
         }
       }
@@ -178,12 +178,12 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentMemberVM Participant6
     {
-      get => this._participant6;
+      get => _participant6;
       set
       {
-        if (value != this._participant6)
+        if (value != _participant6)
         {
-          this._participant6 = value;
+          _participant6 = value;
           OnPropertyChangedWithValue(value, "Participant6");
         }
       }
@@ -194,13 +194,13 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     {
       get
       {
-        return this._participant7;
+        return _participant7;
       }
       set
       {
-        if (value != this._participant7)
+        if (value != _participant7)
         {
-          this._participant7 = value;
+          _participant7 = value;
           OnPropertyChangedWithValue(value, "Participant7");
         }
       }
@@ -211,13 +211,13 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     {
       get
       {
-        return this._participant8;
+        return _participant8;
       }
       set
       {
-        if (value != this._participant8)
+        if (value != _participant8)
         {
-          this._participant8 = value;
+          _participant8 = value;
           OnPropertyChangedWithValue(value, "Participant8");
         }
       }
@@ -226,12 +226,12 @@ namespace SandBox.ViewModelCollection.Tournament.ViewModels
     [DataSourceProperty]
     public int Count
     {
-      get => this._count;
+      get => _count;
       set
       {
-        if (value != this._count)
+        if (value != _count)
         {
-          this._count = value;
+          _count = value;
           OnPropertyChangedWithValue(value, "Count");
         }
       }

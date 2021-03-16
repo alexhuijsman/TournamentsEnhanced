@@ -11,8 +11,8 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
     public TeamTournamentMemberVM()
     {
-      this._visual = new ImageIdentifierVM(ImageIdentifierType.Null);
-      this._character = new CharacterViewModel(CharacterViewModel.StanceTypes.CelebrateVictory);
+      _visual = new ImageIdentifierVM(ImageIdentifierType.Null);
+      _character = new CharacterViewModel(CharacterViewModel.StanceTypes.CelebrateVictory);
     }
 
     public TeamTournamentMemberVM(TeamTournamentMember member) : this()
@@ -23,24 +23,24 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     public override void RefreshValues()
     {
       base.RefreshValues();
-      if (this.IsInitialized)
-        this.Refresh(this.Member, this.TeamColor);
+      if (IsInitialized)
+        Refresh(Member, TeamColor);
     }
 
     public void Refresh(TeamTournamentMember member, Color teamColor)
     {
-      this.Member = member;
-      this.TeamColor = teamColor;
-      this.State = member == null ? 0 : (member.IsPlayer ? 2 : 1);
-      this.IsInitialized = true;
+      Member = member;
+      TeamColor = teamColor;
+      State = member == null ? 0 : (member.IsPlayer ? 2 : 1);
+      IsInitialized = true;
       if (member != null)
       {
-        this.Name = member.Character.Name.ToString() + "'s Team";
-        this.Character = new CharacterViewModel(CharacterViewModel.StanceTypes.CelebrateVictory);
-        this.Character.FillFrom(member.Character, -1);
-        this.Visual = new ImageIdentifierVM(CharacterCode.CreateFrom(member.Character));
-        this.IsValid = true;
-        this.IsMainHero = member.IsPlayer;
+        Name = member.Character.Name.ToString() + "'s Team";
+        Character = new CharacterViewModel(CharacterViewModel.StanceTypes.CelebrateVictory);
+        Character.FillFrom(member.Character, -1);
+        Visual = new ImageIdentifierVM(CharacterCode.CreateFrom(member.Character));
+        IsValid = true;
+        IsMainHero = member.IsPlayer;
       }
     }
 
@@ -52,19 +52,19 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
       OnPropertyChanged("State");
       OnPropertyChanged("TeamColor");
       OnPropertyChanged("IsDead");
-      this.IsMainHero = (this.Member != null && this.Member.IsPlayer);
+      IsMainHero = (Member != null && Member.IsPlayer);
     }
 
     #region view properties
     [DataSourceProperty]
     public bool IsInitialized
     {
-      get => this._isInitialized;
+      get => _isInitialized;
       set
       {
-        if (value != this._isInitialized)
+        if (value != _isInitialized)
         {
-          this._isInitialized = value;
+          _isInitialized = value;
           OnPropertyChangedWithValue(value, "IsInitialized");
         }
       }
@@ -73,12 +73,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool IsValid
     {
-      get => this._isValid;
+      get => _isValid;
       set
       {
-        if (value != this._isValid)
+        if (value != _isValid)
         {
-          this._isValid = value;
+          _isValid = value;
           OnPropertyChangedWithValue(value, "IsValid");
         }
       }
@@ -87,12 +87,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool IsDead
     {
-      get => this._isDead;
+      get => _isDead;
       set
       {
-        if (value != this._isDead)
+        if (value != _isDead)
         {
-          this._isDead = value;
+          _isDead = value;
           OnPropertyChangedWithValue(value, "IsDead");
         }
       }
@@ -101,12 +101,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool IsMainHero
     {
-      get => this._isMainHero;
+      get => _isMainHero;
       set
       {
-        if (value != this._isMainHero)
+        if (value != _isMainHero)
         {
-          this._isMainHero = value;
+          _isMainHero = value;
           OnPropertyChangedWithValue(value, "IsMainHero");
         }
       }
@@ -115,12 +115,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public Color TeamColor
     {
-      get => this._teamColor;
+      get => _teamColor;
       set
       {
-        if (value != this._teamColor)
+        if (value != _teamColor)
         {
-          this._teamColor = value;
+          _teamColor = value;
           OnPropertyChangedWithValue(value, "TeamColor");
         }
       }
@@ -129,12 +129,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public ImageIdentifierVM Visual
     {
-      get => this._visual;
+      get => _visual;
       set
       {
-        if (value != this._visual)
+        if (value != _visual)
         {
-          this._visual = value;
+          _visual = value;
           OnPropertyChangedWithValue(value, "Visual");
         }
       }
@@ -143,12 +143,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public int State
     {
-      get => this._state;
+      get => _state;
       set
       {
-        if (value != this._state)
+        if (value != _state)
         {
-          this._state = value;
+          _state = value;
           OnPropertyChangedWithValue(value, "State");
         }
       }
@@ -157,12 +157,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool IsQualifiedForNextRound
     {
-      get => this._isQualifiedForNextRound;
+      get => _isQualifiedForNextRound;
       set
       {
-        if (value != this._isQualifiedForNextRound)
+        if (value != _isQualifiedForNextRound)
         {
-          this._isQualifiedForNextRound = value;
+          _isQualifiedForNextRound = value;
           OnPropertyChangedWithValue(value, "IsQualifiedForNextRound");
         }
       }
@@ -171,12 +171,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string Score
     {
-      get => this._score;
+      get => _score;
       set
       {
-        if (value != this._score)
+        if (value != _score)
         {
-          this._score = value;
+          _score = value;
           OnPropertyChangedWithValue(value, "Score");
         }
       }
@@ -185,12 +185,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string Name
     {
-      get => this._name;
+      get => _name;
       set
       {
-        if (value != this._name)
+        if (value != _name)
         {
-          this._name = value;
+          _name = value;
           OnPropertyChangedWithValue(value, "Name");
         }
       }
@@ -199,12 +199,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public CharacterViewModel Character
     {
-      get => this._character;
+      get => _character;
       set
       {
-        if (value != this._character)
+        if (value != _character)
         {
-          this._character = value;
+          _character = value;
           OnPropertyChangedWithValue(value, "Character");
         }
       }
@@ -229,9 +229,9 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void ExecuteOpenEncyclopedia()
     {
-      if (this.Member != null && this.Member.Character != null)
+      if (Member != null && Member.Character != null)
       {
-        Campaign.Current.EncyclopediaManager.GoToLink(this.Member.Character.EncyclopediaLink);
+        Campaign.Current.EncyclopediaManager.GoToLink(Member.Character.EncyclopediaLink);
       }
     }
 #pragma warning restore IDE0051 // Remove unused private members

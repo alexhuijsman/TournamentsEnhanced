@@ -17,46 +17,46 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
     public TeamTournamentVM(Action disableUI, TeamTournamentBehavior tournamentBehavior)
     {
-      this.DisableUI = disableUI;
-      this.CurrentMatch = new TeamTournamentMatchVM();
+      DisableUI = disableUI;
+      CurrentMatch = new TeamTournamentMatchVM();
 
-      this.Round1 = new TeamTournamentRoundVM();
-      this.Round2 = new TeamTournamentRoundVM();
-      this.Round3 = new TeamTournamentRoundVM();
-      this.Round4 = new TeamTournamentRoundVM();
+      Round1 = new TeamTournamentRoundVM();
+      Round2 = new TeamTournamentRoundVM();
+      Round3 = new TeamTournamentRoundVM();
+      Round4 = new TeamTournamentRoundVM();
 
-      this._rounds = new List<TeamTournamentRoundVM>
+      _rounds = new List<TeamTournamentRoundVM>
       {
-        this.Round1,
-        this.Round2,
-        this.Round3,
-        this.Round4
+        Round1,
+        Round2,
+        Round3,
+        Round4
       };
 
-      this._tournamentWinner = new TeamTournamentMemberVM();
-      this.Tournament = tournamentBehavior;
-      this.WinnerIntro = GameTexts.FindText("str_tournament_winner_intro", null).ToString();
-      this.BattleRewards = new MBBindingList<TournamentRewardVM>();
+      _tournamentWinner = new TeamTournamentMemberVM();
+      Tournament = tournamentBehavior;
+      WinnerIntro = GameTexts.FindText("str_tournament_winner_intro", null).ToString();
+      BattleRewards = new MBBindingList<TournamentRewardVM>();
 
-      for (int i = 0; i < this.Tournament.Rounds.Length; i++)
-        this._rounds[i].Initialize(this.Tournament.Rounds[i], GameTexts.FindText("str_tournament_round", i.ToString()));
+      for (int i = 0; i < Tournament.Rounds.Length; i++)
+        _rounds[i].Initialize(Tournament.Rounds[i], GameTexts.FindText("str_tournament_round", i.ToString()));
 
 
-      this.Refresh();
+      Refresh();
 
-      this.Tournament.TournamentEnd += this.OnTournamentEnd;
-      this.Tournament.MatchEnd += this.OnMatchEnd;
+      Tournament.TournamentEnd += OnTournamentEnd;
+      Tournament.MatchEnd += OnMatchEnd;
 
-      this.PrizeVisual = (this.HasPrizeItem ? new ImageIdentifierVM(this.Tournament.TournamentGame.Prize) : new ImageIdentifierVM(ImageIdentifierType.Null));
-      this.RefreshValues();
+      PrizeVisual = (HasPrizeItem ? new ImageIdentifierVM(Tournament.TournamentGame.Prize) : new ImageIdentifierVM(ImageIdentifierType.Null));
+      RefreshValues();
     }
 
     private void OnMatchEnd(TeamTournamentMatch match)
     {
-      if (ActiveRoundIndex < this._rounds.Count + 1 && this.Tournament.NextRound != null)
+      if (ActiveRoundIndex < _rounds.Count + 1 && Tournament.NextRound != null)
       {
-        this._rounds[ActiveRoundIndex + 1].Initialize(this.Tournament.NextRound);
-        this.RefreshValues();
+        _rounds[ActiveRoundIndex + 1].Initialize(Tournament.NextRound);
+        RefreshValues();
       }
     }
 
@@ -64,72 +64,72 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       base.RefreshValues();
 
-      this.LeaveText = GameTexts.FindText("str_tournament_leave", null).ToString();
-      this.SkipRoundText = GameTexts.FindText("str_tournament_skip_round", null).ToString();
-      this.WatchRoundText = GameTexts.FindText("str_tournament_watch_round", null).ToString();
-      this.JoinTournamentText = GameTexts.FindText("str_tournament_join_tournament", null).ToString();
-      this.BetText = GameTexts.FindText("str_bet", null).ToString();
-      this.AcceptText = GameTexts.FindText("str_accept", null).ToString();
-      this.CancelText = GameTexts.FindText("str_cancel", null).ToString();
-      this.TournamentWinnerTitle = GameTexts.FindText("str_tournament_winner_title", null).ToString();
-      this.BetTitleText = GameTexts.FindText("str_wager", null).ToString();
-      GameTexts.SetVariable("MAX_AMOUNT", this.Tournament.GetMaximumBet());
+      LeaveText = GameTexts.FindText("str_tournament_leave", null).ToString();
+      SkipRoundText = GameTexts.FindText("str_tournament_skip_round", null).ToString();
+      WatchRoundText = GameTexts.FindText("str_tournament_watch_round", null).ToString();
+      JoinTournamentText = GameTexts.FindText("str_tournament_join_tournament", null).ToString();
+      BetText = GameTexts.FindText("str_bet", null).ToString();
+      AcceptText = GameTexts.FindText("str_accept", null).ToString();
+      CancelText = GameTexts.FindText("str_cancel", null).ToString();
+      TournamentWinnerTitle = GameTexts.FindText("str_tournament_winner_title", null).ToString();
+      BetTitleText = GameTexts.FindText("str_wager", null).ToString();
+      GameTexts.SetVariable("MAX_AMOUNT", Tournament.GetMaximumBet());
       GameTexts.SetVariable("GOLD_ICON", "{=!}<img src=\"Icons\\Coin@2x\">");
-      this.BetDescriptionText = GameTexts.FindText("str_tournament_bet_description", null).ToString();
-      this.TournamentPrizeText = GameTexts.FindText("str_tournament_prize", null).ToString();
-      this.PrizeItemName = this.Tournament.TournamentGame.Prize.Name.ToString();
-      MBTextManager.SetTextVariable("SETTLEMENT_NAME", this.Tournament.Settlement.Name, false);
-      this.TournamentTitle = GameTexts.FindText("str_tournament", null).ToString();
-      this.CurrentWagerText = GameTexts.FindText("str_tournament_current_wager", null).ToString();
+      BetDescriptionText = GameTexts.FindText("str_tournament_bet_description", null).ToString();
+      TournamentPrizeText = GameTexts.FindText("str_tournament_prize", null).ToString();
+      PrizeItemName = Tournament.TournamentGame.Prize.Name.ToString();
+      MBTextManager.SetTextVariable("SETTLEMENT_NAME", Tournament.Settlement.Name, false);
+      TournamentTitle = GameTexts.FindText("str_tournament", null).ToString();
+      CurrentWagerText = GameTexts.FindText("str_tournament_current_wager", null).ToString();
 
-      if (this._round1 != null)
-        this._round1.RefreshValues();
-      if (this._round2 != null)
-        this._round2.RefreshValues();
+      if (_round1 != null)
+        _round1.RefreshValues();
+      if (_round2 != null)
+        _round2.RefreshValues();
       if (_round3 != null)
         _round3.RefreshValues();
-      if (this._round4 != null)
-        this._round4.RefreshValues();
-      if (this._currentMatch != null)
-        this._currentMatch.RefreshValues();
-      if (this._tournamentWinner != null)
-        this._tournamentWinner.RefreshValues();
+      if (_round4 != null)
+        _round4.RefreshValues();
+      if (_currentMatch != null)
+        _currentMatch.RefreshValues();
+      if (_tournamentWinner != null)
+        _tournamentWinner.RefreshValues();
     }
 
     private void RefreshBetProperties()
     {
       TextObject textObject = new TextObject("{=L9GnQvsq}Stake: {BETTED_DENARS}", null);
-      textObject.SetTextVariable("BETTED_DENARS", this.Tournament.BettedDenars);
-      this.BettedDenarsText = textObject.ToString();
+      textObject.SetTextVariable("BETTED_DENARS", Tournament.BettedDenars);
+      BettedDenarsText = textObject.ToString();
       TextObject textObject2 = new TextObject("{=xzzSaN4b}Expected: {OVERALL_EXPECTED_DENARS}", null);
-      textObject2.SetTextVariable("OVERALL_EXPECTED_DENARS", this.Tournament.OverallExpectedDenars);
-      this.OverallExpectedDenarsText = textObject2.ToString();
+      textObject2.SetTextVariable("OVERALL_EXPECTED_DENARS", Tournament.OverallExpectedDenars);
+      OverallExpectedDenarsText = textObject2.ToString();
       TextObject textObject3 = new TextObject("{=yF5fpwNE}Total: {TOTAL}", null);
-      textObject3.SetTextVariable("TOTAL", this.Tournament.PlayerDenars);
-      this.TotalDenarsText = textObject3.ToString();
+      textObject3.SetTextVariable("TOTAL", Tournament.PlayerDenars);
+      TotalDenarsText = textObject3.ToString();
       OnPropertyChanged("IsBetButtonEnabled");
-      this.MaximumBetValue = Math.Min(this.Tournament.GetMaximumBet() - this._thisRoundBettedAmount, Hero.MainHero.Gold);
-      GameTexts.SetVariable("NORMALIZED_EXPECTED_GOLD", (int)(this.Tournament.BetOdd * 100f));
+      MaximumBetValue = Math.Min(Tournament.GetMaximumBet() - _thisRoundBettedAmount, Hero.MainHero.Gold);
+      GameTexts.SetVariable("NORMALIZED_EXPECTED_GOLD", (int)(Tournament.BetOdd * 100f));
       GameTexts.SetVariable("GOLD_ICON", "{=!}<img src=\"Icons\\Coin@2x\">");
-      this.BetOddsText = GameTexts.FindText("str_tournament_bet_odd", null).ToString();
+      BetOddsText = GameTexts.FindText("str_tournament_bet_odd", null).ToString();
     }
 
     private void OnNewRoundStarted(int prevRoundIndex, int currentRoundIndex)
     {
-      this._isPlayerParticipating = this.Tournament.IsPlayerParticipating;
-      this._thisRoundBettedAmount = 0;
+      _isPlayerParticipating = Tournament.IsPlayerParticipating;
+      _thisRoundBettedAmount = 0;
     }
 
     public void Refresh()
     {
-      this.IsCurrentMatchActive = false;
+      IsCurrentMatchActive = false;
       CurrentMatch = _rounds[Tournament.CurrentRoundIndex].MatchVMs.FirstOrDefault(m => m.IsValid && m.Match == Tournament.CurrentMatch);
-      this.ActiveRoundIndex = this.Tournament.CurrentRoundIndex;
-      this.CanPlayerJoin = this.PlayerCanJoinMatch();
+      ActiveRoundIndex = Tournament.CurrentRoundIndex;
+      CanPlayerJoin = PlayerCanJoinMatch();
       OnPropertyChanged("IsTournamentIncomplete");
       OnPropertyChanged("InitializationOver");
       OnPropertyChanged("IsBetButtonEnabled");
-      this.HasPrizeItem = (this.Tournament.TournamentGame.Prize != null && !this.IsOver);
+      HasPrizeItem = (Tournament.TournamentGame.Prize != null && !IsOver);
     }
 
     /// <summary>
@@ -138,66 +138,66 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void OnTournamentEnd()
     {
-      var winnerTeams = this.Tournament.LastMatch.Teams.OrderByDescending(x => x.Score).ToList();
+      var winnerTeams = Tournament.LastMatch.Teams.OrderByDescending(x => x.Score).ToList();
       var firstTeamLeader = new TeamTournamentMemberVM(winnerTeams.ElementAt(0).GetTeamLeader());
       var secondTeamLeader = new TeamTournamentMemberVM(winnerTeams.ElementAt(1).GetTeamLeader());
-      this.TournamentWinner = firstTeamLeader;
+      TournamentWinner = firstTeamLeader;
 
-      if (this.TournamentWinner.IsMainHero)
+      if (TournamentWinner.IsMainHero)
       {
-        GameTexts.SetVariable("TOURNAMENT_FINAL_OPPONENT", $"{(firstTeamLeader == this.TournamentWinner ? secondTeamLeader : firstTeamLeader).Name}'s Team");
-        this.WinnerIntro = GameTexts.FindText("str_tournament_result_won", null).ToString();
+        GameTexts.SetVariable("TOURNAMENT_FINAL_OPPONENT", $"{(firstTeamLeader == TournamentWinner ? secondTeamLeader : firstTeamLeader).Name}'s Team");
+        WinnerIntro = GameTexts.FindText("str_tournament_result_won", null).ToString();
 
-        if (this.Tournament.TournamentGame.TournamentWinRenown > 0f)
+        if (Tournament.TournamentGame.TournamentWinRenown > 0f)
         {
-          GameTexts.SetVariable("RENOWN", this.Tournament.TournamentGame.TournamentWinRenown.ToString("F1"));
-          this.BattleRewards.Add(new TournamentRewardVM(GameTexts.FindText("str_tournament_renown", null).ToString()));
+          GameTexts.SetVariable("RENOWN", Tournament.TournamentGame.TournamentWinRenown.ToString("F1"));
+          BattleRewards.Add(new TournamentRewardVM(GameTexts.FindText("str_tournament_renown", null).ToString()));
         }
 
-        if (this.Tournament.TournamentGame.Prize != null)
+        if (Tournament.TournamentGame.Prize != null)
         {
-          GameTexts.SetVariable("REWARD", this.Tournament.TournamentGame.Prize.Name.ToString());
-          this.BattleRewards.Add(new TournamentRewardVM(GameTexts.FindText("str_tournament_reward", null).ToString(), new ImageIdentifierVM(this.Tournament.TournamentGame.Prize)));
+          GameTexts.SetVariable("REWARD", Tournament.TournamentGame.Prize.Name.ToString());
+          BattleRewards.Add(new TournamentRewardVM(GameTexts.FindText("str_tournament_reward", null).ToString(), new ImageIdentifierVM(Tournament.TournamentGame.Prize)));
         }
 
-        if (this.Tournament.OverallExpectedDenars > 0)
+        if (Tournament.OverallExpectedDenars > 0)
         {
-          GameTexts.SetVariable("BET", this.Tournament.OverallExpectedDenars.ToString());
-          this.BattleRewards.Add(new TournamentRewardVM(GameTexts.FindText("str_tournament_bet", null).ToString()));
+          GameTexts.SetVariable("BET", Tournament.OverallExpectedDenars.ToString());
+          BattleRewards.Add(new TournamentRewardVM(GameTexts.FindText("str_tournament_bet", null).ToString()));
         }
       }
       else if (firstTeamLeader.IsMainHero || secondTeamLeader.IsMainHero)
       {
-        GameTexts.SetVariable("TOURNAMENT_FINAL_OPPONENT", $"{(firstTeamLeader == this.TournamentWinner ? firstTeamLeader : secondTeamLeader).Name}'s Team");
-        this.WinnerIntro = GameTexts.FindText("str_tournament_result_eliminated_at_final", null).ToString();
+        GameTexts.SetVariable("TOURNAMENT_FINAL_OPPONENT", $"{(firstTeamLeader == TournamentWinner ? firstTeamLeader : secondTeamLeader).Name}'s Team");
+        WinnerIntro = GameTexts.FindText("str_tournament_result_eliminated_at_final", null).ToString();
       }
       else
       {
-        GameTexts.SetVariable("TOURNAMENT_FINAL_PARTICIPANT_A", $"{(firstTeamLeader == this.TournamentWinner ? firstTeamLeader : secondTeamLeader).Name}'s Team");
-        GameTexts.SetVariable("TOURNAMENT_FINAL_PARTICIPANT_B", $"{(firstTeamLeader == this.TournamentWinner ? secondTeamLeader : firstTeamLeader).Name}'s Team");
+        GameTexts.SetVariable("TOURNAMENT_FINAL_PARTICIPANT_A", $"{(firstTeamLeader == TournamentWinner ? firstTeamLeader : secondTeamLeader).Name}'s Team");
+        GameTexts.SetVariable("TOURNAMENT_FINAL_PARTICIPANT_B", $"{(firstTeamLeader == TournamentWinner ? secondTeamLeader : firstTeamLeader).Name}'s Team");
 
-        if (this._isPlayerParticipating)
+        if (_isPlayerParticipating)
         {
-          GameTexts.SetVariable("TOURNAMENT_ELIMINATED_ROUND", this.Tournament.PlayerTeamLostAtRound);
-          this.WinnerIntro = GameTexts.FindText("str_tournament_result_eliminated", null).ToString();
+          GameTexts.SetVariable("TOURNAMENT_ELIMINATED_ROUND", Tournament.PlayerTeamLostAtRound);
+          WinnerIntro = GameTexts.FindText("str_tournament_result_eliminated", null).ToString();
         }
         else
-          this.WinnerIntro = GameTexts.FindText("str_tournament_result_spectator", null).ToString();
+          WinnerIntro = GameTexts.FindText("str_tournament_result_spectator", null).ToString();
       }
-      this.IsOver = true;
+      IsOver = true;
     }
 
     private bool PlayerCanJoinMatch()
     {
-      if (this.IsTournamentIncomplete)
-        return this.Tournament.CurrentMatch.IsPlayerParticipating;
+      if (IsTournamentIncomplete)
+        return Tournament.CurrentMatch.IsPlayerParticipating;
 
       return false;
     }
 
     public void OnAgentRemoved(Agent agent)
     {
-      if (this.IsCurrentMatchActive && agent.IsHuman)
+      if (IsCurrentMatchActive && agent.IsHuman)
       {
         var team = _currentMatch.Teams.First(x => x.Team.Members.Any(m => m.Descriptor.CompareTo(agent.Origin.UniqueSeed) == 0));
         if (!team.Team.IsAlive)
@@ -207,7 +207,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
     private TeamTournamentMemberVM GetMemberForSeed(int seed)
     {
-      return this.CurrentMatch.GetMatchMemberVMs().FirstOrDefault(x => x.Member != null && x.Member.Descriptor.CompareTo(seed) == 0);
+      return CurrentMatch.GetMatchMemberVMs().FirstOrDefault(x => x.Member != null && x.Member.Descriptor.CompareTo(seed) == 0);
     }
 
     #region view commands
@@ -218,11 +218,11 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     private void ExecuteShowPrizeItemTooltip()
 
     {
-      if (this.HasPrizeItem)
+      if (HasPrizeItem)
       {
         InformationManager.AddTooltipInformation(typeof(ItemObject), new object[]
         {
-          new EquipmentElement(this.Tournament.TournamentGame.Prize, null)
+          new EquipmentElement(Tournament.TournamentGame.Prize, null)
         });
       }
     }
@@ -240,9 +240,9 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void ExecuteBet()
     {
-      this._thisRoundBettedAmount += this.WageredDenars;
-      this.Tournament.PlaceABet(this.WageredDenars);
-      this.RefreshBetProperties();
+      _thisRoundBettedAmount += WageredDenars;
+      Tournament.PlaceABet(WageredDenars);
+      RefreshBetProperties();
     }
 
     /// <summary>
@@ -250,14 +250,14 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void ExecuteJoinTournament()
     {
-      if (this.PlayerCanJoinMatch())
+      if (PlayerCanJoinMatch())
       {
-        this.Tournament.StartMatch();
-        this.IsCurrentMatchActive = true;
-        this.CurrentMatch.Refresh(true);
-        this.CurrentMatch.State = 3;
-        this.DisableUI();
-        this.IsCurrentMatchActive = true;
+        Tournament.StartMatch();
+        IsCurrentMatchActive = true;
+        CurrentMatch.Refresh(true);
+        CurrentMatch.State = 3;
+        DisableUI();
+        IsCurrentMatchActive = true;
       }
     }
 
@@ -266,11 +266,11 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void ExecuteSkipRound()
     {
-      if (this.IsTournamentIncomplete)
+      if (IsTournamentIncomplete)
       {
-        this.Tournament.SkipMatch();
+        Tournament.SkipMatch();
       }
-      this.Refresh();
+      Refresh();
     }
 
     /// <summary>
@@ -278,14 +278,14 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void ExecuteWatchRound()
     {
-      if (!this.PlayerCanJoinMatch())
+      if (!PlayerCanJoinMatch())
       {
-        this.Tournament.StartMatch();
-        this.IsCurrentMatchActive = true;
-        this.CurrentMatch.Refresh(true);
-        this.CurrentMatch.State = 3;
-        this.DisableUI();
-        this.IsCurrentMatchActive = true;
+        Tournament.StartMatch();
+        IsCurrentMatchActive = true;
+        CurrentMatch.Refresh(true);
+        CurrentMatch.State = 3;
+        DisableUI();
+        IsCurrentMatchActive = true;
       }
     }
 
@@ -294,7 +294,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     /// </summary>
     private void ExecuteLeave()
     {
-      if (this.CurrentMatch != null)
+      if (CurrentMatch != null)
       {
         InformationManager.ShowInquiry(new InquiryData(
           GameTexts.FindText("str_forfeit", null).ToString(),
@@ -303,7 +303,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
           true,
           GameTexts.FindText("str_yes", null).ToString(),
           GameTexts.FindText("str_no", null).ToString(),
-          this.ExitFinishTournament,
+          ExitFinishTournament,
           null),
         true);
       }
@@ -312,7 +312,7 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
 
     private void ExitFinishTournament()
     {
-      Campaign.Current.TournamentManager.ResolveTournament(this.Tournament.TournamentGame, Settlement.CurrentSettlement.Town);
+      Campaign.Current.TournamentManager.ResolveTournament(Tournament.TournamentGame, Settlement.CurrentSettlement.Town);
       Mission.Current.EndMission();
     }
 
@@ -323,12 +323,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string TournamentWinnerTitle
     {
-      get => this._tournamentWinnerTitle;
+      get => _tournamentWinnerTitle;
       set
       {
-        if (value != this._tournamentWinnerTitle)
+        if (value != _tournamentWinnerTitle)
         {
-          this._tournamentWinnerTitle = value;
+          _tournamentWinnerTitle = value;
           OnPropertyChangedWithValue(value, "TournamentWinnerTitle");
         }
       }
@@ -337,12 +337,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentMemberVM TournamentWinner
     {
-      get => this._tournamentWinner;
+      get => _tournamentWinner;
       set
       {
-        if (value != this._tournamentWinner)
+        if (value != _tournamentWinner)
         {
-          this._tournamentWinner = value;
+          _tournamentWinner = value;
           OnPropertyChangedWithValue(value, "TournamentWinner");
         }
       }
@@ -351,31 +351,31 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public int MaximumBetValue
     {
-      get => this._maximumBetValue;
+      get => _maximumBetValue;
       set
       {
-        if (value != this._maximumBetValue)
+        if (value != _maximumBetValue)
         {
-          this._maximumBetValue = value;
+          _maximumBetValue = value;
           OnPropertyChangedWithValue(value, "MaximumBetValue");
-          this._wageredDenars = -1;
-          this.WageredDenars = 0;
+          _wageredDenars = -1;
+          WageredDenars = 0;
         }
       }
     }
 
     [DataSourceProperty]
-    public bool IsBetButtonEnabled => this.PlayerCanJoinMatch() && this.Tournament.GetMaximumBet() > this._thisRoundBettedAmount && Hero.MainHero.Gold > 0;
+    public bool IsBetButtonEnabled => PlayerCanJoinMatch() && Tournament.GetMaximumBet() > _thisRoundBettedAmount && Hero.MainHero.Gold > 0;
 
     [DataSourceProperty]
     public string BetText
     {
-      get => this._betText;
+      get => _betText;
       set
       {
-        if (value != this._betText)
+        if (value != _betText)
         {
-          this._betText = value;
+          _betText = value;
           OnPropertyChangedWithValue(value, "BetText");
         }
       }
@@ -384,12 +384,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string BetTitleText
     {
-      get => this._betTitleText;
+      get => _betTitleText;
       set
       {
-        if (value != this._betTitleText)
+        if (value != _betTitleText)
         {
-          this._betTitleText = value;
+          _betTitleText = value;
           OnPropertyChangedWithValue(value, "BetTitleText");
         }
       }
@@ -398,12 +398,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string CurrentWagerText
     {
-      get => this._currentWagerText;
+      get => _currentWagerText;
       set
       {
-        if (value != this._currentWagerText)
+        if (value != _currentWagerText)
         {
-          this._currentWagerText = value;
+          _currentWagerText = value;
           OnPropertyChangedWithValue(value, "CurrentWagerText");
         }
       }
@@ -412,12 +412,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string BetDescriptionText
     {
-      get => this._betDescriptionText;
+      get => _betDescriptionText;
       set
       {
-        if (value != this._betDescriptionText)
+        if (value != _betDescriptionText)
         {
-          this._betDescriptionText = value;
+          _betDescriptionText = value;
           OnPropertyChangedWithValue(value, "BetDescriptionText");
         }
       }
@@ -426,12 +426,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public ImageIdentifierVM PrizeVisual
     {
-      get => this._prizeVisual;
+      get => _prizeVisual;
       set
       {
-        if (value != this._prizeVisual)
+        if (value != _prizeVisual)
         {
-          this._prizeVisual = value;
+          _prizeVisual = value;
           OnPropertyChangedWithValue(value, "PrizeVisual");
         }
       }
@@ -440,12 +440,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string PrizeItemName
     {
-      get => this._prizeItemName;
+      get => _prizeItemName;
       set
       {
-        if (value != this._prizeItemName)
+        if (value != _prizeItemName)
         {
-          this._prizeItemName = value;
+          _prizeItemName = value;
           OnPropertyChangedWithValue(value, "PrizeItemName");
         }
       }
@@ -454,12 +454,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string TournamentPrizeText
     {
-      get => this._tournamentPrizeText;
+      get => _tournamentPrizeText;
       set
       {
-        if (value != this._tournamentPrizeText)
+        if (value != _tournamentPrizeText)
         {
-          this._tournamentPrizeText = value;
+          _tournamentPrizeText = value;
           OnPropertyChangedWithValue(value, "TournamentPrizeText");
         }
       }
@@ -468,14 +468,14 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public int WageredDenars
     {
-      get => this._wageredDenars;
+      get => _wageredDenars;
       set
       {
-        if (value != this._wageredDenars)
+        if (value != _wageredDenars)
         {
-          this._wageredDenars = value;
+          _wageredDenars = value;
           OnPropertyChangedWithValue(value, "WageredDenars");
-          this.ExpectedBetDenars = ((this._wageredDenars == 0) ? 0 : this.Tournament.GetExpectedDenarsForBet(this._wageredDenars));
+          ExpectedBetDenars = ((_wageredDenars == 0) ? 0 : Tournament.GetExpectedDenarsForBet(_wageredDenars));
         }
       }
     }
@@ -483,12 +483,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public int ExpectedBetDenars
     {
-      get => this._expectedBetDenars;
+      get => _expectedBetDenars;
       set
       {
-        if (value != this._expectedBetDenars)
+        if (value != _expectedBetDenars)
         {
-          this._expectedBetDenars = value;
+          _expectedBetDenars = value;
           OnPropertyChangedWithValue(value, "ExpectedBetDenars");
         }
       }
@@ -497,12 +497,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string BetOddsText
     {
-      get => this._betOddsText;
+      get => _betOddsText;
       set
       {
-        if (value != this._betOddsText)
+        if (value != _betOddsText)
         {
-          this._betOddsText = value;
+          _betOddsText = value;
           OnPropertyChangedWithValue(value, "BetOddsText");
         }
       }
@@ -511,12 +511,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string BettedDenarsText
     {
-      get => this._bettedDenarsText;
+      get => _bettedDenarsText;
       set
       {
-        if (value != this._bettedDenarsText)
+        if (value != _bettedDenarsText)
         {
-          this._bettedDenarsText = value;
+          _bettedDenarsText = value;
           OnPropertyChangedWithValue(value, "BettedDenarsText");
         }
       }
@@ -525,12 +525,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string OverallExpectedDenarsText
     {
-      get => this._overallExpectedDenarsText;
+      get => _overallExpectedDenarsText;
       set
       {
-        if (value != this._overallExpectedDenarsText)
+        if (value != _overallExpectedDenarsText)
         {
-          this._overallExpectedDenarsText = value;
+          _overallExpectedDenarsText = value;
           OnPropertyChangedWithValue(value, "OverallExpectedDenarsText");
         }
       }
@@ -539,12 +539,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string CurrentExpectedDenarsText
     {
-      get => this._currentExpectedDenarsText;
+      get => _currentExpectedDenarsText;
       set
       {
-        if (value != this._currentExpectedDenarsText)
+        if (value != _currentExpectedDenarsText)
         {
-          this._currentExpectedDenarsText = value;
+          _currentExpectedDenarsText = value;
           OnPropertyChangedWithValue(value, "CurrentExpectedDenarsText");
         }
       }
@@ -553,12 +553,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string TotalDenarsText
     {
-      get => this._totalDenarsText;
+      get => _totalDenarsText;
       set
       {
-        if (value != this._totalDenarsText)
+        if (value != _totalDenarsText)
         {
-          this._totalDenarsText = value;
+          _totalDenarsText = value;
           OnPropertyChangedWithValue(value, "TotalDenarsText");
         }
       }
@@ -567,12 +567,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string AcceptText
     {
-      get => this._acceptText;
+      get => _acceptText;
       set
       {
-        if (value != this._acceptText)
+        if (value != _acceptText)
         {
-          this._acceptText = value;
+          _acceptText = value;
           OnPropertyChangedWithValue(value, "AcceptText");
         }
       }
@@ -581,12 +581,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string CancelText
     {
-      get => this._cancelText;
+      get => _cancelText;
       set
       {
-        if (value != this._cancelText)
+        if (value != _cancelText)
         {
-          this._cancelText = value;
+          _cancelText = value;
           OnPropertyChangedWithValue(value, "CancelText");
         }
       }
@@ -595,10 +595,10 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool IsCurrentMatchActive
     {
-      get => this._isCurrentMatchActive;
+      get => _isCurrentMatchActive;
       set
       {
-        this._isCurrentMatchActive = value;
+        _isCurrentMatchActive = value;
         OnPropertyChangedWithValue(value, "IsCurrentMatchActive");
       }
     }
@@ -606,46 +606,46 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentMatchVM CurrentMatch
     {
-      get => this._currentMatch;
+      get => _currentMatch;
       set
       {
-        if (value != this._currentMatch)
+        if (value != _currentMatch)
         {
-          if (this._currentMatch != null && this._currentMatch.IsValid)
+          if (_currentMatch != null && _currentMatch.IsValid)
           {
-            this._currentMatch.State = 2;
-            this._currentMatch.Refresh(false);
+            _currentMatch.State = 2;
+            _currentMatch.Refresh(false);
 
-            int index = this._rounds.FindIndex(r => r.MatchVMs.Any(m => m.Match == this.Tournament.LastMatch));
+            int index = _rounds.FindIndex(r => r.MatchVMs.Any(m => m.Match == Tournament.LastMatch));
 
-            if (index < this.Tournament.Rounds.Length - 1)
-              this._rounds[index + 1].Initialize();
+            if (index < Tournament.Rounds.Length - 1)
+              _rounds[index + 1].Initialize();
           }
 
-          this._currentMatch = value;
+          _currentMatch = value;
           OnPropertyChangedWithValue(value, "CurrentMatch");
 
-          if (this._currentMatch != null)
-            this._currentMatch.State = 1;
+          if (_currentMatch != null)
+            _currentMatch.State = 1;
         }
       }
     }
 
     [DataSourceProperty]
-    public bool IsTournamentIncomplete => this.Tournament == null || this.Tournament.CurrentMatch != null;
+    public bool IsTournamentIncomplete => Tournament == null || Tournament.CurrentMatch != null;
 
     [DataSourceProperty]
     public int ActiveRoundIndex
     {
-      get => this._activeRoundIndex;
+      get => _activeRoundIndex;
       set
       {
-        if (value != this._activeRoundIndex)
+        if (value != _activeRoundIndex)
         {
-          this.OnNewRoundStarted(this._activeRoundIndex, value);
-          this._activeRoundIndex = value;
+          OnNewRoundStarted(_activeRoundIndex, value);
+          _activeRoundIndex = value;
           OnPropertyChangedWithValue(value, "ActiveRoundIndex");
-          this.RefreshBetProperties();
+          RefreshBetProperties();
         }
       }
     }
@@ -653,12 +653,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool CanPlayerJoin
     {
-      get => this._canPlayerJoin;
+      get => _canPlayerJoin;
       set
       {
-        if (value != this._canPlayerJoin)
+        if (value != _canPlayerJoin)
         {
-          this._canPlayerJoin = value;
+          _canPlayerJoin = value;
           OnPropertyChangedWithValue(value, "CanPlayerJoin");
         }
       }
@@ -667,12 +667,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool HasPrizeItem
     {
-      get => this._hasPrizeItem;
+      get => _hasPrizeItem;
       set
       {
-        if (value != this._hasPrizeItem)
+        if (value != _hasPrizeItem)
         {
-          this._hasPrizeItem = value;
+          _hasPrizeItem = value;
           OnPropertyChangedWithValue(value, "HasPrizeItem");
         }
       }
@@ -681,12 +681,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string JoinTournamentText
     {
-      get => this._joinTournamentText;
+      get => _joinTournamentText;
       set
       {
-        if (value != this._joinTournamentText)
+        if (value != _joinTournamentText)
         {
-          this._joinTournamentText = value;
+          _joinTournamentText = value;
           OnPropertyChangedWithValue(value, "JoinTournamentText");
         }
       }
@@ -695,12 +695,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string SkipRoundText
     {
-      get => this._skipRoundText;
+      get => _skipRoundText;
       set
       {
-        if (value != this._skipRoundText)
+        if (value != _skipRoundText)
         {
-          this._skipRoundText = value;
+          _skipRoundText = value;
           OnPropertyChangedWithValue(value, "SkipRoundText");
         }
       }
@@ -709,12 +709,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string WatchRoundText
     {
-      get => this._watchRoundText;
+      get => _watchRoundText;
       set
       {
-        if (value != this._watchRoundText)
+        if (value != _watchRoundText)
         {
-          this._watchRoundText = value;
+          _watchRoundText = value;
           OnPropertyChangedWithValue(value, "WatchRoundText");
         }
       }
@@ -723,12 +723,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string LeaveText
     {
-      get => this._leaveText;
+      get => _leaveText;
       set
       {
-        if (value != this._leaveText)
+        if (value != _leaveText)
         {
-          this._leaveText = value;
+          _leaveText = value;
           OnPropertyChangedWithValue(value, "LeaveText");
         }
       }
@@ -737,12 +737,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentRoundVM Round1
     {
-      get => this._round1;
+      get => _round1;
       set
       {
-        if (value != this._round1)
+        if (value != _round1)
         {
-          this._round1 = value;
+          _round1 = value;
           OnPropertyChangedWithValue(value, "Round1");
         }
       }
@@ -751,12 +751,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentRoundVM Round2
     {
-      get => this._round2;
+      get => _round2;
       set
       {
-        if (value != this._round2)
+        if (value != _round2)
         {
-          this._round2 = value;
+          _round2 = value;
           OnPropertyChangedWithValue(value, "Round2");
         }
       }
@@ -765,12 +765,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public TeamTournamentRoundVM Round3
     {
-      get => this._round3;
+      get => _round3;
       set
       {
-        if (value != this._round3)
+        if (value != _round3)
         {
-          this._round3 = value;
+          _round3 = value;
           OnPropertyChangedWithValue(value, "Round3");
         }
       }
@@ -781,13 +781,13 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     {
       get
       {
-        return this._round4;
+        return _round4;
       }
       set
       {
-        if (value != this._round4)
+        if (value != _round4)
         {
-          this._round4 = value;
+          _round4 = value;
           OnPropertyChangedWithValue(value, "Round4");
         }
       }
@@ -805,12 +805,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string TournamentTitle
     {
-      get => this._tournamentTitle;
+      get => _tournamentTitle;
       set
       {
-        if (value != this._tournamentTitle)
+        if (value != _tournamentTitle)
         {
-          this._tournamentTitle = value;
+          _tournamentTitle = value;
           OnPropertyChangedWithValue(value, "TournamentTitle");
         }
       }
@@ -819,12 +819,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public bool IsOver
     {
-      get => this._isOver;
+      get => _isOver;
       set
       {
-        if (this._isOver != value)
+        if (_isOver != value)
         {
-          this._isOver = value;
+          _isOver = value;
           OnPropertyChangedWithValue(value, "IsOver");
         }
       }
@@ -833,12 +833,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public string WinnerIntro
     {
-      get => this._winnerIntro;
+      get => _winnerIntro;
       set
       {
-        if (value != this._winnerIntro)
+        if (value != _winnerIntro)
         {
-          this._winnerIntro = value;
+          _winnerIntro = value;
           OnPropertyChangedWithValue(value, "WinnerIntro");
         }
       }
@@ -847,12 +847,12 @@ namespace TournamentsEnhanced.TeamTournament.ViewModels
     [DataSourceProperty]
     public MBBindingList<TournamentRewardVM> BattleRewards
     {
-      get => this._battleRewards;
+      get => _battleRewards;
       set
       {
-        if (value != this._battleRewards)
+        if (value != _battleRewards)
         {
-          this._battleRewards = value;
+          _battleRewards = value;
           OnPropertyChangedWithValue(value, "BattleRewards");
         }
       }
