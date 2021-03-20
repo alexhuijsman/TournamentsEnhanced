@@ -112,6 +112,7 @@ namespace Test
         _notables.Add(_mockNotableOne.Object);
         _notables.Add(_mockNotableTwo.Object);
         _notables.Add(_mockNotableThree.Object);
+        _notables.Add(_mockHero.Object);
 
         _mockSettlement = MockRepository.Create<MBSettlement>();
         _mockSettlement.SetupGet(s => s.IsNull).Returns(false);
