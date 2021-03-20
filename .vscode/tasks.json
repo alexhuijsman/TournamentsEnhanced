@@ -22,13 +22,6 @@
         "/p:GenerateFullPaths=true",
         "/p:Configuration=Debug",
         "/p:Platform=x64",
-        "/p:Include=\"[TournamentsEnhanced[Test]?.dll]*\"",
-        "/p:Exclude=\"[*]TournamentsEnhanced.Wrappers.*\"",
-        "/p:SkipAutoProps=true",
-        "/p:CollectCoverage=true",
-        "/p:CoverletOutputFormat=lcov",
-        "/p:CoverletOutput=../lcov.info",
-        "/consoleloggerparameters:NoSummary",
         "${workspaceFolder}/test/TournamentsEnhancedTests.csproj"
       ],
       "group": "build",
@@ -40,6 +33,29 @@
         "Delete Empty Folders",
         "Create Test Folders"
       ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Generate Coverage Report",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "/p:GenerateFullPaths=true",
+        "/p:Configuration=Debug",
+        "/p:Platform=x64",
+        "/p:Include=\"[TournamentsEnhanced[Test]?.dll]*\"",
+        "/p:Exclude=\"[*]TournamentsEnhanced.Wrappers.*\"",
+        "/p:SkipAutoProps=true",
+        "/p:CollectCoverage=true",
+        "/p:CoverletOutputFormat=lcov",
+        "/p:CoverletOutput=../lcov.info",
+        "/consoleloggerparameters:NoSummary",
+        "${workspaceFolder}/test/TournamentsEnhancedTests.csproj"
+      ],
+      "group": "test",
+      "presentation": {
+        "reveal": "silent"
+      },
       "problemMatcher": "$msCompile"
     },
     {
