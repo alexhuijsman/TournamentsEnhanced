@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 using Moq;
 
 using NUnit.Framework;
@@ -30,6 +30,7 @@ namespace Test
     protected const string ExpectedSettlementStringId = "111111111111";
     protected const string ExpectedHeroStringId = "222222222222";
     protected const string SettlementName = "Test Settlement";
+    protected const int NotableBaseHeroRelation = 11;
 
     protected Mock<MBHero> _mockHero;
     protected Mock<MBTown> _mockTown;
@@ -40,7 +41,11 @@ namespace Test
     protected Mock<MBSettlement> _mockSettlement;
     protected Mock<ModState> _mockModState;
     protected Mock<Settings> _mockSettings;
-    Mock<MBInformationManagerFacade> _mockInformationManagerFacade;
+    protected Mock<MBInformationManagerFacade> _mockInformationManagerFacade;
+    protected Mock<MBHero> _mockNotableOne;
+    protected Mock<MBHero> _mockNotableTwo;
+    protected Mock<MBHero> _mockNotableThree;
+    protected List<MBHero> _notables = new List<MBHero>();
     protected TournamentRecordDictionary _tournamentRecords = new TournamentRecordDictionary();
     protected CreateTournamentOptions _options;
 
@@ -73,6 +78,7 @@ namespace Test
         _mockHero.SetupGet(h => h.StringId).Returns(ExpectedHeroStringId);
         _mockHero.SetupGet(h => h.IsHumanPlayerCharacter).Returns(payorType == PayorIs.HumanPlayer);
         _mockHero.Setup(h => h.ChangeHeroGold(-Default.TournamentCost));
+        _mockHero.SetupGet(h => h.MainHero).Returns(_mockHero.Object);
 
         _mockClan = MockRepository.Create<MBClan>();
         _mockClan.SetupGet(c => c.Leader).Returns(_mockHero.Object);
@@ -98,6 +104,15 @@ namespace Test
         _mockTextObject = MockRepository.Create<MBTextObject>();
         _mockTextObject.Setup<string>(o => o.ToString()).Returns(SettlementName);
 
+        _mockNotableOne = CreateMockNotable();
+        _mockNotableTwo = CreateMockNotable();
+        _mockNotableThree = CreateMockNotable();
+
+        _notables.Clear();
+        _notables.Add(_mockNotableOne.Object);
+        _notables.Add(_mockNotableTwo.Object);
+        _notables.Add(_mockNotableThree.Object);
+
         _mockSettlement = MockRepository.Create<MBSettlement>();
         _mockSettlement.SetupGet(s => s.IsNull).Returns(false);
         _mockSettlement.SetupGet(s => s.IsTown).Returns(true);
@@ -107,6 +122,7 @@ namespace Test
         _mockSettlement.SetupGet(s => s.Name).Returns(_mockTextObject.Object);
         _mockSettlement.SetupGet(s => s.Prosperity).Returns(0);
         _mockSettlement.SetupSet(s => s.Prosperity = Default.ProsperityIncrease);
+        _mockSettlement.SetupGet(s => s.Notables).Returns(_notables);
 
         _options = new CreateTournamentOptions()
         {
@@ -125,6 +141,7 @@ namespace Test
         _mockSettings.SetupGet(s => s.SecurityIncrease).Returns(Default.SecurityIncrease);
         _mockSettings.SetupGet(s => s.FoodStocksDecrease).Returns(Default.FoodStocksDecrease);
         _mockSettings.SetupGet(s => s.SettlementStatNotification).Returns(settlementStatNotificationType == SettlementStatNotification.Show);
+        _mockSettings.SetupGet(s => s.NoblesRelationIncrease).Returns(Default.NoblesRelationIncrease);
 
         _mockInformationManagerFacade = MockRepository.Create<MBInformationManagerFacade>();
         _mockInformationManagerFacade.Setup(f => f.DisplayAsQuickBanner(It.IsAny<string>()));
@@ -134,7 +151,17 @@ namespace Test
         _sut.MBCampaign = _mockCampaign.Object;
         _sut.Settings = _mockSettings.Object;
         _sut.MBInformationManagerFacade = _mockInformationManagerFacade.Object;
+        _sut.MBHero = _mockHero.Object;
       }
+    }
+
+    private Mock<MBHero> CreateMockNotable()
+    {
+      var mockNotable = MockRepository.Create<MBHero>();
+      mockNotable.Setup(n => n.GetBaseHeroRelation(_mockHero.Object)).Returns(NotableBaseHeroRelation);
+      mockNotable.Setup(n => n.SetPersonalRelation(_mockHero.Object, NotableBaseHeroRelation + Default.NoblesRelationIncrease));
+
+      return mockNotable;
     }
 
     [Test]
@@ -1624,7 +1651,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1648,7 +1675,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1672,7 +1699,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Exactly(2)),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1696,7 +1723,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Exactly(2)),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1720,7 +1747,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1744,7 +1771,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Never),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1768,7 +1795,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Exactly(2)),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Never),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -1792,7 +1819,7 @@ namespace Test
       var result = _sut.CreateTournament(_options);
 
       result.ShouldSatisfyAllConditions(
-        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Once),
+        () => _mockInformationManagerFacade.Verify(f => f.DisplayAsQuickBanner(It.IsAny<string>()), Times.Exactly(2)),
         () => _mockInformationManagerFacade.Verify(f => f.DisplayAsLogEntry(It.IsAny<string>()), Times.Once),
         () => result.Succeeded.ShouldBe(true),
         () => result.HostSettlement.ShouldBe(_mockSettlement.Object),
@@ -2698,6 +2725,7 @@ namespace Test
     public new Settings Settings { set => base.Settings = value; }
     public new MBCampaign MBCampaign { set => base.MBCampaign = value; }
     public new MBInformationManagerFacade MBInformationManagerFacade { set => base.MBInformationManagerFacade = value; }
+    public new MBHero MBHero { set => base.MBHero = value; }
     public new CreateTournamentResult CreateTournament(CreateTournamentOptions options)
       => base.CreateTournament(options);
   }
